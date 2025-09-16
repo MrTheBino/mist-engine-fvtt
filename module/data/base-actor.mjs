@@ -16,6 +16,7 @@ export default class MistEngineActorBase extends MistEngineDataModel {
       max: new fields.NumberField({ ...requiredInteger, initial: 5 })
     });*/
     schema.biography = new fields.StringField({ required: true, blank: true }); // equivalent to passing ({initial: ""}) for StringFields
+    schema.editMode = new fields.BooleanField({ initial: false })
 
     return schema;
   }

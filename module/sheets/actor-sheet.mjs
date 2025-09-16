@@ -71,6 +71,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         context.system = actorData.system;
         context.flags = actorData.flags;
         context.actor = this.document;
+        context.editMode = actorData.editMode;
 
         // Adding a pointer to CONFIG.MISTENGINE
         context.config = CONFIG.MISTENGINE;
