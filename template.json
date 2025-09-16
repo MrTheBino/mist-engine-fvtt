@@ -1,0 +1,8 @@
+{
+  "Actor": {
+    "types": ["litm-character"]
+  },
+  "Item": {
+    "types": ["item", "themebook"]
+  }
+}

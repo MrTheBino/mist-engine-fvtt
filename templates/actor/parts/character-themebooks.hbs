@@ -1,0 +1,5 @@
+<div class="themebooks-container">
+    {{#each themebooks as |book id|}}
+        {{> 'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs' themebook=book id=id}}
+    {{/each}}
+</div>
