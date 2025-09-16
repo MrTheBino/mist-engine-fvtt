@@ -12,5 +12,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/mist-engine-fvtt/templates/actor/parts/character-themebooks.hbs',
     'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs',
     'systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs',
+    'systems/mist-engine-fvtt/templates/actor/parts/themebook-weekness-line.hbs',
+    'systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs'
   ]);
 };

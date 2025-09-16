@@ -86,6 +86,13 @@ Handlebars.registerHelper('toLowerCase', function (str) {
   return str.toLowerCase();
 });
 
+Handlebars.registerHelper('tagFilled', function (str) {
+  if(str && str.trim().length > 0) {
+    return true;
+  }
+  return false;
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

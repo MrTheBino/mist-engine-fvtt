@@ -71,7 +71,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         context.system = actorData.system;
         context.flags = actorData.flags;
         context.actor = this.document;
-        context.editMode = actorData.editMode;
+        context.editMode = actorData.system.editMode;
 
         // Adding a pointer to CONFIG.MISTENGINE
         context.config = CONFIG.MISTENGINE;
@@ -108,16 +108,16 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 const targetId = trigger.dataset.expandableTarget;
                 const target = this.element.querySelector(`[data-expandable-id="${targetId}"]`);
                 if (target.classList.contains('closed')) {
-                    target.classList.remove('closed'); 
+                    target.classList.remove('closed');
                     target.classList.add('open');
                 }
                 else {
-                    target.classList.remove('open'); 
+                    target.classList.remove('open');
                     target.classList.add('closed');
                 }
             });
         }
-        
+
         const itemEditableStatsElements = this.element.querySelectorAll('.item-editable-stat')
         for (const input of itemEditableStatsElements) {
             input.addEventListener("change", event => this.handleItemStatChanged(event))
@@ -126,8 +126,15 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     async handleItemStatChanged(event) {
         event.preventDefault();
-        const li = $(event.currentTarget).parents('.item');
-        const item = this.actor.items.get(li.data('itemId'));
+        let item = null;
+        if (event.currentTarget.dataset.itemId == undefined) {
+            const li = $(event.currentTarget).parents('.item');
+            item = this.actor.items.get(li.data('itemId'));
+        } else {
+            item = this.actor.items.get(event.currentTarget.dataset.itemId);
+        }
+
+        console.log(item);
 
         if (event.target.type === 'checkbox') {
             item.update({ [event.target.dataset.itemStat]: event.target.checked });

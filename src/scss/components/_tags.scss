@@ -1,0 +1,21 @@
+.litm-pc-powertag{
+    font-family: Labrada, serif;
+    font-weight: normal;
+    color: black;
+
+    &.selected{
+        text-shadow: 0 0 15px rgb(64, 255, 0);
+        font-weight: bold;
+    }
+}
+
+.litm-pc-weekness{
+    font-family: Labrada, serif;
+    font-weight: normal;
+    color: black;
+
+    &.selected{
+        text-shadow: 0 0 15px rgb(64, 255, 0);
+        font-weight: bold;
+    }
+}

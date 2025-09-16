@@ -1,4 +1,12 @@
 <div class="item-powertag-line flexrow">
-    {{index}} {{editMode}}
-    <input type="text" name="system.powertag{{index}}.name" value="{{powertag.name}}" placeholder="{{powertag.question}}" title="{{powertag.question}}"/>
+    {{#if editMode}}
+    {{index}}
+    <input class="item-editable-stat" data-item-id={{id}} type="text" data-item-stat="system.powertag{{index}}.name"
+        value="{{powertag.name}}" placeholder="{{powertag.question}}" title="{{powertag.question}}" />
+    {{else}}
+        {{#if (tagFilled powertag.name)}}
+        <span class="litm-pc-powertag powertag-name pt-selectable {{#if powertag.selected}}selected{{/if}}"
+            data-powertag-index={{index}} data-item-id={{id}}>{{powertag.name}}</span>
+        {{/if}}
+    {{/if}}
 </div>

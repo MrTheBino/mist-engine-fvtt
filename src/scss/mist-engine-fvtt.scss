@@ -11,6 +11,7 @@
 @import 'global/window';
 @import 'global/grid';
 @import 'global/flex';
+@import 'global/font';
 
 /* Styles limited to mist-engine-fvtt sheets */
 .mist-engine {
@@ -19,4 +20,6 @@
   @import 'components/items';
   @import 'components/effects';
   @import 'components/sheet';
+  @import 'components/tags';
+  @import 'components/themebook';
 }

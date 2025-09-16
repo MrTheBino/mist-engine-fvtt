@@ -1,12 +1,47 @@
-<div class="litm-themebook-container" data-id="{{id}}">
-    <h2>{{themebook.name}} {{editMode}}</h2>
-    <div class="powertags-container">
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=1 powertag=themebook.system.powertag1 editMode=editMode}}
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=2 powertag=themebook.system.powertag2 editMode=editMode}}
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=3 powertag=themebook.system.powertag3 editMode=editMode}}
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=4 powertag=themebook.system.powertag4 editMode=editMode}}
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=5 powertag=themebook.system.powertag5 editMode=editMode}}
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=6 powertag=themebook.system.powertag6 editMode=editMode}}
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=7 powertag=themebook.system.powertag7 editMode=editMode}}
+<div class="themebook-container" data-id="{{id}}">
+    <div class="themebook-style {{themebook.system.type}} flexcol">
+        <h2 class="theme-name">{{themebook.name}} 
+            {{#if editMode}}
+            <a data-action="editItem" data-item-id='{{themebook._id}}'>
+                <i class='fas fa-edit'></i>
+            </a>
+            {{else}}
+            <i class="themebook-icon {{themebook.system.type}}"></i>
+            {{/if}}
+        </h2>
+        <div class="powertags-container">
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=1 id=themebook._id
+            powertag=themebook.system.powertag1 editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=2 id=themebook._id
+            powertag=themebook.system.powertag2 editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=3 id=themebook._id
+            powertag=themebook.system.powertag3 editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=4 id=themebook._id
+            powertag=themebook.system.powertag4 editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=5 id=themebook._id
+            powertag=themebook.system.powertag5 editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=6 id=themebook._id
+            powertag=themebook.system.powertag6 editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=7 id=themebook._id
+            powertag=themebook.system.powertag7 editMode=editMode}}
+
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-weekness-line.hbs" index=1 id=themebook._id
+            weeknesstag=themebook.system.weeknesstag1 editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-weekness-line.hbs" index=2 id=themebook._id
+            weeknesstag=themebook.system.weeknesstag2 editMode=editMode}}
+        </div>
+        <div class="quest-container">
+            {{#if editMode}}
+                <textarea class="item-editable-stat quest-textarea" data-item-id={{themebook._id}} data-item-stat="system.quest" placeholder="Quest/Goal">{{themebook.system.quest}}</textarea>
+            {{else}}
+                <h3>Quest</h3>
+                <p class="quest-text">{{themebook.system.quest}}</p>
+            {{/if}}
+        </div>
+        <div class="development-container flexrow">
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Abandon"}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Improve"}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Milestone"}}
+        </div>
     </div>
 </div>

@@ -1,6 +1,5 @@
-editMode: {{editMode}}
-<div class="themebooks-container">
+<div class="themebooks-container flexrow">
     {{#each themebooks as |book id|}}
-        {{> 'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs' themebook=book id=id editMode=system.editMode}}
+        {{> 'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs' themebook=book id=id editMode=../system.editMode}}
     {{/each}}
 </div>

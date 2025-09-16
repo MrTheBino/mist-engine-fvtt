@@ -1,0 +1,15 @@
+<div class="item-weekness-line flexrow">
+    {{#if editMode}}
+    {{index}}
+    <input class="item-editable-stat" data-item-id={{id}} type="text" data-item-stat="system.weeknesstag{{index}}.name"
+        value="{{weeknesstag.name}}" placeholder="{{weeknesstag.question}}" title="{{weeknesstag.question}}" />
+    {{else}}
+        {{#if (tagFilled weeknesstag.name)}}
+        <span class="litm-pc-weekness pt-selectable {{#if weeknesstag.selected}}selected{{/if}}"
+            data-powertag-index={{index}} data-item-id={{id}}>
+            <i class="fa-light fa-angles-down"></i>
+            {{weeknesstag.name}}
+        </span>
+        {{/if}}
+    {{/if}}
+</div>

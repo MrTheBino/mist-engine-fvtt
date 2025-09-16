@@ -203,6 +203,18 @@
   text-align: center;
 }
 
+@font-face {
+  font-family: Labrada;
+  src: url("../assets/fonts/Labrada-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+.labrada-normal {
+  font-family: "Labrada", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Styles limited to mist-engine-fvtt sheets */
 .mist-engine .item-form {
   font-family: "Roboto", sans-serif;
@@ -367,9 +379,133 @@
 .mist-engine .item-powertag-line {
   margin: 5px;
 }
+.mist-engine .litm-pc-powertag {
+  font-family: Labrada, serif;
+  font-weight: normal;
+  color: black;
+}
+.mist-engine .litm-pc-powertag.selected {
+  text-shadow: 0 0 15px rgb(64, 255, 0);
+  font-weight: bold;
+}
+.mist-engine .litm-pc-weekness {
+  font-family: Labrada, serif;
+  font-weight: normal;
+  color: black;
+}
+.mist-engine .litm-pc-weekness.selected {
+  text-shadow: 0 0 15px rgb(64, 255, 0);
+  font-weight: bold;
+}
 .mist-engine .themebooks-container {
-  flexrow: 1;
   display: flex;
+  flex-direction: row;
+  align-items: start;
+}
+.mist-engine .themebook-container {
+  flex-grow: 1;
+}
+.mist-engine .themebook-container .quest-container h3 {
+  font-family: Labrada, serif;
+  font-weight: 800;
+  text-align: center;
+  color: #724a32;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 800;
+  white-space: nowrap;
+  margin: 3px 2px 3px 2px;
+  text-shadow: 1px 1px 2px rgb(255, 249, 249);
+}
+.mist-engine .themebook-container .quest-container .quest-text {
+  font-family: Labrada, serif;
+  font-weight: normal;
+  font-size: 0.8rem;
+  padding: 2px;
+  color: #724a32;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.mist-engine .themebook-style {
+  background-image: url("../assets/litm-themebook-bg.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.mist-engine .themebook-style h2 {
+  text-align: center;
+  font-size: 1.2em;
+  padding: 2px;
+  height: 30px;
+}
+.mist-engine .themebook-style.litm-adventure h2 {
+  background-image: url("../assets/headers/header-adventure.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style.litm-origin h2 {
+  background-image: url("../assets/headers/header-origin.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style.litm-variable h2 {
+  background-image: url("../assets/headers/header-black.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style.litm-greatness h2 {
+  background-image: url("../assets/headers/header-greatness.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style .themebook-icon {
+  height: 15px;
+  width: 15px;
+  float: right;
+  display: inline-block;
+  object-fit: cover;
+  margin-right: 2px;
+}
+.mist-engine .themebook-style .themebook-icon.litm-adventure {
+  background-image: url("../assets/icons/icon-adventure-litm.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style .themebook-icon.litm-greatness {
+  background-image: url("../assets/icons/icon-greatness-litm.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style .themebook-icon.litm-origin {
+  background-image: url("../assets/icons/icon-origin-litm.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style .themebook-icon.litm-variable {
+  background-image: url("../assets/icons/icon-variable-litm.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style .development-partial-container {
+  color: #724a32;
+  font-family: Labrada, serif;
+}
+.mist-engine .themebook-style .development-partial-container input[type=radio] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 50%;
 }
 
 /*# sourceMappingURL=mist-engine-fvtt.css.map */
