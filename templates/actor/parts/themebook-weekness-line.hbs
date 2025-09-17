@@ -5,8 +5,8 @@
         value="{{weeknesstag.name}}" placeholder="{{weeknesstag.question}}" title="{{weeknesstag.question}}" />
     {{else}}
         {{#if (tagFilled weeknesstag.name)}}
-        <span class="litm-pc-weekness pt-selectable {{#if weeknesstag.selected}}selected{{/if}}"
-            data-powertag-index={{index}} data-item-id={{id}}>
+        <span class="litm-pc-weekness wt-selectable {{#if weeknesstag.selected}}selected{{/if}}"
+            data-weeknesstag-index={{index}} data-item-id={{id}}>
             <i class="fa-light fa-angles-down"></i>
             {{weeknesstag.name}}
         </span>

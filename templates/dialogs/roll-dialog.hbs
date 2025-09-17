@@ -1,0 +1,15 @@
+<div class="roll-dialog-container">
+    <div class="selected-tags-container grid grid-4col">
+        {{#each selectedTags}}
+        <span class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{this.name}}</span>
+        {{/each}}
+    </div>
+     <div class="form-group">
+        <label class="resource-label">GM Negative:</label>
+        <div class="flexrow">
+            <i class="fa-solid fa-minus" style="text-align:center" id="button-difficulty-minus"></i>
+            <input type="number" name="negativeValue" value="0" data-dtype="Number" id="difficultyInput"/>
+            <i class="fa-solid fa-plus" style="text-align:center" id="button-difficulty-plus"></i>
+        </div>
+    </div>
+</div>

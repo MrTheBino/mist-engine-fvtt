@@ -39,9 +39,9 @@
             {{/if}}
         </div>
         <div class="development-container flexrow">
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Abandon"}}
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Improve"}}
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Milestone"}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Abandon" id=themebook._id key="system.abandon" value=themebook.system.abandon}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Improve" id=themebook._id key="system.improve" value=themebook.system.improve}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Milestone" id=themebook._id key="system.milestone" value=themebook.system.milestone}}
         </div>
     </div>
 </div>

@@ -4,6 +4,7 @@ import { MistEngineItem } from './documents/item.mjs';
 // Import sheet classes.
 import { MistEngineActorSheet } from './sheets/actor-sheet.mjs';
 import {MistEngineLegendInTheMistCharacterSheet} from './sheets/litm-character-sheet.mjs';
+import { MistEngineLegendInTheMistNpcSheet } from './sheets/litm-npc-sheet.mjs';
 import { MistEngineItemSheet } from './sheets/item-sheet.mjs';
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
@@ -14,6 +15,19 @@ import * as models from './data/_module.mjs';
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
+
+function extractBrackets(text) {
+  // Regulärer Ausdruck, der Inhalte zwischen [] findet
+  const regex = /\[(.*?)\]/g;
+  let matches = [];
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    matches.push(match[1]); // match[1] = Inhalt innerhalb der []
+  }
+
+  return matches;
+}
 
 Hooks.once('init', function () {
   // Add utility classes to the global game object so that they're more easily
@@ -45,14 +59,15 @@ Hooks.once('init', function () {
   CONFIG.Actor.dataModels = {
     character: models.MistEngineCharacter,
     "litm-character": models.MistEngineCharacter,
-    npc: models.MistEngineNPC
+    "litm-npc": models.MistEngineNPC
   }
   CONFIG.Item.documentClass = MistEngineItem;
   CONFIG.Item.dataModels = {
     item: models.MistEngineItem,
     feature: models.MistEngineFeature,
     spell: models.MistEngineSpell,
-    themebook: models.MistEngineItemThemeBook
+    themebook: models.MistEngineItemThemeBook,
+    backpack: models.MistEngineItemBackpack
   }
 
   // Active Effects are never copied to the Actor,
@@ -67,6 +82,12 @@ Hooks.once('init', function () {
     types: ['litm-character'],
     label: 'MIST_ENGINE.SheetLabels.Actor',
   });
+Actors.registerSheet('mist-engine-fvtt', MistEngineLegendInTheMistNpcSheet, {
+    makeDefault: true,
+    types: ['litm-npc'],
+    label: 'MIST_ENGINE.SheetLabels.Actor',
+  });
+  
   Items.unregisterSheet('core', ItemSheet);
   Items.registerSheet('mist-engine-fvtt', MistEngineItemSheet, {
     makeDefault: true,
@@ -91,6 +112,22 @@ Handlebars.registerHelper('tagFilled', function (str) {
     return true;
   }
   return false;
+});
+
+
+
+Handlebars.registerHelper('textWithTags', function (str) {
+  const tags = extractBrackets(str);
+  let result = str;
+  tags.forEach(tag => {
+    if(tag.includes("-")){
+      result = result.replace(`[${tag}]`, `<span class="status">${tag}</span>`);
+    }else{
+      result = result.replace(`[${tag}]`, `<span class="tag">${tag}</span>`);
+    }
+    
+  });
+  return result;
 });
 
 /* -------------------------------------------- */

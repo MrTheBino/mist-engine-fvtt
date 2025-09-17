@@ -13,6 +13,13 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs',
     'systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs',
     'systems/mist-engine-fvtt/templates/actor/parts/themebook-weekness-line.hbs',
-    'systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs'
+    'systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs',
+    'systems/mist-engine-fvtt/templates/actor/parts/backpack-partial.hbs',
+    'systems/mist-engine-fvtt/templates/actor/parts/npc-limits-edit-parial.hbs',
+    'systems/mist-engine-fvtt/templates/actor/parts/npc-tags-status-edit-parial.hbs',
+    'systems/mist-engine-fvtt/templates/actor/parts/npc-special-features-edit-parial.hbs',
+    'systems/mist-engine-fvtt/templates/actor/parts/npc-threats-edit-parial.hbs',
+    'systems/mist-engine-fvtt/templates/actor/parts/npm-beautified-partial.hbs',
+    
   ]);
 };

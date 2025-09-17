@@ -1,0 +1,74 @@
+.message-content{
+    .selected-tags{
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-family: Labrada, serif;
+
+        .tag{
+             background-color: gray;
+            color: white;
+            padding: 2px 2px;
+            text-align: center;
+            border-radius: 5px;
+            &.positive{
+                background-color: rgb(38, 143, 2);
+            }
+            &.burned{
+                text-decoration: line-through;
+            }
+            &.negative{
+                background-color: rgb(228, 190, 0);
+            }
+        }
+    }
+}
+.consequence-container {
+    text-align: center;
+    padding-top: 5px;
+    font-family: Labrada, serif;
+    .heading{
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+}
+
+.consequence-result-negative {
+    background-image: url("../assets/outcome-bg-litm-negative.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.consequence-result-neutral {
+    background-image: url("../assets/outcome-bg-litm-neutral.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.consequence-result-positive {
+    background-image: url("../assets/outcome-bg-litm-positive.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.consequence-result-icon {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+    display: inline-block;
+
+    &.negative {
+        background-image: url("../assets/icons/icon-litm-negative.svg");
+    }
+
+    &.positive {
+        background-image: url("../assets/icons/icon-litm-positive.svg");
+    }
+
+    &.neutral {
+        background-image: url("../assets/icons/icon-litm-neutral.svg");
+    }
+}

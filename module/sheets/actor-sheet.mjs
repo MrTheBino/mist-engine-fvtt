@@ -134,8 +134,6 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             item = this.actor.items.get(event.currentTarget.dataset.itemId);
         }
 
-        console.log(item);
-
         if (event.target.type === 'checkbox') {
             item.update({ [event.target.dataset.itemStat]: event.target.checked });
         } else {

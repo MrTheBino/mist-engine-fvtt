@@ -1,6 +1,20 @@
-<div class="development-partial-container">
-    <input type="radio" class="development-radio">
-    <input type="radio" class="development-radio">
-    <input type="radio" class="development-radio">
+<div class="development-partial-container" data-item-id="{{id}}" data-value-key="{{key}}">
+    {{#if (lt value 1)}}
+        <i class="fa-solid fa-circle"></i>
+    {{else}}
+        <i class="fa-solid fa-circle-xmark"></i>
+    {{/if}}
+    
+    {{#if (lt value 2)}}
+        <i class="fa-solid fa-circle"></i>
+    {{else}}
+        <i class="fa-solid fa-circle-xmark"></i>
+    {{/if}}
+
+    {{#if (lt value 3)}}
+        <i class="fa-solid fa-circle"></i>
+    {{else}}
+        <i class="fa-solid fa-circle-xmark"></i>
+    {{/if}}
     {{name}}
 </div>

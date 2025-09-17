@@ -1,8 +1,8 @@
 {
   "Actor": {
-    "types": ["litm-character"]
+    "types": ["litm-character","litm-npc"]
   },
   "Item": {
-    "types": ["item", "themebook"]
+    "types": ["item", "themebook","backpack"]
   }
 }

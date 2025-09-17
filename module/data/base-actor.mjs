@@ -17,6 +17,7 @@ export default class MistEngineActorBase extends MistEngineDataModel {
     });*/
     schema.biography = new fields.StringField({ required: true, blank: true }); // equivalent to passing ({initial: ""}) for StringFields
     schema.editMode = new fields.BooleanField({ initial: false })
+    schema.shortDescription = new fields.StringField({ required: true, blank: true }); // equivalent to passing ({initial: ""}) for StringFields
 
     return schema;
   }

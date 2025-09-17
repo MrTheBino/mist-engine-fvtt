@@ -13,6 +13,7 @@
 @import 'global/flex';
 @import 'global/font';
 
+
 /* Styles limited to mist-engine-fvtt sheets */
 .mist-engine {
   @import 'components/forms';
@@ -23,3 +24,6 @@
   @import 'components/tags';
   @import 'components/themebook';
 }
+
+@import 'components/roll_dialog';
+@import 'components/chat';

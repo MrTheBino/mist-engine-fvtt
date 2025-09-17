@@ -1,0 +1,25 @@
+.roll-dialog-container {
+    .selected-tags-container {
+        margin: 10px 0;
+        
+
+        .tag {
+            font-family: Labrada, serif;
+            font-weight: bold;
+
+            &.positive {
+                background-color: green;
+                border-radius: 5px solid black;
+                color: black;
+                padding: 2px;
+            }
+
+            &.negative {
+                background-color: orange;
+                border-radius: 5px solid black;
+                color: black;
+                padding: 2px;
+            }
+        }
+    }
+}

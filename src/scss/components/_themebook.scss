@@ -5,7 +5,7 @@
 }
 
 .themebook-container {
-    flex-grow: 1;
+    flex-grow: 0.25;
 
     .quest-container {
         h3 {
@@ -37,6 +37,14 @@
     background-image: url("../assets/litm-themebook-bg.webp");
     background-repeat: no-repeat;
     background-size: cover;
+
+    .themebook-icon{
+        color: black;
+        flex-grow: 0.1;
+    }
+
+    .backpack-item-editable{
+    }
 
     h2 {
         text-align: center;
@@ -79,6 +87,14 @@
         }
     }
 
+    &.litm-backpack {
+        h2 {
+            background-image: url("../assets/headers/header-backpack.webp");
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    }
+
     .themebook-icon {
         height: 15px;
         width: 15px;
@@ -110,6 +126,12 @@
             background-repeat: no-repeat;
             background-size: contain;
         }
+
+        &.litm-backpack {
+            background-image: url('../assets/icons/icon-backpack.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
     }
 
     .development-partial-container {
@@ -117,23 +139,7 @@
         font-family: Labrada, serif;
 
         input[type='radio'] {
-            /* Add if not using autoprefixer */
-            -webkit-appearance: none;
-            appearance: none;
-            /* For iOS < 15 to remove gradient background */
-            background-color: #fff;
-            /* Not removed via appearance */
-            margin: 0;
-
-            appearance: none;
-            background-color: #fff;
-            margin: 0;
-            font: inherit;
-            color: currentColor;
-            width: 1.15em;
-            height: 1.15em;
-            border: 0.15em solid currentColor;
-            border-radius: 50%;
+         
         }
     }
 }

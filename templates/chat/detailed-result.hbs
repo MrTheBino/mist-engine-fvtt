@@ -1,0 +1,52 @@
+<form class="roll-card">
+    <div class="card-title">
+        {{label}}
+    </div>
+    <div class="selected-tags">
+        {{#each selectedTags}}
+        <span
+            class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#if this.toBurn}}burned{{/if}}">{{this.name}}</span>
+        {{/each}}
+    </div>
+    <div class="roll-result">
+        {{{diceRollHTML}}}
+    </div>
+    <div class="consequence-container">
+        {{#if (eq consequenceResult -1)}}
+        <div class="consequence-result-negative">
+
+            <span class="heading"><i class="consequence-result-icon negative"></i>6-</span>
+            <p>The Narrator decides on
+                a narrative development
+                detrimental to the Hero,
+                and can give or remove
+                a tag or status in a way
+                that hinders the Hero.
+            </p>
+        </div>
+        {{/if}}
+        {{#if (eq consequenceResult 0)}}
+        <div class="consequence-result-neutral">
+            <span class="heading"><i class="consequence-result-icon neutral"></i>7-9</span>
+            <p>
+                Success (as in 10+) &amp; Consequences as in Simple action.
+            </p>
+        </div>
+        {{/if}}
+        {{#if (eq consequenceResult 1)}}
+        <div class="consequence-result-positive">
+            <span class="heading"><i class="consequence-result-icon positive"></i>10</span>
+            <p>
+                SPEND YOUR POWER:
+                <ul>
+                    <li>Add or scratch a tag (2 Power)</li>
+                    <li>Add or reduce a status (1 Power per tier)</li>
+                    <li>Discover a valuable detail (1 Power)</li>
+                </ul>
+            </p>
+            <p>See advanced options on page 154.</p>
+            <p>No Consequences.</p>
+        </div>
+        {{/if}}
+    </div>
+</form>

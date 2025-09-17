@@ -31,7 +31,8 @@
     "Actor": {
       "character": "Character",
       "npc": "NPC",
-      "litm-character": "Legend in the Mist Character"
+      "litm-character": "Legend in the Mist Character",
+      "litm-npc": "Legend in the Mist NPC"
     },
     "Item": {
       "item": "Item",

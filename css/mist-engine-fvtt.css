@@ -261,6 +261,9 @@
 .mist-engine .tox .tox-edit-area {
   padding: 0 8px;
 }
+.mist-engine .form-group {
+  margin-bottom: 5px;
+}
 .mist-engine .resource-label {
   font-weight: bold;
 }
@@ -379,6 +382,98 @@
 .mist-engine .item-powertag-line {
   margin: 5px;
 }
+.mist-engine .litm-character-themebooks-container {
+  /*background-image: url("../assets/bg2-litm.webp");
+  background-repeat: no-repeat;
+  background-size: cover;*/
+  margin: 5px;
+}
+.mist-engine .npc-beautified-container {
+  background-image: url("../assets/bg2-litm.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 20px;
+  color: black;
+  align-items: start;
+}
+.mist-engine .npc-beautified-container .left-half {
+  flex-grow: 0.5;
+}
+.mist-engine .npc-beautified-container .right-half {
+  margin-left: 10px;
+}
+.mist-engine .npc-edit-icon {
+  flex-grow: 0.1;
+  text-align: center;
+}
+.mist-engine .npc-subtitle-container-c::before {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background-color: #6b5b4d;
+}
+.mist-engine .npc-subtitle-container-c::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background-color: #6b5b4d;
+}
+.mist-engine .npc-subtitle-container-c {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 1px 0;
+  opacity: 0.75;
+  color: var(--text-hud-subtitles-color);
+  font-weight: bold;
+  font-size: large;
+  flex: auto;
+}
+.mist-engine .npc-subtitle-text {
+  text-transform: uppercase;
+  font-family: Labrada, serif;
+  color: #6b5b4d;
+  font-size: 0.8rem;
+  font-weight: 800;
+  white-space: nowrap;
+  margin: 3px 2px 3px 2px;
+  text-shadow: 1px 1px 2px rgb(255, 249, 249);
+}
+.mist-engine .npc-limit-value {
+  width: 32px;
+  height: 32px;
+  background-image: url("../assets/icons/icon-litm-limit-shield.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  display: inline-block;
+}
+.mist-engine .npc-limits-list {
+  align-items: center;
+}
+.mist-engine .npc-threats-and-consequences-container {
+  font-family: Labrada, serif;
+}
+.mist-engine .npc-threats-and-consequences-container .entry {
+  margin-bottom: 10px;
+}
+.mist-engine .npc-threats-and-consequences-container .entry-list {
+  margin-left: 25px;
+}
+.mist-engine .npc-threats-and-consequences-container .entry-name {
+  font-weight: bold;
+}
+.mist-engine .npc-threats-and-consequences-container .entry-item {
+  margin-top: 5px;
+}
+.mist-engine .npc-threats-and-consequences-container .entry-item .tag {
+  background-color: yellow;
+}
+.mist-engine .npc-threats-and-consequences-container .entry-item .status {
+  background-color: green;
+}
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
   font-weight: normal;
@@ -387,6 +482,10 @@
 .mist-engine .litm-pc-powertag.selected {
   text-shadow: 0 0 15px rgb(64, 255, 0);
   font-weight: bold;
+}
+.mist-engine .litm-pc-powertag.burned {
+  text-decoration: line-through;
+  color: gray;
 }
 .mist-engine .litm-pc-weekness {
   font-family: Labrada, serif;
@@ -397,13 +496,71 @@
   text-shadow: 0 0 15px rgb(64, 255, 0);
   font-weight: bold;
 }
+.mist-engine .burn-indicator {
+  flex-grow: 0.15;
+}
+.mist-engine .burn-icon {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  background-image: url("../assets/icons/icon-burn-scratch-empty.svg");
+}
+.mist-engine .burn-icon.to-burn {
+  background-image: url("../assets/icons/icon-burn-scratch-to-burn.svg");
+}
+.mist-engine .tag-icon-litm-adventure {
+  background-image: url("../assets/icons/icon-adventure-litm.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+}
+.mist-engine .tag-icon-litm-origin {
+  background-image: url("../assets/icons/icon-origin-litm.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+}
+.mist-engine .tag-icon-litm-variable {
+  background-image: url("../assets/icons/icon-variable-litm.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+}
+.mist-engine .tag-icon-litm-greatness {
+  background-image: url("../assets/icons/icon-greatness-litm.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+}
+.mist-engine .tag-icon-litm-consequence {
+  background-image: url("../assets/icons/icon-litm-consequence.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+}
+.mist-engine .npc-tag-status {
+  background-color: rgb(112, 112, 0);
+}
+.mist-engine .npc-tag-status-value {
+  background-color: green;
+}
 .mist-engine .themebooks-container {
   display: flex;
   flex-direction: row;
   align-items: start;
 }
 .mist-engine .themebook-container {
-  flex-grow: 1;
+  flex-grow: 0.25;
 }
 .mist-engine .themebook-container .quest-container h3 {
   font-family: Labrada, serif;
@@ -431,6 +588,10 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+.mist-engine .themebook-style .themebook-icon {
+  color: black;
+  flex-grow: 0.1;
+}
 .mist-engine .themebook-style h2 {
   text-align: center;
   font-size: 1.2em;
@@ -454,6 +615,11 @@
 }
 .mist-engine .themebook-style.litm-greatness h2 {
   background-image: url("../assets/headers/header-greatness.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style.litm-backpack h2 {
+  background-image: url("../assets/headers/header-backpack.webp");
   background-repeat: no-repeat;
   background-size: contain;
 }
@@ -485,27 +651,103 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
+.mist-engine .themebook-style .themebook-icon.litm-backpack {
+  background-image: url("../assets/icons/icon-backpack.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 .mist-engine .themebook-style .development-partial-container {
   color: #724a32;
   font-family: Labrada, serif;
 }
-.mist-engine .themebook-style .development-partial-container input[type=radio] {
-  /* Add if not using autoprefixer */
-  -webkit-appearance: none;
-  appearance: none;
-  /* For iOS < 15 to remove gradient background */
-  background-color: #fff;
-  /* Not removed via appearance */
-  margin: 0;
-  appearance: none;
-  background-color: #fff;
-  margin: 0;
-  font: inherit;
-  color: currentColor;
-  width: 1.15em;
-  height: 1.15em;
-  border: 0.15em solid currentColor;
-  border-radius: 50%;
+.roll-dialog-container .selected-tags-container {
+  margin: 10px 0;
+}
+.roll-dialog-container .selected-tags-container .tag {
+  font-family: Labrada, serif;
+  font-weight: bold;
+}
+.roll-dialog-container .selected-tags-container .tag.positive {
+  background-color: green;
+  border-radius: 5px solid black;
+  color: black;
+  padding: 2px;
+}
+.roll-dialog-container .selected-tags-container .tag.negative {
+  background-color: orange;
+  border-radius: 5px solid black;
+  color: black;
+  padding: 2px;
+}
+
+.message-content .selected-tags {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-family: Labrada, serif;
+}
+.message-content .selected-tags .tag {
+  background-color: gray;
+  color: white;
+  padding: 2px 2px;
+  text-align: center;
+  border-radius: 5px;
+}
+.message-content .selected-tags .tag.positive {
+  background-color: rgb(38, 143, 2);
+}
+.message-content .selected-tags .tag.burned {
+  text-decoration: line-through;
+}
+.message-content .selected-tags .tag.negative {
+  background-color: rgb(228, 190, 0);
+}
+
+.consequence-container {
+  text-align: center;
+  padding-top: 5px;
+  font-family: Labrada, serif;
+}
+.consequence-container .heading {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.consequence-result-negative {
+  background-image: url("../assets/outcome-bg-litm-negative.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.consequence-result-neutral {
+  background-image: url("../assets/outcome-bg-litm-neutral.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.consequence-result-positive {
+  background-image: url("../assets/outcome-bg-litm-positive.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.consequence-result-icon {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+  display: inline-block;
+}
+.consequence-result-icon.negative {
+  background-image: url("../assets/icons/icon-litm-negative.svg");
+}
+.consequence-result-icon.positive {
+  background-image: url("../assets/icons/icon-litm-positive.svg");
+}
+.consequence-result-icon.neutral {
+  background-image: url("../assets/icons/icon-litm-neutral.svg");
 }
 
 /*# sourceMappingURL=mist-engine-fvtt.css.map */

@@ -7,13 +7,45 @@ export default class MistEngineNPC extends MistEngineActorBase {
     const requiredInteger = { required: true, nullable: false, integer: true };
     const schema = super.defineSchema();
 
-    schema.cr = new fields.NumberField({ ...requiredInteger, initial: 1, min: 0 });
-    schema.xp = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
-    
+    schema.difficulty = new fields.NumberField({ ...requiredInteger, initial: 1, min: 0 });
+
+    schema.limits = new fields.ArrayField(
+      new fields.SchemaField({
+        name: new fields.StringField(),
+        value: new fields.StringField()
+      }),
+      { min: 0, required: false }
+    )
+
+    schema.tags_and_statuses = new fields.ArrayField(
+      new fields.SchemaField({
+        name: new fields.StringField(),
+        value: new fields.NumberField(),
+        symbol: new fields.StringField(),
+      }),
+      { min: 0, required: false }
+    )
+
+    schema.specialFeatures = new fields.ArrayField(
+      new fields.SchemaField({
+        name: new fields.StringField(),
+        description: new fields.StringField()
+      }),
+      { min: 0, required: false }
+    )
+
+    schema.threatsAndConsequences = new fields.ArrayField(
+      new fields.SchemaField({
+        name: new fields.StringField(),
+        description: new fields.StringField(),
+        list: new fields.ArrayField(new fields.StringField())
+      }),
+      { min: 0, required: false }
+    );
     return schema
   }
 
   prepareDerivedData() {
-    this.xp = this.cr * this.cr * 100;
+
   }
 }

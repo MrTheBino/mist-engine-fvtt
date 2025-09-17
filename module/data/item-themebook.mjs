@@ -20,6 +20,7 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),
             burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
             planned: new fields.BooleanField({ initial: false }),
             selected: new fields.BooleanField({ initial: false })
         });
@@ -28,6 +29,7 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),
             burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
             planned: new fields.BooleanField({ initial: false }),
             selected: new fields.BooleanField({ initial: false })
         });
@@ -36,6 +38,7 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),
             burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
             planned: new fields.BooleanField({ initial: false }),
             selected: new fields.BooleanField({ initial: false })
         });
@@ -44,6 +47,7 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),
             burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
             planned: new fields.BooleanField({ initial: false }),
             selected: new fields.BooleanField({ initial: false })
         });
@@ -52,6 +56,7 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),
             burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
             planned: new fields.BooleanField({ initial: false }),
             selected: new fields.BooleanField({ initial: false })
         });
@@ -60,6 +65,7 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),
             burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
             planned: new fields.BooleanField({ initial: false }),
             selected: new fields.BooleanField({ initial: false })
         });
@@ -68,6 +74,7 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),
             burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
             planned: new fields.BooleanField({ initial: false }),
             selected: new fields.BooleanField({ initial: false })
         });
@@ -76,6 +83,7 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),
             burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
             planned: new fields.BooleanField({ initial: false }),
             selected: new fields.BooleanField({ initial: false })
         });
@@ -84,6 +92,7 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),
             burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
             planned: new fields.BooleanField({ initial: false }),
             selected: new fields.BooleanField({ initial: false })
         });

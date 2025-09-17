@@ -1,0 +1,20 @@
+<fieldset>
+    <legend>NPC Limits <a data-action="createLimit"><i class='fas fa-plus'></i></a></legend>
+    <div class="form-group">
+        <div class="form-group flexrow">
+            <label>Name</label>
+            <label>Value</label>
+        </div>
+        {{#each system.limits as |limit index|}}
+            <div class="form-group flexrow">
+                <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="limits" data-key="name"  value="{{limit.name}}" placeholder="Name"/>
+                <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="limits" data-key="value" value="{{limit.value}}" placeholder="0"/>
+                <div>
+                <a data-action="deleteLimit" data-index="{{index}}">
+                        <i class='fas fa-trash'></i>
+                    </a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</fieldset>

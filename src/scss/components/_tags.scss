@@ -1,21 +1,96 @@
-.litm-pc-powertag{
+.litm-pc-powertag {
     font-family: Labrada, serif;
     font-weight: normal;
     color: black;
 
-    &.selected{
+    &.selected {
+        text-shadow: 0 0 15px rgb(64, 255, 0);
+        font-weight: bold;
+    }
+
+    &.burned {
+        text-decoration: line-through;
+        color: gray;
+    }
+}
+
+.litm-pc-weekness {
+    font-family: Labrada, serif;
+    font-weight: normal;
+    color: black;
+
+    &.selected {
         text-shadow: 0 0 15px rgb(64, 255, 0);
         font-weight: bold;
     }
 }
 
-.litm-pc-weekness{
-    font-family: Labrada, serif;
-    font-weight: normal;
-    color: black;
+.burn-indicator {
+    flex-grow: 0.15;
+}
 
-    &.selected{
-        text-shadow: 0 0 15px rgb(64, 255, 0);
-        font-weight: bold;
+.burn-icon {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    background-image: url("../assets/icons/icon-burn-scratch-empty.svg");
+
+    &.to-burn {
+        background-image: url("../assets/icons/icon-burn-scratch-to-burn.svg");
     }
+}
+
+.tag-icon-litm-adventure {
+    background-image: url("../assets/icons/icon-adventure-litm.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 15px;
+    height: 15px;
+    display:inline-block;
+}
+
+.tag-icon-litm-origin {
+
+    background-image: url("../assets/icons/icon-origin-litm.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 15px;
+    height: 15px;
+    display:inline-block;
+}
+
+.tag-icon-litm-variable {
+
+    background-image: url("../assets/icons/icon-variable-litm.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 15px;
+    height: 15px;
+    display:inline-block;
+}
+
+.tag-icon-litm-greatness {
+
+    background-image: url("../assets/icons/icon-greatness-litm.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 15px;
+    height: 15px;
+    display:inline-block;
+}
+
+.tag-icon-litm-consequence{
+    background-image: url("../assets/icons/icon-litm-consequence.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 15px;
+    height: 15px;
+    display:inline-block;
+}
+.npc-tag-status{
+    background-color: rgb(112, 112, 0)
+}
+
+.npc-tag-status-value{
+    background-color: green;
 }

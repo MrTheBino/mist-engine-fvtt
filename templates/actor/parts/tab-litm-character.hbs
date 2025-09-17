@@ -1,4 +1,9 @@
 <section class="tab {{tabs.character.id}} {{tabs.character.cssClass}} scrollable" id="character"
     data-tab="{{tabs.character.id}}" data-group="{{tabs.character.group}}">
-    {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-themebooks.hbs'}}
+    <div class="litm-character-themebooks-container flexcol">
+        <div class="flexrow">
+            {{> 'systems/mist-engine-fvtt/templates/actor/parts/backpack-partial.hbs' backpack=backpack editMode=system.editMode}}
+        </div>
+        {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-themebooks.hbs'}}
+    </div>
 </section>

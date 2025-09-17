@@ -1,3 +1,112 @@
-.item-powertag-line{
+.item-powertag-line {
     margin: 5px;
+}
+
+.litm-character-themebooks-container {
+    /*background-image: url("../assets/bg2-litm.webp");
+    background-repeat: no-repeat;
+    background-size: cover;*/
+    margin:5px;
+}
+
+.npc-beautified-container{
+    background-image: url("../assets/bg2-litm.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+    color: black;
+    align-items: start;
+
+    .left-half{
+        flex-grow: 0.5;
+    }
+
+    .right-half{
+        margin-left: 10px;
+    }
+}
+
+.npc-edit-icon {
+    flex-grow: 0.1;
+    text-align: center;
+}
+
+.npc-subtitle-container-c::before {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background-color: #6b5b4d
+}
+
+.npc-subtitle-container-c::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background-color: #6b5b4d
+}
+
+.npc-subtitle-container-c {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 1px 0;
+    opacity: 0.75;
+    color: var(--text-hud-subtitles-color);
+    font-weight: bold;
+    font-size: large;
+    flex: auto;
+}
+
+.npc-subtitle-text {
+    text-transform: uppercase;
+    font-family: Labrada, serif;
+    color: #6b5b4d;
+    font-size: 0.8rem;
+    font-weight: 800;
+    white-space: nowrap;
+    margin: 3px 2px 3px 2px;
+    text-shadow: 1px 1px 2px rgb(255, 249, 249);
+}
+
+.npc-limit-value {
+    width: 32px;
+    height: 32px;
+    background-image: url("../assets/icons/icon-litm-limit-shield.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    display: inline-block;
+}
+
+.npc-limits-list {
+    align-items: center;
+}
+
+.npc-threats-and-consequences-container{
+    font-family: Labrada, serif;
+
+    .entry{
+        margin-bottom: 10px;
+    }
+    .entry-list{
+        margin-left: 25px;
+    }
+
+    .entry-name{
+        font-weight: bold;
+    }
+
+    .entry-item{
+        margin-top: 5px;
+
+        .tag{
+            background-color: yellow;
+        }
+
+        .status{
+            background-color: green;
+        }
+    }
 }

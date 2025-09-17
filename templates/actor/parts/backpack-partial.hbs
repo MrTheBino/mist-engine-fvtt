@@ -1,0 +1,29 @@
+<div class="themebook-container" data-id="{{backpack._id}}">
+    <div class="themebook-style litm-backpack flexcol">
+        <h2 class="theme-name">Backpack
+            {{#if editMode}}
+            <a data-action="createBackpackItem" data-item-id='{{backpack._id}}'>
+                <i class='fas fa-plus'></i>
+            </a>
+            {{else}}
+            <i class="themebook-icon litm-backpack"></i>
+            {{/if}}
+        </h2>
+
+        <div class="powertags-container">
+            {{#each backpack.system.items}}
+            <div class="item-powertag-line flexrow">
+                {{#if ../editMode}}
+                    <input type="text" class="backpack-item-editable" data-item-id={{../backpack._id}} data-item-index="{{@index}}" value="{{this.name}}" placeholder="Item Name"/>
+                    <a class="themebook-icon"data-action="deleteBackpackItem" data-item-id='{{../backpack._id}}' data-item-index="{{@index}}">
+                        <i class='fas fa-trash'></i>
+                    </a>
+                {{else}}
+                <span class="litm-pc-powertag powertag-name bpi-selectable {{#if this.selected}}selected{{/if}}"
+                    data-item-index={{@index}} data-item-id={{../backpack._id}}>{{this.name}}</span>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
