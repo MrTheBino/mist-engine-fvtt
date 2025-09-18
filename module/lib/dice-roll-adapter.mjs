@@ -100,8 +100,8 @@ export class DiceRollAdapter {
 
     async rollCallback(event, button, dialog) {
 
-        let numPositiveTags = 0;
-        let numNegativeTags = button.form.negativeValue.value;
+        let numPositiveTags = parseInt(button.form.positiveValue.value);
+        let numNegativeTags = parseInt(button.form.negativeValue.value);
 
 
         this.selectedTags.forEach(element => {

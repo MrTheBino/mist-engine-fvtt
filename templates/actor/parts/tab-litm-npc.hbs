@@ -1,11 +1,14 @@
-<section class="tab {{tabs.npc.id}} {{tabs.npc.cssClass}} scrollable" id="npc"
-    data-tab="{{tabs.npc.id}}" data-group="{{tabs.npc.group}}">
+<section class="tab {{tabs.npc.id}} {{tabs.npc.cssClass}} scrollable" id="npc" data-tab="{{tabs.npc.id}}"
+    data-group="{{tabs.npc.group}}">
     {{#if editMode}}
+    <div class="flexrow">
         {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-limits-edit-parial.hbs"}}
         {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-tags-status-edit-parial.hbs"}}
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-special-features-edit-parial.hbs"}}
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-threats-edit-parial.hbs"}}
+    </div>
+    {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-special-features-edit-parial.hbs"}}
+    {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-threats-edit-parial.hbs"}}
     {{else}}
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/npm-beautified-partial.hbs"}}
+    {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-beautified-partial.hbs"}}
+    {{> 'systems/mist-engine-fvtt/templates/actor/parts/floating-tags-and-status-partial.hbs'}}
     {{/if}}
 </section>

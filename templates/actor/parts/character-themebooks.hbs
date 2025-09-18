@@ -1,4 +1,4 @@
-<div class="themebooks-container flexrow">
+<div class="themebooks-container grid grid-4col grid-themebook-container">
     {{#each themebooks as |book id|}}
         {{> 'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs' themebook=book id=id editMode=../system.editMode}}
     {{/each}}

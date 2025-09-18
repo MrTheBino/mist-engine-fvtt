@@ -19,7 +19,10 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/mist-engine-fvtt/templates/actor/parts/npc-tags-status-edit-parial.hbs',
     'systems/mist-engine-fvtt/templates/actor/parts/npc-special-features-edit-parial.hbs',
     'systems/mist-engine-fvtt/templates/actor/parts/npc-threats-edit-parial.hbs',
-    'systems/mist-engine-fvtt/templates/actor/parts/npm-beautified-partial.hbs',
-    
+    'systems/mist-engine-fvtt/templates/actor/parts/npc-beautified-partial.hbs',
+    'systems/mist-engine-fvtt/templates/actor/parts/character-quintessences-partial.hbs',
+    'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-partial.hbs',
+    'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-themebook-partial.hbs',
+    'systems/mist-engine-fvtt/templates/actor/parts/floating-tags-and-status-partial.hbs',
   ]);
 };

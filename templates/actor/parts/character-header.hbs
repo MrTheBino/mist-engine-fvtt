@@ -1,14 +1,36 @@
 <div>
-    <header class="sheet-header">
-        <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"
-            height="120" />
-        <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
-        <input type="checkbox" name="system.editMode" {{#if system.editMode}}checked{{/if}}>
+    <header class="sheet-header {{#if system.editMode}}edit-mode{{else}}stylized-background{{/if}}">
+        <div class="flexrow">
+            <div class="image-container">
+                <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img"
+                    title="{{actor.name}}" height="120" />
+            </div>
+        </div>
+        <div class="flexcol header-right-side">
+            <div class="flexcol">
+                {{#if system.editMode}}
+                <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+                <div class="short-description"><input name="system.shortDescription" type="text"
+                        value="{{system.shortDescription}}" placeholder="Short Description" /></div>
+                {{else}}
+                <h1 class="charname">{{actor.name}}</h1>
+                <div class="short-description">{{system.shortDescription}}</div>
+                {{/if}}
+                <input class="editModeToggle" type="checkbox" name="system.editMode" title="toggle to edit the sheet"
+                    {{#if system.editMode}}checked{{/if}}>
 
+
+            </div>
+            {{#if (eq system.editMode false)}}
+            <div class="flexrow roll-buttons-container">
+                <button data-action="clickRoll" class="roll-button" data-roll-type="quick">Quick Roll</button>
+                <button data-action="clickRoll" class="roll-button" data-roll-type="detailed">Detailed
+                    Roll</button>
+                <button data-action="clickRoll" class="roll-button" data-roll-type="reaction">Reaction
+                    Roll</button>
+            </div>
+            {{/if}}
+        </div>
     </header>
-    <div class="flexrow roll-buttons-container">
-        <button data-action="clickRoll" class="roll-quick-button" data-roll-type="quick">Quick Roll</button>
-        <button data-action="clickRoll" class="roll-quick-button" data-roll-type="detailed">Detailed Roll</button>
-        <button data-action="clickRoll" class="roll-quick-button" data-roll-type="reaction">Reaction Roll</button>
-    </div>
+
 </div>

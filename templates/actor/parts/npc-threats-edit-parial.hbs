@@ -3,36 +3,44 @@
     </legend>
     <div class="form-group">
         {{#each system.threatsAndConsequences as |entry index|}}
-        <div class="form-group flexcol">
-            <div class="flexrow" style="margin-bottom: 5px;">
-                <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}"
-                    data-array="threatsAndConsequences" data-key="name" id="limit-{{index}}"
-                    name="system.threatsAndConsequences[{{index}}].name" value="{{entry.name}}" placeholder="Name" />
-                <a class="npc-edit-icon" data-action="deleteThreadAndConsequence" data-index="{{index}}">
-                    <i class='fas fa-trash'></i>
-                </a>
-            </div>
-            <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}"
-                data-array="threatsAndConsequences" data-key="description" id="limit-{{index}}"
-                name="system.threatsAndConsequences[{{index}}].description" value="{{entry.description}}"
-                placeholder="Description" />
-        </div>
-        <fieldset>
-            <legend>Consequences <a data-action="createThreatAndConsequenceEntry" data-index="{{index}}"><i
-                        class='fas fa-plus'></i></a></legend>
-            {{#each entry.list as |listEntry listIndex|}}
+        <div class="threat-and-consequence-container-entry">
             <div class="form-group flexcol">
-                <div class="form-group flexrow">
-                    <input type="text" class="npc-updatable-threat-entry-stat" data-index="{{index}}"
-                        data-listIndex="{{listIndex}}" value="{{listEntry}}" placeholder="" />
-                    <a class="npc-edit-icon" data-action="deleteThreadAndConsequenceEntry" data-index="{{index}}"
-                        data-listIndex="{{listIndex}}">
-                        <i class='fas fa-trash'></i>
-                    </a>
+                <div class="flexrow" style="margin-bottom: 5px;">
+                    <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}"
+                        data-array="threatsAndConsequences" data-key="name" id="limit-{{index}}"
+                        name="system.threatsAndConsequences[{{index}}].name" value="{{entry.name}}"
+                        placeholder="Name" />
+                    <div class="trash-icon-container">
+                        <a class="" data-action="deleteThreadAndConsequence" data-index="{{index}}">
+                            <i class='fas fa-trash'></i>
+                        </a>
+                    </div>
                 </div>
+                <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}"
+                    data-array="threatsAndConsequences" data-key="description" id="limit-{{index}}"
+                    name="system.threatsAndConsequences[{{index}}].description" value="{{entry.description}}"
+                    placeholder="Description" />
             </div>
-            {{/each}}
-        </fieldset>
+            <fieldset>
+                <legend>Consequences <a data-action="createThreatAndConsequenceEntry" data-index="{{index}}"><i
+                            class='fas fa-plus'></i></a></legend>
+                {{#each entry.list as |listEntry listIndex|}}
+                <div class="form-group flexcol thread-entry-container">
+                    <div class="form-group flexrow">
+                        <input type="text" class="npc-updatable-threat-entry-stat value-input-huge"
+                            data-index="{{index}}" data-listIndex="{{listIndex}}" value="{{listEntry}}"
+                            placeholder="" />
+                        <div class="trash-icon-container">
+                            <a class="" data-action="deleteThreadAndConsequenceEntry" data-index="{{index}}"
+                                data-listIndex="{{listIndex}}">
+                                <i class='fas fa-trash'></i>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                {{/each}}
+            </fieldset>
+        </div>
         {{/each}}
     </div>
 </fieldset>

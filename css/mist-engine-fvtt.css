@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 /* Global styles */
 .window-app {
-  font-family: "Roboto", sans-serif;
+  font-family: Labrada, serif;
 }
 
 .rollable:hover, .rollable:focus {
@@ -158,6 +158,12 @@
   grid-column-end: span 12;
 }
 
+.grid-themebook-container {
+  grid-gap: 2px;
+  width: 100%;
+  height: 100%;
+}
+
 .flex-group-center,
 .flex-group-left,
 .flex-group-right {
@@ -217,7 +223,7 @@
 
 /* Styles limited to mist-engine-fvtt sheets */
 .mist-engine .item-form {
-  font-family: "Roboto", sans-serif;
+  font-family: Labrada, serif;
 }
 .mist-engine .sheet-header {
   flex: 0 auto;
@@ -263,6 +269,7 @@
 }
 .mist-engine .form-group {
   margin-bottom: 5px;
+  gap: 5px;
 }
 .mist-engine .resource-label {
   font-weight: bold;
@@ -382,6 +389,13 @@
 .mist-engine .item-powertag-line {
   margin: 5px;
 }
+.mist-engine .item-weekness-line {
+  margin: 5px;
+}
+.mist-engine .quest-container {
+  margin-left: auto;
+  margin-right: auto;
+}
 .mist-engine .litm-character-themebooks-container {
   /*background-image: url("../assets/bg2-litm.webp");
   background-repeat: no-repeat;
@@ -394,12 +408,17 @@
   background-size: cover;
   padding: 20px;
   color: black;
+}
+.mist-engine .npc-beautified-container-stats {
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
   align-items: start;
 }
-.mist-engine .npc-beautified-container .left-half {
+.mist-engine .npc-beautified-container-stats .left-half {
   flex-grow: 0.5;
 }
-.mist-engine .npc-beautified-container .right-half {
+.mist-engine .npc-beautified-container-stats .right-half {
   margin-left: 10px;
 }
 .mist-engine .npc-edit-icon {
@@ -453,6 +472,17 @@
 .mist-engine .npc-limits-list {
   align-items: center;
 }
+.mist-engine .trash-icon-container {
+  flex-grow: 0.1;
+}
+.mist-engine .value-input-small {
+  width: 100px;
+  flex-grow: 0.05;
+}
+.mist-engine .value-input-huge {
+  width: 100px;
+  flex-grow: 20;
+}
 .mist-engine .npc-threats-and-consequences-container {
   font-family: Labrada, serif;
 }
@@ -469,10 +499,68 @@
   margin-top: 5px;
 }
 .mist-engine .npc-threats-and-consequences-container .entry-item .tag {
-  background-color: yellow;
+  background-color: #ECE800;
+  border-radius: 4px;
 }
 .mist-engine .npc-threats-and-consequences-container .entry-item .status {
-  background-color: green;
+  background-color: #BCCDB0;
+  border-radius: 4px;
+}
+.mist-engine .fellowship-promises {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.mist-engine .sheet-header h1 {
+  font-family: Labrada, serif;
+}
+.mist-engine .sheet-header.stylized-background {
+  background-image: url("../assets/bg2-litm.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.mist-engine .sheet-header.stylized-background h1 {
+  color: #724a32;
+}
+.mist-engine .sheet-header.stylized-background .short-description {
+  color: #724a32;
+}
+.mist-engine .sheet-header .difficulty-icons {
+  display: flex;
+}
+.mist-engine .editModeToggle {
+  float: right;
+}
+.mist-engine .threat-and-consequence-container-entry {
+  background-color: gray;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.mist-engine .npc-biography {
+  font-family: Labrada, serif;
+}
+.mist-engine .npc-biography .tag {
+  background-color: #ECE800;
+  border-radius: 4px;
+}
+.mist-engine .npc-biography .status {
+  background-color: #BCCDB0;
+  border-radius: 4px;
+}
+.mist-engine .header-right-side {
+  flex-grow: 1;
+}
+.mist-engine .roll-button {
+  margin: 5px;
+}
+.mist-engine .powertags-container {
+  margin: 2px;
+}
+.mist-engine .fts-input-name {
+  flex-grow: 1;
+}
+.mist-engine .fts-input-value {
+  flex-grow: 0.5;
 }
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
@@ -493,6 +581,24 @@
   color: black;
 }
 .mist-engine .litm-pc-weekness.selected {
+  text-shadow: 0 0 15px rgb(64, 255, 0);
+  font-weight: bold;
+}
+.mist-engine .litm-pc-fellowship-relationship {
+  font-family: Labrada, serif;
+  font-weight: normal;
+  color: black;
+}
+.mist-engine .litm-pc-fellowship-relationship.selected {
+  text-shadow: 0 0 15px rgb(64, 255, 0);
+  font-weight: bold;
+}
+.mist-engine .litm-pc-quintessence {
+  font-family: Labrada, serif;
+  font-weight: normal;
+  color: black;
+}
+.mist-engine .litm-pc-quintessence.selected {
   text-shadow: 0 0 15px rgb(64, 255, 0);
   font-weight: bold;
 }
@@ -549,15 +655,28 @@
   display: inline-block;
 }
 .mist-engine .npc-tag-status {
-  background-color: rgb(112, 112, 0);
+  background-color: #ECE800;
 }
 .mist-engine .npc-tag-status-value {
-  background-color: green;
+  background-color: #BCCDB0;
+}
+.mist-engine .npc-limit-name {
+  font-family: Labrada, serif;
+}
+.mist-engine .fts-input-name.tag {
+  background-color: #BCCDB0;
+  color: #724a32;
+  font-family: Labrada, serif;
+  border-radius: 2px;
+}
+.mist-engine .fts-input-name.status {
+  background-color: #ECE800;
+  color: #724a32;
+  font-family: Labrada, serif;
+  border-radius: 2px;
 }
 .mist-engine .themebooks-container {
-  display: flex;
-  flex-direction: row;
-  align-items: start;
+  margin-bottom: 5px;
 }
 .mist-engine .themebook-container {
   flex-grow: 0.25;
@@ -587,6 +706,7 @@
   background-image: url("../assets/litm-themebook-bg.webp");
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100%;
 }
 .mist-engine .themebook-style .themebook-icon {
   color: black;
@@ -594,9 +714,10 @@
 }
 .mist-engine .themebook-style h2 {
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1.1em;
   padding: 2px;
   height: 30px;
+  margin: 0;
 }
 .mist-engine .themebook-style.litm-adventure h2 {
   background-image: url("../assets/headers/header-adventure.webp");
@@ -619,6 +740,16 @@
   background-size: contain;
 }
 .mist-engine .themebook-style.litm-backpack h2 {
+  background-image: url("../assets/headers/header-backpack.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style.litm-quintessence h2 {
+  background-image: url("../assets/headers/header-backpack.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style.litm-fellowship-relationship h2 {
   background-image: url("../assets/headers/header-backpack.webp");
   background-repeat: no-repeat;
   background-size: contain;
@@ -656,27 +787,50 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
+.mist-engine .themebook-style .themebook-icon.litm-quintessence {
+  background-image: url("../assets/icons/icon-variable-litm.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style .themebook-icon .litm-fellowship-relationship {
+  background-image: url("../assets/icons/icon-variable-litm.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style .development-container {
+  margin-top: auto;
+}
 .mist-engine .themebook-style .development-partial-container {
   color: #724a32;
   font-family: Labrada, serif;
+  text-align: center;
 }
+.mist-engine .themebook-style .fellowship-promises-container {
+  color: #724a32;
+  font-family: Labrada, serif;
+  text-align: center;
+}
+
 .roll-dialog-container .selected-tags-container {
   margin: 10px 0;
+  gap: 2px;
 }
 .roll-dialog-container .selected-tags-container .tag {
   font-family: Labrada, serif;
   font-weight: bold;
+  border-radius: 2px;
+  text-align: center;
 }
 .roll-dialog-container .selected-tags-container .tag.positive {
-  background-color: green;
+  background-color: #BCCDB0;
   border-radius: 5px solid black;
-  color: black;
+  color: #724a32;
   padding: 2px;
 }
 .roll-dialog-container .selected-tags-container .tag.negative {
-  background-color: orange;
+  background-color: #ECB985;
   border-radius: 5px solid black;
-  color: black;
+  color: #724a32;
   padding: 2px;
 }
 

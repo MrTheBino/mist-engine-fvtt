@@ -1,36 +1,11 @@
 {
   "MIST_ENGINE": {
-    "Ability": {
-      "Str": { "long": "Strength", "abbr": "str" },
-      "Con": { "long": "Constitution", "abbr": "con" },
-      "Dex": { "long": "Dexterity", "abbr": "dex" },
-      "Int": { "long": "Intelligence", "abbr": "int" },
-      "Wis": { "long": "Wisdom", "abbr": "wis" },
-      "Cha": { "long": "Charisma", "abbr": "cha" }
-    },
-    "SheetLabels": {
-      "Actor": "MistEngine Actor Sheet",
-      "Item": "MistEngine Item Sheet"
-    },
-    "Item": {
-      "Spell": {
-        "SpellLVL": "Level {level} Spells",
-        "AddLVL": "Add LVL {level}"
-      }
-    },
-    "Effect": {
-      "Source": "Source",
-      "Toggle": "Toggle Effect",
-      "Temporary": "Temporary Effects",
-      "Passive": "Passive Effects",
-      "Inactive": "Inactive Effects"
+    "QUESTIONS":{
+      "DeleteItem":"Are you sure you want to delete this item?"
     }
   },
-
   "TYPES": {
     "Actor": {
-      "character": "Character",
-      "npc": "NPC",
       "litm-character": "Legend in the Mist Character",
       "litm-npc": "Legend in the Mist NPC"
     },

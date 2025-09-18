@@ -5,6 +5,9 @@
             <a data-action="editItem" data-item-id='{{themebook._id}}'>
                 <i class='fas fa-edit'></i>
             </a>
+            <a data-action="deleteItem" data-item-id='{{themebook._id}}'>
+                        <i class='fas fa-trash'></i>
+                    </a>
             {{else}}
             <i class="themebook-icon {{themebook.system.type}}"></i>
             {{/if}}

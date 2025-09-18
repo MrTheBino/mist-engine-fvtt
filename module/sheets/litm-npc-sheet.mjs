@@ -52,6 +52,10 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         npc: {
             id: 'npc',
             template: 'systems/mist-engine-fvtt/templates/actor/parts/tab-litm-npc.hbs'
+        },
+        biography: {
+            id: 'biography',
+            template: 'systems/mist-engine-fvtt/templates/shared/tab-biography.hbs'
         }
     }
 
@@ -63,7 +67,8 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         sheet: { // this is the group name
             tabs:
                 [
-                    { id: 'npc', group: 'sheet', label: 'Details' }
+                    { id: 'npc', group: 'sheet', label: 'Details' },
+                    { id: 'biography', group: 'sheet', label: 'Biography' }
                 ],
             initial: 'npc'
         }

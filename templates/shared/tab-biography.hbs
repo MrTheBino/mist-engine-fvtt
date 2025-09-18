@@ -1,0 +1,13 @@
+<section class="tab {{tabs.biography.id}} {{tabs.biography.cssClass}} scrollable" id="biography"
+    data-tab="{{tabs.biography.id}}" data-group="{{tabs.biography.group}}">
+    <div class="tab-biography">
+        {{#if editable}}
+        <prose-mirror name="system.biography" button="true" editable="{{editable}}" toggled="false"
+            value="{{system.biography}}">
+            {{{biographyHTML}}}
+        </prose-mirror>
+        {{else}}
+        {{{biographyHTML}}}
+        {{/if}}
+    </div>
+</section>

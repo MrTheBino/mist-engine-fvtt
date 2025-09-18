@@ -116,6 +116,13 @@ Handlebars.registerHelper('tagFilled', function (str) {
 
 
 
+Handlebars.registerHelper('times', function(n, block) {
+    var accum = '';
+    for(var i = 0; i < n; ++i)
+        accum += block.fn(i);
+    return accum;
+});
+
 Handlebars.registerHelper('textWithTags', function (str) {
   const tags = extractBrackets(str);
   let result = str;

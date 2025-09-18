@@ -25,6 +25,28 @@
     }
 }
 
+.litm-pc-fellowship-relationship {
+    font-family: Labrada, serif;
+    font-weight: normal;
+    color: black;
+
+    &.selected {
+        text-shadow: 0 0 15px rgb(64, 255, 0);
+        font-weight: bold;
+    }
+}
+
+.litm-pc-quintessence {
+    font-family: Labrada, serif;
+    font-weight: normal;
+    color: black;
+
+    &.selected {
+        text-shadow: 0 0 15px rgb(64, 255, 0);
+        font-weight: bold;
+    }
+}
+
 .burn-indicator {
     flex-grow: 0.15;
 }
@@ -88,9 +110,27 @@
     display:inline-block;
 }
 .npc-tag-status{
-    background-color: rgb(112, 112, 0)
+    background-color: $c-tag-yellow;
 }
 
 .npc-tag-status-value{
-    background-color: green;
+    background-color: $c-tag-green;
+}
+
+.npc-limit-name{
+    font-family: $font-primary
+}
+
+.fts-input-name.tag{
+    background-color: $c-tag-green;
+    color: $c-styled-text;
+    font-family: $font-primary;
+    border-radius: 2px;
+}
+
+.fts-input-name.status{
+    background-color: $c-tag-yellow;
+    color: $c-styled-text;
+    font-family: $font-primary;
+    border-radius: 2px;
 }

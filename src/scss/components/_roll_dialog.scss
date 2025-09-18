@@ -1,23 +1,26 @@
 .roll-dialog-container {
     .selected-tags-container {
         margin: 10px 0;
+        gap: 2px;
         
 
         .tag {
             font-family: Labrada, serif;
             font-weight: bold;
+            border-radius: 2px;
+            text-align: center;
 
             &.positive {
-                background-color: green;
+                background-color: $c-tag-green;
                 border-radius: 5px solid black;
-                color: black;
+                color: $c-styled-text;
                 padding: 2px;
             }
 
             &.negative {
-                background-color: orange;
+                background-color: $c-tag-orange;
                 border-radius: 5px solid black;
-                color: black;
+                color: $c-styled-text;
                 padding: 2px;
             }
         }

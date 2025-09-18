@@ -1,15 +1,30 @@
 <div>
-    <header class="sheet-header">
+    <header class="sheet-header {{#if system.editMode}}edit-mode{{else}}stylized-background{{/if}}">
         <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"
             height="120" />
         <div class="flexcol">
+            {{#if system.editMode}}
             <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
-            <div class="short-description"><input name="shortDescription" type="text" value="{{actor.shortDescription}}"
-                    placeholder="Short Description" /></div>
+            <div class="short-description"><input name="system.shortDescription" type="text"
+                    value="{{system.shortDescription}}" placeholder="Short Description" /></div>
+            {{else}}
+            <h1 class="charname">{{actor.name}}</h1>
+            <div class="short-description">{{system.shortDescription}}</div>
+            {{/if}}
+
             <div>
+                {{#if system.editMode}}
                 Difficulty <input type="number" name="system.difficulty" value="{{system.difficulty}}" min="0"
                     style="width: 50px;" />
-                <input type="checkbox" name="system.editMode" {{#if system.editMode}}checked{{/if}}>
+                {{else}}
+                <div class="difficulty-icons">
+                    {{#times system.difficulty}}
+                    <img src="systems/mist-engine-fvtt/assets/icons/icon-litm-difficulty.webp" title="Difficulty"
+                        height="26px" />
+                    {{/times}}
+                </div>
+                {{/if}}
+                <input class="editModeToggle" type="checkbox" name="system.editMode" title="toggle to edit the sheet" {{#if system.editMode}}checked{{/if}}>
             </div>
         </div>
 

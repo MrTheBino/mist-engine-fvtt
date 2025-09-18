@@ -6,25 +6,44 @@ export class MistEngineRollDialog extends foundry.applications.api.DialogV2 {
     _onRender(context, options) {
         super._onRender(context, options);
 
-        console.log(this);
-        const buttonDifficultyPlus = this.element.querySelector("#button-difficulty-plus");
-        if(buttonDifficultyPlus){
-            buttonDifficultyPlus.addEventListener("click", event => this._handleButtonDifficultyPlus(event));
+        const buttonNegativePlus = this.element.querySelector("#button-negative-plus");
+        if(buttonNegativePlus){
+            buttonNegativePlus.addEventListener("click", event => this._handleButtonNegativePlus(event));
         }
 
-        const buttonDifficultyMinus = this.element.querySelector("#button-difficulty-minus");
-        if(buttonDifficultyMinus){
-            buttonDifficultyMinus.addEventListener("click", event => this._handleButtonDifficultyMinus(event));
+        const buttonNegativeMinus = this.element.querySelector("#button-negative-minus");
+        if(buttonNegativeMinus){
+            buttonNegativeMinus.addEventListener("click", event => this._handleButtonNegativeMinus(event));
+        }
+
+        const buttonPositivePlus = this.element.querySelector("#button-positive-plus");
+        if(buttonPositivePlus){
+            buttonPositivePlus.addEventListener("click", event => this._handleButtonPositivePlus(event));
+        }
+
+        const buttonPositiveMinus = this.element.querySelector("#button-positive-minus");
+        if(buttonPositiveMinus){
+            buttonPositiveMinus.addEventListener("click", event => this._handleButtonPositiveMinus(event));
         }
     }
 
-    _handleButtonDifficultyPlus(event) {
-        const input = this.element.querySelector("#difficultyInput");
+    _handleButtonNegativePlus(event) {
+        const input = this.element.querySelector("#negativeInput");
         input.stepUp();
     }
 
-    _handleButtonDifficultyMinus(event) {
-        const input = this.element.querySelector("#difficultyInput");
+    _handleButtonNegativeMinus(event) {
+        const input = this.element.querySelector("#negativeInput");
+        input.stepDown();
+    }
+
+    _handleButtonPositivePlus(event) {
+        const input = this.element.querySelector("#positiveInput");
+        input.stepUp();
+    }
+
+    _handleButtonPositiveMinus(event) {
+        const input = this.element.querySelector("#positiveInput");
         input.stepDown();
     }
 }

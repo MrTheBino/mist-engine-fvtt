@@ -1,0 +1,84 @@
+<div class="npc-beautified-container flexcol">
+    <div class="npc-biography">
+        {{{textWithTags biographyHTML}}}
+    </div>
+    <div class="npc-beautified-container-stats flexrow">
+        <div class="left-half">
+            <!-- Limits -->
+            <div class="npc-limits-container">
+                <div class="npc-subtitle-container-c">
+                    <div class="npc-subtitle-text">Limits</div>
+                </div>
+                <div class="npc-limits-list flexcol">
+                    {{#each system.limits as |limit|}}
+                    <div class="npc-limit-item">
+                        <div class="npc-limit-name">{{limit.name}} <span class="npc-limit-value">{{limit.value}}</span>
+                        </div>
+
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- TAGS & STATUSES -->
+            <div class="npc-limits-container">
+                <div class="npc-subtitle-container-c">
+                    <div class="npc-subtitle-text">Tags &amp; Statuses</div>
+                </div>
+                <div class="npc-limits-list flexcol">
+                    {{#each system.tags_and_statuses as |tagOrStatus|}}
+                    <div class="npc-limit-item">
+                        <div class="npc-limit-name">
+                            {{#if (gt tagOrStatus.value 0)}}
+                            <span class="npc-tag-status-value">{{tagOrStatus.name}}-{{tagOrStatus.value}}</span>
+                            {{else if (tagFilled tagOrStatus.symbol)}}
+                            <span class="npc-tag-status">
+                                <i class="tag-icon-litm-{{tagOrStatus.symbol}}"></i> {{tagOrStatus.name}}
+                            </span>
+                            {{else}}
+                            <span class="npc-tag-status-with-symbol">{{tagOrStatus.name}}</span>
+                            {{/if}}
+
+                        </div>
+
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <!-- Special Features -->
+            <div class="npc-limits-container">
+                <div class="npc-subtitle-container-c">
+                    <div class="npc-subtitle-text">Special Features</div>
+                </div>
+                <div class="npc-limits-list flexcol">
+                    {{#each system.specialFeatures as |feature|}}
+                    <div class="npc-limit-item">
+                        <div class="npc-limit-name">{{feature.name}}</div>
+                        <div class="npc-limit-description">{{feature.description}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="right-half">
+            <div class="npc-subtitle-container-c">
+                <div class="npc-subtitle-text">THREATS &amp; CONSEQUENCES</div>
+            </div>
+
+            <div class="npc-threats-and-consequences-container flexcol">
+                {{#each system.threatsAndConsequences as |threat|}}
+                <div class="entry">
+                    <div class="entry-header"><span class="entry-name">{{threat.name}}</span> {{threat.description}}
+                    </div>
+                    <div class="entry-list flexcol">
+                        {{#each threat.list as |entry|}}
+                        <div class="entry-item"><i class="tag-icon-litm-consequence"></i>{{{textWithTags entry}}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

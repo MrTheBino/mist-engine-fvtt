@@ -6,13 +6,19 @@
             <label>Description</label>
         </div>
         {{#each system.specialFeatures as |entry index|}}
-            <div class="form-group flexrow">
-                <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="specialFeatures" data-key="name" id="threat-{{index}}" name="system.specialFeatures[{{index}}].name" value="{{entry.name}}" placeholder="Name"/>
-                <textarea class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="specialFeatures" data-key="description" id="threat-{{index}}" name="system.specialFeatures[{{index}}].description" placeholder="Description">{{entry.description}}</textarea>
+        <div class="form-group flexrow">
+            <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="specialFeatures"
+                data-key="name" id="threat-{{index}}" name="system.specialFeatures[{{index}}].name"
+                value="{{entry.name}}" placeholder="Name" />
+            <textarea class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="specialFeatures"
+                data-key="description" id="threat-{{index}}" name="system.specialFeatures[{{index}}].description"
+                placeholder="Description">{{entry.description}}</textarea>
+            <div class="trash-icon-container">
                 <a data-action="deleteSpecialFeature" data-index="{{index}}">
-                        <i class='fas fa-trash'></i>
-                    </a>
+                    <i class='fas fa-trash'></i>
+                </a>
             </div>
+        </div>
         {{/each}}
     </div>
 </fieldset>

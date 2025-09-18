@@ -8,8 +8,8 @@
         {{#each system.limits as |limit index|}}
             <div class="form-group flexrow">
                 <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="limits" data-key="name"  value="{{limit.name}}" placeholder="Name"/>
-                <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="limits" data-key="value" value="{{limit.value}}" placeholder="0"/>
-                <div>
+                <input type="text" class="npc-updatable-npc-array-stat value-input-small" data-index="{{index}}" data-array="limits" data-key="value" value="{{limit.value}}" placeholder="0"/>
+                <div class="trash-icon-container">
                 <a data-action="deleteLimit" data-index="{{index}}">
                         <i class='fas fa-trash'></i>
                     </a>

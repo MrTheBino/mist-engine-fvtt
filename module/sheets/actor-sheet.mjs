@@ -17,7 +17,9 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         actions: {
             createItem: this.#handleCreateItem,
             editItem: this.#handleEditItem,
-            deleteItem: this.#handleDeleteItem
+            deleteItem: this.#handleDeleteItem,
+            createFloatingTagOrStatus: this.#handleCreateFloatingTagOrStatus,
+            deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus
         },
         form: {
             submitOnChange: true
@@ -122,6 +124,68 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         for (const input of itemEditableStatsElements) {
             input.addEventListener("change", event => this.handleItemStatChanged(event))
         }
+
+        // floating tags and statuses
+        const updateableFtsStats = this.element.querySelectorAll('.ft-stat-updateable')
+        for (const input of updateableFtsStats) {
+            input.addEventListener("change", event => this.handleFtStatChanged(event))
+        }
+
+        const updateableFtsStatMinus = this.element.querySelectorAll('.updateable-fts-stat-minus')
+        for (const input of updateableFtsStatMinus) {
+            input.addEventListener("click", event => this.handleFtStatMinus(event))
+        }
+
+        const updateableFtsStatPlus = this.element.querySelectorAll('.updateable-fts-stat-plus')
+        for (const input of updateableFtsStatPlus) {
+            input.addEventListener("click", event => this.handleFtStatPlus(event))
+        }
+    }
+
+    static async #handleDeleteFloatingTagOrStatus(event, target) {
+        event.preventDefault();
+        const index = target.dataset.index;
+        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
+        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
+        floatingTagsAndStatuses.splice(index, 1);
+        await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+    }
+
+    async handleFtStatMinus(event){
+        event.preventDefault();
+        const index = event.currentTarget.dataset.index;
+        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
+        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
+        const currentValue = floatingTagsAndStatuses[index].value || 0;
+        if (currentValue > 1) {
+            foundry.utils.setProperty(floatingTagsAndStatuses[index], 'value', currentValue - 1);
+            await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        }else{
+            floatingTagsAndStatuses.splice(index, 1);
+            await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        }
+    }
+    async handleFtStatPlus(event){
+        event.preventDefault();
+        const index = event.currentTarget.dataset.index;
+        console.log(index);
+        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
+        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
+        const currentValue = floatingTagsAndStatuses[index].value || 0;
+        foundry.utils.setProperty(floatingTagsAndStatuses[index], 'value', currentValue + 1);
+        await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+    }
+
+    async handleFtStatChanged(event){
+        event.preventDefault();
+        const index = event.currentTarget.dataset.ftIndex;
+        const key = event.currentTarget.dataset.ftKey;
+        const value = event.currentTarget.value;
+        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
+        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
+
+        foundry.utils.setProperty(floatingTagsAndStatuses[index], key, value);
+        await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
     }
 
     async handleItemStatChanged(event) {
@@ -138,6 +202,26 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             item.update({ [event.target.dataset.itemStat]: event.target.checked });
         } else {
             item.update({ [event.target.dataset.itemStat]: event.target.value });
+        }
+    }
+
+    static async #handleCreateFloatingTagOrStatus(event, target) {
+        event.preventDefault();
+        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
+
+        if (floatingTagsAndStatuses) {
+            await this.actor.update({
+                "system.floatingTagsAndStatuses": [
+                    ...floatingTagsAndStatuses,
+                    { name: "New Floating Tag", description: "" }
+                ]
+            });
+        } else {
+            await this.actor.update({
+                "system.floatingTagsAndStatuses": [
+                    { name: "New Floating Tag", description: "" }
+                ]
+            });
         }
     }
 
@@ -183,16 +267,24 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     }
 
     static async #handleDeleteItem(event, target) {
-        if (target.dataset.itemId == undefined) {
-            const li = $(target).parents('.item');
-            const item = this.actor.items.get(li.data('itemId'));
-            item.delete();
-            li.slideUp(200, () => this.render(false));
-        } else {
-            const item = this.actor.items.get(target.dataset.itemId);
-            item.delete();
-            li.slideUp(200, () => this.render(false));
+        const proceed = await foundry.applications.api.DialogV2.confirm({
+            content: game.i18n.format("MIST_ENGINE.QUESTIONS.DeleteItem"),
+            rejectClose: false,
+            modal: true
+        });
+        if (proceed) {
+            if (target.dataset.itemId == undefined) {
+                const li = $(target).parents('.item');
+                const item = this.actor.items.get(li.data('itemId'));
+                item.delete();
+                li.slideUp(200, () => this.render(false));
+            } else {
+                const item = this.actor.items.get(target.dataset.itemId);
+                item.delete();
+                li.slideUp(200, () => this.render(false));
+            }
         }
+
     }
 
     /**

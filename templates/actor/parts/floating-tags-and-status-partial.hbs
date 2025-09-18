@@ -1,0 +1,41 @@
+<div>
+    <fieldset>
+        <legend>Tags &amp; Statuses (Temporary,Storytags etc) <a data-action="createFloatingTagOrStatus"><i
+                    class='fas fa-plus'></i></a></legend>
+        <div>
+            <label for="fts-editable-checkbox">Editable</label>
+            <input type="checkbox" id="fts-editable-checkbox" name="system.floatingTagsAndStatusesEditable" {{#if
+                system.floatingTagsAndStatusesEditable}}checked{{/if}}>
+        </div>
+        <div class="floating-tags-and-status-entries grid grid-3col">
+            {{#each system.floatingTagsAndStatuses}}
+            <div class="floating-tag-and-status-entry flexrow">
+                {{#if ../system.floatingTagsAndStatusesEditable}}
+                    <input type="text" class="fts-input-name updateable-fts-stat" data-index="{{@index}}" data-key="name"
+                        value="{{this.name}}" name="system.floatingTagsAndStatuses.{{@index}}.name"
+                        placeholder="Tag/Status Name">
+                {{else}}
+                    <div class="fts-input-name {{#if (gt this.value 0)}}status{{else}}tag{{/if}}">{{this.name}}</div>
+                {{/if}}
+                <div class="fts-input flexrow">
+                    {{#if ../system.floatingTagsAndStatusesEditable}}
+                        <input type="text" class="fts-input-value updateable-fts-stat" data-index="{{@index}}"
+                            data-key="value" value="{{this.value}}" name="system.floatingTagsAndStatuses.{{@index}}.value"
+                            placeholder="Tag/Status Value">
+                            <a data-action="deleteFloatingTagOrStatus" data-index="{{@index}}"><i class='fas fa-trash'></i></a>
+                    {{else}}
+                        {{#if (gt this.value 0)}}
+                        <i class="fa-solid fa-minus updateable-fts-stat-minus" data-index="{{@index}}"
+                            style="text-align:center" id="button-negative-minus"></i>
+                        <input type="text" class="fts-input-value" value="{{this.value}}" disabled>
+                        <i class="fa-solid fa-plus updateable-fts-stat-plus" data-index="{{@index}}"
+                            style="text-align:center" id="button-negative-plus"></i>
+                        {{/if}}
+                    {{/if}}
+
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </fieldset>
+</div>

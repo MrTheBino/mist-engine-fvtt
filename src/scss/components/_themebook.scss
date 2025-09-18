@@ -1,7 +1,6 @@
 .themebooks-container {
-    display: flex;
-    flex-direction: row;
-    align-items: start;
+
+    margin-bottom: 5px;
 }
 
 .themebook-container {
@@ -37,20 +36,21 @@
     background-image: url("../assets/litm-themebook-bg.webp");
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100%;
 
-    .themebook-icon{
+    .themebook-icon {
         color: black;
         flex-grow: 0.1;
     }
 
-    .backpack-item-editable{
-    }
+    .backpack-item-editable {}
 
     h2 {
         text-align: center;
-        font-size: 1.2em;
+        font-size: 1.1em;
         padding: 2px;
         height: 30px;
+        margin:0;
     }
 
     &.litm-adventure {
@@ -95,6 +95,22 @@
         }
     }
 
+    &.litm-quintessence {
+        h2 {
+            background-image: url("../assets/headers/header-backpack.webp");
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    }
+
+    &.litm-fellowship-relationship {
+        h2 {
+            background-image: url("../assets/headers/header-backpack.webp");
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    }
+
     .themebook-icon {
         height: 15px;
         width: 15px;
@@ -132,14 +148,33 @@
             background-repeat: no-repeat;
             background-size: contain;
         }
+
+        &.litm-quintessence {
+            background-image: url('../assets/icons/icon-variable-litm.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .litm-fellowship-relationship {
+            background-image: url('../assets/icons/icon-variable-litm.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
     }
 
+    .development-container{
+        margin-top:auto;
+    }
+    
     .development-partial-container {
         color: #724a32;
         font-family: Labrada, serif;
+        text-align: center;
+    }
 
-        input[type='radio'] {
-         
-        }
+    .fellowship-promises-container {
+        color: #724a32;
+        font-family: Labrada, serif;
+        text-align: center;
     }
 }

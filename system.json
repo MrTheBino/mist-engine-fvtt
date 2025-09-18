@@ -1,7 +1,7 @@
 {
   "id": "mist-engine-fvtt",
-  "title": "MIST-Engine",
-  "description": "The Mist-Engine system for FoundryVTT!",
+  "title": "Legend In The Mist - MIST-Engine",
+  "description": "The Mist-Engine system for FoundryVTT",
   "authors": [
     {
       "name": "MrTheBino",
@@ -11,13 +11,13 @@
   "url": "https://github.com/MrTheBino/mist-engine-fvtt",
   "license": "LICENSE.txt",
   "readme": "README.md",
-  "bugs": "Replace this with a link to file issues or tickets",
+  "bugs": "https://github.com/MrTheBino/mist-engine-fvtt/issues",
   "changelog": "CHANGELOG.md",
   "media": [
     {
       "type": "setup",
-      "url": "systems/mist-engine-fvtt/assets/anvil-impact.png",
-      "thumbnail": "systems/mist-engine-fvtt/assets/anvil-impact.png"
+      "url": "systems/mist-engine-fvtt/assets/landingpage.webp",
+      "thumbnail": "systems/mist-engine-fvtt/assets/landingpage.webp"
     }
   ],
   "version": "0.1",
@@ -37,9 +37,9 @@
   "packs": [],
   "packFolders": [],
   "socket": false,
-  "manifest": "Replace this with a link to the /latest release system.json so people can receive updates after they've installed the system",
-  "download": "This must link to a .zip file of the current version",
-  "background": "systems/mist-engine-fvtt/assets/anvil-impact.png",
+  "manifest": "https://github.com/MrTheBino/mist-engine-fvtt/releases/latest/download/system.json",
+  "download": "https://github.com/MrTheBino/mist-engine-fvtt/releases/latest/download/system.zip",
+  "background": "systems/mist-engine-fvtt/assets/landingpage.webp",
   "gridDistance": 5,
   "gridUnits": "ft",
   "primaryTokenAttribute": "health",

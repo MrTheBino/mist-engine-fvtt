@@ -1,5 +1,5 @@
 import { MistEngineActorSheet } from './actor-sheet.mjs';
-import {DiceRollAdapter} from '../lib/dice-roll-adapter.mjs';
+import { DiceRollAdapter } from '../lib/dice-roll-adapter.mjs';
 
 export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -8,14 +8,18 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         classes: ['mist-engine', 'sheet', 'actor'],
         tag: 'form',
         position: {
-            width: 800,
-            height: 750
+            width: 850,
+            height: 850
         },
         actions: {
             createBackpackItem: this.#handleCreateBackpackItem,
             deleteBackpackItem: this.#handleDeleteBackpackItem,
             clickRoll: this.#handleClickRoll,
-            toggleToBurn: this.#handleToggleToBurn
+            toggleToBurn: this.#handleToggleToBurn,
+            createQuintessence: this.#handleCreateQuintessence,
+            deleteQuintessence: this.#handleDeleteQuintessence,
+            createFellowship: this.#handleCreateFellowship,
+            deleteFellowship: this.#handleDeleteFellowship
         },
         form: {
             submitOnChange: true
@@ -46,6 +50,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         character: {
             id: 'character',
             template: 'systems/mist-engine-fvtt/templates/actor/parts/tab-litm-character.hbs'
+        },
+        biography: {
+            id: 'biography',
+            template: 'systems/mist-engine-fvtt/templates/shared/tab-biography.hbs'
+        },
+        notes: {
+            id: 'notes',
+            template: 'systems/mist-engine-fvtt/templates/shared/tab-notes.hbs'
         }
     }
 
@@ -57,7 +69,9 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         sheet: { // this is the group name
             tabs:
                 [
-                    { id: 'character', group: 'sheet', label: 'Details' }
+                    { id: 'character', group: 'sheet', label: 'Details' },
+                    { id: 'biography', group: 'sheet', label: 'Biography' },
+                    { id: 'notes', group: 'sheet', label: 'Notes' }
                 ],
             initial: 'character'
         }
@@ -70,6 +84,20 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         //context.defenseCalculated = this.options.document.defenseCalculated;
 
         let items = this._prepareItems();
+
+        context.notesHTML = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+            this.document.system.notes,
+            {
+                // Whether to show secret blocks in the finished html
+                secrets: this.document.isOwner,
+                // Necessary in v11, can be removed in v12
+                async: true,
+                // Data to fill in for inline rolls
+                rollData: this.document.getRollData(),
+                // Relative UUID resolution
+                relativeTo: this.document,
+            }
+        );
 
         foundry.utils.mergeObject(context, items);
 
@@ -123,37 +151,124 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             container.addEventListener("click", event => this.handleDevelopmentPartialClick(event));
             container.addEventListener("contextmenu", event => this.handleDevelopmentPartialRightClick(event));
         }
+
+        const characterUpdatableQuintessences = this.element.querySelectorAll('.character-updatable-quintessence');
+        for (const input of characterUpdatableQuintessences) {
+            input.addEventListener("change", event => this.handleCharacterUpdatableQuintessenceChange(event));
+        }
+
+        const characterUpdatableFellowships = this.element.querySelectorAll('.character-updatable-fellowship');
+        for (const input of characterUpdatableFellowships) {
+            input.addEventListener("change", event => this.handleCharacterUpdatableFellowshipChange(event));
+        }
+
+        const fellowshipPromisesContainers = this.element.querySelectorAll('.fellowship-promises-container');
+        for (const container of fellowshipPromisesContainers) {
+            container.addEventListener("click", event => this.handleFellowshipPromiseClick(event));
+            container.addEventListener("contextmenu", event => this.handleFellowshipPromiseRightClick(event));
+        }
     }
 
-    handleDevelopmentPartialClick(event){
+    async handleFellowshipPromiseClick(event) {
+        event.preventDefault();
+        let num = this.actor.system.promises;
+        num = num ? num + 1 : 1;
+        if (num > 5) num = 5;
+        await this.options.document.update({ "system.promises": num });
+    }
+
+    async handleFellowshipPromiseRightClick(event) {
+        event.preventDefault();
+        let num = this.actor.system.promises;
+        num = num ? num - 1 : 0;
+        if (num < 0) num = 0;
+        await this.options.document.update({ "system.promises": num });
+    }
+
+    async handleCharacterUpdatableFellowshipChange(event){
+        event.preventDefault();
+        const input = event.currentTarget;
+        const index = input.dataset.index;
+        const key = input.dataset.key;
+        const newValue = input.value;  
+        let fellowships = this.options.document.system.fellowships;
+        if(!fellowships || index >= fellowships.length) return;
+        foundry.utils.setProperty(fellowships[index], key, newValue);
+        await this.options.document.update({ "system.fellowships": fellowships });
+    }
+
+    static async #handleDeleteFellowship(event, target) {
+        event.preventDefault();
+        const index = target.dataset.index;
+        let fellowships = this.actor.system.fellowships;
+        if (!fellowships || index >= fellowships.length) return;
+        fellowships.splice(index, 1);
+        await this.actor.update({ "system.fellowships": fellowships });
+    }
+
+    static async #handleCreateFellowship(event, target) {
+        event.preventDefault();
+        const currentFellowships = this.actor.system.fellowships;
+        if (currentFellowships) {
+            await this.actor.update({
+                "system.fellowships": [ ...currentFellowships, { companion: "", relationshipTag: "", selected: false } ]
+            });
+        }else{
+            await this.actor.update({
+                "system.fellowships": [ { companion: "", relationshipTag: "", selected: false } ]
+            });
+        }
+    }
+
+    static async #handleDeleteQuintessence(event, target) {
+        event.preventDefault();
+        const index = target.dataset.index;
+        let quintessences = this.actor.system.quintessences;
+        if (!quintessences || index >= quintessences.length) return;
+        quintessences.splice(index, 1);
+        await this.actor.update({ "system.quintessences": quintessences });
+    }
+
+    async handleCharacterUpdatableQuintessenceChange(event){
+        event.preventDefault();
+        const input = event.currentTarget;
+        const index = input.dataset.index;
+        const newName = input.value;
+        let quintessences = this.options.document.system.quintessences;
+        if(!quintessences || index >= quintessences.length) return;
+        quintessences[index] = newName;
+        await this.options.document.update({ "system.quintessences": quintessences });
+    }
+
+    handleDevelopmentPartialClick(event) {
         const target = event.currentTarget;
         const item = this.actor.items.get(target.dataset.itemId);
         if (!item) return;
         const key = target.dataset.valueKey;
         let path = `${key}`;
-        
+
         let prop = foundry.utils.getProperty(item, path);
         prop = prop ? prop + 1 : 1;
-        if(prop > 3) prop = 3;
+        if (prop > 3) prop = 3;
 
         item.update({ [path]: prop });
     }
 
-    handleDevelopmentPartialRightClick(event){
+    handleDevelopmentPartialRightClick(event) {
         const target = event.currentTarget;
         const item = this.actor.items.get(target.dataset.itemId);
         if (!item) return;
         const key = target.dataset.valueKey;
         let path = `${key}`;
-        
+
         let prop = foundry.utils.getProperty(item, path);
         prop = prop ? prop - 1 : 0;
-        if(prop < 0) prop = 0;
+        if (prop < 0) prop = 0;
 
         item.update({ [path]: prop });
     }
 
-    handleBackpackItemUpdate(event){
+    handleBackpackItemUpdate(event) {
         event.preventDefault();
         const input = event.currentTarget;
         const itemId = input.dataset.itemId;
@@ -172,13 +287,13 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     }
 
     handleWeaknessSelectableClick(event) {
-         event.preventDefault();
+        event.preventDefault();
         const tag = event.currentTarget;
         const itemId = tag.dataset.itemId;
         const actor = this.options.document;
         const item = actor.items.get(itemId);
         if (!item) return;
-        if(item.system.burned) return;
+        if (item.system.burned) return;
 
         const ptIndex = tag.dataset.weeknesstagIndex;
         let path = `system.weeknesstag${ptIndex}.selected`;
@@ -213,13 +328,13 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let prop = foundry.utils.getProperty(item, path);
 
         let burnedPath = `system.powertag${ptIndex}.burned`;
-        if(foundry.utils.getProperty(item, burnedPath)){
+        if (foundry.utils.getProperty(item, burnedPath)) {
             return;
         }
 
         item.update({ [path]: !prop });
 
-        if(!prop == false){//if it was not selected and now is, remove toBurn
+        if (!prop == false) {//if it was not selected and now is, remove toBurn
             item.update({ [`system.powertag${ptIndex}.toBurn`]: false });
         }
     }
@@ -254,12 +369,31 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         });
     }
 
+    static async #handleCreateQuintessence(event, target) {
+        event.preventDefault();
+        const currentQuintessences = this.actor.system.quintessences;
+        if (currentQuintessences) {
+            await this.actor.update({
+                "system.quintessences": [
+                    ...currentQuintessences,
+                    "New Quintessence"
+                ]
+            });
+        } else {
+            await this.actor.update({
+                "system.quintessences": [
+                    "New Quintessence"
+                ]
+            });
+        }
+    }
+
     static async #handleCreateBackpackItem(event, target) {
         event.preventDefault();
         const backpack = this.actor.items.get(target.dataset.itemId);
 
         const backpackItems = backpack.system.items;
-        
+
         if (backpackItems) {
             await backpack.update({
                 "system.items": [
@@ -289,7 +423,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if (!powertag) return;
 
         let burnedPath = `system.powertag${powertagIndex}.burned`;
-        if(foundry.utils.getProperty(item, burnedPath)){
+        if (foundry.utils.getProperty(item, burnedPath)) {
             return;
         }
 
@@ -305,7 +439,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     static async #handleClickRoll(event, target) {
         event.preventDefault();
         const actor = this.actor;
-        const diceRollAdapter = new DiceRollAdapter({actor: actor,type: target.dataset.rollType});
+        const diceRollAdapter = new DiceRollAdapter({ actor: actor, type: target.dataset.rollType });
         diceRollAdapter.render();
     }
 }

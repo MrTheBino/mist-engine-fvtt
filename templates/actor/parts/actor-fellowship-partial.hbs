@@ -1,0 +1,67 @@
+<div class="themebook-container" data-id="{{id}}">
+    <div class="themebook-style litm-fellowship-relationship flexcol">
+        <h2 class="theme-name">Fellowship Relationship
+
+            {{#if editMode}}
+            <a data-action="createFellowship">
+                <i class='fas fa-plus'></i>
+            </a>
+            {{else}}
+            <i class="themebook-icon litm-fellowship-relationship"></i>
+            {{/if}}
+        </h2>
+        <div class="fellowship-entries">
+            {{#each system.fellowships as |entry index|}}
+            <div class="form-group flexrow">
+                {{#if ../editMode}}
+                <input type="text" class="character-updatable-fellowship" data-index="{{index}}" data-key="companion"
+                    value="{{entry.companion}}" placeholder="Companion" />
+                <input type="text" class="character-updatable-fellowship" data-index="{{index}}"
+                    data-key="relationshipTag" value="{{entry.relationshipTag}}" placeholder="Tag" />
+                <a class="themebook-icon" data-action="deleteFellowship" data-item-index="{{index}}">
+                    <i class='fas fa-trash'></i>
+                </a>
+                {{else}}
+                <div class="flexrow item-powertag-line">
+                    <span class="litm-pc-fellowship-relationship">{{entry.companion}}</span>
+                    <span class="litm-pc-fellowship-relationship">{{entry.relationshipTag}}</span>
+                </div>
+
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+        <div class="fellowship-promises">
+            <div class="fellowship-promises-container" >
+                {{#if (lt system.promises 1)}}
+                <i class="fa-solid fa-circle"></i>
+                {{else}}
+                <i class="fa-solid fa-circle-xmark"></i>
+                {{/if}}
+
+                {{#if (lt system.promises 2)}}
+                <i class="fa-solid fa-circle"></i>
+                {{else}}
+                <i class="fa-solid fa-circle-xmark"></i>
+                {{/if}}
+
+                {{#if (lt system.promises 3)}}
+                <i class="fa-solid fa-circle"></i>
+                {{else}}
+                <i class="fa-solid fa-circle-xmark"></i>
+                {{/if}}
+                {{#if (lt system.promises 4)}}
+                <i class="fa-solid fa-circle"></i>
+                {{else}}
+                <i class="fa-solid fa-circle-xmark"></i>
+                {{/if}}
+                {{#if (lt system.promises 5)}}
+                <i class="fa-solid fa-circle"></i>
+                {{else}}
+                <i class="fa-solid fa-circle-xmark"></i>
+                {{/if}}
+                <div class="fellowship-promises-label">Promises</div>
+            </div>
+        </div>
+    </div>
+</div>

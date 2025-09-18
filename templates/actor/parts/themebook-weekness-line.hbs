@@ -1,8 +1,7 @@
 <div class="item-weekness-line flexrow">
     {{#if editMode}}
-    {{index}}
     <input class="item-editable-stat" data-item-id={{id}} type="text" data-item-stat="system.weeknesstag{{index}}.name"
-        value="{{weeknesstag.name}}" placeholder="{{weeknesstag.question}}" title="{{weeknesstag.question}}" />
+        value="{{weeknesstag.name}}" placeholder="{{weeknesstag.question}}" title="{{weeknesstag.question}}" title="Weakness"/>
     {{else}}
         {{#if (tagFilled weeknesstag.name)}}
         <span class="litm-pc-weekness wt-selectable {{#if weeknesstag.selected}}selected{{/if}}"
