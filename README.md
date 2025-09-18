@@ -27,6 +27,10 @@ Currently it only supports Legend In The Mist.
 
 If using weekness tags, you have to improve / mark the themebook manually. There is no automation for this in the system.
 
+## Manifest-URL for manual installation of the system
+
+    https://github.com/MrTheBino/mist-engine-fvtt/releases/latest/download/system.json
+
 ## Why another system?
 
 I like simplicity in FoundryVTT systems because I love it to prepare my sessions in Foundry. So, a fast way to prepare my sessions is my primary goal.
