@@ -2,6 +2,17 @@
   "MIST_ENGINE": {
     "QUESTIONS":{
       "DeleteItem":"Are you sure you want to delete this item?"
+    },
+    "LABELS":{
+      "Description":"Description",
+      "Form": "Data",
+      "Themebooks":"ThemeBooks",
+      "Notes":"Notes",
+      "Biography":"Biography",
+      "ActorFloatingTagOrStatus": "Tags & Statuses",
+      "SceneApp":{
+        "Header": "Story Tags & Statuses"
+      }
     }
   },
   "TYPES": {
@@ -13,7 +24,8 @@
       "item": "Item",
       "feature": "Feature",
       "spell": "Spell",
-      "themebook": "Theme Book"
+      "themebook": "Theme Book",
+      "scene-data": "Scene Data"
     }
   }
 }

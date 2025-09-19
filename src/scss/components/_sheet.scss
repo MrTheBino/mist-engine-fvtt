@@ -219,3 +219,11 @@
 .fts-input-value{
     flex-grow: 0.5
 }
+
+.floating-tags-and-status-container{
+    padding: 10px;
+     background-image: url("../assets/bg2-litm.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: $c-styled-text;
+}

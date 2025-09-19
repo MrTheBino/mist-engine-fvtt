@@ -2,6 +2,7 @@
     data-tab="{{tabs.form.id}}" data-group="{{tabs.form.group}}">
     <div>
         <select name="system.type" >
+            <option value="">-</option>
             <option value="litm-origin" {{#if (eq system.type "litm-origin")}}selected{{/if}}>LitM - Origin</option>
             <option value="litm-adventure" {{#if (eq system.type "litm-adventure")}}selected{{/if}}>LitM - Adventure</option>
             <option value="litm-variable" {{#if (eq system.type "litm-variable")}}selected{{/if}}>LitM - Variable</option>

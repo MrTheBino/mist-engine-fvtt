@@ -3,6 +3,6 @@
     "types": ["litm-character","litm-npc"]
   },
   "Item": {
-    "types": ["item", "themebook","backpack"]
+    "types": ["item", "themebook","backpack","scene-data"]
   }
 }

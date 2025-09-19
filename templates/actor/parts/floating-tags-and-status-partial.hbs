@@ -1,7 +1,10 @@
-<div>
-    <fieldset>
-        <legend>Tags &amp; Statuses (Temporary,Storytags etc) <a data-action="createFloatingTagOrStatus"><i
-                    class='fas fa-plus'></i></a></legend>
+<div class="floating-tags-and-status-container">
+
+        <div class="npc-subtitle-container-c">
+                <div class="npc-subtitle-text">{{localize 'MIST_ENGINE.LABELS.ActorFloatingTagOrStatus'}}<a
+                        data-action="createFloatingTagOrStatus"> <i class='fas fa-plus'></i></a></div>
+            </div>
+
         <div>
             <label for="fts-editable-checkbox">Editable</label>
             <input type="checkbox" id="fts-editable-checkbox" name="system.floatingTagsAndStatusesEditable" {{#if
@@ -37,5 +40,4 @@
             </div>
             {{/each}}
         </div>
-    </fieldset>
 </div>

@@ -20,7 +20,7 @@
       "thumbnail": "systems/mist-engine-fvtt/assets/landingpage.webp"
     }
   ],
-  "version": "0.1",
+  "version": "0.2",
   "compatibility": {
     "minimum": 13,
     "verified": "13"
@@ -36,7 +36,7 @@
   ],
   "packs": [],
   "packFolders": [],
-  "socket": false,
+  "socket": true,
   "manifest": "https://github.com/MrTheBino/mist-engine-fvtt/releases/latest/download/system.json",
   "download": "https://github.com/MrTheBino/mist-engine-fvtt/releases/latest/download/system.zip",
   "background": "systems/mist-engine-fvtt/assets/landingpage.webp",

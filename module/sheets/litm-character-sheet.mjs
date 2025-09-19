@@ -69,9 +69,9 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         sheet: { // this is the group name
             tabs:
                 [
-                    { id: 'character', group: 'sheet', label: 'Details' },
-                    { id: 'biography', group: 'sheet', label: 'Biography' },
-                    { id: 'notes', group: 'sheet', label: 'Notes' }
+                    { id: 'character', group: 'sheet', label: 'MIST_ENGINE.LABELS.Themebooks' },
+                    { id: 'biography', group: 'sheet', label: 'MIST_ENGINE.LABELS.Biography' },
+                    { id: 'notes', group: 'sheet', label: 'MIST_ENGINE.LABELS.Notes' }
                 ],
             initial: 'character'
         }

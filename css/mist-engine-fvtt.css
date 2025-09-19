@@ -562,6 +562,13 @@
 .mist-engine .fts-input-value {
   flex-grow: 0.5;
 }
+.mist-engine .floating-tags-and-status-container {
+  padding: 10px;
+  background-image: url("../assets/bg2-litm.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #724a32;
+}
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
   font-weight: normal;
@@ -668,12 +675,16 @@
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
+  text-align: center;
+  font-weight: bold;
 }
 .mist-engine .fts-input-name.status {
   background-color: #ECE800;
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
+  text-align: center;
+  font-weight: bold;
 }
 .mist-engine .themebooks-container {
   margin-bottom: 5px;
@@ -902,6 +913,17 @@
 }
 .consequence-result-icon.neutral {
   background-image: url("../assets/icons/icon-litm-neutral.svg");
+}
+
+#scene-data-app > section.window-content {
+  background-image: url("../assets/bg2-litm.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #724a32;
+}
+
+.floating-tags-and-status-entries {
+  gap: 5px;
 }
 
 /*# sourceMappingURL=mist-engine-fvtt.css.map */

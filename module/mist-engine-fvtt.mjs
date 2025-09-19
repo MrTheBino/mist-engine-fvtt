@@ -3,9 +3,11 @@ import { MistEngineActor } from './documents/actor.mjs';
 import { MistEngineItem } from './documents/item.mjs';
 // Import sheet classes.
 import { MistEngineActorSheet } from './sheets/actor-sheet.mjs';
-import {MistEngineLegendInTheMistCharacterSheet} from './sheets/litm-character-sheet.mjs';
+import { MistEngineLegendInTheMistCharacterSheet } from './sheets/litm-character-sheet.mjs';
 import { MistEngineLegendInTheMistNpcSheet } from './sheets/litm-npc-sheet.mjs';
 import { MistEngineItemSheet } from './sheets/item-sheet.mjs';
+import { MistSceneApp } from './apps/scene-app.mjs';
+
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { MIST_ENGINE } from './helpers/config.mjs';
@@ -67,7 +69,8 @@ Hooks.once('init', function () {
     feature: models.MistEngineFeature,
     spell: models.MistEngineSpell,
     themebook: models.MistEngineItemThemeBook,
-    backpack: models.MistEngineItemBackpack
+    backpack: models.MistEngineItemBackpack,
+    "scene-data": models.MistEngineSceneData
   }
 
   // Active Effects are never copied to the Actor,
@@ -82,12 +85,12 @@ Hooks.once('init', function () {
     types: ['litm-character'],
     label: 'MIST_ENGINE.SheetLabels.Actor',
   });
-Actors.registerSheet('mist-engine-fvtt', MistEngineLegendInTheMistNpcSheet, {
+  Actors.registerSheet('mist-engine-fvtt', MistEngineLegendInTheMistNpcSheet, {
     makeDefault: true,
     types: ['litm-npc'],
     label: 'MIST_ENGINE.SheetLabels.Actor',
   });
-  
+
   Items.unregisterSheet('core', ItemSheet);
   Items.registerSheet('mist-engine-fvtt', MistEngineItemSheet, {
     makeDefault: true,
@@ -108,7 +111,7 @@ Handlebars.registerHelper('toLowerCase', function (str) {
 });
 
 Handlebars.registerHelper('tagFilled', function (str) {
-  if(str && str.trim().length > 0) {
+  if (str && str.trim().length > 0) {
     return true;
   }
   return false;
@@ -116,23 +119,23 @@ Handlebars.registerHelper('tagFilled', function (str) {
 
 
 
-Handlebars.registerHelper('times', function(n, block) {
-    var accum = '';
-    for(var i = 0; i < n; ++i)
-        accum += block.fn(i);
-    return accum;
+Handlebars.registerHelper('times', function (n, block) {
+  var accum = '';
+  for (var i = 0; i < n; ++i)
+    accum += block.fn(i);
+  return accum;
 });
 
 Handlebars.registerHelper('textWithTags', function (str) {
   const tags = extractBrackets(str);
   let result = str;
   tags.forEach(tag => {
-    if(tag.includes("-")){
+    if (tag.includes("-")) {
       result = result.replace(`[${tag}]`, `<span class="status">${tag}</span>`);
-    }else{
+    } else {
       result = result.replace(`[${tag}]`, `<span class="tag">${tag}</span>`);
     }
-    
+
   });
   return result;
 });
@@ -144,6 +147,41 @@ Handlebars.registerHelper('textWithTags', function (str) {
 Hooks.once('ready', function () {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on('hotbarDrop', (bar, data, slot) => createItemMacro(data, slot));
+
+});
+
+Hooks.on("getSceneControlButtons", (controls) => {
+
+  let sidebarControls = {
+    scene_data_app: {
+      name: 'scene_data_app',
+      title: 'Scene Tags',
+      icon: 'fas fa-scroll',
+      visible: true,
+      onChange: () => MistSceneApp.getInstance().render(true, { focus: true }),
+      button: true
+    },
+  };
+
+  controls.notes.tools = foundry.utils.mergeObject(controls.notes.tools, sidebarControls);
+})
+
+Hooks.on("renderItemDirectory", (app, html) => {
+  // ToDo: is this the correct way? maybe move them to a compendium?
+  const sceneDataIds = game.items.filter(item => item.type === "scene-data").map(i => i.id);
+  for (const id of sceneDataIds) {
+    let t = html.querySelector(`li.directory-item[data-entry-id="${id}"]`)
+    if(t) t.remove();
+  }
+});
+
+Hooks.on("mistengine:sceneAppUpdated", (data) => {
+  console.log("received mistengine:sceneAppUpdated event");
+   MistSceneApp.getInstance().render(true, { focus: true });
+});
+
+Hooks.on("canvasReady", (canvas) => {
+  MistSceneApp.getInstance().sceneChangedHook(canvas.scene);
 });
 
 /* -------------------------------------------- */
