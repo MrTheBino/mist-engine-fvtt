@@ -27,7 +27,7 @@
     padding-top: 5px;
     font-family: Labrada, serif;
     .heading{
-        font-size: 1.2em;
+        font-size: 2em;
         font-weight: bold;
     }
 }
@@ -36,18 +36,21 @@
     background-image: url("../assets/outcome-bg-litm-negative.webp");
     background-repeat: no-repeat;
     background-size: cover;
+    padding: 5px;
 }
 
 .consequence-result-neutral {
     background-image: url("../assets/outcome-bg-litm-neutral.webp");
     background-repeat: no-repeat;
     background-size: cover;
+    padding: 5px;
 }
 
 .consequence-result-positive {
     background-image: url("../assets/outcome-bg-litm-positive.webp");
     background-repeat: no-repeat;
     background-size: cover;
+    padding: 5px;
 }
 
 .consequence-result-icon {
@@ -59,6 +62,8 @@
     background-size: contain;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
     display: inline-block;
+    top: 10px;
+    left: -5px;
 
     &.negative {
         background-image: url("../assets/icons/icon-litm-negative.svg");

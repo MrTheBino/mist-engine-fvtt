@@ -392,6 +392,9 @@
 .mist-engine .item-weekness-line {
   margin: 5px;
 }
+.mist-engine .item-weekness-line input {
+  border: 2px solid red;
+}
 .mist-engine .quest-container {
   margin-left: auto;
   margin-right: auto;
@@ -552,6 +555,10 @@
 }
 .mist-engine .roll-button {
   margin: 5px;
+  font-family: Labrada, serif;
+}
+.mist-engine .roll-buttons-container {
+  padding-right: 10px;
 }
 .mist-engine .powertags-container {
   margin: 2px;
@@ -569,6 +576,17 @@
   background-size: cover;
   color: #724a32;
 }
+.mist-engine .portrait-img {
+  border: 2px solid black;
+}
+.mist-engine .tab-notes, .mist-engine .tab-biography {
+  padding: 10px;
+  background-image: url("../assets/bg2-litm.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #724a32;
+  font-family: Labrada, serif;
+}
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
   font-weight: normal;
@@ -581,6 +599,10 @@
 .mist-engine .litm-pc-powertag.burned {
   text-decoration: line-through;
   color: gray;
+}
+.mist-engine .litm-pc-powertag.first {
+  font-weight: bolder;
+  font-size: 1.1em;
 }
 .mist-engine .litm-pc-weekness {
   font-family: Labrada, serif;
@@ -873,7 +895,7 @@
   font-family: Labrada, serif;
 }
 .consequence-container .heading {
-  font-size: 1.2em;
+  font-size: 2em;
   font-weight: bold;
 }
 
@@ -881,18 +903,21 @@
   background-image: url("../assets/outcome-bg-litm-negative.webp");
   background-repeat: no-repeat;
   background-size: cover;
+  padding: 5px;
 }
 
 .consequence-result-neutral {
   background-image: url("../assets/outcome-bg-litm-neutral.webp");
   background-repeat: no-repeat;
   background-size: cover;
+  padding: 5px;
 }
 
 .consequence-result-positive {
   background-image: url("../assets/outcome-bg-litm-positive.webp");
   background-repeat: no-repeat;
   background-size: cover;
+  padding: 5px;
 }
 
 .consequence-result-icon {
@@ -904,6 +929,8 @@
   background-size: contain;
   filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
   display: inline-block;
+  top: 10px;
+  left: -5px;
 }
 .consequence-result-icon.negative {
   background-image: url("../assets/icons/icon-litm-negative.svg");

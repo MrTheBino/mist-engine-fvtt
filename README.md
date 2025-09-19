@@ -1,6 +1,6 @@
 # Legend In The Mist - MistEngine for FoundryVTT
 
-![Foundry v13](https://img.shields.io/badge/foundry-v13-green)
+![Foundry v13](https://img.shields.io/badge/foundry-v13-green) [![Github All Releases](https://img.shields.io/github/downloads/MrTheBino/mist-engine-fvtt/total.svg)]()
 
 This is an unoffical system implementation of the MIST Engine from Son Of Oaks for FoundryVTT.
 

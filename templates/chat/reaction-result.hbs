@@ -15,25 +15,19 @@
         <div class="consequence-result-negative">
 
             <span class="heading"><i class="consequence-result-icon negative"></i>6-</span>
-            <p>Suffer the Consequences as-is
-            </p>
+            <p>{{{localize "MIST_ENGINE.MOVES.LEGEND.reaction.negative"}}}</p>
         </div>
         {{/if}}
         {{#if (eq consequenceResult 0)}}
         <div class="consequence-result-neutral">
             <span class="heading"><i class="consequence-result-icon neutral"></i>7-9</span>
-            <p>
-                Spend your Power, only to lessen the Consequences
-            </p>
-            <p>
-            </p>
+            <p>{{{localize "MIST_ENGINE.MOVES.LEGEND.reaction.neutral"}}}</p>
         </div>
         {{/if}}
         {{#if (eq consequenceResult 1)}}
         <div class="consequence-result-positive">
             <span class="heading"><i class="consequence-result-icon positive"></i>10</span>
-            <p>Spend your Power plus 1, on any Effect
-            </p>
+            <p>{{{localize "MIST_ENGINE.MOVES.LEGEND.reaction.success"}}}</p>
         </div>
         {{/if}}
     </div>

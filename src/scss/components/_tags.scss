@@ -12,6 +12,11 @@
         text-decoration: line-through;
         color: gray;
     }
+
+    &.first{
+        font-weight: bolder;
+        font-size: 1.1em;
+    }
 }
 
 .litm-pc-weekness {

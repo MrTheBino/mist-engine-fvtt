@@ -119,7 +119,10 @@ export class DiceRollAdapter {
 
         const dicePromises = [];
 
-        let rollFormula = `2d6 + ${numPositiveTags} - ${numNegativeTags}`;
+        let rollFormula = `2d6`;
+        if(numPositiveTags> 0) rollFormula += ` + ${numPositiveTags}`;
+        if(numNegativeTags> 0) rollFormula += ` - ${numNegativeTags}`;
+        
         const diceRoll = new Roll(rollFormula, this.actor.getRollData());
         await diceRoll.evaluate();
 

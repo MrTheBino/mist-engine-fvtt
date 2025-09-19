@@ -4,6 +4,9 @@
 
 .item-weekness-line{
     margin: 5px;
+    input{
+        border: 2px solid red;
+    }
 }
 
 .quest-container{
@@ -206,6 +209,11 @@
 
 .roll-button{
     margin: 5px;
+    font-family: $font-primary;
+}
+
+.roll-buttons-container{
+    padding-right: 10px;
 }
 
 .powertags-container{
@@ -226,4 +234,17 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: $c-styled-text;
+}
+
+.portrait-img{
+    border: 2px solid black;
+}
+
+.tab-notes, .tab-biography{
+    padding: 10px;
+     background-image: url("../assets/bg2-litm.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: $c-styled-text;
+    font-family: $font-primary;
 }

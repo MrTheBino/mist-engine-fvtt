@@ -150,6 +150,22 @@ Hooks.once('ready', function () {
 
 });
 
+Hooks.on("preCreateActor", async (actor, data, options, userId) => {
+  // Creating a backpack for each new LITM-Character
+  if (data.type !== "litm-character") return;
+
+  const itemData = {
+    name: "Backpack",
+    type: "backpack",           
+    system: { /* ... */ },
+    flags: { mist: { autoAdded: true } }
+  };
+
+  actor.updateSource({
+    items: [...(actor._source.items ?? []), itemData]
+  });
+});
+
 Hooks.on("getSceneControlButtons", (controls) => {
 
   let sidebarControls = {

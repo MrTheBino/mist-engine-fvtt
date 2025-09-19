@@ -7,7 +7,7 @@
         <span class="burn-indicator" data-action="toggleToBurn" data-item-id={{id}} data-powertag-index={{index}}>
             <i class="burn-icon {{#if powertag.toBurn}}to-burn{{/if}}"></i>
         </span>
-        <span class="litm-pc-powertag powertag-name pt-selectable {{#if powertag.selected}}selected{{/if}} {{#if powertag.burned}}burned{{/if}}" title="Right click to toggle burn state"
+        <span class="litm-pc-powertag powertag-name pt-selectable {{#if firstTag}}first{{/if}} {{#if powertag.selected}}selected{{/if}} {{#if powertag.burned}}burned{{/if}}" title="Right click to toggle burn state"
             data-powertag-index={{index}} data-item-id={{id}}>{{powertag.name}}</span>
         {{/if}}
     {{/if}}
