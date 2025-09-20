@@ -14,56 +14,18 @@ export class MistEngineActor extends Actor {
 
    static async create(data, options = {}) {
     //make default Friendly and Linked on Creation
-    /*data.prototypeToken = data.prototypeToken || {};
+    data.prototypeToken = data.prototypeToken || {};
 
     let defaults = {};
-    let image = null;
-    
-    /*switch(data.type){
-      default:
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-item.svg";
-        break;
-      case "asset":
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-assets.svg";
-        break
-      case "touchstone":
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-touchstone.svg";
-        break
-      case "discipline":
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-discipline.svg";
-        break;
-      case "weapon":
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-weapon.svg";
-        break
-      case "background":
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-background.svg";
-        break
-      case "bloodline":
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-bloodline.svg";
-        break
-      case "class":
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-class.svg";
-        break
-      case "compulsion":
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-compulsion.svg";
-        break
-      case "feeding":
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-feeding.svg";
-        break
-      case "npcAttack":
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-npc-attack.svg";
-        break
-      case "npcFeature":
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-npc-feature.svg";
-        break
-      case "armor":
-        image = "systems/shadowcity-blood-neon-vtt/assets/icons/icon-armor.svg";
-        break
+    if (data.type === "litm-character") {
+      defaults = {
+        actorLink: true,
+        disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
+      };
     }
 
-    if (image != null) {
-      data.img = image
-    }*/
+
+    foundry.utils.mergeObject(data.prototypeToken, defaults, { overwrite: false });
 
     const actor = await super.create(data, options);
     return actor;

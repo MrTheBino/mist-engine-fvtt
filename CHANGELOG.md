@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 0.2.3
+- automaticly link character actor data to the token
+  
 ## 0.2.2
 - slighty improved editing of npc sheet
 - improved slighty visual styles
