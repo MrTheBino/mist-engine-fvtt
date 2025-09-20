@@ -119,7 +119,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         }
     }
 
-    static async #handleDeleteThreadAndConsequenceEntry(event,target){
+    static async #handleDeleteThreadAndConsequenceEntry(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
         const listIndex = target.dataset.listindex;
@@ -129,7 +129,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
             await this.actor.update({ "system.threatsAndConsequences": threatsAndConsequences });
         }
     }
-    
+
     static async #handleDeleteThreadAndConsequence(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
@@ -153,7 +153,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         console.log(key);
         foundry.utils.setProperty(arrayData[arrayIndex], key, target.value);
         console.log(arrayData[arrayIndex]);
-        
+
         await this.actor.update({ [path]: arrayData });
     }
 
@@ -169,6 +169,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         arrayData[arrayIndex].list[listIndex] = target.value;
 
         await this.actor.update({ [path]: arrayData });
+        await this.actor.sheet.render(true);
     }
 
     static async #handleDeleteTagOrStatus(event, target) {
@@ -178,7 +179,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         if (tags_and_statuses && tags_and_statuses.length > 0) {
             tags_and_statuses.splice(index, 1);
             await this.actor.update({ "system.tags_and_statuses": tags_and_statuses });
-        }   
+        }
     }
 
     static async #handleDeleteLimit(event, target) {
@@ -189,7 +190,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         if (limits && limits.length > 0) {
             limits.splice(index, 1);
             await this.actor.update({ "system.limits": limits });
-        }   
+        }
     }
 
     static async #handleDeleteSpecialFeature(event, target) {
@@ -199,7 +200,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         if (specialFeatures && specialFeatures.length > 0) {
             specialFeatures.splice(index, 1);
             await this.actor.update({ "system.specialFeatures": specialFeatures });
-        }   
+        }
     }
 
     static async #handleCreateThreatAndConsequenceEntry(event, target) {
@@ -210,6 +211,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
         threatsAndConsequences[index].list.push("New Entry");
         await this.actor.update({ "system.threatsAndConsequences": threatsAndConsequences });
+        await this.actor.sheet.render(true);
     }
 
     static async #handleCreateThreatAndConsequence(event, target) {
@@ -217,7 +219,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         const index = target.dataset.index;
         const threatsAndConsequences = this.actor.system.threatsAndConsequences;
 
-          if (threatsAndConsequences) {
+        if (threatsAndConsequences) {
             await this.actor.update({
                 "system.threatsAndConsequences": [
                     ...threatsAndConsequences,
@@ -231,6 +233,8 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
                 ]
             });
         }
+
+        await this.actor.sheet.render(true);
     }
 
     static async #handleCreateSpecialFeature(event, target) {

@@ -16,8 +16,7 @@
                 <h1 class="charname">{{actor.name}}</h1>
                 <div class="short-description">{{system.shortDescription}}</div>
                 {{/if}}
-                <input class="editModeToggle" type="checkbox" name="system.editMode" title="toggle to edit the sheet"
-                    {{#if system.editMode}}checked{{/if}}>
+                {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs' isLocked=system.editMode name="system.editMode" title="Toggle Edit Mode"}}
 
 
             </div>

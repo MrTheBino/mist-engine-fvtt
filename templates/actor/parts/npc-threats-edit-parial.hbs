@@ -27,7 +27,7 @@
                 {{#each entry.list as |listEntry listIndex|}}
                 <div class="form-group flexcol thread-entry-container">
                     <div class="form-group flexrow">
-                        <input type="text" class="npc-updatable-threat-entry-stat value-input-huge"
+                        <input type="text" class="npc-updatable-threat-entry-stat value-input-huge" id="npc-thread-list-{{index}}-{{listIndex}}"
                             data-index="{{index}}" data-listIndex="{{listIndex}}" value="{{listEntry}}"
                             placeholder="" />
                         <div class="trash-icon-container">

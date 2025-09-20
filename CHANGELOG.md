@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 0.2.2
+- slighty improved editing of npc sheet
+- improved slighty visual styles
+- fixed dice roll results
+- added fumble and critical roll indicators  (needs styling and altered output in the chat window)
+- fixed special feature rending on npc sheets
+- fellowship relation tags can be used in rolls
+- visual indicator via mouse over on selectable tags
+
 ## 0.2.1
 - all new characters are getting a backpack assigned per default
 - weakness in themebooks got a colored border to better identify them

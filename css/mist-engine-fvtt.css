@@ -463,14 +463,35 @@
   margin: 3px 2px 3px 2px;
   text-shadow: 1px 1px 2px rgb(255, 249, 249);
 }
-.mist-engine .npc-limit-value {
-  width: 32px;
-  height: 32px;
+.mist-engine .npc-limit-value-armor {
   background-image: url("../assets/icons/icon-litm-limit-shield.svg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 0;
+  width: 1.2em;
+  height: auto;
   text-align: center;
-  display: inline-block;
+  font-size: 1rem;
+  color: white;
+}
+.mist-engine .npc-limit-name {
+  font-family: Labrada, serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  color: black;
+  font-size: 0.9rem;
+  clip-path: none;
+  padding: 0;
+  text-transform: uppercase;
 }
 .mist-engine .npc-limits-list {
   align-items: center;
@@ -524,12 +545,21 @@
 }
 .mist-engine .sheet-header.stylized-background h1 {
   color: #724a32;
+  display: flex;
+  justify-content: center;
 }
 .mist-engine .sheet-header.stylized-background .short-description {
   color: #724a32;
+  display: flex;
+  justify-content: center;
+  font-family: Labrada, serif;
+  font-weight: bold;
+  font-size: 1.1em;
 }
 .mist-engine .sheet-header .difficulty-icons {
+  margin-top: 5px;
   display: flex;
+  justify-content: center;
 }
 .mist-engine .editModeToggle {
   float: right;
@@ -579,7 +609,8 @@
 .mist-engine .portrait-img {
   border: 2px solid black;
 }
-.mist-engine .tab-notes, .mist-engine .tab-biography {
+.mist-engine .tab-notes,
+.mist-engine .tab-biography {
   padding: 10px;
   background-image: url("../assets/bg2-litm.webp");
   background-repeat: no-repeat;
@@ -587,10 +618,25 @@
   color: #724a32;
   font-family: Labrada, serif;
 }
+.mist-engine .lock-toggle-container {
+  color: black;
+  display: flex;
+  justify-content: right;
+  padding-right: 20px;
+  font-size: 1.5em;
+}
+.mist-engine .lock-toggle-container.locked {
+  color: darkred;
+}
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
   font-weight: normal;
   color: black;
+}
+.mist-engine .litm-pc-powertag:hover {
+  cursor: pointer;
+  text-shadow: 0 0 15px rgb(143, 255, 105);
+  font-weight: bold;
 }
 .mist-engine .litm-pc-powertag.selected {
   text-shadow: 0 0 15px rgb(64, 255, 0);
@@ -609,14 +655,29 @@
   font-weight: normal;
   color: black;
 }
-.mist-engine .litm-pc-weekness.selected {
-  text-shadow: 0 0 15px rgb(64, 255, 0);
+.mist-engine .litm-pc-weekness:hover {
+  cursor: pointer;
+  text-shadow: 0 0 15px rgb(242, 255, 57);
   font-weight: bold;
+}
+.mist-engine .litm-pc-weekness.selected {
+  text-shadow: 0 0 15px rgb(242, 255, 57);
+  font-weight: bold;
+}
+.mist-engine .litm-pc-fellowship-relationship-companion {
+  font-family: Labrada, serif;
+  font-weight: normal;
+  color: black;
+  margin-right: 5px;
 }
 .mist-engine .litm-pc-fellowship-relationship {
   font-family: Labrada, serif;
   font-weight: normal;
   color: black;
+}
+.mist-engine .litm-pc-fellowship-relationship:hover {
+  text-shadow: 0 0 15px rgb(64, 255, 0);
+  font-weight: bold;
 }
 .mist-engine .litm-pc-fellowship-relationship.selected {
   text-shadow: 0 0 15px rgb(64, 255, 0);
@@ -689,9 +750,6 @@
 .mist-engine .npc-tag-status-value {
   background-color: #BCCDB0;
 }
-.mist-engine .npc-limit-name {
-  font-family: Labrada, serif;
-}
 .mist-engine .fts-input-name.tag {
   background-color: #BCCDB0;
   color: #724a32;
@@ -701,6 +759,22 @@
   font-weight: bold;
 }
 .mist-engine .fts-input-name.status {
+  background-color: #ECE800;
+  color: #724a32;
+  font-family: Labrada, serif;
+  border-radius: 2px;
+  text-align: center;
+  font-weight: bold;
+}
+.mist-engine .npc-limit-description .tag {
+  background-color: #BCCDB0;
+  color: #724a32;
+  font-family: Labrada, serif;
+  border-radius: 2px;
+  text-align: center;
+  font-weight: bold;
+}
+.mist-engine .npc-limit-description .status {
   background-color: #ECE800;
   color: #724a32;
   font-family: Labrada, serif;
@@ -871,22 +945,26 @@
   margin-top: 5px;
   margin-bottom: 5px;
   font-family: Labrada, serif;
+  font-size: 0.9em;
+  display: flex;
+  gap: 2px;
+  color: #724a32;
+  font-weight: 400;
 }
 .message-content .selected-tags .tag {
   background-color: gray;
-  color: white;
   padding: 2px 2px;
   text-align: center;
   border-radius: 5px;
 }
 .message-content .selected-tags .tag.positive {
-  background-color: rgb(38, 143, 2);
-}
-.message-content .selected-tags .tag.burned {
-  text-decoration: line-through;
+  background-color: #BCCDB0;
 }
 .message-content .selected-tags .tag.negative {
-  background-color: rgb(228, 190, 0);
+  background-color: #ECE800;
+}
+.message-content .selected-tags .tag.fellowship {
+  background-color: #81b1dc;
 }
 
 .consequence-container {

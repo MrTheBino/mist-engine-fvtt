@@ -131,6 +131,11 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             tag.addEventListener("contextmenu", event => this.handlePowerTagSelectableRightClick(event));
         }
 
+        const selectableFellowShipRelationshipTags = this.element.querySelectorAll('.pcfr-selectable');
+        for (const tag of selectableFellowShipRelationshipTags) {
+            tag.addEventListener("click", event => this.handleFellowshipRelationshipSelectableClick(event));
+        }
+
         const selectableWeeknesses = this.element.querySelectorAll('.wt-selectable');
         for (const tag of selectableWeeknesses) {
             tag.addEventListener("click", event => this.handleWeaknessSelectableClick(event));
@@ -167,6 +172,17 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             container.addEventListener("click", event => this.handleFellowshipPromiseClick(event));
             container.addEventListener("contextmenu", event => this.handleFellowshipPromiseRightClick(event));
         }
+    }
+
+
+    async handleFellowshipRelationshipSelectableClick(event) {
+        event.preventDefault();
+        const tag = event.currentTarget;
+        const index = tag.dataset.index;
+        let fellowships = this.options.document.system.fellowships;
+        if (!fellowships || index >= fellowships.length) return;
+        fellowships[index].selected = !fellowships[index].selected;
+        await this.options.document.update({ "system.fellowships": fellowships });
     }
 
     async handleFellowshipPromiseClick(event) {

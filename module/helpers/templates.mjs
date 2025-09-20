@@ -24,5 +24,8 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-partial.hbs',
     'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-themebook-partial.hbs',
     'systems/mist-engine-fvtt/templates/actor/parts/floating-tags-and-status-partial.hbs',
+    'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs',
+    'systems/mist-engine-fvtt/templates/chat/critical-fumble-partial.hbs',
+    'systems/mist-engine-fvtt/templates/chat/selected-tags-partial.hbs'
   ]);
 };

@@ -53,11 +53,17 @@ export class DiceRollAdapter {
 
                     const weeknesstagPath = `system.weeknesstag${i + 1}.selected`;
                     if (foundry.utils.getProperty(item, weeknesstagPath)) {
-                        this.selectedTags.push({ name: item.system[`weeknesstag${i + 1}`].name, positive: false });
+                        this.selectedTags.push({ name: item.system[`weeknesstag${i + 1}`].name, positive: false,weekness: true });
                     }
                 }
             }
         }
+
+        this.actor.system.fellowships.forEach((entry, index) => {
+            if (entry.selected) {
+                this.selectedTags.push({ name: entry.relationshipTag, positive: true, fellowship: true });
+            }
+        });
     }
 
     isTagToBurn(index, themebookId) {
@@ -96,6 +102,12 @@ export class DiceRollAdapter {
                 }
             }
         }
+
+        const fellowships = this.actor.system.fellowships;
+        fellowships.forEach((entry) => {
+            entry.selected = false;
+        });
+        this.actor.update({ 'system.fellowships': fellowships });
     }
 
     async rollCallback(event, button, dialog) {
@@ -129,6 +141,11 @@ export class DiceRollAdapter {
         this.addShowDicePromise(dicePromises, diceRoll);
         await Promise.all(dicePromises);
 
+        let diceResults = [...diceRoll.terms[0].results].map(r => r.result);
+        
+        let isCritical = (diceResults[0] === 6 && diceResults[1] === 6);
+        let isFumble = (diceResults[0] === 1 && diceResults[1] === 1);
+
         let diceRollHTML = await diceRoll.render();
 
         let consequenceResult = -1;
@@ -139,11 +156,14 @@ export class DiceRollAdapter {
             consequenceResult = 0;
         }
 
+        console.log(this.selectedTags);
         const chatVars = {
             diceRollHTML: diceRollHTML,
             label: 'Quick',
             selectedTags: this.selectedTags,
-            consequenceResult: consequenceResult
+            consequenceResult: consequenceResult,
+            isCritical: isCritical,
+            isFumble: isFumble
         };
 
         const html = await foundry.applications.handlebars.renderTemplate(

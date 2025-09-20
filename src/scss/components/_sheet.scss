@@ -2,14 +2,15 @@
     margin: 5px;
 }
 
-.item-weekness-line{
+.item-weekness-line {
     margin: 5px;
-    input{
+
+    input {
         border: 2px solid red;
     }
 }
 
-.quest-container{
+.quest-container {
     margin-left: auto;
     margin-right: auto;
 }
@@ -18,32 +19,32 @@
     /*background-image: url("../assets/bg2-litm.webp");
     background-repeat: no-repeat;
     background-size: cover;*/
-    margin:5px;
+    margin: 5px;
 }
 
 
-.npc-beautified-container{
+.npc-beautified-container {
     background-image: url("../assets/bg2-litm.webp");
     background-repeat: no-repeat;
     background-size: cover;
     padding: 20px;
     color: black;
-    
 
-    
+
+
 }
 
-.npc-beautified-container-stats{
+.npc-beautified-container-stats {
     gap: 20px;
     margin-top: 20px;
     width: 100%;
     align-items: start;
 
-    .left-half{
+    .left-half {
         flex-grow: 0.5;
     }
 
-    .right-half{
+    .right-half {
         margin-left: 10px;
     }
 }
@@ -92,57 +93,84 @@
     text-shadow: 1px 1px 2px rgb(255, 249, 249);
 }
 
-.npc-limit-value {
-    width: 32px;
-    height: 32px;
+.npc-limit-value-armor {
+
     background-image: url("../assets/icons/icon-litm-limit-shield.svg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100% 100%;
+    background-position: center;
+
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 0;
+    width: 1.2em;
+    height: auto;
     text-align: center;
-    display: inline-block;
+    font-size: 1rem;
+    color: white;
 }
+
+.npc-limit-name {
+    font-family: $font-primary;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    color: black;
+    font-size: 0.9rem;
+    clip-path: none;
+    padding: 0;
+    text-transform: uppercase;
+}
+
 
 .npc-limits-list {
     align-items: center;
 }
 
-.trash-icon-container{
+.trash-icon-container {
     flex-grow: 0.1;
 }
 
-.value-input-small{
-    width: 100px;    
+.value-input-small {
+    width: 100px;
     flex-grow: 0.05;
 }
 
-.value-input-huge{
-    width: 100px;    
+.value-input-huge {
+    width: 100px;
     flex-grow: 20;
 }
 
-.npc-threats-and-consequences-container{
+.npc-threats-and-consequences-container {
     font-family: Labrada, serif;
 
-    .entry{
+    .entry {
         margin-bottom: 10px;
     }
-    .entry-list{
+
+    .entry-list {
         margin-left: 25px;
     }
 
-    .entry-name{
+    .entry-name {
         font-weight: bold;
     }
 
-    .entry-item{
+    .entry-item {
         margin-top: 5px;
 
-        .tag{
+        .tag {
             background-color: $c-tag-yellow;
             border-radius: 4px;
         }
 
-        .status{
+        .status {
             background-color: $c-tag-green;
             border-radius: 4px;
         }
@@ -150,101 +178,123 @@
 }
 
 
-.fellowship-promises{
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
+.fellowship-promises {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
-.sheet-header{
-    h1{
+.sheet-header {
+    h1 {
         font-family: $font-primary;
     }
 
-    &.stylized-background{
+    &.stylized-background {
         background-image: url("../assets/bg2-litm.webp");
         background-repeat: no-repeat;
         background-size: cover;
 
-        h1{
+        h1 {
             color: $c-styled-text;
+            display: flex;
+            justify-content: center;
         }
 
-        .short-description{
+        .short-description {
             color: $c-styled-text;
+            display: flex;
+            justify-content: center;
+            font-family: $font-primary;
+            font-weight: bold;
+            font-size: 1.1em;
         }
     }
-    .difficulty-icons{
+
+    .difficulty-icons {
+        margin-top: 5px;
         display: flex;
+        justify-content: center;
     }
 }
 
-.editModeToggle{
+.editModeToggle {
     float: right;
 }
 
-.threat-and-consequence-container-entry{
+.threat-and-consequence-container-entry {
     background-color: gray;
     padding: 5px;
     margin-bottom: 10px;
 }
 
-.npc-biography{
+.npc-biography {
     font-family: $font-primary;
 
-    .tag{
-            background-color: $c-tag-yellow;
-            border-radius: 4px;
-        }
+    .tag {
+        background-color: $c-tag-yellow;
+        border-radius: 4px;
+    }
 
-        .status{
-            background-color: $c-tag-green;
-            border-radius: 4px;
-        }
+    .status {
+        background-color: $c-tag-green;
+        border-radius: 4px;
+    }
 }
 
-.header-right-side{
+.header-right-side {
     flex-grow: 1;
 }
 
-.roll-button{
+.roll-button {
     margin: 5px;
     font-family: $font-primary;
 }
 
-.roll-buttons-container{
+.roll-buttons-container {
     padding-right: 10px;
 }
 
-.powertags-container{
+.powertags-container {
     margin: 2px;
 }
 
-.fts-input-name{
+.fts-input-name {
     flex-grow: 1;
 }
 
-.fts-input-value{
+.fts-input-value {
     flex-grow: 0.5
 }
 
-.floating-tags-and-status-container{
+.floating-tags-and-status-container {
     padding: 10px;
-     background-image: url("../assets/bg2-litm.webp");
+    background-image: url("../assets/bg2-litm.webp");
     background-repeat: no-repeat;
     background-size: cover;
     color: $c-styled-text;
 }
 
-.portrait-img{
+.portrait-img {
     border: 2px solid black;
 }
 
-.tab-notes, .tab-biography{
+.tab-notes,
+.tab-biography {
     padding: 10px;
-     background-image: url("../assets/bg2-litm.webp");
+    background-image: url("../assets/bg2-litm.webp");
     background-repeat: no-repeat;
     background-size: cover;
     color: $c-styled-text;
     font-family: $font-primary;
+}
+
+.lock-toggle-container{
+    color: black;
+    display: flex;
+    justify-content: right;
+    padding-right: 20px;
+    font-size: 1.5em;
+    &.locked{
+        color: darkred;
+    }
 }

@@ -19,7 +19,8 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             editItem: this.#handleEditItem,
             deleteItem: this.#handleDeleteItem,
             createFloatingTagOrStatus: this.#handleCreateFloatingTagOrStatus,
-            deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus
+            deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus,
+            clickToggleLock: this.#handleClickToggleLock
         },
         form: {
             submitOnChange: true
@@ -140,6 +141,18 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         for (const input of updateableFtsStatPlus) {
             input.addEventListener("click", event => this.handleFtStatPlus(event))
         }
+    }
+
+    static async #handleClickToggleLock(event, target) {
+        event.preventDefault();
+        const name = target.dataset.name;
+        const isLocked = foundry.utils.getProperty(this.actor, name);
+        await this.actor.update({ [name]: !isLocked });
+        
+        /*console.log("finding: ", `#${name}`);
+        let t = this.actor.sheet.element.querySelector(`${name}`); // .scrollIntoView({ behavior: "instant", block: "center" });
+        console.log(t);*/
+        await this.actor.sheet.render({ force: true });
     }
 
     static async #handleDeleteFloatingTagOrStatus(event, target) {

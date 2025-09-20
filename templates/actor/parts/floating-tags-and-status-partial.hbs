@@ -5,11 +5,10 @@
                         data-action="createFloatingTagOrStatus"> <i class='fas fa-plus'></i></a></div>
             </div>
 
-        <div>
-            <label for="fts-editable-checkbox">Editable</label>
-            <input type="checkbox" id="fts-editable-checkbox" name="system.floatingTagsAndStatusesEditable" {{#if
-                system.floatingTagsAndStatusesEditable}}checked{{/if}}>
-        </div>
+
+
+        {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs' isLocked=system.floatingTagsAndStatusesEditable name="system.floatingTagsAndStatusesEditable" title="Toggle Edit Mode"}}
+
         <div class="floating-tags-and-status-entries grid grid-3col">
             {{#each system.floatingTagsAndStatuses}}
             <div class="floating-tag-and-status-entry flexrow">

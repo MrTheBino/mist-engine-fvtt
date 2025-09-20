@@ -12,7 +12,7 @@
                 <div class="npc-limits-list flexcol">
                     {{#each system.limits as |limit|}}
                     <div class="npc-limit-item">
-                        <div class="npc-limit-name">{{limit.name}} <span class="npc-limit-value">{{limit.value}}</span>
+                        <div class="npc-limit-name">{{limit.name}} <span class="npc-limit-value-armor"><span class="npc-limit-value">{{limit.value}}</span></span>
                         </div>
 
                     </div>
@@ -55,7 +55,7 @@
                     {{#each system.specialFeatures as |feature|}}
                     <div class="npc-limit-item">
                         <div class="npc-limit-name">{{feature.name}}</div>
-                        <div class="npc-limit-description">{{feature.description}}</div>
+                        <div class="npc-limit-description">{{{textWithTags feature.description}}}</div>
                     </div>
                     {{/each}}
                 </div>

@@ -1,32 +1,44 @@
-.message-content{
-    .selected-tags{
+.message-content {
+    .selected-tags {
         margin-top: 5px;
         margin-bottom: 5px;
         font-family: Labrada, serif;
+        font-size: 0.9em;
+        display: flex;
+        gap: 2px;
+        color: $c-styled-text;
+        font-weight: 400;
 
-        .tag{
-             background-color: gray;
-            color: white;
+
+        .tag {
+            background-color: gray;
             padding: 2px 2px;
             text-align: center;
             border-radius: 5px;
-            &.positive{
-                background-color: rgb(38, 143, 2);
+
+            &.positive {
+                background-color: $c-tag-green;
             }
-            &.burned{
-                text-decoration: line-through;
+
+            &.burned {}
+
+            &.negative {
+                background-color: $c-tag-yellow;
             }
-            &.negative{
-                background-color: rgb(228, 190, 0);
+
+            &.fellowship{
+                background-color: $c-tag-blue;
             }
         }
     }
 }
+
 .consequence-container {
     text-align: center;
     padding-top: 5px;
     font-family: Labrada, serif;
-    .heading{
+
+    .heading {
         font-size: 2em;
         font-weight: bold;
     }

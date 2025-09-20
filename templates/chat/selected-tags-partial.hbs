@@ -1,0 +1,14 @@
+<div class="selected-tags">
+        {{#each selectedTags}}
+            <span class="tag 
+                {{#if this.positive}}positive{{else}}negative{{/if}}
+                {{#if this.toBurn}}burned{{/if}}
+                {{#if this.weekness}}weekness{{/if}}
+                {{#if this.fellowship}}fellowship{{/if}}
+                "
+                >
+                {{#if this.toBurn}}🔥 {{/if}}
+                {{this.name}}
+            </span>
+        {{/each}}
+    </div>

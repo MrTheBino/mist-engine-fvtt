@@ -2,20 +2,17 @@
     <div class="card-title">
         {{label}}
     </div>
-    <div class="selected-tags">
-        {{#each selectedTags}}
-        <span class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#if this.toBurn}}burned{{/if}}">{{this.name}}</span>
-        {{/each}}
-    </div>
+    {{> 'systems/mist-engine-fvtt/templates/chat/selected-tags-partial.hbs' selectedTags=selectedTags}}
     <div class="roll-result">
         {{{diceRollHTML}}}
     </div>
+    {{> 'systems/mist-engine-fvtt/templates/chat/critical-fumble-partial.hbs' isCritical=isCritical isFumble=isFumble}}
     <div class="consequence-container">
         {{#if (eq consequenceResult -1)}}
         <div class="consequence-result-negative">
 
             <span class="heading"><i class="consequence-result-icon negative"></i>6-</span>
-            <p>{{{localize "MIST_ENGINE.MOVES.LEGEND.reaction.negative"}}}</p>
+            <p>{{{localize "MIST_ENGINE.MOVES.LEGEND.reaction.fail"}}}</p>
         </div>
         {{/if}}
         {{#if (eq consequenceResult 0)}}
