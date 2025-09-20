@@ -1,0 +1,18 @@
+<div>
+    <header class="sheet-header {{#if system.editMode}}edit-mode{{else}}stylized-background{{/if}}">
+        <div class="flexrow">
+            <div class="image-container">
+                <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img"
+                    title="{{actor.name}}" height="120" />
+            </div>
+        </div>
+        <div class="flexcol header-right-side">
+            <div class="flexcol">
+                <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+                <div class="short-description"><input name="system.shortDescription" type="text"
+                        value="{{system.shortDescription}}" placeholder="Short Description" /></div>
+            </div>
+        </div>
+    </header>
+
+</div>

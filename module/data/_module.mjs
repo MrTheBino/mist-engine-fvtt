@@ -11,3 +11,4 @@ export {default as MistEngineSpell} from "./item-spell.mjs";
 export {default as MistEngineItemThemeBook} from "./item-themebook.mjs";
 export {default as MistEngineItemBackpack} from "./item-backpack.mjs";
 export {default as MistEngineSceneData} from "./item-scene-data.mjs";
+export {default as MistEngineActorFellowshipThemecard} from "./actor-fellowship-themecard.mjs"

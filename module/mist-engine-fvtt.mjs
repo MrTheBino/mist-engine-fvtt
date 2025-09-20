@@ -1,18 +1,20 @@
 // Import document classes.
-import { MistEngineActor } from './documents/actor.mjs';
-import { MistEngineItem } from './documents/item.mjs';
+import { MistEngineActor } from "./documents/actor.mjs";
+import { MistEngineItem } from "./documents/item.mjs";
+
 // Import sheet classes.
-import { MistEngineActorSheet } from './sheets/actor-sheet.mjs';
-import { MistEngineLegendInTheMistCharacterSheet } from './sheets/litm-character-sheet.mjs';
-import { MistEngineLegendInTheMistNpcSheet } from './sheets/litm-npc-sheet.mjs';
-import { MistEngineItemSheet } from './sheets/item-sheet.mjs';
-import { MistSceneApp } from './apps/scene-app.mjs';
+import { MistEngineActorSheet } from "./sheets/actor-sheet.mjs";
+import { MistEngineLegendInTheMistCharacterSheet } from "./sheets/litm-character-sheet.mjs";
+import { MistEngineLegendInTheMistNpcSheet } from "./sheets/litm-npc-sheet.mjs";
+import {MistEngineLegendInTheMistFellowshipThemecard} from "./sheets/litm-fellowship-themecard.mjs"
+import { MistEngineItemSheet } from "./sheets/item-sheet.mjs";
+import { MistSceneApp } from "./apps/scene-app.mjs";
 
 // Import helper/utility classes and constants.
-import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
-import { MIST_ENGINE } from './helpers/config.mjs';
+import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
+import { MIST_ENGINE } from "./helpers/config.mjs";
 // Import DataModel classes
-import * as models from './data/_module.mjs';
+import * as models from "./data/_module.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -31,7 +33,7 @@ function extractBrackets(text) {
   return matches;
 }
 
-Hooks.once('init', function () {
+Hooks.once("init", function () {
   // Add utility classes to the global game object so that they're more easily
   // accessible in global contexts.
   game.mistenginefvtt = {
@@ -48,7 +50,7 @@ Hooks.once('init', function () {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: '1d20 + @abilities.dex.mod',
+    formula: "1d20 + @abilities.dex.mod",
     decimals: 2,
   };
 
@@ -61,8 +63,9 @@ Hooks.once('init', function () {
   CONFIG.Actor.dataModels = {
     character: models.MistEngineCharacter,
     "litm-character": models.MistEngineCharacter,
-    "litm-npc": models.MistEngineNPC
-  }
+    "litm-npc": models.MistEngineNPC,
+    "litm-fellowship-themecard": models.MistEngineActorFellowshipThemecard
+  };
   CONFIG.Item.documentClass = MistEngineItem;
   CONFIG.Item.dataModels = {
     item: models.MistEngineItem,
@@ -70,8 +73,8 @@ Hooks.once('init', function () {
     spell: models.MistEngineSpell,
     themebook: models.MistEngineItemThemeBook,
     backpack: models.MistEngineItemBackpack,
-    "scene-data": models.MistEngineSceneData
-  }
+    "scene-data": models.MistEngineSceneData,
+  };
 
   // Active Effects are never copied to the Actor,
   // but will still apply to the Actor from within the Item
@@ -79,22 +82,35 @@ Hooks.once('init', function () {
   CONFIG.ActiveEffect.legacyTransferral = false;
 
   // Register sheet application classes
-  Actors.unregisterSheet('core', ActorSheet);
-  Actors.registerSheet('mist-engine-fvtt', MistEngineLegendInTheMistCharacterSheet, {
+  Actors.unregisterSheet("core", ActorSheet);
+  Actors.registerSheet(
+    "mist-engine-fvtt",
+    MistEngineLegendInTheMistCharacterSheet,
+    {
+      makeDefault: true,
+      types: ["litm-character"],
+      label: "MIST_ENGINE.SheetLabels.Actor",
+    }
+  );
+  Actors.registerSheet("mist-engine-fvtt", MistEngineLegendInTheMistNpcSheet, {
     makeDefault: true,
-    types: ['litm-character'],
-    label: 'MIST_ENGINE.SheetLabels.Actor',
+    types: ["litm-npc"],
+    label: "MIST_ENGINE.SheetLabels.Actor",
   });
-  Actors.registerSheet('mist-engine-fvtt', MistEngineLegendInTheMistNpcSheet, {
-    makeDefault: true,
-    types: ['litm-npc'],
-    label: 'MIST_ENGINE.SheetLabels.Actor',
-  });
+  Actors.registerSheet(
+    "mist-engine-fvtt",
+    MistEngineLegendInTheMistFellowshipThemecard,
+    {
+      makeDefault: true,
+      types: ["litm-fellowship-themecard"],
+      label: "MIST_ENGINE.SheetLabels.FellowshipThemecard",
+    }
+  );
 
-  Items.unregisterSheet('core', ItemSheet);
-  Items.registerSheet('mist-engine-fvtt', MistEngineItemSheet, {
+  Items.unregisterSheet("core", ItemSheet);
+  Items.registerSheet("mist-engine-fvtt", MistEngineItemSheet, {
     makeDefault: true,
-    label: 'MIST_ENGINE.SheetLabels.Item',
+    label: "MIST_ENGINE.SheetLabels.Item",
   });
 
   // Preload Handlebars templates.
@@ -106,36 +122,32 @@ Hooks.once('init', function () {
 /* -------------------------------------------- */
 
 // If you need to add Handlebars helpers, here is a useful example:
-Handlebars.registerHelper('toLowerCase', function (str) {
+Handlebars.registerHelper("toLowerCase", function (str) {
   return str.toLowerCase();
 });
 
-Handlebars.registerHelper('tagFilled', function (str) {
+Handlebars.registerHelper("tagFilled", function (str) {
   if (str && str.trim().length > 0) {
     return true;
   }
   return false;
 });
 
-
-
-Handlebars.registerHelper('times', function (n, block) {
-  var accum = '';
-  for (var i = 0; i < n; ++i)
-    accum += block.fn(i);
+Handlebars.registerHelper("times", function (n, block) {
+  var accum = "";
+  for (var i = 0; i < n; ++i) accum += block.fn(i);
   return accum;
 });
 
-Handlebars.registerHelper('textWithTags', function (str) {
+Handlebars.registerHelper("textWithTags", function (str) {
   const tags = extractBrackets(str);
   let result = str;
-  tags.forEach(tag => {
+  tags.forEach((tag) => {
     if (tag.includes("-")) {
       result = result.replace(`[${tag}]`, `<span class="status">${tag}</span>`);
     } else {
       result = result.replace(`[${tag}]`, `<span class="tag">${tag}</span>`);
     }
-
   });
   return result;
 });
@@ -144,10 +156,9 @@ Handlebars.registerHelper('textWithTags', function (str) {
 /*  Ready Hook                                  */
 /* -------------------------------------------- */
 
-Hooks.once('ready', function () {
+Hooks.once("ready", function () {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
-  Hooks.on('hotbarDrop', (bar, data, slot) => createItemMacro(data, slot));
-
+  Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
 });
 
 Hooks.on("preCreateActor", async (actor, data, options, userId) => {
@@ -156,44 +167,50 @@ Hooks.on("preCreateActor", async (actor, data, options, userId) => {
 
   const itemData = {
     name: "Backpack",
-    type: "backpack",           
-    system: { /* ... */ },
-    flags: { mist: { autoAdded: true } }
+    type: "backpack",
+    system: {
+      /* ... */
+    },
+    flags: { mist: { autoAdded: true } },
   };
 
   actor.updateSource({
-    items: [...(actor._source.items ?? []), itemData]
+    items: [...(actor._source.items ?? []), itemData],
   });
 });
 
 Hooks.on("getSceneControlButtons", (controls) => {
-
   let sidebarControls = {
     scene_data_app: {
-      name: 'scene_data_app',
-      title: 'Scene Tags',
-      icon: 'fas fa-scroll',
+      name: "scene_data_app",
+      title: "Scene Tags",
+      icon: "fas fa-scroll",
       visible: true,
       onChange: () => MistSceneApp.getInstance().render(true, { focus: true }),
-      button: true
+      button: true,
     },
   };
 
-  controls.notes.tools = foundry.utils.mergeObject(controls.notes.tools, sidebarControls);
-})
+  controls.notes.tools = foundry.utils.mergeObject(
+    controls.notes.tools,
+    sidebarControls
+  );
+});
 
 Hooks.on("renderItemDirectory", (app, html) => {
   // ToDo: is this the correct way? maybe move them to a compendium?
-  const sceneDataIds = game.items.filter(item => item.type === "scene-data").map(i => i.id);
+  const sceneDataIds = game.items
+    .filter((item) => item.type === "scene-data")
+    .map((i) => i.id);
   for (const id of sceneDataIds) {
-    let t = html.querySelector(`li.directory-item[data-entry-id="${id}"]`)
-    if(t) t.remove();
+    let t = html.querySelector(`li.directory-item[data-entry-id="${id}"]`);
+    if (t) t.remove();
   }
 });
 
 Hooks.on("mistengine:sceneAppUpdated", (data) => {
   console.log("received mistengine:sceneAppUpdated event");
-   MistSceneApp.getInstance().render(true, { focus: true });
+  MistSceneApp.getInstance().render(true, { focus: true });
 });
 
 Hooks.on("canvasReady", (canvas) => {
@@ -213,10 +230,10 @@ Hooks.on("canvasReady", (canvas) => {
  */
 async function createItemMacro(data, slot) {
   // First, determine if this is a valid owned item.
-  if (data.type !== 'Item') return;
-  if (!data.uuid.includes('Actor.') && !data.uuid.includes('Token.')) {
+  if (data.type !== "Item") return;
+  if (!data.uuid.includes("Actor.") && !data.uuid.includes("Token.")) {
     return ui.notifications.warn(
-      'You can only create macro buttons for owned Items'
+      "You can only create macro buttons for owned Items"
     );
   }
   // If it is, retrieve it based on the uuid.
@@ -230,10 +247,10 @@ async function createItemMacro(data, slot) {
   if (!macro) {
     macro = await Macro.create({
       name: item.name,
-      type: 'script',
+      type: "script",
       img: item.img,
       command: command,
-      flags: { 'mist-engine-fvtt.itemMacro': true },
+      flags: { "mist-engine-fvtt.itemMacro": true },
     });
   }
   game.user.assignHotbarMacro(macro, slot);
@@ -248,7 +265,7 @@ async function createItemMacro(data, slot) {
 function rollItemMacro(itemUuid) {
   // Reconstruct the drop data so that we can load the item.
   const dropData = {
-    type: 'Item',
+    type: "Item",
     uuid: itemUuid,
   };
   // Load the item from the uuid.

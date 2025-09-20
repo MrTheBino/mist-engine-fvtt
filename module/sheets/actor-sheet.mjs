@@ -204,11 +204,14 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     async handleItemStatChanged(event) {
         event.preventDefault();
         let item = null;
+
+        let actorToUpdate = this.actor;
+
         if (event.currentTarget.dataset.itemId == undefined) {
             const li = $(event.currentTarget).parents('.item');
-            item = this.actor.items.get(li.data('itemId'));
+            item = actorToUpdate.items.get(li.data('itemId'));
         } else {
-            item = this.actor.items.get(event.currentTarget.dataset.itemId);
+            item = actorToUpdate.items.get(event.currentTarget.dataset.itemId);
         }
 
         if (event.target.type === 'checkbox') {

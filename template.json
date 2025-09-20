@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["litm-character","litm-npc"]
+    "types": ["litm-character","litm-npc","litm-fellowship-themecard"]
   },
   "Item": {
     "types": ["item", "themebook","backpack","scene-data"]

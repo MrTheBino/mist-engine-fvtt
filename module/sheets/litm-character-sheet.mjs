@@ -61,6 +61,11 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         }
     }
 
+    constructor(options = {}) {
+        super(options)
+        this.initFellowshipThemecard();
+    }
+
     /**
    * Define the structure of tabs used by this sheet.
    * @type {Record<string, ApplicationTabsConfiguration>}
@@ -99,9 +104,29 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             }
         );
 
+        if(this.actorFellowshipThemecard != null){
+            context.fellowshipThemecard = this.actorFellowshipThemecard.system;
+        }
+
+        console.log(context);
         foundry.utils.mergeObject(context, items);
 
         return context;
+    }
+
+    initFellowshipThemecard(){
+        let assignedUser = game.users.find(u => u.character?._id === this.actor.id)
+        if(assignedUser){
+            let ownedWorldActors = game.actors.filter(a =>
+                a.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
+            );
+            ownedWorldActors = ownedWorldActors.filter(a => a.id !== this.actor.id)
+            if(ownedWorldActors && ownedWorldActors.length > 0){
+                this.actorFellowshipThemecard = ownedWorldActors[0];
+            }else{
+                this.actorFellowshipThemecard = null;
+            }
+        }
     }
 
     _prepareItems() {

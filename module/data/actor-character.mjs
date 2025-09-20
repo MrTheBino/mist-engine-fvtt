@@ -22,6 +22,4 @@ export default class MistEngineCharacter extends MistEngineActorBase {
     )
     return schema;
   }
-
-  
 }

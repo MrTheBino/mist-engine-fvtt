@@ -1,9 +1,40 @@
-<div class="themebook-container">
-    <div class="themebook-style litm-quintessence flexcol">
+<div class="themebook-container" data-id="{{id}}">
+    <div class="themebook-style {{themebook.system.type}} flexcol">
         <h2 class="theme-name">Fellowship
-            <i class="themebook-icon litm-quintessence"></i>
         </h2>
-        <div>
+        <div class="powertags-container">
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=1 id=themebook._id
+            powertag=fellowshipThemecard.system.powertag1 source='fellowship_themecard' editMode=editMode firstTag=true}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=2 id=themebook._id
+            powertag=fellowshipThemecard.system.powertag2 source='fellowship_themecard' editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=3 id=themebook._id
+            powertag=fellowshipThemecard.system.powertag3 source='fellowship_themecard' editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=4 id=themebook._id
+            powertag=fellowshipThemecard.system.powertag4 source='fellowship_themecard' editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=5 id=themebook._id
+            powertag=fellowshipThemecard.system.powertag5 source='fellowship_themecard' editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=6 id=themebook._id
+            powertag=fellowshipThemecard.system.powertag6 source='fellowship_themecard' editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-powertag-line.hbs" index=7 id=themebook._id
+            powertag=fellowshipThemecard.system.powertag7 source='fellowship_themecard' editMode=editMode}}
+
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-weekness-line.hbs" index=1 id=themebook._id
+            weeknesstag=fellowshipThemecard.system.weeknesstag1 source='fellowship_themecard' editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/themebook-weekness-line.hbs" index=2 id=themebook._id
+            weeknesstag=fellowshipThemecard.system.weeknesstag2 source='fellowship_themecard' editMode=editMode}}
+        </div>
+        <div class="quest-container">
+            {{#if editMode}}
+                <textarea class="item-editable-stat quest-textarea" data-item-id={{themebook._id}} data-item-stat="system.quest" placeholder="Quest/Goal">{{themebook.system.quest}}</textarea>
+            {{else}}
+                <h3>Quest</h3>
+                <p class="quest-text">{{fellowshipThemecard.system.quest}}</p>
+            {{/if}}
+        </div>
+        <div class="development-container flexrow">
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Abandon" id=themebook._id key="system.abandon" value=fellowshipThemecard.system.abandon}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Improve" id=themebook._id key="system.improve" value=fellowshipThemecard.system.improve}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Milestone" id=themebook._id key="system.milestone" value=fellowshipThemecard.system.milestone}}
         </div>
     </div>
 </div>
