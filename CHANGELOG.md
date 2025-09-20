@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 0.2.4
+ - drag'n'drop of tags & status from NPCs to characters, thanks to 3rddogpaul
+ - started implementing fellowship themecards, needs some heavy testing
+ - started to restructure some things, to shape things up and to be able to use them as components
+
 # 0.2.3
 - automaticly link character actor data to the token
   
