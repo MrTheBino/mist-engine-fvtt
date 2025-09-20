@@ -357,7 +357,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         if ('link' in event.target.dataset) return;
 
         // Extract the data you need
-        let dragData = null;
+        let dragData = el.dataset;
 
         if (!dragData) return;
 
@@ -382,12 +382,20 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     async _onDrop(event) {
         const data = TextEditor.getDragEventData(event);
 
-        //console.log(data.type);
         // Handle different data types
         switch (data.type) {
-            // write your cases
+            case 'tag':
+            case 'status':
+                const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
+                floatingTagsAndStatuses.push({ name: data.name, value: data.value, description: '' });
+                this.actor.update({
+                    'system.floatingTagsAndStatuses': floatingTagsAndStatuses
+                });
+                break;
+            default:
+                console.warn('Unknown drop type', data);
+                break;
         }
 
         return super._onDrop?.(event);
-    }
-}
+    }}
