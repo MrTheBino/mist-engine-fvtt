@@ -143,10 +143,17 @@ Handlebars.registerHelper("textWithTags", function (str) {
   const tags = extractBrackets(str);
   let result = str;
   tags.forEach((tag) => {
+    const [name, value] = tag.split("-");
     if (tag.includes("-")) {
-      result = result.replace(`[${tag}]`, `<span class="status">${tag}</span>`);
+      result = result.replace(
+        `[${tag}]`,
+        `<span class="status" data-drag="true" data-type="status" data-name="${name}" data-value="${value}">${tag}</span>`
+      );
     } else {
-      result = result.replace(`[${tag}]`, `<span class="tag">${tag}</span>`);
+      result = result.replace(
+        `[${tag}]`,
+        `<span class="tag" data-drag="true" data-type="tag" data-name="${name}">${tag}</span>`
+      );
     }
   });
   return result;
