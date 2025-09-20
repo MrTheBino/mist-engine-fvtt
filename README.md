@@ -20,6 +20,7 @@ Currently it only supports Legend In The Mist.
 * using weekness tags
 * scene window dialog for handing scene and story markers / tags (found in the left sidebar under Journal Notes > Scene Tags)
 * temporary statuses for characters and npcs
+* enclose tags with [] in text forms, eg. [super cool] or [burning-3]
   
 ## ToDo
 
@@ -39,3 +40,7 @@ This system implementation is focused on entering adversaries, npcs and characte
 
 
 This system uses at present code snippets and graphics from the City of Mist HUD module.
+
+
+
+![Alpha Version Screenshot](current_state_screenshot.webp "Title")

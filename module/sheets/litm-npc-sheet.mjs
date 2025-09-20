@@ -149,10 +149,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
         let path = `system.${arrayName}`;
         let arrayData = foundry.utils.getProperty(this.actor, path);
-        console.log(arrayData[arrayIndex]);
-        console.log(key);
         foundry.utils.setProperty(arrayData[arrayIndex], key, target.value);
-        console.log(arrayData[arrayIndex]);
 
         await this.actor.update({ [path]: arrayData });
     }

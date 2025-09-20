@@ -79,7 +79,6 @@ export class MistEngineItemSheet extends HandlebarsApplicationMixin(ItemSheetV2)
         const parts = super._configureRenderParts(options)
 
         let templatePath = `systems/mist-engine-fvtt//templates/item/item-${this.document.type}-sheet.hbs`;
-        console.log(templatePath);
         // Add the main item type part
         if (this.document.type) {
             parts.form = {

@@ -91,7 +91,6 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     sendUpdateHookEvent(){
         this.render(true, { focus: true });
         if(game.user.isGM){
-            console.log("sending mistengine:sceneAppUpdated event");
             game.socket.emit("system.mist-engine-fvtt", {
             type: "hook",
             hook: "sceneAppUpdated",

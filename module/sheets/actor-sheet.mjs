@@ -64,6 +64,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     constructor(options = {}) {
         super(options)
         this.#dragDrop = this.#createDragDropHandlers()
+        this.actorFellowshipThemecard = null;
     }
 
     /* @inheritDoc */
@@ -141,6 +142,11 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         for (const input of updateableFtsStatPlus) {
             input.addEventListener("click", event => this.handleFtStatPlus(event))
         }
+
+        const themebookEntryInputs = this.element.querySelectorAll('.themebook-entry-input')
+        for (const input of themebookEntryInputs) {
+            input.addEventListener("change", event => this.handleThemebookEntryInputChanged(event))
+        }
     }
 
     static async #handleClickToggleLock(event, target) {
@@ -148,7 +154,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const name = target.dataset.name;
         const isLocked = foundry.utils.getProperty(this.actor, name);
         await this.actor.update({ [name]: !isLocked });
-        
+
         /*console.log("finding: ", `#${name}`);
         let t = this.actor.sheet.element.querySelector(`${name}`); // .scrollIntoView({ behavior: "instant", block: "center" });
         console.log(t);*/
@@ -164,7 +170,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
     }
 
-    async handleFtStatMinus(event){
+    async handleFtStatMinus(event) {
         event.preventDefault();
         const index = event.currentTarget.dataset.index;
         const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
@@ -173,12 +179,12 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         if (currentValue > 1) {
             foundry.utils.setProperty(floatingTagsAndStatuses[index], 'value', currentValue - 1);
             await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
-        }else{
+        } else {
             floatingTagsAndStatuses.splice(index, 1);
             await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
         }
     }
-    async handleFtStatPlus(event){
+    async handleFtStatPlus(event) {
         event.preventDefault();
         const index = event.currentTarget.dataset.index;
         console.log(index);
@@ -189,7 +195,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
     }
 
-    async handleFtStatChanged(event){
+    async handleFtStatChanged(event) {
         event.preventDefault();
         const index = event.currentTarget.dataset.ftIndex;
         const key = event.currentTarget.dataset.ftKey;
@@ -203,21 +209,56 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     async handleItemStatChanged(event) {
         event.preventDefault();
+        console.log("DEPRECATED: handleItemStatChanged, use handleThemebookEntryInputChanged instead");
         let item = null;
+        const source = event.target.dataset.source;
 
-        let actorToUpdate = this.actor;
+        // Update items like Themebooks
+        if (source == null || source == undefined) {
+            if (event.currentTarget.dataset.itemId == undefined) {
+                const li = $(event.currentTarget).parents('.item');
+                item = this.actor.items.get(li.data('itemId'));
+            } else {
+                item = this.actor.items.get(event.currentTarget.dataset.itemId);
+            }
 
-        if (event.currentTarget.dataset.itemId == undefined) {
-            const li = $(event.currentTarget).parents('.item');
-            item = actorToUpdate.items.get(li.data('itemId'));
-        } else {
-            item = actorToUpdate.items.get(event.currentTarget.dataset.itemId);
+            if (event.target.type === 'checkbox') {
+                item.update({ [event.target.dataset.itemStat]: event.target.checked });
+            } else {
+                item.update({ [event.target.dataset.itemStat]: event.target.value });
+            }
         }
+        else if(source === "fellowship-themecard"){
+            if(this.actorFellowshipThemecard){
+                this.actorFellowshipThemecard.update({ [event.target.dataset.key]: event.target.value });
+            }
+        }
+    }
 
-        if (event.target.type === 'checkbox') {
-            item.update({ [event.target.dataset.itemStat]: event.target.checked });
-        } else {
-            item.update({ [event.target.dataset.itemStat]: event.target.value });
+    async handleThemebookEntryInputChanged(event) {
+        event.preventDefault();
+        let item = null;
+        const source = event.target.dataset.source;
+
+        // Update items like Themebooks
+        if (source == null || source == undefined) {
+            if (event.currentTarget.dataset.itemId == undefined) {
+                const li = $(event.currentTarget).parents('.item');
+                item = this.actor.items.get(li.data('itemId'));
+            } else {
+                item = this.actor.items.get(event.currentTarget.dataset.itemId);
+            }
+
+            if (event.target.type === 'checkbox') {
+                item.update({ [event.target.dataset.key]: event.target.checked });
+            } else {
+                item.update({ [event.target.dataset.key]: event.target.value });
+            }
+        }   
+        else if(source === "fellowship-themecard"){
+            if(this.actorFellowshipThemecard){
+                this.actorFellowshipThemecard.update({ [event.target.dataset.key]: event.target.value });
+            }
         }
     }
 

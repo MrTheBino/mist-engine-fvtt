@@ -209,7 +209,6 @@ Hooks.on("renderItemDirectory", (app, html) => {
 });
 
 Hooks.on("mistengine:sceneAppUpdated", (data) => {
-  console.log("received mistengine:sceneAppUpdated event");
   MistSceneApp.getInstance().render(true, { focus: true });
 });
 

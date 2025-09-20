@@ -1,14 +1,14 @@
 <div class="item-powertag-line flexrow">
     {{#if editMode}}
-    <input class="item-editable-stat" data-item-id={{id}} type="text" data-item-stat="system.powertag{{index}}.name" data-source="{{source}}"
+    <input class="themebook-entry-input" data-item-id="{{id}}" type="text" data-key="system.powertag{{index}}.name" data-source="{{source}}"
         value="{{powertag.name}}" placeholder="{{powertag.question}}" title="{{powertag.question}}" title="Powertag"/>
     {{else}}
         {{#if (tagFilled powertag.name)}}
-        <span class="burn-indicator" data-action="toggleToBurn" data-item-id={{id}} data-powertag-index={{index}} data-source="{{source}}">
+        <span class="burn-indicator" data-action="toggleToBurn" data-item-id="{{id}}" data-powertag-index="{{index}}" data-source="{{source}}">
             <i class="burn-icon {{#if powertag.toBurn}}to-burn{{/if}}"></i>
         </span>
         <span class="litm-pc-powertag powertag-name pt-selectable {{#if firstTag}}first{{/if}} {{#if powertag.selected}}selected{{/if}} {{#if powertag.burned}}burned{{/if}}" title="Right click to toggle burn state"
-            data-powertag-index={{index}} data-item-id={{id}} data-source="{{source}}">{{powertag.name}}</span>
+            data-powertag-index="{{index}}" data-item-id="{{id}}" data-source="{{source}}">{{powertag.name}}</span>
         {{/if}}
     {{/if}}
 </div>
