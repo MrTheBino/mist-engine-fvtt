@@ -49,7 +49,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         },
         character: {
             id: 'character',
-            template: 'systems/mist-engine-fvtt/templates/actor/parts/tab-litm-character.hbs'
+            template: 'systems/mist-engine-fvtt/templates/actor/parts/tab-litm-character.hbs',
+            scrollable: ['']
         },
         biography: {
             id: 'biography',

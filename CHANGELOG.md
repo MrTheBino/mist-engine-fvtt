@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 0.2.5
+- fixed scrolling issues in NPC and character sheets
+  
 # 0.2.4
  - drag'n'drop of tags & status from NPCs to characters, thanks to 3rddogpaul
  - started implementing fellowship themecards, needs some heavy testing

@@ -51,7 +51,8 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         },
         npc: {
             id: 'npc',
-            template: 'systems/mist-engine-fvtt/templates/actor/parts/tab-litm-npc.hbs'
+            template: 'systems/mist-engine-fvtt/templates/actor/parts/tab-litm-npc.hbs',
+            scrollable: ['']
         },
         biography: {
             id: 'biography',
