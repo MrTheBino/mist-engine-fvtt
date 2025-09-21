@@ -17,7 +17,7 @@ Currently it only supports Legend In The Mist.
 * milestone, abandon,improve, promises development markers
 * quick, detailed and reaction rolls
 * burning power tags
-* using weekness tags
+* using weakness tags
 * scene window dialog for handing scene and story markers / tags (found in the left sidebar under Journal Notes > Scene Tags)
 * temporary statuses for characters and npcs
 * enclose tags with [] in text forms, eg. [super cool] or [burning-3]
@@ -27,7 +27,7 @@ Currently it only supports Legend In The Mist.
 - shared fellowship themebook / cards
 
 
-If using weekness tags, you have to improve / mark the themebook manually. There is no automation for this in the system.
+If using weakness tags, you have to improve / mark the themebook manually. There is no automation for this in the system.
 
 ## Manifest-URL for manual installation of the system
 

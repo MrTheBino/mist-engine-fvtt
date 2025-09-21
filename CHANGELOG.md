@@ -4,6 +4,10 @@
  - drag'n'drop of tags & status from NPCs to characters, thanks to 3rddogpaul
  - started implementing fellowship themecards, needs some heavy testing
  - started to restructure some things, to shape things up and to be able to use them as components
+ - help texts for empty messages
+ - many bugfixes
+ - fixed weakness tag typo, all weakness texts must be entered again if you are already using the system
+ - added weakness tag edit lines in themebooks for the questions
 
 # 0.2.3
 - automaticly link character actor data to the token

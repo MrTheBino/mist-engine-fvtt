@@ -1,5 +1,15 @@
 <div class="themebooks-container grid grid-4col grid-themebook-container">
+    {{!-- If there are no themebooks, show a message --}}
+    {{#if themebooksEmpty}}
+    <div class="themebook-container">
+        <div class="themebook-style  flexcol">
+            <div class="empty-message">No Themebooks found. Create Themebook Items and drop them here.</div>
+        </div>
+    </div>
+    {{/if}}
+    {{!-- Iterate over each themebook and render the partial --}}
     {{#each themebooks as |book id|}}
-        {{> 'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs' themebook=book id=id editMode=../system.editMode}}
+    {{> 'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs' themebook=book id=id
+    editMode=../system.editMode}}
     {{/each}}
 </div>

@@ -111,6 +111,14 @@
         }
     }
 
+    &.litm-fellowship-themecard{
+        h2 {
+            background-image: url("../assets/headers/header-backpack.webp");
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    }
+
     .themebook-icon {
         height: 15px;
         width: 15px;
@@ -156,6 +164,12 @@
         }
 
         .litm-fellowship-relationship {
+            background-image: url('../assets/icons/icon-variable-litm.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .litm-fellowship-themecard{
             background-image: url('../assets/icons/icon-variable-litm.svg');
             background-repeat: no-repeat;
             background-size: contain;

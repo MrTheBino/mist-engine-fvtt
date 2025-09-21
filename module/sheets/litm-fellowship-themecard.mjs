@@ -53,4 +53,15 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
             initial: 'npc'
         }
     }
+
+    /** @inheritDoc */
+    _onRender(context, options) {
+        super._onRender(context, options);
+
+
+    }
+
+    async handleThemebookEntryInputChanged(event) {
+        this.actor.update({ [event.target.dataset.key]: event.target.value });
+    }
 }

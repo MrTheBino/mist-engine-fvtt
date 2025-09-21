@@ -9,7 +9,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         tag: 'form',
         position: {
             width: 850,
-            height: 850
+            height: 1000
         },
         actions: {
             createBackpackItem: this.#handleCreateBackpackItem,
@@ -64,6 +64,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     constructor(options = {}) {
         super(options)
         this.initFellowshipThemecard();
+        this.activateSocketListeners();
     }
 
     /**
@@ -80,6 +81,15 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
                 ],
             initial: 'character'
         }
+    }
+
+    activateSocketListeners() {
+        game.socket.on("system.mist-engine-fvtt", (msg) => {
+            if (msg?.type === "hook" && msg.hook == "fellowshipThemeCardUpdated") {
+                this.reloadFellowshipThemecard(false);
+                this.render(true, { focus: true });
+            }
+        });
     }
 
     /** @override */
@@ -104,9 +114,9 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             }
         );
 
-        if(this.actorFellowshipThemecard != null && this.actorFellowshipThemecard !== false){
+        if (this.actorFellowshipThemecard != null && this.actorFellowshipThemecard !== false) {
             context.fellowshipThemecard = this.actorFellowshipThemecard.system;
-        }else{
+        } else {
             console.log("no fellowship themecard assigned, so no context");
         }
 
@@ -115,36 +125,44 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         return context;
     }
 
-    initFellowshipThemecard(){
-        if(this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== ""){
+    initFellowshipThemecard() {
+        if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
             this.actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
-            if(this.actorFellowshipThemecard){
+            if (this.actorFellowshipThemecard) {
                 // in case it's not found, reset the id in the schema
-                this.actor.update({"system.actorSharedSingleThemecardId": ""});
+                this.actor.update({ "system.actorSharedSingleThemecardId": "" });
                 return;
             }
         }
 
         let assignedUser = game.users.find(u => u.character?._id === this.actor.id)
-        if(assignedUser){
+        if (assignedUser) {
             let ownedWorldActors = game.actors.filter(a =>
                 a.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
             );
             ownedWorldActors = ownedWorldActors.filter(a => a.id !== this.actor.id)
             console.log("owned world actors: ", ownedWorldActors);
-            if(ownedWorldActors && ownedWorldActors.length > 0){
+            if (ownedWorldActors && ownedWorldActors.length > 0) {
                 this.actorFellowshipThemecard = ownedWorldActors[0];
-                this.actor.update({"system.actorSharedSingleThemecardId": this.actorFellowshipThemecard.id});
+                console.log("found fellowship themecard: ", this.actorFellowshipThemecard.id);
+                this.actor.update({ "system.actorSharedSingleThemecardId": this.actorFellowshipThemecard.id });
                 console.log("assigned fellowship themecard");
-            }else{
+            } else {
                 this.actorFellowshipThemecard = false;
             }
         }
     }
 
-    reloadFellowshipThemecard(){
-        if(this.actorFellowshipThemecard){
-            this.actorFellowshipThemecard = game.actors.get(this.actorFellowshipThemecard.id);
+    reloadFellowshipThemecard(sendMessageToOthers = false) {
+        if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
+            this.actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
+            if (sendMessageToOthers == true) {
+                game.socket.emit("system.mist-engine-fvtt", {
+                    type: "hook",
+                    hook: "fellowshipThemeCardUpdated",
+                    data: {}
+                });
+            }
         }
     }
 
@@ -161,7 +179,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             }
         }
 
-        return { themebooks: themebooks, backpack: backpack };
+        return { themebooks: themebooks, backpack: backpack, themebooksEmpty: themebooks.length === 0 };
     }
 
 
@@ -180,8 +198,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             tag.addEventListener("click", event => this.handleFellowshipRelationshipSelectableClick(event));
         }
 
-        const selectableWeeknesses = this.element.querySelectorAll('.wt-selectable');
-        for (const tag of selectableWeeknesses) {
+        const selectableweaknesses = this.element.querySelectorAll('.wt-selectable');
+        for (const tag of selectableweaknesses) {
             tag.addEventListener("click", event => this.handleWeaknessSelectableClick(event));
         }
 
@@ -245,14 +263,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         await this.options.document.update({ "system.promises": num });
     }
 
-    async handleCharacterUpdatableFellowshipChange(event){
+    async handleCharacterUpdatableFellowshipChange(event) {
         event.preventDefault();
         const input = event.currentTarget;
         const index = input.dataset.index;
         const key = input.dataset.key;
-        const newValue = input.value;  
+        const newValue = input.value;
         let fellowships = this.options.document.system.fellowships;
-        if(!fellowships || index >= fellowships.length) return;
+        if (!fellowships || index >= fellowships.length) return;
         foundry.utils.setProperty(fellowships[index], key, newValue);
         await this.options.document.update({ "system.fellowships": fellowships });
     }
@@ -271,11 +289,11 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const currentFellowships = this.actor.system.fellowships;
         if (currentFellowships) {
             await this.actor.update({
-                "system.fellowships": [ ...currentFellowships, { companion: "", relationshipTag: "", selected: false } ]
+                "system.fellowships": [...currentFellowships, { companion: "", relationshipTag: "", selected: false }]
             });
-        }else{
+        } else {
             await this.actor.update({
-                "system.fellowships": [ { companion: "", relationshipTag: "", selected: false } ]
+                "system.fellowships": [{ companion: "", relationshipTag: "", selected: false }]
             });
         }
     }
@@ -289,43 +307,71 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         await this.actor.update({ "system.quintessences": quintessences });
     }
 
-    async handleCharacterUpdatableQuintessenceChange(event){
+    async handleCharacterUpdatableQuintessenceChange(event) {
         event.preventDefault();
         const input = event.currentTarget;
         const index = input.dataset.index;
         const newName = input.value;
         let quintessences = this.options.document.system.quintessences;
-        if(!quintessences || index >= quintessences.length) return;
+        if (!quintessences || index >= quintessences.length) return;
         quintessences[index] = newName;
         await this.options.document.update({ "system.quintessences": quintessences });
     }
 
-    handleDevelopmentPartialClick(event) {
+    async handleDevelopmentPartialClick(event) {
+        event.preventDefault();
         const target = event.currentTarget;
-        const item = this.actor.items.get(target.dataset.itemId);
-        if (!item) return;
+        let object = this.actor.items.get(target.dataset.itemId);
+        const source = target.dataset.source;
+        console.log("source: ", source);
+        if (source === "fellowship-themecard") {
+            if (this.actorFellowshipThemecard) {
+                object = this.actorFellowshipThemecard;
+            }
+        }
+        if (!object) {
+            console.log("WARNING: no object found for power tag selectable click");
+            return;
+        }
+
         const key = target.dataset.valueKey;
         let path = `${key}`;
 
-        let prop = foundry.utils.getProperty(item, path);
+        let prop = foundry.utils.getProperty(object, path);
         prop = prop ? prop + 1 : 1;
         if (prop > 3) prop = 3;
 
-        item.update({ [path]: prop });
+        await object.update({ [path]: prop });
+        this.reloadFellowshipThemecard(true);
+        this.render();
     }
 
-    handleDevelopmentPartialRightClick(event) {
+    async handleDevelopmentPartialRightClick(event) {
         const target = event.currentTarget;
-        const item = this.actor.items.get(target.dataset.itemId);
-        if (!item) return;
+        let object = this.actor.items.get(target.dataset.itemId);
+        const source = target.dataset.source;
+
+        console.log("source: ", source);
+        if (source === "fellowship-themecard") {
+            if (this.actorFellowshipThemecard) {
+                object = this.actorFellowshipThemecard;
+            }
+        }
+        if (!object) {
+            console.log("WARNING: no object found for power tag selectable click");
+            return;
+        }
+
         const key = target.dataset.valueKey;
         let path = `${key}`;
 
-        let prop = foundry.utils.getProperty(item, path);
+        let prop = foundry.utils.getProperty(object, path);
         prop = prop ? prop - 1 : 0;
         if (prop < 0) prop = 0;
 
-        item.update({ [path]: prop });
+        await object.update({ [path]: prop });
+        this.reloadFellowshipThemecard(true);
+        this.render();
     }
 
     handleBackpackItemUpdate(event) {
@@ -352,14 +398,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const itemId = tag.dataset.itemId;
         const actor = this.options.document;
         const source = tag.dataset.source;
-        let object = actor.items.get(itemId);
+        let object = this.actor.items.get(itemId);
 
-         if(source === "fellowship-themecard"){
-            if(this.actorFellowshipThemecard){
+        if (source === "fellowship-themecard") {
+            if (this.actorFellowshipThemecard) {
                 object = this.actorFellowshipThemecard;
             }
         }
-        if (!object){
+        if (!object) {
             console.log("WARNING: no object found for power tag selectable click");
             return;
         }
@@ -367,12 +413,12 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if (!object) return;
         if (object.system.burned) return;
 
-        const ptIndex = tag.dataset.weeknesstagIndex;
-        let path = `system.weeknesstag${ptIndex}.selected`;
+        const ptIndex = tag.dataset.weaknesstagIndex;
+        let path = `system.weaknesstag${ptIndex}.selected`;
         let prop = foundry.utils.getProperty(object, path);
 
         await object.update({ [path]: !prop });
-        this.reloadFellowshipThemecard();
+        this.reloadFellowshipThemecard(true);
         this.render();
     }
 
@@ -382,14 +428,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const itemId = tag.dataset.itemId;
         const actor = this.options.document;
         const source = tag.dataset.source;
-        let object = actor.items.get(itemId);
+        let object = this.actor.items.get(itemId);
 
-         if(source === "fellowship-themecard"){
-            if(this.actorFellowshipThemecard){
+        if (source === "fellowship-themecard") {
+            if (this.actorFellowshipThemecard) {
                 object = this.actorFellowshipThemecard;
             }
         }
-        if (!object){
+        if (!object) {
             console.log("WARNING: no object found for power tag selectable click");
             return;
         }
@@ -400,7 +446,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let prop = foundry.utils.getProperty(object, path);
 
         await object.update({ [path]: !prop });
-        this.reloadFellowshipThemecard();
+        this.reloadFellowshipThemecard(true);
         this.render();
     }
 
@@ -410,14 +456,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const itemId = tag.dataset.itemId;
         const source = tag.dataset.source;
         const actor = this.options.document;
-        let object = actor.items.get(itemId);
-        
-        if(source === "fellowship-themecard"){
-            if(this.actorFellowshipThemecard){
+        let object = this.actor.items.get(itemId);
+
+        if (source === "fellowship-themecard") {
+            if (this.actorFellowshipThemecard) {
                 object = this.actorFellowshipThemecard;
             }
         }
-        if (!object){
+        if (!object) {
             console.log("WARNING: no object found for power tag selectable click");
             return;
         }
@@ -436,7 +482,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             await object.update({ [`system.powertag${ptIndex}.toBurn`]: false });
         }
 
-        this.reloadFellowshipThemecard();
+        this.reloadFellowshipThemecard(true);
         this.render();
     }
 
@@ -517,14 +563,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const actor = this.actor;
         const itemId = target.dataset.itemId;
         const source = target.dataset.source;
-        let object = actor.items.get(itemId);
+        let object = this.actor.items.get(itemId);
 
-         if(source === "fellowship-themecard"){
-            if(this.actorFellowshipThemecard){
+        if (source === "fellowship-themecard") {
+            if (this.actorFellowshipThemecard) {
                 object = this.actorFellowshipThemecard;
             }
         }
-        if (!object){
+        if (!object) {
             console.log("WARNING: no object found for power tag selectable click");
             return;
         }
@@ -545,7 +591,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let prop = foundry.utils.getProperty(object, path);
 
         await object.update({ [path]: powertag.toBurn });
-        this.reloadFellowshipThemecard();
+        this.reloadFellowshipThemecard(true);
         this.render();
     }
 

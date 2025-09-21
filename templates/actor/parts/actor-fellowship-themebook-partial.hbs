@@ -1,6 +1,6 @@
 <div class="themebook-container" data-id="{{id}}">
     {{#if fellowshipThemecard}}
-    <div class="themebook-style {{themebook.system.type}} flexcol">
+    <div class="themebook-style litm-fellowship-themecard flexcol">
         <h2 class="theme-name">Fellowship
         </h2>
         <div class="powertags-container">
@@ -19,10 +19,10 @@
             {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=7
             powertag=fellowshipThemecard.powertag7 source='fellowship-themecard' editMode=editMode}}
 
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weekness-line.hbs" index=1
-            weeknesstag=fellowshipThemecard.weeknesstag1 source='fellowship-themecard' editMode=editMode}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weekness-line.hbs" index=2
-            weeknesstag=fellowshipThemecard.weeknesstag2 source='fellowship-themecard' editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=1
+            weaknesstag=fellowshipThemecard.weaknesstag1 source='fellowship-themecard' editMode=editMode}}
+            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=2
+            weaknesstag=fellowshipThemecard.weaknesstag2 source='fellowship-themecard' editMode=editMode}}
         </div>
         <div class="quest-container">
             {{#if editMode}}
@@ -34,12 +34,20 @@
             {{/if}}
         </div>
         <div class="development-container flexrow">
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Abandon" id=themebook._id
-            key="system.abandon" value=fellowshipThemecard.system.abandon}}
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Improve" id=themebook._id
-            key="system.improve" value=fellowshipThemecard.system.improve}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Abandon" source="fellowship-themecard"
+            key="system.abandon" value=fellowshipThemecard.abandon}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Improve" source="fellowship-themecard"
+            key="system.improve" value=fellowshipThemecard.improve}}
             {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Milestone"
-            id=themebook._id key="system.milestone" value=fellowshipThemecard.system.milestone}}
+            source="fellowship-themecard" key="system.milestone" value=fellowshipThemecard.milestone}}
+        </div>
+    </div>
+    {{else}}
+     <div class="themebook-style litm-fellowship-themecard flexcol">
+        <h2 class="theme-name">Fellowship
+        </h2>
+        <div class="powertags-container">
+            <div class="empty-message">Create a Fellowship Themecard Actor and assign ownership to all party members to see it here.</div>
         </div>
     </div>
     {{/if}}

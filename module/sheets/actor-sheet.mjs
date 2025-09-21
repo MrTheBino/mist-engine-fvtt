@@ -214,7 +214,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const source = event.target.dataset.source;
 
         // Update items like Themebooks
-        if (source == null || source == undefined) {
+        if (source == null || source == undefined || source.trim().length === 0) {
             if (event.currentTarget.dataset.itemId == undefined) {
                 const li = $(event.currentTarget).parents('.item');
                 item = this.actor.items.get(li.data('itemId'));
@@ -240,8 +240,9 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         let item = null;
         const source = event.target.dataset.source;
 
+
         // Update items like Themebooks
-        if (source == null || source == undefined) {
+        if (source == null || source == undefined || source.trim().length === 0) {
             if (event.currentTarget.dataset.itemId == undefined) {
                 const li = $(event.currentTarget).parents('.item');
                 item = this.actor.items.get(li.data('itemId'));
@@ -252,6 +253,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             if (event.target.type === 'checkbox') {
                 item.update({ [event.target.dataset.key]: event.target.checked });
             } else {
+                console.log("updating ", event.target.dataset.key, " to ", event.target.value);
                 item.update({ [event.target.dataset.key]: event.target.value });
             }
         }   

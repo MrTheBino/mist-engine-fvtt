@@ -38,58 +38,71 @@ export class DiceRollAdapter {
         for (let item of this.actor.items) {
             if (item.type === "backpack") {
                 const backpackItems = item.system.items;
-                for (let backpackItem of backpackItems) {
-                    if (backpackItem.selected) {
-                        this.selectedTags.push({ name: backpackItem.name, positive: true });
+                if (backpackItems) {
+                    for (let backpackItem of backpackItems) {
+                        if (backpackItem.selected) {
+                            this.selectedTags.push({ name: backpackItem.name, positive: true, source: null });
+                        }
                     }
                 }
             }
+
             if (item.type === "themebook") {
                 for (let i = 0; i < 7; i++) {
                     const powertagPath = `system.powertag${i + 1}.selected`;
                     if (foundry.utils.getProperty(item, powertagPath)) {
-                        this.selectedTags.push({ name: item.system[`powertag${i + 1}`].name, positive: true, toBurn: item.system[`powertag${i + 1}`].toBurn, index: i + 1, themebookId: item.id });
+                        this.selectedTags.push({ name: item.system[`powertag${i + 1}`].name, positive: true, toBurn: item.system[`powertag${i + 1}`].toBurn, index: i + 1, themebookId: item.id, source: null });
                     }
 
-                    const weeknesstagPath = `system.weeknesstag${i + 1}.selected`;
-                    if (foundry.utils.getProperty(item, weeknesstagPath)) {
-                        this.selectedTags.push({ name: item.system[`weeknesstag${i + 1}`].name, positive: false,weekness: true });
+                    const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
+                    if (foundry.utils.getProperty(item, weaknesstagPath)) {
+                        this.selectedTags.push({ name: item.system[`weaknesstag${i + 1}`].name, positive: false, weakness: true, source: null });
                     }
                 }
             }
         }
 
-        this.actor.system.fellowships.forEach((entry, index) => {
-            if (entry.selected) {
-                this.selectedTags.push({ name: entry.relationshipTag, positive: true, fellowship: true });
-            }
-        });
+        if (this.actor.system.fellowships && this.actor.system.fellowships.length > 0) {
+            this.actor.system.fellowships.forEach((entry, index) => {
+                if (entry.selected) {
+                    this.selectedTags.push({ name: entry.relationshipTag, positive: true, fellowship: true, source: null });
+                }
+            });
+        }
 
         // fellowship themecard tags
-        if(this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== ""){
+        if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
             let actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
-            if(actorFellowshipThemecard){
-                 for (let i = 0; i < 7; i++) {
+            console.log(actorFellowshipThemecard);
+            if (actorFellowshipThemecard) {
+                for (let i = 0; i < 7; i++) {
                     const powertagPath = `system.powertag${i + 1}.selected`;
                     if (foundry.utils.getProperty(actorFellowshipThemecard, powertagPath)) {
-                        this.selectedTags.push({ name: actorFellowshipThemecard.system[`powertag${i + 1}`].name, positive: true, toBurn: actorFellowshipThemecard.system[`powertag${i + 1}`].toBurn, index: i + 1 });
+                        this.selectedTags.push({ name: actorFellowshipThemecard.system[`powertag${i + 1}`].name, positive: true, toBurn: actorFellowshipThemecard.system[`powertag${i + 1}`].toBurn, index: i + 1, source: "fellowship-themecard" });
                     }
 
-                    const weeknesstagPath = `system.weeknesstag${i + 1}.selected`;
-                    if (foundry.utils.getProperty(actorFellowshipThemecard, weeknesstagPath)) {
-                        this.selectedTags.push({ name: actorFellowshipThemecard.system[`weeknesstag${i + 1}`].name, positive: false, weekness: true });
+                    const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
+                    if (foundry.utils.getProperty(actorFellowshipThemecard, weaknesstagPath)) {
+                        this.selectedTags.push({ name: actorFellowshipThemecard.system[`weaknesstag${i + 1}`].name, positive: false, weakness: true, source: "fellowship-themecard" });
                     }
                 }
             }
+        } else {
+            console.log("No fellowship themecard in the actor actor.system.actorSharedSingleThemecardId:", this.actor.system.actorSharedSingleThemecardId);
         }
 
     }
 
     // ToDo, Needs fixing, not working as expected
-    isTagToBurn(index, themebookId,source = null) {
-        for (let tag of this.selectedTags){
-            if (tag.toBurn && tag.index === index && themebookId === tag.themebookId){
+    isTagToBurn(index, themebookId, source = null) {
+        for (let tag of this.selectedTags) {
+            if (tag.toBurn && tag.index === index && themebookId === tag.themebookId && source === null) {
                 return true;
+            }
+            else if (tag.toBurn && tag.index === index && source !== null) {
+                if (tag.source === source) {
+                    return true;
+                }
             }
         }
         return false;
@@ -99,9 +112,12 @@ export class DiceRollAdapter {
         for (let item of this.actor.items) {
             if (item.type === "backpack") {
                 const backpackItems = item.system.items;
-                for (let backpackItem of backpackItems) {
-                    backpackItem.selected = false;
+                if (backpackItems) {
+                    for (let backpackItem of backpackItems) {
+                        backpackItem.selected = false;
+                    }
                 }
+
                 item.update({ 'system.items': backpackItems });
             }
             if (item.type === "themebook") {
@@ -111,47 +127,49 @@ export class DiceRollAdapter {
                     const powertagPathToBurn = `system.powertag${i + 1}.toBurn`;
                     item.update({ [powertagPathToBurn]: false });
 
-                    if (this.isTagToBurn(i + 1,item._id)){
+                    if (this.isTagToBurn(i + 1, item._id)) {
                         const powertagToBurnPath = `system.powertag${i + 1}.burned`;
                         item.update({ [powertagToBurnPath]: true });//mark as burned
                     }
                 }
-                for(let i = 0; i < 2; i++){
-                    const weeknesstagPath = `system.weeknesstag${i + 1}.selected`;
-                    item.update({ [weeknesstagPath]: false });
+                for (let i = 0; i < 2; i++) {
+                    const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
+                    item.update({ [weaknesstagPath]: false });
                 }
             }
         }
 
         const fellowships = this.actor.system.fellowships;
-        fellowships.forEach((entry) => {
-            entry.selected = false;
-        });
-        await this.actor.update({ 'system.fellowships': fellowships });
+        if (fellowships && fellowships.length > 0) {
+            fellowships.forEach((entry) => {
+                entry.selected = false;
+            });
+            await this.actor.update({ 'system.fellowships': fellowships });
+        }
 
         // fellowship themecard tags
-        if(this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== ""){
+        if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
             let actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
-            if(actorFellowshipThemecard){
-               for (let i = 0; i < 7; i++) {
+            if (actorFellowshipThemecard) {
+                for (let i = 0; i < 7; i++) {
                     const powertagPath = `system.powertag${i + 1}.selected`;
                     await actorFellowshipThemecard.update({ [powertagPath]: false });
                     const powertagPathToBurn = `system.powertag${i + 1}.toBurn`;
                     await actorFellowshipThemecard.update({ [powertagPathToBurn]: false });
 
-                    if (this.isTagToBurn(i + 1, actorFellowshipThemecard.id)) {
+                    if (this.isTagToBurn(i + 1, null, "fellowship-themecard")) {
                         const powertagToBurnPath = `system.powertag${i + 1}.burned`;
                         await actorFellowshipThemecard.update({ [powertagToBurnPath]: true });//mark as burned
                     }
                 }
-                for(let i = 0; i < 2; i++){
-                    const weeknesstagPath = `system.weeknesstag${i + 1}.selected`;
-                    await actorFellowshipThemecard.update({ [weeknesstagPath]: false });
+                for (let i = 0; i < 2; i++) {
+                    const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
+                    await actorFellowshipThemecard.update({ [weaknesstagPath]: false });
                 }
             }
-            this.actor.sheet?.reloadFellowshipThemecard()
+            this.actor.sheet?.reloadFellowshipThemecard(true); // true for emitting data to others
         }
-        
+
         this.actor.sheet.render();
     }
 
@@ -163,9 +181,9 @@ export class DiceRollAdapter {
 
         this.selectedTags.forEach(element => {
             if (element.positive) {
-                if(element.toBurn){
+                if (element.toBurn) {
                     numPositiveTags += 3;
-                }else{
+                } else {
                     numPositiveTags++;
                 }
             }
@@ -177,9 +195,9 @@ export class DiceRollAdapter {
         const dicePromises = [];
 
         let rollFormula = `2d6`;
-        if(numPositiveTags> 0) rollFormula += ` + ${numPositiveTags}`;
-        if(numNegativeTags> 0) rollFormula += ` - ${numNegativeTags}`;
-        
+        if (numPositiveTags > 0) rollFormula += ` + ${numPositiveTags}`;
+        if (numNegativeTags > 0) rollFormula += ` - ${numNegativeTags}`;
+
         const diceRoll = new Roll(rollFormula, this.actor.getRollData());
         await diceRoll.evaluate();
 
@@ -187,7 +205,7 @@ export class DiceRollAdapter {
         await Promise.all(dicePromises);
 
         let diceResults = [...diceRoll.terms[0].results].map(r => r.result);
-        
+
         let isCritical = (diceResults[0] === 6 && diceResults[1] === 6);
         let isFumble = (diceResults[0] === 1 && diceResults[1] === 1);
 
@@ -203,7 +221,7 @@ export class DiceRollAdapter {
 
         const chatVars = {
             diceRollHTML: diceRollHTML,
-            label: 'Quick',
+            label: game.i18n.localize(`MIST_ENGINE.ROLL_TYPES.${this.rollType}`),
             selectedTags: this.selectedTags,
             consequenceResult: consequenceResult,
             isCritical: isCritical,

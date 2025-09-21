@@ -2,7 +2,7 @@
     margin: 5px;
 }
 
-.item-weekness-line {
+.item-weakness-line {
     margin: 5px;
 
     input {
@@ -297,4 +297,13 @@
     &.locked{
         color: darkred;
     }
+}
+
+.empty-message{
+    font-family: $font-primary;
+    font-size: 1.2em;
+    font-style: italic;
+    color: $c-styled-text;
+    margin: 10px;
+    text-align: center;
 }

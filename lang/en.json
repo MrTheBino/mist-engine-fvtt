@@ -14,6 +14,11 @@
         "Header": "Story Tags & Statuses"
       }
     },
+    "ROLL_TYPES":{
+      "quick":"Quick",
+      "detailed":"Detailed",
+      "reaction":"Reaction"
+    },
     "MOVES":{
       "LEGEND":{
         "quick": {
@@ -37,7 +42,8 @@
   "TYPES": {
     "Actor": {
       "litm-character": "Legend in the Mist Character",
-      "litm-npc": "Legend in the Mist NPC"
+      "litm-npc": "Legend in the Mist NPC",
+      "litm-fellowship-themecard": "Legend in the Mist Fellowship Themecard"
     },
     "Item": {
       "item": "Item",

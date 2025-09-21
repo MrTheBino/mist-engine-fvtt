@@ -389,10 +389,10 @@
 .mist-engine .item-powertag-line {
   margin: 5px;
 }
-.mist-engine .item-weekness-line {
+.mist-engine .item-weakness-line {
   margin: 5px;
 }
-.mist-engine .item-weekness-line input {
+.mist-engine .item-weakness-line input {
   border: 2px solid red;
 }
 .mist-engine .quest-container {
@@ -628,6 +628,14 @@
 .mist-engine .lock-toggle-container.locked {
   color: darkred;
 }
+.mist-engine .empty-message {
+  font-family: Labrada, serif;
+  font-size: 1.2em;
+  font-style: italic;
+  color: #724a32;
+  margin: 10px;
+  text-align: center;
+}
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
   font-weight: normal;
@@ -650,17 +658,17 @@
   font-weight: bolder;
   font-size: 1.1em;
 }
-.mist-engine .litm-pc-weekness {
+.mist-engine .litm-pc-weakness {
   font-family: Labrada, serif;
   font-weight: normal;
   color: black;
 }
-.mist-engine .litm-pc-weekness:hover {
+.mist-engine .litm-pc-weakness:hover {
   cursor: pointer;
   text-shadow: 0 0 15px rgb(242, 255, 57);
   font-weight: bold;
 }
-.mist-engine .litm-pc-weekness.selected {
+.mist-engine .litm-pc-weakness.selected {
   text-shadow: 0 0 15px rgb(242, 255, 57);
   font-weight: bold;
 }
@@ -861,6 +869,11 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
+.mist-engine .themebook-style.litm-fellowship-themecard h2 {
+  background-image: url("../assets/headers/header-backpack.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 .mist-engine .themebook-style .themebook-icon {
   height: 15px;
   width: 15px;
@@ -900,6 +913,11 @@
   background-size: contain;
 }
 .mist-engine .themebook-style .themebook-icon .litm-fellowship-relationship {
+  background-image: url("../assets/icons/icon-variable-litm.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.mist-engine .themebook-style .themebook-icon .litm-fellowship-themecard {
   background-image: url("../assets/icons/icon-variable-litm.svg");
   background-repeat: no-repeat;
   background-size: contain;
@@ -946,7 +964,6 @@
   margin-bottom: 5px;
   font-family: Labrada, serif;
   font-size: 0.9em;
-  display: flex;
   gap: 2px;
   color: #724a32;
   font-weight: 400;
