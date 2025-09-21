@@ -21,10 +21,14 @@ Currently it only supports Legend In The Mist.
 * scene window dialog for handing scene and story markers / tags (found in the left sidebar under Journal Notes > Scene Tags)
 * temporary statuses for characters and npcs
 * enclose tags with [] in text forms, eg. [super cool] or [burning-3]
+* drag'n'drop of tags & status from NPCs to characters, thanks to 3rddogpaul
+* shared fellowship themebook / cards (needs more testing)
   
 ## ToDo
 
-- shared fellowship themebook / cards
+- more weakness tags
+- improved styling
+- usability improvements
 
 
 If using weakness tags, you have to improve / mark the themebook manually. There is no automation for this in the system.
