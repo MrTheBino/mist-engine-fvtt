@@ -20,7 +20,7 @@
       "thumbnail": "systems/mist-engine-fvtt/assets/landingpage.webp"
     }
   ],
-  "version": "0.2.3",
+  "version": "0.2.4",
   "compatibility": {
     "minimum": 13,
     "verified": "13"
