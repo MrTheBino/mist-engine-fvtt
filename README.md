@@ -23,7 +23,11 @@ Currently it only supports Legend In The Mist.
 * enclose tags with [] in text forms, eg. [super cool] or [burning-3]
 * drag'n'drop of tags & status from NPCs to characters, thanks to 3rddogpaul
 * shared fellowship themebook / cards (needs more testing)
-
+  
+## Items
+ * Quintessence
+ * Themebooks
+  
 ## KeyBindings  
  * Control + T -> Open Scene Tags
   
