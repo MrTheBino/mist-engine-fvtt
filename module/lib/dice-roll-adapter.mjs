@@ -198,6 +198,9 @@ export class DiceRollAdapter {
         if (numPositiveTags > 0) rollFormula += ` + ${numPositiveTags}`;
         if (numNegativeTags > 0) rollFormula += ` - ${numNegativeTags}`;
 
+        let numPowerTags = parseInt(numPositiveTags) - parseInt(numNegativeTags);
+        if (numPowerTags <= 0) numPowerTags = 1; // at least 1 power tag
+
         const diceRoll = new Roll(rollFormula, this.actor.getRollData());
         await diceRoll.evaluate();
 
@@ -225,7 +228,8 @@ export class DiceRollAdapter {
             selectedTags: this.selectedTags,
             consequenceResult: consequenceResult,
             isCritical: isCritical,
-            isFumble: isFumble
+            isFumble: isFumble,
+            numPowerTags: numPowerTags,
         };
 
         const html = await foundry.applications.handlebars.renderTemplate(

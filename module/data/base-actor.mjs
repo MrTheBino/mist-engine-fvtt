@@ -1,4 +1,5 @@
 import MistEngineDataModel from "./base-model.mjs";
+import {buildFloatingTagsAndStatuses} from "./util.mjs";
 
 export default class MistEngineActorBase extends MistEngineDataModel {
 
@@ -19,14 +20,7 @@ export default class MistEngineActorBase extends MistEngineDataModel {
     schema.editMode = new fields.BooleanField({ initial: false })
     schema.shortDescription = new fields.StringField({ required: true, blank: true }); // equivalent to passing ({initial: ""}) for StringFields
 
-    schema.floatingTagsAndStatusesEditable = new fields.BooleanField({ initial: false })
-    schema.floatingTagsAndStatuses = new fields.ArrayField(new fields.SchemaField({
-      name: new fields.StringField({ blank: true }),
-      value: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
-      burned: new fields.BooleanField({ initial: false }),
-      toBurn: new fields.BooleanField({ initial: false }),
-      selected: new fields.BooleanField({ initial: false })
-    }));
+    foundry.utils.mergeObject(schema, buildFloatingTagsAndStatuses());
 
     return schema;
   }

@@ -1,42 +1,48 @@
 <div class="floating-tags-and-status-container">
 
-        <div class="npc-subtitle-container-c">
-                <div class="npc-subtitle-text">{{localize 'MIST_ENGINE.LABELS.ActorFloatingTagOrStatus'}}<a
-                        data-action="createFloatingTagOrStatus"> <i class='fas fa-plus'></i></a></div>
-            </div>
+    <div class="npc-subtitle-container-c">
+        <div class="npc-subtitle-text">
+            {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs' isLocked=system.floatingTagsAndStatusesEditable name="system.floatingTagsAndStatusesEditable" title="Toggle Edit Mode"}}
+            {{localize 'MIST_ENGINE.LABELS.ActorFloatingTagOrStatus'}}
+            <a data-action="createFloatingTagOrStatus"> <i class='fas fa-plus'></i></a>
+        </div>
+    </div>
 
-
-
-        {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs' isLocked=system.floatingTagsAndStatusesEditable name="system.floatingTagsAndStatusesEditable" title="Toggle Edit Mode"}}
-
-        <div class="floating-tags-and-status-entries grid grid-3col">
-            {{#each system.floatingTagsAndStatuses}}
-            <div class="floating-tag-and-status-entry flexrow">
+    <div class="floating-tags-and-status-entries">
+        {{#each system.floatingTagsAndStatuses}}
+        <div class="floating-tag-and-status-entry flexcol">
+            <div class="flexrow">
                 {{#if ../system.floatingTagsAndStatusesEditable}}
-                    <input type="text" class="fts-input-name updateable-fts-stat" data-index="{{@index}}" data-key="name"
-                        value="{{this.name}}" name="system.floatingTagsAndStatuses.{{@index}}.name"
-                        placeholder="Tag/Status Name">
+                    <input type="text" class="fts-input-name updateable-fts-stat" data-index="{{@index}}" data-key="name" value="{{this.name}}" name="system.floatingTagsAndStatuses.{{@index}}.name" placeholder="Tag/Status Name">
                 {{else}}
                     <div class="fts-input-name {{#if (gt this.value 0)}}status{{else}}tag{{/if}}">{{this.name}}</div>
                 {{/if}}
-                <div class="fts-input flexrow">
+                
                     {{#if ../system.floatingTagsAndStatusesEditable}}
-                        <input type="text" class="fts-input-value updateable-fts-stat" data-index="{{@index}}"
-                            data-key="value" value="{{this.value}}" name="system.floatingTagsAndStatuses.{{@index}}.value"
-                            placeholder="Tag/Status Value">
+                        <div class="fts-input flexrow">
+                            <input type="text" class="fts-input-value updateable-fts-stat" data-index="{{@index}}" data-key="value" value="{{this.value}}" name="system.floatingTagsAndStatuses.{{@index}}.value" placeholder="Tag/Status Value">
                             <a data-action="deleteFloatingTagOrStatus" data-index="{{@index}}"><i class='fas fa-trash'></i></a>
+                        </div>
                     {{else}}
                         {{#if (gt this.value 0)}}
-                        <i class="fa-solid fa-minus updateable-fts-stat-minus" data-index="{{@index}}"
-                            style="text-align:center" id="button-negative-minus"></i>
-                        <input type="text" class="fts-input-value" value="{{this.value}}" disabled>
-                        <i class="fa-solid fa-plus updateable-fts-stat-plus" data-index="{{@index}}"
-                            style="text-align:center" id="button-negative-plus"></i>
+                            <div class="fts-input flexrow">
+                                <i class="fa-solid fa-minus updateable-fts-stat-minus" data-index="{{@index}}" style="text-align:center" id="button-negative-minus"></i>
+                                <input type="text" class="fts-input-value" value="{{this.value}}" disabled>
+                                <i class="fa-solid fa-plus updateable-fts-stat-plus" data-index="{{@index}}" style="text-align:center" id="button-negative-plus"></i>
+                            </div>
                         {{/if}}
                     {{/if}}
-
-                </div>
             </div>
-            {{/each}}
+            {{#if (gt this.value 0)}}
+                <div class="fts-markings-container">
+                    {{#each this.markings as |marking index|}}
+                        <span class="fts-input-marking" data-marking-index="{{index}}" data-action="toggleFloatingTagOrStatusMarking" data-index="{{@../index}}">
+                            <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{index}}</i>
+                        </span>
+                    {{/each}}
+                </div>
+            {{/if}}
         </div>
+        {{/each}}
+    </div>
 </div>

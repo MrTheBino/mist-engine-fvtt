@@ -259,12 +259,42 @@
 }
 
 .fts-input-name {
-    flex-grow: 1;
+    flex-grow: 2;
+    margin-right: 2px;
+    height: 16px;
 }
 
 .fts-input-value {
-    flex-grow: 0.5
+    flex-grow: 0.5;
+    height: 16px;
 }
+
+.fts-input-marking {
+    flex-grow: 0.1;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+
+    i.marking-circle {
+        border-radius: 50%;
+        background-color: black;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        font-family: $font-primary;
+        font-style:normal;
+    }
+
+    i.active {
+        background-color: darkred;
+    }
+}
+
+.fts-markings-container {
+    text-align: center;
+    margin-top: 5px;
+}
+
 
 .floating-tags-and-status-container {
     padding: 10px;
@@ -288,22 +318,42 @@
     font-family: $font-primary;
 }
 
-.lock-toggle-container{
+.lock-toggle-container {
     color: black;
-    display: flex;
-    justify-content: right;
-    padding-right: 20px;
     font-size: 1.5em;
-    &.locked{
+
+    &.locked {
         color: darkred;
     }
 }
 
-.empty-message{
+.empty-message {
     font-family: $font-primary;
     font-size: 1.2em;
     font-style: italic;
     color: $c-styled-text;
     margin: 10px;
     text-align: center;
+}
+
+
+
+.character-sheet-divider {
+    align-items: start;
+
+    .right-side {
+        flex-grow: 0.25;
+    }
+}
+
+.floating-tag-and-status-entry {
+    margin-bottom: 20px;
+}
+
+.npc-sheet-divider {
+    align-items: start;
+
+    .right-side {
+        flex-grow: 0.25;
+    }
 }

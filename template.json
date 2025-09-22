@@ -3,6 +3,6 @@
     "types": ["litm-character","litm-npc","litm-fellowship-themecard"]
   },
   "Item": {
-    "types": ["item", "themebook","backpack","scene-data"]
+    "types": ["themebook","backpack","scene-data","quintessence"]
   }
 }

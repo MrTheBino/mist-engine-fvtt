@@ -1,17 +1,26 @@
 <section class="tab {{tabs.character.id}} {{tabs.character.cssClass}} scrollable" id="character"
     data-tab="{{tabs.character.id}}" data-group="{{tabs.character.group}}">
-    <div class="litm-character-themebooks-container">
-        <div class="themebooks-container grid grid-4col grid-themebook-container">
-
-            {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-quintessences-partial.hbs'
-            editMode=system.editMode}}
-            {{> 'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-partial.hbs' editMode=system.editMode}}
-            {{> 'systems/mist-engine-fvtt/templates/actor/parts/backpack-partial.hbs' backpack=backpack
-            editMode=system.editMode}}
-            {{> 'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-themebook-partial.hbs' editMode=system.editMode}}
-            <div></div>
+    <div class="character-sheet-divider flexrow">
+        <div class="left-side">
+            <div class="litm-character-themebooks-container">
+                <div class="themebooks-container grid grid-4col grid-themebook-container">
+                    {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-quintessences-partial.hbs'
+                    editMode=system.editMode}}
+                    {{> 'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-partial.hbs'
+                    editMode=system.editMode}}
+                    {{> 'systems/mist-engine-fvtt/templates/actor/parts/backpack-partial.hbs' backpack=backpack
+                    editMode=system.editMode}}
+                    {{> 'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-themebook-partial.hbs'
+                    editMode=system.editMode}}
+                    <div></div>
+                </div>
+                {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-themebooks.hbs'}}
+            </div>
         </div>
-        {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-themebooks.hbs'}}
+        {{#if (eq system.editMode false)}}
+            <div class="right-side">
+                {{> 'systems/mist-engine-fvtt/templates/actor/parts/floating-tags-and-status-partial.hbs'}}
+            </div>
+        {{/if}}
     </div>
-    {{> 'systems/mist-engine-fvtt/templates/actor/parts/floating-tags-and-status-partial.hbs'}}
 </section>

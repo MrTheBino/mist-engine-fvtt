@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+.align-start {
+  align-items: flex-start;
+}
+
 /* Global styles */
 .window-app {
   font-family: Labrada, serif;
@@ -594,10 +598,35 @@
   margin: 2px;
 }
 .mist-engine .fts-input-name {
-  flex-grow: 1;
+  flex-grow: 2;
+  margin-right: 2px;
+  height: 16px;
 }
 .mist-engine .fts-input-value {
   flex-grow: 0.5;
+  height: 16px;
+}
+.mist-engine .fts-input-marking {
+  flex-grow: 0.1;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+.mist-engine .fts-input-marking i.marking-circle {
+  border-radius: 50%;
+  background-color: black;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  font-family: Labrada, serif;
+  font-style: normal;
+}
+.mist-engine .fts-input-marking i.active {
+  background-color: darkred;
+}
+.mist-engine .fts-markings-container {
+  text-align: center;
+  margin-top: 5px;
 }
 .mist-engine .floating-tags-and-status-container {
   padding: 10px;
@@ -620,9 +649,6 @@
 }
 .mist-engine .lock-toggle-container {
   color: black;
-  display: flex;
-  justify-content: right;
-  padding-right: 20px;
   font-size: 1.5em;
 }
 .mist-engine .lock-toggle-container.locked {
@@ -635,6 +661,21 @@
   color: #724a32;
   margin: 10px;
   text-align: center;
+}
+.mist-engine .character-sheet-divider {
+  align-items: start;
+}
+.mist-engine .character-sheet-divider .right-side {
+  flex-grow: 0.25;
+}
+.mist-engine .floating-tag-and-status-entry {
+  margin-bottom: 20px;
+}
+.mist-engine .npc-sheet-divider {
+  align-items: start;
+}
+.mist-engine .npc-sheet-divider .right-side {
+  flex-grow: 0.25;
 }
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
@@ -759,7 +800,7 @@
   background-color: #BCCDB0;
 }
 .mist-engine .fts-input-name.tag {
-  background-color: #BCCDB0;
+  background-color: #ECE800;
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -767,7 +808,7 @@
   font-weight: bold;
 }
 .mist-engine .fts-input-name.status {
-  background-color: #ECE800;
+  background-color: #BCCDB0;
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -1035,6 +1076,10 @@
 }
 .consequence-result-icon.neutral {
   background-image: url("../assets/icons/icon-litm-neutral.svg");
+}
+
+.power-counter {
+  font-weight: 800;
 }
 
 #scene-data-app > section.window-content {

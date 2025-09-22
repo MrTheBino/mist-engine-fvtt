@@ -8,8 +8,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         classes: ['mist-engine', 'sheet', 'actor'],
         tag: 'form',
         position: {
-            width: 850,
-            height: 1000
+            width: 1000,
+            height: 750
         },
         actions: {
             createBackpackItem: this.#handleCreateBackpackItem,
@@ -169,6 +169,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
     _prepareItems() {
         const themebooks = [];
+        const quintessences = [];
         let backpack = null;
 
         let inventory = this.options.document.items;
@@ -177,10 +178,12 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
                 themebooks.push(i);
             } else if (i.type === 'backpack') {
                 backpack = i;
+            } else if (i.type === 'quintessence') {
+                quintessences.push(i);
             }
         }
 
-        return { themebooks: themebooks, backpack: backpack, themebooksEmpty: themebooks.length === 0 };
+        return { themebooks: themebooks, backpack: backpack, quintessences: quintessences, themebooksEmpty: themebooks.length === 0 };
     }
 
 

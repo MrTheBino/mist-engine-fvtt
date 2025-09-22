@@ -13,18 +13,21 @@
 
             <span class="heading"><i class="consequence-result-icon negative"></i>6-</span>
             <p>{{{localize "MIST_ENGINE.MOVES.LEGEND.reaction.fail"}}}</p>
+            <div class="power-counter">Power: {{numPowerTags}}</div>
         </div>
         {{/if}}
         {{#if (eq consequenceResult 0)}}
         <div class="consequence-result-neutral">
             <span class="heading"><i class="consequence-result-icon neutral"></i>7-9</span>
             <p>{{{localize "MIST_ENGINE.MOVES.LEGEND.reaction.neutral"}}}</p>
+            <div class="power-counter">Power: {{numPowerTags}}</div>
         </div>
         {{/if}}
         {{#if (eq consequenceResult 1)}}
         <div class="consequence-result-positive">
             <span class="heading"><i class="consequence-result-icon positive"></i>10</span>
             <p>{{{localize "MIST_ENGINE.MOVES.LEGEND.reaction.success"}}}</p>
+            <div class="power-counter">Power: {{numPowerTags}}</div>
         </div>
         {{/if}}
     </div>

@@ -15,6 +15,7 @@ import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MIST_ENGINE } from "./helpers/config.mjs";
 // Import DataModel classes
 import * as models from "./data/_module.mjs";
+import {setupMistEngineKeyBindings} from "./lib/key-binding.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -74,6 +75,7 @@ Hooks.once("init", function () {
     themebook: models.MistEngineItemThemeBook,
     backpack: models.MistEngineItemBackpack,
     "scene-data": models.MistEngineSceneData,
+    quintessence: models.MistEngineQuintessence
   };
 
   // Active Effects are never copied to the Actor,
@@ -113,6 +115,8 @@ Hooks.once("init", function () {
     label: "MIST_ENGINE.SheetLabels.Item",
   });
 
+  setupMistEngineKeyBindings();
+
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
 });
@@ -120,6 +124,10 @@ Hooks.once("init", function () {
 /* -------------------------------------------- */
 /*  Handlebars Helpers                          */
 /* -------------------------------------------- */
+
+Handlebars.registerHelper('itemTooltipHTML', function (item) {
+  return `<strong>${item.name}</strong><br/>${item.system.description}`;
+});
 
 // If you need to add Handlebars helpers, here is a useful example:
 Handlebars.registerHelper("toLowerCase", function (str) {

@@ -8,7 +8,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         classes: ['mist-engine', 'sheet', 'actor'],
         tag: 'form',
         position: {
-            width: 800,
+            width: 1000,
             height: 750
         },
         actions: {
@@ -207,7 +207,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         const index = parseInt(target.dataset.index);
         if (!threatsAndConsequences || threatsAndConsequences.length <= index) return;
 
-        threatsAndConsequences[index].list.push("New Entry");
+        threatsAndConsequences[index].list.push("");
         await this.actor.update({ "system.threatsAndConsequences": threatsAndConsequences });
         await this.actor.sheet.render(true);
     }
@@ -221,13 +221,13 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
             await this.actor.update({
                 "system.threatsAndConsequences": [
                     ...threatsAndConsequences,
-                    { name: "New Threat", description: "", list: [] }
+                    { name: "", description: "", list: [] }
                 ]
             });
         } else {
             await this.actor.update({
                 "system.threatsAndConsequences": [
-                    { name: "New Threat", description: "", list: [] }
+                    { name: "", description: "", list: [] }
                 ]
             });
         }
@@ -244,13 +244,13 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
             await this.actor.update({
                 "system.specialFeatures": [
                     ...specialFeatures,
-                    { name: "New Special", description: "" }
+                    { name: "", description: "" }
                 ]
             });
         } else {
             await this.actor.update({
                 "system.specialFeatures": [
-                    { name: "New Special", description: "" }
+                    { name: "", description: "" }
                 ]
             });
         }
@@ -265,13 +265,13 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
             await this.actor.update({
                 "system.tags_and_statuses": [
                     ...tags_and_statuses,
-                    { name: "New Tag / Status", value: 0, symbol: "" }
+                    { name: "", value: 0, symbol: "" }
                 ]
             });
         } else {
             await this.actor.update({
                 "system.tags_and_statuses": [
-                    { name: "New Tag / Status", value: 0, symbol: "" }
+                    { name: "", value: 0, symbol: "" }
                 ]
             });
         }
@@ -286,13 +286,13 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
             await this.actor.update({
                 "system.limits": [
                     ...limits,
-                    { name: "New Limit", value: 0 }
+                    { name: "", value: 0 }
                 ]
             });
         } else {
             await this.actor.update({
                 "system.limits": [
-                    { name: "New Limit", value: 0 }
+                    { name: "", value: 0 }
                 ]
             });
         }

@@ -10,7 +10,6 @@ export default class MistEngineCharacter extends MistEngineActorBase {
     schema.notes = new fields.StringField({ blank: true, default: "" });
 
     schema.promises = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
-    schema.quintessences = new fields.ArrayField(new fields.StringField())
   
     schema.actorSharedSingleThemecardId = new fields.StringField({ blank: true, default: "" });
 

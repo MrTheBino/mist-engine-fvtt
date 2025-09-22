@@ -50,7 +50,8 @@
       "feature": "Feature",
       "spell": "Spell",
       "themebook": "Theme Book",
-      "scene-data": "Scene Data"
+      "scene-data": "Scene Data",
+      "quintessence": "Quintessence"
     }
   }
 }

@@ -20,6 +20,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             deleteItem: this.#handleDeleteItem,
             createFloatingTagOrStatus: this.#handleCreateFloatingTagOrStatus,
             deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus,
+            toggleFloatingTagOrStatusMarking: this.#handleToggleFloatingTagOrStatusMarking,
             clickToggleLock: this.#handleClickToggleLock
         },
         form: {
@@ -207,6 +208,16 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
     }
 
+    static async #handleToggleFloatingTagOrStatusMarking(event, target) {
+        event.preventDefault();
+        const index = target.dataset.index;
+        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
+        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
+
+        foundry.utils.setProperty(floatingTagsAndStatuses[index], 'markings.' + target.dataset.markingIndex, !floatingTagsAndStatuses[index].markings[target.dataset.markingIndex]);
+        await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+    }
+
     async handleItemStatChanged(event) {
         event.preventDefault();
         console.log("DEPRECATED: handleItemStatChanged, use handleThemebookEntryInputChanged instead");
@@ -272,13 +283,13 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             await this.actor.update({
                 "system.floatingTagsAndStatuses": [
                     ...floatingTagsAndStatuses,
-                    { name: "New Floating Tag", description: "" }
+                    { name: "New Floating Tag", description: "", value: 0,markings: Array(6).fill(false) }
                 ]
             });
         } else {
             await this.actor.update({
                 "system.floatingTagsAndStatuses": [
-                    { name: "New Floating Tag", description: "" }
+                    { name: "New Floating Tag", description: "", value: 0, markings: Array(6).fill(false) }
                 ]
             });
         }
@@ -430,7 +441,17 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             case 'tag':
             case 'status':
                 const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
-                floatingTagsAndStatuses.push({ name: data.name, value: data.value, description: '' });
+                let value = data.value;
+                if(value == undefined || value == null || isNaN(parseInt(value))){
+                    value = 0;
+                }
+
+                let newEntry = { name: data.name, value: parseInt(value), description: '', markings:Array(6).fill(false)};
+                if(parseInt(value) > 0 && parseInt(value) <= 6){
+                    newEntry.markings[parseInt(value) - 1] = true;
+                }
+
+                floatingTagsAndStatuses.push(newEntry);
                 this.actor.update({
                     'system.floatingTagsAndStatuses': floatingTagsAndStatuses
                 });

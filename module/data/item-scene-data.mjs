@@ -1,4 +1,5 @@
 import MistEngineItemBase from "./base-item.mjs";
+import {buildFloatingTagsAndStatuses} from "./util.mjs";
 
 export default class MistEngineSceneData extends MistEngineItemBase {
     static defineSchema() {
@@ -7,14 +8,7 @@ export default class MistEngineSceneData extends MistEngineItemBase {
     const schema = {};
 
     schema.sceneKey = new fields.StringField({ required: true, blank: true }); 
-    schema.floatingTagsAndStatusesEditable = new fields.BooleanField({ initial: false })
-    schema.floatingTagsAndStatuses = new fields.ArrayField(new fields.SchemaField({
-      name: new fields.StringField({ blank: true }),
-      value: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
-      burned: new fields.BooleanField({ initial: false }),
-      toBurn: new fields.BooleanField({ initial: false }),
-      selected: new fields.BooleanField({ initial: false })
-    }));
+    foundry.utils.mergeObject(schema, buildFloatingTagsAndStatuses());
 
     return schema;
   }

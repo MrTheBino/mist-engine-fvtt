@@ -11,15 +11,15 @@
             {{/if}}
         </h2>
         <div>
-            {{#each system.quintessences as |entry index|}}
+            {{#each quintessences as |entry index|}}
             <div class="form-group flexrow item-powertag-line" >
                 {{#if ../editMode}}
-                    <input type="text" class="character-updatable-quintessence" data-index="{{index}}" value="{{entry}}" placeholder="Name"/>
-                    <a class="themebook-icon" data-action="deleteQuintessence" data-item-index="{{index}}">
-                        <i class='fas fa-trash'></i>
+                    <span class="litm-pc-quintessence" data-tooltip-html="{{{itemTooltipHTML entry}}}">{{entry.name}}</span>
+                    <a class="themebook-icon" data-action="editItem" data-item-id="{{entry.id}}">
+                        <i class='fas fa-pencil'></i>
                     </a>
                 {{else}}
-                    <span class="litm-pc-quintessence">{{entry}}</span>
+                    <span class="litm-pc-quintessence" data-tooltip-html="{{{itemTooltipHTML entry}}}">{{entry.name}}</span>
                 {{/if}}
             </div>
             {{/each}}
