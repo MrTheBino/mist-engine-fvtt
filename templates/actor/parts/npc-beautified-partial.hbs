@@ -11,36 +11,32 @@
                 </div>
                 <div class="npc-limits-list flexcol">
                     {{#each system.limits as |limit|}}
-                    <div class="npc-limit-item">
-                        <div class="npc-limit-name">{{limit.name}} <span class="npc-limit-value-armor"><span class="npc-limit-value">{{limit.value}}</span></span>
-                        </div>
-
+                    <div class="npc-limit-item flexrow">
+                        <div class="npc-limit-name">{{limit.name}}</div>
+                        <span class="npc-limit-value-armor"><span class="npc-limit-value">{{limit.value}}</span></span>
                     </div>
                     {{/each}}
                 </div>
             </div>
 
             <!-- TAGS & STATUSES -->
-            <div class="npc-limits-container">
+            <div class="npc-tags-container">
                 <div class="npc-subtitle-container-c">
                     <div class="npc-subtitle-text">Tags &amp; Statuses</div>
                 </div>
-                <div class="npc-limits-list flexcol">
+                <div class="npc-tags-list flexcol">
                     {{#each system.tags_and_statuses as |tagOrStatus|}}
-                    <div class="npc-limit-item">
-                        <div class="npc-limit-name">
+                    <div class="npc-tag-item">
+                        <div class="npc-tag-name">
                             {{#if (gt tagOrStatus.value 0)}}
                             <span class="npc-tag-status-value">{{tagOrStatus.name}}-{{tagOrStatus.value}}</span>
                             {{else if (tagFilled tagOrStatus.symbol)}}
-                            <span class="npc-tag-status">
-                                <i class="tag-icon-litm-{{tagOrStatus.symbol}}"></i> {{tagOrStatus.name}}
-                            </span>
+                            <i class="tag-icon-litm-{{tagOrStatus.symbol}}"></i>&nbsp;
+                            <span class="npc-tag-with-symbol">{{tagOrStatus.name}}</span>
                             {{else}}
-                            <span class="npc-tag-status-with-symbol">{{tagOrStatus.name}}</span>
+                            <span class="npc-tag">{{tagOrStatus.name}}</span>
                             {{/if}}
-
                         </div>
-
                     </div>
                     {{/each}}
                 </div>
