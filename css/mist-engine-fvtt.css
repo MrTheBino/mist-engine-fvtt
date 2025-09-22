@@ -14,6 +14,30 @@
   cursor: pointer;
 }
 
+.mist-engine.tag {
+  border-radius: 2px;
+  font-weight: bold;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  background: #ece800;
+}
+
+.mist-engine.status {
+  border-radius: 2px;
+  font-weight: bold;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  background: #bccdb0;
+}
+
+.mist-engine.limit {
+  border-radius: 2px;
+  font-weight: bold;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  background: #d1a28e;
+}
+
 .grid,
 .grid-2col {
   display: grid;
@@ -527,11 +551,11 @@
   margin-top: 5px;
 }
 .mist-engine .npc-threats-and-consequences-container .entry-item .tag {
-  background-color: #ECE800;
+  background-color: #ece800;
   border-radius: 4px;
 }
 .mist-engine .npc-threats-and-consequences-container .entry-item .status {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
   border-radius: 4px;
 }
 .mist-engine .fellowship-promises {
@@ -577,11 +601,11 @@
   font-family: Labrada, serif;
 }
 .mist-engine .npc-biography .tag {
-  background-color: #ECE800;
+  background-color: #ece800;
   border-radius: 4px;
 }
 .mist-engine .npc-biography .status {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
   border-radius: 4px;
 }
 .mist-engine .header-right-side {
@@ -794,13 +818,13 @@
   display: inline-block;
 }
 .mist-engine .npc-tag-status {
-  background-color: #ECE800;
+  background-color: #ece800;
 }
 .mist-engine .npc-tag-status-value {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
 }
 .mist-engine .fts-input-name.tag {
-  background-color: #ECE800;
+  background-color: #ece800;
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -808,7 +832,7 @@
   font-weight: bold;
 }
 .mist-engine .fts-input-name.status {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -816,7 +840,7 @@
   font-weight: bold;
 }
 .mist-engine .npc-limit-description .tag {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -824,7 +848,7 @@
   font-weight: bold;
 }
 .mist-engine .npc-limit-description .status {
-  background-color: #ECE800;
+  background-color: #ece800;
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -988,13 +1012,13 @@
   text-align: center;
 }
 .roll-dialog-container .selected-tags-container .tag.positive {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
   border-radius: 5px solid black;
   color: #724a32;
   padding: 2px;
 }
 .roll-dialog-container .selected-tags-container .tag.negative {
-  background-color: #ECB985;
+  background-color: #ecb985;
   border-radius: 5px solid black;
   color: #724a32;
   padding: 2px;
@@ -1016,10 +1040,10 @@
   border-radius: 5px;
 }
 .message-content .selected-tags .tag.positive {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
 }
 .message-content .selected-tags .tag.negative {
-  background-color: #ECE800;
+  background-color: #ece800;
 }
 .message-content .selected-tags .tag.fellowship {
   background-color: #81b1dc;
