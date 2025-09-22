@@ -24,7 +24,7 @@ export class MistEngineItemSheet extends HandlebarsApplicationMixin(ItemSheetV2)
             type: 'item'
         },
         dragDrop: [{
-            dragSelector: '[data-drag="true"]',
+            dragSelector: '[draggable="true"]',
             dropSelector: '.mist-engine.item'
         }],
         window: {

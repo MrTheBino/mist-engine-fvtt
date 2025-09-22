@@ -30,7 +30,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             type: 'character'
         },
         dragDrop: [{
-            dragSelector: '[data-drag="true"]',
+            dragSelector: '[draggable="true"]',
             dropSelector: '.mist-engine.actor'
         }],
         window: {
