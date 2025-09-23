@@ -175,21 +175,33 @@
         margin-left: 25px;
     }
 
+    .entry-header {
+        margin: 0.4em;
+    }
+
     .entry-name {
         font-weight: bold;
+        background-color: $c-beige;
+        padding: 0.2em 0.5em;
+        border-radius: 0.5em;
+        text-transform: uppercase;
+        clip-path: polygon(0 0.2em, 0.3em 0.2em, 0.3em 0, calc(100% - 0.3em) 0, calc(100% - 0.3em) 0.2em, 100% 0.3em, 100% calc(100% - 0.2em), calc(100% - 0.2em) calc(100% - 0.2em), calc(100% - 0.2em) 100%, 0.2em 100%, 0.3em calc(100% - 0.2em), 0 calc(100% - 0.2em));
     }
 
     .entry-item {
-        margin-top: 5px;
-
+        margin-top: 8px;
+        i[class^="tag-icon"]{
+            margin-right: 0.6em;   
+        }
         .tag {
             background-color: $c-tag-yellow;
-            border-radius: 4px;
+            border-radius: 2px;
+            padding: 0 0.2em;
         }
-
         .status {
             background-color: $c-tag-green;
-            border-radius: 4px;
+            border-radius: 2px;
+            padding: 0 0.2em;
         }
     }
 }

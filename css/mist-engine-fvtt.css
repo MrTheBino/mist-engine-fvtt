@@ -562,19 +562,32 @@
 .mist-engine .npc-threats-and-consequences-container .entry-list {
   margin-left: 25px;
 }
+.mist-engine .npc-threats-and-consequences-container .entry-header {
+  margin: 0.4em;
+}
 .mist-engine .npc-threats-and-consequences-container .entry-name {
   font-weight: bold;
+  background-color: #cfbfb5;
+  padding: 0.2em 0.5em;
+  border-radius: 0.5em;
+  text-transform: uppercase;
+  clip-path: polygon(0 0.2em, 0.3em 0.2em, 0.3em 0, calc(100% - 0.3em) 0, calc(100% - 0.3em) 0.2em, 100% 0.3em, 100% calc(100% - 0.2em), calc(100% - 0.2em) calc(100% - 0.2em), calc(100% - 0.2em) 100%, 0.2em 100%, 0.3em calc(100% - 0.2em), 0 calc(100% - 0.2em));
 }
 .mist-engine .npc-threats-and-consequences-container .entry-item {
-  margin-top: 5px;
+  margin-top: 8px;
+}
+.mist-engine .npc-threats-and-consequences-container .entry-item i[class^=tag-icon] {
+  margin-right: 0.6em;
 }
 .mist-engine .npc-threats-and-consequences-container .entry-item .tag {
   background-color: #ece800;
-  border-radius: 4px;
+  border-radius: 2px;
+  padding: 0 0.2em;
 }
 .mist-engine .npc-threats-and-consequences-container .entry-item .status {
   background-color: #bccdb0;
-  border-radius: 4px;
+  border-radius: 2px;
+  padding: 0 0.2em;
 }
 .mist-engine .fellowship-promises {
   margin-left: auto;
@@ -832,8 +845,7 @@
   display: inline-block;
 }
 .mist-engine .tag-icon-litm-consequence {
-  mask-image: url("../assets/icons/icon-litm-consequence.svg");
-  background-color: #000;
+  background-image: url("../assets/icons/icon-litm-consequence.svg");
   background-repeat: no-repeat;
   background-size: contain;
   width: 15px;
