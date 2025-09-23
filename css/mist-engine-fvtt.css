@@ -1140,4 +1140,12 @@
   gap: 5px;
 }
 
+.scene-app-characters .character-name {
+  font-family: Labrada, serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
 /*# sourceMappingURL=mist-engine-fvtt.css.map */

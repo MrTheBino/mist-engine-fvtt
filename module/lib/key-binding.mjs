@@ -45,14 +45,12 @@ function setupKBSzeneTagsApp(){
     hint: "opens the scene tags window",
     editable: [
       {
-        key: "KeyT",       // Taste T
-        modifiers: ["Control"] // zusammen mit Control
+        key: "KeyJ",       
+        modifiers: ["Control"]
       }
     ],
     onDown: () => {
-        console.log("yes");
         MistSceneApp.getInstance().render(true, { focus: true })
-      // hier deine eigentliche Logik
       return true;
     },
     onUp: () => {},

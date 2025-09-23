@@ -1,6 +1,7 @@
 const { ActorSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
+import { MistSceneApp } from '../apps/scene-app.mjs'
 //import { ShadowCityItem } from '../documents/item.mjs'
 
 export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
@@ -129,7 +130,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         }
 
         // floating tags and statuses
-        const updateableFtsStats = this.element.querySelectorAll('.ft-stat-updateable')
+        const updateableFtsStats = this.element.querySelectorAll('.updateable-fts-stat')
         for (const input of updateableFtsStats) {
             input.addEventListener("change", event => this.handleFtStatChanged(event))
         }
@@ -169,6 +170,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
         floatingTagsAndStatuses.splice(index, 1);
         await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        this.sendFloatableTagOrStatusUpdate();
     }
 
     async handleFtStatMinus(event) {
@@ -184,16 +186,17 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             floatingTagsAndStatuses.splice(index, 1);
             await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
         }
+        this.sendFloatableTagOrStatusUpdate();
     }
     async handleFtStatPlus(event) {
         event.preventDefault();
         const index = event.currentTarget.dataset.index;
-        console.log(index);
         const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
         if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
         const currentValue = floatingTagsAndStatuses[index].value || 0;
         foundry.utils.setProperty(floatingTagsAndStatuses[index], 'value', currentValue + 1);
         await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        this.sendFloatableTagOrStatusUpdate();
     }
 
     async handleFtStatChanged(event) {
@@ -206,6 +209,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
         foundry.utils.setProperty(floatingTagsAndStatuses[index], key, value);
         await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        this.sendFloatableTagOrStatusUpdate();
     }
 
     static async #handleToggleFloatingTagOrStatusMarking(event, target) {
@@ -216,6 +220,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
         foundry.utils.setProperty(floatingTagsAndStatuses[index], 'markings.' + target.dataset.markingIndex, !floatingTagsAndStatuses[index].markings[target.dataset.markingIndex]);
         await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        this.sendFloatableTagOrStatusUpdate();
     }
 
     async handleItemStatChanged(event) {
@@ -293,6 +298,8 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 ]
             });
         }
+
+        this.sendFloatableTagOrStatusUpdate();
     }
 
     static async #handleCreateItem(event, target) {
@@ -469,4 +476,22 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         }
 
         return super._onDrop?.(event);
-    }}
+    }
+
+    async sendFloatableTagOrStatusUpdate(){
+        game.socket.emit("system.mist-engine-fvtt", {
+            type: "hook",
+            hook: "floatableTagOrStatusUpdate",
+            data: { 
+                actorId: this.actor.id,
+                actorType: this.actor.type
+            }
+        });
+
+        // socket events are not getting send to the sender itself, so we need to update our own scene app too
+        const instance = MistSceneApp.getInstance();
+        if(instance.rendered){ // only if shown
+            instance.render(true, { focus: true });
+        }
+    }
+}

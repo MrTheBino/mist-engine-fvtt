@@ -11,7 +11,8 @@
       "Biography":"Biography",
       "ActorFloatingTagOrStatus": "Tags & Statuses",
       "SceneApp":{
-        "Header": "Story Tags & Statuses"
+        "Header": "Story Tags & Statuses",
+        "CharactersHeader": "Characters"
       }
     },
     "ROLL_TYPES":{

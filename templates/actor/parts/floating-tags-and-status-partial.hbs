@@ -37,7 +37,7 @@
                 <div class="fts-markings-container">
                     {{#each this.markings as |marking index|}}
                         <span class="fts-input-marking" data-marking-index="{{index}}" data-action="toggleFloatingTagOrStatusMarking" data-index="{{@../index}}">
-                            <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{index}}</i>
+                            <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne index}}</i>
                         </span>
                     {{/each}}
                 </div>

@@ -1,0 +1,41 @@
+<div class="scene-app-characters scrollable">
+    {{#if isGM}}
+    <div>
+        <div class="npc-limits-container">
+            <div class="npc-subtitle-container-c">
+                <div class="npc-subtitle-text">{{localize 'MIST_ENGINE.LABELS.SceneApp.CharactersHeader'}} </div>
+            </div>
+
+            {{#each characters as |character index|}}
+            <div class="character-container">
+                <div class="character-name">{{character.name}}</div>
+                <div class="floating-tags-and-status-entries">
+                    {{#each character.floatingTagsAndStatuses}}
+                    <div class="floating-tag-and-status-entry flexcol">
+                        <div class="flexrow">
+
+                            <div class="fts-input-name {{#if (gt this.value 0)}}status{{else}}tag{{/if}}">
+                                {{this.name}}
+                                {{#if (gt this.value 0)}}
+                                <span class="fts-input-status">{{this.value}}</span>
+                                {{/if}}
+                            </div>
+                        </div>
+                        {{#if (gt this.value 0)}}
+                        <div class="fts-markings-container">
+                            {{#each this.markings as |marking index|}}
+                            <span class="fts-input-marking">
+                                <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne index}}</i>
+                            </span>
+                            {{/each}}
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+</div>

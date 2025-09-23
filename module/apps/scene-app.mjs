@@ -45,7 +45,11 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         },*/
         tags: {
             template: 'systems/mist-engine-fvtt/templates/scene-app/tags.hbs',
-            scrollable: ['scrollable']
+            scrollable: ['']
+        },
+        characters: {
+            template: 'systems/mist-engine-fvtt/templates/scene-app/characters.hbs',
+            scrollable: ['']
         }
     };
 
@@ -85,6 +89,10 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             if (msg?.type === "hook" && msg.hook == "sceneAppUpdated") {
                 MistSceneApp.getInstance().render(true, { focus: true });
             }
+            else if (msg?.type === "hook" && msg.hook == "floatableTagOrStatusUpdate") {
+                console.log(msg.data);
+                MistSceneApp.getInstance().render(true, { focus: true });
+            }
         });
     }
 
@@ -101,11 +109,36 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
-        context.currentSceneDataItem = this.currentSceneDataItem
+        context.currentSceneDataItem = this.currentSceneDataItem;
         context.currentSceneId = this.currentSceneId;
         context.currentSceneName = this.currentSceneName;
         context.isGM = game.user.isGM;
         context.isNotGM = !game.user.isGM;
+        if(game.user.isGM){
+            foundry.utils.mergeObject(context, await this._prepareContextForCharacters());
+        }
+        
+        return context;
+    }
+
+    async _prepareContextForCharacters(){
+        let context= {}
+        const scene = game.scenes.active;
+        const tokens = scene.tokens.contents;
+        const actors = tokens.map(t => t.actor).filter(a => a);
+        const uniqueActors = [...new Set(actors)];
+
+        uniqueActors.forEach(actor => {
+            if(actor.type == "litm-character"){
+                if(!context.characters) context.characters = [];
+                context.characters.push({
+                    id: actor.id,
+                    name: actor.name,
+                    img: actor.img,
+                    floatingTagsAndStatuses: actor.system.floatingTagsAndStatuses || []
+                });
+            }
+        });
         return context;
     }
 

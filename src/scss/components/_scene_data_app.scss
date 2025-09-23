@@ -9,3 +9,13 @@
     gap: 5px;
 }
 
+.scene-app-characters{
+    .character-name{
+        font-family: $font-primary;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+    }
+}
+

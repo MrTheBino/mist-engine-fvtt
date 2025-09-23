@@ -125,6 +125,10 @@ Hooks.once("init", function () {
 /*  Handlebars Helpers                          */
 /* -------------------------------------------- */
 
+Handlebars.registerHelper('indexPlusOne', function (n) {
+  return parseInt(n) + 1;
+});
+
 Handlebars.registerHelper('itemTooltipHTML', function (item) {
   return `<strong>${item.name}</strong><br/>${item.system.description}`;
 });

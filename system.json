@@ -6,6 +6,10 @@
     {
       "name": "MrTheBino",
       "discord": "MrTheBino"
+    },
+    {
+      "name": "3rddogpaul",
+      "discord": "3rddogpaul"
     }
   ],
   "url": "https://github.com/MrTheBino/mist-engine-fvtt",
@@ -20,7 +24,7 @@
       "thumbnail": "systems/mist-engine-fvtt/assets/landingpage.webp"
     }
   ],
-  "version": "0.2.6",
+  "version": "0.2.7",
   "compatibility": {
     "minimum": 13,
     "verified": "13"

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 0.2.7
+
+- Ctrl-J opens the scene tag window
+- added tags and statuses to journals which can be dragged to actors, In a page you can use the following text: [tag] [status-value] [-limit:value] thanks to 3rddogpaul
+- tags & statuses of characters are getting show in the scene tags window. Only if the characters are in the current activated scene
+  
 # 0.2.6
 - quintessences are now items, hover over the quintessence name and you will see the description for easier referencing
 - added markiers for statuses
