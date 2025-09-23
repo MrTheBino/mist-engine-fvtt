@@ -18,6 +18,9 @@
                     <a class="themebook-icon" data-action="editItem" data-item-id="{{entry.id}}">
                         <i class='fas fa-pencil'></i>
                     </a>
+                    <a class="themebook-icon" data-action="deleteItem" data-item-id="{{entry.id}}">
+                        <i class='fas fa-trash'></i>
+                    </a>
                 {{else}}
                     <span class="litm-pc-quintessence" data-tooltip-html="{{{itemTooltipHTML entry}}}">{{entry.name}}</span>
                 {{/if}}
