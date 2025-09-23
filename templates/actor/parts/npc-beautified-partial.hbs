@@ -65,7 +65,8 @@
             <div class="npc-threats-and-consequences-container flexcol">
                 {{#each system.threatsAndConsequences as |threat|}}
                 <div class="entry">
-                    <div class="entry-header"><span class="entry-name">{{threat.name}}</span> {{threat.description}}
+                    <div class="entry-header">
+                        <span class="entry-name">{{threat.name}}</span> {{threat.description}}
                     </div>
                     <div class="entry-list flexcol">
                         {{#each threat.list as |entry|}}
