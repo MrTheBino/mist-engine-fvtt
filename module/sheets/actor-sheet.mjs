@@ -135,14 +135,9 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             input.addEventListener("change", event => this.handleFtStatChanged(event))
         }
 
-        const updateableFtsStatMinus = this.element.querySelectorAll('.updateable-fts-stat-minus')
-        for (const input of updateableFtsStatMinus) {
-            input.addEventListener("click", event => this.handleFtStatMinus(event))
-        }
-
-        const updateableFtsStatPlus = this.element.querySelectorAll('.updateable-fts-stat-plus')
-        for (const input of updateableFtsStatPlus) {
-            input.addEventListener("click", event => this.handleFtStatPlus(event))
+        const ftsTagStatusToggle = this.element.querySelectorAll('.fts-tag-status-toggle')
+        for (const toggle of ftsTagStatusToggle) {
+            toggle.addEventListener("contextmenu", event => this.handleFtTagStatusToggle(event))
         }
 
         const themebookEntryInputs = this.element.querySelectorAll('.themebook-entry-input')
@@ -151,15 +146,23 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         }
     }
 
+    async handleFtTagStatusToggle(event) {
+        event.preventDefault();
+        const index = event.currentTarget.dataset.index;
+        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
+        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
+        const currentIsStatus = floatingTagsAndStatuses[index].isStatus || false;
+        foundry.utils.setProperty(floatingTagsAndStatuses[index], 'isStatus', !currentIsStatus);
+        await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        this.sendFloatableTagOrStatusUpdate();
+    }
+
     static async #handleClickToggleLock(event, target) {
         event.preventDefault();
         const name = target.dataset.name;
         const isLocked = foundry.utils.getProperty(this.actor, name);
         await this.actor.update({ [name]: !isLocked });
 
-        /*console.log("finding: ", `#${name}`);
-        let t = this.actor.sheet.element.querySelector(`${name}`); // .scrollIntoView({ behavior: "instant", block: "center" });
-        console.log(t);*/
         await this.actor.sheet.render({ force: true });
     }
 
@@ -169,32 +172,6 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
         if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
         floatingTagsAndStatuses.splice(index, 1);
-        await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
-        this.sendFloatableTagOrStatusUpdate();
-    }
-
-    async handleFtStatMinus(event) {
-        event.preventDefault();
-        const index = event.currentTarget.dataset.index;
-        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
-        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
-        const currentValue = floatingTagsAndStatuses[index].value || 0;
-        if (currentValue > 1) {
-            foundry.utils.setProperty(floatingTagsAndStatuses[index], 'value', currentValue - 1);
-            await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
-        } else {
-            floatingTagsAndStatuses.splice(index, 1);
-            await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
-        }
-        this.sendFloatableTagOrStatusUpdate();
-    }
-    async handleFtStatPlus(event) {
-        event.preventDefault();
-        const index = event.currentTarget.dataset.index;
-        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
-        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
-        const currentValue = floatingTagsAndStatuses[index].value || 0;
-        foundry.utils.setProperty(floatingTagsAndStatuses[index], 'value', currentValue + 1);
         await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
         this.sendFloatableTagOrStatusUpdate();
     }
@@ -460,6 +437,9 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             let newEntry = { name: data.name, value: parseInt(value), description: "", markings: Array(6).fill(false) };
             if (parseInt(value) > 0 && parseInt(value) <= 6) {
               newEntry.markings[parseInt(value) - 1] = true;
+              newEntry.isStatus = true;
+            }else{
+                newEntry.isStatus = false;
             }
 
             floatingTagsAndStatuses.push(newEntry);

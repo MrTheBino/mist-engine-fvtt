@@ -1,12 +1,13 @@
 # CHANGELOG
 
+# 0.2.9
+- simplified tag & status behaviour in character and npc sheets
+  
 # 0.2.8
-
  - create quintessence fix in the character sheet
  - creating a new status switches directly to edit mode for statuses
 
 # 0.2.7
-
 - Ctrl-J opens the scene tag window
 - added tags and statuses to journals which can be dragged to actors, In a page you can use the following text: [tag] [status-value] [-limit:value] thanks to 3rddogpaul
 - tags & statuses of characters are getting show in the scene tags window. Only if the characters are in the current activated scene

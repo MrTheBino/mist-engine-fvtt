@@ -25,4 +25,13 @@ export default class MistEngineActorBase extends MistEngineDataModel {
     return schema;
   }
 
+  prepareDerivedData() {
+    this.floatingTagsAndStatuses.forEach(tag =>{
+      let max = 0;
+      for(let i = 0; i < tag.markings.length; i++){
+        if(tag.markings[i]) max = i+1;
+      }
+      tag.value = max;
+    });
+  }
 }
