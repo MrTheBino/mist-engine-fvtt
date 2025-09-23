@@ -10,3 +10,27 @@
     cursor: pointer;
   }
 }
+
+.mist-engine.tag {
+  border-radius: 2px;
+  font-weight: bold;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  background: $c-tag-yellow;
+}
+
+.mist-engine.status {
+  border-radius: 2px;
+  font-weight: bold;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  background: $c-tag-green;
+}
+
+.mist-engine.limit {
+  border-radius: 2px;
+  font-weight: bold;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  background: $c-tag-red;
+}

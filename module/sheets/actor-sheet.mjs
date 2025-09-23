@@ -30,7 +30,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             type: 'character'
         },
         dragDrop: [{
-            dragSelector: '[data-drag="true"]',
+            dragSelector: '[draggable="true"]',
             dropSelector: '.mist-engine.actor'
         }],
         window: {
@@ -438,27 +438,34 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
         // Handle different data types
         switch (data.type) {
-            case 'tag':
-            case 'status':
-                const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
-                let value = data.value;
-                if(value == undefined || value == null || isNaN(parseInt(value))){
-                    value = 0;
-                }
+          case 'tag':
+          case 'status':
+            const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
+            let value = data.value;
+            if (value == undefined || value == null || isNaN(parseInt(value))) {
+              value = 0;
+            }
 
-                let newEntry = { name: data.name, value: parseInt(value), description: '', markings:Array(6).fill(false)};
-                if(parseInt(value) > 0 && parseInt(value) <= 6){
-                    newEntry.markings[parseInt(value) - 1] = true;
-                }
+            let newEntry = { name: data.name, value: parseInt(value), description: "", markings: Array(6).fill(false) };
+            if (parseInt(value) > 0 && parseInt(value) <= 6) {
+              newEntry.markings[parseInt(value) - 1] = true;
+            }
 
-                floatingTagsAndStatuses.push(newEntry);
-                this.actor.update({
-                    'system.floatingTagsAndStatuses': floatingTagsAndStatuses
-                });
-                break;
-            default:
-                console.warn('Unknown drop type', data);
-                break;
+            floatingTagsAndStatuses.push(newEntry);
+            this.actor.update({
+              "system.floatingTagsAndStatuses": floatingTagsAndStatuses,
+            });
+            break;
+          case 'limit':
+            const limits = this.actor.system.limits;
+            if (limits) {
+              limits.push({ name: data.name, value: data.value });
+              this.actor.update({ "system.limits": limits });
+            }
+            break;
+          default:
+            console.warn("Unknown drop type", data);
+            break;
         }
 
         return super._onDrop?.(event);

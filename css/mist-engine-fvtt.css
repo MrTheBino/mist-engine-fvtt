@@ -14,6 +14,30 @@
   cursor: pointer;
 }
 
+.mist-engine.tag {
+  border-radius: 2px;
+  font-weight: bold;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  background: #ece800;
+}
+
+.mist-engine.status {
+  border-radius: 2px;
+  font-weight: bold;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  background: #bccdb0;
+}
+
+.mist-engine.limit {
+  border-radius: 2px;
+  font-weight: bold;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  background: #d1a28e;
+}
+
 .grid,
 .grid-2col {
   display: grid;
@@ -473,6 +497,7 @@
   background-size: 100% 100%;
   background-position: center;
   position: relative;
+  left: -0.5em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -484,21 +509,38 @@
   font-size: 1rem;
   color: white;
 }
+.mist-engine .npc-tag-name,
 .mist-engine .npc-limit-name {
   font-family: Labrada, serif;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background: none;
   color: black;
   font-size: 0.9rem;
   clip-path: none;
-  padding: 0;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
   text-transform: uppercase;
+  border-radius: 2px;
 }
+.mist-engine .npc-tag-name span {
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+.mist-engine .npc-limit-name {
+  background: #d1a28e;
+  padding-left: 0.2em;
+  padding-right: 1em;
+}
+.mist-engine .npc-tags-list,
 .mist-engine .npc-limits-list {
   align-items: center;
+}
+.mist-engine .npc-tag-item,
+.mist-engine .npc-limit-item {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
 }
 .mist-engine .trash-icon-container {
   flex-grow: 0.1;
@@ -527,11 +569,11 @@
   margin-top: 5px;
 }
 .mist-engine .npc-threats-and-consequences-container .entry-item .tag {
-  background-color: #ECE800;
+  background-color: #ece800;
   border-radius: 4px;
 }
 .mist-engine .npc-threats-and-consequences-container .entry-item .status {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
   border-radius: 4px;
 }
 .mist-engine .fellowship-promises {
@@ -577,11 +619,11 @@
   font-family: Labrada, serif;
 }
 .mist-engine .npc-biography .tag {
-  background-color: #ECE800;
+  background-color: #ece800;
   border-radius: 4px;
 }
 .mist-engine .npc-biography .status {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
   border-radius: 4px;
 }
 .mist-engine .header-right-side {
@@ -754,7 +796,8 @@
   background-image: url("../assets/icons/icon-burn-scratch-to-burn.svg");
 }
 .mist-engine .tag-icon-litm-adventure {
-  background-image: url("../assets/icons/icon-adventure-litm.svg");
+  mask-image: url("../assets/icons/icon-adventure-litm.svg");
+  background-color: #8f4024;
   background-repeat: no-repeat;
   background-size: contain;
   width: 15px;
@@ -762,15 +805,17 @@
   display: inline-block;
 }
 .mist-engine .tag-icon-litm-origin {
-  background-image: url("../assets/icons/icon-origin-litm.svg");
+  mask-image: url("../assets/icons/icon-origin-litm.svg");
+  background-color: #4d8061;
   background-repeat: no-repeat;
   background-size: contain;
-  width: 15px;
+  width: 10px;
   height: 15px;
   display: inline-block;
 }
 .mist-engine .tag-icon-litm-variable {
-  background-image: url("../assets/icons/icon-variable-litm.svg");
+  mask-image: url("../assets/icons/icon-variable-litm.svg");
+  background-color: #734a33;
   background-repeat: no-repeat;
   background-size: contain;
   width: 15px;
@@ -778,7 +823,8 @@
   display: inline-block;
 }
 .mist-engine .tag-icon-litm-greatness {
-  background-image: url("../assets/icons/icon-greatness-litm.svg");
+  mask-image: url("../assets/icons/icon-greatness-litm.svg");
+  background-color: #5c5c92;
   background-repeat: no-repeat;
   background-size: contain;
   width: 15px;
@@ -786,21 +832,22 @@
   display: inline-block;
 }
 .mist-engine .tag-icon-litm-consequence {
-  background-image: url("../assets/icons/icon-litm-consequence.svg");
+  mask-image: url("../assets/icons/icon-litm-consequence.svg");
+  background-color: #000;
   background-repeat: no-repeat;
   background-size: contain;
   width: 15px;
   height: 15px;
   display: inline-block;
 }
-.mist-engine .npc-tag-status {
-  background-color: #ECE800;
+.mist-engine .npc-tag {
+  background-color: #ece800;
 }
 .mist-engine .npc-tag-status-value {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
 }
 .mist-engine .fts-input-name.tag {
-  background-color: #ECE800;
+  background-color: #ece800;
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -808,7 +855,7 @@
   font-weight: bold;
 }
 .mist-engine .fts-input-name.status {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -816,7 +863,7 @@
   font-weight: bold;
 }
 .mist-engine .npc-limit-description .tag {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -824,7 +871,7 @@
   font-weight: bold;
 }
 .mist-engine .npc-limit-description .status {
-  background-color: #ECE800;
+  background-color: #ece800;
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -988,13 +1035,13 @@
   text-align: center;
 }
 .roll-dialog-container .selected-tags-container .tag.positive {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
   border-radius: 5px solid black;
   color: #724a32;
   padding: 2px;
 }
 .roll-dialog-container .selected-tags-container .tag.negative {
-  background-color: #ECB985;
+  background-color: #ecb985;
   border-radius: 5px solid black;
   color: #724a32;
   padding: 2px;
@@ -1016,10 +1063,10 @@
   border-radius: 5px;
 }
 .message-content .selected-tags .tag.positive {
-  background-color: #BCCDB0;
+  background-color: #bccdb0;
 }
 .message-content .selected-tags .tag.negative {
-  background-color: #ECE800;
+  background-color: #ece800;
 }
 .message-content .selected-tags .tag.fellowship {
   background-color: #81b1dc;

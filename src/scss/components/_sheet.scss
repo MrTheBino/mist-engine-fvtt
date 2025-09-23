@@ -94,14 +94,12 @@
 }
 
 .npc-limit-value-armor {
-
     background-image: url("../assets/icons/icon-litm-limit-shield.svg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center;
-
-
     position: relative;
+    left: -0.5em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -114,23 +112,42 @@
     color: white;
 }
 
+.npc-tag-name,
 .npc-limit-name {
     font-family: $font-primary;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background: none;
     color: black;
     font-size: 0.9rem;
     clip-path: none;
-    padding: 0;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
     text-transform: uppercase;
+    border-radius: 2px;
 }
 
+.npc-tag-name span {
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+}
 
+.npc-limit-name {
+    background: $c-tag-red;   
+    padding-left: 0.2em;
+    padding-right: 1em;
+}
+
+.npc-tags-list,
 .npc-limits-list {
     align-items: center;
+}
+
+.npc-tag-item,
+.npc-limit-item {
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
 }
 
 .trash-icon-container {

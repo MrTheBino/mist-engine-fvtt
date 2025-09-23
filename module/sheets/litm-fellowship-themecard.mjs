@@ -20,7 +20,7 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
             type: 'litm-fellowship-themecard'
         },
         dragDrop: [{
-            dragSelector: '[data-drag="true"]',
+            dragSelector: '[draggable="true"]',
             dropSelector: '.mist-engine.actor'
         }],
         window: {

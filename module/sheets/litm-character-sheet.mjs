@@ -28,7 +28,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             type: 'character'
         },
         dragDrop: [{
-            dragSelector: '[data-drag="true"]',
+            dragSelector: '[draggable="true"]',
             dropSelector: '.mist-engine.actor'
         }],
         window: {

@@ -155,12 +155,12 @@ Handlebars.registerHelper("textWithTags", function (str) {
     if (tag.includes("-")) {
       result = result.replace(
         `[${tag}]`,
-        `<span class="status" data-drag="true" data-type="status" data-name="${name}" data-value="${value}">${tag}</span>`
+        `<span class="draggable status" draggable="true" data-type="status" data-name="${name}" data-value="${value}">${tag}</span>`
       );
     } else {
       result = result.replace(
         `[${tag}]`,
-        `<span class="tag" data-drag="true" data-type="tag" data-name="${name}">${tag}</span>`
+        `<span class="draggable tag" draggable="true" data-type="tag" data-name="${name}">${tag}</span>`
       );
     }
   });
@@ -174,6 +174,45 @@ Handlebars.registerHelper("textWithTags", function (str) {
 Hooks.once("ready", function () {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
+
+  $(document).on(
+    "dragstart",
+    [
+      "mark.mist-engine.tag",
+      "mark.mist-engine.status",
+      "mark.mist-engine.limit",
+    ],
+    (event) => {
+      event.originalEvent.dataTransfer.setData("text/plain", JSON.stringify(event.target.dataset));
+    }
+  );
+});
+
+// Intercept journal page render and replace text tags/statuses/limits with draggale marks
+Hooks.on("renderJournalEntrySheet", (_app, html) => {
+  html.querySelectorAll(".journal-page-content").forEach((page) => {
+    // tags
+    page.innerHTML.matchAll(/\[([\w\s]*)\]/gm).forEach(([tag, name]) => {
+      page.innerHTML = page.innerHTML.replace(
+        tag,
+        `<mark draggable="true" class="draggable mist-engine tag" data-type="tag" data-name="${name}">${name}</mark>`
+      );
+    });
+    // statuses
+    page.innerHTML.matchAll(/\[([\w\s]*)-(\d*)\]/gm).forEach(([status, name, value]) => {
+      page.innerHTML = page.innerHTML.replace(
+        status,
+        `<mark draggable="true" class="draggable mist-engine status" data-type="status" data-name="${name}" data-value="${value}">${name}-${value}</mark>`
+      );
+    });
+    // limits
+    page.innerHTML.matchAll(/\[\-([\w\s]*):(\d*)\]/gm).forEach(([limit, name, value]) => {
+      page.innerHTML = page.innerHTML.replace(
+        limit,
+        `<mark draggable="true" class="draggable mist-engine limit" data-type="limit" data-name="${name}" data-value="${value}">${name}-${value}</mark>`
+      );
+    });
+  });
 });
 
 Hooks.on("preCreateActor", async (actor, data, options, userId) => {
