@@ -2,7 +2,7 @@ const { ActorSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
 import { MistSceneApp } from '../apps/scene-app.mjs'
-//import { ShadowCityItem } from '../documents/item.mjs'
+import { MistEngineItem } from '../documents/item.mjs'
 
 export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
@@ -299,7 +299,11 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             });
         }
 
+        if(this.actor.type == "litm-character"){
+            this.actor.update({"system.floatingTagsAndStatusesEditable": true});
+        }
         this.sendFloatableTagOrStatusUpdate();
+        
     }
 
     static async #handleCreateItem(event, target) {
@@ -328,7 +332,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         delete itemData.system['type'];
 
         // Finally, create the item!
-        //return await ShadowCityItem.create(itemData, { parent: actor });
+        return await MistEngineItem.create(itemData, { parent: actor });
     }
 
     static async #handleEditItem(event, target) {

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 0.2.8
+
+ - create quintessence fix in the character sheet
+ - creating a new status switches directly to edit mode for statuses
+
 # 0.2.7
 
 - Ctrl-J opens the scene tag window
