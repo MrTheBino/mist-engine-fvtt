@@ -48,7 +48,7 @@ export class DiceRollAdapter {
             }
 
             if (item.type === "themebook") {
-                for (let i = 0; i < 7; i++) {
+                for (let i = 0; i < 10; i++) {
                     const powertagPath = `system.powertag${i + 1}.selected`;
                     if (foundry.utils.getProperty(item, powertagPath)) {
                         this.selectedTags.push({ name: item.system[`powertag${i + 1}`].name, positive: true, toBurn: item.system[`powertag${i + 1}`].toBurn, index: i + 1, themebookId: item.id, source: null });
@@ -75,7 +75,7 @@ export class DiceRollAdapter {
             let actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
             console.log(actorFellowshipThemecard);
             if (actorFellowshipThemecard) {
-                for (let i = 0; i < 7; i++) {
+                for (let i = 0; i < 10; i++) {
                     const powertagPath = `system.powertag${i + 1}.selected`;
                     if (foundry.utils.getProperty(actorFellowshipThemecard, powertagPath)) {
                         this.selectedTags.push({ name: actorFellowshipThemecard.system[`powertag${i + 1}`].name, positive: true, toBurn: actorFellowshipThemecard.system[`powertag${i + 1}`].toBurn, index: i + 1, source: "fellowship-themecard" });
@@ -121,7 +121,7 @@ export class DiceRollAdapter {
                 item.update({ 'system.items': backpackItems });
             }
             if (item.type === "themebook") {
-                for (let i = 0; i < 7; i++) {
+                for (let i = 0; i < 10; i++) {
                     const powertagPath = `system.powertag${i + 1}.selected`;
                     item.update({ [powertagPath]: false });
                     const powertagPathToBurn = `system.powertag${i + 1}.toBurn`;
@@ -132,7 +132,7 @@ export class DiceRollAdapter {
                         item.update({ [powertagToBurnPath]: true });//mark as burned
                     }
                 }
-                for (let i = 0; i < 2; i++) {
+                for (let i = 0; i < 4; i++) {
                     const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
                     item.update({ [weaknesstagPath]: false });
                 }
@@ -151,7 +151,7 @@ export class DiceRollAdapter {
         if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
             let actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
             if (actorFellowshipThemecard) {
-                for (let i = 0; i < 7; i++) {
+                for (let i = 0; i < 10; i++) {
                     const powertagPath = `system.powertag${i + 1}.selected`;
                     await actorFellowshipThemecard.update({ [powertagPath]: false });
                     const powertagPathToBurn = `system.powertag${i + 1}.toBurn`;
@@ -162,7 +162,7 @@ export class DiceRollAdapter {
                         await actorFellowshipThemecard.update({ [powertagToBurnPath]: true });//mark as burned
                     }
                 }
-                for (let i = 0; i < 2; i++) {
+                for (let i = 0; i < 4; i++) {
                     const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
                     await actorFellowshipThemecard.update({ [weaknesstagPath]: false });
                 }

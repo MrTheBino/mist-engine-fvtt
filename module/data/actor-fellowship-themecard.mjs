@@ -79,6 +79,33 @@ export default class MistEngineActorFellowshipThemecard extends MistEngineActorB
             selected: new fields.BooleanField({ initial: false })
         });
 
+        schema.powertag8 = new fields.SchemaField({
+            name: new fields.StringField({ blank: true }),
+            question: new fields.StringField({ blank: true }),
+            burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
+            planned: new fields.BooleanField({ initial: false }),
+            selected: new fields.BooleanField({ initial: false })
+        });
+
+        schema.powertag9 = new fields.SchemaField({
+            name: new fields.StringField({ blank: true }),
+            question: new fields.StringField({ blank: true }),
+            burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
+            planned: new fields.BooleanField({ initial: false }),
+            selected: new fields.BooleanField({ initial: false })
+        });
+
+        schema.powertag10 = new fields.SchemaField({
+            name: new fields.StringField({ blank: true }),
+            question: new fields.StringField({ blank: true }),
+            burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
+            planned: new fields.BooleanField({ initial: false }),
+            selected: new fields.BooleanField({ initial: false })
+        });
+
         schema.weaknesstag1 = new fields.SchemaField({
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),
@@ -97,6 +124,23 @@ export default class MistEngineActorFellowshipThemecard extends MistEngineActorB
             selected: new fields.BooleanField({ initial: false })
         });
  
+        schema.weaknesstag3 = new fields.SchemaField({
+            name: new fields.StringField({ blank: true }),
+            question: new fields.StringField({ blank: true }),
+            burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
+            planned: new fields.BooleanField({ initial: false }),
+            selected: new fields.BooleanField({ initial: false })
+        });
+
+        schema.weaknesstag4 = new fields.SchemaField({
+            name: new fields.StringField({ blank: true }),
+            question: new fields.StringField({ blank: true }),
+            burned: new fields.BooleanField({ initial: false }),
+            toBurn: new fields.BooleanField({ initial: false }),
+            planned: new fields.BooleanField({ initial: false }),
+            selected: new fields.BooleanField({ initial: false })
+        });
     return schema;
   }
 }
