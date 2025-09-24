@@ -10,25 +10,27 @@
             <div class="character-container">
                 <div class="character-name">{{character.name}}</div>
                 <div class="floating-tags-and-status-entries">
-                    {{#each character.floatingTagsAndStatuses}}
+                    {{#each character.floatingTagsAndStatuses as |fts ftsIndex|}}
                     <div class="floating-tag-and-status-entry flexcol">
                         <div class="flexrow">
 
-                            <div class="fts-input-name {{#if (gt this.value 0)}}status{{else}}tag{{/if}}">
-                                {{this.name}}
-                                {{#if (gt this.value 0)}}
-                                <span class="fts-input-status">{{this.value}}</span>
-                                {{/if}}
-                            </div>
+                            <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}}"
+                                data-index="{{ftsIndex}}" data-actor-id="{{character.id}}" title="right click to toggle between tag or state">
+                                {{fts.name}}{{#if fts.isStatus}}-{{fts.value}}{{/if}}</div>
+
                         </div>
-                        {{#if (gt this.value 0)}}
+                        {{#if fts.isStatus}}
+
                         <div class="fts-markings-container">
-                            {{#each this.markings as |marking index|}}
-                            <span class="fts-input-marking">
-                                <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne index}}</i>
+                            {{#each fts.markings as |marking index|}}
+                            <span class="fts-input-marking" data-marking-index="{{index}}"
+                                data-action="actorToggleFloatingTagOrStatusMarking" data-actor-id="{{character.id}}" data-index="{{ftsIndex}}">
+                                <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne
+                                    index}}</i>
                             </span>
                             {{/each}}
                         </div>
+
                         {{/if}}
                     </div>
                     {{/each}}

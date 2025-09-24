@@ -14,6 +14,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs',
     'systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs',
     'systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs',
+    'systems/mist-engine-fvtt/templates/shared/litm/themebook-special-improvement-line.hbs',
     'systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs',
     'systems/mist-engine-fvtt/templates/actor/parts/backpack-partial.hbs',
     'systems/mist-engine-fvtt/templates/actor/parts/npc-limits-edit-parial.hbs',
@@ -28,6 +29,8 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs',
     'systems/mist-engine-fvtt/templates/chat/critical-fumble-partial.hbs',
     'systems/mist-engine-fvtt/templates/chat/selected-tags-partial.hbs',
-    'systems/mist-engine-fvtt/templates/actor/litm-fellowship-themecard/themebook.hbs'
+    'systems/mist-engine-fvtt/templates/actor/litm-fellowship-themecard/tab-themebook.hbs',
+    'systems/mist-engine-fvtt/templates/item/parts/themebook-special-improvement-line.hbs',
+    'systems/mist-engine-fvtt/templates/actor/litm-fellowship-themecard/themebook-special-improvements-line.hbs'
   ]);
 };

@@ -133,12 +133,23 @@ Handlebars.registerHelper('itemTooltipHTML', function (item) {
   return `<strong>${item.name}</strong><br/>${item.system.description}`;
 });
 
+Handlebars.registerHelper('tooltipHTML', function (name,desc) {
+  return `<strong>${name}</strong><br/>${desc}`;
+});
+
 // If you need to add Handlebars helpers, here is a useful example:
 Handlebars.registerHelper("toLowerCase", function (str) {
   return str.toLowerCase();
 });
 
 Handlebars.registerHelper("tagFilled", function (str) {
+  if (str && str.trim().length > 0) {
+    return true;
+  }
+  return false;
+});
+
+Handlebars.registerHelper("notEmpty", function (str) {
   if (str && str.trim().length > 0) {
     return true;
   }

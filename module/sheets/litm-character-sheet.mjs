@@ -90,6 +90,9 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
                 this.reloadFellowshipThemecard(false);
                 this.render(true, { focus: true });
             }
+            else if (msg?.type === "hook" && msg.hook == "floatingTagOrStatusUpdated" && msg.data?.actorId === this.actor.id) {
+                this.render(true, { focus: true });
+            }
         });
     }
 
@@ -117,6 +120,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
         if (this.actorFellowshipThemecard != null && this.actorFellowshipThemecard !== false) {
             context.fellowshipThemecard = this.actorFellowshipThemecard.system;
+            context.fellowshipThemecardName = this.actorFellowshipThemecard.name;
         } else {
             console.log("no fellowship themecard assigned, so no context");
         }
@@ -139,7 +143,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let assignedUser = game.users.find(u => u.character?._id === this.actor.id)
         if (assignedUser) {
             let ownedWorldActors = game.actors.filter(a =>
-                a.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
+                a.testUserPermission(assignedUser, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
             );
             ownedWorldActors = ownedWorldActors.filter(a => a.id !== this.actor.id)
             console.log("owned world actors: ", ownedWorldActors);
@@ -327,7 +331,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const target = event.currentTarget;
         let object = this.actor.items.get(target.dataset.itemId);
         const source = target.dataset.source;
-        console.log("source: ", source);
+
         if (source === "fellowship-themecard") {
             if (this.actorFellowshipThemecard) {
                 object = this.actorFellowshipThemecard;

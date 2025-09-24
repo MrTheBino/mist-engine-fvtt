@@ -1,5 +1,12 @@
 # CHANGELOG
 
+# 0.2.10
+- addes special improvements for themebooks and fellowship themecards
+- fixed nasty bug in fellowship themecard assignment
+- started merging general code functions in helper classes
+- scene tags app can now updated the tags & statuses of characters (markings and type)
+- many small bug fixes
+ 
 # 0.2.9
 - simplified tag & status behaviour in character and npc sheets
   

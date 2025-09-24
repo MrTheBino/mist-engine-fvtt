@@ -1,0 +1,10 @@
+<section class="tab {{tabs.special_improvements.id}} {{tabs.special_improvements.cssClass}} scrollable"
+    id="special_improvements" data-tab="{{tabs.special_improvements.id}}"
+    data-group="{{tabs.special_improvements.group}}">
+
+    {{#each system.specialImprovements as |specialImprovement index|}}
+    {{> "systems/mist-engine-fvtt/templates/actor/litm-fellowship-themecard/themebook-special-improvements-line.hbs"
+    index=index
+    imp=specialImprovement}}
+    {{/each}}
+</section>

@@ -1,4 +1,5 @@
 import MistEngineItemBase from "./base-item.mjs";
+import {buildSpecialImprovements} from "./util.mjs";
 
 export default class MistEngineItemThemeBook extends MistEngineItemBase {
 
@@ -142,6 +143,12 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
             planned: new fields.BooleanField({ initial: false }),
             selected: new fields.BooleanField({ initial: false })
         });
+
+        foundry.utils.mergeObject(schema, buildSpecialImprovements());
         return schema;
+    }
+
+    prepareDerivedData() {
+        this.hasSpecialImprovements = this.specialImprovements.some(imp => imp.active);
     }
 }

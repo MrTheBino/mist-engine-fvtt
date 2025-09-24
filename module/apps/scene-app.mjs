@@ -1,4 +1,5 @@
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
+import {FloatingTagAndStatusAdapter} from "../lib/floating-tag-and-status-adapter.mjs";
 
 export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     constructor(options = {}) {
@@ -33,7 +34,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         },
         actions: {
             createFloatingTagOrStatus: this.#handleCreateFloatingTagOrStatus,
-            deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus
+            deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus,
+            actorToggleFloatingTagOrStatusMarking: this.#handleActorToggleFloatingTagOrStatusMarking
         },
     };
 
@@ -82,6 +84,11 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (ftsEditableCheckbox) {
             ftsEditableCheckbox.addEventListener("change", event => this.handleFtsEditableCheckboxChanged(event));
         }
+
+        const actorFtsTagStatusToggle = this.element.querySelectorAll('.fts-tag-status-toggle-actor')
+        for (const toggle of actorFtsTagStatusToggle) {
+            toggle.addEventListener("contextmenu", event => this.handleActorFtTagStatusToggle(event))
+        }
     }
 
     activateSocketListeners() {
@@ -90,7 +97,6 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 MistSceneApp.getInstance().render(true, { focus: true });
             }
             else if (msg?.type === "hook" && msg.hook == "floatableTagOrStatusUpdate") {
-                console.log(msg.data);
                 MistSceneApp.getInstance().render(true, { focus: true });
             }
         });
@@ -142,6 +148,24 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return context;
     }
 
+    async handleActorFtTagStatusToggle(event) {
+        event.preventDefault();
+        const index = event.currentTarget.dataset.index;
+        const actor = game.actors.get(event.currentTarget.dataset.actorId);
+        FloatingTagAndStatusAdapter.handleTagStatusToggle(actor, index);
+        this.sendFloatableTagOrStatusUpdateForActor(actor);
+    }
+
+    // ToDo: this floating and status functions can be encapsulated in a separate class / helper file or whatever to use them in other places as well
+    // no need to replicate all the code, but right now it's fine 
+    static async #handleActorToggleFloatingTagOrStatusMarking(event, target) {
+        event.preventDefault();
+        const index = target.dataset.index;
+        const actor = game.actors.get(target.dataset.actorId);
+        FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(actor, index, target.dataset.markingIndex);
+        this.sendFloatableTagOrStatusUpdateForActor(actor);
+    }
+    
     async handleFtsEditableCheckboxChanged(event) {
         event.preventDefault();
         const checked = event.currentTarget.checked;
@@ -259,6 +283,17 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.currentSceneId = newScene.id;
         this.currentSceneName = newScene.name;
         this.findOrCreateSceneDataItem();
+        this.sendUpdateHookEvent();
+    }
+
+    sendFloatableTagOrStatusUpdateForActor(actor){
+        if(game.user.isGM){
+            game.socket.emit("system.mist-engine-fvtt", {
+            type: "hook",
+            hook: "floatableTagOrStatusUpdateViaSceneApp",
+            data: { actorId: actor.id }
+            });
+        }
         this.sendUpdateHookEvent();
     }
 }

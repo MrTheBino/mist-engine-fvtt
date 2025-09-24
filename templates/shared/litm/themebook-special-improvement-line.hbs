@@ -1,0 +1,15 @@
+<div class="item-special-improvement-line flexrow">
+    {{#if editMode}}
+    <div>
+        <input type="checkbox" class="themebook-entry-input" data-array="system.specialImprovements" data-item-id="{{id}}" data-index="{{index}}" data-source="{{source}}" data-key="active"
+        {{#if specialImprovement.active}}checked{{/if}}>
+        <span class="special-improvement-label"
+        data-tooltip="{{{tooltipHTML specialImprovement.name specialImprovement.description}}}">{{specialImprovement.name}}</span>
+    </div>
+    {{else}}
+        {{#if specialImprovement.active}}
+        <span class="special-improvement-label" data-tooltip="{{{tooltipHTML specialImprovement.name specialImprovement.description}}}">{{specialImprovement.name}}</span>
+        {{/if}}
+    {{/if}}
+
+</div>

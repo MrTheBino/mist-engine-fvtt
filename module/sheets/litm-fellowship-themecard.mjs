@@ -8,8 +8,8 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
         classes: ['mist-engine', 'sheet', 'actor'],
         tag: 'form',
         position: {
-            width: 400,
-            height: 750
+            width: 500,
+            height: 850
         },
         actions: {
         },
@@ -33,11 +33,22 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
     static PARTS = {
         header: {
             id: 'header',
-            template: 'systems/mist-engine-fvtt/templates/actor/parts/fellowship-themecard-header.hbs'
+            template: 'systems/mist-engine-fvtt/templates/actor/parts/fellowship-themecard-header.hbs',
+            scrollable: ['']
+        },
+        tabs: {
+            id: 'tabs',
+            template: 'templates/generic/tab-navigation.hbs'
         },
         themebook:{
           id: 'themebook',
-          template: 'systems/mist-engine-fvtt/templates/actor/litm-fellowship-themecard/themebook.hbs'
+          template: 'systems/mist-engine-fvtt/templates/actor/litm-fellowship-themecard/tab-themebook.hbs',
+          scrollable: ['']
+        },
+        special_improvements:{
+          id: 'special_improvements',
+          template: 'systems/mist-engine-fvtt/templates/actor/litm-fellowship-themecard/tab-special-improvements.hbs',
+          scrollable: ['']
         }
     }
 
@@ -49,8 +60,10 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
         sheet: { // this is the group name
             tabs:
                 [
+                    { id: 'themebook', group: 'sheet', label: 'Themebook' },
+                    { id: 'special_improvements', group: 'sheet', label: 'Special Improvements' },
                 ],
-            initial: 'npc'
+            initial: 'themebook'
         }
     }
 

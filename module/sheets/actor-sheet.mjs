@@ -3,6 +3,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
 import { MistSceneApp } from '../apps/scene-app.mjs'
 import { MistEngineItem } from '../documents/item.mjs'
+import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adapter.mjs";
 
 export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
@@ -149,11 +150,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     async handleFtTagStatusToggle(event) {
         event.preventDefault();
         const index = event.currentTarget.dataset.index;
-        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
-        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
-        const currentIsStatus = floatingTagsAndStatuses[index].isStatus || false;
-        foundry.utils.setProperty(floatingTagsAndStatuses[index], 'isStatus', !currentIsStatus);
-        await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        FloatingTagAndStatusAdapter.handleTagStatusToggle(this.actor, index);
         this.sendFloatableTagOrStatusUpdate();
     }
 
@@ -169,10 +166,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     static async #handleDeleteFloatingTagOrStatus(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
-        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
-        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
-        floatingTagsAndStatuses.splice(index, 1);
-        await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(this.actor, index);
         this.sendFloatableTagOrStatusUpdate();
     }
 
@@ -181,22 +175,15 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const index = event.currentTarget.dataset.ftIndex;
         const key = event.currentTarget.dataset.ftKey;
         const value = event.currentTarget.value;
-        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
-        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
-
-        foundry.utils.setProperty(floatingTagsAndStatuses[index], key, value);
-        await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        FloatingTagAndStatusAdapter.handleFtStatChanged(this.actor, index, key, value);
         this.sendFloatableTagOrStatusUpdate();
     }
 
     static async #handleToggleFloatingTagOrStatusMarking(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
-        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
-        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
+        FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(this.actor, index, target.dataset.markingIndex);
 
-        foundry.utils.setProperty(floatingTagsAndStatuses[index], 'markings.' + target.dataset.markingIndex, !floatingTagsAndStatuses[index].markings[target.dataset.markingIndex]);
-        await this.actor.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
         this.sendFloatableTagOrStatusUpdate();
     }
 
@@ -221,8 +208,8 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 item.update({ [event.target.dataset.itemStat]: event.target.value });
             }
         }
-        else if(source === "fellowship-themecard"){
-            if(this.actorFellowshipThemecard){
+        else if (source === "fellowship-themecard") {
+            if (this.actorFellowshipThemecard) {
                 this.actorFellowshipThemecard.update({ [event.target.dataset.key]: event.target.value });
             }
         }
@@ -233,7 +220,6 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         let item = null;
         const source = event.target.dataset.source;
 
-
         // Update items like Themebooks
         if (source == null || source == undefined || source.trim().length === 0) {
             if (event.currentTarget.dataset.itemId == undefined) {
@@ -243,16 +229,58 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 item = this.actor.items.get(event.currentTarget.dataset.itemId);
             }
 
-            if (event.target.type === 'checkbox') {
+            if (event.currentTarget.dataset.array !== undefined) { // update for arrays
+                let arrayName = event.currentTarget.dataset.array;
+                let array = foundry.utils.getProperty(item, event.currentTarget.dataset.array);
+                let index = parseInt(event.currentTarget.dataset.index);
+                let key = event.currentTarget.dataset.key;
+                if (isNaN(index) || index < 0 || index >= array.length) {
+                    console.error("Invalid index for array update", event.currentTarget.dataset);
+                    return;
+                }
+
+                if (event.target.type === 'checkbox') {
+                    let keyToUpdate = arrayName + `.${index}.` + key;
+                    foundry.utils.setProperty(item, keyToUpdate, event.target.checked);
+                    item.update({ [arrayName]: array });
+                } else {
+                    foundry.utils.setProperty(item, arrayName + "." + key, event.target.value);
+                    item.update({ [arrayName]: array });
+                }
+            }
+            // update for hashmaps
+            else if (event.target.type === 'checkbox') {
                 item.update({ [event.target.dataset.key]: event.target.checked });
             } else {
-                console.log("updating ", event.target.dataset.key, " to ", event.target.value);
                 item.update({ [event.target.dataset.key]: event.target.value });
             }
-        }   
-        else if(source === "fellowship-themecard"){
-            if(this.actorFellowshipThemecard){
-                this.actorFellowshipThemecard.update({ [event.target.dataset.key]: event.target.value });
+        }
+        else if (source === "fellowship-themecard") {
+            if (this.actorFellowshipThemecard) {
+                if (event.currentTarget.dataset.array !== undefined) { // update for arrays
+                    let arrayName = event.currentTarget.dataset.array;
+                    
+                    let index = parseInt(event.currentTarget.dataset.index);
+                    let key = event.currentTarget.dataset.key;
+                    let array = foundry.utils.getProperty(this.actorFellowshipThemecard, arrayName);
+                    
+                    if (isNaN(index) || index < 0 || index >= array.length) {
+                        console.error("Invalid index for array update", event.currentTarget.dataset);
+                        return;
+                    }
+
+                    if (event.target.type === 'checkbox') {
+                        let keyToUpdate = arrayName + `.${index}.` + key;
+                        foundry.utils.setProperty(this.actorFellowshipThemecard, keyToUpdate, event.target.checked);
+                        this.actorFellowshipThemecard.update({ [arrayName]: array });
+                    } else {
+                        foundry.utils.setProperty(this.actorFellowshipThemecard, arrayName + "." + key, event.target.value);
+                        this.actorFellowshipThemecard.update({ [arrayName]: array });
+                    }
+                } else {
+                    this.actorFellowshipThemecard.update({ [event.target.dataset.key]: event.target.value });
+
+                }
             }
         }
     }
@@ -265,7 +293,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             await this.actor.update({
                 "system.floatingTagsAndStatuses": [
                     ...floatingTagsAndStatuses,
-                    { name: "New Floating Tag", description: "", value: 0,markings: Array(6).fill(false) }
+                    { name: "New Floating Tag", description: "", value: 0, markings: Array(6).fill(false) }
                 ]
             });
         } else {
@@ -276,11 +304,11 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             });
         }
 
-        if(this.actor.type == "litm-character"){
-            this.actor.update({"system.floatingTagsAndStatusesEditable": true});
+        if (this.actor.type == "litm-character") {
+            this.actor.update({ "system.floatingTagsAndStatusesEditable": true });
         }
         this.sendFloatableTagOrStatusUpdate();
-        
+
     }
 
     static async #handleCreateItem(event, target) {
@@ -426,47 +454,47 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
         // Handle different data types
         switch (data.type) {
-          case 'tag':
-          case 'status':
-            const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
-            let value = data.value;
-            if (value == undefined || value == null || isNaN(parseInt(value))) {
-              value = 0;
-            }
+            case 'tag':
+            case 'status':
+                const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
+                let value = data.value;
+                if (value == undefined || value == null || isNaN(parseInt(value))) {
+                    value = 0;
+                }
 
-            let newEntry = { name: data.name, value: parseInt(value), description: "", markings: Array(6).fill(false) };
-            if (parseInt(value) > 0 && parseInt(value) <= 6) {
-              newEntry.markings[parseInt(value) - 1] = true;
-              newEntry.isStatus = true;
-            }else{
-                newEntry.isStatus = false;
-            }
+                let newEntry = { name: data.name, value: parseInt(value), description: "", markings: Array(6).fill(false) };
+                if (parseInt(value) > 0 && parseInt(value) <= 6) {
+                    newEntry.markings[parseInt(value) - 1] = true;
+                    newEntry.isStatus = true;
+                } else {
+                    newEntry.isStatus = false;
+                }
 
-            floatingTagsAndStatuses.push(newEntry);
-            this.actor.update({
-              "system.floatingTagsAndStatuses": floatingTagsAndStatuses,
-            });
-            break;
-          case 'limit':
-            const limits = this.actor.system.limits;
-            if (limits) {
-              limits.push({ name: data.name, value: data.value });
-              this.actor.update({ "system.limits": limits });
-            }
-            break;
-          default:
-            console.warn("Unknown drop type", data);
-            break;
+                floatingTagsAndStatuses.push(newEntry);
+                this.actor.update({
+                    "system.floatingTagsAndStatuses": floatingTagsAndStatuses,
+                });
+                break;
+            case 'limit':
+                const limits = this.actor.system.limits;
+                if (limits) {
+                    limits.push({ name: data.name, value: data.value });
+                    this.actor.update({ "system.limits": limits });
+                }
+                break;
+            default:
+                console.warn("Unknown drop type", data);
+                break;
         }
 
         return super._onDrop?.(event);
     }
 
-    async sendFloatableTagOrStatusUpdate(){
+    async sendFloatableTagOrStatusUpdate() {
         game.socket.emit("system.mist-engine-fvtt", {
             type: "hook",
             hook: "floatableTagOrStatusUpdate",
-            data: { 
+            data: {
                 actorId: this.actor.id,
                 actorType: this.actor.type
             }
@@ -474,7 +502,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
         // socket events are not getting send to the sender itself, so we need to update our own scene app too
         const instance = MistSceneApp.getInstance();
-        if(instance.rendered){ // only if shown
+        if (instance.rendered) { // only if shown
             instance.render(true, { focus: true });
         }
     }

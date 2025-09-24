@@ -42,6 +42,17 @@
             weaknesstag=themebook.system.weaknesstag3 editMode=editMode}}
             {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=4 id=themebook._id
             weaknesstag=themebook.system.weaknesstag4 editMode=editMode}}
+
+            {{#if themebook.system.hasSpecialImprovements}}
+                <h3 class="special-improvement-section-label">Special Improvements</h3>
+            {{/if}}
+            {{#each themebook.system.specialImprovements as |specialImprovement index|}}
+                {{#if (notEmpty specialImprovement.name)}}
+                    {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-special-improvement-line.hbs" index=index id=../themebook._id
+                    specialImprovement=specialImprovement editMode=../editMode}}
+                {{/if}}
+            {{/each}}
+            
         </div>
         <div class="quest-container">
             {{#if editMode}}

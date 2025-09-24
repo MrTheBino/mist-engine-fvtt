@@ -73,7 +73,6 @@ export class DiceRollAdapter {
         // fellowship themecard tags
         if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
             let actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
-            console.log(actorFellowshipThemecard);
             if (actorFellowshipThemecard) {
                 for (let i = 0; i < 10; i++) {
                     const powertagPath = `system.powertag${i + 1}.selected`;

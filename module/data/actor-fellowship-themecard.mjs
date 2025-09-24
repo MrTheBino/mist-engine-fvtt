@@ -1,15 +1,16 @@
 import MistEngineActorBase from "./base-actor.mjs";
+import { buildSpecialImprovements } from "./util.mjs";
 
 export default class MistEngineActorFellowshipThemecard extends MistEngineActorBase {
 
-  static defineSchema() {
-    const fields = foundry.data.fields;
-    const requiredInteger = { required: true, nullable: false, integer: true };
-    const schema = super.defineSchema();
+    static defineSchema() {
+        const fields = foundry.data.fields;
+        const requiredInteger = { required: true, nullable: false, integer: true };
+        const schema = super.defineSchema();
 
-    schema.notes = new fields.StringField({ blank: true, default: "" });
+        schema.notes = new fields.StringField({ blank: true, default: "" });
 
-    schema.type = new fields.StringField({ blank: true });
+        schema.type = new fields.StringField({ blank: true });
         schema.quest = new fields.StringField({ blank: true });
 
         schema.abandon = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
@@ -123,7 +124,7 @@ export default class MistEngineActorFellowshipThemecard extends MistEngineActorB
             planned: new fields.BooleanField({ initial: false }),
             selected: new fields.BooleanField({ initial: false })
         });
- 
+
         schema.weaknesstag3 = new fields.SchemaField({
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),
@@ -141,6 +142,12 @@ export default class MistEngineActorFellowshipThemecard extends MistEngineActorB
             planned: new fields.BooleanField({ initial: false }),
             selected: new fields.BooleanField({ initial: false })
         });
-    return schema;
-  }
+
+        foundry.utils.mergeObject(schema, buildSpecialImprovements());
+        return schema;
+    }
+
+    prepareDerivedData() {
+        this.hasSpecialImprovements = this.specialImprovements.some(imp => imp.active);
+    }
 }

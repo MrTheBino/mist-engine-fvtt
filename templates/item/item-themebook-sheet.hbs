@@ -22,4 +22,9 @@
 
     {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-weakness-line.hbs" index=1 weakness=system.weaknesstag1}}
     {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-weakness-line.hbs" index=2 weakness=system.weaknesstag2}}
+
+    <h2>Special Improvements</h2>
+    {{#each system.specialImprovements as |imp index|}}
+        {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-special-improvement-line.hbs" index=index imp=imp}}
+    {{/each}}
 </section>

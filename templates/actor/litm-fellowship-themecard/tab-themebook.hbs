@@ -1,0 +1,47 @@
+<section class="tab {{tabs.themebook.id}} {{tabs.themebook.cssClass}} scrollable"
+    id="themebook" data-tab="{{tabs.themebook.id}}"
+    data-group="{{tabs.themebook.group}}">
+    <div class="themebook-container">
+        <div class="themebook-style fellowship flexcol">
+            <div class="powertags-container">
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=1 
+                powertag=system.powertag1 editMode=true firstTag=true}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=2 
+                powertag=system.powertag2 editMode=true}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=3 
+                powertag=system.powertag3 editMode=true}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=4 
+                powertag=system.powertag4 editMode=true}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=5 
+                powertag=system.powertag5 editMode=true}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=6 
+                powertag=system.powertag6 editMode=true}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=7 
+                powertag=system.powertag7 editMode=true}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=8 
+                powertag=system.powertag8 editMode=true}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=9 
+                powertag=system.powertag9 editMode=true}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=10 
+                powertag=system.powertag10 editMode=true}}
+
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=1 
+                weaknesstag=system.weaknesstag1 editMode=true}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=2 
+                weaknesstag=system.weaknesstag2 editMode=true}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=3 
+                weaknesstag=system.weaknesstag3 editMode=true}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=4 
+                weaknesstag=system.weaknesstag4 editMode=true}}
+            </div>
+            <div class="quest-container">
+                    <textarea class="themebook-entry-input quest-textarea" data-item-id={{themebook._id}} data-item-stat="system.quest" placeholder="Quest/Goal">{{themebook.system.quest}}</textarea>
+            </div>
+            <div class="development-container flexrow">
+                {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Abandon" id=themebook._id key="system.abandon" value=themebook.system.abandon}}
+                {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Improve" id=themebook._id key="system.improve" value=themebook.system.improve}}
+                {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Milestone" id=themebook._id key="system.milestone" value=themebook.system.milestone}}
+            </div>
+        </div>
+    </div>
+</section>

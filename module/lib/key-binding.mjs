@@ -30,7 +30,6 @@ function surroundSelection(ctrl, prefix, suffix = prefix) {
 
 function withFocusedTextControl(action) {
   const ctrl = getActiveTextControl();
-  console.log(ctrl);
   if (!ctrl) {
     ui.notifications?.warn("Plaziere den Cursor in ein Textfeld/Textbereich.");
     return false;

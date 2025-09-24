@@ -1,7 +1,12 @@
 <div class="themebook-container" data-id="{{id}}">
     {{#if fellowshipThemecard}}
     <div class="themebook-style litm-fellowship-themecard flexcol">
-        <h2 class="theme-name">Fellowship
+        <h2 class="theme-name">
+            {{#if (notEmpty fellowshipThemecardName)}}
+                {{fellowshipThemecardName}}
+            {{else}}
+                Fellowship
+            {{/if}}
         </h2>
         <div class="powertags-container">
             {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=1
@@ -33,6 +38,16 @@
             weaknesstag=fellowshipThemecard.weaknesstag3 source='fellowship-themecard' editMode=editMode}}
             {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=4
             weaknesstag=fellowshipThemecard.weaknesstag4 source='fellowship-themecard' editMode=editMode}}
+
+            {{#if fellowshipThemecard.hasSpecialImprovements}}
+                <h3 class="special-improvement-section-label">Special Improvements</h3>
+            {{/if}}
+            {{#each fellowshipThemecard.specialImprovements as |specialImprovement index|}}
+                {{#if (notEmpty specialImprovement.name)}}
+                    {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-special-improvement-line.hbs" index=index source='fellowship-themecard'
+                    specialImprovement=specialImprovement editMode=../editMode}}
+                {{/if}}
+            {{/each}}
         </div>
         <div class="quest-container">
             {{#if editMode}}
