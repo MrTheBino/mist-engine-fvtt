@@ -1,32 +1,37 @@
 <div>
-    <header class="sheet-header {{#if system.editMode}}edit-mode{{else}}stylized-background{{/if}}">
+    <header class="sheet-header">
         <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"
             height="120" />
-        <div class="flexcol">
+        <div class="header-fields">
             {{#if system.editMode}}
-            <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+            {{!-- Edit Mode Layout --}}
+            <div class="title">
+                <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+                <div class="flexcol">
+                    <label for="system.difficulty">{{localize "MIST_ENGINE.LABELS.Npc.difficulty"}}</label>
+                    <input type="number" name="system.difficulty" value="{{system.difficulty}}" min="0" max="5" />
+                </div>
+            </div>
             <div class="short-description"><input name="system.shortDescription" type="text"
                     value="{{system.shortDescription}}" placeholder="Short Description" /></div>
             {{else}}
-            <h1 class="charname">{{actor.name}}</h1>
-            <div class="short-description">{{system.shortDescription}}</div>
-            {{/if}}
-
-            <div>
-                {{#if system.editMode}}
-                Difficulty <input type="number" name="system.difficulty" value="{{system.difficulty}}" min="0"
-                    style="width: 50px;" />
-                {{else}}
+            {{!-- Normal Layout --}}
+            <div class="title">
+                <h1 class="charname">{{actor.name}}</h1>
                 <div class="difficulty-icons">
                     {{#times system.difficulty}}
-                    <img src="systems/mist-engine-fvtt/assets/icons/icon-litm-difficulty.webp" title="Difficulty"
-                        height="26px" />
+                    <img src="systems/mist-engine-fvtt/assets/icons/icon-litm-difficulty.webp"
+                        title="{{localize 'SHEET.npc.label.difficulty'}}" />
                     {{/times}}
                 </div>
-                {{/if}}
-                {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs' isLocked=system.editMode name="system.editMode" title="Toggle Edit Mode"}}
             </div>
+            <div class="short-description">{{system.shortDescription}}</div>
+            {{/if}}
         </div>
-
+        {{!-- Edit Mode Lock --}}
+        <div style="float: right">
+            {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs' isLocked=system.editMode
+            name="system.editMode" title="Toggle Edit Mode"}}
+        </div>
     </header>
 </div>

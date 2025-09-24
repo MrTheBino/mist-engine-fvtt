@@ -18,13 +18,14 @@
   }
 
   .header-fields {
+    width: 100%;
     flex: 1;
+    gap: 0.5rem;
   }
 
   h1.charname {
     height: 50px;
     padding: 0px;
-    margin: 5px 0;
     border-bottom: 0;
     input {
       width: 100%;
@@ -34,14 +35,8 @@
   }
 }
 
-.sheet-tabs {
-  flex: 0;
-}
-
-.sheet-body,
-.sheet-body .tab,
-.sheet-body .tab .editor {
-  height: 100%;
+.tab {
+  flex-grow: 1;
 }
 
 .tox {
@@ -56,5 +51,17 @@
 
 .form-group {
   margin-bottom: 5px;
-   gap: 5px;
+  gap: 5px;
+}
+
+.table-group {
+  display: table;
+  width: 100%;
+  .table-row {
+    display: table-row;
+    .table-cell {
+      display: table-cell;
+      padding: 2px 3px;
+    }
+  }
 }

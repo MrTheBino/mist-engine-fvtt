@@ -1,35 +1,47 @@
-<div class="floating-tags-and-status-container">
+<div class="floating-tags-and-status-container container-card-with-border">
 
     <div class="npc-subtitle-container-c">
         <div class="npc-subtitle-text">
-            {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs' isLocked=system.floatingTagsAndStatusesEditable name="system.floatingTagsAndStatusesEditable" title="Toggle Edit Mode"}}
-            {{localize 'MIST_ENGINE.LABELS.ActorFloatingTagOrStatus'}}
-            <a data-action="createFloatingTagOrStatus"> <i class='fas fa-plus'></i></a>
+            {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs'
+            isLocked=system.floatingTagsAndStatusesEditable name="system.floatingTagsAndStatusesEditable"
+            title="Toggle
+            Edit Mode"}}
+            {{localize 'MIST_ENGINE.LABELS.Actor.FloatingTagOrStatus'}}
+            <a data-action="createFloatingTagOrStatus"><i class='fas fa-plus'></i></a>
         </div>
     </div>
 
     <div class="floating-tags-and-status-entries">
         {{#each system.floatingTagsAndStatuses}}
         <div class="floating-tag-and-status-entry flexcol">
-            <div class="flexrow">
-                {{#if ../system.floatingTagsAndStatusesEditable}}
-                    <input type="text" class="fts-input-name updateable-fts-stat" data-index="{{@index}}" data-key="name" value="{{this.name}}" name="system.floatingTagsAndStatuses.{{@index}}.name" placeholder="Tag/Status Name">
-                    {{#if this.isStatus}}<input type="text" class="fts-input-value" value="{{this.value}}" disabled>{{/if}}
-                    <a data-action="deleteFloatingTagOrStatus" data-index="{{@index}}"><i class='fas fa-trash'></i></a>
+            {{!-- Tag/Status --}}
+            <div class="fts-tag-container">
+                {{#if @root.system.floatingTagsAndStatusesEditable}}
+                <input type="text" class="fts-input-name updateable-fts-stat" data-index="{{@index}}" data-key="name"
+                    value="{{this.name}}" name="system.floatingTagsAndStatuses.{{@index}}.name"
+                    placeholder="{{localize 'MIST_ENGINE.LABELS.Item.TagStatusName'}}">
+                {{#if this.isStatus}}
+                <input type="text" class="fts-input-value" value="{{this.value}}" disabled>
+                {{/if}}
+                <a data-action="deleteFloatingTagOrStatus" data-index="{{@index}}"><i class='fas fa-trash'></i></a>
                 {{else}}
-                    <div class="fts-input-name fts-tag-status-toggle {{#if this.isStatus}}status{{else}}tag{{/if}}" data-index="{{@index}}" title="right click to toggle between tag or state">{{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}</div>
+                <div class="fts-input-name fts-tag-status-toggle {{#if this.isStatus}}status{{else}}tag{{/if}}"
+                    data-index="{{@index}}" title="right click to toggle between tag or state">{{this.name}}{{#if
+                    this.isStatus}}-{{this.value}}{{/if}}</div>
                 {{/if}}
             </div>
+            {{!-- Status Markers --}}
             {{#if this.isStatus}}
-                {{#if (eq ../system.floatingTagsAndStatusesEditable false)}}
-                    <div class="fts-markings-container">
-                        {{#each this.markings as |marking index|}}
-                            <span class="fts-input-marking" data-marking-index="{{index}}" data-action="toggleFloatingTagOrStatusMarking" data-index="{{@../index}}">
-                                <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne index}}</i>
-                            </span>
-                        {{/each}}
-                    </div>
-                {{/if}}
+            {{#unless @root.system.floatingTagsAndStatusesEditable}}
+            <div class="fts-markings-container">
+                {{#each this.markings as |marking index|}}
+                <span class="fts-input-marking" data-marking-index="{{index}}"
+                    data-action="toggleFloatingTagOrStatusMarking" data-index="{{@../index}}">
+                    <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne index}}</i>
+                </span>
+                {{/each}}
+            </div>
+            {{/unless}}
             {{/if}}
         </div>
         {{/each}}
