@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 0.2.11
+- added more powertags & weakness fields to the themebooks
+  
 # 0.2.10
 - addes special improvements for themebooks and fellowship themecards
 - fixed nasty bug in fellowship themecard assignment
