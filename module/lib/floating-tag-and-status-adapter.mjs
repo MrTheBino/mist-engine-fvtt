@@ -40,7 +40,12 @@ export class FloatingTagAndStatusAdapter {
 
     static async handleToggleFloatingTagOrStatusMarking(objectToUpdate,arrayIndex,markingIndex){
         const floatingTagsAndStatuses = objectToUpdate.system.floatingTagsAndStatuses;
-        if (!floatingTagsAndStatuses || arrayIndex >= floatingTagsAndStatuses.length) return;
+        
+        if (!floatingTagsAndStatuses || arrayIndex >= floatingTagsAndStatuses.length){
+            console.log("FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking: called with", {objectToUpdate,arrayIndex,markingIndex,floatingTagsAndStatuses});
+            console.log("FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking: invalid array index");
+            return;
+        }
 
         foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'markings.' + markingIndex, !floatingTagsAndStatuses[arrayIndex].markings[markingIndex]);
         await objectToUpdate.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });

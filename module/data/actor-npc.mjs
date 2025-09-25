@@ -46,6 +46,6 @@ export default class MistEngineNPC extends MistEngineActorBase {
   }
 
   prepareDerivedData() {
-
+    super.prepareDerivedData();
   }
 }

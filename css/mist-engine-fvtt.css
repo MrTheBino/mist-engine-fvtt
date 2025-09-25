@@ -543,6 +543,8 @@
 .mist-engine .npc-limit-item {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
+  color: #724a32;
+  font-family: Labrada, serif;
 }
 .mist-engine .trash-icon-container {
   flex-grow: 0;
@@ -557,6 +559,7 @@
 }
 .mist-engine .npc-threats-and-consequences-container {
   font-family: Labrada, serif;
+  color: #724a32;
 }
 .mist-engine .npc-threats-and-consequences-container .entry-name {
   font-weight: bold;
