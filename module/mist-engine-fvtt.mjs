@@ -170,12 +170,12 @@ Handlebars.registerHelper("textWithTags", function (str) {
     if (tag.includes("-")) {
       result = result.replace(
         `[${tag}]`,
-        `<span class="draggable status" draggable="true" data-type="status" data-name="${name}" data-value="${value}">${tag}</span>`
+        `<mark class="draggable status" draggable="true" data-type="status" data-name="${name}" data-value="${value}">${tag}</mark>`
       );
     } else {
       result = result.replace(
         `[${tag}]`,
-        `<span class="draggable tag" draggable="true" data-type="tag" data-name="${name}">${tag}</span>`
+        `<mark class="draggable tag" draggable="true" data-type="tag" data-name="${name}">${tag}</mark>`
       );
     }
   });

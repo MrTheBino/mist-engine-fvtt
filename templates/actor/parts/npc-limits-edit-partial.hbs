@@ -1,0 +1,28 @@
+<fieldset>
+    <legend>NPC Limits <a data-action="createLimit"><i class='fas fa-plus'></i></a></legend>
+    <div class="table-group">
+        <div class="table-row">
+            <div class="table-cell">{{localize "MIST_ENGINE.LABELS.Name"}}</div>
+            <div class="table-cell">{{localize "MIST_ENGINE.LABELS.Value"}}</div>
+        </div>
+        {{#each system.limits as |limit index|}}
+        <div class="table-row">
+            <div class="table-cell">
+                <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="limits"
+                    data-key="name" value="{{limit.name}}" placeholder="Name" />
+            </div>
+            <div class="table-cell">
+                <input type="number" class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="limits"
+                    data-key="value" value="{{limit.value}}" min="0" max="6" placeholder="0" />
+            </div>
+            <div class="table-cell">
+                <div class="trash-icon-container">
+                    <a data-action="deleteLimit" data-index="{{index}}">
+                        <i class='fas fa-trash'></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</fieldset>

@@ -10,7 +10,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
-        classes: ['mistengine', 'sheet', 'actor'],
+        classes: ['sheet', 'actor'],
         tag: 'form',
         position: {
             width: 600,
