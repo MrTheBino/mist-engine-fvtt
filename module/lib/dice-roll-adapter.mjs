@@ -1,18 +1,24 @@
+import { MistSceneApp } from "../apps/scene-app.mjs";
 import { MistEngineRollDialog } from "../roll-dialog.mjs";
+
 export class DiceRollAdapter {
     constructor(options = {}) {
         this.actor = options.actor;
         this.rollType = options.type || 'quick'; // 'quick' or 'detailed'
+
+        //both are { name: String, positive: Boolean, weakness: Boolean, source: String }
         this.selectedTags = [];
+        this.selectedGmTags = [];
     }
 
 
     async render() {
         this.prepareTags();
+        this.prepareGMTags();
 
         const html = await foundry.applications.handlebars.renderTemplate(
             "systems/mist-engine-fvtt/templates/dialogs/roll-dialog.hbs",
-            { selectedTags: this.selectedTags }
+            { selectedTags: this.selectedTags,selectedGmTags: this.selectedGmTags }
         );
 
         return new Promise((resolve) => {
@@ -30,6 +36,14 @@ export class DiceRollAdapter {
                 default: "roll",
                 close: () => resolve(null),
             }).render(true);
+        });
+    }
+
+    prepareGMTags(){
+        MistSceneApp.getInstance().getRollModifications().forEach(element => {
+            // at present all gm tags are negative
+            // the roll modifications have a flag positive(boolean) but it is not used for now
+            this.selectedGmTags.push({ name: element.name, positive: false, source: "gm" });
         });
     }
 
@@ -191,6 +205,15 @@ export class DiceRollAdapter {
             }
         });
 
+        this.selectedGmTags.forEach(element => {
+            if (element.positive) {
+                numPositiveTags++;
+            }
+            else {
+                numNegativeTags++;
+            }
+        });
+
         const dicePromises = [];
 
         let rollFormula = `2d6`;
@@ -221,10 +244,19 @@ export class DiceRollAdapter {
             consequenceResult = 0;
         }
 
+        let positiveTags = this.selectedTags.filter(t => t.positive);
+        positiveTags = positiveTags.concat(this.selectedGmTags.filter(t => t.positive));
+
+        let negativeTags = this.selectedTags.filter(t => !t.positive);
+        negativeTags = negativeTags.concat(this.selectedGmTags.filter(t => !t.positive));
+
         const chatVars = {
             diceRollHTML: diceRollHTML,
             label: game.i18n.localize(`MIST_ENGINE.ROLL_TYPES.${this.rollType}`),
             selectedTags: this.selectedTags,
+            selectedGmTags: this.selectedGmTags,
+            positiveTags: positiveTags,
+            negativeTags: negativeTags,
             consequenceResult: consequenceResult,
             isCritical: isCritical,
             isFumble: isFumble,

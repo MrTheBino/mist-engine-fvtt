@@ -137,6 +137,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     if (!value) return;
     
     MistSceneApp.getInstance().addRollModification(name,value);
+    MistSceneApp.getInstance().render(true);
   }
 
   static async #handleDeleteThreadAndConsequenceEntry(event, target) {

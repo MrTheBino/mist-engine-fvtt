@@ -1,6 +1,13 @@
 <div class="roll-dialog-container">
     <div class="selected-tags-container flexcol">
+        <label class="resource-label">You selected:</label>
         {{#each selectedTags}}
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}}</div>
+        {{/each}}
+    </div>
+    <div class="selected-tags-container flexcol">
+        <label class="resource-label">GM selected:</label>
+        {{#each selectedGmTags}}
         <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}}</div>
         {{/each}}
     </div>

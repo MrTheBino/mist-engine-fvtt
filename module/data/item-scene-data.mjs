@@ -24,7 +24,5 @@ export default class MistEngineSceneData extends MistEngineItemBase {
   prepareDerivedData() {
     super.prepareDerivedData();
     this.hasDiceRollModifiers = (this.diceRollTagsStatus.length > 0);
-    console.log(this.hasDiceRollModifiers);
-    console.log(this.diceRollTagsStatus);
   }
 }

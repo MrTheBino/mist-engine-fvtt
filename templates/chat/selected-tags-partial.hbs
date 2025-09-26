@@ -1,14 +1,29 @@
 <div class="selected-tags flexcol">
-        {{#each selectedTags}}
-            <span class="tag 
+    <label class="resource-label">Positive:</label>
+    {{#each positiveTags}}
+    <span class="tag 
                 {{#if this.positive}}positive{{else}}negative{{/if}}
                 {{#if this.toBurn}}burned{{/if}}
                 {{#if this.weakness}}weakness{{/if}}
                 {{#if this.fellowship}}fellowship{{/if}}
-                "
-                >
-                {{#if this.toBurn}}🔥 {{/if}}
-                {{this.name}}
-            </span>
-        {{/each}}
-    </div>
+                ">
+        {{#if this.toBurn}}🔥 {{/if}}
+        {{this.name}}
+    </span>
+    {{/each}}
+</div>
+
+<div class="selected-tags flexcol">
+    <label class="resource-label">Negative:</label>
+    {{#each negativeTags}}
+    <span class="tag 
+                {{#if this.positive}}positive{{else}}negative{{/if}}
+                {{#if this.toBurn}}burned{{/if}}
+                {{#if this.weakness}}weakness{{/if}}
+                {{#if this.fellowship}}fellowship{{/if}}
+                ">
+        {{#if this.toBurn}}🔥 {{/if}}
+        {{this.name}}
+    </span>
+    {{/each}}
+</div>
