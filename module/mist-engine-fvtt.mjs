@@ -182,6 +182,17 @@ Handlebars.registerHelper("textWithTags", function (str) {
   return result;
 });
 
+Handlebars.registerHelper("range", function (...args) {
+  args.pop();
+  let low = args.length === 1 ? 1 : Math.min(args[0], args[1]);
+  let high = Math.max(args[0], args[1] ?? 0);
+  let list = [];
+  for (var i = low; i <= high; i++) {
+    list.push(i);
+  }
+  return list;
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

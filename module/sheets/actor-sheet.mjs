@@ -293,13 +293,13 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             await this.actor.update({
                 "system.floatingTagsAndStatuses": [
                     ...floatingTagsAndStatuses,
-                    { name: "New Floating Tag", description: "", value: 0, markings: Array(6).fill(false) }
+                    { name: "New Floating Tag", description: "", value: 0 }
                 ]
             });
         } else {
             await this.actor.update({
                 "system.floatingTagsAndStatuses": [
-                    { name: "New Floating Tag", description: "", value: 0, markings: Array(6).fill(false) }
+                    { name: "New Floating Tag", description: "", value: 0 }
                 ]
             });
         }
@@ -462,7 +462,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                     value = 0;
                 }
 
-                let newEntry = { name: data.name, value: parseInt(value), description: "", markings: Array(6).fill(false) };
+                let newEntry = { name: data.name, value: parseInt(value), description: "" };
                 if (parseInt(value) > 0 && parseInt(value) <= 6) {
                     newEntry.markings[parseInt(value) - 1] = true;
                     newEntry.isStatus = true;
