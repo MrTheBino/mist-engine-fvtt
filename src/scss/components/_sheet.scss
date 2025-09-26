@@ -421,3 +421,19 @@
   margin: 3px 2px 3px 2px;
   text-shadow: 1px 1px 2px rgb(255, 249, 249);
 }
+
+
+section [data-group="npc-sheet"] {
+  legend{
+    font-family: $font-primary;
+    font-weight: bold;
+    color: black;
+  }
+
+  .table-cell{
+    font-family: $font-primary;
+    color: black; 
+    font-weight: bold;
+  }
+
+}

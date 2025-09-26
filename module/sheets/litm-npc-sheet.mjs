@@ -1,5 +1,6 @@
 import { MistEngineActorSheet } from "./actor-sheet.mjs";
 import { DiceRollAdapter } from "../lib/dice-roll-adapter.mjs";
+import { MistSceneApp } from '../apps/scene-app.mjs'
 
 export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
   #dragDrop; // Private field to hold dragDrop handlers
@@ -21,6 +22,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
       deleteSpecialFeature: this.#handleDeleteSpecialFeature,
       deleteThreatAndConsequence: this.#handleDeleteThreadAndConsequence,
       deleteThreatAndConsequenceEntry: this.#handleDeleteThreadAndConsequenceEntry,
+      addSceneAppRollMod: this.#handleAddSceneAppRollMod
     },
     form: {
       submitOnChange: true,
@@ -73,11 +75,11 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
    * @type {Record<string, ApplicationTabsConfiguration>}
    */
   static TABS = {
-    sheet: {
+    "npc-sheet": {
       // this is the group name
       tabs: [
-        { id: "details", group: "sheet" },
-        { id: "biography", group: "sheet" },
+        { id: "details", group: "npc-sheet" },
+        { id: "biography", group: "npc-sheet" },
       ],
       initial: "details",
       labelPrefix: "MIST_ENGINE.LABELS.Npc",
@@ -126,6 +128,15 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     for (let input of npcUpdatableThreatEntryStats) {
       input.addEventListener("change", (event) => this.handleNpcItemThreatEntryUpdate(event));
     }
+  }
+
+  static async #handleAddSceneAppRollMod(event, target) {
+    event.preventDefault();
+    const value = target.dataset.value;
+    const name = target.dataset.name;
+    if (!value) return;
+    
+    MistSceneApp.getInstance().addRollModification(name,value);
   }
 
   static async #handleDeleteThreadAndConsequenceEntry(event, target) {

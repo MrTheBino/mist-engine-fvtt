@@ -26,7 +26,8 @@
       "Item": { "TagStatusName": "Tag/Status Name" },
       "SceneApp": {
         "Header": "Story Tags & Statuses",
-        "CharactersHeader": "Characters"
+        "CharactersHeader": "Characters",
+        "DiceRollModifiers": "Dice Roll Modifiers"
       }
     },
     "ROLL_TYPES": {

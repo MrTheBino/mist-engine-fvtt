@@ -1,16 +1,16 @@
-#scene-data-app > section.window-content {
-        background-image: url("../assets/bg2-litm.webp");
-        background-repeat: no-repeat;
-        background-size: cover;
-        color: $c-styled-text;
+#scene-data-app>section.window-content {
+    background-image: url("../assets/bg2-litm.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: $c-styled-text;
 }
 
-.floating-tags-and-status-entries{
+.floating-tags-and-status-entries {
     gap: 5px;
 }
 
-.scene-app-characters{
-    .character-name{
+.scene-app-characters {
+    .character-name {
         font-family: $font-primary;
         font-size: 1.2em;
         font-weight: bold;
@@ -19,3 +19,17 @@
     }
 }
 
+.scene-app-dice-roll-modifiers {
+    .listing {
+        .mod-entry {
+            background-color: $c-tag-yellow;
+            color: $c-styled-text;
+            font-family: $font-primary;
+            border-radius: 2px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+    }
+
+}

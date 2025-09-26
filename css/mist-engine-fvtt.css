@@ -282,9 +282,6 @@
   height: 100%;
   margin: 0;
 }
-.mist-engine .tab {
-  flex-grow: 1;
-}
 .mist-engine .tox .tox-editor-container {
   background: #fff;
 }
@@ -757,6 +754,16 @@
   margin: 3px 2px 3px 2px;
   text-shadow: 1px 1px 2px rgb(255, 249, 249);
 }
+.mist-engine section [data-group=npc-sheet] legend {
+  font-family: Labrada, serif;
+  font-weight: bold;
+  color: black;
+}
+.mist-engine section [data-group=npc-sheet] .table-cell {
+  font-family: Labrada, serif;
+  color: black;
+  font-weight: bold;
+}
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
   font-weight: normal;
@@ -1066,6 +1073,14 @@
   font-family: Labrada, serif;
   text-align: center;
 }
+.mist-engine .tab {
+  flex-grow: 1;
+}
+.mist-engine nav.tabs [data-group=npc-sheet] {
+  color: black;
+  font-family: Labrada, serif;
+  font-weight: bold;
+}
 
 .roll-dialog-container .selected-tags-container {
   margin: 10px 0;
@@ -1189,6 +1204,16 @@
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
+}
+
+.scene-app-dice-roll-modifiers .listing .mod-entry {
+  background-color: #ece800;
+  color: #724a32;
+  font-family: Labrada, serif;
+  border-radius: 2px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 2px;
 }
 
 /*# sourceMappingURL=mist-engine-fvtt.css.map */

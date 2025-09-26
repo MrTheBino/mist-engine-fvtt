@@ -24,12 +24,12 @@
                 <div class="npc-tag-item">
                     <div class="npc-tag-name">
                         {{#if (gt tagOrStatus.value 0)}}
-                        <span class="npc-tag-status-value">{{tagOrStatus.name}}-{{tagOrStatus.value}}</span>
+                        <span class="npc-tag-status-value" data-action="addSceneAppRollMod" data-value="1" data-name="{{tagOrStatus.name}}-{{tagOrStatus.value}}">{{tagOrStatus.name}}-{{tagOrStatus.value}}</span>
                         {{else if (tagFilled tagOrStatus.symbol)}}
                         <i class="tag-icon-litm-{{tagOrStatus.symbol}}"></i>&nbsp;
-                        <span class="npc-tag-with-symbol">{{tagOrStatus.name}}</span>
+                        <span class="npc-tag-with-symbol" data-action="addSceneAppRollMod" data-value="1" data-name="{{tagOrStatus.name}}">{{tagOrStatus.name}}</span>
                         {{else}}
-                        <span class="npc-tag">{{tagOrStatus.name}}</span>
+                        <span class="npc-tag" data-action="addSceneAppRollMod" data-value="1" data-name="{{tagOrStatus.name}}">{{tagOrStatus.name}}</span>
                         {{/if}}
                     </div>
                 </div>

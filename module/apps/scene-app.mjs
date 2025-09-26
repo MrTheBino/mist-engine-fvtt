@@ -35,7 +35,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         actions: {
             createFloatingTagOrStatus: this.#handleCreateFloatingTagOrStatus,
             deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus,
-            actorToggleFloatingTagOrStatusMarking: this.#handleActorToggleFloatingTagOrStatusMarking
+            actorToggleFloatingTagOrStatusMarking: this.#handleActorToggleFloatingTagOrStatusMarking,
+            removeSceneAppRollMod: this.#handleRemoveSceneAppRollMod
         },
     };
 
@@ -47,6 +48,10 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         },*/
         tags: {
             template: 'systems/mist-engine-fvtt/templates/scene-app/tags.hbs',
+            scrollable: ['']
+        },
+        "dice-roll-mods": {
+            template: 'systems/mist-engine-fvtt/templates/scene-app/dice-roll-mods.hbs',
             scrollable: ['']
         },
         characters: {
@@ -120,6 +125,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.currentSceneName = this.currentSceneName;
         context.isGM = game.user.isGM;
         context.isNotGM = !game.user.isGM;
+        context.hasDiceRollModifiers = this.currentSceneDataItem ? this.currentSceneDataItem.system.hasDiceRollModifiers : false;
+
         if(game.user.isGM){
             foundry.utils.mergeObject(context, await this._prepareContextForCharacters());
         }
@@ -146,6 +153,16 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             }
         });
         return context;
+    }
+
+    static async #handleRemoveSceneAppRollMod(event, target) {
+        event.preventDefault();
+        const index = target.dataset.index;
+        let data = this.currentSceneDataItem.system.diceRollTagsStatus;
+        if (!data || index >= data.length) return;
+        data.splice(index, 1);
+        await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": data });
+        this.render(true, { focus: true });
     }
 
     async handleActorFtTagStatusToggle(event) {
@@ -295,5 +312,18 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             });
         }
         this.sendUpdateHookEvent();
+    }
+
+    addRollModification(name, value){
+        if(!this.currentSceneDataItem) return;
+        let tags = this.currentSceneDataItem.system.diceRollTagsStatus || [];
+        tags.push({name, value: parseInt(value)});
+        this.currentSceneDataItem.update({ "system.diceRollTagsStatus": tags });
+        this.render(true, { focus: true });
+    }
+
+    getRollModifications(){
+        if(!this.currentSceneDataItem) return [];
+        return this.currentSceneDataItem.system.diceRollTagsStatus || [];
     }
 }
