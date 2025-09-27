@@ -54,3 +54,9 @@ This system uses at present code snippets and graphics from the City of Mist HUD
 
 
 ![Alpha Version Screenshot](current_state_screenshot.webp "Title")
+
+## V0.3 Setup Guide
+
+On youtube: https://youtu.be/cJqjzdLw5P4
+
+[![V0.3 Setup Guide](https://img.youtube.com/vi/cJqjzdLw5P4/0.jpg)](https://youtu.be/cJqjzdLw5P4 "Video Title")
