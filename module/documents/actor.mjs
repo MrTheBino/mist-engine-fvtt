@@ -17,7 +17,7 @@ export class MistEngineActor extends Actor {
     data.prototypeToken = data.prototypeToken || {};
 
     let defaults = {};
-    if (data.type === "litm-character") {
+    if (data.type === "litm-character" || data.type == "litm-fellowship-themecard") {
       defaults = {
         actorLink: true,
         disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,

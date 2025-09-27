@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 0.3.1
+- fellowship themecard actors are linked now per default
+
 # 0.3
 - UI improvements
 - tags & status handling improved
