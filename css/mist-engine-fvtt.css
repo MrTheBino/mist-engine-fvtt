@@ -624,8 +624,9 @@
   font-family: Labrada, serif;
   font-size: 36px;
   color: #4f311d;
+  width: auto;
 }
-.mist-engine .sheet-header .title .short-description {
+.mist-engine .sheet-header .short-description {
   font-family: Labrada, serif;
   font-size: 18px;
   color: #4f311d;
