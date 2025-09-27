@@ -12,6 +12,7 @@ export function buildFloatingTagsAndStatuses(){
       burned: new fields.BooleanField({ initial: false }),
       toBurn: new fields.BooleanField({ initial: false }),
       selected: new fields.BooleanField({ initial: false }),
+      markings: new fields.ArrayField(new fields.BooleanField({ initial: false }), { min: 6, max: 6, initial: Array(6).fill(false) })
     }));
 
     return schema;

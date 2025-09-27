@@ -20,17 +20,17 @@
 
                         </div>
                         {{#if fts.isStatus}}
+
                         <div class="fts-markings-container">
-                            {{#each (range 0 6)}}
-                            <label id="marking-{{@index}}" for="system.floatingTagsAndStatuses.{{@../index}}.value"
-                                class="fts-input-marking">
-                                <input type="radio" name="system.floatingTagsAndStatuses.{{@../index}}.value"
-                                    value="{{@index}}" {{#if (eq @index fts.value)}}checked{{/if}}>
-                                <span
-                                    class="marking-circle {{#if (eq @index fts.value)}}checked{{/if}}">{{@index}}</span>
-                            </label>
+                            {{#each fts.markings as |marking index|}}
+                            <span class="fts-input-marking" data-marking-index="{{index}}"
+                                data-action="actorToggleFloatingTagOrStatusMarking" data-actor-id="{{character.id}}" data-index="{{ftsIndex}}">
+                                <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne
+                                    index}}</i>
+                            </span>
                             {{/each}}
                         </div>
+
                         {{/if}}
                     </div>
                     {{/each}}

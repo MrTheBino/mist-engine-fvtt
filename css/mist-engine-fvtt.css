@@ -303,12 +303,6 @@
   display: table-cell;
   padding: 2px 3px;
 }
-.mist-engine [type=radio] {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
 .mist-engine .resource-label {
   font-weight: bold;
 }
@@ -669,32 +663,32 @@
 .mist-engine .fts-input-value {
   flex-shrink: 2;
 }
-.mist-engine .fts-markings-container {
-  margin-top: 5px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.mist-engine .fts-markings-container .marking-circle {
-  border-radius: 50%;
-  background-color: black;
+.mist-engine .fts-input-marking {
+  flex-grow: 0.1;
+  text-align: center;
   color: white;
   cursor: pointer;
-  text-align: center;
-  width: 18px;
-  height: 18px;
+}
+.mist-engine .fts-input-marking i.marking-circle {
+  border-radius: 50%;
+  background-color: black;
+  width: 20px;
+  height: 20px;
   display: inline-block;
   font-family: Labrada, serif;
   font-style: normal;
-  font-size: 12px;
 }
-.mist-engine .fts-markings-container .marking-circle.checked {
+.mist-engine .fts-input-marking i.active {
   background-color: darkred;
 }
 .mist-engine .fts-tag-container {
   display: flex;
   flex-direction: row;
   column-gap: 1em;
+}
+.mist-engine .fts-markings-container {
+  text-align: center;
+  margin-top: 5px;
 }
 .mist-engine .floating-tags-and-status-container {
   color: #724a32;
