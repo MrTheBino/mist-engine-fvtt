@@ -5,7 +5,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     #dragDrop // Private field to hold dragDrop handlers
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
-        classes: ['mist-engine', 'sheet', 'actor'],
+        classes: ['mist-engine', 'sheet', 'actor','litm-character'],
         tag: 'form',
         position: {
             width: 1000,
@@ -73,12 +73,12 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
    * @type {Record<string, ApplicationTabsConfiguration>}
    */
     static TABS = {
-        sheet: { // this is the group name
+        "litm-character-sheet": { // this is the group name
             tabs:
                 [
-                    { id: 'character', group: 'sheet', label: 'MIST_ENGINE.LABELS.Themebooks' },
-                    { id: 'biography', group: 'sheet', label: 'MIST_ENGINE.LABELS.Biography' },
-                    { id: 'notes', group: 'sheet', label: 'MIST_ENGINE.LABELS.Notes' }
+                    { id: 'character', group: 'litm-character-sheet', label: 'MIST_ENGINE.LABELS.Themebooks' },
+                    { id: 'biography', group: 'litm-character-sheet', label: 'MIST_ENGINE.LABELS.Biography' },
+                    { id: 'notes', group: 'litm-character-sheet', label: 'MIST_ENGINE.LABELS.Notes' }
                 ],
             initial: 'character'
         }

@@ -1,30 +1,38 @@
 <div>
     <header class="sheet-header {{#if system.editMode}}edit-mode{{else}}stylized-background{{/if}}">
-        <div class="flexrow">
-            <div class="image-container">
-                <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img"
-                    title="{{actor.name}}" height="120" />
-            </div>
-        </div>
-        <div class="flexcol header-right-side">
-            <div class="flexcol">
+
+        <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"
+            height="120" />
+
+        <div class="header-fields">
+            
                 {{#if system.editMode}}
-                <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
-                <div class="short-description"><input name="system.shortDescription" type="text"
-                        value="{{system.shortDescription}}" placeholder="Short Description" /></div>
+                {{!-- Edit Mode Layout --}}
+                <div class="title">
+                    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+                    
+                </div>
+                <div class="flexcol">
+                        <div class="short-description"><input name="system.shortDescription" type="text"
+                            value="{{system.shortDescription}}" placeholder="Short Description" /></div>
+                    </div>
                 {{else}}
-                <h1 class="charname">{{actor.name}}</h1>
+                {{!-- Normal Layout --}}
+                <div class="title">
+                    <h1 class="charname">{{actor.name}}</h1>
+                </div>
                 <div class="short-description">{{system.shortDescription}}</div>
                 {{/if}}
-                {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs' isLocked=system.editMode name="system.editMode" title="Toggle Edit Mode"}}
+            
 
-
-            </div>
             {{#if (eq system.editMode false)}}
             <div class="flexrow roll-buttons-container">
-                <button data-action="clickRoll" class="roll-button" data-roll-type="quick"><i class="fa-solid fa-dice"></i> Quick Roll</button>
-                <button data-action="clickRoll" class="roll-button" data-roll-type="detailed"><i class="fa-solid fa-dice"></i> Detailed Roll</button>
-                <button data-action="clickRoll" class="roll-button" data-roll-type="reaction"><i class="fa-solid fa-dice"></i> Reaction Roll</button>
+                <button data-action="clickRoll" class="roll-button" data-roll-type="quick"><i
+                        class="fa-solid fa-dice"></i> Quick Roll</button>
+                <button data-action="clickRoll" class="roll-button" data-roll-type="detailed"><i
+                        class="fa-solid fa-dice"></i> Detailed Roll</button>
+                <button data-action="clickRoll" class="roll-button" data-roll-type="reaction"><i
+                        class="fa-solid fa-dice"></i> Reaction Roll</button>
             </div>
             {{/if}}
         </div>

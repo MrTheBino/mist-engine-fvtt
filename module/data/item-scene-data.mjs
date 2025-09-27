@@ -24,5 +24,13 @@ export default class MistEngineSceneData extends MistEngineItemBase {
   prepareDerivedData() {
     super.prepareDerivedData();
     this.hasDiceRollModifiers = (this.diceRollTagsStatus.length > 0);
+
+    this.floatingTagsAndStatuses.forEach(tag =>{
+      let max = 0;
+      for(let i = 0; i < tag.markings.length; i++){
+        if(tag.markings[i]) max = i+1;
+      }
+      tag.value = max;
+    });
   }
 }

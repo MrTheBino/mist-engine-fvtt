@@ -272,10 +272,16 @@
   flex: 1;
   gap: 0.5rem;
 }
+.mist-engine .sheet-header .header-fields .short-description {
+  font-family: Labrada, serif;
+  font-size: 14px;
+  color: #4f311d;
+}
 .mist-engine .sheet-header h1.charname {
-  height: 50px;
   padding: 0px;
   border-bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 .mist-engine .sheet-header h1.charname input {
   width: 100%;
@@ -419,6 +425,11 @@
   border: none;
 }
 .mist-engine.sheet.actor.npc .window-content {
+  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-repeat: no-repeat;
+  row-gap: 0.5em;
+}
+.mist-engine.sheet.actor.litm-character .window-content {
   background-image: url("../assets/bg-yellow-old-paper-textures.webp");
   background-repeat: no-repeat;
   row-gap: 0.5em;
@@ -614,6 +625,11 @@
   font-size: 36px;
   color: #4f311d;
 }
+.mist-engine .sheet-header .title .short-description {
+  font-family: Labrada, serif;
+  font-size: 18px;
+  color: #4f311d;
+}
 .mist-engine .sheet-header .difficulty-icons {
   display: flex;
   flex-direction: row;
@@ -653,6 +669,7 @@
 }
 .mist-engine .roll-buttons-container {
   padding-right: 10px;
+  margin-top: 35px;
 }
 .mist-engine .powertags-container {
   margin: 2px;
@@ -707,6 +724,14 @@
   -webkit-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
   -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
   border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+}
+.mist-engine .container-themebook-with-border {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  -webkit-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  -o-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
 }
 .mist-engine .tab-notes,
 .mist-engine .tab-biography {
@@ -763,6 +788,9 @@
   font-family: Labrada, serif;
   color: black;
   font-weight: bold;
+}
+.mist-engine .mode-toggle-button {
+  margin-inline-end: auto;
 }
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
@@ -929,6 +957,7 @@
   font-weight: bold;
 }
 .mist-engine .themebooks-container {
+  margin-top: 0px;
   margin-bottom: 5px;
 }
 .mist-engine .themebook-container {
@@ -956,7 +985,6 @@
   padding-right: 10px;
 }
 .mist-engine .themebook-style {
-  background-image: url("../assets/litm-themebook-bg.webp");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
@@ -1077,6 +1105,11 @@
   flex-grow: 1;
 }
 .mist-engine nav.tabs [data-group=npc-sheet] {
+  color: black;
+  font-family: Labrada, serif;
+  font-weight: bold;
+}
+.mist-engine nav.tabs [data-group=litm-character-sheet] {
   color: black;
   font-family: Labrada, serif;
   font-weight: bold;

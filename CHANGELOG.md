@@ -1,5 +1,12 @@
 # CHANGELOG
 
+# 0.3
+- UI improvements
+- tags & status handling improved
+- many bug fixes
+- consolidated code 
+- etc... first BETA release
+  
 # 0.2.11
 - added more powertags & weakness fields to the themebooks
   

@@ -3,22 +3,20 @@
 // for actors and items in a Foundry VTT system.
 export class FloatingTagAndStatusAdapter {
     static async handleTagStatusToggle(objectToUpdate,arrayIndex){
-        //console.log("FloatingTagAndStatusAdapter.handleTagStatusToggle: called with", {objectToUpdate,arrayIndex});
         if(objectToUpdate===undefined){
-            //console.log("FloatingTagAndStatusAdapter.handleTagStatusToggle: no object to update");
+            console.log("FloatingTagAndStatusAdapter.handleTagStatusToggle: no object to update");
             return;
         }
 
         const floatingTagsAndStatuses = objectToUpdate.system.floatingTagsAndStatuses;
-        //console.log("FloatingTagAndStatusAdapter.handleTagStatusToggle: current floatingTagsAndStatuses", floatingTagsAndStatuses);
         if (!floatingTagsAndStatuses || arrayIndex >= floatingTagsAndStatuses.length){
-            //console.log("FloatingTagAndStatusAdapter.handleTagStatusToggle: invalid array index");
+            console.log("FloatingTagAndStatusAdapter.handleTagStatusToggle: invalid array index");
             return;
         }
 
         let oldStatus = floatingTagsAndStatuses[arrayIndex].isStatus || false;
         let newStatus = !oldStatus;
-        //console.log(`FloatingTagAndStatusAdapter.handleTagStatusToggle: changing from ${oldStatus} to ${newStatus}`);
+        
         foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'isStatus', newStatus);
         await objectToUpdate.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
     }
@@ -34,11 +32,19 @@ export class FloatingTagAndStatusAdapter {
         const floatingTagsAndStatuses = objectToUpdate.system.floatingTagsAndStatuses;
         if (!floatingTagsAndStatuses || arrayIndex >= floatingTagsAndStatuses.length) return;
 
-        foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], key, newValue);
+        let tData = floatingTagsAndStatuses[arrayIndex];
+        foundry.utils.setProperty(tData, key, newValue);
+        floatingTagsAndStatuses[arrayIndex] = tData;
+
         await objectToUpdate.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
     }
 
     static async handleToggleFloatingTagOrStatusMarking(objectToUpdate,arrayIndex,markingIndex){
+        console.log("FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking called with", {objectToUpdate,arrayIndex,markingIndex});
+        if(objectToUpdate===undefined){
+            console.log("FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking: no object to update");
+            return;
+        }
         const floatingTagsAndStatuses = objectToUpdate.system.floatingTagsAndStatuses;
         
         if (!floatingTagsAndStatuses || arrayIndex >= floatingTagsAndStatuses.length){
@@ -47,7 +53,11 @@ export class FloatingTagAndStatusAdapter {
             return;
         }
 
-        foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'markings.' + markingIndex, !floatingTagsAndStatuses[arrayIndex].markings[markingIndex]);
+        const path = 'markings.' + markingIndex;
+        const currentVal = floatingTagsAndStatuses[arrayIndex].markings[markingIndex];
+        let tData = floatingTagsAndStatuses[arrayIndex];
+        foundry.utils.setProperty(tData, path, !currentVal);
+        floatingTagsAndStatuses[arrayIndex] = tData;
         await objectToUpdate.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
     }
 }

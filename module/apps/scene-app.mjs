@@ -36,7 +36,10 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             createFloatingTagOrStatus: this.#handleCreateFloatingTagOrStatus,
             deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus,
             actorToggleFloatingTagOrStatusMarking: this.#handleActorToggleFloatingTagOrStatusMarking,
-            removeSceneAppRollMod: this.#handleRemoveSceneAppRollMod
+            removeSceneAppRollMod: this.#handleRemoveSceneAppRollMod,
+            clickToggleLock: this.#handleFtsEditableCheckboxChanged,
+            toggleFloatingTagOrStatusMarking: this.#handleToggleFloatingTagOrStatusMarking,
+            deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus,
         },
     };
 
@@ -69,27 +72,18 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     /** @inheritDoc */
     _onRender(context, options) {
-        // floating tags and statuses
+        // Story floating tags and statuses
         const updateableFtsStats = this.element.querySelectorAll('.updateable-fts-stat')
         for (const input of updateableFtsStats) {
             input.addEventListener("change", event => this.handleFtStatChanged(event))
         }
 
-        const updateableFtsStatMinus = this.element.querySelectorAll('.updateable-fts-stat-minus')
-        for (const input of updateableFtsStatMinus) {
-            input.addEventListener("click", event => this.handleFtStatMinus(event))
+        const ftsTagStatusToggle = this.element.querySelectorAll('.fts-tag-status-toggle')
+        for (const toggle of ftsTagStatusToggle) {
+            toggle.addEventListener("contextmenu", event => this.handleFtTagStatusToggle(event))
         }
 
-        const updateableFtsStatPlus = this.element.querySelectorAll('.updateable-fts-stat-plus')
-        for (const input of updateableFtsStatPlus) {
-            input.addEventListener("click", event => this.handleFtStatPlus(event))
-        }
-
-        const ftsEditableCheckbox = this.element.querySelector('#fts-editable-checkbox');
-        if (ftsEditableCheckbox) {
-            ftsEditableCheckbox.addEventListener("change", event => this.handleFtsEditableCheckboxChanged(event));
-        }
-
+        // Actor Floating Tags and Statuses
         const actorFtsTagStatusToggle = this.element.querySelectorAll('.fts-tag-status-toggle-actor')
         for (const toggle of actorFtsTagStatusToggle) {
             toggle.addEventListener("contextmenu", event => this.handleActorFtTagStatusToggle(event))
@@ -125,7 +119,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.currentSceneName = this.currentSceneName;
         context.isGM = game.user.isGM;
         context.isNotGM = !game.user.isGM;
-        context.hasDiceRollModifiers = this.currentSceneDataItem ? this.currentSceneDataItem.system.hasDiceRollModifiers : false;
+        context.hasDiceRollModifiers = this.currentSceneDataItem.system.diceRollTagsStatus.length > 0;
 
         if(game.user.isGM){
             foundry.utils.mergeObject(context, await this._prepareContextForCharacters());
@@ -177,40 +171,69 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     // no need to replicate all the code, but right now it's fine 
     static async #handleActorToggleFloatingTagOrStatusMarking(event, target) {
         event.preventDefault();
-        const index = target.dataset.index;
+        const index = parseInt(target.dataset.index);
         const actor = game.actors.get(target.dataset.actorId);
-        FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(actor, index, target.dataset.markingIndex);
+        const markingIndex = parseInt(target.dataset.markingIndex);
+        await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(actor, index, markingIndex);
         this.sendFloatableTagOrStatusUpdateForActor(actor);
     }
     
-    async handleFtsEditableCheckboxChanged(event) {
+    static async #handleFtsEditableCheckboxChanged(event,target) {
         event.preventDefault();
-        const checked = event.currentTarget.checked;
-        await this.currentSceneDataItem.update({ "system.floatingTagsAndStatusesEditable": checked });
+        await this.currentSceneDataItem.update({ "system.floatingTagsAndStatusesEditable": !this.currentSceneDataItem.system.floatingTagsAndStatusesEditable  });
         this.sendUpdateHookEvent();
     }
 
-    async handleFtStatChanged(event) {
+    // Story Floating Tags and Statuses
+    static async #handleToggleFloatingTagOrStatusMarking(event, target) {
         event.preventDefault();
+        if(game.user.isGM === false) return;
+        if(!this.currentSceneDataItem) return;
+
+        const index = target.dataset.index;
+        await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(this.currentSceneDataItem, index, target.dataset.markingIndex);
+
+        this.sendUpdateHookEvent();
+        this.render(true, { focus: true });
+    }
+
+    // Story Floating Tags and Statuses
+    async handleFtStatChanged (event) {
+        event.preventDefault();
+        if(game.user.isGM === false) return;
+        if(!this.currentSceneDataItem) return;
+
         const index = event.currentTarget.dataset.index;
         const key = event.currentTarget.dataset.key;
         const value = event.currentTarget.value;
-        const floatingTagsAndStatuses = this.currentSceneDataItem.system.floatingTagsAndStatuses;
-        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
-
-        foundry.utils.setProperty(floatingTagsAndStatuses[index], key, value);
-        await this.currentSceneDataItem.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        
+        FloatingTagAndStatusAdapter.handleFtStatChanged(this.currentSceneDataItem, index, key, value);
         this.sendUpdateHookEvent();
+        this.render(true, { focus: true });
+    }
+
+    async handleFtTagStatusToggle(event) {
+        event.preventDefault();
+        
+        if(game.user.isGM === false) return;
+        if(!this.currentSceneDataItem) return;
+
+        const index = event.currentTarget.dataset.index;
+        FloatingTagAndStatusAdapter.handleTagStatusToggle(this.currentSceneDataItem, index);
+        this.sendUpdateHookEvent();
+        this.render(true, { focus: true });
     }
 
     static async #handleDeleteFloatingTagOrStatus(event, target) {
         event.preventDefault();
+        
+        if(game.user.isGM === false) return;
+        if(!this.currentSceneDataItem) return;
+
         const index = target.dataset.index;
-        const floatingTagsAndStatuses = this.currentSceneDataItem.system.floatingTagsAndStatuses;
-        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
-        floatingTagsAndStatuses.splice(index, 1);
-        await this.currentSceneDataItem.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(this.currentSceneDataItem, index);
         this.sendUpdateHookEvent();
+        this.render(true, { focus: true });
     }
 
     async handleFtStatMinus(event) {
@@ -299,6 +322,11 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
         this.currentSceneId = newScene.id;
         this.currentSceneName = newScene.name;
+        this.findOrCreateSceneDataItem();
+        this.sendUpdateHookEvent();
+    }
+
+    sceneUpdatedHook(){
         this.findOrCreateSceneDataItem();
         this.sendUpdateHookEvent();
     }

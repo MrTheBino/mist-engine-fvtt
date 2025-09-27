@@ -70,6 +70,39 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         this.actorFellowshipThemecard = null;
     }
 
+    _renderModeToggle() {
+        const header = this.element.querySelector(".window-header");
+
+        let button = header.querySelector(".mode-toggle-button");
+        if (!button) {
+            button = document.createElement("button");
+            button.classList.add("header-control", "fa-solid", "icon", "mode-toggle-button");
+            const h1Element = header.querySelector("h1");
+            header.insertBefore(button, h1Element);
+        }
+
+        button.onclick = ev => this._onToggleEditMode(ev);
+
+
+        if (this.actor.system.editMode) {
+            button.classList.add("fa-lock-open");
+            button.classList.remove("fa-lock");
+            button.title = "Switch to Edit Mode";
+        } else {
+            button.classList.add("fa-lock");
+            button.classList.remove("fa-lock-open");
+            button.title = "Switch to Game Mode";
+
+        }
+        button.onclick = ev => this._onToggleEditMode(ev);
+    }
+
+    async _onToggleEditMode(event) {
+        event.preventDefault();
+        await this.actor.update({ "system.editMode": !this.actor.system.editMode });
+        this.render(false);
+    }
+
     /* @inheritDoc */
     async _prepareContext(options) {
         const context = await super._prepareContext(options)
@@ -102,6 +135,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     /** @inheritDoc */
     _onRender(context, options) {
         this.#dragDrop.forEach((d) => d.bind(this.element))
+        this._renderModeToggle();
 
         /**const tooltipElements = this.element.querySelectorAll('.tooltip-hover');
         for (const tooltip of tooltipElements) {
@@ -172,10 +206,11 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     async handleFtStatChanged(event) {
         event.preventDefault();
-        const index = event.currentTarget.dataset.ftIndex;
-        const key = event.currentTarget.dataset.ftKey;
+        const index = event.currentTarget.dataset.index;
+        const key = event.currentTarget.dataset.key;
         const value = event.currentTarget.value;
-        FloatingTagAndStatusAdapter.handleFtStatChanged(this.actor, index, key, value);
+
+        await FloatingTagAndStatusAdapter.handleFtStatChanged(this.actor, index, key, value);
         this.sendFloatableTagOrStatusUpdate();
     }
 
@@ -259,11 +294,11 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             if (this.actorFellowshipThemecard) {
                 if (event.currentTarget.dataset.array !== undefined) { // update for arrays
                     let arrayName = event.currentTarget.dataset.array;
-                    
+
                     let index = parseInt(event.currentTarget.dataset.index);
                     let key = event.currentTarget.dataset.key;
                     let array = foundry.utils.getProperty(this.actorFellowshipThemecard, arrayName);
-                    
+
                     if (isNaN(index) || index < 0 || index >= array.length) {
                         console.error("Invalid index for array update", event.currentTarget.dataset);
                         return;

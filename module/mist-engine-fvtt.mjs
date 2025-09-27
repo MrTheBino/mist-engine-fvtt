@@ -285,6 +285,31 @@ Hooks.on("canvasReady", (canvas) => {
   MistSceneApp.getInstance().sceneChangedHook(canvas.scene);
 });
 
+Hooks.on("createToken", (tokenDocument, options, userId) => {
+  const instance = MistSceneApp.getInstance();
+  if (instance.rendered) { // only if shown
+      instance.sceneUpdatedHook();
+      instance.render(true, { focus: true });
+  }
+});
+
+
+Hooks.on("updateToken", (tokenDocument, changes) => {
+  const instance = MistSceneApp.getInstance();
+  if (instance.rendered) { // only if shown
+      instance.sceneUpdatedHook();
+      instance.render(true, { focus: true });
+  }
+});
+
+Hooks.on("deleteToken", (tokenDocument, options, userId) => {
+  const instance = MistSceneApp.getInstance();
+  if (instance.rendered) { // only if shown
+      instance.sceneUpdatedHook();
+      instance.render(true, { focus: true });
+  }
+});
+
 /* -------------------------------------------- */
 /*  Hotbar Macros                               */
 /* -------------------------------------------- */

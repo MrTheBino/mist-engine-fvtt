@@ -6,6 +6,14 @@
   }
 }
 
+&.sheet.actor.litm-character {
+  .window-content {
+    background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+    background-repeat: no-repeat;
+    row-gap: 0.5em;
+  }
+}
+
 .item-powertag-line {
   margin: 5px;
 }
@@ -243,6 +251,11 @@
       font-size: 36px;
       color: $c-dark-styled-text;
     }
+    .short-description{
+      font-family: $font-primary;
+      font-size: 18px;
+      color: $c-dark-styled-text;
+    }
   }
 
   .difficulty-icons {
@@ -294,6 +307,7 @@
 
 .roll-buttons-container {
   padding-right: 10px;
+  margin-top: 35px;
 }
 
 .powertags-container {
@@ -363,6 +377,15 @@
   -webkit-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
   -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
   border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+}
+
+.container-themebook-with-border {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  -webkit-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  -o-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
 }
 
 .tab-notes,
@@ -436,4 +459,9 @@ section [data-group="npc-sheet"] {
     font-weight: bold;
   }
 
+}
+
+
+.mode-toggle-button{
+      margin-inline-end: auto;
 }

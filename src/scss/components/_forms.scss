@@ -21,12 +21,19 @@
     width: 100%;
     flex: 1;
     gap: 0.5rem;
+
+    .short-description{
+      font-family: $font-primary;
+      font-size: 14px;
+      color: $c-dark-styled-text;
+    }
   }
 
   h1.charname {
-    height: 50px;
     padding: 0px;
     border-bottom: 0;
+    width: 100%;
+    text-align: center;
     input {
       width: 100%;
       height: 100%;
