@@ -312,24 +312,27 @@
   // height: 16px;
 }
 
-.fts-input-marking {
-  flex-grow: 0.1;
-  text-align: center;
-  color: white;
-  cursor: pointer;
 
-  i.marking-circle {
+.fts-markings-container {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .marking-circle {
     border-radius: 50%;
     background-color: black;
-    width: 20px;
-    height: 20px;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+    width: 18px;
+    height: 18px;
     display: inline-block;
     font-family: $font-primary;
     font-style: normal;
-  }
-
-  i.active {
-    background-color: darkred;
+    font-size: 12px;
+    &.checked {
+      background-color: darkred;
+    }
   }
 }
 
@@ -337,11 +340,6 @@
   display: flex;
   flex-direction: row;
   column-gap: 1em;
-}
-
-.fts-markings-container {
-  text-align: center;
-  margin-top: 5px;
 }
 
 .floating-tags-and-status-container {
