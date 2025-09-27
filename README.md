@@ -7,13 +7,13 @@ This is an unoffical system implementation of the MIST Engine from Son Of Oaks f
 Currently it only supports Legend In The Mist.
 
 
-**This system is in ALPHA stage.**
+**This system is in BETA stage.**
 
 ## Features
 
 * NPC / Adversary sheet
 * Character sheets
-* backpack, themebooks, fellowship relationships for character sheets
+* backpack, themebooks, fellowship relationships for character sheets 
 * milestone, abandon,improve, promises development markers
 * quick, detailed and reaction rolls
 * burning power tags
@@ -34,10 +34,8 @@ Currently it only supports Legend In The Mist.
   
 ## ToDo
 
-- special improvements for fellowship themecards
 - improved styling
 - usability improvements
-
 
 If using weakness tags, you have to improve / mark the themebook manually. There is no automation for this in the system.
 
