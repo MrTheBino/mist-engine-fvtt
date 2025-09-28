@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 0.3.3
+- improved internal handling of fellowship theme cards
+
 # 0.3.2
 - styling fixes
 - correct permission management in the scene tags window / app

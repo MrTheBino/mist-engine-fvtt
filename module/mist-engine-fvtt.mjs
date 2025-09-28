@@ -84,8 +84,9 @@ Hooks.once("init", function () {
   CONFIG.ActiveEffect.legacyTransferral = false;
 
   // Register sheet application classes
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet(
+  foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
+  
+  foundry.documents.collections.Actors.registerSheet(
     "mist-engine-fvtt",
     MistEngineLegendInTheMistCharacterSheet,
     {
@@ -94,12 +95,14 @@ Hooks.once("init", function () {
       label: "MIST_ENGINE.SheetLabels.Actor",
     }
   );
-  Actors.registerSheet("mist-engine-fvtt", MistEngineLegendInTheMistNpcSheet, {
+  
+  foundry.documents.collections.Actors.registerSheet("mist-engine-fvtt", MistEngineLegendInTheMistNpcSheet, {
     makeDefault: true,
     types: ["litm-npc"],
     label: "MIST_ENGINE.SheetLabels.Actor",
   });
-  Actors.registerSheet(
+  
+  foundry.documents.collections.Actors.registerSheet(
     "mist-engine-fvtt",
     MistEngineLegendInTheMistFellowshipThemecard,
     {
@@ -109,8 +112,8 @@ Hooks.once("init", function () {
     }
   );
 
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("mist-engine-fvtt", MistEngineItemSheet, {
+  foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
+  foundry.documents.collections.Items.registerSheet("mist-engine-fvtt", MistEngineItemSheet, {
     makeDefault: true,
     label: "MIST_ENGINE.SheetLabels.Item",
   });

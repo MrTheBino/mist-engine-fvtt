@@ -64,8 +64,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
     constructor(options = {}) {
         super(options)
-        this.initFellowshipThemecard();
         this.activateSocketListeners();
+        this.loadFellowshipThemecard();
     }
 
     /**
@@ -86,6 +86,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
     activateSocketListeners() {
         game.socket.on("system.mist-engine-fvtt", (msg) => {
+            console.log("socket message received in character sheet: ", msg);
             if (msg?.type === "hook" && msg.hook == "fellowshipThemeCardUpdated") {
                 this.reloadFellowshipThemecard(false);
                 this.render(true, { focus: true });
@@ -130,13 +131,16 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         return context;
     }
 
-    initFellowshipThemecard() {
+    getActorFellowshipThemecard() {
+        return this.actorFellowshipThemecard;
+    }
+
+    loadFellowshipThemecard() {
         if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
             this.actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
             if (this.actorFellowshipThemecard) {
                 // in case it's not found, reset the id in the schema
                 this.actor.update({ "system.actorSharedSingleThemecardId": "" });
-                return;
             }
         }
 
@@ -146,19 +150,21 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
                 a.testUserPermission(assignedUser, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
             );
             ownedWorldActors = ownedWorldActors.filter(a => a.id !== this.actor.id)
-            console.log("owned world actors: ", ownedWorldActors);
+            //console.log("owned world actors: ", ownedWorldActors);
             if (ownedWorldActors && ownedWorldActors.length > 0) {
                 this.actorFellowshipThemecard = ownedWorldActors[0];
-                console.log("found fellowship themecard: ", this.actorFellowshipThemecard.id);
+                //console.log("found fellowship themecard: ", this.actorFellowshipThemecard.id);
                 this.actor.update({ "system.actorSharedSingleThemecardId": this.actorFellowshipThemecard.id });
-                console.log("assigned fellowship themecard");
+                //console.log("assigned fellowship themecard");
             } else {
                 this.actorFellowshipThemecard = false;
+                //console.log("no owned world actors found");
             }
         }
     }
 
     reloadFellowshipThemecard(sendMessageToOthers = false) {
+        this.loadFellowshipThemecard();
         if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
             this.actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
             if (sendMessageToOthers == true) {

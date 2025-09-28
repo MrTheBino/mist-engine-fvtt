@@ -4,7 +4,7 @@
  * @return {Promise}
  */
 export const preloadHandlebarsTemplates = async function () {
-  return loadTemplates([
+  return foundry.applications.handlebars.loadTemplates([
     // Actor partials.
     "systems/mist-engine-fvtt/templates/actor/parts/character-header.hbs",
     "systems/mist-engine-fvtt/templates/actor/parts/tab-litm-character.hbs",

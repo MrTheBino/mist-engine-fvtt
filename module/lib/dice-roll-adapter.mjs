@@ -85,8 +85,8 @@ export class DiceRollAdapter {
         }
 
         // fellowship themecard tags
-        if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
-            let actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
+        if (this.actor.sheet.getActorFellowshipThemecard()) {
+            let actorFellowshipThemecard = this.actor.sheet.getActorFellowshipThemecard();
             if (actorFellowshipThemecard) {
                 for (let i = 0; i < 10; i++) {
                     const powertagPath = `system.powertag${i + 1}.selected`;
@@ -101,7 +101,7 @@ export class DiceRollAdapter {
                 }
             }
         } else {
-            console.log("No fellowship themecard in the actor actor.system.actorSharedSingleThemecardId:", this.actor.system.actorSharedSingleThemecardId);
+            console.log("No fellowship themecard in the actor getActorFellowshipThemecard():", this.actor.sheet.getActorFellowshipThemecard());
         }
 
     }
@@ -161,8 +161,8 @@ export class DiceRollAdapter {
         }
 
         // fellowship themecard tags
-        if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
-            let actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
+        if (this.actor.sheet.getActorFellowshipThemecard()) {
+            let actorFellowshipThemecard = this.actor.sheet.getActorFellowshipThemecard();
             if (actorFellowshipThemecard) {
                 for (let i = 0; i < 10; i++) {
                     const powertagPath = `system.powertag${i + 1}.selected`;
@@ -180,7 +180,12 @@ export class DiceRollAdapter {
                     await actorFellowshipThemecard.update({ [weaknesstagPath]: false });
                 }
             }
-            this.actor.sheet?.reloadFellowshipThemecard(true); // true for emitting data to others
+            if(this.actor.sheet){
+                this.actor.sheet.reloadFellowshipThemecard(true); // true for emitting data to others    
+            }else{
+                console.log("No actor sheet to send reload signal for fellowship themecard");
+            }
+            
         }
 
         this.actor.sheet.render();
