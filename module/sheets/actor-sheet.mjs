@@ -137,11 +137,17 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         this.#dragDrop.forEach((d) => d.bind(this.element))
         this._renderModeToggle();
 
-        /**const tooltipElements = this.element.querySelectorAll('.tooltip-hover');
-        for (const tooltip of tooltipElements) {
-            tooltip.addEventListener("mouseenter", event => this.handleTooltipMouseEnter(event));
-            tooltip.addEventListener("mouseleave", event => this.handleTooltipMouseLeave(event));
-        }*/
+        // Input Event Listener for preventing toggling the enter mode, this is a strange behaviour of foundry, didn't know to handle it otherwise
+        const constAllInputs = this.element.querySelectorAll('input');
+        for (const input of constAllInputs) {
+            input.addEventListener("keydown", event => {
+                if (event.key === "Enter") {
+                    event.preventDefault(); // optional, verhindert Default-Verhalten (z.B. Formular-Submit)
+                }
+            });
+        };
+
+
 
         const expandableTriggerElements = this.element.querySelectorAll('.expandable-trigger');
         for (const trigger of expandableTriggerElements) {
@@ -189,6 +195,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     }
 
     static async #handleClickToggleLock(event, target) {
+        console.log("toggle lock");
         event.preventDefault();
         const name = target.dataset.name;
         const isLocked = foundry.utils.getProperty(this.actor, name);

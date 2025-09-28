@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 0.3.2
+- styling fixes
+- correct permission management in the scene tags window / app
+- stopped prevent edit mode toggling via submiting / editing data via the ENTER key
+- fixed some small bugs for the scene tags app
+
 # 0.3.1
 - fellowship themecard actors are linked now per default
 

@@ -157,6 +157,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         data.splice(index, 1);
         await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": data });
         this.render(true, { focus: true });
+        this.sendUpdateHookEvent();
     }
 
     async handleActorFtTagStatusToggle(event) {
@@ -180,6 +181,9 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     
     static async #handleFtsEditableCheckboxChanged(event,target) {
         event.preventDefault();
+        if(game.user.isGM === false) return;
+        if(!this.currentSceneDataItem) return;
+
         await this.currentSceneDataItem.update({ "system.floatingTagsAndStatusesEditable": !this.currentSceneDataItem.system.floatingTagsAndStatusesEditable  });
         this.sendUpdateHookEvent();
     }
@@ -236,35 +240,11 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.render(true, { focus: true });
     }
 
-    async handleFtStatMinus(event) {
-        event.preventDefault();
-        const index = event.currentTarget.dataset.index;
-        const floatingTagsAndStatuses = this.currentSceneDataItem.system.floatingTagsAndStatuses;
-        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
-        const currentValue = floatingTagsAndStatuses[index].value || 0;
-        if (currentValue > 1) {
-            foundry.utils.setProperty(floatingTagsAndStatuses[index], 'value', currentValue - 1);
-            await this.currentSceneDataItem.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
-        } else {
-            floatingTagsAndStatuses.splice(index, 1);
-            await this.currentSceneDataItem.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
-        }
-        this.sendUpdateHookEvent();
-    }
-
-    async handleFtStatPlus(event) {
-        event.preventDefault();
-        const index = event.currentTarget.dataset.index;
-        const floatingTagsAndStatuses = this.currentSceneDataItem.system.floatingTagsAndStatuses;
-        if (!floatingTagsAndStatuses || index >= floatingTagsAndStatuses.length) return;
-        const currentValue = floatingTagsAndStatuses[index].value || 0;
-        foundry.utils.setProperty(floatingTagsAndStatuses[index], 'value', currentValue + 1);
-        await this.currentSceneDataItem.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
-        this.sendUpdateHookEvent();
-    }
-
     static async #handleCreateFloatingTagOrStatus(event, target) {
         event.preventDefault();
+        if(game.user.isGM === false) return;
+        if(!this.currentSceneDataItem) return;
+        
         const floatingTagsAndStatuses = this.currentSceneDataItem.system.floatingTagsAndStatuses;
 
         if (floatingTagsAndStatuses) {
@@ -342,12 +322,13 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.sendUpdateHookEvent();
     }
 
-    addRollModification(name, value){
+    async addRollModification(name, value){
         if(!this.currentSceneDataItem) return;
         let tags = this.currentSceneDataItem.system.diceRollTagsStatus || [];
         tags.push({name, value: parseInt(value)});
-        this.currentSceneDataItem.update({ "system.diceRollTagsStatus": tags });
+        await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": tags });
         this.render(true, { focus: true });
+        this.sendUpdateHookEvent();
     }
 
     getRollModifications(){

@@ -5,7 +5,7 @@
             </div>
             <div class="flexcol listing">
                 {{#each currentSceneDataItem.system.diceRollTagsStatus}}
-                    <div class="mod-entry">{{name}} <a class="tag-status-delete" data-action="removeSceneAppRollMod" data-index="{{@index}}" title="{{localize 'MIST_ENGINE.LABELS.SceneApp.RemoveRolMod'}}"><i class="fas fa-trash"></i></a></div>
+                    <div class="mod-entry">{{name}} {{#if ../isGM}}<a class="tag-status-delete" data-action="removeSceneAppRollMod" data-index="{{@index}}" title="{{localize 'MIST_ENGINE.LABELS.SceneApp.RemoveRolMod'}}"><i class="fas fa-trash"></i></a>{{/if}}</div>
                 {{/each}}
             </div>
     {{/if}}
