@@ -250,12 +250,14 @@
       font-family: $font-primary;
       font-size: 36px;
       color: $c-dark-styled-text;
+      width: auto;
     }
-    .short-description{
-      font-family: $font-primary;
-      font-size: 18px;
-      color: $c-dark-styled-text;
-    }
+  }
+
+  .short-description {
+    font-family: $font-primary;
+    font-size: 18px;
+    color: $c-dark-styled-text;
   }
 
   .difficulty-icons {
@@ -445,23 +447,20 @@
   text-shadow: 1px 1px 2px rgb(255, 249, 249);
 }
 
-
 section [data-group="npc-sheet"] {
-  legend{
+  legend {
     font-family: $font-primary;
     font-weight: bold;
     color: black;
   }
 
-  .table-cell{
+  .table-cell {
     font-family: $font-primary;
-    color: black; 
+    color: black;
     font-weight: bold;
   }
-
 }
 
-
-.mode-toggle-button{
-      margin-inline-end: auto;
+.mode-toggle-button {
+  margin-inline-end: auto;
 }
