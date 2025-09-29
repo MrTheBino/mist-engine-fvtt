@@ -89,7 +89,10 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             console.log("socket message received in character sheet: ", msg);
             if (msg?.type === "hook" && msg.hook == "fellowshipThemeCardUpdated") {
                 this.reloadFellowshipThemecard(false);
-                this.render(true, { focus: true });
+                if(this.rendered){
+                    this.render();
+                }
+                
             }
             else if (msg?.type === "hook" && msg.hook == "floatingTagOrStatusUpdated" && msg.data?.actorId === this.actor.id) {
                 this.render(true, { focus: true });
@@ -135,12 +138,12 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         return this.actorFellowshipThemecard;
     }
 
-    loadFellowshipThemecard() {
+    async loadFellowshipThemecard() {
         if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
             this.actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
             if (this.actorFellowshipThemecard) {
                 // in case it's not found, reset the id in the schema
-                this.actor.update({ "system.actorSharedSingleThemecardId": "" });
+                await this.actor.update({ "system.actorSharedSingleThemecardId": "" });
             }
         }
 
@@ -154,7 +157,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             if (ownedWorldActors && ownedWorldActors.length > 0) {
                 this.actorFellowshipThemecard = ownedWorldActors[0];
                 //console.log("found fellowship themecard: ", this.actorFellowshipThemecard.id);
-                this.actor.update({ "system.actorSharedSingleThemecardId": this.actorFellowshipThemecard.id });
+                await this.actor.update({ "system.actorSharedSingleThemecardId": this.actorFellowshipThemecard.id });
                 //console.log("assigned fellowship themecard");
             } else {
                 this.actorFellowshipThemecard = false;
@@ -165,15 +168,12 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
     reloadFellowshipThemecard(sendMessageToOthers = false) {
         this.loadFellowshipThemecard();
-        if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
-            this.actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
-            if (sendMessageToOthers == true) {
-                game.socket.emit("system.mist-engine-fvtt", {
-                    type: "hook",
-                    hook: "fellowshipThemeCardUpdated",
-                    data: {}
-                });
-            }
+        if (sendMessageToOthers == true) {
+            game.socket.emit("system.mist-engine-fvtt", {
+                type: "hook",
+                hook: "fellowshipThemeCardUpdated",
+                data: {}
+            });
         }
     }
 
@@ -495,8 +495,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             await object.update({ [`system.powertag${ptIndex}.toBurn`]: false });
         }
 
-        this.reloadFellowshipThemecard(true);
-        this.render();
+        if (source === "fellowship-themecard") {
+            this.reloadFellowshipThemecard(true);
+        }
+
+        if(this.rendered){
+            this.render();
+        }
+        
     }
 
     async handleBackpackItemSelectableClick(event) {

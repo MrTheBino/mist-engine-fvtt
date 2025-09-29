@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 0.3.5
+- improved internal handling of fellowship theme cards
+- selecting tags doesn't send always a fellowship changed signal
+
 # 0.3.4
 - fixed entering / saving the quest for the fellowship themecard
 
