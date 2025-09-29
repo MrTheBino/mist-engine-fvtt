@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 0.3.4
+- fixed entering / saving the quest for the fellowship themecard
+
 # 0.3.3
 - improved internal handling of fellowship theme cards
 

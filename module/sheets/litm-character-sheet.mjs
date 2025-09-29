@@ -365,7 +365,6 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let object = this.actor.items.get(target.dataset.itemId);
         const source = target.dataset.source;
 
-        console.log("source: ", source);
         if (source === "fellowship-themecard") {
             if (this.actorFellowshipThemecard) {
                 object = this.actorFellowshipThemecard;

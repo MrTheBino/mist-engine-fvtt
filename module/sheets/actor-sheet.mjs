@@ -314,15 +314,19 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                     if (event.target.type === 'checkbox') {
                         let keyToUpdate = arrayName + `.${index}.` + key;
                         foundry.utils.setProperty(this.actorFellowshipThemecard, keyToUpdate, event.target.checked);
-                        this.actorFellowshipThemecard.update({ [arrayName]: array });
+                        await this.actorFellowshipThemecard.update({ [arrayName]: array });
                     } else {
                         foundry.utils.setProperty(this.actorFellowshipThemecard, arrayName + "." + key, event.target.value);
-                        this.actorFellowshipThemecard.update({ [arrayName]: array });
+                        await this.actorFellowshipThemecard.update({ [arrayName]: array });
                     }
                 } else {
-                    this.actorFellowshipThemecard.update({ [event.target.dataset.key]: event.target.value });
+                    let key = event.currentTarget.dataset.key;
+                    let value = event.currentTarget.value;
+                    await this.actorFellowshipThemecard.update({ [key]: value });
 
                 }
+            }else{
+                console.warn("No fellowship themecard found for actor");
             }
         }
     }
