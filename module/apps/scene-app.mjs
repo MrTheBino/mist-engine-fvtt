@@ -88,6 +88,12 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         for (const toggle of actorFtsTagStatusToggle) {
             toggle.addEventListener("contextmenu", event => this.handleActorFtTagStatusToggle(event))
         }
+
+        // toggle positive / negativ status for dice roll modifiers
+        const toggleSceneAppRollMods = this.element.querySelectorAll('.toggleSceneAppRollMod')
+        for (const toggle of toggleSceneAppRollMods) {
+            toggle.addEventListener("contextmenu", event => this.handleToggleSceneAppRollMod(event))
+        }
     }
 
     activateSocketListeners() {
@@ -156,6 +162,18 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (!data || index >= data.length) return;
         data.splice(index, 1);
         await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": data });
+        this.render(true, { focus: true });
+        this.sendUpdateHookEvent();
+    }
+
+    async handleToggleSceneAppRollMod(event) {
+        event.preventDefault();
+        const index = event.currentTarget.dataset.index;
+        const data = this.currentSceneDataItem.system.diceRollTagsStatus;
+        if (!data || index >= data.length) return;
+        data[index].positive = !data[index].positive;
+        await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": data });
+        console.log(data);
         this.render(true, { focus: true });
         this.sendUpdateHookEvent();
     }

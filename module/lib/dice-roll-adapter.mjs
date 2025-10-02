@@ -43,7 +43,7 @@ export class DiceRollAdapter {
         MistSceneApp.getInstance().getRollModifications().forEach(element => {
             // at present all gm tags are negative
             // the roll modifications have a flag positive(boolean) but it is not used for now
-            this.selectedGmTags.push({ name: element.name, positive: false, source: "gm" });
+            this.selectedGmTags.push({ name: element.name, positive: element.positive, source: "gm" });
         });
     }
 

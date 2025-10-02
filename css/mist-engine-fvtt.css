@@ -1249,5 +1249,11 @@
   font-weight: bold;
   margin-bottom: 2px;
 }
+.scene-app-dice-roll-modifiers .listing .mod-entry.positive {
+  background-color: #bccdb0;
+}
+.scene-app-dice-roll-modifiers .listing .mod-entry.negative {
+  background-color: #ecb985;
+}
 
 /*# sourceMappingURL=mist-engine-fvtt.css.map */

@@ -29,6 +29,14 @@
             text-align: center;
             font-weight: bold;
             margin-bottom: 2px;
+
+            &.positive{
+                background-color: $c-tag-green;
+            }
+
+            &.negative{
+                background-color: $c-tag-orange;
+            }
         }
     }
 
