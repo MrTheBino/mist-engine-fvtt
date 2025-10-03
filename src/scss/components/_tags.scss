@@ -25,7 +25,7 @@
     }
 }
 
-.special-improvement-label{
+.special-improvement-label {
     font-family: Labrada, serif;
     font-weight: normal;
     color: black;
@@ -49,7 +49,7 @@
     }
 }
 
-.litm-pc-fellowship-relationship-companion{
+.litm-pc-fellowship-relationship-companion {
     font-family: Labrada, serif;
     font-weight: normal;
     color: black;
@@ -155,22 +155,40 @@
     background-color: $c-tag-green;
 }
 
-.fts-input-name.tag {
-    background-color: $c-tag-yellow;
-    color: $c-styled-text;
-    font-family: $font-primary;
-    border-radius: 2px;
-    text-align: center;
-    font-weight: bold;
+
+
+.fts-input-name {
+    &.tag {
+        background-color: $c-tag-yellow;
+        color: $c-styled-text;
+        font-family: $font-primary;
+        border-radius: 2px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    &.status {
+        background-color: $c-tag-green;
+        color: $c-styled-text;
+        font-family: $font-primary;
+        border-radius: 2px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    &.negative{
+        background-color: $c-tag-orange;
+    }
 }
 
-.fts-input-name.status {
-    background-color: $c-tag-green;
-    color: $c-styled-text;
-    font-family: $font-primary;
-    border-radius: 2px;
-    text-align: center;
-    font-weight: bold;
+.fts-tag-modifier-toggle{
+    float: left;
+    cursor: pointer;
+}
+
+.fts-tag-status-toggle{
+    float: right;
+    cursor: pointer;
 }
 
 .npc-limit-description {

@@ -23,6 +23,8 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             createFloatingTagOrStatus: this.#handleCreateFloatingTagOrStatus,
             deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus,
             toggleFloatingTagOrStatusMarking: this.#handleToggleFloatingTagOrStatusMarking,
+            toggleFloatingTagOrStatus: this.#handleToggleFloatingTagOrStatus,
+            toggleFloatingTagOrStatusModifier: this.#handleToggleFloatingTagOrStatusModifier,
             clickToggleLock: this.#handleClickToggleLock
         },
         form: {
@@ -176,20 +178,22 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             input.addEventListener("change", event => this.handleFtStatChanged(event))
         }
 
-        const ftsTagStatusToggle = this.element.querySelectorAll('.fts-tag-status-toggle')
-        for (const toggle of ftsTagStatusToggle) {
-            toggle.addEventListener("contextmenu", event => this.handleFtTagStatusToggle(event))
-        }
-
         const themebookEntryInputs = this.element.querySelectorAll('.themebook-entry-input')
         for (const input of themebookEntryInputs) {
             input.addEventListener("change", event => this.handleThemebookEntryInputChanged(event))
         }
     }
 
-    async handleFtTagStatusToggle(event) {
+    static async #handleToggleFloatingTagOrStatusModifier(event, target) {
         event.preventDefault();
-        const index = event.currentTarget.dataset.index;
+        const index = target.dataset.index;
+        FloatingTagAndStatusAdapter.handleTagStatusModifierToggle(this.actor, index);
+        this.sendFloatableTagOrStatusUpdate();
+    }
+    
+    static async #handleToggleFloatingTagOrStatus(event,target) {
+        event.preventDefault();
+        const index = target.dataset.index;
         FloatingTagAndStatusAdapter.handleTagStatusToggle(this.actor, index);
         this.sendFloatableTagOrStatusUpdate();
     }

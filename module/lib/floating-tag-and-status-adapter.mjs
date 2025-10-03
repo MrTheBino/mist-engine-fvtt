@@ -2,6 +2,22 @@
 // This module provides static methods to manage floating tags and statuses
 // for actors and items in a Foundry VTT system.
 export class FloatingTagAndStatusAdapter {
+    static async handleTagStatusModifierToggle(objectToUpdate,arrayIndex){
+        if(objectToUpdate===undefined){
+            console.log("FloatingTagAndStatusAdapter.handleTagStatusModifierToggle: no object to update");
+            return;
+        }
+        const floatingTagsAndStatuses = objectToUpdate.system.floatingTagsAndStatuses;
+        if (!floatingTagsAndStatuses || arrayIndex >= floatingTagsAndStatuses.length){
+            console.log("FloatingTagAndStatusAdapter.handleTagStatusModifierToggle: invalid array index");
+            return;
+        }
+        let oldPositive = floatingTagsAndStatuses[arrayIndex].positive || false;
+        let newPositive = !oldPositive;
+        foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'positive', newPositive);
+        await objectToUpdate.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+    }
+    
     static async handleTagStatusToggle(objectToUpdate,arrayIndex){
         if(objectToUpdate===undefined){
             console.log("FloatingTagAndStatusAdapter.handleTagStatusToggle: no object to update");

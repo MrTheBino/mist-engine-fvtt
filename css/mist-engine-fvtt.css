@@ -941,6 +941,17 @@
   text-align: center;
   font-weight: bold;
 }
+.mist-engine .fts-input-name.negative {
+  background-color: #ecb985;
+}
+.mist-engine .fts-tag-modifier-toggle {
+  float: left;
+  cursor: pointer;
+}
+.mist-engine .fts-tag-status-toggle {
+  float: right;
+  cursor: pointer;
+}
 .mist-engine .npc-limit-description .tag {
   background-color: #bccdb0;
   color: #724a32;
@@ -1158,7 +1169,7 @@
   background-color: #bccdb0;
 }
 .message-content .selected-tags .tag.negative {
-  background-color: #ece800;
+  background-color: #ecb985;
 }
 .message-content .selected-tags .tag.fellowship {
   background-color: #81b1dc;

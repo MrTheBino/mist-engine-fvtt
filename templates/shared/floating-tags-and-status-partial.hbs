@@ -25,9 +25,11 @@
             {{/if}}
             <a data-action="deleteFloatingTagOrStatus" data-index="{{@index}}"><i class='fas fa-trash'></i></a>
             {{else}}
-            <div class="fts-input-name fts-tag-status-toggle {{#if this.isStatus}}status{{else}}tag{{/if}}"
-                data-index="{{@index}}" title="right click to toggle between tag or state">{{this.name}}{{#if
-                this.isStatus}}-{{this.value}}{{/if}}</div>
+            <div class="fts-input-name  {{#if this.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}">
+                <i class="fa-solid fa-arrows-turn-to-dots fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-index="{{@index}}" title="toggle between positive and negative"></i>
+                {{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}
+                <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{@index}}" title="toggle between tag and status"></i>
+                </div>
             {{/if}}
         </div>
         {{!-- Status Markers --}}
