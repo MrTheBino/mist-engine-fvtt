@@ -4,6 +4,7 @@ const { TextEditor, DragDrop } = foundry.applications.ux
 import { MistSceneApp } from '../apps/scene-app.mjs'
 import { MistEngineItem } from '../documents/item.mjs'
 import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adapter.mjs";
+import {StoryTagAdapter} from "../lib/story-tag-adapter.mjs";
 
 export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
@@ -25,6 +26,10 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             toggleFloatingTagOrStatusMarking: this.#handleToggleFloatingTagOrStatusMarking,
             toggleFloatingTagOrStatus: this.#handleToggleFloatingTagOrStatus,
             toggleFloatingTagOrStatusModifier: this.#handleToggleFloatingTagOrStatusModifier,
+            toggleFloatingTagOrStatusSelected: this.#handleToggleFloatingTagOrStatusSelected,
+            deleteStoryTag: this.#handleDeleteStoryTag,
+            toggleStoryTagSelection: this.#handleToggleStoryTagSelection,
+            toggleStoryTagBurn: this.#handleToggleStoryTagBurn,
             clickToggleLock: this.#handleClickToggleLock
         },
         form: {
@@ -167,6 +172,17 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             });
         }
 
+        // Story Tags
+        const storytagItemEditableElements = this.element.querySelectorAll('.storytag-item-editable')
+        for (const input of storytagItemEditableElements) {
+            input.addEventListener("change", event => this.handleStoryTagItemChanged(event))
+        }
+
+        const storytagSelectableElements = this.element.querySelectorAll('.storytag-selectable')
+        for (const input of storytagSelectableElements) {
+            input.addEventListener("contextmenu", event => this.handleStoryTagBurnState(event)) // right click is for changing the burn state
+        }
+
         const itemEditableStatsElements = this.element.querySelectorAll('.item-editable-stat')
         for (const input of itemEditableStatsElements) {
             input.addEventListener("change", event => this.handleItemStatChanged(event))
@@ -182,6 +198,52 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         for (const input of themebookEntryInputs) {
             input.addEventListener("change", event => this.handleThemebookEntryInputChanged(event))
         }
+    }
+
+    async handleStoryTagBurnState(event) {
+        event.preventDefault();
+        const target = event.currentTarget;
+        const index = target.dataset.index;
+        const itemId = target.dataset.itemId;
+        const key = target.dataset.key;
+        await StoryTagAdapter.toggleBurnedState(this.actor,itemId,key,index);
+    }
+    
+    static async #handleToggleStoryTagBurn(event,target){
+        event.preventDefault();
+        const index = target.dataset.index;
+        const itemId = target.dataset.itemId;
+        const key = target.dataset.key;
+        await StoryTagAdapter.toggleBurnSelection(this.actor,itemId,key,index);
+    }
+
+    static async #handleToggleStoryTagSelection(event,target){
+        event.preventDefault();
+        const index = target.dataset.index;
+        const itemId = target.dataset.itemId;
+        const key = target.dataset.key;
+
+        await StoryTagAdapter.toggleStoryTagSelection(this.actor, itemId, key, index);
+    }
+
+    async handleStoryTagItemChanged(event) {
+        event.preventDefault();
+        const index = event.currentTarget.dataset.index;
+        const key = event.currentTarget.dataset.key;
+        const itemId = event.currentTarget.dataset.itemId;
+
+        if (event.currentTarget.type === 'checkbox') {
+            await StoryTagAdapter.updateStoryTag(this.actor, itemId, key, index, event.currentTarget.checked);
+        }else{
+            await StoryTagAdapter.updateStoryTag(this.actor, itemId, key, index, event.currentTarget.value);
+        }
+    }
+
+    static async #handleToggleFloatingTagOrStatusSelected(event, target) {
+        event.preventDefault();
+        const index = target.dataset.index;
+        FloatingTagAndStatusAdapter.handleTagStatusSelectedToggle(this.actor, index);
+        this.sendFloatableTagOrStatusUpdate();
     }
 
     static async #handleToggleFloatingTagOrStatusModifier(event, target) {
@@ -421,6 +483,17 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             }
         }
 
+    }
+
+    static async #handleDeleteStoryTag(event, target) {
+        event.preventDefault();
+        const itemId = target.dataset.itemId;
+        const index = target.dataset.index;
+        const key = target.dataset.key;
+
+        console.log("Deleting story tag", {itemId,index,key});
+        StoryTagAdapter.deleteStoryTag(this.actor,itemId,key,index);
+        this.render(true);
     }
 
     /**

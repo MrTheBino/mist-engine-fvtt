@@ -27,7 +27,7 @@
             {{else}}
             <div class="fts-input-name  {{#if this.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}">
                 <i class="fa-solid fa-arrows-turn-to-dots fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-index="{{@index}}" title="toggle between positive and negative"></i>
-                {{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}
+                <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-index="{{@index}}">{{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}</span>
                 <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{@index}}" title="toggle between tag and status"></i>
                 </div>
             {{/if}}

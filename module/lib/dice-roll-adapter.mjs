@@ -53,9 +53,9 @@ export class DiceRollAdapter {
             if (item.type === "backpack") {
                 const backpackItems = item.system.items;
                 if (backpackItems) {
-                    for (let backpackItem of backpackItems) {
+                    for (const [i, backpackItem] of backpackItems.entries()) {
                         if (backpackItem.selected) {
-                            this.selectedTags.push({ name: backpackItem.name, positive: true, source: null });
+                            this.selectedTags.push({ name: backpackItem.name, positive: true, toBurn: backpackItem.toBurn, index: i, themebookId: backpackItem.id, source: 'backpack' });
                         }
                     }
                 }
@@ -126,8 +126,12 @@ export class DiceRollAdapter {
             if (item.type === "backpack") {
                 const backpackItems = item.system.items;
                 if (backpackItems) {
-                    for (let backpackItem of backpackItems) {
+                    for (let [bi, backpackItem] of backpackItems.entries()) {
                         backpackItem.selected = false;
+                        if(backpackItem.toBurn){
+                            backpackItem.burned = true;
+                            backpackItem.toBurn = false;
+                        }
                     }
                 }
 

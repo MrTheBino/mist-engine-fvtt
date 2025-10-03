@@ -12,17 +12,7 @@
 
         <div class="powertags-container">
             {{#each backpack.system.items}}
-            <div class="item-powertag-line flexrow">
-                {{#if ../editMode}}
-                    <input type="text" class="backpack-item-editable" data-item-id={{../backpack._id}} data-item-index="{{@index}}" value="{{this.name}}" placeholder="Item Name"/>
-                    <a class="themebook-icon"data-action="deleteBackpackItem" data-item-id='{{../backpack._id}}' data-item-index="{{@index}}">
-                        <i class='fas fa-trash'></i>
-                    </a>
-                {{else}}
-                <span class="litm-pc-powertag powertag-name bpi-selectable {{#if this.selected}}selected{{/if}}"
-                    data-item-index={{@index}} data-item-id={{../backpack._id}}>{{this.name}}</span>
-                {{/if}}
-            </div>
+                {{>  'systems/mist-engine-fvtt/templates/shared/litm/storytag-line.hbs'  storytag=this source='backpack' key='system.items' id=../backpack._id index=@index editMode=../editMode firstTag=@first}}
             {{/each}}
         </div>
     </div>

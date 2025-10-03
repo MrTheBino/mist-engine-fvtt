@@ -681,6 +681,12 @@
 .mist-engine .fts-input-value {
   flex-shrink: 2;
 }
+.mist-engine .fts-selectable {
+  cursor: pointer;
+}
+.mist-engine .fts-selectable.selected {
+  text-shadow: 0px 0px 15px #ff87ff;
+}
 .mist-engine .fts-input-marking {
   flex-grow: 0.1;
   text-align: center;
@@ -812,6 +818,28 @@
   color: gray;
 }
 .mist-engine .litm-pc-powertag.first {
+  font-weight: bolder;
+  font-size: 1.1em;
+}
+.mist-engine .litm-pc-storytag {
+  font-family: Labrada, serif;
+  font-weight: normal;
+  color: black;
+}
+.mist-engine .litm-pc-storytag:hover {
+  cursor: pointer;
+  text-shadow: 0 0 15px rgb(143, 255, 105);
+  font-weight: bold;
+}
+.mist-engine .litm-pc-storytag.selected {
+  text-shadow: 0 0 15px rgb(64, 255, 0);
+  font-weight: bold;
+}
+.mist-engine .litm-pc-storytag.burned {
+  text-decoration: line-through;
+  color: gray;
+}
+.mist-engine .litm-pc-storytag.first {
   font-weight: bolder;
   font-size: 1.1em;
 }

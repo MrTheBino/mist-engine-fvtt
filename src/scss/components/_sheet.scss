@@ -328,6 +328,13 @@
   // height: 16px;
 }
 
+.fts-selectable {
+  cursor: pointer;
+  &.selected{
+    text-shadow: 0px 0px 15px $c-tag-shadow-selected;
+  }
+}
+
 .fts-input-marking {
   flex-grow: 0.1;
   text-align: center;

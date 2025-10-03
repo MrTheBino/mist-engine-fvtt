@@ -25,6 +25,33 @@
     }
 }
 
+.litm-pc-storytag  {
+    font-family: Labrada, serif;
+    font-weight: normal;
+    color: black;
+
+    &:hover {
+        cursor: pointer;
+        text-shadow: 0 0 15px rgb(143, 255, 105);
+        font-weight: bold;
+    }
+
+    &.selected {
+        text-shadow: 0 0 15px rgb(64, 255, 0);
+        font-weight: bold;
+    }
+
+    &.burned {
+        text-decoration: line-through;
+        color: gray;
+    }
+
+    &.first {
+        font-weight: bolder;
+        font-size: 1.1em;
+    }
+}
+
 .special-improvement-label {
     font-family: Labrada, serif;
     font-weight: normal;

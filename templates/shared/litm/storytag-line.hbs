@@ -1,0 +1,14 @@
+<div class="item-storytag-line flexrow">
+    {{#if editMode}}
+    <input type="text" class="storytag-item-editable" data-item-id='{{id}}' data-index="{{index}}" value="{{this.name}}" data-key="{{key}}" placeholder="Name"/>
+    <a class="themebook-icon" data-action="deleteStoryTag" data-item-id='{{id}}' data-index="{{index}}" data-source="{{source}}" data-key="{{key}}">
+        <i class='fas fa-trash'></i>
+    </a>
+    {{else}}
+    <span class="burn-indicator" data-action="toggleStoryTagBurn" data-item-id="{{id}}" data-index="{{index}}" data-key="{{key}}" data-source="{{source}}">
+            <i class="burn-icon {{#if storytag.toBurn}}to-burn{{/if}}"></i>
+        </span>
+        <span class="litm-pc-storytag storytag-name storytag-selectable {{#if firstTag}}first{{/if}} {{#if storytag.selected}}selected{{/if}} {{#if storytag.burned}}burned{{/if}}" title="Right click to toggle burn state"
+            data-action="toggleStoryTagSelection" data-index="{{index}}" data-item-id="{{id}}" data-key="{{key}}" data-source="{{source}}">{{storytag.name}}</span>
+    {{/if}}
+</div>

@@ -18,6 +18,22 @@ export class FloatingTagAndStatusAdapter {
         await objectToUpdate.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
     }
     
+    static async handleTagStatusSelectedToggle(objectToUpdate,arrayIndex){
+        if(objectToUpdate===undefined){
+            console.log("FloatingTagAndStatusAdapter.handleTagStatusSelectedToggle: no object to update");
+            return;
+        }
+        const floatingTagsAndStatuses = objectToUpdate.system.floatingTagsAndStatuses;
+        if (!floatingTagsAndStatuses || arrayIndex >= floatingTagsAndStatuses.length){
+            console.log("FloatingTagAndStatusAdapter.handleTagStatusSelectedToggle: invalid array index");
+            return;
+        }
+        let oldSelected = floatingTagsAndStatuses[arrayIndex].selected || false;
+        let newSelected = !oldSelected;
+        foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'selected', newSelected);
+        await objectToUpdate.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+    }
+    
     static async handleTagStatusToggle(objectToUpdate,arrayIndex){
         if(objectToUpdate===undefined){
             console.log("FloatingTagAndStatusAdapter.handleTagStatusToggle: no object to update");

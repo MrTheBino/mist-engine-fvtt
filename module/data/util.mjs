@@ -19,6 +19,20 @@ export function buildFloatingTagsAndStatuses(){
     return schema;
 }
 
+export function buildPowerTag(){
+  const fields = foundry.data.fields;
+    const requiredInteger = { required: true, nullable: false, integer: true };
+
+  return new fields.SchemaField({
+                name: new fields.StringField({ blank: true }),
+                question: new fields.StringField({ blank: true }),
+                burned: new fields.BooleanField({ initial: false }),
+                toBurn: new fields.BooleanField({ initial: false }),
+                planned: new fields.BooleanField({ initial: false }),
+                selected: new fields.BooleanField({ initial: false })
+            });
+}
+
 export function buildSpecialImprovements(){
   const fields = foundry.data.fields;
   const requiredInteger = { required: true, nullable: false, integer: true };

@@ -13,6 +13,7 @@ export const preloadHandlebarsTemplates = async function () {
     "systems/mist-engine-fvtt/templates/actor/parts/character-themebooks.hbs",
     "systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs",
     "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs",
+    "systems/mist-engine-fvtt/templates/shared/litm/storytag-line.hbs",
     "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs",
     "systems/mist-engine-fvtt/templates/shared/litm/themebook-special-improvement-line.hbs",
     "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs",

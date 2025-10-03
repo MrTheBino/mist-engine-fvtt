@@ -1,5 +1,6 @@
 import { MistEngineActorSheet } from './actor-sheet.mjs';
 import { DiceRollAdapter } from '../lib/dice-roll-adapter.mjs';
+import { PowerTagAdapter } from '../lib/power-tag-adapter.mjs';
 
 export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -217,16 +218,6 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             tag.addEventListener("click", event => this.handleWeaknessSelectableClick(event));
         }
 
-        const selectableBackpackItems = this.element.querySelectorAll('.bpi-selectable');
-        for (const item of selectableBackpackItems) {
-            item.addEventListener("click", event => this.handleBackpackItemSelectableClick(event));
-        }
-
-        const backpackItemUpdates = this.element.querySelectorAll('.backpack-item-editable');
-        for (const input of backpackItemUpdates) {
-            input.addEventListener("change", event => this.handleBackpackItemUpdate(event));
-        }
-
         const developmentPartialContainers = this.element.querySelectorAll('.development-partial-container');
         for (const container of developmentPartialContainers) {
             container.addEventListener("click", event => this.handleDevelopmentPartialClick(event));
@@ -387,24 +378,6 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         this.render();
     }
 
-    handleBackpackItemUpdate(event) {
-        event.preventDefault();
-        const input = event.currentTarget;
-        const itemId = input.dataset.itemId;
-        const itemIndex = input.dataset.itemIndex;
-        const newName = input.value;
-
-        const backpack = this.options.document.items.get(itemId);
-        if (!backpack) return;
-
-        const backpackItems = backpack.system.items;
-        backpackItems[itemIndex].name = newName;
-
-        backpack.update({
-            "system.items": backpackItems
-        });
-    }
-
     async handleWeaknessSelectableClick(event) {
         event.preventDefault();
         const tag = event.currentTarget;
@@ -503,23 +476,6 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             this.render();
         }
         
-    }
-
-    async handleBackpackItemSelectableClick(event) {
-        event.preventDefault();
-        const item = event.currentTarget;
-        const itemId = item.dataset.itemId;
-        const actor = this.options.document;
-        const backpack = actor.items.get(itemId);
-        if (!backpack) return;
-        const itemIndex = item.dataset.itemIndex;
-        let backpackItems = backpack.system.items;
-        if (!backpackItems || itemIndex >= backpackItems.length) return;
-        backpackItems[itemIndex].selected = !backpackItems[itemIndex].selected;
-
-        await backpack.update({
-            "system.items": backpackItems
-        });
     }
 
     static async #handleDeleteBackpackItem(event, target) {
