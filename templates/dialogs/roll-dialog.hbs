@@ -2,13 +2,19 @@
     <div class="selected-tags-container flexcol">
         <label class="resource-label">You selected:</label>
         {{#each selectedTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}}</div>
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}} {{#if (gt this.value 0)}}-{{this.value}}{{/if}}</div>
+        {{/each}}
+    </div>
+    <div class="selected-tags-container flexcol">
+        <label class="resource-label">Story Tags / Status selected:</label>
+        {{#each selectedStoryTags}}
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}} {{#if (gt this.value 0)}}-{{this.value}}{{/if}}</div>
         {{/each}}
     </div>
     <div class="selected-tags-container flexcol">
         <label class="resource-label">GM selected:</label>
         {{#each selectedGmTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}}</div>
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}} {{#if (gt this.value 0)}}-{{this.value}}{{/if}}</div>
         {{/each}}
     </div>
      <div class="form-group">

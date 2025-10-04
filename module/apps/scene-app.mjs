@@ -40,6 +40,11 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             clickToggleLock: this.#handleFtsEditableCheckboxChanged,
             toggleFloatingTagOrStatusMarking: this.#handleToggleFloatingTagOrStatusMarking,
             deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus,
+            toggleDiceRollModifier: this.#handleToggleDiceRollModifier,
+            // story floating tags and statuses
+            toggleFloatingTagOrStatusSelected: this.#handleToggleFloatingTagOrStatusSelected,
+            toggleFloatingTagOrStatusModifier: this.#handleToggleFloatingTagOrStatusModifier,
+            toggleFloatingTagOrStatus: this.#handleToggleFloatingTagOrStatus,
         },
     };
 
@@ -76,23 +81,6 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const updateableFtsStats = this.element.querySelectorAll('.updateable-fts-stat')
         for (const input of updateableFtsStats) {
             input.addEventListener("change", event => this.handleFtStatChanged(event))
-        }
-
-        const ftsTagStatusToggle = this.element.querySelectorAll('.fts-tag-status-toggle')
-        for (const toggle of ftsTagStatusToggle) {
-            toggle.addEventListener("contextmenu", event => this.handleFtTagStatusToggle(event))
-        }
-
-        // Actor Floating Tags and Statuses
-        const actorFtsTagStatusToggle = this.element.querySelectorAll('.fts-tag-status-toggle-actor')
-        for (const toggle of actorFtsTagStatusToggle) {
-            toggle.addEventListener("contextmenu", event => this.handleActorFtTagStatusToggle(event))
-        }
-
-        // toggle positive / negativ status for dice roll modifiers
-        const toggleSceneAppRollMods = this.element.querySelectorAll('.toggleSceneAppRollMod')
-        for (const toggle of toggleSceneAppRollMods) {
-            toggle.addEventListener("contextmenu", event => this.handleToggleSceneAppRollMod(event))
         }
     }
 
@@ -155,6 +143,17 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return context;
     }
 
+    static async #handleToggleDiceRollModifier(event, target) {
+        event.preventDefault();
+        const index = target.dataset.index;
+        let data = this.currentSceneDataItem.system.diceRollTagsStatus;
+        if (!data || index >= data.length) return;
+        data[index].positive = !data[index].positive;
+        await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": data });
+        
+        this.sendUpdateHookEvent();
+    }
+
     static async #handleRemoveSceneAppRollMod(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
@@ -162,19 +161,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (!data || index >= data.length) return;
         data.splice(index, 1);
         await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": data });
-        this.render(true, { focus: true });
-        this.sendUpdateHookEvent();
-    }
-
-    async handleToggleSceneAppRollMod(event) {
-        event.preventDefault();
-        const index = event.currentTarget.dataset.index;
-        const data = this.currentSceneDataItem.system.diceRollTagsStatus;
-        if (!data || index >= data.length) return;
-        data[index].positive = !data[index].positive;
-        await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": data });
-        console.log(data);
-        this.render(true, { focus: true });
+        
         this.sendUpdateHookEvent();
     }
 
@@ -182,7 +169,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         event.preventDefault();
         const index = event.currentTarget.dataset.index;
         const actor = game.actors.get(event.currentTarget.dataset.actorId);
-        FloatingTagAndStatusAdapter.handleTagStatusToggle(actor, index);
+        await FloatingTagAndStatusAdapter.handleTagStatusToggle(actor, index);
         this.sendFloatableTagOrStatusUpdateForActor(actor);
     }
 
@@ -216,7 +203,6 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(this.currentSceneDataItem, index, target.dataset.markingIndex);
 
         this.sendUpdateHookEvent();
-        this.render(true, { focus: true });
     }
 
     // Story Floating Tags and Statuses
@@ -229,21 +215,40 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const key = event.currentTarget.dataset.key;
         const value = event.currentTarget.value;
         
-        FloatingTagAndStatusAdapter.handleFtStatChanged(this.currentSceneDataItem, index, key, value);
+        await FloatingTagAndStatusAdapter.handleFtStatChanged(this.currentSceneDataItem, index, key, value);
         this.sendUpdateHookEvent();
-        this.render(true, { focus: true });
     }
 
-    async handleFtTagStatusToggle(event) {
+    static async #handleToggleFloatingTagOrStatusSelected(event, target) {
         event.preventDefault();
-        
+
         if(game.user.isGM === false) return;
         if(!this.currentSceneDataItem) return;
 
-        const index = event.currentTarget.dataset.index;
-        FloatingTagAndStatusAdapter.handleTagStatusToggle(this.currentSceneDataItem, index);
+        const index = target.dataset.index;
+        await FloatingTagAndStatusAdapter.handleTagStatusSelectedToggle(this.currentSceneDataItem, index);
         this.sendUpdateHookEvent();
-        this.render(true, { focus: true });
+    }
+
+    static async #handleToggleFloatingTagOrStatus(event,target) {
+        event.preventDefault();
+        if(game.user.isGM === false) return;
+        if(!this.currentSceneDataItem) return;
+
+        const index = target.dataset.index;
+        await FloatingTagAndStatusAdapter.handleTagStatusToggle(this.currentSceneDataItem, index);
+        this.sendUpdateHookEvent();
+    }
+
+    static async #handleToggleFloatingTagOrStatusModifier(event, target) {
+        event.preventDefault();
+
+        if(game.user.isGM === false) return;
+        if(!this.currentSceneDataItem) return;
+
+        const index = target.dataset.index;
+        await FloatingTagAndStatusAdapter.handleTagStatusModifierToggle(this.currentSceneDataItem, index);
+        this.sendUpdateHookEvent();
     }
 
     static async #handleDeleteFloatingTagOrStatus(event, target) {
@@ -255,7 +260,6 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const index = target.dataset.index;
         await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(this.currentSceneDataItem, index);
         this.sendUpdateHookEvent();
-        this.render(true, { focus: true });
     }
 
     static async #handleCreateFloatingTagOrStatus(event, target) {
@@ -341,16 +345,35 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     async addRollModification(name, value){
+        if(game.user.isGM === false) return;
+        console.log("addRollModification", name, value);
         if(!this.currentSceneDataItem) return;
         let tags = this.currentSceneDataItem.system.diceRollTagsStatus || [];
         tags.push({name, value: parseInt(value)});
         await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": tags });
-        this.render(true, { focus: true });
+        
         this.sendUpdateHookEvent();
     }
 
     getRollModifications(){
         if(!this.currentSceneDataItem) return [];
         return this.currentSceneDataItem.system.diceRollTagsStatus || [];
+    }
+
+    getSceneAndStoryTags(){
+        if(!this.currentSceneDataItem) return [];
+        return this.currentSceneDataItem.system.floatingTagsAndStatuses || [];
+    }
+
+    resetSelection(){
+        if(!this.currentSceneDataItem) return;
+        if(game.user.isGM === false) return;
+
+        const floatingTagsAndStatuses = this.currentSceneDataItem.system.floatingTagsAndStatuses;
+        if (!floatingTagsAndStatuses) return;
+        floatingTagsAndStatuses.forEach(t => t.selected = false);
+        this.currentSceneDataItem.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+
+        this.sendUpdateHookEvent();
     }
 }

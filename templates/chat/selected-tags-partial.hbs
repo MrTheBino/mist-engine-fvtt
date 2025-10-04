@@ -8,7 +8,7 @@
                 {{#if this.fellowship}}fellowship{{/if}}
                 ">
         {{#if this.toBurn}}🔥 {{/if}}
-        {{this.name}}
+        {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
     </span>
     {{/each}}
 </div>
@@ -23,7 +23,7 @@
                 {{#if this.fellowship}}fellowship{{/if}}
                 ">
         {{#if this.toBurn}}🔥 {{/if}}
-        {{this.name}}
+        {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
     </span>
     {{/each}}
 </div>

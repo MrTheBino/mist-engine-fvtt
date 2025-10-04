@@ -6,19 +6,21 @@ export class DiceRollAdapter {
         this.actor = options.actor;
         this.rollType = options.type || 'quick'; // 'quick' or 'detailed'
 
-        //both are { name: String, positive: Boolean, weakness: Boolean, source: String }
+        //both are { name: String, positive: Boolean, weakness: Boolean, source: String,value: Number }
         this.selectedTags = [];
         this.selectedGmTags = [];
+        this.selectedStoryTags = [];
     }
 
 
     async render() {
         this.prepareTags();
         this.prepareGMTags();
+        this.prepareSceneAndStoryTags();
 
         const html = await foundry.applications.handlebars.renderTemplate(
             "systems/mist-engine-fvtt/templates/dialogs/roll-dialog.hbs",
-            { selectedTags: this.selectedTags,selectedGmTags: this.selectedGmTags }
+            { selectedTags: this.selectedTags, selectedGmTags: this.selectedGmTags, selectedStoryTags: this.selectedStoryTags }
         );
 
         return new Promise((resolve) => {
@@ -39,12 +41,72 @@ export class DiceRollAdapter {
         });
     }
 
-    prepareGMTags(){
+    prepareGMTags() {
         MistSceneApp.getInstance().getRollModifications().forEach(element => {
             // at present all gm tags are negative
             // the roll modifications have a flag positive(boolean) but it is not used for now
-            this.selectedGmTags.push({ name: element.name, positive: element.positive, source: "gm" });
+            this.selectedGmTags.push({ name: element.name, positive: element.positive, source: "gm", value: element.value });
         });
+    }
+
+    prepareSceneAndStoryTags() {
+        MistSceneApp.getInstance().getSceneAndStoryTags().forEach(element => {
+            if (element.selected) {
+                this.selectedStoryTags.push({ name: element.name, positive: element.positive, source: "scene-and-story", value: element.value });
+            }
+        });
+    }
+
+    applyRulesToSelectedTags() {
+        const tagsForRole = [];
+
+        // first the take all normal tags
+        this.selectedGmTags.forEach(gmTag => {
+            if (gmTag.value === 0 || gmTag.value === undefined) {
+                tagsForRole.push(gmTag);
+            }
+        });
+
+        this.selectedTags.forEach(tag => {
+            if (tag.value === 0 || tag.value === undefined) {
+                tagsForRole.push(tag);
+            }
+        });
+
+        this.selectedStoryTags.forEach(tag => {
+            if (tag.value === 0 || tag.value === undefined) {
+                tagsForRole.push(tag);
+            }
+        });
+
+        let statuses = this.selectedTags.filter(t => t.value && t.value > 0);
+        statuses = this.selectedStoryTags.filter(t => t.value && t.value > 0).concat(statuses);
+        statuses = this.selectedGmTags.filter(t => t.value && t.value > 0).concat(statuses);
+
+        let positiveStatuses = statuses.filter(s => s.positive);
+        let negativeStatuses = statuses.filter(s => !s.positive);
+
+        // lets go through the statuses, but we only take the highest value one for each type
+        if (positiveStatuses.length > 0) {
+            let biggestPositiveStatus = positiveStatuses.reduce(function (prev, current) {
+                return (prev && prev.value > current.value) ? prev : current
+            }) //returns object
+            if (biggestPositiveStatus) {
+                tagsForRole.push(biggestPositiveStatus);
+            }
+        }
+
+
+        if (negativeStatuses.length > 0) {
+            let biggestNegativeStatus = negativeStatuses.reduce(function (prev, current) {
+                return (prev && prev.value > current.value) ? prev : current
+            }) //returns object
+            if (biggestNegativeStatus) {
+                tagsForRole.push(biggestNegativeStatus);
+            }
+        }
+
+        return tagsForRole;
     }
 
     prepareTags() {
@@ -104,6 +166,16 @@ export class DiceRollAdapter {
             console.log("No fellowship themecard in the actor getActorFellowshipThemecard():", this.actor.sheet.getActorFellowshipThemecard());
         }
 
+        // floating tags and statuses from the actor
+        if (this.actor.system.floatingTagsAndStatuses && this.actor.system.floatingTagsAndStatuses.length > 0) {
+            this.actor.system.floatingTagsAndStatuses.forEach((entry) => {
+                console.log(entry);
+                if (entry.selected) {
+                    this.selectedTags.push({ name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value });
+                }
+            });
+        }
+
     }
 
     // ToDo, Needs fixing, not working as expected
@@ -128,7 +200,7 @@ export class DiceRollAdapter {
                 if (backpackItems) {
                     for (let [bi, backpackItem] of backpackItems.entries()) {
                         backpackItem.selected = false;
-                        if(backpackItem.toBurn){
+                        if (backpackItem.toBurn) {
                             backpackItem.burned = true;
                             backpackItem.toBurn = false;
                         }
@@ -184,15 +256,25 @@ export class DiceRollAdapter {
                     await actorFellowshipThemecard.update({ [weaknesstagPath]: false });
                 }
             }
-            if(this.actor.sheet){
+            if (this.actor.sheet) {
                 this.actor.sheet.reloadFellowshipThemecard(true); // true for emitting data to others    
-            }else{
+            } else {
                 console.log("No actor sheet to send reload signal for fellowship themecard");
             }
-            
+
+        }
+
+        // floating tags and statuses from the actor
+        if (this.actor.system.floatingTagsAndStatuses && this.actor.system.floatingTagsAndStatuses.length > 0) {
+            let floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
+            floatingTagsAndStatuses.forEach((entry) => {
+                entry.selected = false;
+            });
+            await this.actor.update({ 'system.floatingTagsAndStatuses': floatingTagsAndStatuses });
         }
 
         this.actor.sheet.render();
+        MistSceneApp.getInstance().resetSelection();
     }
 
     async rollCallback(event, button, dialog) {
@@ -200,28 +282,31 @@ export class DiceRollAdapter {
         let numPositiveTags = parseInt(button.form.positiveValue.value);
         let numNegativeTags = parseInt(button.form.negativeValue.value);
 
-
-        this.selectedTags.forEach(element => {
-            if (element.positive) {
-                if (element.toBurn) {
-                    numPositiveTags += 3;
-                } else {
-                    numPositiveTags++;
+        let tagsAndStatusForRoll = this.applyRulesToSelectedTags();
+        tagsAndStatusForRoll.forEach(element => {
+            if (element.value === undefined || element.value == 0) {
+                // normal power tags, story tags etc
+                if (element.positive) {
+                    if (element.toBurn) {
+                        numPositiveTags += 3;
+                    } else {
+                        numPositiveTags++;
+                    }
+                }
+                else {
+                    numNegativeTags++;
+                }
+            } else {
+                // statuses
+                if (element.positive) {
+                    numPositiveTags += element.value;
+                }
+                else {
+                    numNegativeTags += element.value;
                 }
             }
-            else {
-                numNegativeTags++;
-            }
         });
 
-        this.selectedGmTags.forEach(element => {
-            if (element.positive) {
-                numPositiveTags++;
-            }
-            else {
-                numNegativeTags++;
-            }
-        });
 
         const dicePromises = [];
 
@@ -253,17 +338,13 @@ export class DiceRollAdapter {
             consequenceResult = 0;
         }
 
-        let positiveTags = this.selectedTags.filter(t => t.positive);
-        positiveTags = positiveTags.concat(this.selectedGmTags.filter(t => t.positive));
-
-        let negativeTags = this.selectedTags.filter(t => !t.positive);
-        negativeTags = negativeTags.concat(this.selectedGmTags.filter(t => !t.positive));
+        let positiveTags = tagsAndStatusForRoll.filter(t => t.positive);
+        let negativeTags = tagsAndStatusForRoll.filter(t => !t.positive);
 
         const chatVars = {
             diceRollHTML: diceRollHTML,
             label: game.i18n.localize(`MIST_ENGINE.ROLL_TYPES.${this.rollType}`),
-            selectedTags: this.selectedTags,
-            selectedGmTags: this.selectedGmTags,
+            tagsAndStatusForRoll: this.tagsAndStatusForRoll,
             positiveTags: positiveTags,
             negativeTags: negativeTags,
             consequenceResult: consequenceResult,

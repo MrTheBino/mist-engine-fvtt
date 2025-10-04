@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 0.3.6
+- improved handling status / tags acording to the rules (takes +- of hightest tier status) (Page 69 of LITM, Making a Roll)
+- improved UX
+- scene tag app: GM can toggle dice roll mods between positive and negative, story tags can be selected by the gm for the next roll of a character
+- only used tags / statuses during a roll are shown in the chat windows
+
 # 0.3.5
 - improved internal handling of fellowship theme cards
 - selecting tags doesn't send always a fellowship changed signal

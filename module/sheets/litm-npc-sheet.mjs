@@ -135,6 +135,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     const value = target.dataset.value;
     const name = target.dataset.name;
     if (!value) return;
+    console.log("handleAddSceneAppRollMod", name, value);
     
     await MistSceneApp.getInstance().addRollModification(name,value);
   }
@@ -288,11 +289,11 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
     if (limits) {
       await this.actor.update({
-        "system.limits": [...limits, { name: "", value: 0 }],
+        "system.limits": [...limits, { name: "", value: 0,positive: false }],
       });
     } else {
       await this.actor.update({
-        "system.limits": [{ name: "", value: 0 }],
+        "system.limits": [{ name: "", value: 0, positive: false }],
       });
     }
   }
