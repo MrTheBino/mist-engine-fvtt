@@ -82,6 +82,45 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         for (const input of updateableFtsStats) {
             input.addEventListener("change", event => this.handleFtStatChanged(event))
         }
+
+        this.element.addEventListener("drop", this._onDrop.bind(this));
+    }
+
+    /**
+     * Callback actions which occur when a dragged element is dropped on a target.
+     * @param {DragEvent} event       The originating DragEvent
+     * @protected
+     */
+    async _onDrop(event) {
+      const { type, name, value } = TextEditor.getDragEventData(event);
+      const isStatus = type === "status";
+      const floatingTagsAndStatuses = this.currentSceneDataItem.system.floatingTagsAndStatuses ?? [];
+
+      // Handle different data types
+      switch (type) {
+        case "tag":
+          await this.currentSceneDataItem.update({
+              "system.floatingTagsAndStatuses": [...floatingTagsAndStatuses, { name }],
+          });
+          this.sendUpdateHookEvent();
+          break;
+        case "status":
+          const markings = new Array(6).fill(false);
+          markings[Math.max(0, Math.min(parseInt(value) - 1, 5))] = true;
+          await this.currentSceneDataItem.update({
+            "system.floatingTagsAndStatuses": [
+              ...floatingTagsAndStatuses,
+              { name, value, isStatus, markings }
+            ],
+          });
+          this.sendUpdateHookEvent();
+          break;
+        default:
+          console.warn("Unknown drop type", data);
+          break;
+      }
+
+      return super._onDrop?.(event);
     }
 
     activateSocketListeners() {
