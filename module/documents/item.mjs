@@ -29,6 +29,27 @@ export class MistEngineItem extends Item {
     return rollData;
   }
 
+   static async create(data, options = {}) {
+    //make default Friendly and Linked on Creation
+    data.prototypeToken = data.prototypeToken || {};
+
+    let defaults = {};
+    let image = null;
+    
+    switch(data.type){
+      case 'themebook':
+        image = "systems/mist-engine-fvtt/assets/icons/item-themebook.svg";
+        break;
+    }
+
+    if (image != null) {
+      data.img = image
+    }
+
+    const actor = await super.create(data, options);
+    return actor;
+  }
+
   /**
    * Convert the actor document to a plain object.
    *
