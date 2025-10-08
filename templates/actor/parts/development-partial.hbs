@@ -1,20 +1,20 @@
 <div class="development-partial-container" data-item-id="{{id}}" data-value-key="{{key}}" data-source="{{source}}">
     {{#if (lt value 1)}}
-        <i class="fa-solid fa-circle"></i>
+        <i class="marker fa-solid fa-circle"></i>
     {{else}}
-        <i class="fa-solid fa-circle-xmark"></i>
+        <i class="marker checked fa-solid fa-circle"></i>
     {{/if}}
     
     {{#if (lt value 2)}}
-        <i class="fa-solid fa-circle"></i>
+        <i class="marker fa-solid fa-circle"></i>
     {{else}}
-        <i class="fa-solid fa-circle-xmark"></i>
+        <i class="marker checked fa-solid fa-circle"></i>
     {{/if}}
 
     {{#if (lt value 3)}}
-        <i class="fa-solid fa-circle"></i>
+        <i class="marker fa-solid fa-circle"></i>
     {{else}}
-        <i class="fa-solid fa-circle-xmark"></i>
+        <i class="marker checked fa-solid fa-circle"></i>
     {{/if}}
     {{name}}
 </div>
