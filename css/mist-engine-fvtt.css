@@ -1260,9 +1260,12 @@
 }
 
 #scene-data-app > section.window-content {
-  background-image: url("../assets/bg2-litm.webp");
-  background-repeat: no-repeat;
-  background-size: cover;
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  -webkit-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
   color: #724a32;
 }
 
