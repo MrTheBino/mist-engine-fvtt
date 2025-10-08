@@ -298,6 +298,21 @@
   }
 }
 
+.tab-description {
+  font-family: $font-primary;
+  color: $c-dark-styled-text;
+
+  .tag {
+    background-color: $c-tag-yellow;
+    border-radius: 4px;
+  }
+
+  .status {
+    background-color: $c-tag-green;
+    border-radius: 4px;
+  }
+}
+
 .header-right-side {
   flex-grow: 1;
 }

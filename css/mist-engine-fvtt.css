@@ -661,6 +661,18 @@
   background-color: #bccdb0;
   border-radius: 4px;
 }
+.mist-engine .tab-description {
+  font-family: Labrada, serif;
+  color: #4f311d;
+}
+.mist-engine .tab-description .tag {
+  background-color: #ece800;
+  border-radius: 4px;
+}
+.mist-engine .tab-description .status {
+  background-color: #bccdb0;
+  border-radius: 4px;
+}
 .mist-engine .header-right-side {
   flex-grow: 1;
 }
