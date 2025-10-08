@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 0.3.7
+- GHI: Change Request: Smaller icon on the themebook sheet #8
+- GHI: Themebook Description: White text on bright background & copied text cannot be saved #7
+- Added tag/status drop to scene data app
+- Added border image to scene data app
+  
 # 0.3.6
 - improved handling status / tags acording to the rules (takes +- of hightest tier status) (Page 69 of LITM, Making a Roll)
 - improved UX
