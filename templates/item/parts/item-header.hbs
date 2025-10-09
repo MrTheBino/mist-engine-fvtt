@@ -1,4 +1,6 @@
 <header class="item-header">
-    <img class="item-img" data-action="editImage" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="120"/>
-    <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+    <div class="flexrow">
+    <img class="item-img" data-action="editImage" src="{{item.img}}" data-edit="img" title="{{item.name}}" height="60"/>
+    <h1 class="charname" style="flex-grow: 4;"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+    </div>
 </header>
