@@ -605,6 +605,20 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                     this.actor.update({ "system.limits": limits });
                 }
                 break;
+            case 'backpack':
+                // Story Tag from Backpack
+                if (data.name && data.name.trim().length > 0) {
+                    if(this.actor.type !== "litm-character"){
+                        return;
+                    }
+                    let backpack = this.getBackpack();
+                    if(backpack){
+                        const backpackItems = backpack.system.items;
+                        backpackItems.push({ name: data.name, selected: false, burned: false });
+                        await backpack.update({ "system.items": backpackItems });
+                        this.render(true);
+                    }
+                }
             default:
                 console.warn("Unknown drop type", data);
                 break;

@@ -9,6 +9,6 @@
             <i class="burn-icon {{#if storytag.toBurn}}to-burn{{/if}}"></i>
         </span>
         <span class="litm-pc-storytag storytag-name storytag-selectable {{#if firstTag}}first{{/if}} {{#if storytag.selected}}selected{{/if}} {{#if storytag.burned}}burned{{/if}}" title="Right click to toggle burn state"
-            data-action="toggleStoryTagSelection" data-index="{{index}}" data-item-id="{{id}}" data-key="{{key}}" data-source="{{source}}">{{storytag.name}}</span>
+            data-action="toggleStoryTagSelection" data-index="{{index}}" data-item-id="{{id}}" data-key="{{key}}" data-source="{{source}}" {{{storyTagDraggableData storytag source}}}>{{storytag.name}}</span>
     {{/if}}
 </div>

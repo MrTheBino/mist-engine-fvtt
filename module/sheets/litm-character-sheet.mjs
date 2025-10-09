@@ -197,6 +197,9 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         return { themebooks: themebooks, backpack: backpack, quintessences: quintessences, themebooksEmpty: themebooks.length === 0 };
     }
 
+    getBackpack(){
+        return this.options.document.items.find(i => i.type === 'backpack');
+    }
 
     /** @inheritDoc */
     _onRender(context, options) {

@@ -128,6 +128,15 @@ Hooks.once("init", function () {
 /*  Handlebars Helpers                          */
 /* -------------------------------------------- */
 
+
+
+Handlebars.registerHelper('storyTagDraggableData', function (storytag,source) {
+  if(source !== "backpack"){
+    return "";
+  }
+  return `draggable="true" data-type="${source}" data-name="${storytag.name}"`;
+});
+
 Handlebars.registerHelper('indexPlusOne', function (n) {
   return parseInt(n) + 1;
 });
