@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 0.3.8
+- Refined character theme card styling
+- backpack items drag and drop between different character sheets, the backpack item in the source character doesn't get deleted on purpose
+  
 # 0.3.7
 - GHI: Change Request: Smaller icon on the themebook sheet #8
 - GHI: Themebook Description: White text on bright background & copied text cannot be saved #7
