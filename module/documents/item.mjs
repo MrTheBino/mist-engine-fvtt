@@ -40,6 +40,9 @@ export class MistEngineItem extends Item {
       case 'themebook':
         image = "systems/mist-engine-fvtt/assets/icons/item-themebook.svg";
         break;
+      case 'backpack':
+        image = "systems/mist-engine-fvtt/assets/icons/item-backpack.svg";
+        break;
     }
 
     if (image != null) {
