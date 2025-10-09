@@ -275,7 +275,7 @@
 .mist-engine .sheet-header .header-fields .short-description {
   font-family: Labrada, serif;
   font-size: 14px;
-  color: #4f311d;
+  color: #191813;
 }
 .mist-engine .sheet-header h1.charname {
   padding: 0px;
@@ -443,10 +443,6 @@
 .mist-engine .item-weakness-line input {
   border: 2px solid red;
 }
-.mist-engine .quest-container {
-  margin-left: auto;
-  margin-right: auto;
-}
 .mist-engine .litm-character-themebooks-container {
   /*background-image: url("../assets/bg2-litm.webp");
     background-repeat: no-repeat;
@@ -571,7 +567,7 @@
 }
 .mist-engine .npc-threats-and-consequences-container .entry-name {
   font-weight: bold;
-  background-color: #cfbfb5;
+  background-color: #c9c7b8;
   padding: 2px 4px;
   text-transform: uppercase;
   clip-path: polygon(0 0.2em, 0.3em 0.2em, 0.3em 0, calc(100% - 0.3em) 0, calc(100% - 0.3em) 0.2em, 100% 0.3em, 100% calc(100% - 0.2em), calc(100% - 0.2em) calc(100% - 0.2em), calc(100% - 0.2em) 100%, 0.2em 100%, 0.3em calc(100% - 0.2em), 0 calc(100% - 0.2em));
@@ -623,13 +619,13 @@
 .mist-engine .sheet-header .title h1.charname {
   font-family: Labrada, serif;
   font-size: 36px;
-  color: #4f311d;
+  color: #191813;
   width: auto;
 }
 .mist-engine .sheet-header .short-description {
   font-family: Labrada, serif;
   font-size: 18px;
-  color: #4f311d;
+  color: #191813;
 }
 .mist-engine .sheet-header .difficulty-icons {
   display: flex;
@@ -663,7 +659,7 @@
 }
 .mist-engine .tab-description {
   font-family: Labrada, serif;
-  color: #4f311d;
+  color: #191813;
 }
 .mist-engine .tab-description .tag {
   background-color: #ece800;
@@ -686,6 +682,7 @@
 }
 .mist-engine .powertags-container {
   margin: 2px;
+  flex-grow: 1;
 }
 .mist-engine .fts-input-name {
   flex-grow: 1;
@@ -697,7 +694,7 @@
   cursor: pointer;
 }
 .mist-engine .fts-selectable.selected {
-  text-shadow: 0px 0px 15px #ff87ff;
+  text-shadow: 0px 0px 15px #ff4500;
   font-weight: bold;
 }
 .mist-engine .fts-input-marking {
@@ -819,11 +816,11 @@
 }
 .mist-engine .litm-pc-powertag:hover {
   cursor: pointer;
-  text-shadow: 0 0 15px rgb(143, 255, 105);
+  text-shadow: 0 0 15px #32cd32;
   font-weight: bold;
 }
 .mist-engine .litm-pc-powertag.selected {
-  text-shadow: 0 0 15px rgb(64, 255, 0);
+  text-shadow: 0 0 15px #32cd32;
   font-weight: bold;
 }
 .mist-engine .litm-pc-powertag.burned {
@@ -841,11 +838,11 @@
 }
 .mist-engine .litm-pc-storytag:hover {
   cursor: pointer;
-  text-shadow: 0 0 15px rgb(143, 255, 105);
+  text-shadow: 0 0 15px #32cd32;
   font-weight: bold;
 }
 .mist-engine .litm-pc-storytag.selected {
-  text-shadow: 0 0 15px rgb(64, 255, 0);
+  text-shadow: 0 0 15px #32cd32;
   font-weight: bold;
 }
 .mist-engine .litm-pc-storytag.burned {
@@ -869,11 +866,11 @@
 }
 .mist-engine .litm-pc-weakness:hover {
   cursor: pointer;
-  text-shadow: 0 0 15px rgb(242, 255, 57);
+  text-shadow: 0 0 15px #ff4500;
   font-weight: bold;
 }
 .mist-engine .litm-pc-weakness.selected {
-  text-shadow: 0 0 15px rgb(242, 255, 57);
+  text-shadow: 0 0 15px #ff4500;
   font-weight: bold;
 }
 .mist-engine .litm-pc-fellowship-relationship-companion {
@@ -908,8 +905,9 @@
   flex-grow: 0.15;
 }
 .mist-engine .burn-icon {
-  width: 15px;
-  height: 15px;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
   display: inline-block;
   background-image: url("../assets/icons/icon-burn-scratch-empty.svg");
 }
@@ -1013,23 +1011,26 @@
 }
 .mist-engine .themebook-container {
   flex-grow: 0.25;
+  padding-bottom: 8px;
 }
 .mist-engine .themebook-container .quest-container h3 {
   font-family: Labrada, serif;
   font-weight: 800;
   text-align: center;
+  background-color: rgba(114, 74, 50, 0.2);
   color: #724a32;
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 800;
   white-space: nowrap;
-  margin: 3px 2px 3px 2px;
-  text-shadow: 1px 1px 2px rgb(255, 249, 249);
+  margin: 3px 2px;
+  padding: 2px;
 }
 .mist-engine .themebook-container .quest-container .quest-text {
   font-family: Labrada, serif;
   font-weight: normal;
-  font-size: 0.8rem;
+  font-size: small;
+  text-align: center;
   padding: 2px;
   color: #724a32;
   padding-left: 10px;
@@ -1040,16 +1041,15 @@
   background-size: cover;
   height: 100%;
 }
-.mist-engine .themebook-style .themebook-icon {
-  color: black;
-  flex-grow: 0.1;
-}
 .mist-engine .themebook-style h2 {
   text-align: center;
-  font-size: 1.1em;
+  font-size: smaller;
+  line-height: 1.5em;
   padding: 2px;
   height: 30px;
-  margin: 0;
+  margin: -7px -8px 0px -8px;
+  text-transform: uppercase;
+  color: #fff;
 }
 .mist-engine .themebook-style.litm-adventure h2 {
   background-image: url("../assets/headers/header-adventure.webp");
@@ -1097,7 +1097,7 @@
   float: right;
   display: inline-block;
   object-fit: cover;
-  margin-right: 2px;
+  margin: 2px 2px 0 0;
 }
 .mist-engine .themebook-style .themebook-icon.litm-adventure {
   background-image: url("../assets/icons/icon-adventure-litm.svg");
@@ -1145,12 +1145,31 @@
 .mist-engine .themebook-style .development-partial-container {
   color: #724a32;
   font-family: Labrada, serif;
+  font-size: xx-small;
+  text-transform: uppercase;
   text-align: center;
+}
+.mist-engine .themebook-style .development-partial-container .marker {
+  color: #f6eeea;
+}
+.mist-engine .themebook-style .development-partial-container .marker.checked {
+  color: #724a32;
+}
+.mist-engine .themebook-style .fellowship-entries {
+  flex-grow: 1;
 }
 .mist-engine .themebook-style .fellowship-promises-container {
   color: #724a32;
   font-family: Labrada, serif;
+  font-size: xx-small;
+  text-transform: uppercase;
   text-align: center;
+}
+.mist-engine .themebook-style .fellowship-promises-container .marker {
+  color: #f6eeea;
+}
+.mist-engine .themebook-style .fellowship-promises-container .marker.checked {
+  color: #724a32;
 }
 .mist-engine .tab {
   flex-grow: 1;

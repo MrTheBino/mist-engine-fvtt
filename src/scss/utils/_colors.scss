@@ -1,21 +1,27 @@
 $c-white: #fff;
 $c-black: #000;
 
-$c-dark: #191813;
+$c-off-white: #f6eeea;
 $c-faint: #c9c7b8;
 $c-beige: #cfbfb5;
+$c-brown: #724a32;
 $c-tan: #444;
+$c-dark: #191813;
 
 $c-tag-orange: #ecb985;
 $c-tag-yellow: #ece800;
 $c-tag-green: #bccdb0;
 $c-tag-blue: #81b1dc;
 $c-tag-red: #d1a28e;
-$c-styled-text: #724a32;
-$c-dark-styled-text: #4f311d;
+$c-styled-text: $c-brown;
+$c-dark-styled-text: $c-dark;
 
-$c-tag-shadow-selected: #ff87ff;
 $c-icon-red: #8f4024;
 $c-icon-blue: #5c5c92;
 $c-icon-green: #4d8061;
 $c-icon-brown: #734a33;
+
+$c-storytag-selected: #32cd32;
+$c-powertag-selected: #32cd32;
+$c-weaknesstag-selected: #ff4500;
+$c-floatingtag-selected: #ff4500;

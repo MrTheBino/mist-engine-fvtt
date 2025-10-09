@@ -5,12 +5,12 @@
 
     &:hover {
         cursor: pointer;
-        text-shadow: 0 0 15px rgb(143, 255, 105);
+        text-shadow: 0 0 15px $c-powertag-selected;
         font-weight: bold;
     }
 
     &.selected {
-        text-shadow: 0 0 15px rgb(64, 255, 0);
+        text-shadow: 0 0 15px $c-powertag-selected;
         font-weight: bold;
     }
 
@@ -32,12 +32,12 @@
 
     &:hover {
         cursor: pointer;
-        text-shadow: 0 0 15px rgb(143, 255, 105);
+        text-shadow: 0 0 15px $c-storytag-selected;
         font-weight: bold;
     }
 
     &.selected {
-        text-shadow: 0 0 15px rgb(64, 255, 0);
+        text-shadow: 0 0 15px $c-storytag-selected;
         font-weight: bold;
     }
 
@@ -66,12 +66,12 @@
 
     &:hover {
         cursor: pointer;
-        text-shadow: 0 0 15px rgb(242, 255, 57);
+        text-shadow: 0 0 15px $c-weaknesstag-selected;
         font-weight: bold;
     }
 
     &.selected {
-        text-shadow: 0 0 15px rgb(242, 255, 57);
+        text-shadow: 0 0 15px $c-weaknesstag-selected;
         font-weight: bold;
     }
 }
@@ -115,8 +115,9 @@
 }
 
 .burn-icon {
-    width: 15px;
-    height: 15px;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
     display: inline-block;
     background-image: url("../assets/icons/icon-burn-scratch-empty.svg");
 

@@ -5,27 +5,30 @@
 
 .themebook-container {
     flex-grow: 0.25;
+    padding-bottom: 8px;
 
     .quest-container {
         h3 {
             font-family: Labrada, serif;
             font-weight: 800;
             text-align: center;
-            color: #724a32;
+            background-color: rgba(114, 74, 50, 0.2);
+            color: $c-brown;
             text-transform: uppercase;
             font-size: 0.8rem;
             font-weight: 800;
             white-space: nowrap;
-            margin: 3px 2px 3px 2px;
-            text-shadow: 1px 1px 2px rgb(255, 249, 249)
+            margin: 3px 2px;
+            padding: 2px;
         }
 
         .quest-text {
             font-family: Labrada, serif;
             font-weight: normal;
-            font-size: 0.8rem;
+            font-size: small;
+            text-align: center;
             padding: 2px;
-            color: #724a32;
+            color: $c-brown;
             padding-left: 10px;
             padding-right: 10px;
         }
@@ -37,19 +40,17 @@
     background-size: cover;
     height: 100%;
 
-    .themebook-icon {
-        color: black;
-        flex-grow: 0.1;
-    }
-
     .backpack-item-editable {}
 
     h2 {
         text-align: center;
-        font-size: 1.1em;
+        font-size: smaller;
+        line-height: 1.5em;
         padding: 2px;
         height: 30px;
-        margin:0;
+        margin: -7px -8px 0px -8px;
+        text-transform: uppercase;
+        color: $c-white;
     }
 
     &.litm-adventure {
@@ -124,7 +125,7 @@
         float: right;
         display: inline-block;
         object-fit: cover;
-        margin-right: 2px;
+        margin: 2px 2px 0 0;
 
         &.litm-adventure {
             background-image: url('../assets/icons/icon-adventure-litm.svg');
@@ -180,14 +181,36 @@
     }
     
     .development-partial-container {
-        color: #724a32;
+        color: $c-brown;
         font-family: Labrada, serif;
+        font-size: xx-small;
+        text-transform: uppercase;
         text-align: center;
+
+        .marker {
+            color: $c-off-white;
+            &.checked {
+                color: $c-styled-text;
+            }
+        }
+    }
+
+    .fellowship-entries {
+        flex-grow: 1;
     }
 
     .fellowship-promises-container {
-        color: #724a32;
+        color: $c-brown;
         font-family: Labrada, serif;
+        font-size: xx-small;
+        text-transform: uppercase;
         text-align: center;
+
+        .marker {
+            color: $c-off-white;
+            &.checked {
+                color: $c-styled-text;
+            }
+        }        
     }
 }
