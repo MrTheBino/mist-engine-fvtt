@@ -297,6 +297,7 @@
 .tab-description {
   font-family: $font-primary;
   color: $c-dark-styled-text;
+  height: 100%;
 
   .tag {
     background-color: $c-tag-yellow;
@@ -416,6 +417,7 @@
   // background-image: url("../assets/bg2-litm.webp");
   // background-repeat: no-repeat;
   // background-size: cover;
+  height: 100%;
   color: $c-styled-text;
   font-family: $font-primary;
   padding: 1em;

@@ -661,6 +661,7 @@
 .mist-engine .tab-description {
   font-family: Labrada, serif;
   color: #191813;
+  height: 100%;
 }
 .mist-engine .tab-description .tag {
   background-color: #ece800;
@@ -753,6 +754,7 @@
 }
 .mist-engine .tab-notes,
 .mist-engine .tab-biography {
+  height: 100%;
   color: #724a32;
   font-family: Labrada, serif;
   padding: 1em;
