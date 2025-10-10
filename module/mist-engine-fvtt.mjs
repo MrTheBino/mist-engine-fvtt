@@ -137,6 +137,13 @@ Handlebars.registerHelper('storyTagDraggableData', function (storytag,source) {
   return `draggable="true" data-type="${source}" data-name="${storytag.name}"`;
 });
 
+Handlebars.registerHelper('npcLimitValue', function (n) {
+  if(parseInt(n) <= 0){
+    return "-";
+  }
+  return n;
+});
+
 Handlebars.registerHelper('indexPlusOne', function (n) {
   return parseInt(n) + 1;
 });

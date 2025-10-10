@@ -9,7 +9,7 @@
                 {{#each system.limits as |limit|}}
                 <div class="npc-limit-item flexrow">
                     <div class="npc-limit-name">{{limit.name}}</div>
-                    <span class="npc-limit-value-armor"><span class="npc-limit-value">{{limit.value}}</span></span>
+                    <span class="npc-limit-value-armor"><span class="npc-limit-value">{{npcLimitValue limit.value}}</span></span>
                 </div>
                 {{/each}}
             </div>
