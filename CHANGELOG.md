@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 0.3.10
+- just a version bump
+  
 # 0.3.9
 - Change Request: Label the "Legend in the Mist NPC" as "Legend in the Mist Challenge" instead #14
 - Feature: On the NPC Sheet in Edit mode for Threats & Consequences offer the possibility to delete consequence lines again
