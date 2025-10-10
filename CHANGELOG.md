@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 0.3.9
+- Change Request: Label the "Legend in the Mist NPC" as "Legend in the Mist Challenge" instead #14
+- Feature: On the NPC Sheet in Edit mode for Threats & Consequences offer the possibility to delete consequence lines again
+- Change Request: larger description field on the items #12
+- Change Request: Legend in the Mist NPC sheet should be able to display Immunities in the Limit section #13
+
 # 0.3.8
 - Refined character theme card styling
 - backpack items drag and drop between different character sheets, the backpack item in the source character doesn't get deleted on purpose
