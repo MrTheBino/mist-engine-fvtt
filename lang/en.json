@@ -58,7 +58,7 @@
   "TYPES": {
     "Actor": {
       "litm-character": "Legend in the Mist Character",
-      "litm-npc": "Legend in the Mist NPC",
+      "litm-npc": "Legend in the Mist Challenge",
       "litm-fellowship-themecard": "Legend in the Mist Fellowship Themecard"
     },
     "Item": {
