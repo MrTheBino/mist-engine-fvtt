@@ -552,6 +552,7 @@
 }
 .mist-engine .trash-icon-container {
   flex-grow: 0;
+  color: black;
 }
 .mist-engine .value-input-small {
   width: 100px;
