@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 0.3.11
+- Backpack section of character sheet (edit mode): The fields have become smaller, and the trash bin icon is displayed in white #16
+- added basic documentation
+- added themebooks as compendium, only their name without the actual content from the book got added
+  
 # 0.3.10
 - just a version bump
   

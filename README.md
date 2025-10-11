@@ -24,6 +24,8 @@ Currently it only supports Legend In The Mist.
 * drag'n'drop of tags & status from NPCs to characters, thanks to 3rddogpaul
 * shared fellowship themebook / cards (needs more testing)
 * special improvements for themebooks
+* basic documentation of the system as a compendium
+* all themebooks from Legend In The Mist are provided as compendium entries (only with their names and category, not the actual content from the rulebooks)
   
 ## Items
  * Quintessence
