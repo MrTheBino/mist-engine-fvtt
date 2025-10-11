@@ -25,9 +25,16 @@
   @import 'components/tags';
   @import 'components/themebook';
   @import 'components/tabs';
+  @import 'components/icons';
 
 }
 
 @import 'components/roll_dialog';
 @import 'components/chat';
 @import 'components/scene_data_app';
+
+.editor{
+  &.prosemirror{
+    height: 100%;
+  }
+}

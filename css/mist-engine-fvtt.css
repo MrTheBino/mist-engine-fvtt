@@ -434,7 +434,16 @@
   background-repeat: no-repeat;
   row-gap: 0.5em;
 }
+.mist-engine .storytag-item-editable {
+  flex-grow: 8;
+}
+.mist-engine .character-updatable-fellowship {
+  flex-grow: 4;
+}
 .mist-engine .item-powertag-line {
+  margin: 5px;
+}
+.mist-engine .item-storytag-line {
   margin: 5px;
 }
 .mist-engine .item-weakness-line {
@@ -1187,6 +1196,9 @@
   font-family: Labrada, serif;
   font-weight: bold;
 }
+.mist-engine .item-storytag-line .fa-trash, .mist-engine .fellowship-entries .fa-trash {
+  color: black;
+}
 
 .roll-dialog-container .selected-tags-container {
   margin: 10px 0;
@@ -1329,6 +1341,10 @@
 }
 .scene-app-dice-roll-modifiers .listing .mod-entry.negative {
   background-color: #ecb985;
+}
+
+.editor.prosemirror {
+  height: 100%;
 }
 
 /*# sourceMappingURL=mist-engine-fvtt.css.map */

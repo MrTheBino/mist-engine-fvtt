@@ -14,7 +14,19 @@
   }
 }
 
+.storytag-item-editable {
+  flex-grow: 8;
+}
+
+.character-updatable-fellowship{
+  flex-grow: 4;
+}
+
 .item-powertag-line {
+  margin: 5px;
+}
+
+.item-storytag-line {
   margin: 5px;
 }
 

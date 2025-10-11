@@ -24,7 +24,7 @@
       "thumbnail": "systems/mist-engine-fvtt/assets/landingpage.webp"
     }
   ],
-  "version": "0.3.10",
+  "version": "0.3.11",
   "compatibility": {
     "minimum": 13,
     "verified": "13"
@@ -38,7 +38,32 @@
       "path": "lang/en.json"
     }
   ],
-  "packs": [],
+  "packs": [
+    {
+      "name": "system-documentation",
+      "label": "System Documentation",
+      "path": "packs/system-documentation",
+      "type": "JournalEntry",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "mist-engine-fvtt",
+      "flags": {}
+    },
+    {
+      "name": "litm-themebooks",
+      "label": "LiTM Themebooks",
+      "path": "packs/litm-themebooks",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "mist-engine-fvtt",
+      "flags": {}
+    }
+  ],
   "packFolders": [],
   "socket": true,
   "manifest": "https://github.com/MrTheBino/mist-engine-fvtt/releases/latest/download/system.json",
