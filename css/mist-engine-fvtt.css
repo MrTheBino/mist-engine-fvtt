@@ -685,7 +685,9 @@
 }
 .mist-engine .roll-button {
   margin: 5px;
+  margin-top: 25px;
   font-family: Labrada, serif;
+  width: 100%;
 }
 .mist-engine .roll-buttons-container {
   padding-right: 10px;
@@ -1364,6 +1366,21 @@
 }
 .scene-app-dice-roll-modifiers .listing .mod-entry.negative {
   background-color: #ecb985;
+}
+
+#dice-roll-app > section.window-content {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  -webkit-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  color: #724a32;
+  font-family: Labrada, serif;
+}
+
+.icon-hover:hover {
+  cursor: pointer;
 }
 
 .editor.prosemirror {

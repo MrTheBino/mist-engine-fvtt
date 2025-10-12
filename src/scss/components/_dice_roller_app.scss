@@ -1,0 +1,16 @@
+#dice-roll-app>section.window-content {
+    border-style: solid;
+    border-width: 10px 10px 10px 10px;
+    -moz-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+    -webkit-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+    -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+    border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+    color: $c-styled-text;
+    font-family: $font-primary;
+}
+
+.icon-hover{
+    &:hover {
+        cursor: pointer;
+    }
+}

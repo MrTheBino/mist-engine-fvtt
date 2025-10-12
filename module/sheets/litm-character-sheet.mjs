@@ -1,5 +1,6 @@
 import { MistEngineActorSheet } from './actor-sheet.mjs';
 import { DiceRollAdapter } from '../lib/dice-roll-adapter.mjs';
+import { DiceRollApp } from '../apps/dice-roll-app.mjs';
 import { PowerTagAdapter } from '../lib/power-tag-adapter.mjs';
 
 export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorSheet {
@@ -437,6 +438,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         await object.update({ [path]: !prop });
         this.reloadFellowshipThemecard(true);
         this.render();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true)
     }
 
     async handlePowerTagSelectableClick(event) {
@@ -478,7 +480,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if(this.rendered){
             this.render();
         }
-        
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true)
     }
 
     static async #handleDeleteBackpackItem(event, target) {
@@ -571,12 +573,13 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         await object.update({ [path]: powertag.toBurn });
         this.reloadFellowshipThemecard(true);
         this.render();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     static async #handleClickRoll(event, target) {
         event.preventDefault();
         const actor = this.actor;
-        const diceRollAdapter = new DiceRollAdapter({ actor: actor, type: target.dataset.rollType });
-        diceRollAdapter.render();
+        DiceRollApp.getInstance({ actor: actor, type: target.dataset.rollType }).updateTagsAndStatuses()
+        DiceRollApp.getInstance({ actor: actor, type: target.dataset.rollType }).render(true, { focus: true });
     }
 }

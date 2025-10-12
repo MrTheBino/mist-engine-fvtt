@@ -2,6 +2,7 @@ const { ActorSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
 import { MistSceneApp } from '../apps/scene-app.mjs'
+import { DiceRollApp } from '../apps/dice-roll-app.mjs'
 import { MistEngineItem } from '../documents/item.mjs'
 import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adapter.mjs";
 import {StoryTagAdapter} from "../lib/story-tag-adapter.mjs";
@@ -215,6 +216,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const itemId = target.dataset.itemId;
         const key = target.dataset.key;
         await StoryTagAdapter.toggleBurnSelection(this.actor,itemId,key,index);
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     static async #handleToggleStoryTagSelection(event,target){
@@ -224,6 +226,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const key = target.dataset.key;
 
         await StoryTagAdapter.toggleStoryTagSelection(this.actor, itemId, key, index);
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     async handleStoryTagItemChanged(event) {
@@ -237,12 +240,14 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         }else{
             await StoryTagAdapter.updateStoryTag(this.actor, itemId, key, index, event.currentTarget.value);
         }
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     static async #handleToggleFloatingTagOrStatusSelected(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
         FloatingTagAndStatusAdapter.handleTagStatusSelectedToggle(this.actor, index);
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         this.sendFloatableTagOrStatusUpdate();
     }
 
@@ -250,6 +255,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         event.preventDefault();
         const index = target.dataset.index;
         FloatingTagAndStatusAdapter.handleTagStatusModifierToggle(this.actor, index);
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         this.sendFloatableTagOrStatusUpdate();
     }
     
@@ -257,6 +263,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         event.preventDefault();
         const index = target.dataset.index;
         FloatingTagAndStatusAdapter.handleTagStatusToggle(this.actor, index);
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         this.sendFloatableTagOrStatusUpdate();
     }
 
