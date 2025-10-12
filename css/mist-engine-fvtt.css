@@ -834,8 +834,6 @@
 }
 .mist-engine .litm-pc-powertag:hover {
   cursor: pointer;
-  text-shadow: 0 0 15px #32cd32;
-  font-weight: bold;
 }
 .mist-engine .litm-pc-powertag.selected {
   margin: 0 -0.4em;
@@ -862,8 +860,6 @@
 }
 .mist-engine .litm-pc-storytag:hover {
   cursor: pointer;
-  text-shadow: 0 0 15px #32cd32;
-  font-weight: bold;
 }
 .mist-engine .litm-pc-storytag.selected {
   margin: 0 -0.4em;
@@ -896,8 +892,6 @@
 }
 .mist-engine .litm-pc-weakness:hover {
   cursor: pointer;
-  text-shadow: 0 0 15px #ff4500;
-  font-weight: bold;
 }
 .mist-engine .litm-pc-weakness.selected {
   margin: 0 -0.4em;
@@ -921,8 +915,7 @@
   color: black;
 }
 .mist-engine .litm-pc-fellowship-relationship:hover {
-  text-shadow: 0 0 15px rgb(64, 255, 0);
-  font-weight: bold;
+  cursor: pointer;
 }
 .mist-engine .litm-pc-fellowship-relationship.selected {
   margin: 0 -0.4em;

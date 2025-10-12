@@ -1,5 +1,3 @@
-2025/10/11-12:09:15.045 74cc Recovering log #3
-2025/10/11-12:09:15.045 74cc Level-0 table #5: started
-2025/10/11-12:09:15.054 74cc Level-0 table #5: 767 bytes OK
-2025/10/11-12:09:15.057 74cc Delete type=0 #3
-2025/10/11-12:09:15.057 74cc Delete type=3 #2
+2025/10/12-21:27:03.519 12cc Recovering log #11
+2025/10/12-21:27:03.523 12cc Delete type=0 #11
+2025/10/12-21:27:03.523 12cc Delete type=3 #10

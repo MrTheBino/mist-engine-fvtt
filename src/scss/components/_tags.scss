@@ -5,8 +5,6 @@
 
     &:hover {
         cursor: pointer;
-        text-shadow: 0 0 15px $c-powertag-selected;
-        font-weight: bold;
     }
 
     &.selected {
@@ -31,8 +29,6 @@
 
     &:hover {
         cursor: pointer;
-        text-shadow: 0 0 15px $c-storytag-selected;
-        font-weight: bold;
     }
 
     &.selected {
@@ -64,8 +60,6 @@
 
     &:hover {
         cursor: pointer;
-        text-shadow: 0 0 15px $c-weaknesstag-selected;
-        font-weight: bold;
     }
 
     &.selected {
@@ -86,8 +80,7 @@
     color: black;
 
     &:hover {
-        text-shadow: 0 0 15px rgb(64, 255, 0);
-        font-weight: bold;
+        cursor: pointer
     }
 
     &.selected {

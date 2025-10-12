@@ -2,6 +2,7 @@
 
 # 0.3.12
 - added the posibility to add tags & statuses to the short description of challenges
+- compendium entry for Statuses provided by Markus Raab
   
 # 0.3.11
 - Backpack section of character sheet (edit mode): The fields have become smaller, and the trash bin icon is displayed in white #16
