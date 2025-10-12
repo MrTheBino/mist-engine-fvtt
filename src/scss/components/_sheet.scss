@@ -356,8 +356,7 @@
 .fts-selectable {
   cursor: pointer;
   &.selected{
-    text-shadow: 0px 0px 15px $c-floatingtag-selected;
-    font-weight: bold;
+    @include ts-selection;
   }
 }
 

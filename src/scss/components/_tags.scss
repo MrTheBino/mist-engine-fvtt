@@ -10,8 +10,7 @@
     }
 
     &.selected {
-        text-shadow: 0 0 15px $c-powertag-selected;
-        font-weight: bold;
+        @include ts-selection;
     }
 
     &.burned {
@@ -37,8 +36,7 @@
     }
 
     &.selected {
-        text-shadow: 0 0 15px $c-storytag-selected;
-        font-weight: bold;
+        @include ts-selection;
     }
 
     &.burned {
@@ -71,8 +69,7 @@
     }
 
     &.selected {
-        text-shadow: 0 0 15px $c-weaknesstag-selected;
-        font-weight: bold;
+        @include ts-selection;
     }
 }
 
@@ -94,8 +91,7 @@
     }
 
     &.selected {
-        text-shadow: 0 0 15px rgb(64, 255, 0);
-        font-weight: bold;
+        @include ts-selection;
     }
 }
 
@@ -187,7 +183,7 @@
 
 .fts-input-name {
     &.tag {
-        background-color: $c-tag-yellow;
+        background-color: $c-tag-green;
         color: $c-styled-text;
         font-family: $font-primary;
         border-radius: 2px;

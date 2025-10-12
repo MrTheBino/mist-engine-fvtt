@@ -705,7 +705,13 @@
   cursor: pointer;
 }
 .mist-engine .fts-selectable.selected {
-  text-shadow: 0px 0px 15px #ff4500;
+  margin: 0 -0.4em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.8em 0.3em;
+  background: transparent;
+  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 225, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   font-weight: bold;
 }
 .mist-engine .fts-input-marking {
@@ -832,7 +838,13 @@
   font-weight: bold;
 }
 .mist-engine .litm-pc-powertag.selected {
-  text-shadow: 0 0 15px #32cd32;
+  margin: 0 -0.4em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.8em 0.3em;
+  background: transparent;
+  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 225, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   font-weight: bold;
 }
 .mist-engine .litm-pc-powertag.burned {
@@ -854,7 +866,13 @@
   font-weight: bold;
 }
 .mist-engine .litm-pc-storytag.selected {
-  text-shadow: 0 0 15px #32cd32;
+  margin: 0 -0.4em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.8em 0.3em;
+  background: transparent;
+  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 225, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   font-weight: bold;
 }
 .mist-engine .litm-pc-storytag.burned {
@@ -882,7 +900,13 @@
   font-weight: bold;
 }
 .mist-engine .litm-pc-weakness.selected {
-  text-shadow: 0 0 15px #ff4500;
+  margin: 0 -0.4em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.8em 0.3em;
+  background: transparent;
+  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 225, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   font-weight: bold;
 }
 .mist-engine .litm-pc-fellowship-relationship-companion {
@@ -901,7 +925,13 @@
   font-weight: bold;
 }
 .mist-engine .litm-pc-fellowship-relationship.selected {
-  text-shadow: 0 0 15px rgb(64, 255, 0);
+  margin: 0 -0.4em;
+  padding: 0.1em 0.4em;
+  border-radius: 0.8em 0.3em;
+  background: transparent;
+  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 225, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
   font-weight: bold;
 }
 .mist-engine .litm-pc-quintessence {
@@ -977,7 +1007,7 @@
   background-color: #bccdb0;
 }
 .mist-engine .fts-input-name.tag {
-  background-color: #ece800;
+  background-color: #bccdb0;
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
