@@ -933,6 +933,7 @@
   font-family: Labrada, serif;
   font-weight: normal;
   color: black;
+  flex-grow: 8;
 }
 .mist-engine .litm-pc-quintessence.selected {
   text-shadow: 0 0 15px rgb(64, 255, 0);
@@ -1224,6 +1225,12 @@
 .mist-engine .item-storytag-line .fa-trash, .mist-engine .fellowship-entries .fa-trash {
   color: black;
 }
+.mist-engine .themebook-icon .fa-pencil {
+  color: black;
+}
+.mist-engine .themebook-icon .fa-trash {
+  color: black;
+}
 
 .roll-dialog-container .selected-tags-container {
   margin: 10px 0;
@@ -1268,9 +1275,6 @@
 }
 .message-content .selected-tags .tag.negative {
   background-color: #ecb985;
-}
-.message-content .selected-tags .tag.fellowship {
-  background-color: #81b1dc;
 }
 
 .consequence-container {

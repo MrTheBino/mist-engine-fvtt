@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 0.4
+- new reactive dice roll dialog, you can open the dice roll dialog and then select power tags, statuses etc, the new dice roll dialog will display the new selections
+- many small bugfixes
+
 # 0.3.12
 - added the posibility to add tags & statuses to the short description of challenges
 - compendium entry for Statuses provided by Markus Raab

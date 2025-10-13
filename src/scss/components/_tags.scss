@@ -92,6 +92,7 @@
     font-family: Labrada, serif;
     font-weight: normal;
     color: black;
+    flex-grow: 8;
 
     &.selected {
         text-shadow: 0 0 15px rgb(64, 255, 0);

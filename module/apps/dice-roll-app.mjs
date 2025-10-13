@@ -29,8 +29,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             resizable: true
         },
         position: {
-            width: 500,
-            height: 600
+            width: 400,
+            height: 550
         },
         actions: {
             clickedRoll: this.#rollCallback,
@@ -224,7 +224,6 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         // floating tags and statuses from the actor
         if (this.actor.system.floatingTagsAndStatuses && this.actor.system.floatingTagsAndStatuses.length > 0) {
             this.actor.system.floatingTagsAndStatuses.forEach((entry) => {
-                console.log(entry);
                 if (entry.selected) {
                     this.selectedTags.push({ name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value });
                 }

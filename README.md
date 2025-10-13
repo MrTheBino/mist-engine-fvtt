@@ -26,6 +26,7 @@ Currently it only supports Legend In The Mist.
 * special improvements for themebooks
 * basic documentation of the system as a compendium
 * all themebooks from Legend In The Mist are provided as compendium entries (only with their names and category, not the actual content from the rulebooks)
+* reactive dice roll dialog
   
 ## Items
  * Quintessence
