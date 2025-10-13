@@ -1,0 +1,22 @@
+.editor{
+  &.prosemirror{
+    height: 100%;
+  }
+}
+
+.editor-content{
+  h1{
+    color: $c-styled-text;
+    font-family: $font-primary;
+  }
+
+  h2{
+    color: $c-styled-text;
+    font-family: $font-primary;
+  }
+
+  h3{
+    color: $c-styled-text;
+    font-family: $font-primary;
+  }
+}

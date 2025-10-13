@@ -249,6 +249,23 @@
   font-style: normal;
 }
 
+.editor.prosemirror {
+  height: 100%;
+}
+
+.editor-content h1 {
+  color: #724a32;
+  font-family: Labrada, serif;
+}
+.editor-content h2 {
+  color: #724a32;
+  font-family: Labrada, serif;
+}
+.editor-content h3 {
+  color: #724a32;
+  font-family: Labrada, serif;
+}
+
 /* Styles limited to mist-engine-fvtt sheets */
 .mist-engine .item-form {
   font-family: Labrada, serif;
@@ -1385,10 +1402,6 @@
 
 .icon-hover:hover {
   cursor: pointer;
-}
-
-.editor.prosemirror {
-  height: 100%;
 }
 
 /*# sourceMappingURL=mist-engine-fvtt.css.map */

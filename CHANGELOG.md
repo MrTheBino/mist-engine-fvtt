@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 0.4.1
+- Headers in Description fields and Biographies are displayed in white #18
+  
 # 0.4
 - new reactive dice roll dialog, you can open the dice roll dialog and then select power tags, statuses etc, the new dice roll dialog will display the new selections
 - many small bugfixes
