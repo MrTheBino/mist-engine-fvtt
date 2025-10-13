@@ -1,5 +1,6 @@
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 import {FloatingTagAndStatusAdapter} from "../lib/floating-tag-and-status-adapter.mjs";
+import {DiceRollApp} from "./dice-roll-app.mjs";
 
 export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     constructor(options = {}) {
@@ -127,9 +128,11 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         game.socket.on("system.mist-engine-fvtt", (msg) => {
             if (msg?.type === "hook" && msg.hook == "sceneAppUpdated") {
                 MistSceneApp.getInstance().render(true, { focus: true });
+                DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
             }
             else if (msg?.type === "hook" && msg.hook == "floatableTagOrStatusUpdate") {
                 MistSceneApp.getInstance().render(true, { focus: true });
+                DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
             }
         });
     }
@@ -191,6 +194,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": data });
         
         this.sendUpdateHookEvent();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     static async #handleRemoveSceneAppRollMod(event, target) {
@@ -202,6 +206,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": data });
         
         this.sendUpdateHookEvent();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     async handleActorFtTagStatusToggle(event) {
@@ -242,6 +247,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(this.currentSceneDataItem, index, target.dataset.markingIndex);
 
         this.sendUpdateHookEvent();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     // Story Floating Tags and Statuses
@@ -267,6 +273,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const index = target.dataset.index;
         await FloatingTagAndStatusAdapter.handleTagStatusSelectedToggle(this.currentSceneDataItem, index);
         this.sendUpdateHookEvent();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     static async #handleToggleFloatingTagOrStatus(event,target) {
@@ -277,6 +284,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const index = target.dataset.index;
         await FloatingTagAndStatusAdapter.handleTagStatusToggle(this.currentSceneDataItem, index);
         this.sendUpdateHookEvent();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     static async #handleToggleFloatingTagOrStatusModifier(event, target) {
@@ -288,6 +296,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const index = target.dataset.index;
         await FloatingTagAndStatusAdapter.handleTagStatusModifierToggle(this.currentSceneDataItem, index);
         this.sendUpdateHookEvent();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     static async #handleDeleteFloatingTagOrStatus(event, target) {
@@ -299,6 +308,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const index = target.dataset.index;
         await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(this.currentSceneDataItem, index);
         this.sendUpdateHookEvent();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     static async #handleCreateFloatingTagOrStatus(event, target) {
@@ -392,6 +402,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": tags });
         
         this.sendUpdateHookEvent();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     getRollModifications(){

@@ -22,7 +22,7 @@
             <div class="npc-tags-list flexcol">
                 {{#each system.tags_and_statuses as |tagOrStatus|}}
                 <div class="npc-tag-item">
-                    <div class="npc-tag-name">
+                    <div class="npc-tag-name icon-hover">
                         {{#if (gt tagOrStatus.value 0)}}
                         <span class="npc-tag-status-value" data-action="addSceneAppRollMod" data-value="{{tagOrStatus.value}}" data-name="{{tagOrStatus.name}}">{{tagOrStatus.name}}-{{tagOrStatus.value}}</span>
                         {{else if (tagFilled tagOrStatus.symbol)}}

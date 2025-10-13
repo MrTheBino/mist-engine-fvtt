@@ -1,5 +1,4 @@
 import { MistEngineActorSheet } from './actor-sheet.mjs';
-import { DiceRollAdapter } from '../lib/dice-roll-adapter.mjs';
 
 export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers

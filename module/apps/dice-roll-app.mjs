@@ -29,11 +29,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             resizable: true
         },
         position: {
-            width: 600,
+            width: 500,
             height: 600
         },
         actions: {
-            clickedRoll: this.#rollCallback
+            clickedRoll: this.#rollCallback,
+            clickModPositiveMinus: this.#handleClickModPositiveMinus,
+            clickModPositivePlus: this.#handleClickModPositivePlus,
+            clickModNegativeMinus: this.#handleClickModNegativeMinus,
+            clickModNegativePlus: this.#handleClickModNegativePlus
         },
     };
 
@@ -421,5 +425,22 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             // we pass synchronize=true so DSN dice appear on all players' screens
             promises.push(game.dice3d.showForRoll(roll, game.user, true, null, false));
         }
+    }
+
+    static async #handleClickModPositiveMinus(event, target) {
+        const input = target.parentElement.querySelector("#positiveInput");
+        input.stepDown();
+    }
+    static async #handleClickModPositivePlus(event, target) {
+        const input = target.parentElement.querySelector("#positiveInput");
+        input.stepUp();
+    }
+    static async #handleClickModNegativeMinus(event, target) {
+        const input = target.parentElement.querySelector("#negativeInput");
+        input.stepDown();
+    }
+    static async #handleClickModNegativePlus(event, target) {
+        const input = target.parentElement.querySelector("#negativeInput");
+        input.stepUp();
     }
 }

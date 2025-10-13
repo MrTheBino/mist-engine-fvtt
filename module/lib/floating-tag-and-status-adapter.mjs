@@ -53,6 +53,9 @@ export class FloatingTagAndStatusAdapter {
         if(!newStatus){ // if the new value is not a status, reset value to 0
             foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'value', 0);
             foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'markings', [false,false,false,false,false,false]);
+        }else{ // if the new value is a status, set initial value
+            foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'value', 1);
+            foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'markings', [true,false,false,false,false,false]);
         }
         
         await objectToUpdate.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });

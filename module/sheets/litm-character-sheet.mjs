@@ -1,5 +1,4 @@
 import { MistEngineActorSheet } from './actor-sheet.mjs';
-import { DiceRollAdapter } from '../lib/dice-roll-adapter.mjs';
 import { DiceRollApp } from '../apps/dice-roll-app.mjs';
 import { PowerTagAdapter } from '../lib/power-tag-adapter.mjs';
 
@@ -254,6 +253,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if (!fellowships || index >= fellowships.length) return;
         fellowships[index].selected = !fellowships[index].selected;
         await this.options.document.update({ "system.fellowships": fellowships });
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     async handleFellowshipPromiseClick(event) {
@@ -410,6 +410,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         await object.update({ [path]: !prop });
         this.reloadFellowshipThemecard(true);
         this.render();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     async handlePowerTagSelectableRightClick(event) {
@@ -434,11 +435,19 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const ptIndex = tag.dataset.powertagIndex;
         let path = `system.powertag${ptIndex}.burned`;
         let prop = foundry.utils.getProperty(object, path);
-
         await object.update({ [path]: !prop });
+
+        if(foundry.utils.getProperty(object, path) == true){//if it was not burned and now is, remove selected and toBurn
+            let selectedPath = `system.powertag${ptIndex}.selected`;
+            let toBurnPath = `system.powertag${ptIndex}.toBurn`;
+            await object.update({ [selectedPath]: false });
+            await object.update({ [toBurnPath]: false });
+        }
+
         this.reloadFellowshipThemecard(true);
         this.render();
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true)
+        console.log("powertag right clicked, burned toggled");
     }
 
     async handlePowerTagSelectableClick(event) {

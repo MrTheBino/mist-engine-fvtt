@@ -1,5 +1,4 @@
 import { MistEngineActorSheet } from "./actor-sheet.mjs";
-import { DiceRollAdapter } from "../lib/dice-roll-adapter.mjs";
 import { MistSceneApp } from '../apps/scene-app.mjs'
 
 export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
