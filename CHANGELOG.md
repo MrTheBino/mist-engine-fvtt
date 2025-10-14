@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 0.4.2
+- fixed quest text area while editing the fellowship themecard
+- removed auto assign of fellowship themecards in actors and replaced it with an "assign button" with ui notifications when something isn't setup correctly
+- added unassign fellowship themecard icon on character sheets while in editing mode
+  
 # 0.4.1
 - Headers in Description fields and Biographies are displayed in white #18
   

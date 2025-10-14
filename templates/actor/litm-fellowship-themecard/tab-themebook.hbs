@@ -35,12 +35,7 @@
                 weaknesstag=system.weaknesstag4 editMode=true}}
             </div>
             <div class="quest-container">
-                    <textarea class="themebook-entry-input quest-textarea" data-item-id={{themebook._id}} data-item-stat="system.quest" placeholder="Quest/Goal">{{themebook.system.quest}}</textarea>
-            </div>
-            <div class="development-container flexrow">
-                {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Abandon" id=themebook._id key="system.abandon" value=themebook.system.abandon}}
-                {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Improve" id=themebook._id key="system.improve" value=themebook.system.improve}}
-                {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Milestone" id=themebook._id key="system.milestone" value=themebook.system.milestone}}
+                    <textarea class="themebook-entry-input quest-textarea" data-item-id="{{themebook._id}}" data-key="system.quest" placeholder="Quest/Goal">{{system.quest}}</textarea>
             </div>
         </div>
     </div>

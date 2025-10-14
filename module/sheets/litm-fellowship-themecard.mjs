@@ -70,10 +70,17 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
     _onRender(context, options) {
         super._onRender(context, options);
 
-
+        const elements = this.element.querySelectorAll('.themebook-entry-input');
+        for (const el of elements) {
+            el.addEventListener("change", event => this.handleThemebookEntryInputChanged(event));
+        }
     }
 
     async handleThemebookEntryInputChanged(event) {
-        this.actor.update({ [event.target.dataset.key]: event.target.value });
+        console.log("Themebook entry input changed", event.target);
+        console.log("Dataset:", event.target.dataset);
+        console.log("Value:", event.target.value);
+        console.log("Key:", event.target.dataset.key);
+        await this.actor.update({ [event.target.dataset.key]: event.target.value });
     }
 }

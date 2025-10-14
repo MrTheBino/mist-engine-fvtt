@@ -4,6 +4,9 @@
         <h2 class="theme-name">
             {{#if (notEmpty fellowshipThemecardName)}}
                 {{fellowshipThemecardName}}
+                {{#if editMode}}
+                    <i class="fa-solid fa-user-xmark" title="remove fellowship themecard assignment" data-action="removeFellowshipThemecard"></i>
+                {{/if}}
             {{else}}
                 Fellowship
             {{/if}}
@@ -72,7 +75,10 @@
         <h2 class="theme-name">Fellowship
         </h2>
         <div class="powertags-container">
-            <div class="empty-message">Create a Fellowship Themecard Actor and assign ownership to all party members to see it here.</div>
+            <div class="empty-message">
+                <p>Create a Fellowship Themecard Actor and assign ownership to all party members to see it here.</p>
+                <button  data-action="assignFellowshipThemecard" style="margin-left: auto; margin-right: auto;"><i class="fa-solid fa-people-arrows icon-hover" title="assign fellowship themecard"></i>Assign </button>
+            </div>
         </div>
     </div>
     {{/if}}

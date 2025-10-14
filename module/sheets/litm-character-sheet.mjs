@@ -20,7 +20,9 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             createQuintessence: this.#handleCreateQuintessence,
             deleteQuintessence: this.#handleDeleteQuintessence,
             createFellowship: this.#handleCreateFellowship,
-            deleteFellowship: this.#handleDeleteFellowship
+            deleteFellowship: this.#handleDeleteFellowship,
+            removeFellowshipThemecard: this.#handleRemoveFellowshipThemecard,
+            assignFellowshipThemecard: this.#handleAssignFellowshipThemecard
         },
         form: {
             submitOnChange: true
@@ -139,21 +141,46 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         return this.actorFellowshipThemecard;
     }
 
-    async loadFellowshipThemecard() {
-        if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
-            this.actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
-            if (this.actorFellowshipThemecard) {
-                // in case it's not found, reset the id in the schema
-                await this.actor.update({ "system.actorSharedSingleThemecardId": "" });
-            }
+    static async #handleRemoveFellowshipThemecard(event, target) {
+        event.preventDefault();
+        const proceed = await foundry.applications.api.DialogV2.confirm({
+            content: game.i18n.format("MIST_ENGINE.QUESTIONS.RemoveFellowshipThemecardConfirmation"),
+            rejectClose: false,
+            modal: true
+        });
+        if (proceed) {
+            await this.actor.update({ "system.actorSharedSingleThemecardId": "" });
+            this.actorFellowshipThemecard = false;
+            this.render(true);
         }
+    }
 
-        let assignedUser = game.users.find(u => u.character?._id === this.actor.id)
-        if (assignedUser) {
+    static async #handleAssignFellowshipThemecard(event, target) {
+        event.preventDefault();
+        if(this.isActorAssignedToUser()){
+            await this.assignFellowshipThemecard();
+            this.render(true);
+        }
+    }
+
+    isActorAssignedToUser(){
+        // find the user (not gm) assigned to this actor
+        let assignedUserNotGM = game.users.find(u => u.character?._id === this.actor.id && !u.isGM);
+        if(!assignedUserNotGM){
+            ui.notifications.error("This character is not assigned to any non GM user. Please assign the character to a user before assigning a fellowship themecard. Press F5 to reload foundry and its permissions if you encounter problems.");
+            return false;
+        }
+        return true;
+    }
+
+    async assignFellowshipThemecard(){
+        let assignedUserNotGM = game.users.find(u => u.character?._id === this.actor.id && !u.isGM);
+        if (assignedUserNotGM) {
             let ownedWorldActors = game.actors.filter(a =>
-                a.testUserPermission(assignedUser, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
+                a.testUserPermission(assignedUserNotGM, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
             );
             ownedWorldActors = ownedWorldActors.filter(a => a.id !== this.actor.id)
+            ownedWorldActors = ownedWorldActors.filter(a => a.type === "litm-fellowship-themecard");
             //console.log("owned world actors: ", ownedWorldActors);
             if (ownedWorldActors && ownedWorldActors.length > 0) {
                 this.actorFellowshipThemecard = ownedWorldActors[0];
@@ -162,8 +189,15 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
                 //console.log("assigned fellowship themecard");
             } else {
                 this.actorFellowshipThemecard = false;
+                ui.notifications.error(`No fellowship themecard actors found that are owned by the user ${assignedUserNotGM.name}. Please create a fellowship themecard actor and assign ownership to the same user as this character. Press F5 to reload foundry and its permissions if you encounter problems.`);
                 //console.log("no owned world actors found");
             }
+        }
+    }
+
+    async loadFellowshipThemecard() {
+        if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
+            this.actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
         }
     }
 
