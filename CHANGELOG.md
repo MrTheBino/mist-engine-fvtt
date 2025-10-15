@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 0.4.3
+- items got some love with styling
+- actor fellowship themecard: entering questions not the actual power tags, editing / adding powertags is added on character sheets -> same behaviour with the other themebooks
+- usability improvements
+  
 # 0.4.2
 - fixed quest text area while editing the fellowship themecard
 - removed auto assign of fellowship themecards in actors and replaced it with an "assign button" with ui notifications when something isn't setup correctly

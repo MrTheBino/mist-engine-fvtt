@@ -1,7 +1,7 @@
 <div class="item-powertag-line flexrow">
     {{#if editMode}}
-    <input class="themebook-entry-input" data-item-id="{{id}}" type="text" data-key="system.powertag{{index}}.name" data-source="{{source}}"
-        value="{{powertag.name}}" placeholder="{{powertag.question}}" title="{{powertag.question}}" title="Powertag"/>
+        <strong style="flex-grow:0.3;">{{questionIndexToLetter index}}</strong><input class="themebook-entry-input" data-item-id="{{id}}" type="text" data-key="system.powertag{{index}}.name" data-source="{{source}}"
+        value="{{powertag.name}}" placeholder="{{powerTagQuestionPlaceholder index powertag.question}}" title="{{powerTagQuestionPlaceholder index powertag.question}}" title="Powertag" style="flex-grow: 8;"/>
     {{else}}
         {{#if (tagFilled powertag.name)}}
         <span class="burn-indicator" data-action="toggleToBurn" data-item-id="{{id}}" data-powertag-index="{{index}}" data-source="{{source}}">

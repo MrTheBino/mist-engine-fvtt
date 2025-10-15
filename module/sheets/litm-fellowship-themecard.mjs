@@ -4,10 +4,10 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
     #dragDrop // Private field to hold dragDrop handlers
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
-        classes: ['mist-engine', 'sheet', 'actor'],
+        classes: ['mist-engine', 'sheet', 'actor','litm-fellowship-themecard'],
         tag: 'form',
         position: {
-            width: 500,
+            width: 600,
             height: 850
         },
         actions: {

@@ -446,7 +446,23 @@
   background-repeat: no-repeat;
   row-gap: 0.5em;
 }
+.mist-engine.sheet.item .window-content {
+  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-repeat: no-repeat;
+  row-gap: 0.5em;
+}
+.mist-engine.sheet.item {
+  color: #724a32;
+}
+.mist-engine.sheet.item h2 {
+  color: #724a32;
+}
 .mist-engine.sheet.actor.litm-character .window-content {
+  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-repeat: no-repeat;
+  row-gap: 0.5em;
+}
+.mist-engine.sheet.actor.litm-fellowship-themecard .window-content {
   background-image: url("../assets/bg-yellow-old-paper-textures.webp");
   background-repeat: no-repeat;
   row-gap: 0.5em;
@@ -459,12 +475,14 @@
 }
 .mist-engine .item-powertag-line {
   margin: 5px;
+  color: #724a32;
 }
 .mist-engine .item-storytag-line {
   margin: 5px;
 }
 .mist-engine .item-weakness-line {
   margin: 5px;
+  color: #724a32;
 }
 .mist-engine .item-weakness-line input {
   border: 2px solid red;
@@ -843,8 +861,19 @@
   color: black;
   font-weight: bold;
 }
+.mist-engine nav.tabs [data-tab] {
+  font-family: Labrada, serif;
+  color: black;
+  font-weight: bold;
+}
+.mist-engine nav.tabs [data-tab] .active {
+  color: black;
+}
 .mist-engine .mode-toggle-button {
   margin-inline-end: auto;
+}
+.mist-engine .quest-textarea {
+  width: 100%;
 }
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;

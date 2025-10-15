@@ -129,6 +129,27 @@ Hooks.once("init", function () {
 /* -------------------------------------------- */
 
 
+Handlebars.registerHelper("powerTagQuestionPlaceholder", function (index,str) {
+  let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index-1];
+  let qText = str;
+  if(!qText || qText.length <= 0){
+    qText = "PowerTag Question";
+  }
+  return `${letter} - ${qText}`;
+});
+
+Handlebars.registerHelper("weaknessTagQuestionPlaceholder", function (index,str) {
+  let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index-1];
+  let qText = str;
+  if(!qText || qText.length <= 0){
+    qText = "Weakness Question";
+  }
+  return `${letter} - ${qText}`;
+});
+
+Handlebars.registerHelper('questionIndexToLetter',function(n){
+  return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[n-1];
+});
 
 Handlebars.registerHelper('storyTagDraggableData', function (storytag,source) {
   if(source !== "backpack"){

@@ -6,7 +6,27 @@
   }
 }
 
+&.sheet.item {
+  .window-content {
+    background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+    background-repeat: no-repeat;
+    row-gap: 0.5em;
+  }
+  color: $c-styled-text;
+  h2{
+    color: $c-styled-text;
+  }
+}
+
 &.sheet.actor.litm-character {
+  .window-content {
+    background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+    background-repeat: no-repeat;
+    row-gap: 0.5em;
+  }
+}
+
+&.sheet.actor.litm-fellowship-themecard {
   .window-content {
     background-image: url("../assets/bg-yellow-old-paper-textures.webp");
     background-repeat: no-repeat;
@@ -24,6 +44,7 @@
 
 .item-powertag-line {
   margin: 5px;
+  color: $c-styled-text
 }
 
 .item-storytag-line {
@@ -32,6 +53,7 @@
 
 .item-weakness-line {
   margin: 5px;
+  color: $c-styled-text;
 
   input {
     border: 2px solid red;
@@ -496,6 +518,19 @@ section [data-group="npc-sheet"] {
   }
 }
 
+nav.tabs [data-tab]{
+  font-family: $font-primary;
+  color: black;
+  font-weight: bold;
+  .active{
+    color: black;
+  }
+}
+
 .mode-toggle-button {
   margin-inline-end: auto;
+}
+
+.quest-textarea{
+  width: 100%;
 }

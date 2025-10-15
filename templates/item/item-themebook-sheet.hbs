@@ -1,6 +1,7 @@
 <section class="tab {{tabs.form.id}} {{tabs.form.cssClass}} scrollable" id="form"
     data-tab="{{tabs.form.id}}" data-group="{{tabs.form.group}}">
-    <div>
+    <div class="flexrow">
+        <label><strong>Type</strong></label>
         <select name="system.type" >
             <option value="">-</option>
             <option value="litm-origin" {{#if (eq system.type "litm-origin")}}selected{{/if}}>LitM - Origin</option>
@@ -10,7 +11,7 @@
         </select>
     </div>
     <div class="item-powertag-line flexrow">
-        Question
+        <h2>Questions</h2>
     </div>
     {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-powertag-line.hbs" index=1 powertag=system.powertag1}}
     {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-powertag-line.hbs" index=2 powertag=system.powertag2}}
