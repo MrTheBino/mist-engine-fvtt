@@ -196,7 +196,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (this.actor.system.fellowships && this.actor.system.fellowships.length > 0) {
             this.actor.system.fellowships.forEach((entry, index) => {
                 if (entry.selected) {
-                    this.selectedTags.push({ name: entry.relationshipTag, positive: true, fellowship: true, source: null });
+                    this.selectedTags.push({ name: entry.relationshipTag, positive: true, fellowship: true, source: 'fellowship-relationship' });
                 }
             });
         }
@@ -283,8 +283,17 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
 
         const fellowships = this.actor.system.fellowships;
+        let fellowshipTagsToCheck = this.selectedTags.filter(t => t.source === "fellowship-relationship").map(t => t.name);
         if (fellowships && fellowships.length > 0) {
             fellowships.forEach((entry) => {
+                //check if fellowship tag was selected
+                console.log("checking fellowship entry:", entry);
+                if(fellowshipTagsToCheck.includes(entry.relationshipTag)) {
+                    // mark as scratched
+                    if(entry.selected){
+                        entry.scratched = true;
+                    }
+                }
                 entry.selected = false;
             });
             await this.actor.update({ 'system.fellowships': fellowships });

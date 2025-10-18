@@ -22,6 +22,8 @@
     }
 }
 
+
+
 .litm-pc-storytag  {
     font-family: Labrada, serif;
     font-weight: normal;
@@ -85,6 +87,11 @@
 
     &.selected {
         @include ts-selection;
+    }
+
+    &.scratched {
+        text-decoration: line-through;
+        color: gray;
     }
 }
 

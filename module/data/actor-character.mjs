@@ -17,7 +17,8 @@ export default class MistEngineCharacter extends MistEngineActorBase {
       new fields.SchemaField({
         companion: new fields.StringField(),
         relationshipTag: new fields.StringField(),
-        selected: new fields.BooleanField({ default: false })
+        selected: new fields.BooleanField({ default: false }),
+        scratched: new fields.BooleanField({ default: false }),
       }),
       { min: 0, required: false }
     )

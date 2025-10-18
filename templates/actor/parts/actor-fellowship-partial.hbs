@@ -24,7 +24,7 @@
                 {{else}}
                 <div class="flexrow item-powertag-line">
                     <span class="litm-pc-fellowship-relationship-companion">{{entry.companion}}</span>
-                    <span class="litm-pc-fellowship-relationship pcfr-selectable {{#if entry.selected}}selected{{/if}}" data-index="{{index}}">{{entry.relationshipTag}}</span>
+                    <span class="litm-pc-fellowship-relationship pcfr-selectable {{#if entry.selected}}selected{{/if}} {{#if entry.scratched}}scratched{{/if}}" data-index="{{index}}">{{entry.relationshipTag}}</span>
                 </div>
 
                 {{/if}}

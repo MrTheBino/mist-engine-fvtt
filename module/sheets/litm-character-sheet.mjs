@@ -248,6 +248,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const selectableFellowShipRelationshipTags = this.element.querySelectorAll('.pcfr-selectable');
         for (const tag of selectableFellowShipRelationshipTags) {
             tag.addEventListener("click", event => this.handleFellowshipRelationshipSelectableClick(event));
+            tag.addEventListener("contextmenu", event => this.handleFellowshipRelationshipSelectableToggleClick(event));
         }
 
         const selectableweaknesses = this.element.querySelectorAll('.wt-selectable');
@@ -285,7 +286,19 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const index = tag.dataset.index;
         let fellowships = this.options.document.system.fellowships;
         if (!fellowships || index >= fellowships.length) return;
+        if( fellowships[index].scratched ) return; // do not allow selecting scratched tags
         fellowships[index].selected = !fellowships[index].selected;
+        await this.options.document.update({ "system.fellowships": fellowships });
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+    }
+
+     async handleFellowshipRelationshipSelectableToggleClick(event) {
+        event.preventDefault();
+        const tag = event.currentTarget;
+        const index = tag.dataset.index;
+        let fellowships = this.options.document.system.fellowships;
+        if (!fellowships || index >= fellowships.length) return;
+        fellowships[index].scratched = !fellowships[index].scratched;
         await this.options.document.update({ "system.fellowships": fellowships });
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }

@@ -975,6 +975,10 @@
   box-decoration-break: clone;
   font-weight: bold;
 }
+.mist-engine .litm-pc-fellowship-relationship.scratched {
+  text-decoration: line-through;
+  color: gray;
+}
 .mist-engine .litm-pc-quintessence {
   font-family: Labrada, serif;
   font-weight: normal;
