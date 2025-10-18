@@ -40,8 +40,6 @@ Currently it only supports Legend In The Mist.
 - improved styling
 - usability improvements
 
-If using weakness tags, you have to improve / mark the themebook manually. There is no automation for this in the system.
-
 ## Manifest-URL for manual installation of the system
 
     https://github.com/MrTheBino/mist-engine-fvtt/releases/latest/download/system.json

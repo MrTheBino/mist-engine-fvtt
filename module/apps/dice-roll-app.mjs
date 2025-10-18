@@ -261,7 +261,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                     }
                 }
 
-                item.update({ 'system.items': backpackItems });
+                await item.update({ 'system.items': backpackItems });
             }
             if (item.type === "themebook") {
                 for (let i = 0; i < 10; i++) {
@@ -277,7 +277,12 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 }
                 for (let i = 0; i < 4; i++) {
                     const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
-                    item.update({ [weaknesstagPath]: false });
+                    if(foundry.utils.getProperty(item, weaknesstagPath) == true){
+                        if(item.system.improve < 3){
+                            await item.update({ 'system.improve': item.system.improve + 1 });
+                        }
+                    };
+                    await item.update({ [weaknesstagPath]: false });
                 }
             }
         }
@@ -287,7 +292,6 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (fellowships && fellowships.length > 0) {
             fellowships.forEach((entry) => {
                 //check if fellowship tag was selected
-                console.log("checking fellowship entry:", entry);
                 if(fellowshipTagsToCheck.includes(entry.relationshipTag)) {
                     // mark as scratched
                     if(entry.selected){
@@ -316,6 +320,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 }
                 for (let i = 0; i < 4; i++) {
                     const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
+                    if(foundry.utils.getProperty(actorFellowshipThemecard, weaknesstagPath) == true){
+                        if(actorFellowshipThemecard.system.improve < 3){
+                            await actorFellowshipThemecard.update({ 'system.improve': actorFellowshipThemecard.system.improve + 1 });
+                        }
+                    };
                     await actorFellowshipThemecard.update({ [weaknesstagPath]: false });
                 }
             }
