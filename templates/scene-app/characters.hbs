@@ -2,40 +2,8 @@
     {{#if isGM}}
     <div>
         <div class="npc-limits-container">
-            <div class="npc-subtitle-container-c">
-                <div class="npc-subtitle-text">{{localize 'MIST_ENGINE.LABELS.SceneApp.CharactersHeader'}} </div>
-            </div>
-
             {{#each characters as |character index|}}
-            <div class="character-container">
-                <div class="character-name">{{character.name}}</div>
-                <div class="floating-tags-and-status-entries">
-                    {{#each character.floatingTagsAndStatuses as |fts ftsIndex|}}
-                    <div class="floating-tag-and-status-entry flexcol">
-                        <div class="flexrow">
-
-                            <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}}"
-                                data-index="{{ftsIndex}}" data-actor-id="{{character.id}}" title="right click to toggle between tag or state">
-                                {{fts.name}}{{#if fts.isStatus}}-{{fts.value}}{{/if}}</div>
-
-                        </div>
-                        {{#if fts.isStatus}}
-
-                        <div class="fts-markings-container">
-                            {{#each fts.markings as |marking index|}}
-                            <span class="fts-input-marking" data-marking-index="{{index}}"
-                                data-action="actorToggleFloatingTagOrStatusMarking" data-actor-id="{{character.id}}" data-index="{{ftsIndex}}">
-                                <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne
-                                    index}}</i>
-                            </span>
-                            {{/each}}
-                        </div>
-
-                        {{/if}}
-                    </div>
-                    {{/each}}
-                </div>
-            </div>
+                {{> "systems/mist-engine-fvtt/templates/scene-app/_single_character.hbs" character=character index=index}}
             {{/each}}
         </div>
     </div>

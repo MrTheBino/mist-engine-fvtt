@@ -127,6 +127,9 @@
   white-space: nowrap;
   margin: 3px 2px 3px 2px;
   text-shadow: 1px 1px 2px rgb(255, 249, 249);
+  &.bold{
+    font-weight: 1200;
+  }
 }
 
 .npc-limit-value-armor {
@@ -533,4 +536,8 @@ nav.tabs [data-tab]{
 
 .quest-textarea{
   width: 100%;
+}
+
+.pointer{
+  cursor: pointer;
 }

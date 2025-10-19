@@ -29,5 +29,6 @@ export const preloadHandlebarsTemplates = async function () {
     "systems/mist-engine-fvtt/templates/actor/litm-fellowship-themecard/tab-themebook.hbs",
     "systems/mist-engine-fvtt/templates/item/parts/themebook-special-improvement-line.hbs",
     "systems/mist-engine-fvtt/templates/actor/litm-fellowship-themecard/themebook-special-improvements-line.hbs",
+    "systems/mist-engine-fvtt/templates/scene-app/_single_character.hbs"
   ]);
 };

@@ -1,6 +1,7 @@
 import { MistEngineActorSheet } from './actor-sheet.mjs';
 import { DiceRollApp } from '../apps/dice-roll-app.mjs';
 import { PowerTagAdapter } from '../lib/power-tag-adapter.mjs';
+import { MistSceneApp } from '../apps/scene-app.mjs';
 
 export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -290,6 +291,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         fellowships[index].selected = !fellowships[index].selected;
         await this.options.document.update({ "system.fellowships": fellowships });
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
      async handleFellowshipRelationshipSelectableToggleClick(event) {
@@ -299,8 +301,10 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let fellowships = this.options.document.system.fellowships;
         if (!fellowships || index >= fellowships.length) return;
         fellowships[index].scratched = !fellowships[index].scratched;
+        fellowships[index].selected = false;
         await this.options.document.update({ "system.fellowships": fellowships });
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     async handleFellowshipPromiseClick(event) {
@@ -329,6 +333,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if (!fellowships || index >= fellowships.length) return;
         foundry.utils.setProperty(fellowships[index], key, newValue);
         await this.options.document.update({ "system.fellowships": fellowships });
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     static async #handleDeleteFellowship(event, target) {
@@ -338,6 +343,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if (!fellowships || index >= fellowships.length) return;
         fellowships.splice(index, 1);
         await this.actor.update({ "system.fellowships": fellowships });
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     static async #handleCreateFellowship(event, target) {
@@ -458,6 +464,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         this.reloadFellowshipThemecard(true);
         this.render();
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     async handlePowerTagSelectableRightClick(event) {
@@ -493,8 +500,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
         this.reloadFellowshipThemecard(true);
         this.render();
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true)
-        console.log("powertag right clicked, burned toggled");
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     async handlePowerTagSelectableClick(event) {
@@ -536,7 +543,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if(this.rendered){
             this.render();
         }
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true)
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     static async #handleDeleteBackpackItem(event, target) {
@@ -550,6 +558,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         await backpack.update({
             "system.items": backpackItems
         });
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     static async #handleCreateQuintessence(event, target) {
@@ -630,6 +639,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         this.reloadFellowshipThemecard(true);
         this.render();
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     static async #handleClickRoll(event, target) {

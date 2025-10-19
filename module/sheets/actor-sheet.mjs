@@ -209,6 +209,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const key = target.dataset.key;
         await StoryTagAdapter.toggleBurnedState(this.actor,itemId,key,index);
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
     
     static async #handleToggleStoryTagBurn(event,target){
@@ -218,6 +219,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const key = target.dataset.key;
         await StoryTagAdapter.toggleBurnSelection(this.actor,itemId,key,index);
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     static async #handleToggleStoryTagSelection(event,target){
@@ -228,6 +230,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
         await StoryTagAdapter.toggleStoryTagSelection(this.actor, itemId, key, index);
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     async handleStoryTagItemChanged(event) {
@@ -242,6 +245,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             await StoryTagAdapter.updateStoryTag(this.actor, itemId, key, index, event.currentTarget.value);
         }
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     static async #handleToggleFloatingTagOrStatusSelected(event, target) {
@@ -503,6 +507,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
         console.log("Deleting story tag", {itemId,index,key});
         StoryTagAdapter.deleteStoryTag(this.actor,itemId,key,index);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
         this.render(true);
     }
 

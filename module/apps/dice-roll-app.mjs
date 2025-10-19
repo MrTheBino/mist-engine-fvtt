@@ -164,15 +164,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return tagsForRole;
     }
 
-    prepareTags() {
-
-        for (let item of this.actor.items) {
+    static getPreparedTagsAndStatusesForRoll(actor) {
+        let selectedTags = [];
+        for (let item of actor.items) {
             if (item.type === "backpack") {
                 const backpackItems = item.system.items;
                 if (backpackItems) {
                     for (const [i, backpackItem] of backpackItems.entries()) {
                         if (backpackItem.selected) {
-                            this.selectedTags.push({ name: backpackItem.name, positive: true, toBurn: backpackItem.toBurn, index: i, themebookId: backpackItem.id, source: 'backpack' });
+                            selectedTags.push({ name: backpackItem.name, positive: true, toBurn: backpackItem.toBurn, index: i, themebookId: backpackItem.id, source: 'backpack' });
                         }
                     }
                 }
@@ -182,53 +182,60 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 for (let i = 0; i < 10; i++) {
                     const powertagPath = `system.powertag${i + 1}.selected`;
                     if (foundry.utils.getProperty(item, powertagPath)) {
-                        this.selectedTags.push({ name: item.system[`powertag${i + 1}`].name, positive: true, toBurn: item.system[`powertag${i + 1}`].toBurn, index: i + 1, themebookId: item.id, source: null });
+                        selectedTags.push({ name: item.system[`powertag${i + 1}`].name, positive: true, toBurn: item.system[`powertag${i + 1}`].toBurn, index: i + 1, themebookId: item.id, source: null });
                     }
 
                     const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
                     if (foundry.utils.getProperty(item, weaknesstagPath)) {
-                        this.selectedTags.push({ name: item.system[`weaknesstag${i + 1}`].name, positive: false, weakness: true, source: null });
+                        selectedTags.push({ name: item.system[`weaknesstag${i + 1}`].name, positive: false, weakness: true, source: null });
                     }
                 }
             }
         }
 
-        if (this.actor.system.fellowships && this.actor.system.fellowships.length > 0) {
-            this.actor.system.fellowships.forEach((entry, index) => {
+        if (actor.system.fellowships && actor.system.fellowships.length > 0) {
+            actor.system.fellowships.forEach((entry, index) => {
                 if (entry.selected) {
-                    this.selectedTags.push({ name: entry.relationshipTag, positive: true, fellowship: true, source: 'fellowship-relationship' });
+                    selectedTags.push({ name: entry.relationshipTag, positive: true, fellowship: true, source: 'fellowship-relationship' });
                 }
             });
         }
 
         // fellowship themecard tags
-        if (this.actor.sheet.getActorFellowshipThemecard()) {
-            let actorFellowshipThemecard = this.actor.sheet.getActorFellowshipThemecard();
+        if (actor.sheet.getActorFellowshipThemecard()) {
+            let actorFellowshipThemecard = actor.sheet.getActorFellowshipThemecard();
             if (actorFellowshipThemecard) {
                 for (let i = 0; i < 10; i++) {
                     const powertagPath = `system.powertag${i + 1}.selected`;
                     if (foundry.utils.getProperty(actorFellowshipThemecard, powertagPath)) {
-                        this.selectedTags.push({ name: actorFellowshipThemecard.system[`powertag${i + 1}`].name, positive: true, toBurn: actorFellowshipThemecard.system[`powertag${i + 1}`].toBurn, index: i + 1, source: "fellowship-themecard" });
+                        selectedTags.push({ name: actorFellowshipThemecard.system[`powertag${i + 1}`].name, positive: true, toBurn: actorFellowshipThemecard.system[`powertag${i + 1}`].toBurn, index: i + 1, source: "fellowship-themecard" });
                     }
 
                     const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
                     if (foundry.utils.getProperty(actorFellowshipThemecard, weaknesstagPath)) {
-                        this.selectedTags.push({ name: actorFellowshipThemecard.system[`weaknesstag${i + 1}`].name, positive: false, weakness: true, source: "fellowship-themecard" });
+                        selectedTags.push({ name: actorFellowshipThemecard.system[`weaknesstag${i + 1}`].name, positive: false, weakness: true, source: "fellowship-themecard" });
                     }
                 }
             }
         } else {
-            console.log("No fellowship themecard in the actor getActorFellowshipThemecard():", this.actor.sheet.getActorFellowshipThemecard());
+            console.log("No fellowship themecard in the actor getActorFellowshipThemecard():", actor.sheet.getActorFellowshipThemecard());
         }
 
         // floating tags and statuses from the actor
-        if (this.actor.system.floatingTagsAndStatuses && this.actor.system.floatingTagsAndStatuses.length > 0) {
-            this.actor.system.floatingTagsAndStatuses.forEach((entry) => {
+        if (actor.system.floatingTagsAndStatuses && actor.system.floatingTagsAndStatuses.length > 0) {
+            actor.system.floatingTagsAndStatuses.forEach((entry) => {
                 if (entry.selected) {
-                    this.selectedTags.push({ name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value });
+                    selectedTags.push({ name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value });
                 }
             });
         }
+
+        return selectedTags;
+    }
+
+    prepareTags() {
+
+        this.selectedTags = DiceRollApp.getPreparedTagsAndStatusesForRoll(this.actor);
 
     }
 

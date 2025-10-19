@@ -1,0 +1,44 @@
+<div class="character-container">
+    <div class="npc-subtitle-container-c">
+        <div class="npc-subtitle-text pointer" data-action="clickOpenCharacterSheet" data-id="{{character.id}}">{{character.name}}</div>
+    </div>
+    {{#if character.hasFloatingTagsAndStatuses}}
+    <div class="floating-tags-and-status-entries">
+        {{#each character.floatingTagsAndStatuses as |fts ftsIndex|}}
+        <div class="floating-tag-and-status-entry flexcol">
+            <div class="flexrow">
+
+                <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}}"
+                    data-index="{{ftsIndex}}" data-actor-id="{{character.id}}"
+                    title="right click to toggle between tag or state">
+                    {{fts.name}}{{#if fts.isStatus}}-{{fts.value}}{{/if}}</div>
+
+            </div>
+            {{#if fts.isStatus}}
+
+            <div class="fts-markings-container">
+                {{#each fts.markings as |marking index|}}
+                <span class="fts-input-marking" data-marking-index="{{index}}"
+                    data-action="actorToggleFloatingTagOrStatusMarking" data-actor-id="{{character.id}}"
+                    data-index="{{ftsIndex}}">
+                    <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne
+                        index}}</i>
+                </span>
+                {{/each}}
+            </div>
+            {{/if}}
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if character.hasSelectedTagsForRoll}}
+    <div class="selected-tags-container flexcol">
+        <label class="resource-label" style="text-align:center;">Selected Tags &amp; Statuses</label>
+        {{#each character.selectedTagsForRoll}}
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}}
+            {{#if (gt this.value 0)}}-{{this.value}}{{/if}}</div>
+        {{/each}}
+    </div>
+    {{/if}}
+</div>

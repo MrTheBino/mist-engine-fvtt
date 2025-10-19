@@ -328,6 +328,8 @@
 }
 .mist-engine .resource-label {
   font-weight: bold;
+  font-family: Labrada, serif;
+  color: #724a32;
 }
 .mist-engine .items-header {
   height: 28px;
@@ -540,6 +542,9 @@
   white-space: nowrap;
   margin: 3px 2px 3px 2px;
   text-shadow: 1px 1px 2px rgb(255, 249, 249);
+}
+.mist-engine .npc-subtitle-text.bold {
+  font-weight: 1200;
 }
 .mist-engine .npc-limit-value-armor {
   background-image: url("../assets/icons/icon-litm-limit-shield.svg");
@@ -875,6 +880,9 @@
 .mist-engine .quest-textarea {
   width: 100%;
 }
+.mist-engine .pointer {
+  cursor: pointer;
+}
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
   font-weight: normal;
@@ -1142,42 +1150,42 @@
 .mist-engine .themebook-style.litm-adventure h2 {
   background-image: url("../assets/headers/header-adventure.webp");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 20px;
 }
 .mist-engine .themebook-style.litm-origin h2 {
   background-image: url("../assets/headers/header-origin.webp");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 20px;
 }
 .mist-engine .themebook-style.litm-variable h2 {
   background-image: url("../assets/headers/header-black.webp");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 20px;
 }
 .mist-engine .themebook-style.litm-greatness h2 {
   background-image: url("../assets/headers/header-greatness.webp");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 20px;
 }
 .mist-engine .themebook-style.litm-backpack h2 {
   background-image: url("../assets/headers/header-backpack.webp");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 20px;
 }
 .mist-engine .themebook-style.litm-quintessence h2 {
   background-image: url("../assets/headers/header-backpack.webp");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 20px;
 }
 .mist-engine .themebook-style.litm-fellowship-relationship h2 {
   background-image: url("../assets/headers/header-backpack.webp");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 20px;
 }
 .mist-engine .themebook-style.litm-fellowship-themecard h2 {
   background-image: url("../assets/headers/header-backpack.webp");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 20px;
 }
 .mist-engine .themebook-style .themebook-icon {
   height: 12px;
@@ -1420,6 +1428,29 @@
 }
 .scene-app-dice-roll-modifiers .listing .mod-entry.negative {
   background-color: #ecb985;
+}
+
+.character-container .selected-tags-container {
+  margin: 10px 0;
+  gap: 2px;
+}
+.character-container .selected-tags-container .tag {
+  font-family: Labrada, serif;
+  font-weight: bold;
+  border-radius: 2px;
+  text-align: center;
+}
+.character-container .selected-tags-container .tag.positive {
+  background-color: #bccdb0;
+  border-radius: 5px solid black;
+  color: #724a32;
+  padding: 2px;
+}
+.character-container .selected-tags-container .tag.negative {
+  background-color: #ecb985;
+  border-radius: 5px solid black;
+  color: #724a32;
+  padding: 2px;
 }
 
 #dice-roll-app > section.window-content {

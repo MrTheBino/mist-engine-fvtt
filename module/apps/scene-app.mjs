@@ -23,7 +23,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         tag: 'div',
         window: {
             frame: true,
-            title: 'Scene Tags',
+            title: 'Scene Tags & Characters',
             icon: 'fa-solid fa-book-atlas',
             positioned: true,
             resizable: true
@@ -31,7 +31,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         position: {
             left: 100,
             width: 300,
-            height: 600
+            height: 800
         },
         actions: {
             createFloatingTagOrStatus: this.#handleCreateFloatingTagOrStatus,
@@ -46,6 +46,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             toggleFloatingTagOrStatusSelected: this.#handleToggleFloatingTagOrStatusSelected,
             toggleFloatingTagOrStatusModifier: this.#handleToggleFloatingTagOrStatusModifier,
             toggleFloatingTagOrStatus: this.#handleToggleFloatingTagOrStatus,
+            clickOpenCharacterSheet: this.#handleClickOpenCharacterSheet
         },
     };
 
@@ -137,9 +138,14 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         });
     }
 
-    sendUpdateHookEvent(){
-        this.render(true, { focus: true });
-        if(game.user.isGM){
+    sendUpdateHookEvent(forceRender = true) {
+        if (forceRender) {
+            this.render(true, { focus: true });
+        } else if (this.rendered) {
+            this.render(true, { focus: true });
+        }
+
+        if (game.user.isGM) {
             game.socket.emit("system.mist-engine-fvtt", {
             type: "hook",
             hook: "sceneAppUpdated",
@@ -172,17 +178,31 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const uniqueActors = [...new Set(actors)];
 
         uniqueActors.forEach(actor => {
+            let selectedTags = DiceRollApp.getPreparedTagsAndStatusesForRoll(actor);
+            let floatingTagAndStatuses = actor.system.floatingTagsAndStatuses || [];
             if(actor.type == "litm-character"){
                 if(!context.characters) context.characters = [];
                 context.characters.push({
                     id: actor.id,
                     name: actor.name,
                     img: actor.img,
-                    floatingTagsAndStatuses: actor.system.floatingTagsAndStatuses || []
+                    floatingTagsAndStatuses: floatingTagAndStatuses,
+                    hasFloatingTagsAndStatuses: floatingTagAndStatuses.length > 0,
+                    selectedTagsForRoll: selectedTags,
+                    hasSelectedTagsForRoll: selectedTags.length > 0
                 });
             }
         });
         return context;
+    }
+
+    static async #handleClickOpenCharacterSheet(event, target) {
+        event.preventDefault();
+        const actorId = target.dataset.id;
+        const actor = game.actors.get(actorId);
+        if(actor){
+            actor.sheet.render(true);
+        }
     }
 
     static async #handleToggleDiceRollModifier(event, target) {
