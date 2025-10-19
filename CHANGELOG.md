@@ -7,6 +7,11 @@
 - fellowship tags are getting scratched after being used
 - small css improvements
 - some small bug fixes & usability improvements
+- fix: Status/Tags on the character sheet and in the turn tracker should be shown in the same color #24
+- fix: Change Request: Treat fellowship tags differently from standard tags #23
+- change: Change Request: Change the order of rows on the character sheet #22
+- fix: Formatting: the top most backpack item should probably not be in bold #19
+- fix: Journal Tags: Tags with diacritics (e.g., ç, ã) are not recognized #25
   
 # 0.4.3
 - items got some love with styling

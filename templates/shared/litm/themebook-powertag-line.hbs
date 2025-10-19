@@ -4,9 +4,12 @@
         value="{{powertag.name}}" placeholder="{{powerTagQuestionPlaceholder index powertag.question}}" title="{{powerTagQuestionPlaceholder index powertag.question}}" title="Powertag" style="flex-grow: 8;"/>
     {{else}}
         {{#if (tagFilled powertag.name)}}
+        {{#if noBurn}}
+        {{else}}
         <span class="burn-indicator" data-action="toggleToBurn" data-item-id="{{id}}" data-powertag-index="{{index}}" data-source="{{source}}">
             <i class="burn-icon {{#if powertag.toBurn}}to-burn{{/if}}"></i>
         </span>
+        {{/if}}
         <span class="litm-pc-powertag powertag-name pt-selectable {{#if firstTag}}first{{/if}} {{#if powertag.selected}}selected{{/if}} {{#if powertag.burned}}burned{{/if}}" title="Right click to toggle burn state"
             data-powertag-index="{{index}}" data-item-id="{{id}}" data-source="{{source}}">{{powertag.name}}</span>
         {{/if}}

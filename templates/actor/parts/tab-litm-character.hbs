@@ -3,6 +3,7 @@
     <div class="character-sheet-divider flexrow">
         <div class="left-side">
             <div class="litm-character-themebooks-container">
+                {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-themebooks.hbs'}}
                 <div class="themebooks-container grid grid-4col grid-themebook-container">
                     {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-quintessences-partial.hbs'
                     editMode=system.editMode}}
@@ -14,7 +15,6 @@
                     editMode=system.editMode}}
                     <div></div>
                 </div>
-                {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-themebooks.hbs'}}
             </div>
         </div>
         {{#if (eq system.editMode false)}}

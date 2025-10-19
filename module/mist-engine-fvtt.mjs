@@ -244,23 +244,26 @@ Hooks.once("ready", function () {
 
 // Intercept journal page render and replace text tags/statuses/limits with draggale marks
 Hooks.on("renderJournalEntrySheet", (_app, html) => {
+  const TAG_RE = /\[([\p{L}\p{N}\p{M}_\-\.\s'"/:;!?()+&%#@€$]+)\]/gu;
   html.querySelectorAll(".journal-page-content").forEach((page) => {
     // tags
-    page.innerHTML.matchAll(/\[([A-Za-z\s\-]*)\]/gm).forEach(([tag, name]) => {
+    page.innerHTML.matchAll(TAG_RE).forEach(([tag, name]) => {
       page.innerHTML = page.innerHTML.replace(
         tag,
         `<mark draggable="true" class="draggable mist-engine tag" data-type="tag" data-name="${name}">${name}</mark>`
       );
     });
     // statuses
-    page.innerHTML.matchAll(/\[([A-Za-z\s\-]*)-(\d*)\]/gm).forEach(([status, name, value]) => {
+    const STATUS_RE = /\[([^\]-]+)-([^\]]+)\]/gu;
+    page.innerHTML.matchAll(STATUS_RE).forEach(([status, name, value]) => {
       page.innerHTML = page.innerHTML.replace(
         status,
         `<mark draggable="true" class="draggable mist-engine status" data-type="status" data-name="${name}" data-value="${value}">${name}-${value}</mark>`
       );
     });
     // limits
-    page.innerHTML.matchAll(/\[\-([A-Za-z\s\-]*):(\d*)\]/gm).forEach(([limit, name, value]) => {
+    const LIMIT_RE = /\[-([^\]:]+):([^\]]+)\]/gu;
+    page.innerHTML.matchAll(LIMIT_RE).forEach(([limit, name, value]) => {
       page.innerHTML = page.innerHTML.replace(
         limit,
         `<mark draggable="true" class="draggable mist-engine limit" data-type="limit" data-name="${name}" data-value="${value}">${name}-${value}</mark>`

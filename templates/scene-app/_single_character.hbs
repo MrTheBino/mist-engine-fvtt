@@ -8,7 +8,7 @@
         <div class="floating-tag-and-status-entry flexcol">
             <div class="flexrow">
 
-                <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}}"
+                <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}"
                     data-index="{{ftsIndex}}" data-actor-id="{{character.id}}"
                     title="right click to toggle between tag or state">
                     {{fts.name}}{{#if fts.isStatus}}-{{fts.value}}{{/if}}</div>

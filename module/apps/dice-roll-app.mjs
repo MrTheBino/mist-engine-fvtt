@@ -259,6 +259,20 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return false;
     }
 
+    wasTagSelected(index, themebookId, source = null) {
+       for (let tag of this.selectedTags) {
+            if (tag.index === index && themebookId === tag.themebookId && source === null) {
+                return true;
+            }
+            else if (tag.index === index && source !== null) {
+                if (tag.source === source) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     async resetTags() {
         let alreadyImprovedThemebooks = [];
 
@@ -330,7 +344,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                     const powertagPathToBurn = `system.powertag${i + 1}.toBurn`;
                     await actorFellowshipThemecard.update({ [powertagPathToBurn]: false });
 
-                    if (this.isTagToBurn(i + 1, null, "fellowship-themecard")) {
+                    if (this.wasTagSelected(i + 1, null, "fellowship-themecard")) {
                         const powertagToBurnPath = `system.powertag${i + 1}.burned`;
                         await actorFellowshipThemecard.update({ [powertagToBurnPath]: true });//mark as burned
                     }
