@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 13.4.5
+- fixed a small bug in the scene tags app
+- new version schema for upcomming development branches for Foundry 14, 13.X.X will always work for Foundry 13
+
 # 0.4.4
 - GMs see now the selected tags & statuses for a roll of a character in the scene tags window before a character makes a roll
 - GMs can open a character sheet in the scene tags window by clicking on the character name
