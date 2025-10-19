@@ -6,9 +6,6 @@ This is an unoffical system implementation of the MIST Engine from Son Of Oaks f
 
 Currently it only supports Legend In The Mist.
 
-
-**This system is in BETA stage.**
-
 ## Features
 
 * NPC / Adversary sheet
