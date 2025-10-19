@@ -145,13 +145,13 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             this.render(true, { focus: true });
         }
 
-        if (game.user.isGM) {
+        //if (game.user.isGM) {
             game.socket.emit("system.mist-engine-fvtt", {
             type: "hook",
             hook: "sceneAppUpdated",
             data: { }
             });
-        }
+        //}
     }
 
     async _prepareContext(options) {
@@ -177,6 +177,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const actors = tokens.map(t => t.actor).filter(a => a);
         const uniqueActors = [...new Set(actors)];
 
+        context.userIsGM = game.user.isGM;
         uniqueActors.forEach(actor => {
             let selectedTags = DiceRollApp.getPreparedTagsAndStatusesForRoll(actor);
             let floatingTagAndStatuses = actor.system.floatingTagsAndStatuses || [];

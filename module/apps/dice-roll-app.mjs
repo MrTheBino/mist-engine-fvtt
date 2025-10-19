@@ -166,6 +166,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     static getPreparedTagsAndStatusesForRoll(actor) {
         let selectedTags = [];
+        if(!actor){
+            console.warn("No actor provided for getPreparedTagsAndStatusesForRoll");
+            return selectedTags;
+        
+        }
         for (let item of actor.items) {
             if (item.type === "backpack") {
                 const backpackItems = item.system.items;
@@ -218,7 +223,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 }
             }
         } else {
-            console.log("No fellowship themecard in the actor getActorFellowshipThemecard():", actor.sheet.getActorFellowshipThemecard());
+            console.log("No fellowship themecard in the actor getActorFellowshipThemecard():", actor.name);
         }
 
         // floating tags and statuses from the actor
@@ -255,6 +260,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     async resetTags() {
+        let alreadyImprovedThemebooks = [];
+
         for (let item of this.actor.items) {
             if (item.type === "backpack") {
                 const backpackItems = item.system.items;
@@ -286,7 +293,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                     const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
                     if(foundry.utils.getProperty(item, weaknesstagPath) == true){
                         if(item.system.improve < 3){
-                            await item.update({ 'system.improve': item.system.improve + 1 });
+                            if(alreadyImprovedThemebooks.includes(item.id) == false){
+                                alreadyImprovedThemebooks.push(item.id);
+                                await item.update({ 'system.improve': item.system.improve + 1 });
+                            }
                         }
                     };
                     await item.update({ [weaknesstagPath]: false });
@@ -329,7 +339,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                     const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
                     if(foundry.utils.getProperty(actorFellowshipThemecard, weaknesstagPath) == true){
                         if(actorFellowshipThemecard.system.improve < 3){
-                            await actorFellowshipThemecard.update({ 'system.improve': actorFellowshipThemecard.system.improve + 1 });
+                            if(alreadyImprovedThemebooks.includes(actorFellowshipThemecard.id) == false){
+                                alreadyImprovedThemebooks.push(actorFellowshipThemecard.id);
+                                await actorFellowshipThemecard.update({ 'system.improve': actorFellowshipThemecard.system.improve + 1 });
+                            }
                         }
                     };
                     await actorFellowshipThemecard.update({ [weaknesstagPath]: false });

@@ -2,12 +2,27 @@
 
 <div class="npc-subtitle-container-c">
     <div class="npc-subtitle-text">
-        {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs'
-        isLocked=floatingTagsAndStatusesEditable name="system.floatingTagsAndStatusesEditable"
-        title="Toggle
-        Edit Mode"}}
+        {{#if gmCheck}}
+            {{#if userIsGM}}
+                {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs'
+                isLocked=floatingTagsAndStatusesEditable name="system.floatingTagsAndStatusesEditable"
+                title="Toggle
+                Edit Mode"}}
+            {{/if}}
+        {{else}}
+            {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs'
+            isLocked=floatingTagsAndStatusesEditable name="system.floatingTagsAndStatusesEditable"
+            title="Toggle
+            Edit Mode"}}
+        {{/if}}
         {{localize 'MIST_ENGINE.LABELS.Actor.FloatingTagOrStatus'}}
-        <a data-action="createFloatingTagOrStatus"><i class='fas fa-plus'></i></a>
+        {{#if gmCheck}}
+            {{#if userIsGM}}
+                <a data-action="createFloatingTagOrStatus"><i class='fas fa-plus'></i></a>
+            {{/if}}
+        {{else}}
+            <a data-action="createFloatingTagOrStatus"><i class='fas fa-plus'></i></a>
+        {{/if}}
     </div>
 </div>
 

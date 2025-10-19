@@ -1,5 +1,13 @@
 # CHANGELOG
 
+# 0.4.4
+- GMs see now the selected tags & statuses for a roll of a character in the scene tags window before a character makes a roll
+- GMs can open a character sheet in the scene tags window by clicking on the character name
+- the improve markings of a themebook are getting increased if a character used a weakness tag
+- fellowship tags are getting scratched after being used
+- small css improvements
+- some small bug fixes & usability improvements
+  
 # 0.4.3
 - items got some love with styling
 - actor fellowship themecard: entering questions not the actual power tags, editing / adding powertags is added on character sheets -> same behaviour with the other themebooks

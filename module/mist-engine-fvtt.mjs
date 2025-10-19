@@ -128,7 +128,6 @@ Hooks.once("init", function () {
 /*  Handlebars Helpers                          */
 /* -------------------------------------------- */
 
-
 Handlebars.registerHelper("powerTagQuestionPlaceholder", function (index,str) {
   let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index-1];
   let qText = str;
