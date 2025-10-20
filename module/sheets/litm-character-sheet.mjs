@@ -7,7 +7,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     #dragDrop // Private field to hold dragDrop handlers
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
-        classes: ['mist-engine', 'sheet', 'actor','litm-character'],
+        classes: ['mist-engine', 'sheet', 'actor', 'litm-character'],
         tag: 'form',
         position: {
             width: 1000,
@@ -93,10 +93,10 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             console.log("socket message received in character sheet: ", msg);
             if (msg?.type === "hook" && msg.hook == "fellowshipThemeCardUpdated") {
                 this.reloadFellowshipThemecard(false);
-                if(this.rendered){
+                if (this.rendered) {
                     this.render();
                 }
-                
+
             }
             else if (msg?.type === "hook" && msg.hook == "floatingTagOrStatusUpdated" && msg.data?.actorId === this.actor.id) {
                 this.render(true, { focus: true });
@@ -158,23 +158,23 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
     static async #handleAssignFellowshipThemecard(event, target) {
         event.preventDefault();
-        if(this.isActorAssignedToUser()){
+        if (this.isActorAssignedToUser()) {
             await this.assignFellowshipThemecard();
             this.render(true);
         }
     }
 
-    isActorAssignedToUser(){
+    isActorAssignedToUser() {
         // find the user (not gm) assigned to this actor
         let assignedUserNotGM = game.users.find(u => u.character?._id === this.actor.id && !u.isGM);
-        if(!assignedUserNotGM){
+        if (!assignedUserNotGM) {
             ui.notifications.error("This character is not assigned to any non GM user. Please assign the character to a user before assigning a fellowship themecard. Press F5 to reload foundry and its permissions if you encounter problems.");
             return false;
         }
         return true;
     }
 
-    async assignFellowshipThemecard(){
+    async assignFellowshipThemecard() {
         let assignedUserNotGM = game.users.find(u => u.character?._id === this.actor.id && !u.isGM);
         if (assignedUserNotGM) {
             let ownedWorldActors = game.actors.filter(a =>
@@ -232,7 +232,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         return { themebooks: themebooks, backpack: backpack, quintessences: quintessences, themebooksEmpty: themebooks.length === 0 };
     }
 
-    getBackpack(){
+    getBackpack() {
         return this.options.document.items.find(i => i.type === 'backpack');
     }
 
@@ -287,14 +287,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const index = tag.dataset.index;
         let fellowships = this.options.document.system.fellowships;
         if (!fellowships || index >= fellowships.length) return;
-        if( fellowships[index].scratched ) return; // do not allow selecting scratched tags
+        if (fellowships[index].scratched) return; // do not allow selecting scratched tags
         fellowships[index].selected = !fellowships[index].selected;
         await this.options.document.update({ "system.fellowships": fellowships });
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
-     async handleFellowshipRelationshipSelectableToggleClick(event) {
+    async handleFellowshipRelationshipSelectableToggleClick(event) {
         event.preventDefault();
         const tag = event.currentTarget;
         const index = tag.dataset.index;
@@ -491,7 +491,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let prop = foundry.utils.getProperty(object, path);
         await object.update({ [path]: !prop });
 
-        if(foundry.utils.getProperty(object, path) == true){//if it was not burned and now is, remove selected and toBurn
+        if (foundry.utils.getProperty(object, path) == true) {//if it was not burned and now is, remove selected and toBurn
             let selectedPath = `system.powertag${ptIndex}.selected`;
             let toBurnPath = `system.powertag${ptIndex}.toBurn`;
             await object.update({ [selectedPath]: false });
@@ -540,7 +540,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             this.reloadFellowshipThemecard(true);
         }
 
-        if(this.rendered){
+        if (this.rendered) {
             this.render();
         }
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
@@ -586,17 +586,35 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
         const backpackItems = backpack.system.items;
 
+        let itemName = "New Item";
+        try {
+            itemName = await foundry.applications.api.DialogV2.prompt({
+                window: { title: "Enter the backpack item name" },
+                content: '<input name="itemName" type="text" autofocus>',
+                ok: {
+                    label: "Submit",
+                    callback: (event, button, dialog) => button.form.elements.itemName.value
+                }
+            });
+        } catch (error){
+            return;
+        }
+
+        if (itemName === undefined || itemName.trim().length === 0) {
+            return;
+        }
+
         if (backpackItems) {
             await backpack.update({
                 "system.items": [
                     ...backpackItems,
-                    { name: "New Item", selected: false }
+                    { name: itemName, selected: false }
                 ]
             });
         } else {
             await backpack.update({
                 "system.items": [
-                    { name: "New Item", selected: false }
+                    { name: itemName, selected: false }
                 ]
             });
         }

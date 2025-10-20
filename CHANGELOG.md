@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 13.4.6
+- reverted fix: Journal Tags: Tags with diacritics (e.g., ç, ã) are not recognized #25 until a better regex is done
+- faster entering of tags & statuses and also backpack items
+- Change Request: Easier adding items from the backpack #20
+- added custom dice for Dice So Nice
+
 # 13.4.5
 - fixed a small bug in the scene tags app
 - new version schema for upcomming development branches for Foundry 14, 13.X.X will always work for Foundry 13

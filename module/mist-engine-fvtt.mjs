@@ -244,26 +244,23 @@ Hooks.once("ready", function () {
 
 // Intercept journal page render and replace text tags/statuses/limits with draggale marks
 Hooks.on("renderJournalEntrySheet", (_app, html) => {
-  const TAG_RE = /\[([\p{L}\p{N}\p{M}_\-\.\s'"/:;!?()+&%#@€$]+)\]/gu;
   html.querySelectorAll(".journal-page-content").forEach((page) => {
     // tags
-    page.innerHTML.matchAll(TAG_RE).forEach(([tag, name]) => {
+    page.innerHTML.matchAll(/\[([A-Za-z\s\-]*)\]/gm).forEach(([tag, name]) => {
       page.innerHTML = page.innerHTML.replace(
         tag,
         `<mark draggable="true" class="draggable mist-engine tag" data-type="tag" data-name="${name}">${name}</mark>`
       );
     });
     // statuses
-    const STATUS_RE = /\[([^\]-]+)-([^\]]+)\]/gu;
-    page.innerHTML.matchAll(STATUS_RE).forEach(([status, name, value]) => {
+    page.innerHTML.matchAll(/\[([A-Za-z\s\-]*)-(\d*)\]/gm).forEach(([status, name, value]) => {
       page.innerHTML = page.innerHTML.replace(
         status,
         `<mark draggable="true" class="draggable mist-engine status" data-type="status" data-name="${name}" data-value="${value}">${name}-${value}</mark>`
       );
     });
     // limits
-    const LIMIT_RE = /\[-([^\]:]+):([^\]]+)\]/gu;
-    page.innerHTML.matchAll(LIMIT_RE).forEach(([limit, name, value]) => {
+    page.innerHTML.matchAll(/\[\-([A-Za-z\s\-]*):(\d*)\]/gm).forEach(([limit, name, value]) => {
       page.innerHTML = page.innerHTML.replace(
         limit,
         `<mark draggable="true" class="draggable mist-engine limit" data-type="limit" data-name="${name}" data-value="${value}">${name}-${value}</mark>`
@@ -417,3 +414,42 @@ function rollItemMacro(itemUuid) {
     item.roll();
   });
 }
+
+class D6ToD12 extends foundry.dice.terms.Die {
+    constructor(termData) {
+        super({ ...termData, faces: 12 });
+    }
+
+    static DENOMINATION = "6";
+}
+
+CONFIG.Dice.terms["6"] = D6ToD12;
+
+Hooks.once('diceSoNiceReady', (dice3d) => {
+  console.log("Registering Legend in the Mist Dice So Nice Dice");
+    dice3d.addSystem({ id: "mist-engine-fvtt", name: "Legend in the Mist", group: "Legend in the Mist" });
+
+    dice3d.addDicePreset({
+        system: "mist-engine-fvtt",
+        type: "d6",
+        labels: ['1', '2', '3', '4', '5', '/systems/mist-engine-fvtt/assets/dice/dice_greatness_color.png',
+            '/systems/mist-engine-fvtt/assets/dice/dice_raven_color.png', '5', '4', '3', '2', '1'],
+        bumpMaps: [, , , , , '/systems/mist-engine-fvtt/assets/dice/dice_greatness_bump.png',
+            '/systems/mist-engine-fvtt/assets/dice/dice_raven_bump.png', , , , ,],
+        colorset: "litm-default",
+    }, "d12");
+
+    dice3d.addColorset({
+        name: "litm-default",
+        description: "Legend in the Mist Default",
+        category: "Legend in the Mist",
+        foreground: ["#000000", "#000000", "#000000", "#000000"],
+        background: ["#e9e1d6", "#74774fff", "#5c7979ff", "#c9ac89"],
+        outline: ["#000000", "#000000", "#000000", "#000000"],
+        edge: ["#f8f3eb", "#c3c3a0ff", "#7ea590ff", "#e9dcbc"],
+        texture: "wood",
+        material: "stone",
+        font: "Times",
+        visibility: "visible",
+    });
+});

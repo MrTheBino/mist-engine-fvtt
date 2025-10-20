@@ -2,6 +2,22 @@
 // This module provides static methods to manage floating tags and statuses
 // for actors and items in a Foundry VTT system.
 export class FloatingTagAndStatusAdapter {
+    static parseFloatingTagAndStatusString(srcString){
+        let ftsObject = { name: srcString, description: "", isStatus: false, value: 0, markings: Array(6).fill(false) };
+        if (srcString.includes("-")) {
+            const parts = srcString.split("-");
+            ftsObject.isStatus = true;
+            ftsObject.value = parseInt(parts[parts.length - 1]) || 0;
+            ftsObject.name = parts.slice(0, parts.length - 1).join("-").trim();
+            if(ftsObject.value > 0 && ftsObject.value <= 6){
+                ftsObject.markings[ftsObject.value-1] = true; 
+            }
+            
+        }
+
+        return ftsObject;
+    }
+
     static async handleTagStatusModifierToggle(objectToUpdate,arrayIndex){
         if(objectToUpdate===undefined){
             console.log("FloatingTagAndStatusAdapter.handleTagStatusModifierToggle: no object to update");

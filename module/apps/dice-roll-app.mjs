@@ -166,8 +166,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     static getPreparedTagsAndStatusesForRoll(actor) {
         let selectedTags = [];
-        if(actor.type !== "character" && actor.type !== "litm-character"){
-            console.warn("getPreparedTagsAndStatusesForRoll called for non-character actor:", actor.name);
+        if(!actor || (actor.type !== "character" && actor.type !== "litm-character")){
             return selectedTags;
         }
         

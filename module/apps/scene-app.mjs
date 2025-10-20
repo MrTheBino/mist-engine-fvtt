@@ -339,17 +339,37 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         
         const floatingTagsAndStatuses = this.currentSceneDataItem.system.floatingTagsAndStatuses;
 
+        let srcStatusTagStr = "New Status";
+        try {
+            srcStatusTagStr = await foundry.applications.api.DialogV2.prompt({
+                window: { title: "Enter the status or tag" },
+                content: '<input name="srcStatusTagStr" type="text" autofocus placeholder="tag or status-2">',
+                ok: {
+                    label: "Submit",
+                    callback: (event, button, dialog) => button.form.elements.srcStatusTagStr.value
+                }
+            });
+        } catch (error) {
+            return;
+        }
+
+        if (srcStatusTagStr === undefined || srcStatusTagStr.trim().length === 0) {
+            return;
+        }
+
+        let ftsObject = FloatingTagAndStatusAdapter.parseFloatingTagAndStatusString(srcStatusTagStr);
+        
         if (floatingTagsAndStatuses) {
             await this.currentSceneDataItem.update({
                 "system.floatingTagsAndStatuses": [
                     ...floatingTagsAndStatuses,
-                    { name: "New Floating Tag", description: "" }
+                    ftsObject
                 ]
             });
         } else {
             await this.currentSceneDataItem.update({
                 "system.floatingTagsAndStatuses": [
-                    { name: "New Floating Tag", description: "" }
+                    ftsObject
                 ]
             });
         }

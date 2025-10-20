@@ -5,7 +5,7 @@ import { MistSceneApp } from '../apps/scene-app.mjs'
 import { DiceRollApp } from '../apps/dice-roll-app.mjs'
 import { MistEngineItem } from '../documents/item.mjs'
 import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adapter.mjs";
-import {StoryTagAdapter} from "../lib/story-tag-adapter.mjs";
+import { StoryTagAdapter } from "../lib/story-tag-adapter.mjs";
 
 export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
@@ -207,22 +207,22 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const index = target.dataset.index;
         const itemId = target.dataset.itemId;
         const key = target.dataset.key;
-        await StoryTagAdapter.toggleBurnedState(this.actor,itemId,key,index);
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
-        MistSceneApp.getInstance().sendUpdateHookEvent(false);
-    }
-    
-    static async #handleToggleStoryTagBurn(event,target){
-        event.preventDefault();
-        const index = target.dataset.index;
-        const itemId = target.dataset.itemId;
-        const key = target.dataset.key;
-        await StoryTagAdapter.toggleBurnSelection(this.actor,itemId,key,index);
+        await StoryTagAdapter.toggleBurnedState(this.actor, itemId, key, index);
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
-    static async #handleToggleStoryTagSelection(event,target){
+    static async #handleToggleStoryTagBurn(event, target) {
+        event.preventDefault();
+        const index = target.dataset.index;
+        const itemId = target.dataset.itemId;
+        const key = target.dataset.key;
+        await StoryTagAdapter.toggleBurnSelection(this.actor, itemId, key, index);
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
+    }
+
+    static async #handleToggleStoryTagSelection(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
         const itemId = target.dataset.itemId;
@@ -241,7 +241,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
         if (event.currentTarget.type === 'checkbox') {
             await StoryTagAdapter.updateStoryTag(this.actor, itemId, key, index, event.currentTarget.checked);
-        }else{
+        } else {
             await StoryTagAdapter.updateStoryTag(this.actor, itemId, key, index, event.currentTarget.value);
         }
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
@@ -263,8 +263,8 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         this.sendFloatableTagOrStatusUpdate();
     }
-    
-    static async #handleToggleFloatingTagOrStatus(event,target) {
+
+    static async #handleToggleFloatingTagOrStatus(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
         await FloatingTagAndStatusAdapter.handleTagStatusToggle(this.actor, index);
@@ -405,7 +405,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                     await this.actorFellowshipThemecard.update({ [key]: value });
 
                 }
-            }else{
+            } else {
                 console.warn("No fellowship themecard found for actor");
             }
         }
@@ -415,24 +415,43 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         event.preventDefault();
         const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
 
+        let srcStatusTagStr = "New Status";
+        try {
+            srcStatusTagStr = await foundry.applications.api.DialogV2.prompt({
+                window: { title: "Enter the status or tag" },
+                content: '<input name="srcStatusTagStr" type="text" autofocus placeholder="tag or status-2">',
+                ok: {
+                    label: "Submit",
+                    callback: (event, button, dialog) => button.form.elements.srcStatusTagStr.value
+                }
+            });
+        } catch (error) {
+            return;
+        }
+
+        if (srcStatusTagStr === undefined || srcStatusTagStr.trim().length === 0) {
+            return;
+        }
+
+        let ftsObject = FloatingTagAndStatusAdapter.parseFloatingTagAndStatusString(srcStatusTagStr);
         if (floatingTagsAndStatuses) {
             await this.actor.update({
                 "system.floatingTagsAndStatuses": [
                     ...floatingTagsAndStatuses,
-                    { name: "New Floating Tag", description: "", value: 0, markings: Array(6).fill(false) }
+                    ftsObject
                 ]
             });
         } else {
             await this.actor.update({
                 "system.floatingTagsAndStatuses": [
-                    { name: "New Floating Tag", description: "", value: 0, markings: Array(6).fill(false) }
+                    ftsObject
                 ]
             });
         }
 
-        if (this.actor.type == "litm-character") {
+        /*if (this.actor.type == "litm-character") {
             this.actor.update({ "system.floatingTagsAndStatusesEditable": true });
-        }
+        }*/
         this.sendFloatableTagOrStatusUpdate();
 
     }
@@ -505,8 +524,8 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const index = target.dataset.index;
         const key = target.dataset.key;
 
-        console.log("Deleting story tag", {itemId,index,key});
-        StoryTagAdapter.deleteStoryTag(this.actor,itemId,key,index);
+        console.log("Deleting story tag", { itemId, index, key });
+        StoryTagAdapter.deleteStoryTag(this.actor, itemId, key, index);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
         this.render(true);
     }
@@ -623,11 +642,11 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             case 'backpack':
                 // Story Tag from Backpack
                 if (data.name && data.name.trim().length > 0) {
-                    if(this.actor.type !== "litm-character"){
+                    if (this.actor.type !== "litm-character") {
                         return;
                     }
                     let backpack = this.getBackpack();
-                    if(backpack){
+                    if (backpack) {
                         const backpackItems = backpack.system.items;
                         backpackItems.push({ name: data.name, selected: false, burned: false });
                         await backpack.update({ "system.items": backpackItems });
