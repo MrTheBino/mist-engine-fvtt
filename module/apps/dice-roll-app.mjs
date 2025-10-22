@@ -87,6 +87,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.selectedGmTags = this.selectedGmTags;
         context.selectedStoryTags = this.selectedStoryTags;
         context.rollType = this.rollType;
+        let countTags =  DiceRollApp.calculatePowerTags(DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags)); 
+        context.powerAmount = countTags.positive - countTags.negative;
+        if(context.powerAmount < 0){
+            context.powerAmount = 0;
+        }
 
         return context;
     }
@@ -112,31 +117,61 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         });
     }
 
-    applyRulesToSelectedTags() {
+    static calculatePowerTags(tagsForRoll){
+        let numPositiveTags = 0;
+        let numNegativeTags = 0;
+
+        tagsForRoll.forEach(element => {
+            if (element.value === undefined || element.value == 0) {
+                // normal power tags, story tags etc
+                if (element.positive) {
+                    if (element.toBurn) {
+                        numPositiveTags += 3;
+                    } else {
+                        numPositiveTags++;
+                    }
+                }
+                else {
+                    numNegativeTags++;
+                }
+            } else {
+                // statuses
+                if (element.positive) {
+                    numPositiveTags += element.value;
+                }
+                else {
+                    numNegativeTags += element.value;
+                }
+            }
+        });
+        return { positive: numPositiveTags, negative: numNegativeTags };
+    }
+
+    static applyRulesToSelectedTags(selectedTags, selectedGmTags, selectedStoryTags) {
         const tagsForRole = [];
 
         // first the take all normal tags
-        this.selectedGmTags.forEach(gmTag => {
+        selectedGmTags.forEach(gmTag => {
             if (gmTag.value === 0 || gmTag.value === undefined) {
                 tagsForRole.push(gmTag);
             }
         });
 
-        this.selectedTags.forEach(tag => {
+        selectedTags.forEach(tag => {
             if (tag.value === 0 || tag.value === undefined) {
                 tagsForRole.push(tag);
             }
         });
 
-        this.selectedStoryTags.forEach(tag => {
+        selectedStoryTags.forEach(tag => {
             if (tag.value === 0 || tag.value === undefined) {
                 tagsForRole.push(tag);
             }
         });
 
-        let statuses = this.selectedTags.filter(t => t.value && t.value > 0);
-        statuses = this.selectedStoryTags.filter(t => t.value && t.value > 0).concat(statuses);
-        statuses = this.selectedGmTags.filter(t => t.value && t.value > 0).concat(statuses);
+        let statuses = selectedTags.filter(t => t.value && t.value > 0);
+        statuses = selectedStoryTags.filter(t => t.value && t.value > 0).concat(statuses);
+        statuses = selectedGmTags.filter(t => t.value && t.value > 0).concat(statuses);
 
         let positiveStatuses = statuses.filter(s => s.positive);
         let negativeStatuses = statuses.filter(s => !s.positive);
@@ -234,7 +269,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (actor.system.floatingTagsAndStatuses && actor.system.floatingTagsAndStatuses.length > 0) {
             actor.system.floatingTagsAndStatuses.forEach((entry) => {
                 if (entry.selected) {
-                    selectedTags.push({ name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value });
+                    let t = { name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value }
+                    if(entry.value === undefined || entry.value > 0){
+                        t.isStatus = true;
+                    }
+                    selectedTags.push(t);
                 }
             });
         }
@@ -391,30 +430,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         let numPositiveTags = parseInt(target.form.positiveValue.value);
         let numNegativeTags = parseInt(target.form.negativeValue.value);
 
-        let tagsAndStatusForRoll = this.applyRulesToSelectedTags();
-        tagsAndStatusForRoll.forEach(element => {
-            if (element.value === undefined || element.value == 0) {
-                // normal power tags, story tags etc
-                if (element.positive) {
-                    if (element.toBurn) {
-                        numPositiveTags += 3;
-                    } else {
-                        numPositiveTags++;
-                    }
-                }
-                else {
-                    numNegativeTags++;
-                }
-            } else {
-                // statuses
-                if (element.positive) {
-                    numPositiveTags += element.value;
-                }
-                else {
-                    numNegativeTags += element.value;
-                }
-            }
-        });
+        let tagsAndStatusForRoll = DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags);
+        let countTags = DiceRollApp.calculatePowerTags(tagsAndStatusForRoll);
+        numPositiveTags += countTags.positive;
+        numNegativeTags += countTags.negative;
 
 
         const dicePromises = [];

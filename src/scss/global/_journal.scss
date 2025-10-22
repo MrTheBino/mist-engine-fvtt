@@ -1,0 +1,34 @@
+.journal-entry-content{
+    background-image: url(../assets/bg-pargement-texture.webp);
+    background-repeat: no-repeat;
+    row-gap: 0.5em;
+    color: $c-dark-styled-text;
+    font-family: $font-primary;
+    font-size: 1.1em;
+
+    h1,h2,h3,h4,h5,h6{
+        color: $c-text-redish;
+        font-family: $font-primary;
+        text-transform: uppercase;
+        font-weight:900;
+    }
+
+    .bigger-redish-text{
+        color: $c-text-redish;
+        font-size: 1.2em;
+    }
+
+    .redish-text{
+        color: $c-text-redish;
+    }
+
+    .tag{
+        background-color: $c-tag-orange;
+        font-style: italic;
+    }
+
+    .status{
+        background-color: $c-tag-green;
+        font-style: italic;
+    }
+}

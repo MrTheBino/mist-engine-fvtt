@@ -266,6 +266,36 @@
   font-family: Labrada, serif;
 }
 
+.journal-entry-content {
+  background-image: url(../assets/bg-pargement-texture.webp);
+  background-repeat: no-repeat;
+  row-gap: 0.5em;
+  color: #191813;
+  font-family: Labrada, serif;
+  font-size: 1.1em;
+}
+.journal-entry-content h1, .journal-entry-content h2, .journal-entry-content h3, .journal-entry-content h4, .journal-entry-content h5, .journal-entry-content h6 {
+  color: #742A2B;
+  font-family: Labrada, serif;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+.journal-entry-content .bigger-redish-text {
+  color: #742A2B;
+  font-size: 1.2em;
+}
+.journal-entry-content .redish-text {
+  color: #742A2B;
+}
+.journal-entry-content .tag {
+  background-color: #ecb985;
+  font-style: italic;
+}
+.journal-entry-content .status {
+  background-color: #bccdb0;
+  font-style: italic;
+}
+
 /* Styles limited to mist-engine-fvtt sheets */
 .mist-engine .item-form {
   font-family: Labrada, serif;
@@ -751,7 +781,7 @@
   padding: 0.1em 0.4em;
   border-radius: 0.8em 0.3em;
   background: transparent;
-  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 225, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
+  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 170, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   font-weight: bold;
@@ -896,7 +926,7 @@
   padding: 0.1em 0.4em;
   border-radius: 0.8em 0.3em;
   background: transparent;
-  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 225, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
+  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 170, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   font-weight: bold;
@@ -922,7 +952,7 @@
   padding: 0.1em 0.4em;
   border-radius: 0.8em 0.3em;
   background: transparent;
-  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 225, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
+  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 170, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   font-weight: bold;
@@ -954,7 +984,7 @@
   padding: 0.1em 0.4em;
   border-radius: 0.8em 0.3em;
   background: transparent;
-  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 225, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
+  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 170, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   font-weight: bold;
@@ -978,7 +1008,7 @@
   padding: 0.1em 0.4em;
   border-radius: 0.8em 0.3em;
   background: transparent;
-  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 225, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
+  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 170, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   font-weight: bold;
@@ -1311,6 +1341,12 @@
   border-radius: 5px solid black;
   color: #724a32;
   padding: 2px;
+}
+.roll-dialog-container .power-label {
+  width: 100%;
+  text-align: center;
+  display: block;
+  font-size: large;
 }
 
 .message-content .selected-tags {

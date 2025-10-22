@@ -14,6 +14,7 @@
 @import 'global/flex';
 @import 'global/font';
 @import 'global/editor';
+@import 'global/journal';
 
 
 /* Styles limited to mist-engine-fvtt sheets */
@@ -27,7 +28,6 @@
   @import 'components/themebook';
   @import 'components/tabs';
   @import 'components/icons';
-
 }
 
 @import 'components/roll_dialog';
