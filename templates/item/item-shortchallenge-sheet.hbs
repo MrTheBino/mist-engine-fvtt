@@ -1,0 +1,13 @@
+<section class="tab {{tabs.form.id}} {{tabs.form.cssClass}} scrollable" id="form"
+    data-tab="{{tabs.form.id}}" data-group="{{tabs.form.group}}">
+    <textarea data-dtype="String" name="system.shortDescription">{{system.shortDescription}}</textarea>
+    <fieldset>
+    <legend>Consequences <a data-action="createEntry"><i class='fas fa-plus'></i></a></legend>
+    {{#each system.list as |entry index|}}
+        <div class="list-entry flexrow">
+            <input type="text" value="{{entry}}" class="editable-item" data-index="{{index}}" style="flex-grow: 8;"/>
+            <a style="flex-grow: 0.2" data-action="deleteEntry" data-index="{{index}}"><i class="fas fa-trash"></i></a>
+        </div>
+    {{/each}}
+    </fieldset>
+</section>

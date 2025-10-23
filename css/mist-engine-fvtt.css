@@ -356,6 +356,9 @@
   display: table-cell;
   padding: 2px 3px;
 }
+.mist-engine .list-entry {
+  margin-bottom: 5px;
+}
 .mist-engine .resource-label {
   font-weight: bold;
   font-family: Labrada, serif;

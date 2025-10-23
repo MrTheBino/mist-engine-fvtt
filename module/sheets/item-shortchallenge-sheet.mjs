@@ -2,7 +2,7 @@ const { ItemSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
 
-export class MistEngineItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
+export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
 
     /** @inheritDoc */
@@ -14,7 +14,8 @@ export class MistEngineItemSheet extends HandlebarsApplicationMixin(ItemSheetV2)
             height: 550
         },
         actions: {
-
+            createEntry: this.#handleCreateEntry,
+            deleteEntry: this.#handleDeleteEntry
         },
         form: {
             // handler: DCCActorSheet.#onSubmitForm,
@@ -45,7 +46,7 @@ export class MistEngineItemSheet extends HandlebarsApplicationMixin(ItemSheetV2)
             // classes: ['sysclass'], // Optionally add extra classes to the part for extra customization
         },
         form: {
-            template: 'systems/mist-engine-fvtt/templates/item/item-sheet.hbs'
+            template: 'systems/mist-engine-fvtt/templates/item/item-shortchallenge-sheet.hbs'
         },
         description: {
             template: 'systems/mist-engine-fvtt/templates/shared/tab-description.hbs',
@@ -73,21 +74,6 @@ export class MistEngineItemSheet extends HandlebarsApplicationMixin(ItemSheetV2)
         super(options)
         this.#dragDrop = this.#createDragDropHandlers()
     }
-
-    /** @inheritDoc */
-    _configureRenderParts(options) {
-        const parts = super._configureRenderParts(options)
-
-        let templatePath = `systems/mist-engine-fvtt//templates/item/item-${this.document.type}-sheet.hbs`;
-        // Add the main item type part
-        if (this.document.type) {
-            parts.form = {
-                id: 'form',
-                template: templatePath
-            }
-        }
-        return parts;
-    }
     
     /* @inheritDoc */
     async _prepareContext(options) {
@@ -97,9 +83,6 @@ export class MistEngineItemSheet extends HandlebarsApplicationMixin(ItemSheetV2)
         context.system = actorData.system;
         context.flags = actorData.flags;
         context.item = this.document;
-
-        // Adding a pointer to CONFIG.SHADOWCITY
-        context.config = CONFIG.SHADOWCITY;
 
         context.descriptionHTML = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
             this.document.system.description,
@@ -114,9 +97,52 @@ export class MistEngineItemSheet extends HandlebarsApplicationMixin(ItemSheetV2)
                 relativeTo: this.document,
             }
         );
+
         return context;
     }
 
+    _onRender(context, options) {
+        super._onRender(context, options)
+        const editableItems = this.element.querySelectorAll('.editable-item');
+        for (const input of editableItems) {
+            input.addEventListener("change", event => this.handleInputUpdate(event))
+        }
+    }
+
+    async handleInputUpdate(event) {
+        const item = this.document;
+        const target = event.currentTarget;
+        const value = target.value;
+        const index = target.dataset.index;
+
+        const data = foundry.utils.duplicate(item.system);
+
+        // Update the specific entry in the list
+        data.list[index] = value;
+        await item.update({ 'system.list': data.list });
+    }
+
+    static async #handleDeleteEntry(event, target) {
+        event.preventDefault();
+        const item = this.document;
+        const index = parseInt(target.dataset.index);
+        const data = duplicate(item.system);
+
+        // Remove the entry at the specified index
+        data.list.splice(index, 1);
+        await item.update({ 'system.list': data.list });
+    }
+
+    static async #handleCreateEntry(event, target) {
+        event.preventDefault();
+        const item = this.document;
+        const data = duplicate(item.system);
+
+        // Create a new entry in the consequences array
+        data.list = data.list || [];
+        data.list.push('');
+        await item.update({ 'system.list': data.list });
+    }
 
     /** @override */
     async _processSubmitData(event, form, formData) {
