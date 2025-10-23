@@ -1348,6 +1348,12 @@
   display: block;
   font-size: large;
 }
+.roll-dialog-container .might-label {
+  width: 100%;
+  text-align: center;
+  display: block;
+  font-size: large;
+}
 
 .message-content .selected-tags {
   margin-top: 5px;
@@ -1487,6 +1493,16 @@
   border-radius: 5px solid black;
   color: #724a32;
   padding: 2px;
+}
+
+.might-scale-entry {
+  text-align: center;
+}
+
+.might-scale-radio {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #dice-roll-app > section.window-content {

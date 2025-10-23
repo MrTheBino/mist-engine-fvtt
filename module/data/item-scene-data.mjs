@@ -10,6 +10,10 @@ export default class MistEngineSceneData extends MistEngineItemBase {
     schema.sceneKey = new fields.StringField({ required: true, blank: true });
     foundry.utils.mergeObject(schema, buildFloatingTagsAndStatuses());
 
+    schema.might = new fields.SchemaField({
+      selected: new fields.BooleanField({ initial: false }),
+      scale: new fields.NumberField({ ...requiredInteger, initial: 0 }),
+    });
 
     schema.diceRollTagsStatus = new fields.ArrayField(new fields.SchemaField({
       name: new fields.StringField({ required: true, blank: false }),

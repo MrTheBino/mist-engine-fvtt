@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 13.5.0
+- added might to the scene tag app, GMs can adjust might for the characters roll
+- basic journal styling
+- amount of power is displayed in the dice roll dialog
+- improved tag & status parsing in journals
+  
 # 13.4.6
 - reverted fix: Journal Tags: Tags with diacritics (e.g., ç, ã) are not recognized #25 until a better regex is done
 - faster entering of tags & statuses and also backpack items

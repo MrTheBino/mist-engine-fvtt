@@ -28,7 +28,8 @@
       "SceneApp": {
         "Header": "Story Tags & Statuses",
         "CharactersHeader": "Characters",
-        "DiceRollModifiers": "Dice Roll Modifiers"
+        "DiceRollModifiers": "Dice Roll Modifiers",
+        "MightModifiers": "Might"
       }
     },
     "ROLL_TYPES": {

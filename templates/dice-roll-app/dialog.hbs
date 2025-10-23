@@ -20,7 +20,7 @@
         <label class="resource-label">Positive Mods:</label>
         <div class="flexrow">
             <i class="fa-solid fa-minus icon-hover" style="text-align:center" id="button-positive-minus" data-action="clickModPositiveMinus"></i>
-            <input type="number" name="positiveValue" value="0" data-dtype="Number" id="positiveInput"/>
+            <input type="number" name="positiveValue" value="{{numModPositive}}" data-dtype="Number" id="positiveInput"/>
             <i class="fa-solid fa-plus icon-hover" style="text-align:center" id="button-positive-plus" data-action="clickModPositivePlus"></i>
         </div>
     </div>
@@ -28,12 +28,17 @@
         <label class="resource-label">Negative Mods:</label>
         <div class="flexrow">
             <i class="fa-solid fa-minus icon-hover" style="text-align:center" id="button-negative-minus" data-action="clickModNegativeMinus"></i>
-            <input type="number" name="negativeValue" value="0" data-dtype="Number" id="negativeInput"/>
+            <input type="number" name="negativeValue" value="{{numModNegative}}" data-dtype="Number" id="negativeInput"/>
             <i class="fa-solid fa-plus icon-hover" style="text-align:center" id="button-negative-plus" data-action="clickModNegativePlus"></i>
         </div>
     </div>
-    <div class="form-group">
-        <label class="resource-label power-label">Power: {{powerAmount}}</label>
+    <div class="grid grid-2col">
+        <div class="form-group">
+            <label class="resource-label might-label">Might: {{mightScale}}</label>
+        </div>
+        <div class="form-group">
+            <label class="resource-label power-label">Power: {{powerAmount}}</label>
+        </div>
     </div>
     <footer class="dialog-footer">
         <button type="button" class="roll-button" data-action="clickedRoll">Roll</button>

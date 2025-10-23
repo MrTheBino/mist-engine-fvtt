@@ -12,6 +12,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.selectedTags = [];
         this.selectedGmTags = [];
         this.selectedStoryTags = [];
+        this.numModPositive = 0;
+        this.numModNegative = 0;
 
         DiceRollApp.instance = this;
     }
@@ -87,8 +89,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.selectedGmTags = this.selectedGmTags;
         context.selectedStoryTags = this.selectedStoryTags;
         context.rollType = this.rollType;
+        context.numModPositive = this.numModPositive || 0;
+        context.numModNegative = this.numModNegative || 0;
+        context.mightScale = MistSceneApp.getInstance().getMightScale();
         let countTags =  DiceRollApp.calculatePowerTags(DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags)); 
-        context.powerAmount = countTags.positive - countTags.negative;
+        context.powerAmount = (countTags.positive - countTags.negative) + context.mightScale + this.numModPositive - this.numModNegative;
         if(context.powerAmount < 0){
             context.powerAmount = 0;
         }
@@ -445,6 +450,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         let numPowerTags = parseInt(numPositiveTags) - parseInt(numNegativeTags);
         if (numPowerTags <= 0) numPowerTags = 1; // at least 1 power tag
 
+        let mightScale = MistSceneApp.getInstance().getMightScale();
+        if(mightScale != 0){
+            rollFormula += ` + ${mightScale}`;
+            numPowerTags += mightScale;
+            if (numPowerTags <= 0){
+                numPowerTags = 1; // is this correct?
+            }
+        }
+
         const diceRoll = new Roll(rollFormula, this.actor.getRollData());
         await diceRoll.evaluate();
 
@@ -504,17 +518,34 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     static async #handleClickModPositiveMinus(event, target) {
         const input = target.parentElement.querySelector("#positiveInput");
         input.stepDown();
+        this.numModPositive = parseInt(input.value);
+        if(this.numModPositive < 0){
+            this.numModPositive = 0;
+            input.value = 0;
+        }
+        this.render()
     }
     static async #handleClickModPositivePlus(event, target) {
         const input = target.parentElement.querySelector("#positiveInput");
         input.stepUp();
+        this.numModPositive = parseInt(input.value);
+        this.render()
     }
     static async #handleClickModNegativeMinus(event, target) {
         const input = target.parentElement.querySelector("#negativeInput");
         input.stepDown();
+        this.numModNegative = parseInt(input.value);
+        if(this.numModNegative < 0){
+            this.numModNegative = 0;
+            input.value = 0;
+        }
+        this.render()
     }
+
     static async #handleClickModNegativePlus(event, target) {
         const input = target.parentElement.querySelector("#negativeInput");
         input.stepUp();
+        this.numModNegative = parseInt(input.value);
+        this.render()
     }
 }
