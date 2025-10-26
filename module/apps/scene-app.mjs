@@ -171,6 +171,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.isGM = game.user.isGM;
         context.isNotGM = !game.user.isGM;
         context.hasDiceRollModifiers = this.currentSceneDataItem.system.diceRollTagsStatus.length > 0;
+        context.mightUsageEnabled = game.settings.get("mist-engine-fvtt", "mightUsageEnabled");
 
         if(game.user.isGM){
             foundry.utils.mergeObject(context, await this._prepareContextForCharacters());

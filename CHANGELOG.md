@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 13.5.1
+- might usage can be turned off and on via system configuration in Foundry
+  
 # 13.5.0
 - added might to the scene tag app, GMs can adjust might for the characters roll
 - basic journal styling

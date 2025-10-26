@@ -18,6 +18,8 @@ import {makeStyledTagOrStatusText} from "./lib/tag-status-text-helper.mjs";
 import * as models from "./data/_module.mjs";
 import {setupMistEngineKeyBindings} from "./lib/key-binding.mjs";
 
+import {setupConfiguration} from "./lib/configuration.mjs";
+
 /* -------------------------------------------- */
 /*  Init Hook                                   */
 /* -------------------------------------------- */
@@ -120,6 +122,7 @@ Hooks.once("init", function () {
   });
 
   setupMistEngineKeyBindings();
+  setupConfiguration();
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();

@@ -92,6 +92,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.numModPositive = this.numModPositive || 0;
         context.numModNegative = this.numModNegative || 0;
         context.mightScale = MistSceneApp.getInstance().getMightScale();
+        context.mightUsageEnabled = game.settings.get("mist-engine-fvtt", "mightUsageEnabled");
+        if(context.mightUsageEnabled == false){ // just to be sure
+            context.mightScale = 0;
+        }
         let countTags =  DiceRollApp.calculatePowerTags(DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags)); 
         context.powerAmount = (countTags.positive - countTags.negative) + context.mightScale + this.numModPositive - this.numModNegative;
         if(context.powerAmount < 0){

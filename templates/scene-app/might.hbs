@@ -1,22 +1,24 @@
 <div>
     {{#if userIsGM}}
-    <div class="scene-app-might-modifier">
+        {{#if mightUsageEnabled}}
+                <div class="scene-app-might-modifier">
 
-        <div class="npc-subtitle-container-c">
-            <div class="npc-subtitle-text">{{localize 'MIST_ENGINE.LABELS.SceneApp.MightModifiers'}} </div>
-        </div>
-        <div class="flexrow">
-            <div class="might-scale-entry"><input type="radio" name="might_scale" class="might-scale-radio" value="-6"
-                    {{#if (eq currentSceneDataItem.system.might.scale -6)}}checked{{/if}}>-6</div>
-            <div class="might-scale-entry"><input type="radio" name="might_scale" class="might-scale-radio" value="-3"
-                    {{#if (eq currentSceneDataItem.system.might.scale -3)}}checked{{/if}}>-3</div>
-            <div class="might-scale-entry"><input type="radio" name="might_scale" class="might-scale-radio" value="0"
-                    {{#if (eq currentSceneDataItem.system.might.scale 0)}}checked{{/if}}>0</div>
-            <div class="might-scale-entry"><input type="radio" name="might_scale" class="might-scale-radio" value="3"
-                    {{#if (eq currentSceneDataItem.system.might.scale 3)}}checked{{/if}}>+3</div>
-            <div class="might-scale-entry"><input type="radio" name="might_scale" class="might-scale-radio" value="6"
-                    {{#if (eq currentSceneDataItem.system.might.scale 6)}}checked{{/if}}>+6</div>
-        </div>
-    </div>
+                        <div class="npc-subtitle-container-c">
+                        <div class="npc-subtitle-text">{{localize 'MIST_ENGINE.LABELS.SceneApp.MightModifiers'}} </div>
+                        </div>
+                        <div class="flexrow">
+                        <div class="might-scale-entry"><input type="radio" name="might_scale" class="might-scale-radio" value="-6"
+                                {{#if (eq currentSceneDataItem.system.might.scale -6)}}checked{{/if}}>-6</div>
+                        <div class="might-scale-entry"><input type="radio" name="might_scale" class="might-scale-radio" value="-3"
+                                {{#if (eq currentSceneDataItem.system.might.scale -3)}}checked{{/if}}>-3</div>
+                        <div class="might-scale-entry"><input type="radio" name="might_scale" class="might-scale-radio" value="0"
+                                {{#if (eq currentSceneDataItem.system.might.scale 0)}}checked{{/if}}>0</div>
+                        <div class="might-scale-entry"><input type="radio" name="might_scale" class="might-scale-radio" value="3"
+                                {{#if (eq currentSceneDataItem.system.might.scale 3)}}checked{{/if}}>+3</div>
+                        <div class="might-scale-entry"><input type="radio" name="might_scale" class="might-scale-radio" value="6"
+                                {{#if (eq currentSceneDataItem.system.might.scale 6)}}checked{{/if}}>+6</div>
+                        </div>
+                </div>
+        {{/if}}
     {{/if}}
 </div>
