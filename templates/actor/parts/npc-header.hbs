@@ -6,14 +6,14 @@
             {{#if system.editMode}}
             {{!-- Edit Mode Layout --}}
             <div class="title">
-                <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+                <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" /></h1>
                 <div class="flexcol">
                     <label for="system.difficulty">{{localize "MIST_ENGINE.LABELS.Npc.difficulty"}}</label>
                     <input type="number" name="system.difficulty" value="{{system.difficulty}}" min="0" max="5" />
                 </div>
             </div>
             <div class="short-description"><input name="system.shortDescription" type="text"
-                    value="{{system.shortDescription}}" placeholder="Short Description" /></div>
+                    value="{{system.shortDescription}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" /></div>
             {{else}}
             {{!-- Normal Layout --}}
             <div class="title">

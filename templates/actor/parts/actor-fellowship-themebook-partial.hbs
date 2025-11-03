@@ -8,7 +8,7 @@
                     <i class="fa-solid fa-user-xmark" title="remove fellowship themecard assignment" data-action="removeFellowshipThemecard"></i>
                 {{/if}}
             {{else}}
-                Fellowship
+                {{localize 'MIST_ENGINE.THEMEBOOKS.Fellowship'}}
             {{/if}}
         </h2>
         <div class="powertags-container">
@@ -62,11 +62,11 @@
             {{/if}}
         </div>
         <div class="development-container flexrow">
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Abandon" source="fellowship-themecard"
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Abandon') source="fellowship-themecard"
             key="system.abandon" value=fellowshipThemecard.abandon}}
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Improve" source="fellowship-themecard"
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Improve') source="fellowship-themecard"
             key="system.improve" value=fellowshipThemecard.improve}}
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Milestone"
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Milestone')
             source="fellowship-themecard" key="system.milestone" value=fellowshipThemecard.milestone}}
         </div>
     </div>

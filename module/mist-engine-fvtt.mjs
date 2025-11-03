@@ -6,19 +6,19 @@ import { MistEngineItem } from "./documents/item.mjs";
 import { MistEngineActorSheet } from "./sheets/actor-sheet.mjs";
 import { MistEngineLegendInTheMistCharacterSheet } from "./sheets/litm-character-sheet.mjs";
 import { MistEngineLegendInTheMistNpcSheet } from "./sheets/litm-npc-sheet.mjs";
-import {MistEngineLegendInTheMistFellowshipThemecard} from "./sheets/litm-fellowship-themecard.mjs"
+import { MistEngineLegendInTheMistFellowshipThemecard } from "./sheets/litm-fellowship-themecard.mjs"
 import { MistEngineItemSheet } from "./sheets/item-sheet.mjs";
 import { MistSceneApp } from "./apps/scene-app.mjs";
 
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MIST_ENGINE } from "./helpers/config.mjs";
-import {makeStyledTagOrStatusText} from "./lib/tag-status-text-helper.mjs";
+import { makeStyledTagOrStatusText } from "./lib/tag-status-text-helper.mjs";
 // Import DataModel classes
 import * as models from "./data/_module.mjs";
-import {setupMistEngineKeyBindings} from "./lib/key-binding.mjs";
+import { setupMistEngineKeyBindings } from "./lib/key-binding.mjs";
 
-import {setupConfiguration} from "./lib/configuration.mjs";
+import { setupConfiguration } from "./lib/configuration.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -88,7 +88,7 @@ Hooks.once("init", function () {
 
   // Register sheet application classes
   foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
-  
+
   foundry.documents.collections.Actors.registerSheet(
     "mist-engine-fvtt",
     MistEngineLegendInTheMistCharacterSheet,
@@ -98,13 +98,13 @@ Hooks.once("init", function () {
       label: "MIST_ENGINE.SheetLabels.Actor",
     }
   );
-  
+
   foundry.documents.collections.Actors.registerSheet("mist-engine-fvtt", MistEngineLegendInTheMistNpcSheet, {
     makeDefault: true,
     types: ["litm-npc"],
     label: "MIST_ENGINE.SheetLabels.Actor",
   });
-  
+
   foundry.documents.collections.Actors.registerSheet(
     "mist-engine-fvtt",
     MistEngineLegendInTheMistFellowshipThemecard,
@@ -132,37 +132,37 @@ Hooks.once("init", function () {
 /*  Handlebars Helpers                          */
 /* -------------------------------------------- */
 
-Handlebars.registerHelper("powerTagQuestionPlaceholder", function (index,str) {
-  let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index-1];
+Handlebars.registerHelper("powerTagQuestionPlaceholder", function (index, str) {
+  let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index - 1];
   let qText = str;
-  if(!qText || qText.length <= 0){
+  if (!qText || qText.length <= 0) {
     qText = "PowerTag Question";
   }
   return `${letter} - ${qText}`;
 });
 
-Handlebars.registerHelper("weaknessTagQuestionPlaceholder", function (index,str) {
-  let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index-1];
+Handlebars.registerHelper("weaknessTagQuestionPlaceholder", function (index, str) {
+  let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index - 1];
   let qText = str;
-  if(!qText || qText.length <= 0){
+  if (!qText || qText.length <= 0) {
     qText = "Weakness Question";
   }
   return `${letter} - ${qText}`;
 });
 
-Handlebars.registerHelper('questionIndexToLetter',function(n){
-  return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[n-1];
+Handlebars.registerHelper('questionIndexToLetter', function (n) {
+  return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[n - 1];
 });
 
-Handlebars.registerHelper('storyTagDraggableData', function (storytag,source) {
-  if(source !== "backpack"){
+Handlebars.registerHelper('storyTagDraggableData', function (storytag, source) {
+  if (source !== "backpack") {
     return "";
   }
   return `draggable="true" data-type="${source}" data-name="${storytag.name}"`;
 });
 
 Handlebars.registerHelper('npcLimitValue', function (n) {
-  if(parseInt(n) <= 0){
+  if (parseInt(n) <= 0) {
     return "-";
   }
   return n;
@@ -176,7 +176,7 @@ Handlebars.registerHelper('itemTooltipHTML', function (item) {
   return `<strong>${item.name}</strong><br/>${item.system.description}`;
 });
 
-Handlebars.registerHelper('tooltipHTML', function (name,desc) {
+Handlebars.registerHelper('tooltipHTML', function (name, desc) {
   return `<strong>${name}</strong><br/>${desc}`;
 });
 
@@ -256,9 +256,9 @@ Hooks.on("renderJournalEntrySheet", (_app, html) => {
   });
 });
 
-Hooks.on("preCreateActor", async (actor, data, options, userId) => {
+Hooks.on("createActor", async (actor, data, options, userId) => {
   // Creating a backpack for each new LITM-Character
-  if (data.type !== "litm-character") return;
+  if (actor.type !== "litm-character") return;
 
   const itemData = {
     name: "Backpack",
@@ -269,9 +269,10 @@ Hooks.on("preCreateActor", async (actor, data, options, userId) => {
     flags: { mist: { autoAdded: true } },
   };
 
-  actor.updateSource({
-    items: [...(actor._source.items ?? []), itemData],
-  });
+  await Item.implementation.create(
+    [itemData],
+    { parent: actor }
+  );
 });
 
 Hooks.on("getSceneControlButtons", (controls) => {
@@ -314,8 +315,8 @@ Hooks.on("canvasReady", (canvas) => {
 Hooks.on("createToken", (tokenDocument, options, userId) => {
   const instance = MistSceneApp.getInstance();
   if (instance.rendered) { // only if shown
-      instance.sceneUpdatedHook();
-      instance.render(true, { focus: true });
+    instance.sceneUpdatedHook();
+    instance.render(true, { focus: true });
   }
 });
 
@@ -323,16 +324,16 @@ Hooks.on("createToken", (tokenDocument, options, userId) => {
 Hooks.on("updateToken", (tokenDocument, changes) => {
   const instance = MistSceneApp.getInstance();
   if (instance.rendered) { // only if shown
-      instance.sceneUpdatedHook();
-      instance.render(true, { focus: true });
+    instance.sceneUpdatedHook();
+    instance.render(true, { focus: true });
   }
 });
 
 Hooks.on("deleteToken", (tokenDocument, options, userId) => {
   const instance = MistSceneApp.getInstance();
   if (instance.rendered) { // only if shown
-      instance.sceneUpdatedHook();
-      instance.render(true, { focus: true });
+    instance.sceneUpdatedHook();
+    instance.render(true, { focus: true });
   }
 });
 
@@ -403,40 +404,40 @@ function rollItemMacro(itemUuid) {
 }
 
 class D6ToD12 extends foundry.dice.terms.Die {
-    constructor(termData) {
-        super({ ...termData, faces: 12 });
-    }
+  constructor(termData) {
+    super({ ...termData, faces: 12 });
+  }
 
-    static DENOMINATION = "6";
+  static DENOMINATION = "6";
 }
 
 CONFIG.Dice.terms["6"] = D6ToD12;
 
 Hooks.once('diceSoNiceReady', (dice3d) => {
   console.log("Registering Legend in the Mist Dice So Nice Dice");
-    dice3d.addSystem({ id: "mist-engine-fvtt", name: "Legend in the Mist", group: "Legend in the Mist" });
+  dice3d.addSystem({ id: "mist-engine-fvtt", name: "Legend in the Mist", group: "Legend in the Mist" });
 
-    dice3d.addDicePreset({
-        system: "mist-engine-fvtt",
-        type: "d6",
-        labels: ['1', '2', '3', '4', '5', '/systems/mist-engine-fvtt/assets/dice/dice_greatness_color.png',
-            '/systems/mist-engine-fvtt/assets/dice/dice_raven_color.png', '5', '4', '3', '2', '1'],
-        bumpMaps: [, , , , , '/systems/mist-engine-fvtt/assets/dice/dice_greatness_bump.png',
-            '/systems/mist-engine-fvtt/assets/dice/dice_raven_bump.png', , , , ,],
-        colorset: "litm-default",
-    }, "d12");
+  dice3d.addDicePreset({
+    system: "mist-engine-fvtt",
+    type: "d6",
+    labels: ['1', '2', '3', '4', '5', '/systems/mist-engine-fvtt/assets/dice/dice_greatness_color.png',
+      '/systems/mist-engine-fvtt/assets/dice/dice_raven_color.png', '5', '4', '3', '2', '1'],
+    bumpMaps: [, , , , , '/systems/mist-engine-fvtt/assets/dice/dice_greatness_bump.png',
+      '/systems/mist-engine-fvtt/assets/dice/dice_raven_bump.png', , , , ,],
+    colorset: "litm-default",
+  }, "d12");
 
-    dice3d.addColorset({
-        name: "litm-default",
-        description: "Legend in the Mist Default",
-        category: "Legend in the Mist",
-        foreground: ["#000000", "#000000", "#000000", "#000000"],
-        background: ["#e9e1d6", "#74774fff", "#5c7979ff", "#c9ac89"],
-        outline: ["#000000", "#000000", "#000000", "#000000"],
-        edge: ["#f8f3eb", "#c3c3a0ff", "#7ea590ff", "#e9dcbc"],
-        texture: "wood",
-        material: "stone",
-        font: "Times",
-        visibility: "visible",
-    });
+  dice3d.addColorset({
+    name: "litm-default",
+    description: "Legend in the Mist Default",
+    category: "Legend in the Mist",
+    foreground: ["#000000", "#000000", "#000000", "#000000"],
+    background: ["#e9e1d6", "#74774fff", "#5c7979ff", "#c9ac89"],
+    outline: ["#000000", "#000000", "#000000", "#000000"],
+    edge: ["#f8f3eb", "#c3c3a0ff", "#7ea590ff", "#e9dcbc"],
+    texture: "wood",
+    material: "stone",
+    font: "Times",
+    visibility: "visible",
+  });
 });

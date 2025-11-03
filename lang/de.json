@@ -1,0 +1,62 @@
+{
+    "MIST_ENGINE": {
+        "PLACEHOLDERS": {
+            "QuestGoal": "Quest/Ziel",
+            "SpecialImprovementName": "Spezialverbesserung Name",
+            "SpecialImprovementDescription": "Spezialverbesserung Beschreibung",
+            "Companion": "Kompanion",
+            "Tag": "Tag",
+            "Name": "Name",
+            "ShortDescription": "Kurze Beschreibung",
+            "Description": "Beschreibung"
+        },
+        "ROLL_TYPES": {
+            "quick": "Schneller Wurf",
+            "detailed": "Detaillierter Wurf",
+            "reaction": "Reaktionswurf"
+        },
+        "LABELS": {
+            "Milestone": "Meilenstein",
+            "Abandon": "Aufgeben",
+            "Improve": "Verbessern",
+            "Quest": "Quest",
+            "Description": "Beschreibung",
+            "Form": "Daten",
+            "Themebooks": "Themenbücher",
+            "Notes": "Notizen",
+            "Biography": "Biografie",
+            "ToggleEditMode": "Bearbeitungsmodus umschalten",
+            "Name": "Name",
+            "Value": "Wert",
+            "Symbol": "Symbol",
+            "Actor": {
+                "FloatingTagOrStatus": "Tags & Statuses"
+            },
+            "SpecialImprovements": "Spezialverbesserungen",
+            "Quantity": "Menge",
+            "Npc": {
+                "details": "Details",
+                "biography": "Biografie",
+                "difficulty": "Schwierigkeit",
+                "limits": "Limits",
+                "TagsAndStatuses": "Tags & Statuses",
+                "SpecialFeatures": "Spezialmerkmale",
+                "ThreatsAndConsequences": "Bedrohungen & Konsequenzen"
+            }
+        }
+    },
+     "TYPES": {
+            "Actor": {
+                "litm-character": "Legend in the Mist Character",
+                "litm-npc": "Legend in the Mist Challenge",
+                "litm-fellowship-themecard": "Legend in the Mist Fellowship Themecard"
+            },
+            "Item": {
+                "item": "Gegenstand",
+                "themebook": "Themenbuch",
+                "scene-data": "Szenendaten",
+                "quintessence": "Quintessenz",
+                "backpack": "Rucksack"
+            }
+        }
+}

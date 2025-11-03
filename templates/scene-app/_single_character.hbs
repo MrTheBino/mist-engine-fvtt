@@ -34,7 +34,7 @@
 
     {{#if character.hasSelectedTagsForRoll}}
     <div class="selected-tags-container flexcol">
-        <label class="resource-label" style="text-align:center;">Selected Tags &amp; Statuses</label>
+        <label class="resource-label" style="text-align:center;">{{localize "MIST_ENGINE.LABELS.SelectedTagsAndStatuses"}}</label>
         {{#each character.selectedTagsForRoll}}
         <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}}
             {{#if (gt this.value 0)}}-{{this.value}}{{/if}}</div>
