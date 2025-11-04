@@ -1,5 +1,5 @@
 <fieldset>
-    <legend>Tags &amp; Statuses <a data-action="createTagOrStatus"><i class='fas fa-plus'></i></a></legend>
+    <legend>{{localize "MIST_ENGINE.NPC.TagsAndStatuses"}} <a data-action="createTagOrStatus"><i class='fas fa-plus'></i></a></legend>
     <div class="table-group">
         <div class="table-row">
             <div class="table-cell">{{localize "MIST_ENGINE.LABELS.Name"}}</div>
@@ -23,10 +23,10 @@
                 <select class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="tags_and_statuses"
                     data-key="symbol" id="limit-{{index}}" name="system.tags_and_statuses[{{index}}].symbol">
                     <option value="" {{#if (eq entry.symbol "" )}}selected{{/if}}>-</option>
-                    <option value="adventure" {{#if (eq entry.symbol "adventure" )}}selected{{/if}}>Adventure</option>
-                    <option value="origin" {{#if (eq entry.symbol "origin" )}}selected{{/if}}>Origin</option>
-                    <option value="variable" {{#if (eq entry.symbol "variable" )}}selected{{/if}}>Variable</option>
-                    <option value="greatness" {{#if (eq entry.symbol "greatness" )}}selected{{/if}}>Greatness</option>
+                    <option value="adventure" {{#if (eq entry.symbol "adventure" )}}selected{{/if}}>{{localize "MIST_ENGINE.NPC.TagsStatus.Symbols.Adventure"}}</option>
+                    <option value="origin" {{#if (eq entry.symbol "origin" )}}selected{{/if}}>{{localize "MIST_ENGINE.NPC.TagsStatus.Symbols.Origin"}}</option>
+                    <option value="variable" {{#if (eq entry.symbol "variable" )}}selected{{/if}}>{{localize "MIST_ENGINE.NPC.TagsStatus.Symbols.Variable"}}</option>
+                    <option value="greatness" {{#if (eq entry.symbol "greatness" )}}selected{{/if}}>{{localize "MIST_ENGINE.NPC.TagsStatus.Symbols.Greatness"}}</option>
                 </select>
             </div>
             <div class="table-cell">

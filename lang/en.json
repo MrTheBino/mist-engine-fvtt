@@ -6,9 +6,22 @@
     },
     "HELP": {
       "FellowshipCreation": "Create a Fellowship Themecard Actor and assign ownership to all party members to see it here.",
+      "NoThemebooksInCharacter": "No Themebooks found. Create Themebook Items and drop them here.",
       "Titles":{
         "RightClickToToggleBurnState": "Right click to toggle burn state",
         "Powertag": "Powertag"
+      }
+    },
+    "NPC":{
+      "TagsAndStatuses": "Tags & Statuses",
+      "SpecialFeatures": "Special Features",
+      "TagsStatus":{
+        "Symbols":{
+          "Adventure": "Adventure",
+          "Origin": "Origin",
+          "Variable": "Variable",
+          "Greatness": "Greatness"
+        }
       }
     },
     "PLACEHOLDERS": {

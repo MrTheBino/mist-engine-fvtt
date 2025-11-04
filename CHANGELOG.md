@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 13.5.2
+- updated en.json to make the system more translationable
+- fixed a bug: new characters automaticly have an empty backpack
+  
 # 13.5.1
 - might usage can be turned off and on via system configuration in Foundry
   
