@@ -9,12 +9,12 @@
                 {{#if system.editMode}}
                 {{!-- Edit Mode Layout --}}
                 <div class="title">
-                    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
+                    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" /></h1>
                     
                 </div>
                 <div class="flexcol">
-                        <div class="short-description"><input name="system.shortDescription" type="text"
-                            value="{{system.shortDescription}}" placeholder="Short Description" /></div>
+                    <div class="short-description"><input name="system.shortDescription" type="text"
+                            value="{{system.shortDescription}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" /></div>
                     </div>
                 {{else}}
                 {{!-- Normal Layout --}}
@@ -28,11 +28,11 @@
             {{#if (eq system.editMode false)}}
             <div class="flexrow roll-buttons-container">
                 <button data-action="clickRoll" class="roll-button" data-roll-type="quick"><i
-                        class="fa-solid fa-dice"></i> Quick Roll</button>
+                        class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.quick'}}</button>
                 <button data-action="clickRoll" class="roll-button" data-roll-type="detailed"><i
-                        class="fa-solid fa-dice"></i> Detailed Roll</button>
+                        class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.detailed'}}</button>
                 <button data-action="clickRoll" class="roll-button" data-roll-type="reaction"><i
-                        class="fa-solid fa-dice"></i> Reaction Roll</button>
+                        class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.reaction'}}</button>
             </div>
             {{/if}}
         </div>

@@ -1,6 +1,6 @@
 <div class="themebook-container container-themebook-with-border" data-id="{{id}}">
     <div class="themebook-style litm-fellowship-relationship flexcol">
-        <h2 class="theme-name">Fellowship Relationship
+        <h2 class="theme-name">{{localize 'MIST_ENGINE.THEMEBOOKS.FellowshipRelationship'}}
 
             {{#if editMode}}
             <a data-action="createFellowship">
@@ -15,9 +15,9 @@
             <div class="form-group flexrow">
                 {{#if ../editMode}}
                 <input type="text" class="character-updatable-fellowship" data-index="{{index}}" data-key="companion"
-                    value="{{entry.companion}}" placeholder="Companion" />
+                    value="{{entry.companion}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Companion'}}" />
                 <input type="text" class="character-updatable-fellowship" data-index="{{index}}"
-                    data-key="relationshipTag" value="{{entry.relationshipTag}}" placeholder="Tag" />
+                    data-key="relationshipTag" value="{{entry.relationshipTag}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Tag'}}" />
                 <a class="themebook-icon" data-action="deleteFellowship" data-item-index="{{index}}">
                     <i class='fas fa-trash'></i>
                 </a>

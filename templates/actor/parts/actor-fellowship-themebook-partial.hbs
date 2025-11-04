@@ -8,7 +8,7 @@
                     <i class="fa-solid fa-user-xmark" title="remove fellowship themecard assignment" data-action="removeFellowshipThemecard"></i>
                 {{/if}}
             {{else}}
-                Fellowship
+                {{localize 'MIST_ENGINE.THEMEBOOKS.Fellowship'}}
             {{/if}}
         </h2>
         <div class="powertags-container">
@@ -43,7 +43,7 @@
             weaknesstag=fellowshipThemecard.weaknesstag4 source='fellowship-themecard' editMode=editMode}}
 
             {{#if fellowshipThemecard.hasSpecialImprovements}}
-                <h3 class="special-improvement-section-label">Special Improvements</h3>
+                <h3 class="special-improvement-section-label">{{localize 'MIST_ENGINE.THEMEBOOKS.SpecialImprovements'}}</h3>
             {{/if}}
             {{#each fellowshipThemecard.specialImprovements as |specialImprovement index|}}
                 {{#if (notEmpty specialImprovement.name)}}
@@ -55,28 +55,28 @@
         <div class="quest-container">
             {{#if editMode}}
             <textarea class="themebook-entry-input quest-textarea" data-key="system.quest" data-source='fellowship-themecard'
-                placeholder="Quest/Goal">{{fellowshipThemecard.quest}}</textarea>
+                placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.QuestGoal'}}">{{fellowshipThemecard.quest}}</textarea>
             {{else}}
-            <h3>Quest</h3>
+            <h3>{{localize 'MIST_ENGINE.LABELS.Quest'}}</h3>
             <p class="quest-text">{{fellowshipThemecard.quest}}</p>
             {{/if}}
         </div>
         <div class="development-container flexrow">
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Abandon" source="fellowship-themecard"
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Abandon') source="fellowship-themecard"
             key="system.abandon" value=fellowshipThemecard.abandon}}
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Improve" source="fellowship-themecard"
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Improve') source="fellowship-themecard"
             key="system.improve" value=fellowshipThemecard.improve}}
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Milestone"
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Milestone')
             source="fellowship-themecard" key="system.milestone" value=fellowshipThemecard.milestone}}
         </div>
     </div>
     {{else}}
      <div class="themebook-style litm-fellowship-themecard flexcol">
-        <h2 class="theme-name">Fellowship
+        <h2 class="theme-name">{{localize 'MIST_ENGINE.THEMEBOOKS.Fellowship'}}
         </h2>
         <div class="powertags-container">
             <div class="empty-message">
-                <p>Create a Fellowship Themecard Actor and assign ownership to all party members to see it here.</p>
+                <p>{{localize 'MIST_ENGINE.HELP.FellowshipCreation'}}</p>
                 <button  data-action="assignFellowshipThemecard" style="margin-left: auto; margin-right: auto;"><i class="fa-solid fa-people-arrows icon-hover" title="assign fellowship themecard"></i>Assign </button>
             </div>
         </div>

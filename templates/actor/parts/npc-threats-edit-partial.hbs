@@ -1,5 +1,5 @@
 <fieldset>
-    <legend>Threats &amp; Consequences <a data-action="createThreatAndConsequence"><i class='fas fa-plus'></i></a>
+    <legend>{{localize 'MIST_ENGINE.LABELS.ThreatsAndConsequences'}} <a data-action="createThreatAndConsequence"><i class='fas fa-plus'></i></a>
     </legend>
     {{!-- <div class="form-group"> --}}
         {{#each system.threatsAndConsequences as |entry index|}}
@@ -9,7 +9,7 @@
                     <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}"
                         data-array="threatsAndConsequences" data-key="name" id="limit-{{index}}"
                         name="system.threatsAndConsequences[{{index}}].name" value="{{entry.name}}"
-                        placeholder="Name" />
+                        placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" />
                     <div class="trash-icon-container">
                         <a class="" data-action="deleteThreatAndConsequence" data-index="{{index}}">
                             <i class='fas fa-trash'></i>
@@ -19,10 +19,10 @@
                 <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}"
                     data-array="threatsAndConsequences" data-key="description" id="limit-{{index}}"
                     name="system.threatsAndConsequences[{{index}}].description" value="{{entry.description}}"
-                    placeholder="Description" />
+                    placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Description'}}" />
             </div>
             <fieldset>
-                <legend>Consequences <a data-action="createThreatAndConsequenceEntry" data-index="{{index}}"><i
+                <legend>{{localize 'MIST_ENGINE.LABELS.Consequences'}} <a data-action="createThreatAndConsequenceEntry" data-index="{{index}}"><i
                             class='fas fa-plus'></i></a></legend>
                 {{#each entry.list as |listEntry listIndex|}}
                 <div class="threat-entry-container form-group flexrow">

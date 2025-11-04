@@ -18,6 +18,7 @@ import { makeStyledTagOrStatusText } from "./lib/tag-status-text-helper.mjs";
 // Import DataModel classes
 import * as models from "./data/_module.mjs";
 import { setupMistEngineKeyBindings } from "./lib/key-binding.mjs";
+import { setupConfiguration } from "./lib/configuration.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -128,6 +129,7 @@ Hooks.once("init", function () {
   });
 
   setupMistEngineKeyBindings();
+  setupConfiguration();
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
@@ -261,9 +263,9 @@ Hooks.on("renderJournalEntrySheet", (_app, html) => {
   });
 });
 
-Hooks.on("preCreateActor", async (actor, data, options, userId) => {
+Hooks.on("createActor", async (actor, data, options, userId) => {
   // Creating a backpack for each new LITM-Character
-  if (data.type !== "litm-character") return;
+  if (actor.type !== "litm-character") return;
 
   const itemData = {
     name: "Backpack",
@@ -274,9 +276,10 @@ Hooks.on("preCreateActor", async (actor, data, options, userId) => {
     flags: { mist: { autoAdded: true } },
   };
 
-  actor.updateSource({
-    items: [...(actor._source.items ?? []), itemData],
-  });
+  await Item.implementation.create(
+    [itemData],
+    { parent: actor }
+  );
 });
 
 Hooks.on("getSceneControlButtons", (controls) => {

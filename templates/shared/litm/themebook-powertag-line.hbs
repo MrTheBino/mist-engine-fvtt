@@ -1,7 +1,7 @@
 <div class="item-powertag-line flexrow">
     {{#if editMode}}
         <strong style="flex-grow:0.3;">{{questionIndexToLetter index}}</strong><input class="themebook-entry-input" data-item-id="{{id}}" type="text" data-key="system.powertag{{index}}.name" data-source="{{source}}"
-        value="{{powertag.name}}" placeholder="{{powerTagQuestionPlaceholder index powertag.question}}" title="{{powerTagQuestionPlaceholder index powertag.question}}" title="Powertag" style="flex-grow: 8;"/>
+        value="{{powertag.name}}" placeholder="{{powerTagQuestionPlaceholder index powertag.question}}" title="{{powerTagQuestionPlaceholder index powertag.question}}" title="{{localize "MIST_ENGINE.TITLES.Powertag"}}" style="flex-grow: 8;"/>
     {{else}}
         {{#if (tagFilled powertag.name)}}
         {{#if noBurn}}
@@ -10,7 +10,7 @@
             <i class="burn-icon {{#if powertag.toBurn}}to-burn{{/if}}"></i>
         </span>
         {{/if}}
-        <span class="litm-pc-powertag powertag-name pt-selectable {{#if firstTag}}first{{/if}} {{#if powertag.selected}}selected{{/if}} {{#if powertag.burned}}burned{{/if}}" title="Right click to toggle burn state"
+        <span class="litm-pc-powertag powertag-name pt-selectable {{#if firstTag}}first{{/if}} {{#if powertag.selected}}selected{{/if}} {{#if powertag.burned}}burned{{/if}}" title="{{localize "MIST_ENGINE.HELP.Titles.RightClickToToggleBurnState"}}"
             data-powertag-index="{{index}}" data-item-id="{{id}}" data-source="{{source}}">{{powertag.name}}</span>
         {{/if}}
     {{/if}}

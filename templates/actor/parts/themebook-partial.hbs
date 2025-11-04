@@ -44,7 +44,7 @@
             weaknesstag=themebook.system.weaknesstag4 editMode=editMode}}
 
             {{#if themebook.system.hasSpecialImprovements}}
-                <h3 class="special-improvement-section-label">Special Improvements</h3>
+                <h3 class="special-improvement-section-label">{{localize 'MIST_ENGINE.LABELS.SpecialImprovements'}}</h3>
             {{/if}}
             {{#each themebook.system.specialImprovements as |specialImprovement index|}}
                 {{#if (notEmpty specialImprovement.name)}}
@@ -56,16 +56,16 @@
         </div>
         <div class="quest-container">
             {{#if editMode}}
-                <textarea class="item-editable-stat quest-textarea" data-item-id={{themebook._id}} data-item-stat="system.quest" placeholder="Quest/Goal">{{themebook.system.quest}}</textarea>
+                <textarea class="item-editable-stat quest-textarea" data-item-id={{themebook._id}} data-item-stat="system.quest" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.QuestGoal'}}">{{themebook.system.quest}}</textarea>
             {{else}}
-                <h3>Quest</h3>
+                <h3>{{localize 'MIST_ENGINE.LABELS.Quest'}}</h3>
                 <p class="quest-text">{{themebook.system.quest}}</p>
             {{/if}}
         </div>
         <div class="development-container flexrow">
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Abandon" id=themebook._id key="system.abandon" value=themebook.system.abandon}}
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Improve" id=themebook._id key="system.improve" value=themebook.system.improve}}
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name="Milestone" id=themebook._id key="system.milestone" value=themebook.system.milestone}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Abandon') id=themebook._id key="system.abandon" value=themebook.system.abandon}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Improve') id=themebook._id key="system.improve" value=themebook.system.improve}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Milestone') id=themebook._id key="system.milestone" value=themebook.system.milestone}}
         </div>
     </div>
 </div>

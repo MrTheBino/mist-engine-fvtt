@@ -5,11 +5,13 @@
   "authors": [
     {
       "name": "MrTheBino",
-      "discord": "MrTheBino"
+      "discord": "MrTheBino",
+      "flags": {}
     },
     {
       "name": "3rddogpaul",
-      "discord": "3rddogpaul"
+      "discord": "3rddogpaul",
+      "flags": {}
     }
   ],
   "url": "https://github.com/MrTheBino/mist-engine-fvtt",
@@ -21,21 +23,36 @@
     {
       "type": "setup",
       "url": "systems/mist-engine-fvtt/assets/landingpage.webp",
-      "thumbnail": "systems/mist-engine-fvtt/assets/landingpage.webp"
+      "thumbnail": "systems/mist-engine-fvtt/assets/landingpage.webp",
+      "loop": false,
+      "flags": {}
     }
   ],
-  "version": "13.4.6",
+  "version": "13.5.2",
   "compatibility": {
-    "minimum": 13,
+    "minimum": "13",
     "verified": "13"
   },
-  "esmodules": ["module/mist-engine-fvtt.mjs"],
-  "styles": ["css/mist-engine-fvtt.css"],
+  "esmodules": [
+    "module/mist-engine-fvtt.mjs"
+  ],
+  "styles": [
+    {
+      "src": "css/mist-engine-fvtt.css"
+    }
+  ],
   "languages": [
     {
       "lang": "en",
       "name": "English",
-      "path": "lang/en.json"
+      "path": "lang/en.json",
+      "flags": {}
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json",
+      "flags": {}
     }
   ],
   "packs": [
@@ -64,13 +81,15 @@
       "flags": {}
     }
   ],
-  "packFolders": [],
   "socket": true,
   "manifest": "https://github.com/MrTheBino/mist-engine-fvtt/releases/latest/download/system.json",
-  "download": "https://github.com/MrTheBino/mist-engine-fvtt/releases/latest/download/system.zip",
+  "download": "https://github.com/MrTheBino/mist-engine-fvtt/releases/download/13.5.1/system.zip",
   "background": "systems/mist-engine-fvtt/assets/landingpage.webp",
-  "gridDistance": 5,
-  "gridUnits": "ft",
   "primaryTokenAttribute": "health",
-  "secondaryTokenAttribute": "power"
+  "secondaryTokenAttribute": "power",
+  "grid": {
+    "distance": 5,
+    "units": "ft"
+  },
+  "flags": {}
 }

@@ -60,6 +60,10 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             template: 'systems/mist-engine-fvtt/templates/scene-app/tags.hbs',
             scrollable: ['']
         },
+        might: {
+            template: 'systems/mist-engine-fvtt/templates/scene-app/might.hbs',
+            scrollable: ['']
+        },
         "dice-roll-mods": {
             template: 'systems/mist-engine-fvtt/templates/scene-app/dice-roll-mods.hbs',
             scrollable: ['']
@@ -83,6 +87,11 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const updateableFtsStats = this.element.querySelectorAll('.updateable-fts-stat')
         for (const input of updateableFtsStats) {
             input.addEventListener("change", event => this.handleFtStatChanged(event))
+        }
+
+        const mightScaleRadios = this.element.querySelectorAll('.might-scale-radio')
+        for (const radio of mightScaleRadios) {
+            radio.addEventListener("change", event => this.handleMightScaleChanged(event))
         }
 
         this.element.addEventListener("drop", this._onDrop.bind(this));
@@ -162,6 +171,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.isGM = game.user.isGM;
         context.isNotGM = !game.user.isGM;
         context.hasDiceRollModifiers = this.currentSceneDataItem.system.diceRollTagsStatus.length > 0;
+        context.mightUsageEnabled = game.settings.get("mist-engine-fvtt", "mightUsageEnabled");
 
         if(game.user.isGM){
             foundry.utils.mergeObject(context, await this._prepareContextForCharacters());
@@ -195,6 +205,16 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             }
         });
         return context;
+    }
+
+    async handleMightScaleChanged(event) {
+        event.preventDefault();
+        if(game.user.isGM === false) return;
+        if(!this.currentSceneDataItem) return;
+        const value = parseInt(event.currentTarget.value);
+        await this.currentSceneDataItem.update({ "system.might.scale": value  });
+        this.sendUpdateHookEvent();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
     }
 
     static async #handleClickOpenCharacterSheet(event, target) {
@@ -454,6 +474,11 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     getSceneAndStoryTags(){
         if(!this.currentSceneDataItem) return [];
         return this.currentSceneDataItem.system.floatingTagsAndStatuses || [];
+    }
+
+    getMightScale(){
+        if(!this.currentSceneDataItem) return 0;
+        return this.currentSceneDataItem.system.might.scale || 0;
     }
 
     resetSelection(){
