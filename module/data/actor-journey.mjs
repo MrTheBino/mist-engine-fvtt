@@ -1,6 +1,6 @@
 import MistEngineActorBase from "./base-actor.mjs";
 
-export default class MistEngineNPC extends MistEngineActorBase {
+export default class MistEngineJourney extends MistEngineActorBase {
 
   static defineSchema() {
     const fields = foundry.data.fields;

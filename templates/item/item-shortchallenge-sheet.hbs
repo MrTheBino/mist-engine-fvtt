@@ -1,6 +1,6 @@
 <section class="tab {{tabs.form.id}} {{tabs.form.cssClass}} scrollable" id="form"
     data-tab="{{tabs.form.id}}" data-group="{{tabs.form.group}}">
-    <textarea data-dtype="String" name="system.shortDescription">{{system.shortDescription}}</textarea>
+    <textarea data-dtype="String" class="textarea-short-description" name="system.shortDescription" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}">{{system.shortDescription}}</textarea>
     <fieldset>
     <legend>Consequences <a data-action="createEntry"><i class='fas fa-plus'></i></a></legend>
     {{#each system.list as |entry index|}}

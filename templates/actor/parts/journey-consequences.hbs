@@ -1,0 +1,9 @@
+<section class="tab {{tabs.journey-consequences.id}} {{tabs.journey-consequences.cssClass}} scrollable" id="journey-consequences"
+    data-tab="{{tabs.journey-consequences.id}}" data-group="{{tabs.journey-consequences.group}}">
+    {{#if editMode}}
+        <div><a data-action="createChallenge"><i class='fas fa-plus'></i> Add Challenge</a></div>
+    {{/if}}
+    {{#each challenges}}
+    {{> systems/mist-engine-fvtt/templates/actor/parts/challenge-partial.hbs challenge=this editMode=../editMode}}
+    {{/each}}
+</section>

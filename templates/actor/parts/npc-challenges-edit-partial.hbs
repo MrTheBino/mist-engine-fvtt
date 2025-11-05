@@ -1,0 +1,13 @@
+{{!-- Challenges / PreMade templates--}}
+<div class="npc-challenges-container">
+    <h2>Challenge Templates</h2>
+    {{#if hasChallenges}}
+        {{#each challenges}}
+            {{> systems/mist-engine-fvtt/templates/actor/parts/challenge-partial.hbs challenge=this editMode=true}}
+        {{/each}}
+    {{else}}
+        <div class="challenge-templates-info">
+            {{localize "MIST_ENGINE.HELP.ChallengeTemplateDragNDrop"}}
+        </div>
+    {{/if}}
+</div>

@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["litm-character","litm-npc","litm-fellowship-themecard","journey"]
+    "types": ["litm-character","litm-npc","litm-fellowship-themecard","litm-journey"]
   },
   "Item": {
     "types": ["themebook","backpack","scene-data","quintessence","shortchallenge"]

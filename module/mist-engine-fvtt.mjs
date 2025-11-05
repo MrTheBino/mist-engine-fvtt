@@ -9,6 +9,7 @@ import { MistEngineLegendInTheMistNpcSheet } from "./sheets/litm-npc-sheet.mjs";
 import { MistEngineLegendInTheMistFellowshipThemecard } from "./sheets/litm-fellowship-themecard.mjs"
 import { MistEngineItemSheet } from "./sheets/item-sheet.mjs";
 import { MistEngineShortChallengeItemSheet } from "./sheets/item-shortchallenge-sheet.mjs";
+import { MistEngineLegendInTheMistJourneySheet } from "./sheets/litm-actor-journey-sheet.mjs";
 import { MistSceneApp } from "./apps/scene-app.mjs";
 
 // Import helper/utility classes and constants.
@@ -68,8 +69,10 @@ Hooks.once("init", function () {
     character: models.MistEngineCharacter,
     "litm-character": models.MistEngineCharacter,
     "litm-npc": models.MistEngineNPC,
-    "litm-fellowship-themecard": models.MistEngineActorFellowshipThemecard
+    "litm-fellowship-themecard": models.MistEngineActorFellowshipThemecard,
+    "litm-journey": models.MistEngineActorJourney
   };
+
   CONFIG.Item.documentClass = MistEngineItem;
   CONFIG.Item.dataModels = {
     item: models.MistEngineItem,
@@ -104,6 +107,12 @@ Hooks.once("init", function () {
     makeDefault: true,
     types: ["litm-npc"],
     label: "MIST_ENGINE.SheetLabels.Actor",
+  });
+
+   foundry.documents.collections.Actors.registerSheet("mist-engine-fvtt", MistEngineLegendInTheMistJourneySheet, {
+    makeDefault: true,
+    types: ["litm-journey"],
+    label: "MIST_ENGINE.SheetLabels.Journey",
   });
 
   foundry.documents.collections.Actors.registerSheet(
@@ -213,6 +222,7 @@ Handlebars.registerHelper("times", function (n, block) {
 });
 
 Handlebars.registerHelper("textWithTags", function (str) {
+
   const tags = extractBrackets(str);
   let result = str;
   tags.forEach((tag) => {
@@ -220,12 +230,12 @@ Handlebars.registerHelper("textWithTags", function (str) {
     if (tag.includes("-")) {
       result = result.replace(
         `[${tag}]`,
-        `<mark class="draggable status" draggable="true" data-type="status" data-name="${name}" data-value="${value}">${tag}</mark>`
+        makeStyledTagOrStatusText(tag)
       );
     } else {
       result = result.replace(
         `[${tag}]`,
-        `<mark class="draggable tag" draggable="true" data-type="tag" data-name="${name}">${tag}</mark>`
+        makeStyledTagOrStatusText(tag)
       );
     }
   });

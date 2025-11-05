@@ -12,8 +12,10 @@
     background-repeat: no-repeat;
     row-gap: 0.5em;
   }
+
   color: $c-styled-text;
-  h2{
+
+  h2 {
     color: $c-styled-text;
   }
 }
@@ -34,11 +36,19 @@
   }
 }
 
+&.sheet.actor.litm-journey {
+  .window-content {
+    background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+    background-repeat: no-repeat;
+    row-gap: 0.5em;
+  }
+}
+
 .storytag-item-editable {
   flex-grow: 8;
 }
 
-.character-updatable-fellowship{
+.character-updatable-fellowship {
   flex-grow: 4;
 }
 
@@ -79,9 +89,11 @@
   gap: 10px;
   width: 100%;
   align-items: start;
+
   .left-half {
     flex-grow: 0.5;
   }
+
   .right-half {
     flex-shrink: 1;
   }
@@ -127,7 +139,8 @@
   white-space: nowrap;
   margin: 3px 2px 3px 2px;
   text-shadow: 1px 1px 2px rgb(255, 249, 249);
-  &.bold{
+
+  &.bold {
     font-weight: 1200;
   }
 }
@@ -215,20 +228,18 @@
     background-color: $c-faint;
     padding: 2px 4px;
     text-transform: uppercase;
-    clip-path: polygon(
-      0 0.2em,
-      0.3em 0.2em,
-      0.3em 0,
-      calc(100% - 0.3em) 0,
-      calc(100% - 0.3em) 0.2em,
-      100% 0.3em,
-      100% calc(100% - 0.2em),
-      calc(100% - 0.2em) calc(100% - 0.2em),
-      calc(100% - 0.2em) 100%,
-      0.2em 100%,
-      0.3em calc(100% - 0.2em),
-      0 calc(100% - 0.2em)
-    );
+    clip-path: polygon(0 0.2em,
+        0.3em 0.2em,
+        0.3em 0,
+        calc(100% - 0.3em) 0,
+        calc(100% - 0.3em) 0.2em,
+        100% 0.3em,
+        100% calc(100% - 0.2em),
+        calc(100% - 0.2em) calc(100% - 0.2em),
+        calc(100% - 0.2em) 100%,
+        0.2em 100%,
+        0.3em calc(100% - 0.2em),
+        0 calc(100% - 0.2em));
   }
 
   ul.entry-list {
@@ -242,11 +253,13 @@
     background-repeat: no-repeat;
     background-position: -0.5em 0;
     background-size: 2em 1.5em;
+
     .tag {
       background-color: $c-tag-yellow;
       border-radius: 4px;
       padding: 0 2px;
     }
+
     .status {
       background-color: $c-tag-green;
       border-radius: 4px;
@@ -263,6 +276,7 @@
 
 .sheet-header {
   font-family: Labrada, serif;
+
   label {
     font-family: var(--font-body);
   }
@@ -279,6 +293,7 @@
     flex-direction: row;
     column-gap: 1em;
     justify-content: center;
+
     h1.charname {
       font-family: $font-primary;
       font-size: 36px;
@@ -296,6 +311,7 @@
   .difficulty-icons {
     display: flex;
     flex-direction: row;
+
     img {
       height: 26px;
       margin-top: 7px;
@@ -382,7 +398,8 @@
 
 .fts-selectable {
   cursor: pointer;
-  &.selected{
+
+  &.selected {
     @include ts-selection;
   }
 }
@@ -464,6 +481,7 @@
 .lock-toggle-container {
   cursor: pointer;
   color: black;
+
   &.locked {
     color: darkred;
   }
@@ -521,11 +539,12 @@ section [data-group="npc-sheet"] {
   }
 }
 
-nav.tabs [data-tab]{
+nav.tabs [data-tab] {
   font-family: $font-primary;
   color: black;
   font-weight: bold;
-  .active{
+
+  .active {
     color: black;
   }
 }
@@ -534,10 +553,57 @@ nav.tabs [data-tab]{
   margin-inline-end: auto;
 }
 
-.quest-textarea{
+.quest-textarea {
   width: 100%;
 }
 
-.pointer{
+.pointer {
   cursor: pointer;
+}
+
+.challenge-entry-container,.npc-challenges-container {
+  font-family: $font-primary;
+  color: $c-styled-text;
+
+
+
+  h2 {
+    font-family: $font-primary;
+    color: $c-styled-text;
+    font-size: 1.3em;
+  }
+
+  .list-entries {
+    margin-top: 20px;
+
+    .entry-content {
+      flex-direction: row;
+      display: flex;
+    }
+    .entry-content-no-edit{
+      
+    }
+  }
+}
+
+.tab.journey-consequences {
+  a {
+    font-family: $font-primary;
+    color: $c-styled-text;
+  }
+}
+
+mark{
+  padding-left: 2px;
+  padding-right: 2px;
+  background-color: $c-tag-yellow;
+  .status{
+    background-color: $c-tag-yellow;
+  }
+  &.green{
+      background-color: $c-tag-green;
+    }
+  &.orange{
+      background-color: $c-tag-orange;
+    }
 }

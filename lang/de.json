@@ -47,9 +47,10 @@
     },
      "TYPES": {
             "Actor": {
-                "litm-character": "Legend in the Mist Character",
-                "litm-npc": "Legend in the Mist Challenge",
-                "litm-fellowship-themecard": "Legend in the Mist Fellowship Themecard"
+                "litm-character": "Charakter",
+                "litm-npc": "Herausforderung",
+                "litm-fellowship-themecard": "Fellowship Themecard",
+                "litm-journey": "Reise"
             },
             "Item": {
                 "item": "Gegenstand",

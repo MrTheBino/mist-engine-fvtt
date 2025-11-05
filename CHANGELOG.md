@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 13.5.3
+- journey actor
+- short challenges / vignettes
+- NPCs can use short challenges as templates via drag'n'drop
+  
 # 13.5.2
 - updated en.json to make the system more translationable
 - fixed a bug: new characters automaticly have an empty backpack

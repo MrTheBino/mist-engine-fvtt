@@ -359,6 +359,9 @@
 .mist-engine .list-entry {
   margin-bottom: 5px;
 }
+.mist-engine .textarea-short-description {
+  width: 100%;
+}
 .mist-engine .resource-label {
   font-weight: bold;
   font-family: Labrada, serif;
@@ -498,6 +501,11 @@
   row-gap: 0.5em;
 }
 .mist-engine.sheet.actor.litm-fellowship-themecard .window-content {
+  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-repeat: no-repeat;
+  row-gap: 0.5em;
+}
+.mist-engine.sheet.actor.litm-journey .window-content {
   background-image: url("../assets/bg-yellow-old-paper-textures.webp");
   background-repeat: no-repeat;
   row-gap: 0.5em;
@@ -916,6 +924,40 @@
 .mist-engine .pointer {
   cursor: pointer;
 }
+.mist-engine .challenge-entry-container, .mist-engine .npc-challenges-container {
+  font-family: Labrada, serif;
+  color: #724a32;
+}
+.mist-engine .challenge-entry-container h2, .mist-engine .npc-challenges-container h2 {
+  font-family: Labrada, serif;
+  color: #724a32;
+  font-size: 1.3em;
+}
+.mist-engine .challenge-entry-container .list-entries, .mist-engine .npc-challenges-container .list-entries {
+  margin-top: 20px;
+}
+.mist-engine .challenge-entry-container .list-entries .entry-content, .mist-engine .npc-challenges-container .list-entries .entry-content {
+  flex-direction: row;
+  display: flex;
+}
+.mist-engine .tab.journey-consequences a {
+  font-family: Labrada, serif;
+  color: #724a32;
+}
+.mist-engine mark {
+  padding-left: 2px;
+  padding-right: 2px;
+  background-color: #ece800;
+}
+.mist-engine mark .status {
+  background-color: #ece800;
+}
+.mist-engine mark.green {
+  background-color: #bccdb0;
+}
+.mist-engine mark.orange {
+  background-color: #ecb985;
+}
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
   font-weight: normal;
@@ -1321,6 +1363,18 @@
 }
 .mist-engine .themebook-icon .fa-trash {
   color: black;
+}
+.mist-engine .skull-icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+  margin-right: 2px;
+  display: inline-block;
+  background-image: url("../assets/icons/icon-litm-negative.svg");
 }
 
 .roll-dialog-container .selected-tags-container {

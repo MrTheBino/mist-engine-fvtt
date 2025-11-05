@@ -71,5 +71,12 @@
             </div>
             {{/each}}
         </div>
+
+        {{!-- Challenges / PreMade templates--}}
+        <div class="npc-challenges-container">
+            {{#each challenges}}
+                {{> systems/mist-engine-fvtt/templates/actor/parts/challenge-partial.hbs challenge=this editMode=editMode}}
+            {{/each}}
+        </div>
     </div>
 </div>

@@ -1,18 +1,19 @@
 <section id="{{partId}}" class="tab {{tabs.details.cssClass}} scrollable" data-tab="{{tabs.details.id}}"
     data-group="{{tabs.details.group}}">
     {{#if editMode}}
-    {{!-- Edit Mode Layout --}}
-    <div class="flexrow align-start">
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-limits-edit-partial.hbs"}}
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-tags-status-edit-partial.hbs"}}
-    </div>
-    {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-special-features-edit-partial.hbs"}}
-    {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-threats-edit-partial.hbs"}}
+        {{!-- Edit Mode Layout --}}
+        <div class="flexrow align-start">
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-limits-edit-partial.hbs"}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-tags-status-edit-partial.hbs"}}
+        </div>
+        {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-special-features-edit-partial.hbs"}}
+        {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-threats-edit-partial.hbs"}}
+        {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-challenges-edit-partial.hbs"}}
     {{else}}
-    {{!-- Normal Layout --}}
-    <div class="npc-sheet-divider">
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-beautified-partial.hbs"}}
-        {{> "systems/mist-engine-fvtt/templates/actor/parts/floating-tags-and-status-partial.hbs"}}
-    </div>
+        {{!-- Normal Layout --}}
+        <div class="npc-sheet-divider">
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-beautified-partial.hbs"}}
+            {{> "systems/mist-engine-fvtt/templates/actor/parts/floating-tags-and-status-partial.hbs"}}
+        </div>
     {{/if}}
 </section>

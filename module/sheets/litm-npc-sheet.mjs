@@ -7,7 +7,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
   static DEFAULT_OPTIONS = {
     classes: ["mist-engine", "sheet", "actor", "npc"],
     position: {
-      width: 800,
+      width: 850,
       height: 700,
     },
     actions: {
@@ -21,7 +21,10 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
       deleteSpecialFeature: this.#handleDeleteSpecialFeature,
       deleteThreatAndConsequence: this.#handleDeleteThreadAndConsequence,
       deleteThreatAndConsequenceEntry: this.#handleDeleteThreadAndConsequenceEntry,
-      addSceneAppRollMod: this.#handleAddSceneAppRollMod
+      addSceneAppRollMod: this.#handleAddSceneAppRollMod,
+      deleteChallengeListItem: this.#handleDeleteChallengeListItem,
+      createChallengeListEntry: this.#handleCreateChallengeListEntry,
+      deleteChallenge: this.#handleDeleteChallenge
     },
     form: {
       submitOnChange: true,
@@ -99,19 +102,16 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
   }
 
   _prepareItems() {
-    const themebooks = [];
-    let backpack = null;
+    const challenges = [];
 
     let inventory = this.options.document.items;
     for (let i of inventory) {
-      if (i.type === "themebook") {
-        themebooks.push(i);
-      } else if (i.type === "backpack") {
-        backpack = i;
+      if (i.type === 'shortchallenge') {
+        challenges.push(i);
       }
     }
 
-    return { themebooks: themebooks, backpack: backpack };
+    return { challenges: challenges,hasChallenges: challenges.length > 0 };
   }
 
   /** @inheritDoc */
@@ -127,6 +127,16 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     for (let input of npcUpdatableThreatEntryStats) {
       input.addEventListener("change", (event) => this.handleNpcItemThreatEntryUpdate(event));
     }
+
+    const editableChallengeItems = this.element.querySelectorAll('.editable-challenge-item');
+    for (const input of editableChallengeItems) {
+      input.addEventListener("change", event => this.handleChallengeItemUpdate(event)) // right click is for changing the burn state
+    }
+
+    const editableChallengeItemListEntries = this.element.querySelectorAll('.editable-challenge-item-list-entry');
+    for (const input of editableChallengeItemListEntries) {
+      input.addEventListener("change", event => this.handleChallengeItemListUpdate(event)) // right click is for changing the burn state
+    }
   }
 
   static async #handleAddSceneAppRollMod(event, target) {
@@ -135,8 +145,8 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     const name = target.dataset.name;
     if (!value) return;
     console.log("handleAddSceneAppRollMod", name, value);
-    
-    await MistSceneApp.getInstance().addRollModification(name,value);
+
+    await MistSceneApp.getInstance().addRollModification(name, value);
   }
 
   static async #handleDeleteThreadAndConsequenceEntry(event, target) {
@@ -288,12 +298,66 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
     if (limits) {
       await this.actor.update({
-        "system.limits": [...limits, { name: "", value: 0,positive: false }],
+        "system.limits": [...limits, { name: "", value: 0, positive: false }],
       });
     } else {
       await this.actor.update({
         "system.limits": [{ name: "", value: 0, positive: false }],
       });
+    }
+  }
+
+  async handleChallengeItemUpdate(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const field = event.currentTarget.dataset.key;
+    const value = event.currentTarget.type === "checkbox" ? event.currentTarget.checked : event.currentTarget.value;
+
+
+    await item.update({ [field]: value });
+  }
+
+  async handleChallengeItemListUpdate(event) {
+    event.preventDefault();
+    const itemId = event.currentTarget.dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const index = parseInt(event.currentTarget.dataset.index);
+    const value = event.currentTarget.value;
+    const list = item.system.list;
+    list[index] = value;
+    await item.update({ 'system.list': list });
+  }
+
+  static async #handleDeleteChallengeListItem(event, target) {
+    event.preventDefault();
+    const itemId = target.dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const index = parseInt(target.dataset.index);
+    const list = item.system.list;
+    list.splice(index, 1);
+    await item.update({ 'system.list': list });
+  }
+
+  static async #handleCreateChallengeListEntry(event, target) {
+    event.preventDefault();
+    const itemId = target.dataset.itemId;
+    const item = this.actor.items.get(itemId);
+    const list = item.system.list;
+    list.push("");
+    await item.update({ 'system.list': list });
+  }
+
+  static async #handleDeleteChallenge(event, target) {
+    event.preventDefault();
+    const proceed = await foundry.applications.api.DialogV2.confirm({
+      content: game.i18n.format("MIST_ENGINE.QUESTIONS.DeleteChallenge"),
+      rejectClose: false,
+      modal: true
+    });
+    if (proceed) {
+      const itemId = target.dataset.itemId;
+      await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
     }
   }
 }

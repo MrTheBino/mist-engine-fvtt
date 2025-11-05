@@ -1,0 +1,33 @@
+<div class="challenge-entry-container container-card-with-border">
+    {{#if editMode}}
+        <fieldset>
+            <legend><a data-action="createChallengeListEntry" data-item-id="{{challenge.id}}"><i class='fas fa-plus'></i></a> <a data-action="deleteChallenge" data-item-id="{{challenge.id}}"><i class='fas fa-trash'></i></a> </legend>
+            <input type="text" class="editable-challenge-item" value="{{challenge.name}}" data-item-id="{{challenge.id}}" data-key="name"/>
+            <div class="short-description">
+                <input type="text" class="editable-challenge-item" value="{{challenge.system.shortDescription}}" data-item-id="{{challenge.id}}" data-key="system.shortDescription" title="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}"/>
+            </div>
+            <div class="list-entries">
+                {{#each challenge.system.list as |entry index|}}
+                    <div class="list-entry flexrow">
+                        <div class="entry-content" style="flex-grow: 8;">
+                                <input type="text" value="{{entry}}" class="editable-challenge-item-list-entry" data-index="{{index}}" data-item-id="{{../challenge.id}}"/>
+                                <a class="themebook-icon" data-action="deleteChallengeListItem" data-index="{{index}}" data-item-id="{{../challenge.id}}">
+                                    <i class='fas fa-trash'></i>
+                                </a>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </fieldset>
+    {{else}}
+        <h2>{{challenge.name}}</h2>
+        <div class="short-description">{{{textWithTags challenge.system.shortDescription}}}</div>
+        <div class="list-entries">
+            {{#each challenge.system.list as |entry index|}}
+                <div class="list-entry">
+                    <div class="entry-content-no-edit"><i class="skull-icon"></i> {{{textWithTags entry}}}</div>
+                </div>
+            {{/each}}
+        </div>
+    {{/if}}
+</div>

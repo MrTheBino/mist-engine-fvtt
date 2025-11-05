@@ -2,6 +2,7 @@
 export {default as MistEngineActorBase} from "./base-actor.mjs";
 export {default as MistEngineCharacter} from "./actor-character.mjs";
 export {default as MistEngineNPC} from "./actor-npc.mjs";
+export {default as MistEngineActorJourney} from "./actor-journey.mjs";
 
 // Export Items
 export {default as MistEngineItemBase} from "./base-item.mjs";
