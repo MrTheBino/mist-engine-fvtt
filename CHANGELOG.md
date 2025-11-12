@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 13.5.4
+- added french translations by Sunny Sun Sun
+  
 # 13.5.3
 - journey actor
 - short challenges / vignettes

@@ -1,0 +1,131 @@
+{
+  "MIST_ENGINE": {
+    "QUESTIONS": {
+      "DeleteItem": "Êtes-vous sûr de vouloir supprimer cet élément ?",
+      "DeleteChallenge": "Êtes-vous sûr de vouloir supprimer ce Défi ?",
+      "RemoveFellowshipThemecardConfirmation": "Êtes-vous sûr de vouloir retirer l'assignation de la Carte de Communauté ? Ceci ne supprimera pas l'Acteur Carte de Communauté, juste le désassignera de ce personnage."
+    },
+    "HELP": {
+      "FellowshipCreation": "Créez un Acteur Carte de Communauté et assignez-en la propriété à tous les membres du groupe pour le voir ici.",
+      "NoThemebooksInCharacter": "Aucun Livret de Thème trouvé. Créez des Items Livret de Thème et déposez-les ici.",
+      "ChallengeTemplateDragNDrop": "Faites glisser et déposez des items de défi / vignette sur ce PNJ pour les utiliser. Ils servent de modèles et ne modifieront pas l'item original.",
+      "Titles": {
+        "RightClickToToggleBurnState": "Clic droit pour basculer l'état Brûlé",
+        "Powertag": "Trait de Pouvoir"
+      }
+    },
+    "NPC": {
+      "TagsAndStatuses": "Traits & Conditions",
+      "SpecialFeatures": "Caractéristiques Spéciales",
+      "TagsStatus": {
+        "Symbols": {
+          "Adventure": "Aventure",
+          "Origin": "Origine",
+          "Variable": "Variable",
+          "Greatness": "Grandeur"
+        }
+      }
+    },
+    "PLACEHOLDERS": {
+      "QuestGoal": "Quête/Objectif",
+      "SpecialImprovementName": "Nom de l'Amélioration Spéciale",
+      "SpecialImprovementDescription": "Description de l'Amélioration Spéciale",
+      "Companion": "Compagnon",
+      "Tag": "Trait",
+      "Name": "Nom",
+      "ShortDescription": "Description Courte",
+      "Description": "Description"
+    },
+    "THEMEBOOKS": {
+      "FellowshipRelationship": "Relation de Communauté",
+      "SpecialImprovements": "Améliorations Spéciales",
+      "Fellowship": "Communauté",
+      "Backpack": "Sac à Dos",
+      "Quintessences": "Quintessences"
+    },
+    "ROLL_TYPES": {
+      "quick": "Jet Rapide",
+      "detailed": "Jet Détaillé",
+      "reaction": "Jet de Réaction"
+    },
+    "LABELS": {
+      "JourneyConsequences": "Conséquences & Vignettes",
+      "ThreatsAndConsequences": "Menaces & Conséquences",
+      "SelectedTagsAndStatuses": "Traits & Conditions Sélectionnés",
+      "Consequences": "Conséquences",
+      "Positive": "Positif",
+      "Negative": "Négatif",
+      "Milestone": "Progrès",
+      "Abandon": "Abandon",
+      "Improve": "Améliorer",
+      "Quest": "Quête",
+      "Description": "Description",
+      "Form": "Données",
+      "Themebooks": "Livrets de Thèmes",
+      "Notes": "Notes",
+      "Biography": "Biographie",
+      "ToggleEditMode": "Basculer en Mode Édition",
+      "Name": "Nom",
+      "Value": "Valeur",
+      "Symbol": "Symbole",
+      "Actor": {
+        "FloatingTagOrStatus": "Traits & Conditions"
+      },
+      "SpecialImprovements": "Améliorations Spéciales",
+      "Quantity": "Quantité",
+      "Npc": {
+        "details": "Détails",
+        "biography": "Biographie",
+        "difficulty": "Difficulté",
+        "limits": "Limites",
+        "TagsAndStatuses": "Traits & Conditions",
+        "SpecialFeatures": "Caractéristiques Spéciales",
+        "ThreatsAndConsequences": "Menaces & Conséquences"
+      },
+      "Item": {
+        "TagStatusName": "Nom du Trait/de la Condition"
+      },
+      "SceneApp": {
+        "Header": "Traits & Conditions de Scène",
+        "CharactersHeader": "Personnages",
+        "DiceRollModifiers": "Modificateurs de Jet de Dés",
+        "MightModifiers": "Écart de Puissance"
+      }
+    },
+    "MOVES": {
+      "LEGEND": {
+        "quick": {
+          "fail": "Le Narrateur décide d'un développement narratif préjudiciable au Héros, et peut donner ou retirer un trait ou une condition d'une manière qui le handicape.",
+          "neutral": "<p> L'action se déroule comme prévu, ou mieux, atteignant son objectif ou surmontant un obstacle. Le Narrateur peut également vous donner un trait ou une condition utile. </p> <p> Le Narrateur décide d'un développement narratif préjudiciable au Héros, et peut donner ou retirer un trait ou une condition d'une manière qui le handicape. </p>",
+          "success": "L'action se déroule comme prévu, ou mieux, atteignant son objectif ou surmontant un obstacle. Le Narrateur peut également vous donner un Trait ou une Condition utile."
+        },
+        "detailed": {
+          "fail": "Le Narrateur décide d'un développement narratif préjudiciable au Héros, et peut donner ou retirer un trait ou une condition d'une manière qui le handicape.",
+          "neutral": "Succès (comme en 10+) &amp; Conséquences comme dans l'action Simple.<p> L'action se déroule comme prévu, ou mieux, atteignant son objectif ou surmontant un obstacle. Le Narrateur peut également vous donner un Trait ou une Condition utile. </p> <p> Le Narrateur décide d'un développement narratif préjudiciable au Héros, et peut donner ou retirer un Trait ou une Condition d'une manière qui le handicape. </p>",
+          "success": "Dépensez votre Pouvoir : <ul> <li>Ajouter ou barrer un Trait (2 Pouvoir)</li> <li>Ajouter ou réduire une Condition (1 Pouvoir par palier)</li> <li>Découvrir un détail précieux (1 Pouvoir)</li> </ul><p>Voir les options avancées à la page 154.</p><p>Aucune Conséquence.</p>"
+        },
+        "reaction": {
+          "fail": "Subissez les Conséquences telles quelles.",
+          "neutral": "Vous réussissez mais ne pouvez dépenser la Pouvoir que pour atténuer les Conséquences.",
+          "success": "Vous réussissez et pouvez dépenser Pouvoir+1, sur n'importe quel Effet."
+        }
+      }
+    }
+  },
+    "TYPES": {
+      "Actor": {
+        "litm-character": "Personnage",
+        "litm-npc": "Défi",
+        "litm-fellowship-themecard": "Carte de Communauté",
+        "litm-journey": "Voyage"
+      },
+      "Item": {
+        "item": "Objet",
+        "themebook": "Livret de Thème",
+        "scene-data": "Données de Scène",
+        "quintessence": "Quintessence",
+        "shortchallenge": "Défi Court / Vignette",
+        "backpack": "Sac à Dos"
+      }
+    }
+  }
