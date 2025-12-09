@@ -1,7 +1,7 @@
 {
   "id": "mist-engine-fvtt",
-  "title": "Legend In The Mist - MIST-Engine",
-  "description": "The Mist-Engine system for FoundryVTT",
+  "title": "Legend In The Mist",
+  "description": "Legend In The Mist for FoundryVTT",
   "authors": [
     {
       "name": "MrTheBino",
@@ -28,7 +28,7 @@
       "flags": {}
     }
   ],
-  "version": "13.5.3",
+  "version": "13.5.4",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
@@ -89,7 +89,7 @@
   ],
   "socket": true,
   "manifest": "https://github.com/MrTheBino/mist-engine-fvtt/releases/latest/download/system.json",
-  "download": "https://github.com/MrTheBino/mist-engine-fvtt/releases/download/13.5.1/system.zip",
+  "download": "https://github.com/MrTheBino/mist-engine-fvtt/releases/download/13.5.4/system.zip",
   "background": "systems/mist-engine-fvtt/assets/landingpage.webp",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "power",
