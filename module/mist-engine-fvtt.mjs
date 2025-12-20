@@ -277,6 +277,10 @@ Hooks.on("createActor", async (actor, data, options, userId) => {
   // Creating a backpack for each new LITM-Character
   if (actor.type !== "litm-character") return;
 
+  // check first if the items of the actor already has a backpack, if yes, do nothing
+  const hasBackpack = actor.items.find(i => i.type === "backpack");
+  if (hasBackpack) return;
+  
   const itemData = {
     name: "Backpack",
     type: "backpack",

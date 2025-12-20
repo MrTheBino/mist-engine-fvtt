@@ -32,12 +32,10 @@
             <i class="fa-solid fa-plus icon-hover" style="text-align:center" id="button-negative-plus" data-action="clickModNegativePlus"></i>
         </div>
     </div>
-    <div class="grid grid-2col">
-        {{#if mightUsageEnabled}}
-            <div class="form-group">
-                <label class="resource-label might-label">Might: {{mightScale}}</label>
-            </div>
-        {{/if}}
+    {{#if mightUsageEnabled}}
+        {{> "systems/mist-engine-fvtt/templates/dice-roll-app/might.hbs"}}
+    {{/if}}
+    <div class="mt-10">
         <div class="form-group">
             <label class="resource-label power-label">Power: {{powerAmount}}</label>
         </div>

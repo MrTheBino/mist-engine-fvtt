@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 13.5.5
+- backpack fix while duplicating characters, characters are compendium ready now
+- moved might modifier to roll dialog as requested
+
 # 13.5.4
 - added french translations by Sunny Sun Sun
   

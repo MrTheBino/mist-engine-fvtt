@@ -33,6 +33,7 @@ export class MistEngineActor extends Actor {
 
   /** @override */
   prepareBaseData() {
+    super.prepareBaseData();
     // Data modifications in this step occur before processing embedded
     // documents or derived data.
   }
@@ -45,8 +46,9 @@ export class MistEngineActor extends Actor {
    * is queried and has a roll executed directly from it).
    */
   prepareDerivedData() {
-    const actorData = this;
-    const flags = actorData.flags.mistenginefvtt || {};
+    super.prepareDerivedData();
+    //const actorData = this;
+    //const flags = actorData.flags.mistenginefvtt || {};
   }
 
   /**

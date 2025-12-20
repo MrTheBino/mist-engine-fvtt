@@ -192,6 +192,10 @@
   height: 100%;
 }
 
+mt-10 {
+  margin-top: 10px;
+}
+
 .flex-group-center,
 .flex-group-left,
 .flex-group-right {
@@ -1411,6 +1415,14 @@
   display: block;
   font-size: large;
 }
+.roll-dialog-container .might-scale-entry {
+  text-align: center;
+}
+.roll-dialog-container .might-scale-radio {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .message-content .selected-tags {
   margin-top: 5px;
@@ -1550,16 +1562,6 @@
   border-radius: 5px solid black;
   color: #724a32;
   padding: 2px;
-}
-
-.might-scale-entry {
-  text-align: center;
-}
-
-.might-scale-radio {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 #dice-roll-app > section.window-content {

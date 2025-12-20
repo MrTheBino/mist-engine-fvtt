@@ -14,6 +14,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.selectedStoryTags = [];
         this.numModPositive = 0;
         this.numModNegative = 0;
+        this.mightScale = 0;
 
         DiceRollApp.instance = this;
     }
@@ -91,7 +92,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.rollType = this.rollType;
         context.numModPositive = this.numModPositive || 0;
         context.numModNegative = this.numModNegative || 0;
-        context.mightScale = MistSceneApp.getInstance().getMightScale();
+        context.mightScale = this.mightScale;
         context.mightUsageEnabled = game.settings.get("mist-engine-fvtt", "mightUsageEnabled");
         if(context.mightUsageEnabled == false){ // just to be sure
             context.mightScale = 0;
@@ -439,6 +440,12 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         let numPositiveTags = parseInt(target.form.positiveValue.value);
         let numNegativeTags = parseInt(target.form.negativeValue.value);
 
+        // first check if might usage is enabled
+        let mightScale = 0;
+        if(game.settings.get("mist-engine-fvtt", "mightUsageEnabled") == true){
+            mightScale = parseInt(target.form.might_scale.value);
+        }
+
         let tagsAndStatusForRoll = DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags);
         let countTags = DiceRollApp.calculatePowerTags(tagsAndStatusForRoll);
         numPositiveTags += countTags.positive;
@@ -454,7 +461,6 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         let numPowerTags = parseInt(numPositiveTags) - parseInt(numNegativeTags);
         if (numPowerTags <= 0) numPowerTags = 1; // at least 1 power tag
 
-        let mightScale = MistSceneApp.getInstance().getMightScale();
         if(mightScale != 0){
             rollFormula += ` + ${mightScale}`;
             numPowerTags += mightScale;
