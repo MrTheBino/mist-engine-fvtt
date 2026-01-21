@@ -11,6 +11,7 @@
                 <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}"
                     data-index="{{ftsIndex}}" data-actor-id="{{character.id}}"
                     title="right click to toggle between tag or state">
+                    {{#unless this.positive}}<i class="fa-light fa-angles-down"></i>{{/unless}}
                     {{fts.name}}{{#if fts.isStatus}}-{{fts.value}}{{/if}}</div>
 
             </div>
@@ -36,7 +37,7 @@
     <div class="selected-tags-container flexcol">
         <label class="resource-label" style="text-align:center;">{{localize "MIST_ENGINE.LABELS.SelectedTagsAndStatuses"}}</label>
         {{#each character.selectedTagsForRoll}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}}
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{else}}{{#unless this.positive}}<i class="fa-light fa-angles-down"></i>{{/unless}}{{/if}}{{this.name}}
             {{#if (gt this.value 0)}}-{{this.value}}{{/if}}</div>
         {{/each}}
     </div>

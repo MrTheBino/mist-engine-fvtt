@@ -103,6 +103,29 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             context.powerAmount = 0;
         }
 
+        // sort selected tags by first positive ones then negative ones, both alphabetically
+        context.selectedTags.sort((a, b) => {
+            if (a.positive === b.positive) {
+                return a.name.localeCompare(b.name);
+            }
+            return a.positive ? -1 : 1;
+        });
+
+        // sort select gm tags by first positive ones then negative ones, both alphabetically
+        context.selectedGmTags.sort((a, b) => {
+            if (a.positive === b.positive) {
+                return a.name.localeCompare(b.name);
+            }
+            return a.positive ? -1 : 1;
+        });
+
+        // sort select story tags by first positive ones then negative ones, both alphabetically
+        context.selectedStoryTags.sort((a, b) => {
+            if (a.positive === b.positive) {
+                return a.name.localeCompare(b.name);
+            }
+            return a.positive ? -1 : 1;
+        });
         return context;
     }
 
@@ -287,6 +310,14 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 }
             });
         }
+
+        // sort selected tags by first positive ones then negative ones, both alphabetically
+        selectedTags.sort((a, b) => {
+            if (a.positive === b.positive) { 
+                return a.name.localeCompare(b.name);
+            }
+            return a.positive ? -1 : 1;
+        });
 
         return selectedTags;
     }

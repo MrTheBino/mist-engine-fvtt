@@ -2,38 +2,51 @@
     <div class="selected-tags-container flexcol">
         <label class="resource-label">You selected:</label>
         {{#each selectedTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}</div>
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥
+            {{else}}
+            {{#unless this.positive}}<i class="fa-light fa-angles-down"></i>{{/unless}}
+            {{/if}}{{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}</div>
         {{/each}}
     </div>
     <div class="selected-tags-container flexcol">
         <label class="resource-label">Story Tags / Status selected:</label>
         {{#each selectedStoryTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}</div>
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{else}}
+            {{#unless this.positive}}<i class="fa-light fa-angles-down"></i>{{/unless}}{{/if}}{{this.name}}{{#if (gt
+            this.value 0)}}-{{this.value}}{{/if}}</div>
         {{/each}}
     </div>
     <div class="selected-tags-container flexcol">
         {{#each selectedGmTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{/if}}{{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}</div>
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">{{#if this.toBurn}}🔥 {{else}}
+            {{#unless this.positive}}<i class="fa-light fa-angles-down"></i>{{/unless}}{{/if}}{{this.name}}{{#if (gt
+            this.value 0)}}-{{this.value}}{{/if}}</div>
         {{/each}}
     </div>
-     <div class="form-group">
+    <div class="form-group">
         <label class="resource-label">Positive Mods:</label>
         <div class="flexrow">
-            <i class="fa-solid fa-minus icon-hover" style="text-align:center" id="button-positive-minus" data-action="clickModPositiveMinus"></i>
-            <input type="number" name="positiveValue" value="{{numModPositive}}" data-dtype="Number" id="positiveInput"/>
-            <i class="fa-solid fa-plus icon-hover" style="text-align:center" id="button-positive-plus" data-action="clickModPositivePlus"></i>
+            <i class="fa-solid fa-minus icon-hover" style="text-align:center" id="button-positive-minus"
+                data-action="clickModPositiveMinus"></i>
+            <input type="number" name="positiveValue" value="{{numModPositive}}" data-dtype="Number"
+                id="positiveInput" />
+            <i class="fa-solid fa-plus icon-hover" style="text-align:center" id="button-positive-plus"
+                data-action="clickModPositivePlus"></i>
         </div>
     </div>
-     <div class="form-group">
+    <div class="form-group">
         <label class="resource-label">Negative Mods:</label>
         <div class="flexrow">
-            <i class="fa-solid fa-minus icon-hover" style="text-align:center" id="button-negative-minus" data-action="clickModNegativeMinus"></i>
-            <input type="number" name="negativeValue" value="{{numModNegative}}" data-dtype="Number" id="negativeInput"/>
-            <i class="fa-solid fa-plus icon-hover" style="text-align:center" id="button-negative-plus" data-action="clickModNegativePlus"></i>
+            <i class="fa-solid fa-minus icon-hover" style="text-align:center" id="button-negative-minus"
+                data-action="clickModNegativeMinus"></i>
+            <input type="number" name="negativeValue" value="{{numModNegative}}" data-dtype="Number"
+                id="negativeInput" />
+            <i class="fa-solid fa-plus icon-hover" style="text-align:center" id="button-negative-plus"
+                data-action="clickModNegativePlus"></i>
         </div>
     </div>
     {{#if mightUsageEnabled}}
-        {{> "systems/mist-engine-fvtt/templates/dice-roll-app/might.hbs"}}
+    {{> "systems/mist-engine-fvtt/templates/dice-roll-app/might.hbs"}}
     {{/if}}
     <div class="mt-10">
         <div class="form-group">
