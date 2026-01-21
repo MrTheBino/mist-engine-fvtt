@@ -366,6 +366,11 @@ mt-10 {
 .mist-engine .textarea-short-description {
   width: 100%;
 }
+.mist-engine p.help-text {
+  font-size: 0.9em;
+  color: #191813;
+  margin-bottom: 10px;
+}
 .mist-engine .resource-label {
   font-weight: bold;
   font-family: Labrada, serif;
@@ -1578,3 +1583,5 @@ mt-10 {
 .icon-hover:hover {
   cursor: pointer;
 }
+
+/*# sourceMappingURL=mist-engine-fvtt.css.map */
