@@ -9,6 +9,7 @@
       "FellowshipCreation": "Create a Fellowship Themecard Actor and assign ownership to all party members to see it here.",
       "NoThemebooksInCharacter": "No Themebooks found. Create Themebook Items and drop them here.",
       "ChallengeTemplateDragNDrop": "Drag and drop challenge / vignette items on this NPC to use them. They serve as templates and will not modify the original item.",
+      "FelllowshipThemeCardExplanation": "A Fellowship Themecard is a shared resource for all members of a fellowship. It contains shared tags, statuses, special improvements, and other resources that the fellowship can use during their adventures. The actual tags are getting entered in the characters. Not here, here are only the questions of the tags.",
       "Titles":{
         "RightClickToToggleBurnState": "Right click to toggle burn state",
         "Powertag": "Powertag"
