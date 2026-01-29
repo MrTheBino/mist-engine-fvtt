@@ -12,17 +12,21 @@
 
             &.positive {
                 background-color: $c-tag-green;
-                border-radius: 5px solid black;
+                border-radius: 5px;
                 color: $c-styled-text;
                 padding: 2px;
             }
 
             &.negative {
                 background-color: $c-tag-orange;
-                border-radius: 5px solid black;
+                border-radius: 5px;
                 color: $c-styled-text;
                 padding: 2px;
             }
+        }
+
+        .tag-icon{
+            float:left;
         }
     }
 

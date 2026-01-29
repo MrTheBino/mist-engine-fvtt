@@ -1398,15 +1398,18 @@ mt-10 {
 }
 .roll-dialog-container .selected-tags-container .tag.positive {
   background-color: #bccdb0;
-  border-radius: 5px solid black;
+  border-radius: 5px;
   color: #724a32;
   padding: 2px;
 }
 .roll-dialog-container .selected-tags-container .tag.negative {
   background-color: #ecb985;
-  border-radius: 5px solid black;
+  border-radius: 5px;
   color: #724a32;
   padding: 2px;
+}
+.roll-dialog-container .selected-tags-container .tag-icon {
+  float: left;
 }
 .roll-dialog-container .power-label {
   width: 100%;
