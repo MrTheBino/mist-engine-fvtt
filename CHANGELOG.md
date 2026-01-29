@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 13.5.7
+- UI improvements
+- 
 # 13.5.5
 - backpack fix while duplicating characters, characters are compendium ready now
 - moved might modifier to roll dialog as requested
