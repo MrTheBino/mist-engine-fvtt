@@ -1411,6 +1411,11 @@ mt-10 {
 .roll-dialog-container .selected-tags-container .tag-icon {
   float: left;
 }
+.roll-dialog-container .selected-tags-container .deselect-icon {
+  float: right;
+  cursor: pointer;
+  margin-left: 5px;
+}
 .roll-dialog-container .power-label {
   width: 100%;
   text-align: center;

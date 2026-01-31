@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 13.5.8
+- deselecting of player selected powertags, tags & statuses in the dice roll dialog 
+  
 # 13.5.7
 - UI improvements
 - 

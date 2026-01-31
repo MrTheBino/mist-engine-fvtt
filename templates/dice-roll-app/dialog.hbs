@@ -9,6 +9,9 @@
             </span>
             {{#if this.toBurn}}🔥
             {{/if}}{{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
+            <span class="deselect-icon">
+                <i class="fa-solid fa-circle-trash" data-action="clickDeselectTag" data-index="{{@index}}"></i>
+            </span>
         </div>
         {{/each}}
     </div>

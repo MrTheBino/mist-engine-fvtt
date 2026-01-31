@@ -1,6 +1,8 @@
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 import { MistSceneApp } from "./scene-app.mjs";
 import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adapter.mjs";
+import {PowerTagAdapter} from "../lib/power-tag-adapter.mjs";
+import { StoryTagAdapter } from "../lib/story-tag-adapter.mjs";
 
 export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     constructor(options = {}) {
@@ -33,14 +35,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         },
         position: {
             width: 400,
-            height: 550
+            height: 600
         },
         actions: {
             clickedRoll: this.#rollCallback,
             clickModPositiveMinus: this.#handleClickModPositiveMinus,
             clickModPositivePlus: this.#handleClickModPositivePlus,
             clickModNegativeMinus: this.#handleClickModNegativeMinus,
-            clickModNegativePlus: this.#handleClickModNegativePlus
+            clickModNegativePlus: this.#handleClickModNegativePlus,
+            clickDeselectTag: this.#handleClickDeselectTag
         },
     };
 
@@ -60,6 +63,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             this.rollType = options.type || 'quick'; // 'quick' or 'detailed'
         }
 
+        // set the dialog title according to the type
+        if (this.rollType === 'quick') {
+            this.options.window.title = 'Quick Dice Roll';
+        } else if (this.rollType === 'detailed') {
+            this.options.window.title = 'Detailed Dice Roll';
+        }
+        else if( this.rollType === 'reaction'){
+            this.options.window.title = 'Reaction Roll';
+        }
     }
 
     updateTagsAndStatuses(renderFlag = false) {
@@ -249,7 +261,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 if (backpackItems) {
                     for (const [i, backpackItem] of backpackItems.entries()) {
                         if (backpackItem.selected) {
-                            selectedTags.push({ name: backpackItem.name, positive: true, toBurn: backpackItem.toBurn, index: i, themebookId: backpackItem.id, source: 'backpack' });
+                            selectedTags.push({ name: backpackItem.name, positive: true, toBurn: backpackItem.toBurn, index: i + 1, themebookId: backpackItem.id, source: 'backpack' });
                         }
                     }
                 }
@@ -264,7 +276,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
                     const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
                     if (foundry.utils.getProperty(item, weaknesstagPath)) {
-                        selectedTags.push({ name: item.system[`weaknesstag${i + 1}`].name, positive: false, weakness: true, source: null });
+                        selectedTags.push({ name: item.system[`weaknesstag${i + 1}`].name, positive: false, weakness: true, source: null,index: i+1,themebookId: item.id });
                     }
                 }
             }
@@ -273,7 +285,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (actor.system.fellowships && actor.system.fellowships.length > 0) {
             actor.system.fellowships.forEach((entry, index) => {
                 if (entry.selected) {
-                    selectedTags.push({ name: entry.relationshipTag, positive: true, fellowship: true, source: 'fellowship-relationship' });
+                    selectedTags.push({ name: entry.relationshipTag, positive: true, fellowship: true, source: 'fellowship-relationship', index: index + 1});
                 }
             });
         }
@@ -290,7 +302,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
                     const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
                     if (foundry.utils.getProperty(actorFellowshipThemecard, weaknesstagPath)) {
-                        selectedTags.push({ name: actorFellowshipThemecard.system[`weaknesstag${i + 1}`].name, positive: false, weakness: true, source: "fellowship-themecard" });
+                        selectedTags.push({ name: actorFellowshipThemecard.system[`weaknesstag${i + 1}`].name, positive: false, weakness: true,index: i + 1, source: "fellowship-themecard" });
                     }
                 }
             }
@@ -300,9 +312,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
         // floating tags and statuses from the actor
         if (actor.system.floatingTagsAndStatuses && actor.system.floatingTagsAndStatuses.length > 0) {
-            actor.system.floatingTagsAndStatuses.forEach((entry) => {
+            actor.system.floatingTagsAndStatuses.forEach((entry,index) => {
                 if (entry.selected) {
-                    let t = { name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value }
+                    let t = { name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value,index: index + 1 };
                     if(entry.value === undefined || entry.value > 0){
                         t.isStatus = true;
                     }
@@ -588,5 +600,67 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         input.stepUp();
         this.numModNegative = parseInt(input.value);
         this.render()
+    }
+
+    static async #handleClickDeselectTag(event, target) {
+        const index = parseInt(target.dataset.index);
+        
+        const tagToDeselect = this.selectedTags[index]; 
+        if (!tagToDeselect) {
+            console.warn("No tag found to deselect at index:", index);
+            return;
+        }
+        else{
+            // we check if this is a power tag or weakness tag from a themebook and if a themebook id is provided
+            if(tagToDeselect.source === null && tagToDeselect.themebookId){
+                if(tagToDeselect.weakness){
+                    await PowerTagAdapter.deselectPowerTag(this.actor, tagToDeselect.themebookId, `system.weaknesstag${tagToDeselect.index}.selected`, tagToDeselect.index - 1);
+                }
+                else{
+                    await PowerTagAdapter.deselectPowerTag(this.actor, tagToDeselect.themebookId, `system.powertag${tagToDeselect.index}.selected`, tagToDeselect.index - 1);
+                }
+                this.updateTagsAndStatuses(true);
+            }
+            // now the backpack
+            else if(tagToDeselect.source === "backpack"){
+                //get the backpack from the actor in one line
+                let backpackItem = this.actor.items.find(i => i.type === "backpack");
+                // backpacks contains powertags 
+                if(backpackItem){
+                    await StoryTagAdapter.toggleStoryTagSelection(this.actor, backpackItem.id, 'system.items', tagToDeselect.index -1);
+                    this.updateTagsAndStatuses(true);
+                }
+            }
+            // now floating tag or status
+            else if(tagToDeselect.source === "floating-tag"){
+                await FloatingTagAndStatusAdapter.handleTagStatusSelectedToggle(this.actor, tagToDeselect.index -1);
+                this.updateTagsAndStatuses(true);
+            }
+            // now for fellowship theme cards
+            else if(tagToDeselect.source === "fellowship-themecard"){
+                let fellowshipThemecard = this.actor.sheet.getActorFellowshipThemecard();
+                if(fellowshipThemecard){
+                    if(tagToDeselect.weakness){
+                        await fellowshipThemecard.update({ [`system.weaknesstag${tagToDeselect.index}.selected`]: false });
+                    }
+                    else{
+                        await fellowshipThemecard.update({ [`system.powertag${tagToDeselect.index}.selected`]: false });
+                    }
+                    this.updateTagsAndStatuses(true);
+                    this.actor.render({force: false})
+                }
+            }
+            // now for fellowship-relationship
+            else if(tagToDeselect.source === "fellowship-relationship"){
+                let fellowships = this.actor.system.fellowships;
+                let indexOfTag = tagToDeselect.index -1;
+                if(fellowships && fellowships.length > indexOfTag){
+                    fellowships[indexOfTag].selected = false;
+                    await this.actor.update({ 'system.fellowships': fellowships });
+                    this.updateTagsAndStatuses(true);
+                    this.actor.render({force: false})
+                }
+            }
+        }
     }
 }
