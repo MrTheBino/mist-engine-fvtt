@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 13.5.9
+- compendiums are not packaged during release packaging
+- planning of powertags for characters implemented
+  
 # 13.5.8
 - deselecting of player selected powertags, tags & statuses in the dice roll dialog 
   
