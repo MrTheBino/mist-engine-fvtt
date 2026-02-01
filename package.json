@@ -5,7 +5,8 @@
   "scripts": {
     "build": "sass src/scss/mist-engine-fvtt.scss css/mist-engine-fvtt.css --style=expanded --no-source-map",
     "watch": "sass src/scss/mist-engine-fvtt.scss css/mist-engine-fvtt.css --style=expanded --source-map --watch",
-    "unpack-compendium": "node  src/commands/unpack.mjs"
+    "unpack-compendium": "node  src/commands/unpack.mjs",
+    "pack-compendium": "node  src/commands/pack.mjs"
   },
   "browserslist": [
     "last 3 versions"
