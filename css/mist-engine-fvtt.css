@@ -539,6 +539,9 @@ mt-10 {
 .mist-engine .item-weakness-line input {
   border: 2px solid red;
 }
+.mist-engine .item-weakness-line input[type=checkbox] {
+  border: none;
+}
 .mist-engine .litm-character-themebooks-container {
   /*background-image: url("../assets/bg2-litm.webp");
     background-repeat: no-repeat;

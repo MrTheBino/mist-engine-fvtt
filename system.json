@@ -85,6 +85,30 @@
       },
       "system": "mist-engine-fvtt",
       "flags": {}
+    },
+    {
+      "name": "pregen-heroes",
+      "label": "Pregen Heroes",
+      "path": "packs/pregen-heroes",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "mist-engine-fvtt",
+      "flags": {}
+    },
+    {
+      "name": "challenges",
+      "label": "Demo Game Challenges",
+      "path": "packs/challenges",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "mist-engine-fvtt",
+      "flags": {}
     }
   ],
   "socket": true,

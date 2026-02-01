@@ -1,0 +1,22 @@
+{
+  "type": "Item",
+  "folder": "gsv3wCgshIMrAAhH",
+  "name": "Origin",
+  "color": "#60865f",
+  "sorting": "a",
+  "_id": "BmgEu8IcX0N16vpv",
+  "description": "",
+  "sort": 0,
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.348",
+    "systemId": "mist-engine-fvtt",
+    "systemVersion": "0.3.10",
+    "lastModifiedBy": "b16EOKUCwwbnVrnm",
+    "modifiedTime": 1760166563359
+  },
+  "_key": "!folders!BmgEu8IcX0N16vpv"
+}

@@ -1,0 +1,176 @@
+{
+  "name": "Sorrowbalm",
+  "type": "litm-npc",
+  "prototypeToken": {
+    "name": "Sorrowbalm",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": "health"
+    },
+    "bar2": {
+      "attribute": "power"
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "_id": "BfEDevVmINZ6tH4Y",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "biography": "",
+    "editMode": false,
+    "shortDescription": "Sorrowbalm is a Child of Twilight that collects relics of the ancient kingdom. She seeks the bewitched opal that is in a chest at the bottom of the Sunken Watchtower, but is ill-equipped or unwilling to reach it herself, so she attempts to enlist the companions. She cannot be killed; if hurt or if she thinks the companions are a waste of time, she vanishes without a trace, but she may return later one more time for the opal, or to curse those who would deny it from her.",
+    "floatingTagsAndStatusesEditable": false,
+    "floatingTagsAndStatuses": [],
+    "difficulty": 3,
+    "limits": [
+      {
+        "name": "hurt",
+        "value": "1"
+      }
+    ],
+    "tags_and_statuses": [
+      {
+        "name": "mysterious",
+        "value": 2,
+        "symbol": ""
+      },
+      {
+        "name": "fleeting",
+        "value": 3,
+        "symbol": ""
+      },
+      {
+        "name": "aware",
+        "value": 3,
+        "symbol": ""
+      }
+    ],
+    "threatsAndConsequences": [
+      {
+        "name": "With an eerie smile, plea with the companions to obtain the chest for her",
+        "description": "",
+        "list": [
+          "Tempt someone with a promise of something they want (give them [tempted-1], or [bound-2] if a deal was made)"
+        ]
+      },
+      {
+        "name": "(If the opal has been found) Beseech the companions to give her the opal",
+        "description": "",
+        "list": [
+          "Stare strangely at the companions as their vision begins to fade ([sleepy-4])",
+          "(If the opal is in the open) Fleetingly pass by and sweep the opal from their hands"
+        ]
+      },
+      {
+        "name": "(If she is denied the opal) Warn the companions that they must give her the opal",
+        "description": "",
+        "list": [
+          "Foretell that the companions would be hunted down ([marked-4]), and then leave"
+        ]
+      }
+    ]
+  },
+  "items": [],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "fXOlRnJPiyvuihOi": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mist-engine-fvtt",
+    "systemVersion": "13.5.8",
+    "createdTime": 1769930663169,
+    "modifiedTime": 1769931101112,
+    "lastModifiedBy": "fXOlRnJPiyvuihOi"
+  },
+  "_key": "!actors!BfEDevVmINZ6tH4Y"
+}

@@ -1,0 +1,158 @@
+{
+  "folder": "13djii76rtlUgsz9",
+  "name": "Uncanny Being",
+  "type": "themebook",
+  "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
+  "_id": "1u8vDhLqw7CCp9zq",
+  "system": {
+    "description": "",
+    "abandon": 0,
+    "improve": 0,
+    "milestone": 0,
+    "powertag1": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "powertag2": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "powertag3": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "powertag4": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "powertag5": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "powertag6": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "powertag7": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "powertag8": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "powertag9": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "powertag10": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "weaknesstag1": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "weaknesstag2": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "weaknesstag3": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "weaknesstag4": {
+      "burned": false,
+      "toBurn": false,
+      "planned": false,
+      "selected": false,
+      "question": ""
+    },
+    "specialImprovements": [
+      {
+        "name": "",
+        "active": false,
+        "description": ""
+      },
+      {
+        "name": "",
+        "active": false,
+        "description": ""
+      },
+      {
+        "name": "",
+        "active": false,
+        "description": ""
+      },
+      {
+        "name": "",
+        "active": false,
+        "description": ""
+      },
+      {
+        "name": "",
+        "active": false,
+        "description": ""
+      }
+    ],
+    "type": "litm-adventure"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "b16EOKUCwwbnVrnm": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.348",
+    "systemId": "mist-engine-fvtt",
+    "systemVersion": "0.3.10",
+    "createdTime": 1760166396593,
+    "modifiedTime": 1760166398688,
+    "lastModifiedBy": "b16EOKUCwwbnVrnm"
+  },
+  "_key": "!items!1u8vDhLqw7CCp9zq"
+}

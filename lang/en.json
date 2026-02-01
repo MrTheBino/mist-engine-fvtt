@@ -12,7 +12,8 @@
       "FelllowshipThemeCardExplanation": "A Fellowship Themecard is a shared resource for all members of a fellowship. It contains power tags, weakness tags and special improvements. The actual tags are getting entered in the characters. Not here, here are only the questions of the tags.",
       "Titles":{
         "RightClickToToggleBurnState": "Right click to toggle burn state",
-        "Powertag": "Powertag"
+        "Powertag": "Powertag",
+        "PlannedPowertag": "Planned Power Or Weakness Tag. Select it to hide it from the active tags list until you are ready to use it."
       }
     },
     "NPC":{

@@ -1,0 +1,235 @@
+{
+  "name": "The Pond In The Tower",
+  "type": "litm-npc",
+  "prototypeToken": {
+    "name": "The Pond In The Tower",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "icons/svg/mystery-man.svg",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": "health"
+    },
+    "bar2": {
+      "attribute": "power"
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "_id": "cIAtFWCucgf69G6C",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "biography": "",
+    "editMode": false,
+    "shortDescription": "This ruin of an ancient tower has sunk deep into the ground and filled up with water and plants. What once was the ground level of the tower is the bottom of a murky pond, into which a strange miasma has seeped. It is home to a monstrous wurm, as well as some armored skeletons that bear resemblance to the Waken Sentry. Diving to the bottom of the pond takes one action, while diving back up takes another - if the diver can get back up without trouble.",
+    "floatingTagsAndStatusesEditable": false,
+    "floatingTagsAndStatuses": [
+      {
+        "name": "murky",
+        "value": 0,
+        "isStatus": false,
+        "burned": false,
+        "toBurn": false,
+        "selected": false,
+        "positive": false,
+        "markings": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "name": "underwater",
+        "value": 0,
+        "isStatus": false,
+        "burned": false,
+        "toBurn": false,
+        "selected": false,
+        "positive": false,
+        "markings": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "name": "entangling plants",
+        "value": 0,
+        "isStatus": false,
+        "burned": false,
+        "toBurn": false,
+        "selected": false,
+        "positive": false,
+        "markings": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "name": "heavy chest",
+        "value": 0,
+        "isStatus": false,
+        "burned": false,
+        "toBurn": false,
+        "selected": false,
+        "positive": false,
+        "markings": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      }
+    ],
+    "difficulty": 2,
+    "limits": [
+      {
+        "name": "cleanse",
+        "value": "3"
+      }
+    ],
+    "tags_and_statuses": [
+      {
+        "name": "murky",
+        "value": 0,
+        "symbol": ""
+      },
+      {
+        "name": "underwater",
+        "value": 0,
+        "symbol": ""
+      },
+      {
+        "name": "entangling plants",
+        "value": 0,
+        "symbol": ""
+      },
+      {
+        "name": "heavy chest",
+        "value": 0,
+        "symbol": ""
+      }
+    ],
+    "threatsAndConsequences": [
+      {
+        "name": "A companion who dived in will run out of air soon",
+        "description": "",
+        "list": [
+          "A companion who dived in begins to [drown-1]"
+        ]
+      }
+    ]
+  },
+  "items": [],
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "fXOlRnJPiyvuihOi": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mist-engine-fvtt",
+    "systemVersion": "13.5.8",
+    "createdTime": 1769931137298,
+    "modifiedTime": 1769931252664,
+    "lastModifiedBy": "fXOlRnJPiyvuihOi"
+  },
+  "_key": "!actors!cIAtFWCucgf69G6C"
+}

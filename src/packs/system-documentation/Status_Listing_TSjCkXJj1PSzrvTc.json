@@ -1,0 +1,278 @@
+{
+  "name": "Status Listing",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Elemetal",
+      "type": "text",
+      "_id": "IHrQOO9K10CH0EeM",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p> Acid: [stung-1],[blistering-2],[corroded-3],[severe-burns-4],[dissolving-5],[liquefied-6]</p><p>Chemical: [exposed-1],[dizzy-2],[nauseated-3],[internal-damage-4],[system-failure-5],[dead-6]</p><p>Compression: [squeezed-1],[strained-2],[ruptured-3],[crushed-4],[flattened-5],[smashed-6]</p><p>Earth: [pelted-1],[bruised-2],[battered-3],[crushed-4],[buried-5],[obliterated-6]</p><p>Electric: [shocked-1],[jolted-2],[spasming-3],[scorched-4],[lights-out-5],[fried-6]</p><p>Fire: [singed-1,blis],[ters-2],[charred-3],[severe-burns-4],[roasted-5],[burned-to-ashes-6]</p><p>Fumes: [coughing-1],[wheezing-2],[choking-3],[asphyxiating-4],[blacked-out-5],[dead-6]</p><p>Ice: [frostbitten-1],[numb-2],[frozen-limbs-3],[hypothermia-4],[frozen-solid-5],[shattered-6]</p><p>Radiant: [burned-1],[scorched-2],[blasted-3],[melting-4],[severed-5],[disintegrated-6]</p><p>Suffocation: [breathless-1],[starved-2],[choking-3],[fading-4],[passed-out-5],[dead-6]</p><p>Water: [soaked-1],[struggling-2],[flailing-3],[water-in-lungs-4],[drowning-5],[drowned-6]</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "0.3.11",
+        "lastModifiedBy": null
+      },
+      "ownership": {
+        "default": -1
+      },
+      "_key": "!journal.pages!TSjCkXJj1PSzrvTc.IHrQOO9K10CH0EeM"
+    },
+    {
+      "sort": 200000,
+      "name": "Hazards",
+      "type": "text",
+      "_id": "rfVB1fVAPa3dx3YH",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Contamination: [exposure-1],[itchy-skin-2],[nausea-3],[feverish-4],[organ-failure-5],[dead-6]</p><p>Disease: [cough-1],[infected-2],[sick-3],[bedridden-4],[system-shock-5],[dead-6]</p><p>Food Poisoning: [sick-1],[cramps-2],[vomiting-3],[wasted-4],[passed-out-5],[dead-6]</p><p>Mental (inc. intoxication): [scattered-1],[dazed-2],[confused-3],[bewildered-4],[psychotic-5]</p><p>Poison: [rash-1],[spreading-venom-2],[paralyzed-3],[spasms-4],[system-shock-5],[dead-6]</p><p>Radiation: [exposure-1],[radiation-burns-2],[coughing-blood-3],[organ-failure-4],[radiation-sickness-5],[dead-6]</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "0.3.11",
+        "lastModifiedBy": null
+      },
+      "ownership": {
+        "default": -1
+      },
+      "_key": "!journal.pages!TSjCkXJj1PSzrvTc.rfVB1fVAPa3dx3YH"
+    },
+    {
+      "sort": 300000,
+      "name": "Combat",
+      "type": "text",
+      "_id": "jJm7YXR3OGbizEAe",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Cover (-): [exposed-1],[bad-cover-2],[plain-view-3],[compromised-4]</p><p>Cover (+): [lite-cover-1],[good-cover-2],[full-cover-3],[bunkered-4]</p><p>Positioning (-): [disadvantage-1],[bad-position-2],[compromised-3],[tactical-deficit-4]</p><p>Positioning (+); [advantage-1],[good-position-2],[upper-hand-3],[high-ground-4]</p><p>Injury: [ouch-1],[stinging-pain-2],[broken-3],[multiple-fractures-4],[dying-5],[dead-6]</p><p>Head Injury: [bumped-head-1],[concussed-2],[head-trauma-3],[fractured-skull-4],[knocked-out-5],[brain-dead-6]</p><p>Arm Injury: [bruised-arm-1],[sprained-wrist-2],[fractured-arm-3],[shattered-bones-4],[useless-arm-5],[amputated-6]</p><p>Torso Injury: [bruised-ribs-1],[winded-2],[cracked-ribs-3],[internal-bleeding-4],[collapsed-lung-5],[dead-6]</p><p>Leg Injury: [twisted-ankle-1],[bruised-leg-2],[fractured-legs-3],[torn-ligament-4],[paralyzed-5],[dismembered-6]</p><p>Clubs: [bruised-1],[battered-2],[cracked-bone-3],[blunt-trauma-4],[shattered-bones-5],[disfigured-6]</p><p>Claws: [grazed-1],[raked-2],[deep-gash-3],[maimed-4],[eviscerated-5],[ripped-apart-6]</p><p>Knives: [nicked-1],[cut-2],[deep-wound-3],[stabbed-4],[bleeding-out-5],[impaled-6]</p><p>Swords: [scratched-1],[slashed-2],[serious-gash-3],[cleaved-4],[gushing-wound-5],[deadly-wound-6]</p><p>Combat (-): [distracted-1],[exposed-2],[surprised-3],[overrun-4],[surrounded-5],[defeated-6]</p><p>Combat (+): [upper-hand-1],[behind-cover-2],[in-my-sight-3],[tactical-superiority-4]</p><p>Exhaustion: [tired-1],[groggy-2],[fatigued-3],[exhausted-4],[passed-out-5]</p><p>Subdual: [tangled-1],[restricted-2],[cuffed-2],[tied-up-3],[pinned-down-4],[overpowered-5]</p><p>Aiming: [aiming-1],[good-position-2],[plain-sight-3],[clear-shot-4],[sitting-duck-5],[deadshot-6]</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "0.3.11",
+        "lastModifiedBy": null
+      },
+      "ownership": {
+        "default": -1
+      },
+      "_key": "!journal.pages!TSjCkXJj1PSzrvTc.jJm7YXR3OGbizEAe"
+    },
+    {
+      "sort": 400000,
+      "name": "Persuit",
+      "type": "text",
+      "_id": "kGGUlBT0YNeRR39A",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Being Followed: [suspicious-1],[noticed-2],[evasive-3],[almost-lost-4],[gone-5]</p><p>Chase: [spotted-1],[closing-in-2],[closing-gap-3],[side-by-side-4],[cornered-5],[wrecked-6]</p><p>Chasing on Foot: [lagging-1],[pacing-up-2],[closing-in-3],[arms-reach-4],[tackled-5],[neutralized-6]</p><p>Escaping: [aware-1],[gaining-distance-2],[almost-clear-3],[out-of-sight-4],[escaped-5]</p><p>Following: [trailing-1],[keeping-distance-2],[closing-in-3],[almost-there-4],[right-behind-5],[caught-6]</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "0.3.11",
+        "lastModifiedBy": null
+      },
+      "ownership": {
+        "default": -1
+      },
+      "_key": "!journal.pages!TSjCkXJj1PSzrvTc.kGGUlBT0YNeRR39A"
+    },
+    {
+      "sort": 500000,
+      "name": "Sensory",
+      "type": "text",
+      "_id": "dVxfOSoHkyx8MHYg",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Camouflage: [partially-blended-1],[blended-2],[perfectly-matching-3],[adaptive-camo-4],[chameleon-5],[invisible-6]</p><p>Darkness Advantage: [dim-light-1],[shaded-2],[cloaked-in-shadows-3],[near-invisible-4],[one-with-darkness-5]</p><p>Disguise: [minor-alteration-1],[plausible-cover-2],[convincing-3],[perfect-imitation-4],[master-of-disguise-5],[unrecognizable-6]</p><p>Fear: [hesitant-1],[daunted-2],[fearful-3],[terror-struck-4],[petrified-5],[scared-to-death-6]</p><p>Focus (-): [distracted-1],[losing-focus-2],[confused-3],[disoriented-4],[mentally-blocked-5]</p><p>Focus (+): [alert-1],[concentrated-2],[in-the-zone-3],[hyper-focused-4]</p><p>Hidden: [concealed-1],[obscured-2],[well-hidden-3],[invisible-4],[shadowmelded-5],[undetectable-6]</p><p>Mood: [melancholic-1],[sad-2],[depressed-3],[shattered-4],[despaired-5],[suicidal-6]</p><p>Moving Unnoticed: [quiet-1],[sneaky-2],[ghosting-3],[blending-in-4],[untraceable-5]</p><p>Surprise: [startled-1],[shocked-2],[stunned-3],[overwhelmed-4],[paralyzed-5]</p><p>Vision (-): [obstructed-1],[clouded-2],[disoriented-3],[can-hardly-see-4],[blinded-5],[leglly-blind-6]</p><p>Investigation (+): [observant-1],[analytical-2],[insightful-3],[elementar-4]</p><p>Investigation (-): [distracted-1],[careless-2],[misled-3],[clueless-4]</p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "0.3.11",
+        "lastModifiedBy": null
+      },
+      "ownership": {
+        "default": -1
+      },
+      "_key": "!journal.pages!TSjCkXJj1PSzrvTc.dVxfOSoHkyx8MHYg"
+    },
+    {
+      "sort": 600000,
+      "name": "Relations",
+      "type": "text",
+      "_id": "jKS4Bb4sndKpfr6F",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Financial: [strained-budget-1],[overspending-2],[financial-risk-3],[indebted-4],[bankrupt-5]</p><p>Legal: [warning-1],[watched-2],[warrant-for-arrest-3],[wanted-4],[most-wanted-5]</p><p>Seduction: [interested-1],[beguiled-2],[charmed-3],[mesmerized-4],[controlled-5],[enslaved-6]</p><p>Society (+): [attention-1],[interesting-2],[admired-3],[life-of-the-party-4],[media-craze-5]</p><p>Society (-): [embarrassed-1],[on-the-spot-2],[humiliated-3],[laughing-stock-4],[ostracized-5]</p><p>Leadership (+): [confident-1],[respected-2],[rallying-3],[strategic-4],[inspiring-leader-5],[legendary-commander-6]</p><p>Leadership (-): [uncertain-1],[overlooked-2],[untrusted-3],[divisive-4],[mutinous-5],[disgraced-6]</p><p>Social (+): [charismatic-1],[persuasive-2],[inspiring-3],[trusted-4],[idolized-5],[legendary-6]</p><p>Social (-): [awkward-1],[unconvincing-2],[misunderstood-3],[distrusted-4],[outcast-5],[infamous-6]</p><p>Negotiation (+): [reasonable-1],[promising-deal-2],[advantageous-offer-3],[leverage-4],[deal-closer-5]</p><p>Negotiation (-): [hesitant-1],[pressured-2],[unprepared-3],[outmaneuvered-4],[ruined-bargain-5]</p><p>Deception (+): [convincing-lie-1],[believable-story-2],[expertly-fabricated-3],[flawless-disguise-4],[untraceable-5]</p><p>Deception (-): [obvious-lie-1],[poorly-spun-2],[suspicious-3],[exposed-4],[condemned-5]</p><p>Intimidation (+): [unnerving-1],[assertive-2],[commanding-3],[fearsome-4],[terrifying-5]</p><p>Intimidation (-): [hesitant-1],[weak-threat-2],[unimposing-3],[ridiculed-4],[humiliated-5]</p><p>Charm (+): [pleasant-1],[likable-2],[enchanting-3],[magnetic-4],[irresistible-5]</p><p>Charm (-): [bland-1],[unappealing-2],[off-putting-3],[abrasive-4],[repulsive-5]</p><p>Teamwork (+): [cooperative-1],[supportive-2],[well-coordinated-3],[cohesive-4],[seamless-synergy-5]</p><p>Teamwork (-): [uncooperative-1],[self-centered-2],[argumentative-3],[disruptive-4],[sabotaging-5]</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "0.3.11",
+        "lastModifiedBy": null
+      },
+      "ownership": {
+        "default": -1
+      },
+      "_key": "!journal.pages!TSjCkXJj1PSzrvTc.jKS4Bb4sndKpfr6F"
+    },
+    {
+      "sort": 700000,
+      "name": "Supernatural",
+      "type": "text",
+      "_id": "3l6fVZGDeT1f3JGl",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Demonic: [marked-1],[tainted-2],[branded-3],[corrupted-4],[possessed-5],[damned-6]</p><p>Divine: [touched-1],[blessed-2],[empowered-3],[holy-radiance-4],[ascended-5],[transcended-6]</p><p>Fey: [delighted-1],[bewitched-2],[glamoured-3],[enthralled-4],[fey-touched-5],[lost-to-feywild-6]</p><p>Magical: [sparked-1],[stricken-2],[hexed-3],[cursed-4],[warped-5],[unmade-6]</p><p>Undead: [haunted-1],[drained-2],[undead-3],[possessed-4],[withered-5],[unmade-6]</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "0.3.11",
+        "lastModifiedBy": null
+      },
+      "ownership": {
+        "default": -1
+      },
+      "_key": "!journal.pages!TSjCkXJj1PSzrvTc.3l6fVZGDeT1f3JGl"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "ownership": {
+    "default": 0,
+    "b16EOKUCwwbnVrnm": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.348",
+    "systemId": "mist-engine-fvtt",
+    "systemVersion": "0.3.11",
+    "createdTime": 1760297681941,
+    "modifiedTime": 1760297699126,
+    "lastModifiedBy": "b16EOKUCwwbnVrnm"
+  },
+  "_id": "TSjCkXJj1PSzrvTc",
+  "sort": 0,
+  "_key": "!journal!TSjCkXJj1PSzrvTc"
+}

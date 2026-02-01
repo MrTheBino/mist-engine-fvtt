@@ -208,6 +208,13 @@ Handlebars.registerHelper("tagFilled", function (str) {
   return false;
 });
 
+Handlebars.registerHelper("tagFilledAndNotPlanned", function (tag) {
+  if (tag.name && tag.name.trim().length > 0 && !tag.planned) {
+    return true;
+  }
+  return false;
+});
+
 Handlebars.registerHelper("notEmpty", function (str) {
   if (str && str.trim().length > 0) {
     return true;

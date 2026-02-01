@@ -1,0 +1,182 @@
+{
+  "name": "Documentation",
+  "_id": "TrgMWh3RyxxBkZoB",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "Scene App",
+      "type": "text",
+      "_id": "9j9ESpVGQStpEOlM",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<h2>Opening the Scene App</h2><p>Shortcut: Ctl+J or Journal Notes -&gt; Scene Tags</p><img src=\"systems/mist-engine-fvtt/assets/screenshots/opening_scene_app.jpg\" /><p></p><h2>Adding Tags &amp; Statuses from Challenges As Dice Roll Modifiers</h2><p>Click on a tag or status in the Tags &amp; Status section from a challenge on the left side to add them as dice roll modifiers.</p><img src=\"systems/mist-engine-fvtt/assets/screenshots/add_tags_status_from_challenge.jpg\" /><p></p><h2>Drag'N'Drop of Tags &amp; Statuses from a challenge to the scene app or character</h2><p>You can drag'n'drop tags &amp; statuses from the Threats &amp; Consequences of  challenge to the scene app</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "b16EOKUCwwbnVrnm": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "0.3.10",
+        "createdTime": 1760166649327,
+        "modifiedTime": 1760177908711,
+        "lastModifiedBy": "b16EOKUCwwbnVrnm"
+      },
+      "_key": "!journal.pages!TrgMWh3RyxxBkZoB.9j9ESpVGQStpEOlM"
+    },
+    {
+      "sort": 0,
+      "name": "Welcome",
+      "type": "text",
+      "_id": "YAJ4PJzLv83so7Zp",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p><strong>Almost all import functions of this system display a short help text while hovering them with the mouse.</strong></p><p></p><p>If you find bugs feel free to contact us via the GitHub issues page or via discord. Either per DM or in the #vtt section of the Sons Of Oak discord server.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "b16EOKUCwwbnVrnm": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "0.3.10",
+        "createdTime": 1760177917349,
+        "modifiedTime": 1760177999425,
+        "lastModifiedBy": "b16EOKUCwwbnVrnm"
+      },
+      "_key": "!journal.pages!TrgMWh3RyxxBkZoB.YAJ4PJzLv83so7Zp"
+    },
+    {
+      "sort": 200000,
+      "name": "Fellowship Themebooks",
+      "type": "text",
+      "_id": "zLZwDJ0ul7XRcL0Q",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>Fellowship Themebooks are special. They are technically a seperate actor which all users from the fellowship have ownership.</p><p></p><h2>1. Create an actor of the type \"Fellowship Themecard\"</h2><img src=\"systems/mist-engine-fvtt/assets/screenshots/fellowshio_themecard_creation.jpg\" /><p></p><h2>2. Give all fellowship characters(users) ownership to the fellowship themecard (actor)</h2><img src=\"systems/mist-engine-fvtt/assets/screenshots/configure_ownership_of_fellowship.jpg\" /><p></p><h2>3 Assign characters to their corresponding user</h2><p>Do not forget to assign the characters to their corresponding users. Do NOT assign the fellowship themecard actor, just the character of the user.</p><img src=\"systems/mist-engine-fvtt/assets/screenshots/user_configuration_1.jpg\" /><p></p><img src=\"systems/mist-engine-fvtt/assets/screenshots/user_configuration_2.jpg\" /><p>After setting up the character assignment and after a reload / or relogin of the users, they will see the fellowship themecard in their charactersheet.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "b16EOKUCwwbnVrnm": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "0.3.10",
+        "createdTime": 1760178163217,
+        "modifiedTime": 1760178830885,
+        "lastModifiedBy": "b16EOKUCwwbnVrnm"
+      },
+      "_key": "!journal.pages!TrgMWh3RyxxBkZoB.zLZwDJ0ul7XRcL0Q"
+    },
+    {
+      "sort": 300000,
+      "name": "Roll Dialog",
+      "type": "text",
+      "_id": "8W29zhp0MktAgqbd",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>The roll dialog is reactive. This means you can open the roll dialog by clicking on one of the three roll types (e.G. Quick Roll). Now you can (de)select tags &amp; statuses from your character sheet and they will get added or removed from the roll dialog.</p><p></p><p>The same applies for the GM when adding or removing tags &amp; statuses from the scene.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "b16EOKUCwwbnVrnm": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.348",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "0.3.12",
+        "createdTime": 1760356778764,
+        "modifiedTime": 1760356883349,
+        "lastModifiedBy": "b16EOKUCwwbnVrnm"
+      },
+      "_key": "!journal.pages!TrgMWh3RyxxBkZoB.8W29zhp0MktAgqbd"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "b16EOKUCwwbnVrnm": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.348",
+    "systemId": "mist-engine-fvtt",
+    "systemVersion": "0.3.10",
+    "createdTime": 1760166629690,
+    "modifiedTime": 1760166629690,
+    "lastModifiedBy": "b16EOKUCwwbnVrnm"
+  },
+  "_key": "!journal!TrgMWh3RyxxBkZoB"
+}

@@ -401,9 +401,14 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                     }
                 } else {
                     let key = event.currentTarget.dataset.key;
-                    let value = event.currentTarget.value;
-                    await this.actorFellowshipThemecard.update({ [key]: value });
-
+                    if (event.target.type === 'checkbox') {
+                        let value = event.currentTarget.checked;
+                        await this.actorFellowshipThemecard.update({ [key]: value });
+                        return;
+                    }else{
+                        let value = event.currentTarget.value;
+                        await this.actorFellowshipThemecard.update({ [key]: value });
+                    }
                 }
             } else {
                 console.warn("No fellowship themecard found for actor");
