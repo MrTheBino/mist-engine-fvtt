@@ -59,3 +59,11 @@ An Example
 
 
 This system uses at present code snippets and graphics from the City of Mist HUD module.
+
+
+## Development
+
+  npm install
+  npm run watch (CSS live build)
+  npm run pack-compendium (builds the foundry compendium entries)
+  npm run unpack-compendium (unpacks the foundry compendium entries to json files in src/packs)

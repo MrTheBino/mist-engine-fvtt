@@ -9,7 +9,7 @@
     "width": 1,
     "height": 1,
     "texture": {
-      "src": "systems/mist-engine-fvtt/assets/compendium/red_marshall%20_blond_masc_muscular_token.png",
+      "src": "systems/mist-engine-fvtt/assets/compendium/red_marshall_albino%20masc_crossbow_token.png",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "offsetX": 0,
@@ -95,7 +95,7 @@
     "appendNumber": false,
     "prependAdjective": false
   },
-  "img": "systems/mist-engine-fvtt/assets/compendium/red_marshall%20_blond_masc_muscular.webp",
+  "img": "systems/mist-engine-fvtt/assets/compendium/red_marshall_albino%20masc_crossbow.webp",
   "system": {
     "biography": "",
     "editMode": false,
@@ -184,7 +184,7 @@
       "ownership": {
         "default": 0
       },
-      "_key": "!actors.items!JqFVgBCC4NkHLK3s.EFZQrKTPePNauGl6"
+      "_key": "!actors.items!5NisBPdRwWNu5Cg4.EFZQrKTPePNauGl6"
     },
     {
       "folder": "BmgEu8IcX0N16vpv",
@@ -347,7 +347,7 @@
       "ownership": {
         "default": 0
       },
-      "_key": "!actors.items!JqFVgBCC4NkHLK3s.y3kNmr7hO6vMHWKb"
+      "_key": "!actors.items!5NisBPdRwWNu5Cg4.y3kNmr7hO6vMHWKb"
     },
     {
       "folder": "BmgEu8IcX0N16vpv",
@@ -510,7 +510,7 @@
       "ownership": {
         "default": 0
       },
-      "_key": "!actors.items!JqFVgBCC4NkHLK3s.vLcwxbJZtsjT1Ifk"
+      "_key": "!actors.items!5NisBPdRwWNu5Cg4.vLcwxbJZtsjT1Ifk"
     },
     {
       "folder": "BmgEu8IcX0N16vpv",
@@ -673,7 +673,7 @@
       "ownership": {
         "default": 0
       },
-      "_key": "!actors.items!JqFVgBCC4NkHLK3s.7sYHOflvv8rAdLVo"
+      "_key": "!actors.items!5NisBPdRwWNu5Cg4.7sYHOflvv8rAdLVo"
     },
     {
       "folder": "BmgEu8IcX0N16vpv",
@@ -835,7 +835,7 @@
       "ownership": {
         "default": 0
       },
-      "_key": "!actors.items!JqFVgBCC4NkHLK3s.GiSvriQxxTYJhOZq"
+      "_key": "!actors.items!5NisBPdRwWNu5Cg4.GiSvriQxxTYJhOZq"
     }
   ],
   "effects": [],
@@ -848,15 +848,15 @@
     "coreVersion": "13.351",
     "systemId": "mist-engine-fvtt",
     "systemVersion": "13.5.8",
-    "createdTime": 1769929918889,
+    "createdTime": 1770121421747,
     "modifiedTime": 1770121801717,
     "lastModifiedBy": "34ccT7rxa8SJ86RB"
   },
   "ownership": {
     "default": 0,
-    "fXOlRnJPiyvuihOi": 3
+    "34ccT7rxa8SJ86RB": 3
   },
-  "_id": "JqFVgBCC4NkHLK3s",
-  "sort": 1000000,
-  "_key": "!actors!JqFVgBCC4NkHLK3s"
+  "_id": "5NisBPdRwWNu5Cg4",
+  "sort": 700000,
+  "_key": "!actors!5NisBPdRwWNu5Cg4"
 }

@@ -1,15 +1,15 @@
 {
-  "name": "The Red Marshal",
+  "name": "The Apple Picker",
   "type": "litm-character",
   "prototypeToken": {
     "actorLink": true,
     "disposition": 1,
-    "name": "The Red Marshal",
+    "name": "The Apple Picker",
     "displayName": 0,
     "width": 1,
     "height": 1,
     "texture": {
-      "src": "systems/mist-engine-fvtt/assets/compendium/red_marshall%20_blond_masc_muscular_token.png",
+      "src": "systems/mist-engine-fvtt/assets/compendium/apple_picker_asian_femme_outlander_token.png",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "offsetX": 0,
@@ -95,7 +95,7 @@
     "appendNumber": false,
     "prependAdjective": false
   },
-  "img": "systems/mist-engine-fvtt/assets/compendium/red_marshall%20_blond_masc_muscular.webp",
+  "img": "systems/mist-engine-fvtt/assets/compendium/apple_picker_asian_femme_outlander.webp",
   "system": {
     "biography": "",
     "editMode": false,
@@ -112,49 +112,49 @@
       "system": {
         "items": [
           {
-            "name": "A Good Sword",
+            "name": "Fishing Rod & Bait",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Soothing Salve",
+            "name": "Empty Sacks",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Forest-Colored Overcloak",
+            "name": "Paring Knife",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Old Seeing Glass",
+            "name": "Jug Of Cider",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Rope",
+            "name": "Sling",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Whetstone",
+            "name": "Hemp Twine",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Bread, eggs and cheese",
+            "name": "Wooden Whistle",
             "selected": false,
             "burned": false,
             "toBurn": false,
@@ -167,7 +167,7 @@
           "autoAdded": true
         }
       },
-      "_id": "EFZQrKTPePNauGl6",
+      "_id": "33iSwI3EYO8uTL0x",
       "img": "icons/svg/item-bag.svg",
       "effects": [],
       "folder": null,
@@ -184,496 +184,7 @@
       "ownership": {
         "default": 0
       },
-      "_key": "!actors.items!JqFVgBCC4NkHLK3s.EFZQrKTPePNauGl6"
-    },
-    {
-      "folder": "BmgEu8IcX0N16vpv",
-      "name": "Devotion",
-      "type": "themebook",
-      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
-      "_id": "y3kNmr7hO6vMHWKb",
-      "system": {
-        "description": "",
-        "abandon": 0,
-        "improve": 0,
-        "milestone": 0,
-        "powertag1": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": "",
-          "name": "Protector Of The Dale"
-        },
-        "powertag2": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": "",
-          "name": "The Red Armor"
-        },
-        "powertag3": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": "",
-          "name": "Stand Watch"
-        },
-        "powertag4": {
-          "burned": false,
-          "toBurn": false,
-          "planned": true,
-          "selected": false,
-          "question": "",
-          "name": "Reassuring Presence"
-        },
-        "powertag5": {
-          "burned": false,
-          "toBurn": false,
-          "planned": true,
-          "selected": false,
-          "question": "",
-          "name": "Know These Lands"
-        },
-        "powertag6": {
-          "burned": false,
-          "toBurn": false,
-          "planned": true,
-          "selected": false,
-          "question": "",
-          "name": "Loyal Horse"
-        },
-        "powertag7": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "powertag8": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "powertag9": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "powertag10": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "weaknesstag1": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": "",
-          "name": "Burden of Responsibility"
-        },
-        "weaknesstag2": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "weaknesstag3": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "weaknesstag4": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "specialImprovements": [
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          },
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          },
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          },
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          },
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          }
-        ],
-        "type": "litm-origin",
-        "quest": "I am sworn to guard this Land and it's people"
-      },
-      "effects": [],
-      "sort": 0,
-      "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.351",
-        "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.5.8",
-        "lastModifiedBy": null
-      },
-      "ownership": {
-        "default": 0
-      },
-      "_key": "!actors.items!JqFVgBCC4NkHLK3s.y3kNmr7hO6vMHWKb"
-    },
-    {
-      "folder": "BmgEu8IcX0N16vpv",
-      "name": "Skill or Trade",
-      "type": "themebook",
-      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
-      "_id": "vLcwxbJZtsjT1Ifk",
-      "system": {
-        "description": "",
-        "abandon": 0,
-        "improve": 0,
-        "milestone": 0,
-        "powertag1": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": "",
-          "name": "Martial Training"
-        },
-        "powertag2": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": "",
-          "name": "Swordmanship"
-        },
-        "powertag3": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": "",
-          "name": "Rally Comrades"
-        },
-        "powertag4": {
-          "burned": false,
-          "toBurn": false,
-          "planned": true,
-          "selected": false,
-          "question": "",
-          "name": "Practiced Footwork"
-        },
-        "powertag5": {
-          "burned": false,
-          "toBurn": false,
-          "planned": true,
-          "selected": false,
-          "question": "",
-          "name": "Iron Focus"
-        },
-        "powertag6": {
-          "burned": false,
-          "toBurn": false,
-          "planned": true,
-          "selected": false,
-          "question": "",
-          "name": "Archery"
-        },
-        "powertag7": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "powertag8": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "powertag9": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "powertag10": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "weaknesstag1": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": "",
-          "name": "Experienced Foes"
-        },
-        "weaknesstag2": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "weaknesstag3": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "weaknesstag4": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "specialImprovements": [
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          },
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          },
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          },
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          },
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          }
-        ],
-        "type": "litm-origin",
-        "quest": "I have been trained for this"
-      },
-      "effects": [],
-      "sort": 0,
-      "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.351",
-        "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.5.8",
-        "lastModifiedBy": null
-      },
-      "ownership": {
-        "default": 0
-      },
-      "_key": "!actors.items!JqFVgBCC4NkHLK3s.vLcwxbJZtsjT1Ifk"
-    },
-    {
-      "folder": "BmgEu8IcX0N16vpv",
-      "name": "Trait",
-      "type": "themebook",
-      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
-      "_id": "7sYHOflvv8rAdLVo",
-      "system": {
-        "description": "",
-        "abandon": 0,
-        "improve": 0,
-        "milestone": 0,
-        "powertag1": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": "",
-          "name": "Athletic"
-        },
-        "powertag2": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": "",
-          "name": "Brute Strength"
-        },
-        "powertag3": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": "",
-          "name": "Runner's Stamina"
-        },
-        "powertag4": {
-          "burned": false,
-          "toBurn": false,
-          "planned": true,
-          "selected": false,
-          "question": "",
-          "name": "Climbing"
-        },
-        "powertag5": {
-          "burned": false,
-          "toBurn": false,
-          "planned": true,
-          "selected": false,
-          "question": "",
-          "name": "Hardened Physique"
-        },
-        "powertag6": {
-          "burned": false,
-          "toBurn": false,
-          "planned": true,
-          "selected": false,
-          "question": "",
-          "name": "All-Terrain Trekker"
-        },
-        "powertag7": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "powertag8": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "powertag9": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "powertag10": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "weaknesstag1": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": "",
-          "name": "This Is Gonna Hurt Later"
-        },
-        "weaknesstag2": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "weaknesstag3": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "weaknesstag4": {
-          "burned": false,
-          "toBurn": false,
-          "planned": false,
-          "selected": false,
-          "question": ""
-        },
-        "specialImprovements": [
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          },
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          },
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          },
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          },
-          {
-            "name": "",
-            "active": false,
-            "description": ""
-          }
-        ],
-        "type": "litm-origin",
-        "quest": "I'll race you!"
-      },
-      "effects": [],
-      "sort": 0,
-      "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.351",
-        "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.5.8",
-        "lastModifiedBy": null
-      },
-      "ownership": {
-        "default": 0
-      },
-      "_key": "!actors.items!JqFVgBCC4NkHLK3s.7sYHOflvv8rAdLVo"
+      "_key": "!actors.items!tyIgjRDv9ZHV55Tr.33iSwI3EYO8uTL0x"
     },
     {
       "folder": "BmgEu8IcX0N16vpv",
@@ -692,7 +203,7 @@
           "planned": false,
           "selected": false,
           "question": "",
-          "name": "Aspiring Local Hero"
+          "name": "Rascal"
         },
         "powertag2": {
           "burned": false,
@@ -700,7 +211,7 @@
           "planned": false,
           "selected": false,
           "question": "",
-          "name": "Feign Courage"
+          "name": "Prankster"
         },
         "powertag3": {
           "burned": false,
@@ -708,7 +219,7 @@
           "planned": false,
           "selected": false,
           "question": "",
-          "name": "A Villager's Shield"
+          "name": "Finders Keepers"
         },
         "powertag4": {
           "burned": false,
@@ -716,7 +227,7 @@
           "planned": true,
           "selected": false,
           "question": "",
-          "name": "Shortcuts To Greatness"
+          "name": "Sneak"
         },
         "powertag5": {
           "burned": false,
@@ -724,7 +235,7 @@
           "planned": true,
           "selected": false,
           "question": "",
-          "name": "Seize Attention"
+          "name": "Light-Footed"
         },
         "powertag6": {
           "burned": false,
@@ -732,7 +243,7 @@
           "planned": true,
           "selected": false,
           "question": "",
-          "name": "Village Folk's Blessing"
+          "name": "Cunnit Wit"
         },
         "powertag7": {
           "burned": false,
@@ -768,7 +279,170 @@
           "planned": false,
           "selected": false,
           "question": "",
-          "name": "Rash"
+          "name": "Can't Sit Still"
+        },
+        "weaknesstag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "specialImprovements": [
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          }
+        ],
+        "type": "litm-origin",
+        "quest": "It's never a bad time for a prank!"
+      },
+      "effects": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.5.8",
+        "lastModifiedBy": null
+      },
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!tyIgjRDv9ZHV55Tr.GiSvriQxxTYJhOZq"
+    },
+    {
+      "folder": "BmgEu8IcX0N16vpv",
+      "name": "People",
+      "type": "themebook",
+      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
+      "_id": "tsuV9xoF9bUchsVw",
+      "system": {
+        "description": "",
+        "abandon": 0,
+        "improve": 0,
+        "milestone": 0,
+        "powertag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Ravenhome Raised"
+        },
+        "powertag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Run of the Place"
+        },
+        "powertag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Seeking Kinship"
+        },
+        "powertag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Ravenhome Spirit"
+        },
+        "powertag5": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Ears To the Grapevine"
+        },
+        "powertag6": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Healthy as a Horse"
+        },
+        "powertag7": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag8": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag9": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag10": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Belongs Nowhere"
         },
         "weaknesstag2": {
           "burned": false,
@@ -818,7 +492,8 @@
             "description": ""
           }
         ],
-        "type": "litm-origin"
+        "type": "litm-origin",
+        "quest": "It's the backside of nowhere, but it's home"
       },
       "effects": [],
       "sort": 0,
@@ -835,7 +510,333 @@
       "ownership": {
         "default": 0
       },
-      "_key": "!actors.items!JqFVgBCC4NkHLK3s.GiSvriQxxTYJhOZq"
+      "_key": "!actors.items!tyIgjRDv9ZHV55Tr.tsuV9xoF9bUchsVw"
+    },
+    {
+      "folder": "BmgEu8IcX0N16vpv",
+      "name": "Trait",
+      "type": "themebook",
+      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
+      "_id": "7sYHOflvv8rAdLVo",
+      "system": {
+        "description": "",
+        "abandon": 0,
+        "improve": 0,
+        "milestone": 0,
+        "powertag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Scrappy"
+        },
+        "powertag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Roll With A Blow"
+        },
+        "powertag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Unkempt Charm"
+        },
+        "powertag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Lunge At Them"
+        },
+        "powertag5": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Resourceful"
+        },
+        "powertag6": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Dig My Heels In"
+        },
+        "powertag7": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag8": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag9": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag10": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Never Listens"
+        },
+        "weaknesstag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "specialImprovements": [
+          {
+            "name": "",
+            "active": false,
+            "description": ""
+          },
+          {
+            "name": "",
+            "active": false,
+            "description": ""
+          },
+          {
+            "name": "",
+            "active": false,
+            "description": ""
+          },
+          {
+            "name": "",
+            "active": false,
+            "description": ""
+          },
+          {
+            "name": "",
+            "active": false,
+            "description": ""
+          }
+        ],
+        "type": "litm-origin",
+        "quest": "You're not the boss of me!"
+      },
+      "effects": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.5.8",
+        "lastModifiedBy": null
+      },
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!tyIgjRDv9ZHV55Tr.7sYHOflvv8rAdLVo"
+    },
+    {
+      "folder": "JuEAktEDADzvlIae",
+      "name": "Possessions",
+      "type": "themebook",
+      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
+      "_id": "77gOPy1JdQNsdOON",
+      "system": {
+        "description": "",
+        "abandon": 0,
+        "improve": 0,
+        "milestone": 0,
+        "powertag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Bushel Of Apples"
+        },
+        "powertag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Strong Throw"
+        },
+        "powertag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Deft Hands"
+        },
+        "powertag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Highly Nutrious"
+        },
+        "powertag5": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Low Hanging Fruit"
+        },
+        "powertag6": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Orchardist"
+        },
+        "powertag7": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag8": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag9": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag10": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Only Goes So Far"
+        },
+        "weaknesstag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "specialImprovements": [
+          {
+            "name": "",
+            "active": false,
+            "description": ""
+          },
+          {
+            "name": "",
+            "active": false,
+            "description": ""
+          },
+          {
+            "name": "",
+            "active": false,
+            "description": ""
+          },
+          {
+            "name": "",
+            "active": false,
+            "description": ""
+          },
+          {
+            "name": "",
+            "active": false,
+            "description": ""
+          }
+        ],
+        "type": "litm-variable",
+        "quest": "Simple solutions work best."
+      },
+      "effects": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.5.8",
+        "lastModifiedBy": null
+      },
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!tyIgjRDv9ZHV55Tr.77gOPy1JdQNsdOON"
     }
   ],
   "effects": [],
@@ -848,15 +849,15 @@
     "coreVersion": "13.351",
     "systemId": "mist-engine-fvtt",
     "systemVersion": "13.5.8",
-    "createdTime": 1769929918889,
+    "createdTime": 1770121574477,
     "modifiedTime": 1770121801717,
     "lastModifiedBy": "34ccT7rxa8SJ86RB"
   },
   "ownership": {
     "default": 0,
-    "fXOlRnJPiyvuihOi": 3
+    "34ccT7rxa8SJ86RB": 3
   },
-  "_id": "JqFVgBCC4NkHLK3s",
-  "sort": 1000000,
-  "_key": "!actors!JqFVgBCC4NkHLK3s"
+  "_id": "tyIgjRDv9ZHV55Tr",
+  "sort": 400000,
+  "_key": "!actors!tyIgjRDv9ZHV55Tr"
 }

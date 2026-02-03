@@ -8,7 +8,7 @@
     "width": 1,
     "height": 1,
     "texture": {
-      "src": "icons/svg/mystery-man.svg",
+      "src": "systems/mist-engine-fvtt/assets/compendium/willow_token.png",
       "anchorX": 0.5,
       "anchorY": 0.5,
       "offsetX": 0,
@@ -26,10 +26,10 @@
     "disposition": -1,
     "displayBars": 0,
     "bar1": {
-      "attribute": "health"
+      "attribute": null
     },
     "bar2": {
-      "attribute": "power"
+      "attribute": null
     },
     "light": {
       "negative": false,
@@ -77,7 +77,7 @@
         "ring": null,
         "background": null
       },
-      "effects": 1,
+      "effects": 0,
       "subject": {
         "scale": 1,
         "texture": null
@@ -96,7 +96,7 @@
     "prependAdjective": false
   },
   "_id": "NdEiSoLkrAqnd6xo",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/mist-engine-fvtt/assets/compendium/willow.webp",
   "system": {
     "biography": "",
     "editMode": false,
@@ -169,8 +169,8 @@
     "systemId": "mist-engine-fvtt",
     "systemVersion": "13.5.8",
     "createdTime": 1769931426741,
-    "modifiedTime": 1769931498147,
-    "lastModifiedBy": "fXOlRnJPiyvuihOi"
+    "modifiedTime": 1770122214344,
+    "lastModifiedBy": "34ccT7rxa8SJ86RB"
   },
   "_key": "!actors!NdEiSoLkrAqnd6xo"
 }
