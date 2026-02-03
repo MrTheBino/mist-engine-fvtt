@@ -2,7 +2,7 @@
     <div class="selected-tags-container flexcol">
         <label class="resource-label">You selected:</label>
         {{#each selectedTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}} {{#if this.isStatus}}clickable{{/if}}" {{#if this.isStatus}}data-action="clickTagStatusModifierToggle" data-index="{{this.index}}"{{/if}}>
             <span class="tag-icon">
                 {{#if this.positive}}<i class="fa-solid fa-circle-plus"></i>{{else}}<i
                     class="fa-solid fa-circle-minus"></i>{{/if}}
@@ -18,7 +18,7 @@
     <div class="selected-tags-container flexcol">
         <label class="resource-label">Story Tags / Status selected:</label>
         {{#each selectedStoryTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}}">
             <span class="tag-icon">
                 {{#if this.positive}}<i class="fa-solid fa-circle-plus"></i>{{else}}<i
                     class="fa-solid fa-circle-minus"></i>{{/if}}
@@ -30,7 +30,7 @@
     </div>
     <div class="selected-tags-container flexcol">
         {{#each selectedGmTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}}">
             <span class="tag-icon">
                 {{#if this.positive}}<i class="fa-solid fa-circle-plus"></i>{{else}}<i
                     class="fa-solid fa-circle-minus"></i>{{/if}}

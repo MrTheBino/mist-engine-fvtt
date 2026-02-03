@@ -43,7 +43,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             clickModPositivePlus: this.#handleClickModPositivePlus,
             clickModNegativeMinus: this.#handleClickModNegativeMinus,
             clickModNegativePlus: this.#handleClickModNegativePlus,
-            clickDeselectTag: this.#handleClickDeselectTag
+            clickDeselectTag: this.#handleClickDeselectTag,
+            clickTagStatusModifierToggle: this.#handleTagStatusModifierToggle
         },
     };
 
@@ -98,6 +99,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
+        this.applyRulesPreviewToSelectedTags();
         context.selectedTags = this.selectedTags;
         context.selectedGmTags = this.selectedGmTags;
         context.selectedStoryTags = this.selectedStoryTags;
@@ -190,6 +192,39 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             }
         });
         return { positive: numPositiveTags, negative: numNegativeTags };
+    }
+
+    applyRulesPreviewToSelectedTags() {
+        const tempTagsForRole = DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags);
+        // we got the result, now we add to the single selectedTags array a new property 'isAppliedInPreview' to indicate if the tag/status is applied in the preview
+        this.selectedTags.forEach(tag => {
+            const foundTag = tempTagsForRole.find(t => t.name === tag.name && t.positive === tag.positive && t.source === tag.source);
+            if (foundTag) {
+                tag.isAppliedInPreview = true;
+            } else {
+                tag.isAppliedInPreview = false;
+            }
+        });
+
+        // we do the same for selectedGmTags
+        this.selectedGmTags.forEach(tag => {
+            const foundTag = tempTagsForRole.find(t => t.name === tag.name && t.positive === tag.positive && t.source === tag.source);
+            if (foundTag) {
+                tag.isAppliedInPreview = true;
+            } else {
+                tag.isAppliedInPreview = false;
+            }
+        });
+
+        // the same for selectedStoryTags
+        this.selectedStoryTags.forEach(tag => {
+            const foundTag = tempTagsForRole.find(t => t.name === tag.name && t.positive === tag.positive && t.source === tag.source);
+            if (foundTag) {
+                tag.isAppliedInPreview = true;
+            } else {
+                tag.isAppliedInPreview = false;
+            }
+        });
     }
 
     static applyRulesToSelectedTags(selectedTags, selectedGmTags, selectedStoryTags) {
@@ -314,7 +349,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (actor.system.floatingTagsAndStatuses && actor.system.floatingTagsAndStatuses.length > 0) {
             actor.system.floatingTagsAndStatuses.forEach((entry,index) => {
                 if (entry.selected) {
-                    let t = { name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value,index: index + 1 };
+                    let t = { name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value,index: index + 1,isStatus: true };
                     if(entry.value === undefined || entry.value > 0){
                         t.isStatus = true;
                     }
@@ -600,6 +635,12 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         input.stepUp();
         this.numModNegative = parseInt(input.value);
         this.render()
+    }
+
+    static async #handleTagStatusModifierToggle(event, target) {
+        const index = parseInt(target.dataset.index);
+        await FloatingTagAndStatusAdapter.handleTagStatusModifierToggle(this.actor, index -1);
+        this.updateTagsAndStatuses(true);
     }
 
     static async #handleClickDeselectTag(event, target) {

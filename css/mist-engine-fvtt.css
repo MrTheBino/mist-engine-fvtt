@@ -1411,6 +1411,16 @@ mt-10 {
   color: #724a32;
   padding: 2px;
 }
+.roll-dialog-container .selected-tags-container .tag.unapplied-preview {
+  opacity: 0.75;
+  background-color: #a9a9a9;
+  border-radius: 5px;
+  color: #724a32;
+  padding: 2px;
+}
+.roll-dialog-container .selected-tags-container .tag.clickable {
+  cursor: pointer;
+}
 .roll-dialog-container .selected-tags-container .tag-icon {
   float: left;
 }

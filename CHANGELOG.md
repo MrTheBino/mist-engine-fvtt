@@ -3,6 +3,8 @@
 # 13.5.9
 - compendiums are not packaged during release packaging
 - planning of powertags for characters implemented
+- switch positve & negative status of player selected statuses in the dice roll dialog
+- posive & netagive statused are grayed out in the dice roll dialog if they are not getting used by the rules (only use the highest negative or positive status)
   
 # 13.5.8
 - deselecting of player selected powertags, tags & statuses in the dice roll dialog 

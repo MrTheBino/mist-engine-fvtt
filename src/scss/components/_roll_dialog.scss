@@ -23,6 +23,17 @@
                 color: $c-styled-text;
                 padding: 2px;
             }
+            &.unapplied-preview{
+                opacity: 0.75;
+                background-color: $c-tag-gray;
+                border-radius: 5px;
+                color: $c-styled-text;
+                padding: 2px;
+            }
+
+            &.clickable{
+                cursor: pointer;
+            }
         }
 
         .tag-icon{
