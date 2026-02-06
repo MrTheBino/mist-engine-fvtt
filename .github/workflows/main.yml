@@ -13,22 +13,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Node
-        uses: actions/setup-node@v4
+      # run the npm command 'npm run pack-compendiums' to create the compendium packs before creating the release, so I need to set up node first
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: 'lts/*'
-          cache: 'npm'
-      - name: Packer
-        id: packs
-        uses: aMediocreDad/foundry-db-packer@next
-        with:
-          inputdir: src/packs
-          packsdir: packs/
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: packs
-          path: packs/
+          node-version: '16' # Specify the Node.js version you want to use
+      - name: Install Dependencies
+        run: npm install
+        
+      - name: Run Pack Compendiums
+        run: npm run pack-compendiums
+
       # Substitute the Manifest and Download URLs in the system.json
       - name: Substitute Manifest and Download Links For Versioned Ones
         id: sub_manifest_link_version
