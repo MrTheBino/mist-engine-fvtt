@@ -1,0 +1,24 @@
+.character-token-overlay{
+    font-size: 0.95em;
+    text-align: center;
+    font-family: $font-primary;
+    h4{
+        margin: 0;
+        font-size: 1.1em;
+    }
+
+    .burned{
+        // text is crossed out in burned state
+        text-decoration: line-through;
+    }
+
+    .weakness{
+        // weakness tags are italicized
+        font-style: italic;
+        color: $c-tag-orange;
+    }
+
+    .overlay-tag-entry{
+        margin-bottom: 3px;
+    }
+}

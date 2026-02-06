@@ -1605,4 +1605,24 @@ mt-10 {
   cursor: pointer;
 }
 
+.character-token-overlay {
+  font-size: 0.95em;
+  text-align: center;
+  font-family: Labrada, serif;
+}
+.character-token-overlay h4 {
+  margin: 0;
+  font-size: 1.1em;
+}
+.character-token-overlay .burned {
+  text-decoration: line-through;
+}
+.character-token-overlay .weakness {
+  font-style: italic;
+  color: #ecb985;
+}
+.character-token-overlay .overlay-tag-entry {
+  margin-bottom: 3px;
+}
+
 /*# sourceMappingURL=mist-engine-fvtt.css.map */

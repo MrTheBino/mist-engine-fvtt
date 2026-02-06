@@ -13,6 +13,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+      - name: Packer
+        id: packs
+        uses: aMediocreDad/foundry-db-packer@next
+        with:
+          inputdir: src/packs
+          packsdir: packs/
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: packs/
+          path: packs/
       # Substitute the Manifest and Download URLs in the system.json
       - name: Substitute Manifest and Download Links For Versioned Ones
         id: sub_manifest_link_version

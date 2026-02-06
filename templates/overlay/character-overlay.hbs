@@ -1,0 +1,114 @@
+<div class="character-token-overlay">
+    <div class="character-token-overlay themebooks-container grid grid-4col">
+        {{!-- Iterate over each themebook and render the partial --}}
+        {{#each themebooks as |themebook id|}}
+        <div class="flexcol">
+            <h4>{{themebook.name}}</h4>
+            {{#if (tagFilledAndNotPlanned themebook.system.powertag1)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.powertag1}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned themebook.system.powertag2)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.powertag2}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned themebook.system.powertag3)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.powertag3}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned themebook.system.powertag4)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.powertag4}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned themebook.system.powertag5)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.powertag5}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned themebook.system.powertag6)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.powertag6}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned themebook.system.powertag7)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.powertag7}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned themebook.system.powertag8)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.powertag8}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned themebook.system.powertag9)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.powertag9}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned themebook.system.powertag10)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.powertag10}}
+            {{/if}}
+
+            {{#if (tagFilledAndNotPlanned themebook.system.weaknesstag1)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.weaknesstag1 isWeakness=true}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned themebook.system.weaknesstag2)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.weaknesstag2 isWeakness=true}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned themebook.system.weaknesstag3)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.weaknesstag3 isWeakness=true}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned themebook.system.weaknesstag4)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=themebook.system.weaknesstag4 isWeakness=true}}
+            {{/if}}
+        </div>
+
+        {{/each}}
+    </div>
+    <div class="character-token-overlay themebooks-container grid grid-4col">
+        <div class="backpack flexcol">
+            <h4>{{localize 'MIST_ENGINE.THEMEBOOKS.Backpack'}}</h4>
+            {{#if backpack}}
+                {{#each backpack.system.items as |item|}}
+                    <div class="overlay-tag-entry {{#if item.burned}}burned{{/if}}">{{item.name}}</div>
+                {{/each}}
+            {{else}}
+                <div>{{localize 'MIST_ENGINE.HELP.NoBackpackEquipped'}}</div>
+            {{/if}}
+        </div>
+        {{#if hasFellowshipThemecard}}
+        <div class="fellowship-themecard flexcol">
+            <h4>{{fellowshipThemecard.name}}</h4>
+             {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.powertag1)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.powertag1}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.powertag2)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.powertag2}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.powertag3)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.powertag3}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.powertag4)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.powertag4}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.powertag5)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.powertag5}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.powertag6)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.powertag6}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.powertag7)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.powertag7}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.powertag8)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.powertag8}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.powertag9)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.powertag9}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.powertag10)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.powertag10}}
+            {{/if}}
+
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.weaknesstag1)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.weaknesstag1 isWeakness=true}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.weaknesstag2)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.weaknesstag2 isWeakness=true}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.weaknesstag3)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.weaknesstag3 isWeakness=true}}
+            {{/if}}
+            {{#if (tagFilledAndNotPlanned fellowshipThemecard.system.weaknesstag4)}}
+                {{> "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs" powertag=fellowshipThemecard.system.weaknesstag4 isWeakness=true}}
+            {{/if}}
+        </div>
+        {{/if}}
+    </div>
+</div>

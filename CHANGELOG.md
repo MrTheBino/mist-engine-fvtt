@@ -5,8 +5,8 @@
 - planning of powertags for characters implemented
 - switch positve & negative status of player selected statuses in the dice roll dialog
 - posive & netagive statused are grayed out in the dice roll dialog if they are not getting used by the rules (only use the highest negative or positive status)
-- added pregen characters from the demo game
-- added challenges from the demo game
+- configuration option to disable system integrated custom dices for DiceSoNice
+- quick powertag view for GMs (configurable via options)
   
 # 13.5.8
 - deselecting of player selected powertags, tags & statuses in the dice roll dialog 

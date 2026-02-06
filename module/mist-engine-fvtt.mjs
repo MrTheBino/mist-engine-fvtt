@@ -20,6 +20,7 @@ import { makeStyledTagOrStatusText } from "./lib/tag-status-text-helper.mjs";
 import * as models from "./data/_module.mjs";
 import { setupMistEngineKeyBindings } from "./lib/key-binding.mjs";
 import { setupConfiguration } from "./lib/configuration.mjs";
+import { showCharacterTokenHover } from "./lib/character-token-hover.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -109,7 +110,7 @@ Hooks.once("init", function () {
     label: "MIST_ENGINE.SheetLabels.Actor",
   });
 
-   foundry.documents.collections.Actors.registerSheet("mist-engine-fvtt", MistEngineLegendInTheMistJourneySheet, {
+  foundry.documents.collections.Actors.registerSheet("mist-engine-fvtt", MistEngineLegendInTheMistJourneySheet, {
     makeDefault: true,
     types: ["litm-journey"],
     label: "MIST_ENGINE.SheetLabels.Journey",
@@ -130,7 +131,7 @@ Hooks.once("init", function () {
     makeDefault: true,
     label: "MIST_ENGINE.SheetLabels.Item",
   });
-  
+
   foundry.documents.collections.Items.registerSheet("mist-engine-fvtt", MistEngineShortChallengeItemSheet, {
     makeDefault: true,
     types: ["shortchallenge"],
@@ -139,6 +140,10 @@ Hooks.once("init", function () {
 
   setupMistEngineKeyBindings();
   setupConfiguration();
+
+  if(game.settings.get("mist-engine-fvtt", "disableCustomDice") !== true) {
+    CONFIG.Dice.terms["6"] = D6ToD12;
+  }
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
@@ -287,7 +292,7 @@ Hooks.on("createActor", async (actor, data, options, userId) => {
   // check first if the items of the actor already has a backpack, if yes, do nothing
   const hasBackpack = actor.items.find(i => i.type === "backpack");
   if (hasBackpack) return;
-  
+
   const itemData = {
     name: "Backpack",
     type: "backpack",
@@ -439,33 +444,44 @@ class D6ToD12 extends foundry.dice.terms.Die {
   static DENOMINATION = "6";
 }
 
-CONFIG.Dice.terms["6"] = D6ToD12;
+
+
+Hooks.on("hoverToken", (token, hovered) => {
+  // we only show the hover effect if the token belongs to a character actor
+  if (token.actor?.type === "litm-character") {
+    showCharacterTokenHover(token, hovered);
+  }
+});
 
 Hooks.once('diceSoNiceReady', (dice3d) => {
-  console.log("Registering Legend in the Mist Dice So Nice Dice");
-  dice3d.addSystem({ id: "mist-engine-fvtt", name: "Legend in the Mist", group: "Legend in the Mist" });
+  if (game.settings.get("mist-engine-fvtt", "disableCustomDice") !== true) {
+    
+    console.log("Registering Legend in the Mist Dice So Nice Dice");
+    dice3d.addSystem({ id: "mist-engine-fvtt", name: "Legend in the Mist", group: "Legend in the Mist" });
 
-  dice3d.addDicePreset({
-    system: "mist-engine-fvtt",
-    type: "d6",
-    labels: ['1', '2', '3', '4', '5', '/systems/mist-engine-fvtt/assets/dice/dice_greatness_color.png',
-      '/systems/mist-engine-fvtt/assets/dice/dice_raven_color.png', '5', '4', '3', '2', '1'],
-    bumpMaps: [, , , , , '/systems/mist-engine-fvtt/assets/dice/dice_greatness_bump.png',
-      '/systems/mist-engine-fvtt/assets/dice/dice_raven_bump.png', , , , ,],
-    colorset: "litm-default",
-  }, "d12");
+    dice3d.addDicePreset({
+      system: "mist-engine-fvtt",
+      type: "d6",
+      labels: ['1', '2', '3', '4', '5', '/systems/mist-engine-fvtt/assets/dice/dice_greatness_color.png',
+        '/systems/mist-engine-fvtt/assets/dice/dice_raven_color.png', '5', '4', '3', '2', '1'],
+      bumpMaps: [, , , , , '/systems/mist-engine-fvtt/assets/dice/dice_greatness_bump.png',
+        '/systems/mist-engine-fvtt/assets/dice/dice_raven_bump.png', , , , ,],
+      colorset: "litm-default",
+    }, "d12");
 
-  dice3d.addColorset({
-    name: "litm-default",
-    description: "Legend in the Mist Default",
-    category: "Legend in the Mist",
-    foreground: ["#000000", "#000000", "#000000", "#000000"],
-    background: ["#e9e1d6", "#74774fff", "#5c7979ff", "#c9ac89"],
-    outline: ["#000000", "#000000", "#000000", "#000000"],
-    edge: ["#f8f3eb", "#c3c3a0ff", "#7ea590ff", "#e9dcbc"],
-    texture: "wood",
-    material: "stone",
-    font: "Times",
-    visibility: "visible",
-  });
+    dice3d.addColorset({
+      name: "litm-default",
+      description: "Legend in the Mist Default",
+      category: "Legend in the Mist",
+      foreground: ["#000000", "#000000", "#000000", "#000000"],
+      background: ["#e9e1d6", "#74774fff", "#5c7979ff", "#c9ac89"],
+      outline: ["#000000", "#000000", "#000000", "#000000"],
+      edge: ["#f8f3eb", "#c3c3a0ff", "#7ea590ff", "#e9dcbc"],
+      texture: "wood",
+      material: "stone",
+      font: "Times",
+      visibility: "visible",
+    });
+  }
 });
+
