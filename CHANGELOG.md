@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 13.6.1
+- compendiums are now getting packed during release creation
+  
 # 13.6.0
 - compendiums are not packaged during release packaging
 - planning of powertags for characters implemented
