@@ -21,8 +21,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
         
-      - name: Run Pack Compendiums
-        run: npm run pack-compendiums
+      # run 'pack-compendiums' in from package.json to create the compendium packs before creating the release
+      - name: Pack Compendiums
+        run: npm run pack-compendium
 
       # Substitute the Manifest and Download URLs in the system.json
       - name: Substitute Manifest and Download Links For Versioned Ones
