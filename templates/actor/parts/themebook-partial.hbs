@@ -54,18 +54,20 @@
             {{/each}}
             
         </div>
-        <div class="quest-container">
-            {{#if editMode}}
-                <textarea class="item-editable-stat quest-textarea" data-item-id={{themebook._id}} data-item-stat="system.quest" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.QuestGoal'}}">{{themebook.system.quest}}</textarea>
-            {{else}}
-                <h3>{{localize 'MIST_ENGINE.LABELS.Quest'}}</h3>
-                <p class="quest-text">{{themebook.system.quest}}</p>
-            {{/if}}
-        </div>
-        <div class="development-container flexrow">
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Abandon') id=themebook._id key="system.abandon" value=themebook.system.abandon}}
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Improve') id=themebook._id key="system.improve" value=themebook.system.improve}}
-            {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Milestone') id=themebook._id key="system.milestone" value=themebook.system.milestone}}
+        <div class="bottom-wrapper">
+            <div class="quest-container">
+                {{#if editMode}}
+                    <textarea class="item-editable-stat quest-textarea" data-item-id={{themebook._id}} data-item-stat="system.quest" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.QuestGoal'}}">{{themebook.system.quest}}</textarea>
+                {{else}}
+                    <h3>{{localize 'MIST_ENGINE.LABELS.Quest'}}</h3>
+                    <p class="quest-text">{{themebook.system.quest}}</p>
+                {{/if}}
+            </div>
+            <div class="development-container flexrow">
+                {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Abandon') id=themebook._id key="system.abandon" value=themebook.system.abandon}}
+                {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Improve') id=themebook._id key="system.improve" value=themebook.system.improve}}
+                {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize 'MIST_ENGINE.LABELS.Milestone') id=themebook._id key="system.milestone" value=themebook.system.milestone}}
+            </div>
         </div>
     </div>
 </div>

@@ -7,9 +7,10 @@
         value="{{weaknesstag.name}}" placeholder="{{weaknessTagQuestionPlaceholder index weaknesstag.question}}" title="{{weaknessTagQuestionPlaceholder index weaknesstag.question}}" title="Weakness" data-source="{{source}}" style="flex-grow:8;"/>
     {{else}}
         {{#if (tagFilledAndNotPlanned weaknesstag)}}
+        <span class="weakness-indicator"><i class="fa-light fa-angles-down"></i></span>
         <span class="litm-pc-weakness wt-selectable {{#if weaknesstag.selected}}selected{{/if}}"
             data-weaknesstag-index="{{index}}" data-item-id="{{id}}" data-source="{{source}}">
-            <i class="fa-light fa-angles-down"></i>
+            
             {{weaknesstag.name}}
         </span>
         {{/if}}

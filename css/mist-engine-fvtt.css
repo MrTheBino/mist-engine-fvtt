@@ -36,6 +36,15 @@ body {
   align-items: flex-start;
 }
 
+.seperator {
+  width: 100%;
+  background-image: url(../assets/separator.webp);
+  background-repeat: no-repeat;
+  height: 15px;
+  background-size: contain;
+  margin-top: 10px;
+}
+
 /* Global styles */
 .window-app {
   font-family: Labrada, serif;
@@ -883,16 +892,23 @@ mt-10 {
 }
 .mist-engine .fts-selectable {
   cursor: pointer;
+  position: relative;
+  /*  &.selected {
+      @include ts-selection;
+    }*/
 }
-.mist-engine .fts-selectable.selected {
-  margin: 0 -0.4em;
-  padding: 0.1em 0.4em;
-  border-radius: 0.8em 0.3em;
-  background: transparent;
-  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 170, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  font-weight: bold;
+.mist-engine .fts-selectable.selected::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: calc(5px + 100%);
+  background: url("../assets/brush.svg") no-repeat center;
+  background-blend-mode: color;
+  background-size: contain;
+  opacity: 0.5;
+  top: 0px;
+  left: 45%;
+  transform: translateX(-50%);
 }
 .mist-engine .fts-input-marking {
   flex-grow: 0.1;
@@ -1059,19 +1075,29 @@ mt-10 {
   font-family: Labrada, serif;
   font-weight: normal;
   color: black;
+  position: relative;
+  text-align: center;
 }
 .mist-engine .litm-pc-powertag:hover {
   cursor: pointer;
 }
-.mist-engine .litm-pc-powertag.selected {
-  margin: 0 -0.4em;
-  padding: 0.1em 0.4em;
-  border-radius: 0.8em 0.3em;
-  background: transparent;
-  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 170, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  font-weight: bold;
+.mist-engine .litm-pc-powertag {
+  /*&.selected {
+      @include ts-selection;
+  }*/
+}
+.mist-engine .litm-pc-powertag.selected::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: calc(5px + 100%);
+  background: url("../assets/brush.svg") no-repeat center;
+  background-blend-mode: color;
+  background-size: contain;
+  opacity: 0.5;
+  top: 0px;
+  left: 45%;
+  transform: translateX(-50%);
 }
 .mist-engine .litm-pc-powertag.burned {
   text-decoration: line-through;
@@ -1084,25 +1110,38 @@ mt-10 {
 .mist-engine .litm-pc-powertag.empty {
   color: rgba(0, 0, 0, 0.5);
 }
+.mist-engine .litm-pc-powertag.empty:hover {
+  cursor: default;
+}
 .mist-engine .litm-pc-storytag {
   font-family: Labrada, serif;
   font-weight: normal;
   color: black;
   min-height: 23px;
   border-bottom: 1.5px solid rgba(0, 0, 0, 0.1);
+  position: relative;
+  text-align: center;
 }
 .mist-engine .litm-pc-storytag:hover {
   cursor: pointer;
 }
-.mist-engine .litm-pc-storytag.selected {
-  margin: 0 -0.4em;
-  padding: 0.1em 0.4em;
-  border-radius: 0.8em 0.3em;
-  background: transparent;
-  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 170, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  font-weight: bold;
+.mist-engine .litm-pc-storytag {
+  /*&.selected {
+      @include ts-selection;
+  }*/
+}
+.mist-engine .litm-pc-storytag.selected::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: calc(5px + 100%);
+  background: url("../assets/brush.svg") no-repeat center;
+  background-blend-mode: color;
+  background-size: contain;
+  opacity: 0.5;
+  top: 0px;
+  left: 45%;
+  transform: translateX(-50%);
 }
 .mist-engine .litm-pc-storytag.burned {
   text-decoration: line-through;
@@ -1122,19 +1161,29 @@ mt-10 {
   font-family: Labrada, serif;
   font-weight: normal;
   color: black;
+  position: relative;
+  text-align: center;
 }
 .mist-engine .litm-pc-weakness:hover {
   cursor: pointer;
 }
-.mist-engine .litm-pc-weakness.selected {
-  margin: 0 -0.4em;
-  padding: 0.1em 0.4em;
-  border-radius: 0.8em 0.3em;
-  background: transparent;
-  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 170, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  font-weight: bold;
+.mist-engine .litm-pc-weakness {
+  /*&.selected {
+      @include ts-selection;
+  }*/
+}
+.mist-engine .litm-pc-weakness.selected::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: calc(5px + 100%);
+  background: url("../assets/brush.svg") no-repeat center;
+  background-blend-mode: color;
+  background-size: contain;
+  opacity: 0.5;
+  top: 0px;
+  left: 45%;
+  transform: translateX(-50%);
 }
 .mist-engine .litm-pc-fellowship-relationship-companion {
   font-family: Labrada, serif;
@@ -1146,19 +1195,29 @@ mt-10 {
   font-family: Labrada, serif;
   font-weight: normal;
   color: black;
+  position: relative;
+  text-align: center;
 }
 .mist-engine .litm-pc-fellowship-relationship:hover {
   cursor: pointer;
 }
-.mist-engine .litm-pc-fellowship-relationship.selected {
-  margin: 0 -0.4em;
-  padding: 0.1em 0.4em;
-  border-radius: 0.8em 0.3em;
-  background: transparent;
-  background-image: linear-gradient(to right, rgba(255, 225, 0, 0.1), rgba(255, 170, 0, 0.7) 4%, rgba(255, 225, 0, 0.3));
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  font-weight: bold;
+.mist-engine .litm-pc-fellowship-relationship {
+  /*&.selected {
+      @include ts-selection;
+  }*/
+}
+.mist-engine .litm-pc-fellowship-relationship.selected::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: calc(5px + 100%);
+  background: url("../assets/brush.svg") no-repeat center;
+  background-blend-mode: color;
+  background-size: contain;
+  opacity: 0.5;
+  top: 0px;
+  left: 45%;
+  transform: translateX(-50%);
 }
 .mist-engine .litm-pc-fellowship-relationship.scratched {
   text-decoration: line-through;
@@ -1176,6 +1235,11 @@ mt-10 {
 }
 .mist-engine .burn-indicator {
   flex-grow: 0.15;
+  align-self: flex-start;
+}
+.mist-engine .weakness-indicator {
+  flex-grow: 0.15;
+  align-self: flex-start;
 }
 .mist-engine .burn-icon {
   width: 1em;
