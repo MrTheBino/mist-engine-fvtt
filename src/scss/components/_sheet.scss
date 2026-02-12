@@ -54,7 +54,9 @@
 
 .item-powertag-line {
   margin: 5px;
-  color: $c-styled-text
+  color: $c-styled-text;
+  min-height: 23px;
+  border-bottom: 1.5px solid rgb(0, 0, 0, 0.1);
 }
 
 .item-storytag-line {

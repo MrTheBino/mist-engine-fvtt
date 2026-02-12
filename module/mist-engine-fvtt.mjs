@@ -21,6 +21,7 @@ import * as models from "./data/_module.mjs";
 import { setupMistEngineKeyBindings } from "./lib/key-binding.mjs";
 import { setupConfiguration } from "./lib/configuration.mjs";
 import { showCharacterTokenHover } from "./lib/character-token-hover.mjs";
+import {Fonts} from "./lib/fonts.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -138,6 +139,7 @@ Hooks.once("init", function () {
     label: "MIST_ENGINE.SheetLabels.ShortChallengeItem",
   });
 
+  Fonts.register();
   setupMistEngineKeyBindings();
   setupConfiguration();
 
@@ -306,6 +308,20 @@ Hooks.on("createActor", async (actor, data, options, userId) => {
     [itemData],
     { parent: actor }
   );
+});
+
+Hooks.on("renderPause", (_, html) => {
+			html
+				.find("img")
+				.attr("src", "systems/mist-engine-fvtt/assets/marshal-crest.webp")
+				.removeAttr("class");
+		});
+
+Hooks.on("renderGamePause", (_, html) => {
+  const img = html.querySelector("img");
+  if (!img) return;
+  img.src = "systems/mist-engine-fvtt/assets/marshal-crest.webp";
+  img.classList.remove("fa-spin");
 });
 
 Hooks.on("getSceneControlButtons", (controls) => {

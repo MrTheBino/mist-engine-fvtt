@@ -20,6 +20,10 @@
         font-weight: bolder;
         font-size: 1.1em;
     }
+
+    &.empty{
+        color: rgba(0, 0, 0, 0.5);
+    }
 }
 
 
@@ -28,6 +32,8 @@
     font-family: Labrada, serif;
     font-weight: normal;
     color: black;
+    min-height: 23px;
+    border-bottom: 1.5px solid rgb(0, 0, 0, 0.1);
 
     &:hover {
         cursor: pointer;

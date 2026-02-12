@@ -15,6 +15,9 @@
         {{/if}}
         <span class="litm-pc-powertag powertag-name pt-selectable {{#if firstTag}}first{{/if}} {{#if powertag.selected}}selected{{/if}} {{#if powertag.burned}}burned{{/if}}" title="{{localize "MIST_ENGINE.HELP.Titles.RightClickToToggleBurnState"}}"
             data-powertag-index="{{index}}" data-item-id="{{id}}" data-source="{{source}}">{{powertag.name}}</span>
+        {{else}}
+            <span class="burn-indicator"></span>
+            <span class="litm-pc-powertag empty">{{powertag.name}}</span>
         {{/if}}
     {{/if}}
 </div>

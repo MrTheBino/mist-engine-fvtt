@@ -31,4 +31,11 @@
         background-color: $c-tag-green;
         font-style: italic;
     }
+
+    .notes{
+        background-image: url(../assets/notes_darker_2.webp);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        padding: 20px;
+    }
 }
