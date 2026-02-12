@@ -2,7 +2,88 @@
     margin-top: 0px;
     margin-bottom: 5px;
     min-width: 233px;
+
 }
+
+.themebooks-container-stylized {
+
+
+    > :nth-child(2) {
+        top: 3.75rem;
+        left: 11rem;
+        rotate: 0deg;
+
+        &::before {
+            content: "";
+            position: absolute;
+            background: url(../assets/raven.webp) no-repeat center / contain;
+            height: 45%;
+            width: 45%;
+            z-index: 3;
+            pointer-events: none;
+            //top: 10.5rem;
+            left: -3.625rem;
+            rotate: 10deg;
+        }
+    }
+
+    > :nth-child(3) {
+        top: 3.75rem;
+        left: 11rem;
+        rotate: 0deg;
+
+        &::before {
+            content: "";
+            position: absolute;
+            background: url(../assets/flowers-top.webp) no-repeat center / contain;
+            height: 55%;
+            width: 55%;
+            z-index: 3;
+            pointer-events: none;
+            top: 10.5rem;
+            left: -3.625rem;
+            rotate: 10deg;
+        }
+    }
+}
+
+ .backpack-stylized{
+        top: 3.75rem;
+        left: 11rem;
+        rotate: 0deg;
+
+        &::before {
+            content: "";
+            position: absolute;
+            background: url(../assets/necklace.webp) no-repeat center / contain;
+            height: 80%;
+            width: 80%;
+            z-index: 3;
+            pointer-events: none;
+            top: 15.0rem;
+            left: -4.625rem;
+            rotate: 10deg;
+        }
+    }
+
+    .fellowship-themebook-stylized{
+        top: 3.75rem;
+        left: 11rem;
+        rotate: 0deg;
+
+        &::before {
+            content: "";
+            position: absolute;
+            background: url(../assets/middle-branches.webp) no-repeat center / contain;
+            height: 80%;
+            width: 80%;
+            z-index: 3;
+            pointer-events: none;
+            top: 10rem;
+            left: 4rem;
+            rotate: -10deg;
+        }
+    }
 
 .themebook-container {
     flex-grow: 0.25;
@@ -24,7 +105,7 @@
         }
 
         .quest-text {
-            font-family: Labrada, serif;
+            font-family: var(--litm-font-accent);
             font-weight: normal;
             font-size: small;
             text-align: center;
@@ -112,7 +193,7 @@
         }
     }
 
-    &.litm-fellowship-themecard{
+    &.litm-fellowship-themecard {
         h2 {
             background-image: url("../assets/headers/header-backpack.webp");
             background-repeat: no-repeat;
@@ -170,17 +251,17 @@
             background-size: contain;
         }
 
-        .litm-fellowship-themecard{
+        .litm-fellowship-themecard {
             background-image: url('../assets/icons/icon-variable-litm.svg');
             background-repeat: no-repeat;
             background-size: contain;
         }
     }
 
-    .development-container{
-        margin-top:auto;
+    .development-container {
+        margin-top: auto;
     }
-    
+
     .development-partial-container {
         color: $c-brown;
         font-family: Labrada, serif;
@@ -190,6 +271,7 @@
 
         .marker {
             color: $c-off-white;
+
             &.checked {
                 color: $c-styled-text;
             }
@@ -209,9 +291,10 @@
 
         .marker {
             color: $c-off-white;
+
             &.checked {
                 color: $c-styled-text;
             }
-        }        
+        }
     }
 }

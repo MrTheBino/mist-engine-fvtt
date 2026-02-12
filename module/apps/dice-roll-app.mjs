@@ -113,9 +113,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
         let countTags =  DiceRollApp.calculatePowerTags(DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags)); 
         context.powerAmount = (countTags.positive - countTags.negative) + context.mightScale + this.numModPositive - this.numModNegative;
-        if(context.powerAmount < 0){
+        /*if(context.powerAmount < 0){
             context.powerAmount = 0;
-        }
+        }*/
 
         // sort selected tags by first positive ones then negative ones, both alphabetically
         context.selectedTags.sort((a, b) => {

@@ -1,8 +1,8 @@
-<div class="themebooks-container grid grid-4col grid-themebook-container">
+<div class="themebooks-container {{#unless system.editMode}}themebooks-container-stylized{{/unless}} grid grid-4col grid-themebook-container">
     {{!-- If there are no themebooks, show a message --}}
     {{#if themebooksEmpty}}
     <div class="themebook-container">
-        <div class="themebook-style  flexcol">
+        <div class="themebook-style flexcol">
             <div class="empty-message">{{localize "MIST_ENGINE.HELP.NoThemebooksInCharacter"}}</div>
         </div>
     </div>
