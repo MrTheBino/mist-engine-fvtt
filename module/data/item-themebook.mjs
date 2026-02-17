@@ -12,6 +12,7 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
 
         schema.type = new fields.StringField({ blank: true });
         schema.quest = new fields.StringField({ blank: true });
+        schema.story = new fields.StringField({ blank: true });
 
         schema.abandon = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
         schema.improve = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });

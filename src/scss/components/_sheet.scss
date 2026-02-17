@@ -22,9 +22,10 @@
 
 &.sheet.actor.litm-character {
   .window-content {
-    background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+    background-image: url("../assets/default_sheet_background.webp");
     background-repeat: no-repeat;
     row-gap: 0.5em;
+    background-size: cover;
   }
 }
 
@@ -303,15 +304,15 @@
     h1.charname {
       font-family: $font-primary;
       font-size: 36px;
-      color: $c-dark-styled-text;
+      color: var(--litm-color-accent);
       width: auto;
     }
   }
 
   .short-description {
     font-family: $font-primary;
-    font-size: 18px;
-    color: $c-dark-styled-text;
+    font-size: 14px;
+    color: var(--litm-color-accent);
   }
 
   .difficulty-icons {
@@ -375,14 +376,13 @@
 
 .roll-button {
   margin: 5px;
-  margin-top: 25px;
+  //margin-top: 25px;
   font-family: $font-primary;
   width: 100%;
 }
 
 .roll-buttons-container {
   padding-right: 10px;
-  margin-top: 35px;
 }
 
 .powertags-container {
@@ -448,7 +448,7 @@
 .fts-tag-container {
   display: flex;
   flex-direction: row;
-  column-gap: 1em;
+  column-gap: 0.25em;
 }
 
 .fts-markings-container {
@@ -460,12 +460,16 @@
   color: $c-styled-text;
   display: flex;
   flex-direction: column;
+  float: right;
 }
 
 .floating-tags-and-status-entries {
   display: flex;
   flex-direction: column;
   row-gap: 1em;
+  &.grid{
+    display: grid;
+  }
 }
 
 .container-card-with-border {
@@ -498,6 +502,12 @@
   padding: 1em;
 }
 
+section [data-group="litm-character-sheet"] {
+  .tab-biography,.tab-notes {
+    margin-left: var(--litm-premium-left-margin);
+  }
+}
+
 .lock-toggle-container {
   cursor: pointer;
   color: black;
@@ -518,6 +528,7 @@
 
 .character-sheet-divider {
   align-items: start;
+  margin-left: var(--litm-premium-left-margin);
 
   .right-side {
     flex-grow: 0.25;

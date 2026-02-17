@@ -30,6 +30,7 @@
     },
     "PLACEHOLDERS": {
       "QuestGoal": "Quest/Goal",
+      "ThemebookStory": "Story",
       "SpecialImprovementName": "Special Improvement Name",
       "SpecialImprovementDescription": "Special Improvement Description",
       "Companion": "Companion",
@@ -54,6 +55,7 @@
       "JourneyConsequences": "Consequences & Vignettes",
       "ThreatsAndConsequences": "Threats & Consequences",
       "SelectedTagsAndStatuses": "Selected Tags & Statuses",
+      "SelectCustomBackground": "Select Custom Background",
       "Consequences": "Consequences",
       "Positive": "Positive",
       "Negative": "Negative",

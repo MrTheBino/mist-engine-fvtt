@@ -11,7 +11,15 @@ nav.tabs [data-group="npc-sheet"] {
 }
 
 nav.tabs [data-group="litm-character-sheet"] {
-    color: black;
+    color: var(--litm-tab-text-color);
     font-family: $font-primary;
     font-weight: bold;
 }
+
+
+
+.litm-character-sheet-tabs{
+    margin-left: var(--litm-premium-left-margin);
+    background-color: rgba(0,0,0,0.5);
+}
+

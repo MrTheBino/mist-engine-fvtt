@@ -60,9 +60,12 @@
             <textarea class="item-editable-stat quest-textarea" data-item-id={{themebook._id}}
                 data-item-stat="system.quest"
                 placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.QuestGoal'}}">{{themebook.system.quest}}</textarea>
+            <textarea class="item-editable-stat quest-textarea" data-item-id={{themebook._id}}
+                data-item-stat="system.story"
+                placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ThemebookStory'}}">{{themebook.system.story}}</textarea>
             {{else}}
             <h3>{{localize 'MIST_ENGINE.LABELS.Quest'}}</h3>
-            <p class="quest-text">{{themebook.system.quest}}</p>
+            <p class="quest-text" data-tooltip="{{themebook.system.story}}" data-tooltip-direction="DOWN">{{themebook.system.quest}}</p>
             {{/if}}
         </div>
         <div class="development-container flexrow">

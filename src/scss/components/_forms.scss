@@ -22,10 +22,21 @@
     flex: 1;
     gap: 0.5rem;
 
-    .short-description{
-      font-family: $font-primary;
-      font-size: 14px;
-      color: $c-dark-styled-text;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    display: flex;
+
+    .col-character-name{
+      min-width: var(--litm-premium-left-margin);
+      max-width: var(--litm-premium-left-margin);
+    }
+    .col-main {
+      min-width: 150px;
+    }
+
+    .col-status {
+      flex-grow: 0.75;
     }
   }
 
@@ -34,11 +45,13 @@
     border-bottom: 0;
     width: 100%;
     text-align: center;
+
     input {
       width: 100%;
       height: 100%;
       margin: 0;
     }
+
   }
 }
 
@@ -60,8 +73,10 @@
 .table-group {
   display: table;
   width: 100%;
+
   .table-row {
     display: table-row;
+
     .table-cell {
       display: table-cell;
       padding: 2px 3px;
@@ -69,11 +84,11 @@
   }
 }
 
-.list-entry{
+.list-entry {
   margin-bottom: 5px;
 }
 
-.textarea-short-description{
+.textarea-short-description {
   width: 100%;
 }
 

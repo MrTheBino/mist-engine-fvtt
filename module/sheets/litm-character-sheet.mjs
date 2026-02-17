@@ -10,8 +10,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         classes: ['mist-engine', 'sheet', 'actor', 'litm-character'],
         tag: 'form',
         position: {
-            width: 1000,
-            height: 750
+            width: 1100,
+            height: 800
         },
         actions: {
             createBackpackItem: this.#handleCreateBackpackItem,
@@ -23,7 +23,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             createFellowship: this.#handleCreateFellowship,
             deleteFellowship: this.#handleDeleteFellowship,
             removeFellowshipThemecard: this.#handleRemoveFellowshipThemecard,
-            assignFellowshipThemecard: this.#handleAssignFellowshipThemecard
+            assignFellowshipThemecard: this.#handleAssignFellowshipThemecard,
+            clickedCustomBackground: this.#handleClickedCustomBackground,
         },
         form: {
             submitOnChange: true
@@ -49,7 +50,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         },
         tabs: {
             id: 'tabs',
-            template: 'templates/generic/tab-navigation.hbs'
+            template: 'templates/generic/tab-navigation.hbs',
+            classes: ["litm-character-sheet-tabs"]
         },
         character: {
             id: 'character',
@@ -84,7 +86,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
                     { id: 'biography', group: 'litm-character-sheet', label: 'MIST_ENGINE.LABELS.Biography' },
                     { id: 'notes', group: 'litm-character-sheet', label: 'MIST_ENGINE.LABELS.Notes' }
                 ],
-            initial: 'character'
+            initial: 'character',
         }
     }
 
@@ -239,6 +241,13 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     /** @inheritDoc */
     _onRender(context, options) {
         super._onRender(context, options);
+
+        // If the actor has a custom background, set it as the background image of the sheet.
+        if(this.actor.system.customBackground){
+            console.log("Setting custom background image:", this.actor.system.customBackground);
+             const el = this.element.querySelector?.(".window-content") ?? this.element;
+             el.style.backgroundImage = `url("${this.actor.system.customBackground}")`;
+        }
 
         const selectablePowertags = this.element.querySelectorAll('.pt-selectable');
         for (const tag of selectablePowertags) {
@@ -665,5 +674,20 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const actor = this.actor;
         DiceRollApp.getInstance({ actor: actor, type: target.dataset.rollType }).updateTagsAndStatuses()
         DiceRollApp.getInstance({ actor: actor, type: target.dataset.rollType }).render(true, { focus: true });
+    }
+
+    static async #handleClickedCustomBackground(event,target){
+        event.preventDefault();
+         const picker = new FilePicker({
+            type: "image",
+            current: this.actor.system.customBackground || "",
+            callback: async (path) => {
+            await this.actor.update({
+                "system.customBackground": path
+            });
+            }
+        });
+
+        picker.render(true);
     }
 }

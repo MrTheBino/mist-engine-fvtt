@@ -26,6 +26,7 @@ body {
 	--litm-color-tag-bg: hsl(45 98% 46% / 70%);
 	--litm-color-status-bg: hsl(75.88 48.31% 42.3% / 70%);
 	--litm-color-limit-bg: hsl(0 67.35% 63.41% / 70%);
+	--litm-tab-text-color: hsl(34, 34%, 82%);
 
 	/* Fonts */
 	--litm-font-heading: PackardAntique, CaslonAntique, "Palatino Linotype",
@@ -36,4 +37,6 @@ body {
 		"Lucida Calligraphy", "Lucida Handwriting", "Apple Chancery", cursive;
 	--litm-font-text: Fraunces, LibreCaslonText, "Book Antiqua", Palatino, serif;
 	--litm-font-sc: PowellAntique, PackardAntique, Palatino, serif;
+
+	--litm-premium-left-margin: 300px;
 }

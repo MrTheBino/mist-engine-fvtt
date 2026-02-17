@@ -75,6 +75,18 @@
       "flags": {}
     },
     {
+      "name": "pregen-characters",
+      "label": "Pregen Characters",
+      "path": "packs/pregen-characters",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "mist-engine-fvtt",
+      "flags": {}
+    },
+    {
       "name": "litm-themebooks",
       "label": "LiTM Themebooks",
       "path": "packs/litm-themebooks",

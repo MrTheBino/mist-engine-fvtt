@@ -21,6 +21,7 @@ body {
   --litm-color-tag-bg: hsl(45 98% 46% / 70%);
   --litm-color-status-bg: hsl(75.88 48.31% 42.3% / 70%);
   --litm-color-limit-bg: hsl(0 67.35% 63.41% / 70%);
+  --litm-tab-text-color: hsl(34, 34%, 82%);
   /* Fonts */
   --litm-font-heading: PackardAntique, CaslonAntique, "Palatino Linotype",
   	"Book Antiqua", Palatino, serif;
@@ -30,6 +31,7 @@ body {
   	"Lucida Calligraphy", "Lucida Handwriting", "Apple Chancery", cursive;
   --litm-font-text: Fraunces, LibreCaslonText, "Book Antiqua", Palatino, serif;
   --litm-font-sc: PowellAntique, PackardAntique, Palatino, serif;
+  --litm-premium-left-margin: 300px;
 }
 
 .align-start {
@@ -311,6 +313,26 @@ mt-10 {
   color: #724a32;
   font-family: Labrada, serif;
 }
+.editor-content h3 {
+  display: flex;
+  align-items: center;
+}
+.editor-content h3.with-line::after {
+  content: "";
+  display: inline-block;
+  width: 105px;
+  height: 6px;
+  background-image: url(../assets/header-backline.webp);
+  background-repeat: no-repeat;
+  margin-left: 10px;
+}
+.editor-content .line-with-image img {
+  display: inline;
+  margin-right: 3px;
+}
+.editor-content .line-with-image p {
+  display: inline;
+}
 
 .journal-entry-content {
   background-image: url(../assets/bg-pargement-texture.webp);
@@ -320,11 +342,36 @@ mt-10 {
   font-family: Labrada, serif;
   font-size: 1.1em;
 }
-.journal-entry-content h1, .journal-entry-content h2, .journal-entry-content h3, .journal-entry-content h4, .journal-entry-content h5, .journal-entry-content h6 {
+.journal-entry-content h1,
+.journal-entry-content h2,
+.journal-entry-content h3,
+.journal-entry-content h4,
+.journal-entry-content h5,
+.journal-entry-content h6 {
   color: #742A2B;
   font-family: Labrada, serif;
   text-transform: uppercase;
   font-weight: 900;
+}
+.journal-entry-content h3 {
+  display: flex;
+  align-items: center;
+}
+.journal-entry-content h3.with-line::after {
+  content: "";
+  display: inline-block;
+  width: 105px;
+  height: 6px;
+  background-image: url(../assets/header-backline.webp);
+  background-repeat: no-repeat;
+  margin-left: 10px;
+}
+.journal-entry-content .line-with-image img {
+  display: inline;
+  margin-right: 3px;
+}
+.journal-entry-content .line-with-image p {
+  display: inline;
 }
 .journal-entry-content .bigger-redish-text {
   color: #742A2B;
@@ -414,11 +461,20 @@ mt-10 {
   width: 100%;
   flex: 1;
   gap: 0.5rem;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  display: flex;
 }
-.mist-engine .sheet-header .header-fields .short-description {
-  font-family: Labrada, serif;
-  font-size: 14px;
-  color: #191813;
+.mist-engine .sheet-header .header-fields .col-character-name {
+  min-width: var(--litm-premium-left-margin);
+  max-width: var(--litm-premium-left-margin);
+}
+.mist-engine .sheet-header .header-fields .col-main {
+  min-width: 150px;
+}
+.mist-engine .sheet-header .header-fields .col-status {
+  flex-grow: 0.75;
 }
 .mist-engine .sheet-header h1.charname {
   padding: 0px;
@@ -597,9 +653,10 @@ mt-10 {
   color: #724a32;
 }
 .mist-engine.sheet.actor.litm-character .window-content {
-  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-image: url("../assets/default_sheet_background.webp");
   background-repeat: no-repeat;
   row-gap: 0.5em;
+  background-size: cover;
 }
 .mist-engine.sheet.actor.litm-fellowship-themecard .window-content {
   background-image: url("../assets/bg-yellow-old-paper-textures.webp");
@@ -816,13 +873,13 @@ mt-10 {
 .mist-engine .sheet-header .title h1.charname {
   font-family: Labrada, serif;
   font-size: 36px;
-  color: #191813;
+  color: var(--litm-color-accent);
   width: auto;
 }
 .mist-engine .sheet-header .short-description {
   font-family: Labrada, serif;
-  font-size: 18px;
-  color: #191813;
+  font-size: 14px;
+  color: var(--litm-color-accent);
 }
 .mist-engine .sheet-header .difficulty-icons {
   display: flex;
@@ -872,13 +929,11 @@ mt-10 {
 }
 .mist-engine .roll-button {
   margin: 5px;
-  margin-top: 25px;
   font-family: Labrada, serif;
   width: 100%;
 }
 .mist-engine .roll-buttons-container {
   padding-right: 10px;
-  margin-top: 35px;
 }
 .mist-engine .powertags-container {
   margin: 2px;
@@ -931,7 +986,7 @@ mt-10 {
 .mist-engine .fts-tag-container {
   display: flex;
   flex-direction: row;
-  column-gap: 1em;
+  column-gap: 0.25em;
 }
 .mist-engine .fts-markings-container {
   text-align: center;
@@ -941,11 +996,15 @@ mt-10 {
   color: #724a32;
   display: flex;
   flex-direction: column;
+  float: right;
 }
 .mist-engine .floating-tags-and-status-entries {
   display: flex;
   flex-direction: column;
   row-gap: 1em;
+}
+.mist-engine .floating-tags-and-status-entries.grid {
+  display: grid;
 }
 .mist-engine .container-card-with-border {
   border-style: solid;
@@ -970,6 +1029,9 @@ mt-10 {
   font-family: Labrada, serif;
   padding: 1em;
 }
+.mist-engine section [data-group=litm-character-sheet] .tab-biography, .mist-engine section [data-group=litm-character-sheet] .tab-notes {
+  margin-left: var(--litm-premium-left-margin);
+}
 .mist-engine .lock-toggle-container {
   cursor: pointer;
   color: black;
@@ -987,6 +1049,7 @@ mt-10 {
 }
 .mist-engine .character-sheet-divider {
   align-items: start;
+  margin-left: var(--litm-premium-left-margin);
 }
 .mist-engine .character-sheet-divider .right-side {
   flex-grow: 0.25;
@@ -1393,7 +1456,7 @@ mt-10 {
   width: 80%;
   z-index: 3;
   pointer-events: none;
-  top: 15rem;
+  top: 5rem;
   left: -4.625rem;
   rotate: 10deg;
 }
@@ -1410,7 +1473,7 @@ mt-10 {
   width: 80%;
   z-index: 3;
   pointer-events: none;
-  top: 10rem;
+  top: 3rem;
   left: 4rem;
   rotate: -10deg;
 }
@@ -1585,9 +1648,13 @@ mt-10 {
   font-weight: bold;
 }
 .mist-engine nav.tabs [data-group=litm-character-sheet] {
-  color: black;
+  color: var(--litm-tab-text-color);
   font-family: Labrada, serif;
   font-weight: bold;
+}
+.mist-engine .litm-character-sheet-tabs {
+  margin-left: var(--litm-premium-left-margin);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .mist-engine .item-storytag-line .fa-trash, .mist-engine .fellowship-entries .fa-trash {
   color: black;

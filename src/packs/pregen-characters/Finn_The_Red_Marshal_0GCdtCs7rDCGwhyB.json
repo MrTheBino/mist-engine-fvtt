@@ -1,0 +1,877 @@
+{
+  "folder": null,
+  "name": "Finn The Red Marshal",
+  "type": "litm-character",
+  "prototypeToken": {
+    "actorLink": true,
+    "disposition": 1,
+    "name": "Finn The Red Marshal",
+    "displayName": 0,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/mist-engine-fvtt/assets/pregen/redmarshal_token.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": "health"
+    },
+    "bar2": {
+      "attribute": "power"
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "img": "systems/mist-engine-fvtt/assets/pregen/redmarshal_token.png",
+  "system": {
+    "biography": "<p>\"Stack the firewood... Help build the dam... Go fetch Old Trilla's goat... Oh, I'm sick of it! Is that what I have been preparing for? For this I broke my nose and lost a tooth in the training grounds? I'm ready for so much more than helping these farmers through yet another winter. What a bore! They say Stormhelm is fighting a war on the northern frontier. What acts of valor they must see! I mean, I don't want war to come here... I, I want everyone to be safe. But... is it so wrong to want to become the hero I know I can be?\"</p>",
+    "editMode": false,
+    "shortDescription": "A STRAPPING YOUNG CONSTABLE PROTECTING  A SLEEPY VILLAGE AND DREAMING OF GLORY",
+    "customBackground": "systems/mist-engine-fvtt/assets/pregen/redmarshal_background.webp",
+    "floatingTagsAndStatusesEditable": false,
+    "floatingTagsAndStatuses": [],
+    "promises": 0,
+    "notes": "<h3 class=\"with-line\">Taking Actions</h3><p>When you get the spotlight, the Narrator will tell you if you need one, two, or all three steps:</p><p><strong>1. DESCRIBE YOUR ACTION</strong></p><p><strong>2. MAKE A ROLL</strong></p><p>Count your action's POWER</p><ul><li><p>+1 Power for every [helpful tag]</p></li><li><p>-1 Power for every [hindering tag]</p></li><li><p>+ tier of highest [/sg helpful status ]</p></li><li><p>- tier of highest [/sg hindering status]</p></li></ul><p>Roll two six-sided dice and add your Power to the total:</p><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-positive.svg\" width=\"20\" height=\"20\"><p>10 or more: Success!</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-neutral.svg\" width=\"20\" height=\"20\"><p>7-9: Success and Consequences</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-negative.svg\" width=\"20\" height=\"20\"><p>6 or less: Consequences</p></div><p><strong>3. SPEND YOUR POWER</strong></p><ul><li><p>Give or remove a [/sg status]: 1 Power per tier</p></li><li><p>Give or remove a [tag]: 2 Power per tag</p></li><li><p>Discover a detail: 1 Power</p></li><li><p>Perform an extra feat: 1 Power</p></li></ul><h3 class=\"with-line\">Reactions</h3><p>When you receive a negative status or tag, or lose a good status or tag, the Narrator may allow you to react to lessen the blow.</p><p>Describe your reaction, make a roll, and spend your Power to buy down the Consequences (1 Power per status tier, 2 Power per tag).</p><ul><li><p>10 or more: Spend Power+1, on any Effect</p></li><li><p>7-9: Spend Power, only to lessen</p></li><li><p>6 or less: Take the full Consequences</p></li></ul><h3 class=\"with-line\">Hero Development</h3><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>IMPROVE:</strong> Mark whenever the theme's weakness tag is invoked. When full, choose a new power tag or Special Improvement for that theme and reset the track</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>ABANDON:</strong> Mark whenever you ignore or betray the theme's Quest. When full, your theme is <strong>replaced</strong>.</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>MILESTONE:</strong> Mark whenever you achieve a goal of the theme's Quest. When full, your theme evolves.</p></div>"
+  },
+  "items": [
+    {
+      "name": "Backpack",
+      "type": "backpack",
+      "system": {
+        "items": [
+          {
+            "name": "Green quilted gambeson",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "A good sword",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Soothing salve",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Old seeing glass",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Hemp rope",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Whetstone",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Bread, eggs, and cheese",
+            "selected": false,
+            "burned": false,
+            "toBurn": false,
+            "planned": false
+          }
+        ]
+      },
+      "flags": {
+        "mist": {
+          "autoAdded": true
+        }
+      },
+      "_id": "uxEk5zF9sMsCewgW",
+      "img": "icons/svg/item-bag.svg",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.6.2",
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!0GCdtCs7rDCGwhyB.uxEk5zF9sMsCewgW"
+    },
+    {
+      "folder": "U1NyV4jSRswOk6kl",
+      "name": "Devotion",
+      "type": "themebook",
+      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
+      "_id": "O8lX89tVnusEiQnF",
+      "system": {
+        "description": "<p>You have dedicated yourself to a person (a loved one, mentor, or dependent), a group (your circle of weavers or the village of Woodend), or an ideal (religion, creed, or way of life). Your devotion gives you meaning, drives you to carry on in difficult times, offers you something to go back to when the adventures are over, and serves as a framework for knowing right from wrong.</p><p></p><ul><li><p>What is the most important thing to you, personally?</p></li><li><p>How did you end up caring so much about this person, group, or ideal? </p></li><li><p>Do you chafe under the needs, demands, or ethos of who or what you are devoted to? </p></li><li><p>How far would you go to protect that which you are devoted to?</p></li></ul>",
+        "abandon": 0,
+        "improve": 0,
+        "milestone": 0,
+        "powertag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "Who or what are you Devoted to?",
+          "name": "PROTECTOR  of THE DALES"
+        },
+        "powertag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What action do you most commonly take in service of your Devotion?",
+          "name": "The Red Armor"
+        },
+        "powertag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What feeling does your Devotion fill you with that you can call upon?",
+          "name": "Stand watch"
+        },
+        "powertag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "What possession do you carry or have that symbolizes your Devotion?",
+          "name": "Reassuring presence"
+        },
+        "powertag5": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "Where or when can you connect with your Devotion?",
+          "name": "Know these lands"
+        },
+        "powertag6": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "What does the object of your Devotion often help you with?",
+          "name": "Loyal riding horse"
+        },
+        "powertag7": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What quality do you possess that best exemplifies your dedication?"
+        },
+        "powertag8": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What approach do you take in social situations due to your Devotion?"
+        },
+        "powertag9": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What ethos or saying do you aspire to live up to in your dedication?"
+        },
+        "powertag10": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What useful ritual or habit do you have to show your Devotion?"
+        },
+        "weaknesstag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What are you blind to because of your Devotion?",
+          "name": "Burden of responsibility"
+        },
+        "weaknesstag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What duties do you have that frequently need your time or resources?"
+        },
+        "weaknesstag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What unsightly or destructive behavior can your Devotion evoke in you?"
+        },
+        "weaknesstag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What often threatens the object of your Devotion?"
+        },
+        "specialImprovements": [
+          {
+            "name": "Bodyguard",
+            "description": "When your Devotion or a person representing it takes Consequence, you may take it instead of them (and possibly react to it), if the Narrator deems it possible.",
+            "active": false
+          },
+          {
+            "name": "Catch Me When I Fall",
+            "description": "Once per session, when you act with the object of your Devotion or a person representing it at your side, and the outcome is only Consequences, you may choose to Succeed as well.",
+            "active": false
+          },
+          {
+            "name": "Deeply Committed",
+            "description": "Your dedication fills you with purpose. Once per scene, when you take action to pursue this theme’s Quest, you may first gain [committed-2], which expires after that action.",
+            "active": false
+          },
+          {
+            "name": "Goes Both Ways",
+            "description": "Once per session, if the object of your Devotion is near, you may gain a story tag representing aid granted by them, such as an item, encouragement, knowledge, or direct help.",
+            "active": false
+          },
+          {
+            "name": "Unwavering",
+            "description": "Once per session, when a tag in this theme would be scratched for any reason, you may \nkeep it unscratched instead.",
+            "active": false
+          }
+        ],
+        "type": "litm-origin",
+        "quest": "“I am sworn to guard this \nland and its people.“",
+        "story": "Finn is a new arrival at the village: a Red Marshal \nassigned to keep the peace and safety of the \nDalish people, taking over from his retired \npredecessor. Everyone knows nothing ever \nhappens in this quiet little dale, but nevertheless \nhe often struts around in his a-little-too-shiny Red \nArmor, a practical boiled-leather vest that also \nserves as symbol of his station and a reminder of \nthe responsibility he bears."
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "fXOlRnJPiyvuihOi": 3,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.6.2",
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!0GCdtCs7rDCGwhyB.O8lX89tVnusEiQnF"
+    },
+    {
+      "folder": "U1NyV4jSRswOk6kl",
+      "name": "Skill or Trade",
+      "type": "themebook",
+      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
+      "_id": "8Lbphx2lNhvvABkn",
+      "system": {
+        "description": "<p>You have a skill or ability you are somewhat good at, developed through practice or daily application over time. Or perhaps you’ve acquired a trade, which is more than a single honed skill – it’s a set of related techniques and understandings, with its own role in society. You might have learned a profession from a mentor, put to work in your family’s farm or shop, or practiced by yourself due to personal interest or out of necessity. You have become fairly good at what you do, and can trust your skills to carry you forward in most everyday situations.</p><ul><li><p>• How did you acquire this skill or trade? </p></li><li><p>What are its everyday needs? What tools do you use? </p></li><li><p>How do others look upon you as a practitioner of this skill? </p></li><li><p>How do you keep your skills honed?</p></li></ul>",
+        "abandon": 0,
+        "improve": 0,
+        "milestone": 0,
+        "powertag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What Skill or Trade are you good at?",
+          "name": "MARTIAL TRAINING"
+        },
+        "powertag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What specific technique within this Skill set is your specialty?",
+          "name": "Swordsmanship"
+        },
+        "powertag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What tool, equipment, or outfit is a staple of your Trade?",
+          "name": "Rally comrades"
+        },
+        "powertag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "Who most respects, values, or requires your abilities?",
+          "name": "Practiced footwork"
+        },
+        "powertag5": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "What unusual or inventive application have you found for your Skill?",
+          "name": "Iron focus"
+        },
+        "powertag6": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "In what conditions can you work with the most confidence and efficiency?",
+          "name": "Archery"
+        },
+        "powertag7": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "How do you reduce the risk of failure, harm, or poor outcome?"
+        },
+        "powertag8": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What are you more aware of or know about, thanks to your Skill?"
+        },
+        "powertag9": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "Who assists you in practicing your Skill or Trade?"
+        },
+        "powertag10": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What conviction or emotion motivates you to practice your Skill?"
+        },
+        "weaknesstag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What challenge or feat is quite beyond your everyday ability?",
+          "name": "Experienced foes"
+        },
+        "weaknesstag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What conditions make it harder for you to practice your Skill or Trade?"
+        },
+        "weaknesstag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "How does your practice or talent bias your perceptions or interactions?"
+        },
+        "weaknesstag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "Where or when are those of your Trade unwelcome or unwilling to work?"
+        },
+        "specialImprovements": [
+          {
+            "name": "Deft Remedy",
+            "description": "Once per session, when you use tags from this theme and roll a total of 6 or less, you may reroll the dice and take the new result instead.",
+            "active": false
+          },
+          {
+            "name": "Learn from My Mistakes",
+            "description": "Once per scene, when you act using tags from this theme and don’t Succeed, mark Improve on this theme.",
+            "active": false
+          },
+          {
+            "name": "Practice Makes Perfect",
+            "description": "Choose a helpful status reflecting your use of your expertise such as [alert] or [well-off]. You may burn a tag from this theme at any time to gain that status at tier 3.",
+            "active": false
+          },
+          {
+            "name": "Rehearsed Technique",
+            "description": "When you choose this Special, choose a power tag from this theme. Whenever you burn that tag for Power, you gain 3 Power as normal and may also forgo rolling the dice and treat the dice roll total as 7 (before adding Power).",
+            "active": false
+          },
+          {
+            "name": "Resourceful",
+            "description": "When you camp or sojourn, if you dedicate your time to preparing or crafting something using your skill, you may create an extra story tag in addition to the usual benefits.",
+            "active": false
+          }
+        ],
+        "type": "litm-origin",
+        "quest": "“Training keeps me ready \nfor whatever may come.”",
+        "story": "After volunteering to join the Red Marshals, Finn \napprenticed at Fort Gherdorn, their Barleytown \nbarracks, spending years of rigorous arms \ntraining. He learned to wield swords, knives, axes \nand bows, or fi ght bare-handed, practicing in the \nsanded courtyard until he was bloody. He also \nlearned to read missives and write reports. Today, \nhe wonders what it was all for; it seems these \nskills will never truly be put to good use."
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "fXOlRnJPiyvuihOi": 3,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.6.2",
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!0GCdtCs7rDCGwhyB.8Lbphx2lNhvvABkn"
+    },
+    {
+      "folder": "U1NyV4jSRswOk6kl",
+      "name": "Trait",
+      "type": "themebook",
+      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
+      "_id": "e1jp3MWDhDIIP1es",
+      "system": {
+        "description": "<p>You have a specific innate attribute that defines you, whether in your physique, your mind, or your heart – for example, you are strong, covered in scales, large-bodied, beautiful, cunning, or quick. Or, you possess some kind of special quality, unique to you, although not terribly out of the ordinary, such as being loved by animals. It could be something you were always well-known for while growing up or a recent transformation.</p><p></p><ul><li><p>When did you first discover or become aware of your trait? </p></li><li><p>How reliant on this trait are you? Do you neglect developing relevant skills, or is it so good you simply don’t need to? </p></li><li><p>Who around you came to appreciate or resent this trait? </p></li><li><p>What can this trait help you achieve?</p></li></ul>",
+        "abandon": 0,
+        "improve": 0,
+        "milestone": 0,
+        "powertag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What is your most defining Trait?",
+          "name": "ATHLETIC"
+        },
+        "powertag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What is a specific or common way you put this Trait to use?",
+          "name": "Brute strength"
+        },
+        "powertag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "How is this Trait helping you keep safe?",
+          "name": "Runner’s stamina"
+        },
+        "powertag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "What item or ally helps you get the most of your Trait?",
+          "name": "Climbing"
+        },
+        "powertag5": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "What can you do that only those with this Trait can?",
+          "name": "Hardened physique"
+        },
+        "powertag6": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "In which situation is this Trait especially useful to you?",
+          "name": "All-terrain trekker"
+        },
+        "powertag7": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What skill have you developed to make the most of this gift?"
+        },
+        "powertag8": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What do you notice, sense, or understand that most other people cannot?"
+        },
+        "powertag9": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "How can you perform, show off, or be creative with your Trait?"
+        },
+        "powertag10": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "How do you hide this Trait, when you need to?"
+        },
+        "weaknesstag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What happens when you overuse your Trait?",
+          "name": "This is gonna hurt later"
+        },
+        "weaknesstag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "Who around you resents, covets, or mocks your Trait?"
+        },
+        "weaknesstag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What is the most obvious vulnerability or misuse of this Trait?"
+        },
+        "weaknesstag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "When is your Trait utterly useless?"
+        },
+        "specialImprovements": [
+          {
+            "name": "Innate Sense",
+            "description": "Once per session, you can ask the Narrator for one important detail that you can intuit thanks to your Trait.",
+            "active": false
+          },
+          {
+            "name": "Made for This",
+            "description": "Choose a hindering status that your Trait helps you overcome. Once per scene, you may ignore this status when you act.",
+            "active": false
+          },
+          {
+            "name": "Moment to Shine",
+            "description": "Once per session, when you act using tags from this theme, you may ignore being Imperiled, or treat being Extremely Imperiled as being Imperiled.",
+            "active": false
+          },
+          {
+            "name": "Pull Through",
+            "description": "Once per session, when you roll with tags from this theme, you may ignore any negative physical or emotional status of tier 3 or lower.",
+            "active": false
+          },
+          {
+            "name": "Wild Blood",
+            "description": "Your Trait manifests in unusual ways. Choose and gain a Special Improvement from the Uncanny Being themebook.",
+            "active": false
+          }
+        ],
+        "type": "litm-origin",
+        "quest": "“I’ll race you!”",
+        "story": "Red Marshal’s duty involves not only preparing \nfor battle but also patrolling through the hills \n                    and woods, saving a stray farm animal from a \n                    deep ravine, or helping farmers to stack hay bales. \n                    Strapping and vigorous, Finn has the natural \n                    stamina and strength to help the people of his dale, \n                    and his training has only improved these abilities."
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "fXOlRnJPiyvuihOi": 3,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.6.2",
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!0GCdtCs7rDCGwhyB.e1jp3MWDhDIIP1es"
+    },
+    {
+      "folder": "U1NyV4jSRswOk6kl",
+      "name": "Personality",
+      "type": "themebook",
+      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
+      "_id": "UKolxEbIL3XWd1Xt",
+      "system": {
+        "description": "<p>You have a certain way of seeing the world and engaging with it, an archetypal personality type or way about you. You might have developed it during your younger years, or adopted it only lately, and it might not even be to your liking – but your personality is taking you places and defines how you interact with others. It could be that when times get tough, your true self comes out. Or maybe your persona is just a crutch, a defense that keeps people from getting too close.</p><p></p><ul><li><p>What are you like? </p></li><li><p>What made you this way? </p></li><li><p>How well does your personality mesh with others’?</p></li><li><p> Is it all a show you’re putting on for the world? And if so, what’s beneath it?</p></li></ul>",
+        "abandon": 0,
+        "improve": 0,
+        "milestone": 0,
+        "powertag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What Personality trait is most central to you?",
+          "name": "ASPIRING  LOCAL HERO"
+        },
+        "powertag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "In what situations does your Personality truly shine?",
+          "name": "Feign courage"
+        },
+        "powertag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "How do you influence other people?",
+          "name": "A villager’s shield"
+        },
+        "powertag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "What item or garment best expresses your personal style?",
+          "name": "Shortcuts to greatness"
+        },
+        "powertag5": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "What interpersonal or social skill or talent do you possess?",
+          "name": "Seize attention"
+        },
+        "powertag6": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "When in trouble or stressed, what emotion or behavior do you turn to?",
+          "name": "Village folk’s blessing"
+        },
+        "powertag7": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What is an unexpected but useful facet of your Personality?"
+        },
+        "powertag8": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "How do you support or help others?"
+        },
+        "powertag9": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "How do you resist influence or stay true to yourself?"
+        },
+        "powertag10": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "How can your unique worldview help you figure things out?"
+        },
+        "weaknesstag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "In what situations does your Personality get you into trouble?",
+          "name": "Rash"
+        },
+        "weaknesstag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What is an ugly or unfortunate aspect of your Personality?"
+        },
+        "weaknesstag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "What unwanted behavior does your Personality push you toward?"
+        },
+        "weaknesstag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "Who finds you, or who do you find, irksome or loathsome?"
+        },
+        "specialImprovements": [
+          {
+            "name": "Adaptable Persona",
+            "description": "Once per session, when you take an action using tags from this theme and get only Consequences, you may choose to Succeed as well.",
+            "active": false
+          },
+          {
+            "name": "Big Personality",
+            "description": "When you burn power tags from this theme for Power, they add 4 Power instead of 3.",
+            "active": false
+          },
+          {
+            "name": "Infectious Personality",
+            "description": "When you camp or sojourn, you may give another Hero a story tag describing an aspect of your Personality (expiring any previous tag created this way).",
+            "active": false
+          },
+          {
+            "name": "Lasting Impression",
+            "description": "Once per scene, when you take a social action and Succeed, you may give a [lasting impression] to everyone you affect with this action.",
+            "active": false
+          },
+          {
+            "name": "Unshakeable",
+            "description": "Once per scene, when you react to lessen social or emotional Consequences and get a total result of 7 or above, you may spend all your Power to completely avoid all Consequence Effects.",
+            "active": false
+          }
+        ],
+        "type": "litm-origin",
+        "quest": "“No one remembers”",
+        "story": "In his heart, Finn dreams of becoming a \nrenowned hero and so he seeks adventure and \njumps head first whenever the opportunity \npresents itself to show his mettle. While this has \nearned him the respect of some folk, others see \nhim as a brash fool obsessed with glory. It seems \na hero is in there, somewhere, but Finn must first \nfind what truly matters to him most."
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "fXOlRnJPiyvuihOi": 3,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.6.2",
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!0GCdtCs7rDCGwhyB.UKolxEbIL3XWd1Xt"
+    }
+  ],
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "wgZHyBDokH67OG0A": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mist-engine-fvtt",
+    "systemVersion": "13.6.2",
+    "createdTime": 1771328722630,
+    "modifiedTime": 1771328725489,
+    "lastModifiedBy": "wgZHyBDokH67OG0A"
+  },
+  "_id": "0GCdtCs7rDCGwhyB",
+  "sort": 100000,
+  "_key": "!actors!0GCdtCs7rDCGwhyB"
+}

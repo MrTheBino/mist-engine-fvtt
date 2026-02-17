@@ -1,21 +1,25 @@
 <div>
     <header class="sheet-header {{#if system.editMode}}edit-mode{{else}}stylized-background{{/if}}">
 
+        {{#if system.editMode}}
         <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"
             height="120" />
+        {{/if}}
 
         <div class="header-fields">
-            
+            <div class="col-character-name">
                 {{#if system.editMode}}
                 {{!-- Edit Mode Layout --}}
                 <div class="title">
-                    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" /></h1>
-                    
+                    <h1 class="charname"><input name="name" type="text" value="{{actor.name}}"
+                            placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" /></h1>
+
                 </div>
                 <div class="flexcol">
                     <div class="short-description"><input name="system.shortDescription" type="text"
-                            value="{{system.shortDescription}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" /></div>
-                    </div>
+                            value="{{system.shortDescription}}"
+                            placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" /></div>
+                </div>
                 {{else}}
                 {{!-- Normal Layout --}}
                 <div class="title">
@@ -23,18 +27,31 @@
                 </div>
                 <div class="short-description">{{system.shortDescription}}</div>
                 {{/if}}
-            
-
-            {{#if (eq system.editMode false)}}
-            <div class="flexrow roll-buttons-container">
-                <button data-action="clickRoll" class="roll-button" data-roll-type="quick"><i
-                        class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.quick'}}</button>
-                <button data-action="clickRoll" class="roll-button" data-roll-type="detailed"><i
-                        class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.detailed'}}</button>
-                <button data-action="clickRoll" class="roll-button" data-roll-type="reaction"><i
-                        class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.reaction'}}</button>
             </div>
-            {{/if}}
+            <div class="col-main">
+
+
+                {{#if (eq system.editMode false)}}
+                <div class="flexcol roll-buttons-container">
+                    <button data-action="clickRoll" class="roll-button" data-roll-type="quick"><i
+                            class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.quick'}}</button>
+                    <button data-action="clickRoll" class="roll-button" data-roll-type="detailed"><i
+                            class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.detailed'}}</button>
+                    <button data-action="clickRoll" class="roll-button" data-roll-type="reaction"><i
+                            class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.reaction'}}</button>
+                </div>
+                {{else}}
+                <div class="flexcol roll-buttons-container">
+                    <button data-action="clickedCustomBackground">{{localize
+                        'MIST_ENGINE.LABELS.SelectCustomBackground'}}</button>
+                </div>
+                {{/if}}
+            </div>
+            <div class="col-status">
+                {{#if (eq system.editMode false)}}
+                {{> 'systems/mist-engine-fvtt/templates/actor/parts/floating-tags-and-status-partial.hbs' useGrid=true}}
+                {{/if}}
+            </div>
         </div>
     </header>
 

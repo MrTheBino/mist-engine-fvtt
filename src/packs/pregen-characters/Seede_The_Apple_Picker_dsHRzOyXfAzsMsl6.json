@@ -1,0 +1,877 @@
+{
+  "folder": null,
+  "name": "Seede The Apple Picker",
+  "type": "litm-character",
+  "prototypeToken": {
+    "actorLink": true,
+    "disposition": 1,
+    "name": "Seede The Apple Picker",
+    "displayName": 0,
+    "width": 1,
+    "height": 1,
+    "texture": {
+      "src": "systems/mist-engine-fvtt/assets/pregen/applepicker_token.png",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "offsetX": 0,
+      "offsetY": 0,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "rotation": 0,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": "health"
+    },
+    "bar2": {
+      "attribute": "power"
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": [],
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "img": "systems/mist-engine-fvtt/assets/pregen/applepicker_token.png",
+  "system": {
+    "biography": "<p>\" [APPLE CRUNCHING]... See, if you pull it here and tie this around like this, it'll fly right into the alderman's face when he opens the barn door. Naw, don't worry, it's a rotten apple - it'll splatter all over him, ha! What do you mean, you're not sure? Come onnnnn, you can't chicken out on me now. Anyway - you know they're gonna pin the blame on me. That's the price of all these notches on my belt. I probably got every person in the dale at least once. Quick, hide! I hear him coming! Oh, this is gonna be gooood!...\"</p>",
+    "editMode": false,
+    "shortDescription": "A RASCALLY ORPHAN WORKING AS A FARMHAND, PRANKING THE PEOPLE OF RAVENHOME",
+    "customBackground": "systems/mist-engine-fvtt/assets/pregen/applepicker_background.webp",
+    "floatingTagsAndStatusesEditable": false,
+    "floatingTagsAndStatuses": [],
+    "promises": 0,
+    "notes": "<h3 class=\"with-line\">Taking Actions</h3><p>When you get the spotlight, the Narrator will tell you if you need one, two, or all three steps:</p><p><strong>1. DESCRIBE YOUR ACTION</strong></p><p><strong>2. MAKE A ROLL</strong></p><p>Count your action's POWER</p><ul><li><p>+1 Power for every [helpful tag]</p></li><li><p>-1 Power for every [hindering tag]</p></li><li><p>+ tier of highest [/sg helpful status ]</p></li><li><p>- tier of highest [/sg hindering status]</p></li></ul><p>Roll two six-sided dice and add your Power to the total:</p><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-positive.svg\" width=\"20\" height=\"20\"><p>10 or more: Success!</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-neutral.svg\" width=\"20\" height=\"20\"><p>7-9: Success and Consequences</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-negative.svg\" width=\"20\" height=\"20\"><p>6 or less: Consequences</p></div><p><strong>3. SPEND YOUR POWER</strong></p><ul><li><p>Give or remove a [/sg status]: 1 Power per tier</p></li><li><p>Give or remove a [tag]: 2 Power per tag</p></li><li><p>Discover a detail: 1 Power</p></li><li><p>Perform an extra feat: 1 Power</p></li></ul><h3 class=\"with-line\">Reactions</h3><p>When you receive a negative status or tag, or lose a good status or tag, the Narrator may allow you to react to lessen the blow.</p><p>Describe your reaction, make a roll, and spend your Power to buy down the Consequences (1 Power per status tier, 2 Power per tag).</p><ul><li><p>10 or more: Spend Power+1, on any Effect</p></li><li><p>7-9: Spend Power, only to lessen</p></li><li><p>6 or less: Take the full Consequences</p></li></ul><h3 class=\"with-line\">Hero Development</h3><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>IMPROVE:</strong> Mark whenever the theme's weakness tag is invoked. When full, choose a new power tag or Special Improvement for that theme and reset the track</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>ABANDON:</strong> Mark whenever you ignore or betray the theme's Quest. When full, your theme is <strong>replaced</strong>.</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>MILESTONE:</strong> Mark whenever you achieve a goal of the theme's Quest. When full, your theme evolves.</p></div>"
+  },
+  "items": [
+    {
+      "name": "Backpack",
+      "type": "backpack",
+      "system": {
+        "items": [
+          {
+            "name": "Firecracker",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Empty sacks",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Paring knife",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Jug of cider",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Sling",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Hemp twine",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Wooden whistle",
+            "selected": false,
+            "burned": false,
+            "toBurn": false,
+            "planned": false
+          }
+        ]
+      },
+      "flags": {
+        "mist": {
+          "autoAdded": true
+        }
+      },
+      "_id": "FGnwYX6i2p0Sl1VA",
+      "img": "icons/svg/item-bag.svg",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.6.2",
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!dsHRzOyXfAzsMsl6.FGnwYX6i2p0Sl1VA"
+    },
+    {
+      "folder": "BmgEu8IcX0N16vpv",
+      "name": "People",
+      "type": "themebook",
+      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
+      "_id": "tsuV9xoF9bUchsVw",
+      "system": {
+        "description": "",
+        "abandon": 0,
+        "improve": 0,
+        "milestone": 0,
+        "powertag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "RAVENHOME RAISED"
+        },
+        "powertag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Run of the place"
+        },
+        "powertag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Seeking kinship"
+        },
+        "powertag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Ravenhome spirit"
+        },
+        "powertag5": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Ears to the grapevine"
+        },
+        "powertag6": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Healthy as a horse"
+        },
+        "powertag7": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag8": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag9": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag10": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Belongs nowhere"
+        },
+        "weaknesstag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "specialImprovements": [
+          {
+            "name": "Stand Out",
+            "description": "You are an unusual member of your People. Once per scene, when you act against your People’s habits, culture, or traditions and get both a Success and Consequences, you may choose not to take the Consequences.",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          }
+        ],
+        "type": "litm-origin",
+        "quest": "“It’s the backside of nowhere, but it’s home.”",
+        "story": "Abandoned somewhere in the Ravensdale fi elds at a young age and adopted by the people of Ravenhome, Seede has known nowhere else her entire life. Almost every family in the dale had a hand at raising her, until she was old enough to help as a farmhand. Eating at diff erent dinner tables over the years has taught her that while Ravenhome is her home, it may not be where she truly belongs."
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "b16EOKUCwwbnVrnm": 3,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.6.2",
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!dsHRzOyXfAzsMsl6.tsuV9xoF9bUchsVw"
+    },
+    {
+      "folder": "BmgEu8IcX0N16vpv",
+      "name": "Personality",
+      "type": "themebook",
+      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
+      "_id": "GiSvriQxxTYJhOZq",
+      "system": {
+        "description": "",
+        "abandon": 0,
+        "improve": 0,
+        "milestone": 0,
+        "powertag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "RASCAL"
+        },
+        "powertag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Prankster"
+        },
+        "powertag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Finders keepers"
+        },
+        "powertag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Great excuses"
+        },
+        "powertag5": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Light-footed"
+        },
+        "powertag6": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Cunning wit"
+        },
+        "powertag7": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag8": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag9": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag10": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Can’t sit still"
+        },
+        "weaknesstag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "specialImprovements": [
+          {
+            "name": "Adaptable Persona",
+            "description": "Once per session, when you take an action using tags from this theme and get only Consequences, you may choose to Succeed as well.",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          }
+        ],
+        "type": "litm-origin",
+        "quest": "“It’s never a bad time for a prank!”",
+        "story": "Feeling that life pulled a “prank” on her, Seede feels it’s only just to balance the scales. A true troublemaker, she fi nds the small mishaps of others entertaining, setting them up to stumble, slip, misplace their tools,, and get into trouble with an angry elder. Her pranks often catch up to her but that hasn’t stopped her yet."
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "b16EOKUCwwbnVrnm": 3,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.6.2",
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!dsHRzOyXfAzsMsl6.GiSvriQxxTYJhOZq"
+    },
+    {
+      "folder": "BmgEu8IcX0N16vpv",
+      "name": "Trait",
+      "type": "themebook",
+      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
+      "_id": "7sYHOflvv8rAdLVo",
+      "system": {
+        "description": "",
+        "abandon": 0,
+        "improve": 0,
+        "milestone": 0,
+        "powertag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "SCRAPPY"
+        },
+        "powertag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Roll with a blow"
+        },
+        "powertag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Unkempt charm"
+        },
+        "powertag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Lunge at them"
+        },
+        "powertag5": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Resourceful"
+        },
+        "powertag6": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Dig my heels in"
+        },
+        "powertag7": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag8": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag9": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag10": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Never listens"
+        },
+        "weaknesstag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "specialImprovements": [
+          {
+            "name": "Made For This",
+            "description": "Once per scene, you may ignore a status of fear or discouragement when you act.",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          }
+        ],
+        "type": "litm-origin",
+        "quest": "“You’re not the boss of me!”",
+        "story": "Having had to fend for herself for as long as she can remember, Seede has learned to roll with life’s punches and make ends meet when she has to. She became indignant and indomitable, too much trouble for most adults to bother with. But falling from snapped tree branches, wrestling with pigs in the mud, and arguing with grown-ups three times her size has made her incredibly tough and brave for her age."
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "b16EOKUCwwbnVrnm": 3,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.6.2",
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!dsHRzOyXfAzsMsl6.7sYHOflvv8rAdLVo"
+    },
+    {
+      "folder": "JuEAktEDADzvlIae",
+      "name": "Possessions",
+      "type": "themebook",
+      "img": "systems/mist-engine-fvtt/assets/icons/item-themebook.svg",
+      "_id": "77gOPy1JdQNsdOON",
+      "system": {
+        "description": "",
+        "abandon": 0,
+        "improve": 0,
+        "milestone": 0,
+        "powertag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "BUSHEL of APPLES"
+        },
+        "powertag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Strong throw"
+        },
+        "powertag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Deft hands"
+        },
+        "powertag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Highly nutritious"
+        },
+        "powertag5": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Low hanging fruit"
+        },
+        "powertag6": {
+          "burned": false,
+          "toBurn": false,
+          "planned": true,
+          "selected": false,
+          "question": "",
+          "name": "Orchardist"
+        },
+        "powertag7": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag8": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag9": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "powertag10": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag1": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": "",
+          "name": "Only goes so far"
+        },
+        "weaknesstag2": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag3": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "weaknesstag4": {
+          "burned": false,
+          "toBurn": false,
+          "planned": false,
+          "selected": false,
+          "question": ""
+        },
+        "specialImprovements": [
+          {
+            "name": "Favorite Piece",
+            "description": "Once per session, you may burn Bushel of Apples for Power without scratching it.",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          },
+          {
+            "name": "",
+            "description": "",
+            "active": false
+          }
+        ],
+        "type": "litm-variable",
+        "quest": "“Simple solutions work best.”",
+        "story": "Does Seede grab fruit off the trees as she walks by? Does she carry a sack of partly-rotting apples? Or hide them in her pockets? Who knows. Somehow she always seems to have more of them at hand, and she uses apples in the most creative ways: as throwing projectiles, as a slipping hazard for running adults, or as weights for a nasty trap. And of course, she’s constantly snacking on them"
+      },
+      "effects": [],
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "b16EOKUCwwbnVrnm": 3,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.6.2",
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!dsHRzOyXfAzsMsl6.77gOPy1JdQNsdOON"
+    }
+  ],
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "wgZHyBDokH67OG0A": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mist-engine-fvtt",
+    "systemVersion": "13.6.2",
+    "createdTime": 1771328725468,
+    "modifiedTime": 1771328725489,
+    "lastModifiedBy": "wgZHyBDokH67OG0A"
+  },
+  "_id": "dsHRzOyXfAzsMsl6",
+  "sort": 200000,
+  "_key": "!actors!dsHRzOyXfAzsMsl6"
+}

@@ -1,4 +1,4 @@
-.journal-entry-content{
+.journal-entry-content {
     background-image: url(../assets/bg-pargement-texture.webp);
     background-repeat: no-repeat;
     row-gap: 0.5em;
@@ -6,33 +6,67 @@
     font-family: $font-primary;
     font-size: 1.1em;
 
-    h1,h2,h3,h4,h5,h6{
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         color: $c-text-redish;
         font-family: $font-primary;
         text-transform: uppercase;
-        font-weight:900;
+        font-weight: 900;
     }
 
-    .bigger-redish-text{
+    h3 {
+        // if want to display the image assets/icons/header-backline after the header text in the same line
+        display: flex;
+        align-items: center;
+
+        &.with-line {
+            &::after {
+                content: "";
+                display: inline-block;
+                width: 105px;
+                height: 6px;
+                background-image: url(../assets/header-backline.webp);
+                background-repeat: no-repeat;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .line-with-image {
+        img {
+            display: inline;
+            margin-right: 3px;
+        }
+
+        p {
+            display: inline;
+        }
+    }
+
+    .bigger-redish-text {
         color: $c-text-redish;
         font-size: 1.2em;
     }
 
-    .redish-text{
+    .redish-text {
         color: $c-text-redish;
     }
 
-    .tag{
+    .tag {
         background-color: $c-tag-orange;
         font-style: italic;
     }
 
-    .status{
+    .status {
         background-color: $c-tag-green;
         font-style: italic;
     }
 
-    .notes{
+    .notes {
         background-image: url(../assets/notes_darker_2.webp);
         background-repeat: no-repeat;
         background-size: 100% 100%;

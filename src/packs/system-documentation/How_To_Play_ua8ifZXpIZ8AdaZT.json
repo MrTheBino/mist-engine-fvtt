@@ -1,0 +1,65 @@
+{
+  "name": "How To Play",
+  "_id": "ua8ifZXpIZ8AdaZT",
+  "pages": [
+    {
+      "sort": 100000,
+      "name": "How To Play",
+      "type": "text",
+      "_id": "XAQFYQGRZsqaRVwn",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<h3 class=\"with-line\">Taking Actions</h3><p>When you get the spotlight, the Narrator will tell you if you need one, two, or all three steps:</p><p><strong>1. DESCRIBE YOUR ACTION</strong></p><p><strong>2. MAKE A ROLL</strong></p><p>Count your action's POWER</p><ul><li><p>+1 Power for every [helpful tag]</p></li><li><p>-1 Power for every [hindering tag]</p></li><li><p>+ tier of highest [/sg helpful status ]</p></li><li><p>- tier of highest [/sg hindering status]</p></li></ul><p>Roll two six-sided dice and add your Power to the total:</p><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-positive.svg\" width=\"20\" height=\"20\" /><p>10 or more: Success!</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-neutral.svg\" width=\"20\" height=\"20\" /><p>7-9: Success and Consequences</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-negative.svg\" width=\"20\" height=\"20\" /><p>6 or less: Consequences</p></div><p><strong>3. SPEND YOUR POWER</strong></p><ul><li><p>Give or remove a [/sg status]: 1 Power per tier</p></li><li><p>Give or remove a [tag]: 2 Power per tag</p></li><li><p>Discover a detail: 1 Power</p></li><li><p>Perform an extra feat: 1 Power</p></li></ul><h3 class=\"with-line\">Reactions</h3><p>When you receive a negative status or tag, or lose a good status or tag, the Narrator may allow you to react to lessen the blow.</p><p>Describe your reaction, make a roll, and spend your Power to buy down the Consequences (1 Power per status tier, 2 Power per tag).</p><ul><li><p>10 or more: Spend Power+1, on any Effect</p></li><li><p>7-9: Spend Power, only to lessen</p></li><li><p>6 or less: Take the full Consequences</p></li></ul><h3 class=\"with-line\">Hero Development</h3><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\" /><p><strong>IMPROVE:</strong> Mark whenever the theme's weakness tag is invoked. When full, choose a new power tag or Special Improvement for that theme and reset the track</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\" /><p><strong>ABANDON:</strong> Mark whenever you ignore or betray the theme's Quest. When full, your theme is <strong>replaced</strong>.</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\" /><p><strong>MILESTONE:</strong> Mark whenever you achieve a goal of the theme's Quest. When full, your theme evolves.</p></div>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.6.2",
+        "createdTime": 1771313404098,
+        "modifiedTime": 1771318816460,
+        "lastModifiedBy": "wgZHyBDokH67OG0A"
+      },
+      "_key": "!journal.pages!ua8ifZXpIZ8AdaZT.XAQFYQGRZsqaRVwn"
+    }
+  ],
+  "folder": null,
+  "categories": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "wgZHyBDokH67OG0A": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "mist-engine-fvtt",
+    "systemVersion": "13.6.2",
+    "createdTime": 1771313244714,
+    "modifiedTime": 1771313244714,
+    "lastModifiedBy": "wgZHyBDokH67OG0A"
+  },
+  "_key": "!journal!ua8ifZXpIZ8AdaZT"
+}
