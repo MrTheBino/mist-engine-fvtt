@@ -70,6 +70,7 @@
 
   input {
     border: 2px solid red;
+
     // inputs of type checkbox have no red border
     &[type="checkbox"] {
       border: none;
@@ -284,6 +285,13 @@
 .sheet-header {
   font-family: Labrada, serif;
 
+  .character-name-container{
+    position: absolute;
+    top: 32rem;
+    max-width: 300px;
+    width: 300px;
+  }
+  
   label {
     font-family: var(--font-body);
   }
@@ -405,23 +413,24 @@
 .fts-selectable {
   cursor: pointer;
   position: relative;
-/*  &.selected {
+
+  /*  &.selected {
     @include ts-selection;
   }*/
   &.selected::before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: calc(5px + 100%);
-        background: url("../assets/brush.svg") no-repeat center;
-        background-blend-mode: color;
-        background-size: contain;
-        opacity: 0.5;
-        top: 0px;
-        left: 45%;
-        transform: translateX(-50%);
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: calc(5px + 100%);
+    background: url("../assets/brush.svg") no-repeat center;
+    background-blend-mode: color;
+    background-size: contain;
+    opacity: 0.5;
+    top: 0px;
+    left: 45%;
+    transform: translateX(-50%);
 
-    }
+  }
 }
 
 .fts-input-marking {
@@ -467,7 +476,8 @@
   display: flex;
   flex-direction: column;
   row-gap: 1em;
-  &.grid{
+
+  &.grid {
     display: grid;
   }
 }
@@ -500,10 +510,55 @@
   color: $c-styled-text;
   font-family: $font-primary;
   padding: 1em;
+  font-size: 1.1em;
+  overflow: hidden auto;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: $c-text-redish;
+        font-family: $font-primary;
+        text-transform: uppercase;
+        font-weight: 900;
+    }
+
+  h3 {
+        // if want to display the image assets/icons/header-backline after the header text in the same line
+        display: flex;
+        align-items: center;
+
+        &.with-line {
+            &::after {
+                content: "";
+                display: inline-block;
+                width: 105px;
+                height: 6px;
+                background-image: url(../assets/header-backline.webp);
+                background-repeat: no-repeat;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .line-with-image {
+        img {
+            display: inline;
+            margin-right: 3px;
+        }
+
+        p {
+            display: inline;
+        }
+    }
 }
 
 section [data-group="litm-character-sheet"] {
-  .tab-biography,.tab-notes {
+
+  .tab-biography,
+  .tab-notes {
     margin-left: var(--litm-premium-left-margin);
   }
 }
@@ -528,10 +583,10 @@ section [data-group="litm-character-sheet"] {
 
 .character-sheet-divider {
   align-items: start;
-  margin-left: var(--litm-premium-left-margin);
+
 
   .right-side {
-    flex-grow: 0.25;
+    margin-left: var(--litm-premium-left-margin);
   }
 }
 
@@ -592,7 +647,8 @@ nav.tabs [data-tab] {
   cursor: pointer;
 }
 
-.challenge-entry-container,.npc-challenges-container {
+.challenge-entry-container,
+.npc-challenges-container {
   font-family: $font-primary;
   color: $c-styled-text;
 
@@ -611,9 +667,8 @@ nav.tabs [data-tab] {
       flex-direction: row;
       display: flex;
     }
-    .entry-content-no-edit{
-      
-    }
+
+    .entry-content-no-edit {}
   }
 }
 
@@ -624,17 +679,20 @@ nav.tabs [data-tab] {
   }
 }
 
-mark{
+mark {
   padding-left: 2px;
   padding-right: 2px;
   background-color: $c-tag-yellow;
-  .status{
+
+  .status {
     background-color: $c-tag-yellow;
   }
-  &.green{
-      background-color: $c-tag-green;
-    }
-  &.orange{
-      background-color: $c-tag-orange;
-    }
+
+  &.green {
+    background-color: $c-tag-green;
+  }
+
+  &.orange {
+    background-color: $c-tag-orange;
+  }
 }

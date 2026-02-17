@@ -21,11 +21,13 @@
                             placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" /></div>
                 </div>
                 {{else}}
-                {{!-- Normal Layout --}}
-                <div class="title">
-                    <h1 class="charname">{{actor.name}}</h1>
+                <div class="character-name-container">
+
+                    <div class="title">
+                        <h1 class="charname">{{actor.name}}</h1>
+                    </div>
+                    <div class="short-description">{{system.shortDescription}}</div>
                 </div>
-                <div class="short-description">{{system.shortDescription}}</div>
                 {{/if}}
             </div>
             <div class="col-main">

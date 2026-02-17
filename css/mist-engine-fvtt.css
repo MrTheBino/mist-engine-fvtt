@@ -855,6 +855,12 @@ mt-10 {
 .mist-engine .sheet-header {
   font-family: Labrada, serif;
 }
+.mist-engine .sheet-header .character-name-container {
+  position: absolute;
+  top: 32rem;
+  max-width: 300px;
+  width: 300px;
+}
 .mist-engine .sheet-header label {
   font-family: var(--font-body);
 }
@@ -949,8 +955,8 @@ mt-10 {
   cursor: pointer;
   position: relative;
   /*  &.selected {
-      @include ts-selection;
-    }*/
+    @include ts-selection;
+  }*/
 }
 .mist-engine .fts-selectable.selected::before {
   content: "";
@@ -1028,8 +1034,52 @@ mt-10 {
   color: #724a32;
   font-family: Labrada, serif;
   padding: 1em;
+  font-size: 1.1em;
+  overflow: hidden auto;
 }
-.mist-engine section [data-group=litm-character-sheet] .tab-biography, .mist-engine section [data-group=litm-character-sheet] .tab-notes {
+.mist-engine .tab-notes h1,
+.mist-engine .tab-notes h2,
+.mist-engine .tab-notes h3,
+.mist-engine .tab-notes h4,
+.mist-engine .tab-notes h5,
+.mist-engine .tab-notes h6,
+.mist-engine .tab-biography h1,
+.mist-engine .tab-biography h2,
+.mist-engine .tab-biography h3,
+.mist-engine .tab-biography h4,
+.mist-engine .tab-biography h5,
+.mist-engine .tab-biography h6 {
+  color: #742A2B;
+  font-family: Labrada, serif;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+.mist-engine .tab-notes h3,
+.mist-engine .tab-biography h3 {
+  display: flex;
+  align-items: center;
+}
+.mist-engine .tab-notes h3.with-line::after,
+.mist-engine .tab-biography h3.with-line::after {
+  content: "";
+  display: inline-block;
+  width: 105px;
+  height: 6px;
+  background-image: url(../assets/header-backline.webp);
+  background-repeat: no-repeat;
+  margin-left: 10px;
+}
+.mist-engine .tab-notes .line-with-image img,
+.mist-engine .tab-biography .line-with-image img {
+  display: inline;
+  margin-right: 3px;
+}
+.mist-engine .tab-notes .line-with-image p,
+.mist-engine .tab-biography .line-with-image p {
+  display: inline;
+}
+.mist-engine section [data-group=litm-character-sheet] .tab-biography,
+.mist-engine section [data-group=litm-character-sheet] .tab-notes {
   margin-left: var(--litm-premium-left-margin);
 }
 .mist-engine .lock-toggle-container {
@@ -1049,10 +1099,9 @@ mt-10 {
 }
 .mist-engine .character-sheet-divider {
   align-items: start;
-  margin-left: var(--litm-premium-left-margin);
 }
 .mist-engine .character-sheet-divider .right-side {
-  flex-grow: 0.25;
+  margin-left: var(--litm-premium-left-margin);
 }
 .mist-engine .npc-sheet-divider {
   height: 100%;
@@ -1100,19 +1149,23 @@ mt-10 {
 .mist-engine .pointer {
   cursor: pointer;
 }
-.mist-engine .challenge-entry-container, .mist-engine .npc-challenges-container {
+.mist-engine .challenge-entry-container,
+.mist-engine .npc-challenges-container {
   font-family: Labrada, serif;
   color: #724a32;
 }
-.mist-engine .challenge-entry-container h2, .mist-engine .npc-challenges-container h2 {
+.mist-engine .challenge-entry-container h2,
+.mist-engine .npc-challenges-container h2 {
   font-family: Labrada, serif;
   color: #724a32;
   font-size: 1.3em;
 }
-.mist-engine .challenge-entry-container .list-entries, .mist-engine .npc-challenges-container .list-entries {
+.mist-engine .challenge-entry-container .list-entries,
+.mist-engine .npc-challenges-container .list-entries {
   margin-top: 20px;
 }
-.mist-engine .challenge-entry-container .list-entries .entry-content, .mist-engine .npc-challenges-container .list-entries .entry-content {
+.mist-engine .challenge-entry-container .list-entries .entry-content,
+.mist-engine .npc-challenges-container .list-entries .entry-content {
   flex-direction: row;
   display: flex;
 }

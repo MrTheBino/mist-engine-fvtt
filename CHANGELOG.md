@@ -1,5 +1,11 @@
 # CHANGELOG
 
+# 13.6.3
+- this system is now the official supported system by Son Of Oak
+- new stylized character sheets
+- pre-packaged 3 characters
+- lots of small tiny improvements here and there
+
 # 13.6.1
 - compendiums are now getting packed during release creation
   
