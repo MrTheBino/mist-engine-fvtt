@@ -27,9 +27,20 @@
     flex-direction: row;
     display: flex;
 
+    .change-custom-background-btn{
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 5px;
+    }
     .col-character-name{
       min-width: var(--litm-premium-left-margin);
       max-width: var(--litm-premium-left-margin);
+      &.edit-mode{
+        width: 80%;
+        max-width: 80%;
+        min-width: 80%;
+      }
     }
     .col-main {
       min-width: 150px;

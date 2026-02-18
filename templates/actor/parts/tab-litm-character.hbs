@@ -1,7 +1,7 @@
 <section class="tab {{tabs.character.id}} {{tabs.character.cssClass}} scrollable" id="character"
     data-tab="{{tabs.character.id}}" data-group="{{tabs.character.group}}">
     <div class="character-sheet-divider flexrow">
-        <div class="right-side">
+        <div class="right-side {{#if system.editMode}}edit-mode{{/if}}">
             <div class="litm-character-themebooks-container">
                 {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-themebooks.hbs'}}
                 <div class="themebooks-container grid grid-4col grid-themebook-container">

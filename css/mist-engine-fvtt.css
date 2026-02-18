@@ -466,9 +466,20 @@ mt-10 {
   flex-direction: row;
   display: flex;
 }
+.mist-engine .sheet-header .header-fields .change-custom-background-btn {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+}
 .mist-engine .sheet-header .header-fields .col-character-name {
   min-width: var(--litm-premium-left-margin);
   max-width: var(--litm-premium-left-margin);
+}
+.mist-engine .sheet-header .header-fields .col-character-name.edit-mode {
+  width: 80%;
+  max-width: 80%;
+  min-width: 80%;
 }
 .mist-engine .sheet-header .header-fields .col-main {
   min-width: 150px;
@@ -1102,6 +1113,9 @@ mt-10 {
 }
 .mist-engine .character-sheet-divider .right-side {
   margin-left: var(--litm-premium-left-margin);
+}
+.mist-engine .character-sheet-divider .right-side.edit-mode {
+  margin-left: 0;
 }
 .mist-engine .npc-sheet-divider {
   height: 100%;

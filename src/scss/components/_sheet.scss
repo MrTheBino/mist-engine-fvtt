@@ -587,6 +587,10 @@ section [data-group="litm-character-sheet"] {
 
   .right-side {
     margin-left: var(--litm-premium-left-margin);
+
+    &.edit-mode{
+      margin-left: 0;
+    }
   }
 }
 
