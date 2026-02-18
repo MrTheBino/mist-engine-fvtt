@@ -67,3 +67,7 @@ This system uses at present code snippets and graphics from the City of Mist HUD
   npm run watch (CSS live build)
   npm run pack-compendium (builds the foundry compendium entries)
   npm run unpack-compendium (unpacks the foundry compendium entries to json files in src/packs)
+
+
+## Foundry VTT Preview Screenshot
+![Current State Screenshot](./current_state_screenshot.webp)
