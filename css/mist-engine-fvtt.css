@@ -467,10 +467,9 @@ mt-10 {
   display: flex;
 }
 .mist-engine .sheet-header .header-fields .change-custom-background-btn {
-  width: 50%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5px;
+  margin: 5px;
 }
 .mist-engine .sheet-header .header-fields .col-character-name {
   min-width: var(--litm-premium-left-margin);

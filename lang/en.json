@@ -3,7 +3,8 @@
     "QUESTIONS": {
       "DeleteItem": "Are you sure you want to delete this item?",
       "DeleteChallenge": "Are you sure you want to delete this Challenge?",
-      "RemoveFellowshipThemecardConfirmation": "Are you sure you want to remove the Fellowship Themecard assignment? This will not delete the Themecard Actor, just unassign it from this character."
+      "RemoveFellowshipThemecardConfirmation": "Are you sure you want to remove the Fellowship Themecard assignment? This will not delete the Themecard Actor, just unassign it from this character.",
+      "RemoveCustomBackgroundConfirmation": "Are you sure you want to remove the custom background? This will not delete the image, just remove it from this character."
     },
     "HELP": {
       "FellowshipCreation": "Create a Fellowship Themecard Actor and assign ownership to all party members to see it here.",
@@ -56,6 +57,7 @@
       "ThreatsAndConsequences": "Threats & Consequences",
       "SelectedTagsAndStatuses": "Selected Tags & Statuses",
       "SelectCustomBackground": "Select Custom Background",
+      "RemoveCustomBackground": "Remove Custom Background",
       "Consequences": "Consequences",
       "Positive": "Positive",
       "Negative": "Negative",

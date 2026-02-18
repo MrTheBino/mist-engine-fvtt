@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 13.6.4
+- hot fix, added button to remove custom background
+  
 # 13.6.3
 - this system is now the official supported system by Son Of Oak
 - new stylized character sheets

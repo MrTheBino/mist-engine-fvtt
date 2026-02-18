@@ -25,6 +25,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             removeFellowshipThemecard: this.#handleRemoveFellowshipThemecard,
             assignFellowshipThemecard: this.#handleAssignFellowshipThemecard,
             clickedCustomBackground: this.#handleClickedCustomBackground,
+            clickedRemoveCustomBackground: this.#handleRemoveCustomBackground
         },
         form: {
             submitOnChange: true
@@ -689,5 +690,25 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         });
 
         picker.render(true);
+    }
+
+    static async #handleRemoveCustomBackground(event,target){
+        event.preventDefault();
+        // question if we shall remove the background
+        const proceed = await foundry.applications.api.DialogV2.confirm({
+            content: game.i18n.format("MIST_ENGINE.QUESTIONS.RemoveCustomBackgroundConfirmation"),
+            rejectClose: false,
+        });
+        if (proceed) {
+            await this.actor.update({
+                "system.customBackground": null
+            });
+            
+            this.render(true); // this doesn't work
+            // so let's enforce it by directly setting the background to default here as well
+            // after reloading the sheet it works, but this way the user gets immediate feedback that the background was removed without needing to wait for the sheet to reload
+            const el = this.element.querySelector?.(".window-content") ?? this.element;
+             el.style.backgroundImage = `url(/systems/mist-engine-fvtt/assets/default_sheet_background.webp)`;
+        }
     }
 }
