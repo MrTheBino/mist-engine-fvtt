@@ -2,7 +2,9 @@
 
 ![Foundry v13](https://img.shields.io/badge/foundry-v13-green) [![Github All Releases](https://img.shields.io/github/downloads/MrTheBino/mist-engine-fvtt/total.svg)]()
 
-This is an unoffical system implementation of Legend In The Mist from Son Of Oaks for FoundryVTT.
+This is the offical system implementation of Legend In The Mist from Son Of Oaks for FoundryVTT.
+
+The system contains 3 official pregenerated characters with full artwork for free.
 
 ## Features
 
@@ -25,6 +27,7 @@ This is an unoffical system implementation of Legend In The Mist from Son Of Oak
 * journey actor
 * short challenges / vignettes
 * NPCs can use short challenges as templates via drag'n'drop
+* custom character background graphics
   
 ## Items
  * Quintessence
@@ -32,11 +35,6 @@ This is an unoffical system implementation of Legend In The Mist from Son Of Oak
   
 ## KeyBindings  
  * Control + J -> Open Scene Tags
-  
-## ToDo
-
-- improved styling
-- usability improvements
 
 ## Manifest-URL for manual installation of the system
 
