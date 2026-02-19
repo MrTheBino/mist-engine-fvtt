@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 13.6.6
+- added line guide in the custom background editor to help you position your artwork
+  
 # 13.6.5
 - added a small custom background editor, you can select a custom background or use the default one, then you can upload your own artwork and place it on the background, then export it as PNG or set it directly as the actors background. User rights are checked.
   

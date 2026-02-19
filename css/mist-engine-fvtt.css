@@ -1951,6 +1951,9 @@ mt-10 {
   align-items: center;
   flex-wrap: wrap;
 }
+.custom-background-editor p.help-text {
+  color: white;
+}
 .custom-background-editor .stage {
   border: 1px solid var(--color-border-light-1);
   border-radius: 6px;

@@ -15,7 +15,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
         position: {
             left: 100,
             width: 1200,
-            height: 950
+            height: 1000
         },
         actions: {
             clickedReset: this.#handleClickedReset,
@@ -166,7 +166,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
 
     #overlay = { x: 200, y: 200, scale: 1.0, anchor: { x: 0.5, y: 0.5 } };
 
-    draw() {
+    draw(line = true) {
         const ctx = this.ctx, canvas = this.canvas;
         if (!ctx || !canvas) return;
 
@@ -174,6 +174,22 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
 
         if (this.bgImg) this.#drawCover(ctx, this.bgImg, 0, 0, canvas.width, canvas.height);
 
+        if(line == true){
+            const lineX = 300;
+            ctx.save();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "white";
+            ctx.beginPath();
+            ctx.moveTo(lineX, 0);
+            ctx.lineTo(lineX, canvas.height);
+            ctx.stroke();
+            ctx.strokeStyle = "black";
+            ctx.beginPath();
+            ctx.moveTo(lineX + 1, 0);
+            ctx.lineTo(lineX + 1, canvas.height);
+            ctx.stroke();
+            ctx.restore();
+        }
         if (this.overlayImg) {
             const img = this.overlayImg;
             const w = img.width * this.#overlay.scale;
@@ -196,7 +212,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
         const canvas = this.canvas;
         if (!canvas) return;
 
-        this.draw();
+        this.draw(false); // redraw without line for export
         const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
         if (!blob) return;
 
@@ -310,6 +326,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
         }
 
         try {
+            this.draw(false); // redraw without line for export
             const blob = await new Promise(r => this.canvas.toBlob(r, "image/png"));
             const file_path = await this.uploadToWorldAssets(blob, {
                 subdir: `custom_backgrounds/generated/${this.actor.id}`,

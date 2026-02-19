@@ -106,7 +106,8 @@
         "Reset": "Reset",
         "ExportPng": "Export as PNG",
         "UploadOverlayArtwork": "Upload Overlay Artwork",
-        "SetAsCustomBackground": "Set as Custom Background"
+        "SetAsCustomBackground": "Set as Custom Background",
+        "HelpText": "The Custom Background Editor allows you to create a custom background for your character by uploading (or copy and paste) an image and adjusting its position and scale. You can also export the customized background as a PNG file or set it directly as your character's background. Please note that you need permission to upload files to use this feature. Contact your GM if you don't have the necessary permissions. The line below is just a guide to help you position your artwork, it will not be visible in the exported image or the character background."
       }
     },
     "MOVES": {
