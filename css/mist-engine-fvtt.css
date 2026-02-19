@@ -466,6 +466,9 @@ mt-10 {
   flex-direction: row;
   display: flex;
 }
+.mist-engine .sheet-header .header-fields.npc, .mist-engine .sheet-header .header-fields.journey {
+  color: #724a32;
+}
 .mist-engine .sheet-header .header-fields .change-custom-background-btn {
   margin-left: auto;
   margin-right: auto;
@@ -651,6 +654,12 @@ mt-10 {
   background-repeat: no-repeat;
   row-gap: 0.5em;
 }
+.mist-engine.sheet.actor.npc h1.npc-name {
+  font-family: Labrada, serif;
+  font-size: 36px;
+  color: #724a32;
+  width: auto;
+}
 .mist-engine.sheet.item .window-content {
   background-image: url("../assets/bg-yellow-old-paper-textures.webp");
   background-repeat: no-repeat;
@@ -677,6 +686,16 @@ mt-10 {
   background-image: url("../assets/bg-yellow-old-paper-textures.webp");
   background-repeat: no-repeat;
   row-gap: 0.5em;
+}
+.mist-engine.sheet.actor.litm-journey h1.journey-name {
+  font-family: Labrada, serif;
+  font-size: 36px;
+  color: #724a32;
+  width: auto;
+}
+.mist-engine.sheet.actor.litm-journey .short-description {
+  font-family: Labrada, serif;
+  color: #724a32;
 }
 .mist-engine .storytag-item-editable {
   flex-grow: 8;
@@ -885,12 +904,6 @@ mt-10 {
   flex-direction: row;
   column-gap: 1em;
   justify-content: center;
-}
-.mist-engine .sheet-header .title h1.charname {
-  font-family: Labrada, serif;
-  font-size: 36px;
-  color: var(--litm-color-accent);
-  width: auto;
 }
 .mist-engine .sheet-header .short-description {
   font-family: Labrada, serif;

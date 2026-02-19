@@ -27,6 +27,10 @@
     flex-direction: row;
     display: flex;
 
+    &.npc,&.journey{
+      color: $c-styled-text;
+    }
+
     .change-custom-background-btn{
       margin-left: auto;
       margin-right: auto;

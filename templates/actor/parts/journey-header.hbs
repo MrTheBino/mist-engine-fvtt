@@ -2,25 +2,22 @@
     <header class="sheet-header">
         <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"
             height="120" />
-        <div class="header-fields">
+        <div class="header-fields journey">
             {{#if system.editMode}}
+            <div class="flexcol">
             {{!-- Edit Mode Layout --}}
             <div class="title">
-                <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" /></h1>
-                <div class="flexcol">
-                    <label for="system.difficulty">{{localize "MIST_ENGINE.LABELS.Npc.difficulty"}}</label>
-                </div>
+                <h1 class="journey-name"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" /></h1>
             </div>
             <div class="short-description"><input name="system.shortDescription" type="text"
                     value="{{system.shortDescription}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" /></div>
+            </div>
             {{else}}
             {{!-- Normal Layout --}}
-            <div class="title">
-                <h1 class="charname">{{actor.name}}</h1>
-                <div class="difficulty-icons">
-                </div>
+            <div class="flexcol">
+                <h1 class="journey-name">{{actor.name}}</h1>
+                <div class="short-description">{{{textWithTags system.shortDescription}}}</div>
             </div>
-            <div class="short-description">{{{textWithTags system.shortDescription}}}</div>
             {{/if}}
         </div>
     </header>

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 13.6.7
+- fixed font colors for all actor sheets except characters
+- removed lock icon for fellowship themecard actors, not needed because not supported for them
+- added option field for characters to change the font color of the character name
+  
 # 13.6.6
 - added line guide in the custom background editor to help you position your artwork
   

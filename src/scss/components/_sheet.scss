@@ -4,6 +4,13 @@
     background-repeat: no-repeat;
     row-gap: 0.5em;
   }
+
+  h1.npc-name {
+      font-family: $font-primary;
+      font-size: 36px;
+      color: $c-styled-text;
+      width: auto;
+    }
 }
 
 &.sheet.item {
@@ -43,6 +50,18 @@
     background-repeat: no-repeat;
     row-gap: 0.5em;
   }
+
+  h1.journey-name {
+      font-family: $font-primary;
+      font-size: 36px;
+      color: $c-styled-text;
+      width: auto;
+    }
+
+    .short-description{
+      font-family: $font-primary;
+      color: $c-styled-text;
+    }
 }
 
 .storytag-item-editable {
@@ -308,13 +327,6 @@
     flex-direction: row;
     column-gap: 1em;
     justify-content: center;
-
-    h1.charname {
-      font-family: $font-primary;
-      font-size: 36px;
-      color: var(--litm-color-accent);
-      width: auto;
-    }
   }
 
   .short-description {

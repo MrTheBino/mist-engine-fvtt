@@ -143,7 +143,10 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     /** @inheritDoc */
     _onRender(context, options) {
         this.#dragDrop.forEach((d) => d.bind(this.element))
-        this._renderModeToggle();
+
+        if(this.actor.type === "litm-character" || this.actor.type === "litm-npc" || this.actor.type === "litm-journey"){
+            this._renderModeToggle();
+        }
 
         // Input Event Listener for preventing toggling the enter mode, this is a strange behaviour of foundry, didn't know to handle it otherwise
         const constAllInputs = this.element.querySelectorAll('input');
@@ -273,7 +276,6 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     }
 
     static async #handleClickToggleLock(event, target) {
-        console.log("toggle lock");
         event.preventDefault();
         const name = target.dataset.name;
         const isLocked = foundry.utils.getProperty(this.actor, name);
