@@ -2,6 +2,7 @@ import { MistEngineActorSheet } from './actor-sheet.mjs';
 import { DiceRollApp } from '../apps/dice-roll-app.mjs';
 import { PowerTagAdapter } from '../lib/power-tag-adapter.mjs';
 import { MistSceneApp } from '../apps/scene-app.mjs';
+import { CustomBackgroundEditorApp } from '../apps/custom_background_editor.mjs';
 
 export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -25,7 +26,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             removeFellowshipThemecard: this.#handleRemoveFellowshipThemecard,
             assignFellowshipThemecard: this.#handleAssignFellowshipThemecard,
             clickedCustomBackground: this.#handleClickedCustomBackground,
-            clickedRemoveCustomBackground: this.#handleRemoveCustomBackground
+            clickedRemoveCustomBackground: this.#handleRemoveCustomBackground,
+            clickedCustomBackgroundEditor: this.#handleClickedCustomBackgroundEditor
         },
         form: {
             submitOnChange: true
@@ -710,5 +712,12 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             const el = this.element.querySelector?.(".window-content") ?? this.element;
              el.style.backgroundImage = `url(/systems/mist-engine-fvtt/assets/default_sheet_background.webp)`;
         }
+    }
+
+    static async #handleClickedCustomBackgroundEditor(event,target){
+        event.preventDefault();
+        const app = new CustomBackgroundEditorApp();
+        app.setActor(this.actor);
+        app.render(true);
     }
 }

@@ -1,0 +1,16 @@
+<div class="custom-background-editor">
+    <div class="toolbar flexrow">
+        <button type="button" class="btn" data-action="clickedSelectBackground"><i class="fa-solid fa-object-ungroup"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.PickBackground"}}</button>
+        <button class="btn" data-action="clickedUploadOverlay">
+            <i class="fa-solid fa-upload"></i>{{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.UploadOverlayArtwork"}} <input type="file" id="pick_overlay_file" accept="image/png,image/webp,image/jpeg" data-action="clickedPickOverlay" hidden>
+        </button>
+
+        <button type="button" class="btn" data-action="export-png"><i class="fa-solid fa-download"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.ExportPng"}}</button>
+        <button type="button" class="btn" data-action="clickedSetAsCustomBackground"><i class="fa-solid fa-image-portrait"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.SetAsCustomBackground"}}</button>
+        <button type="button" class="btn" data-action="clickedReset"><i class="fa-solid fa-arrows-rotate"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.Reset"}}</button>
+    </div>
+
+    <div class="stage">
+        <canvas data-ref="canvas" width="1100" height="800"></canvas>
+    </div>
+</div>

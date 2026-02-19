@@ -6,6 +6,9 @@
       "RemoveFellowshipThemecardConfirmation": "Are you sure you want to remove the Fellowship Themecard assignment? This will not delete the Themecard Actor, just unassign it from this character.",
       "RemoveCustomBackgroundConfirmation": "Are you sure you want to remove the custom background? This will not delete the image, just remove it from this character."
     },
+    "NOTIFICATIONS":{
+      "NotAllowedToUploadFilesForCustomBackground": "You do not have permission to upload files. Please contact your GM."
+    },
     "HELP": {
       "FellowshipCreation": "Create a Fellowship Themecard Actor and assign ownership to all party members to see it here.",
       "NoThemebooksInCharacter": "No Themebooks found. Create Themebook Items and drop them here.",
@@ -96,6 +99,14 @@
         "CharactersHeader": "Characters",
         "DiceRollModifiers": "Dice Roll Modifiers",
         "MightModifiers": "Might"
+      },
+      "CustomBackgroundEditor": {
+        "Button": "Custom Background Editor",
+        "PickBackground": "Pick Background",
+        "Reset": "Reset",
+        "ExportPng": "Export as PNG",
+        "UploadOverlayArtwork": "Upload Overlay Artwork",
+        "SetAsCustomBackground": "Set as Custom Background"
       }
     },
     "MOVES": {
