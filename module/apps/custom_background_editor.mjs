@@ -33,16 +33,16 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
         },
     };
 
-    #canvas = null;
-    #ctx = null;
-    #bgImg = null;
-    #overlayImg = null;
+    canvas = null;
+    ctx = null;
+    bgImg = null;
+    overlayImg = null;
 
     actor = null;
 
     // Drag state
-    #dragging = false;
-    #dragOffset = { x: 0, y: 0 };
+    dragging = false;
+    dragOffset = { x: 0, y: 0 };
 
     // System defaults
     static SYSTEM_ID = "mist-engine-fvtt";
@@ -63,10 +63,10 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
     async close(options) {
         window.removeEventListener("paste", this.#onPaste, true);
 
-        if (this.#canvas) {
-            this.#canvas.removeEventListener("pointerdown", this.#onPointerDown);
-            this.#canvas.removeEventListener("pointermove", this.#onPointerMove);
-            this.#canvas.removeEventListener("pointerup", this.#onPointerUp);
+        if (this.canvas) {
+            this.canvas.removeEventListener("pointerdown", this.#onPointerDown);
+            this.canvas.removeEventListener("pointermove", this.#onPointerMove);
+            this.canvas.removeEventListener("pointerup", this.#onPointerUp);
         }
         return super.close(options);
     }
@@ -74,8 +74,8 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
     _onRender(context, options) {
         super._onRender(context, options);
 
-        this.#canvas = this.element.querySelector("[data-ref='canvas']");
-        this.#ctx = this.#canvas?.getContext("2d", { alpha: true });
+        this.canvas = this.element.querySelector("[data-ref='canvas']");
+        this.ctx = this.canvas?.getContext("2d", { alpha: true });
 
         window.addEventListener("paste", this.#onPaste.bind(this), true);
 
@@ -100,20 +100,20 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
             input.value = "";
         });
 
-        this.#canvas.addEventListener("pointerdown", this.#onPointerDown);
-        this.#canvas.addEventListener("pointermove", this.#onPointerMove);
-        this.#canvas.addEventListener("pointerup", this.#onPointerUp);
-        this.#canvas.addEventListener("wheel", this.#onWheel, { passive: false });
+        this.canvas.addEventListener("pointerdown", this.#onPointerDown);
+        this.canvas.addEventListener("pointermove", this.#onPointerMove);
+        this.canvas.addEventListener("pointerup", this.#onPointerUp);
+        this.canvas.addEventListener("wheel", this.#onWheel, { passive: false });
 
 
         // Load background initial
         this.loadBackground(this.backgroundSrc).then(() => this.draw());
     }
 
-    #canvasPoint(ev) {
-        const rect = this.#canvas.getBoundingClientRect();
-        const scaleX = this.#canvas.width / rect.width;
-        const scaleY = this.#canvas.height / rect.height;
+    canvasPoint(ev) {
+        const rect = this.canvas.getBoundingClientRect();
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
         return {
             x: (ev.clientX - rect.left) * scaleX,
             y: (ev.clientY - rect.top) * scaleY,
@@ -121,7 +121,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
     }
 
     #hitTestOverlay(px, py) {
-        const img = this.#overlayImg;
+        const img = this.overlayImg;
         if (!img) return false;
 
         const w = img.width * this.#overlay.scale;
@@ -134,7 +134,6 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
     }
 
     static async #pickBackground(event, target) {
-        // Startpfad: System-Verzeichnis
         const startPath = CustomBackgroundEditorApp.DEFAULT_BG_DIR;
 
         const fp = new FilePicker({
@@ -153,7 +152,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
     }
 
     async loadBackground(src) {
-        this.#bgImg = await this.#loadImage(src);
+        this.bgImg = await this.#loadImage(src);
     }
 
     async #loadOverlayFromFile(file) {
@@ -161,22 +160,22 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
     }
 
     static async #handleClickedReset(event, target) {
-        this.#overlayImg = null;
+        this.overlayImg = null;
         this.draw();
     }
 
     #overlay = { x: 200, y: 200, scale: 1.0, anchor: { x: 0.5, y: 0.5 } };
 
     draw() {
-        const ctx = this.#ctx, canvas = this.#canvas;
+        const ctx = this.ctx, canvas = this.canvas;
         if (!ctx || !canvas) return;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        if (this.#bgImg) this.#drawCover(ctx, this.#bgImg, 0, 0, canvas.width, canvas.height);
+        if (this.bgImg) this.#drawCover(ctx, this.bgImg, 0, 0, canvas.width, canvas.height);
 
-        if (this.#overlayImg) {
-            const img = this.#overlayImg;
+        if (this.overlayImg) {
+            const img = this.overlayImg;
             const w = img.width * this.#overlay.scale;
             const h = img.height * this.#overlay.scale;
             const dx = this.#overlay.x - w * this.#overlay.anchor.x;
@@ -194,7 +193,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
     }
 
     async #exportPng() {
-        const canvas = this.#canvas;
+        const canvas = this.canvas;
         if (!canvas) return;
 
         this.draw();
@@ -243,11 +242,11 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
     async #loadOverlayFromBlob(blobOrFile) {
         const url = URL.createObjectURL(blobOrFile);
         try {
-            this.#overlayImg = await this.#loadImage(url);
+            this.overlayImg = await this.#loadImage(url);
 
             // Overlay zentrieren
-            this.#overlay.x = this.#canvas.width / 2;
-            this.#overlay.y = this.#canvas.height / 2;
+            this.#overlay.x = this.canvas.width / 2;
+            this.#overlay.y = this.canvas.height / 2;
             this.#overlay.scale = 1.0;
 
             this.draw();
@@ -257,37 +256,37 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
     }
 
     #onPointerDown = (ev) => {
-        if (!this.#overlayImg) return;
-        const { x, y } = this.#canvasPoint(ev);
+        if (!this.overlayImg) return;
+        const { x, y } = this.canvasPoint(ev);
 
         if (this.#hitTestOverlay(x, y)) {
-            this.#dragging = true;
-            this.#canvas.classList.add("dragging");
-            this.#dragOffset.x = x - this.#overlay.x;
-            this.#dragOffset.y = y - this.#overlay.y;
-            this.#canvas.setPointerCapture(ev.pointerId);
+            this.dragging = true;
+            this.canvas.classList.add("dragging");
+            this.dragOffset.x = x - this.#overlay.x;
+            this.dragOffset.y = y - this.#overlay.y;
+            this.canvas.setPointerCapture(ev.pointerId);
         }
     };
 
     #onPointerMove = (ev) => {
-        if (!this.#dragging) return;
-        const { x, y } = this.#canvasPoint(ev);
+        if (!this.dragging) return;
+        const { x, y } = this.canvasPoint(ev);
 
-        this.#overlay.x = x - this.#dragOffset.x;
-        this.#overlay.y = y - this.#dragOffset.y;
+        this.#overlay.x = x - this.dragOffset.x;
+        this.#overlay.y = y - this.dragOffset.y;
 
         this.draw();
     };
 
     #onPointerUp = (ev) => {
-        if (!this.#dragging) return;
-        this.#dragging = false;
-        this.#canvas?.classList.remove("dragging");
-        try { this.#canvas?.releasePointerCapture(ev.pointerId); } catch { }
+        if (!this.dragging) return;
+        this.dragging = false;
+        this.canvas?.classList.remove("dragging");
+        try { this.canvas?.releasePointerCapture(ev.pointerId); } catch { }
     };
 
     #onWheel = (ev) => {
-        if (!this.#overlayImg) return;
+        if (!this.overlayImg) return;
         ev.preventDefault();
 
         const delta = Math.sign(ev.deltaY);
@@ -311,7 +310,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
         }
 
         try {
-            const blob = await new Promise(r => this.#canvas.toBlob(r, "image/png"));
+            const blob = await new Promise(r => this.canvas.toBlob(r, "image/png"));
             const file_path = await this.uploadToWorldAssets(blob, {
                 subdir: `custom_backgrounds/generated/${this.actor.id}`,
                 filename: `${this.actor.id}-${Date.now()}.png`
