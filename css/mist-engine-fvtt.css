@@ -467,6 +467,8 @@ mt-10 {
   display: flex;
 }
 .mist-engine .sheet-header .header-fields.npc, .mist-engine .sheet-header .header-fields.journey {
+  display: flex;
+  flex-direction: column;
   color: #724a32;
 }
 .mist-engine .sheet-header .header-fields .change-custom-background-btn {
@@ -659,6 +661,28 @@ mt-10 {
   font-size: 36px;
   color: #724a32;
   width: auto;
+}
+.mist-engine.sheet.actor.npc h1.npc-name input {
+  height: 1.5em;
+}
+.mist-engine.sheet.actor.npc .npc-types {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+.mist-engine.sheet.actor.npc .npc-types .field-roles {
+  flex-basis: 80%;
+}
+.mist-engine.sheet.actor.npc .npc-types .field-difficulty {
+  flex-basis: 20%;
+}
+.mist-engine.sheet.actor.npc .npc-roles {
+  font-family: var(--litm-font-accent);
+  font-size: large;
+  text-align: center;
+}
+.mist-engine.sheet.actor.npc .npc-short-description textarea {
+  width: 100%;
 }
 .mist-engine.sheet.item .window-content {
   background-image: url("../assets/bg-yellow-old-paper-textures.webp");

@@ -10,6 +10,31 @@
       font-size: 36px;
       color: $c-styled-text;
       width: auto;
+    input {
+      height: 1.5em;
+    }
+  }
+
+  .npc-types {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    .field-roles {
+      flex-basis: 80%;
+    }
+    .field-difficulty {
+      flex-basis: 20%;
+    }
+  }
+
+  .npc-roles {
+    font-family: var(--litm-font-accent);
+    font-size: large;
+    text-align: center;
+  }
+
+  .npc-short-description textarea {
+    width: 100%;
     }
 }
 

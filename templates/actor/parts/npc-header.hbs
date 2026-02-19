@@ -6,14 +6,25 @@
             {{#if system.editMode}}
             {{!-- Edit Mode Layout --}}
             <div class="title">
-                <h1 class="npc-name"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" /></h1>
-                <div class="flexcol">
+                <h1 class="npc-name">
+                    <input name="name" type="text" value="{{actor.name}}"
+                        placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" />
+                </h1>
+            </div>
+            <div class="npc-types">
+                <div class="field-roles">
+                    <label for="system.roles">{{localize "MIST_ENGINE.LABELS.Npc.roles"}}</label>
+                    <input type="text" name="system.roles" value="{{system.roles}}" />
+                </div>
+                <div class="field-difficulty">
                     <label for="system.difficulty">{{localize "MIST_ENGINE.LABELS.Npc.difficulty"}}</label>
                     <input type="number" name="system.difficulty" value="{{system.difficulty}}" min="0" max="5" />
                 </div>
             </div>
-            <div class="npc-short-description"><input name="system.shortDescription" type="text"
-                    value="{{system.shortDescription}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" /></div>
+            <div class="npc-short-description">
+                <textarea name="system.shortDescription"
+                    placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}">{{system.shortDescription}}</textarea>
+            </div>
             {{else}}
             {{!-- Normal Layout --}}
             <div class="title">
@@ -25,6 +36,7 @@
                     {{/times}}
                 </div>
             </div>
+            <div class="npc-roles">{{system.roles}}</div>
             <div class="npc-short-description">{{{textWithTags system.shortDescription}}}</div>
             {{/if}}
         </div>

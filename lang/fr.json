@@ -76,6 +76,7 @@
       "Npc": {
         "details": "Détails",
         "biography": "Biographie",
+        "roles": "Rôles",
         "difficulty": "Difficulté",
         "limits": "Limites",
         "TagsAndStatuses": "Traits & Conditions",

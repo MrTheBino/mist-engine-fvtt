@@ -27,7 +27,10 @@
     flex-direction: row;
     display: flex;
 
-    &.npc,&.journey{
+    &.npc,
+    &.journey {
+      display: flex;
+      flex-direction: column;
       color: $c-styled-text;
     }
 
