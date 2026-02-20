@@ -230,6 +230,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
     #loadImage(src) {
         return new Promise((resolve, reject) => {
             const img = new Image();
+            img.crossOrigin = "anonymous"; // this might fix the CORS problem?
             img.onload = () => resolve(img);
             img.onerror = reject;
             img.src = src;

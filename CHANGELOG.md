@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 13.6.9
+- hotfix for CORS problem in the custom background editor, hope this fixes the issue with theForge
+  
 # 13.6.8
 - Updated NPC sheet header layout, added roles field (Paul)
 - fix: removing token hover information when a tokens gets deleted
