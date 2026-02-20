@@ -178,7 +178,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
             const lineX = 300;
             ctx.save();
             ctx.lineWidth = 3;
-            ctx.strokeStyle = "white";
+            ctx.strokeStyle = "red";
             ctx.beginPath();
             ctx.moveTo(lineX, 0);
             ctx.lineTo(lineX, canvas.height);

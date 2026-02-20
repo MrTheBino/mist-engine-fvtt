@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 13.6.8
+- Updated NPC sheet header layout, added roles field (Paul)
+- fix: removing token hover information when a tokens gets deleted
+  
 # 13.6.7
 - fixed font colors for all actor sheets except characters
 - removed lock icon for fellowship themecard actors, not needed because not supported for them

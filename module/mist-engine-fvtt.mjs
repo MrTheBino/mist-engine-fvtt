@@ -469,6 +469,12 @@ Hooks.on("hoverToken", (token, hovered) => {
   }
 });
 
+Hooks.on("preDeleteToken", (token, options, userId) => {
+  if (token.actor?.type === "litm-character") {
+    showCharacterTokenHover(token, false);
+  }
+});
+
 Hooks.once('diceSoNiceReady', (dice3d) => {
   if (game.settings.get("mist-engine-fvtt", "disableCustomDice") !== true) {
     
