@@ -333,6 +333,40 @@ mt-10 {
 .editor-content .line-with-image p {
   display: inline;
 }
+.editor-content table.example-actions-table {
+  background-color: transparent;
+  border-collapse: collapse;
+}
+.editor-content table.example-actions-table td {
+  border: 1px solid black;
+  text-align: center;
+  border-top: 0;
+  align-content: start;
+}
+.editor-content table.example-actions-table td .black-strong {
+  color: black;
+  font-weight: bold;
+}
+.editor-content table.example-actions-table tr:nth-child(odd) {
+  background-color: transparent;
+}
+.editor-content table.example-actions-table tr:nth-child(even) {
+  background-color: transparent;
+}
+.editor-content table.example-actions-table tr:first-child th {
+  border-top: 0;
+}
+.editor-content table.example-actions-table tr:last-child td {
+  border-bottom: 0;
+}
+.editor-content table.example-actions-table tr td:first-child,
+.editor-content table.example-actions-table tr th:first-child {
+  border-left: 0;
+}
+.editor-content table.example-actions-table tr td:last-child,
+.editor-content table.example-actions-table tr th:last-child {
+  border-right: 0;
+}
 
 .journal-entry-content {
   background-image: url(../assets/bg-pargement-texture.webp);
@@ -1227,6 +1261,7 @@ mt-10 {
   padding-left: 2px;
   padding-right: 2px;
   background-color: #ece800;
+  border-radius: 2px;
 }
 .mist-engine mark .status {
   background-color: #ece800;
@@ -1236,6 +1271,12 @@ mt-10 {
 }
 .mist-engine mark.orange {
   background-color: #ecb985;
+}
+.mist-engine mark.power {
+  background-color: #a9a9a9;
+  padding-left: 20px;
+  padding-right: 20px;
+  clip-path: polygon(0% 50%, 10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%);
 }
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;

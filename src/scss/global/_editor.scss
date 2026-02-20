@@ -1,51 +1,94 @@
-.editor{
-  &.prosemirror{
+.editor {
+  &.prosemirror {
     height: 100%;
   }
 }
 
-.editor-content{
-  h1{
+.editor-content {
+  h1 {
     color: $c-styled-text;
     font-family: $font-primary;
   }
 
-  h2{
-    color: $c-styled-text;
-    font-family: $font-primary;
-  }
-
-  h3{
+  h2 {
     color: $c-styled-text;
     font-family: $font-primary;
   }
 
   h3 {
-        // if want to display the image assets/icons/header-backline after the header text in the same line
-        display: flex;
-        align-items: center;
+    color: $c-styled-text;
+    font-family: $font-primary;
+  }
 
-        &.with-line {
-            &::after {
-                content: "";
-                display: inline-block;
-                width: 105px;
-                height: 6px;
-                background-image: url(../assets/header-backline.webp);
-                background-repeat: no-repeat;
-                margin-left: 10px;
-            }
-        }
+  h3 {
+    // if want to display the image assets/icons/header-backline after the header text in the same line
+    display: flex;
+    align-items: center;
+
+    &.with-line {
+      &::after {
+        content: "";
+        display: inline-block;
+        width: 105px;
+        height: 6px;
+        background-image: url(../assets/header-backline.webp);
+        background-repeat: no-repeat;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .line-with-image {
+    img {
+      display: inline;
+      margin-right: 3px;
     }
 
-    .line-with-image {
-        img {
-            display: inline;
-            margin-right: 3px;
-        }
-
-        p {
-            display: inline;
-        }
+    p {
+      display: inline;
     }
+  }
+
+  table.example-actions-table {
+    
+    background-color: transparent;
+    border-collapse: collapse;
+    td {
+      border: 1px solid black;
+      text-align: center;
+      border-top: 0;
+      align-content: start;
+
+      .black-strong {
+        color: black;
+        font-weight: bold;
+      }
+    }
+
+    tr:nth-child(odd) {
+      background-color: transparent;
+    }
+
+    tr:nth-child(even) {
+      background-color: transparent;
+    }
+
+    tr:first-child th {
+      border-top: 0;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    tr td:first-child,
+    tr th:first-child {
+      border-left: 0;
+    }
+
+    tr td:last-child,
+    tr th:last-child {
+      border-right: 0;
+    }
+  }
 }

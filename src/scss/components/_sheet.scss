@@ -724,6 +724,7 @@ mark {
   padding-left: 2px;
   padding-right: 2px;
   background-color: $c-tag-yellow;
+  border-radius: 2px;
 
   .status {
     background-color: $c-tag-yellow;
@@ -735,5 +736,19 @@ mark {
 
   &.orange {
     background-color: $c-tag-orange;
+  }
+
+  &.power {
+    background-color: $c-tag-power;
+    padding-left: 20px;
+    padding-right: 20px;
+    clip-path: polygon(
+      0% 50%,        // linke Spitze
+      10% 0%,        // linke obere Schräge
+      90% 0%,        // rechte obere Schräge
+      100% 50%,      // rechte Spitze
+      90% 100%,      // rechte untere Schräge
+      10% 100%       // linke untere Schräge
+    );
   }
 }

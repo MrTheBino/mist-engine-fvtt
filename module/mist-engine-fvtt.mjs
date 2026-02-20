@@ -15,7 +15,7 @@ import { MistSceneApp } from "./apps/scene-app.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MIST_ENGINE } from "./helpers/config.mjs";
-import { makeStyledTagOrStatusText } from "./lib/tag-status-text-helper.mjs";
+import { makeStyledTagOrStatusText,textWithTags } from "./lib/tag-status-text-helper.mjs";
 // Import DataModel classes
 import * as models from "./data/_module.mjs";
 import { setupMistEngineKeyBindings } from "./lib/key-binding.mjs";
@@ -27,18 +27,7 @@ import {Fonts} from "./lib/fonts.mjs";
 /*  Init Hook                                   */
 /* -------------------------------------------- */
 
-function extractBrackets(text) {
-  // Regulärer Ausdruck, der Inhalte zwischen [] findet
-  const regex = /\[(.*?)\]/g;
-  let matches = [];
-  let match;
 
-  while ((match = regex.exec(text)) !== null) {
-    matches.push(match[1]); // match[1] = Inhalt innerhalb der []
-  }
-
-  return matches;
-}
 
 Hooks.once("init", function () {
   // Add utility classes to the global game object so that they're more easily
@@ -196,11 +185,17 @@ Handlebars.registerHelper('indexPlusOne', function (n) {
 });
 
 Handlebars.registerHelper('itemTooltipHTML', function (item) {
-  return `<strong>${item.name}</strong><br/>${item.system.description}`;
+  let t = textWithTags(item.system.description);
+  // replace " with ' to avoid issues with HTML attributes
+  t = t.replace(/"/g, "'");
+  return `<strong>${item.name}</strong><br/>${t}`;
 });
 
 Handlebars.registerHelper('tooltipHTML', function (name, desc) {
-  return `<strong>${name}</strong><br/>${desc}`;
+  let t = textWithTags(desc);
+  // replace " with ' to avoid issues with HTML attributes
+  t = t.replace(/"/g, "'");
+  return `<strong>${name}</strong><br/>${t}`;
 });
 
 // If you need to add Handlebars helpers, here is a useful example:
@@ -236,24 +231,7 @@ Handlebars.registerHelper("times", function (n, block) {
 });
 
 Handlebars.registerHelper("textWithTags", function (str) {
-
-  const tags = extractBrackets(str);
-  let result = str;
-  tags.forEach((tag) => {
-    const [name, value] = tag.split("-");
-    if (tag.includes("-")) {
-      result = result.replace(
-        `[${tag}]`,
-        makeStyledTagOrStatusText(tag)
-      );
-    } else {
-      result = result.replace(
-        `[${tag}]`,
-        makeStyledTagOrStatusText(tag)
-      );
-    }
-  });
-  return result;
+  return textWithTags(str);
 });
 
 /* -------------------------------------------- */
