@@ -63,7 +63,7 @@ body {
   font-weight: bold;
   padding-left: 0.2em;
   padding-right: 0.2em;
-  background: #ece800;
+  background: rgba(223, 182, 43, 0.75);
 }
 
 .mist-engine.status {
@@ -71,7 +71,7 @@ body {
   font-weight: bold;
   padding-left: 0.2em;
   padding-right: 0.2em;
-  background: #bccdb0;
+  background: rgba(64, 134, 54, 0.75);
 }
 
 .mist-engine.limit {
@@ -79,7 +79,7 @@ body {
   font-weight: bold;
   padding-left: 0.2em;
   padding-right: 0.2em;
-  background: #d1a28e;
+  background: rgb(161, 61, 41);
 }
 
 .grid,
@@ -415,11 +415,11 @@ mt-10 {
   color: #742A2B;
 }
 .journal-entry-content .tag {
-  background-color: #ecb985;
+  background-color: rgba(223, 182, 43, 0.75);
   font-style: italic;
 }
 .journal-entry-content .status {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
   font-style: italic;
 }
 .journal-entry-content .notes {
@@ -875,7 +875,7 @@ mt-10 {
   padding-right: 0.2em;
 }
 .mist-engine .npc-limit-name {
-  background: #d1a28e;
+  background: rgb(161, 61, 41);
   padding-left: 0.2em;
   padding-right: 1em;
 }
@@ -925,12 +925,12 @@ mt-10 {
   background-size: 2em 1.5em;
 }
 .mist-engine .npc-threats-and-consequences-container li.entry-item .tag {
-  background-color: #ece800;
+  background-color: rgba(223, 182, 43, 0.75);
   border-radius: 4px;
   padding: 0 2px;
 }
 .mist-engine .npc-threats-and-consequences-container li.entry-item .status {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
   border-radius: 4px;
   padding: 0 2px;
 }
@@ -991,11 +991,11 @@ mt-10 {
   font-family: Labrada, serif;
 }
 .mist-engine .npc-biography .tag {
-  background-color: #ece800;
+  background-color: rgba(223, 182, 43, 0.75);
   border-radius: 4px;
 }
 .mist-engine .npc-biography .status {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
   border-radius: 4px;
 }
 .mist-engine .tab-description {
@@ -1004,11 +1004,11 @@ mt-10 {
   height: 100%;
 }
 .mist-engine .tab-description .tag {
-  background-color: #ece800;
+  background-color: rgba(223, 182, 43, 0.75);
   border-radius: 4px;
 }
 .mist-engine .tab-description .status {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
   border-radius: 4px;
 }
 .mist-engine .header-right-side {
@@ -1260,20 +1260,21 @@ mt-10 {
 .mist-engine mark {
   padding-left: 2px;
   padding-right: 2px;
-  background-color: #ece800;
+  background-color: rgba(223, 182, 43, 0.75);
   border-radius: 2px;
+  font-style: italic;
 }
 .mist-engine mark .status {
-  background-color: #ece800;
+  background-color: rgba(223, 182, 43, 0.75);
 }
 .mist-engine mark.green {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
 }
 .mist-engine mark.orange {
-  background-color: #ecb985;
+  background-color: rgba(223, 182, 43, 0.75);
 }
 .mist-engine mark.power {
-  background-color: #a9a9a9;
+  background-color: rgb(227, 221, 217);
   padding-left: 20px;
   padding-right: 20px;
   clip-path: polygon(0% 50%, 10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%);
@@ -1503,27 +1504,27 @@ mt-10 {
   display: inline-block;
 }
 .mist-engine .npc-tag {
-  background-color: #ece800;
+  background-color: rgba(223, 182, 43, 0.75);
 }
 .mist-engine .npc-tag-status-value {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
 }
 .mist-engine .fts-input-name.tag {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
   text-align: center;
 }
 .mist-engine .fts-input-name.status {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
   text-align: center;
 }
 .mist-engine .fts-input-name.negative {
-  background-color: #ecb985;
+  background-color: rgba(223, 182, 43, 0.75);
 }
 .mist-engine .fts-tag-modifier-toggle {
   float: left;
@@ -1534,7 +1535,7 @@ mt-10 {
   cursor: pointer;
 }
 .mist-engine .npc-limit-description .tag {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -1542,7 +1543,7 @@ mt-10 {
   font-weight: bold;
 }
 .mist-engine .npc-limit-description .status {
-  background-color: #ece800;
+  background-color: rgba(223, 182, 43, 0.75);
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -1833,13 +1834,13 @@ mt-10 {
   text-align: center;
 }
 .roll-dialog-container .selected-tags-container .tag.positive {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
   border-radius: 5px;
   color: #724a32;
   padding: 2px;
 }
 .roll-dialog-container .selected-tags-container .tag.negative {
-  background-color: #ecb985;
+  background-color: rgba(223, 182, 43, 0.75);
   border-radius: 5px;
   color: #724a32;
   padding: 2px;
@@ -1899,10 +1900,10 @@ mt-10 {
   border-radius: 5px;
 }
 .message-content .selected-tags .tag.positive {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
 }
 .message-content .selected-tags .tag.negative {
-  background-color: #ecb985;
+  background-color: rgba(223, 182, 43, 0.75);
 }
 
 .consequence-container {
@@ -1985,7 +1986,7 @@ mt-10 {
 }
 
 .scene-app-dice-roll-modifiers .listing .mod-entry {
-  background-color: #ece800;
+  background-color: rgba(223, 182, 43, 0.75);
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -1994,10 +1995,10 @@ mt-10 {
   margin-bottom: 2px;
 }
 .scene-app-dice-roll-modifiers .listing .mod-entry.positive {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
 }
 .scene-app-dice-roll-modifiers .listing .mod-entry.negative {
-  background-color: #ecb985;
+  background-color: rgba(223, 182, 43, 0.75);
 }
 
 .character-container .selected-tags-container {
@@ -2011,13 +2012,13 @@ mt-10 {
   text-align: center;
 }
 .character-container .selected-tags-container .tag.positive {
-  background-color: #bccdb0;
+  background-color: rgba(64, 134, 54, 0.75);
   border-radius: 5px solid black;
   color: #724a32;
   padding: 2px;
 }
 .character-container .selected-tags-container .tag.negative {
-  background-color: #ecb985;
+  background-color: rgba(223, 182, 43, 0.75);
   border-radius: 5px solid black;
   color: #724a32;
   padding: 2px;
@@ -2135,7 +2136,7 @@ mt-10 {
 }
 .character-token-overlay .weakness {
   font-style: italic;
-  color: #ecb985;
+  color: rgba(223, 182, 43, 0.75);
 }
 .character-token-overlay .overlay-tag-entry {
   margin-bottom: 3px;
