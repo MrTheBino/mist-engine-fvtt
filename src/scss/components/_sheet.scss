@@ -59,6 +59,13 @@
     row-gap: 0.5em;
     background-size: cover;
   }
+
+  h1.charname {
+    font-family: $font-primary;
+    font-size: 36px;
+    color: var(--litm-color-accent);
+    width: auto;
+  }
 }
 
 &.sheet.actor.litm-fellowship-themecard {
