@@ -73,7 +73,8 @@ Hooks.once("init", function () {
     backpack: models.MistEngineItemBackpack,
     "scene-data": models.MistEngineSceneData,
     quintessence: models.MistEngineQuintessence,
-    shortchallenge: models.MistEngineShortChallenge
+    shortchallenge: models.MistEngineShortChallenge,
+    themekit: models.MistEngineThemekit
   };
 
   // Active Effects are never copied to the Actor,
