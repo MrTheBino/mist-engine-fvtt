@@ -3,7 +3,8 @@
     "THEMEKITS": {
       "Powertags": "Powertags",
       "WeaknessTags": "Weakness Tags",
-      "SpecialImprovements": "Special Improvements"
+      "SpecialImprovements": "Special Improvements",
+      "Quest": "Quest"
     },
     "QUESTIONS": {
       "DeleteItem": "Are you sure you want to delete this item?",

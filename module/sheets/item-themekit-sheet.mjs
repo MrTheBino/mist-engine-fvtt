@@ -17,7 +17,9 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
             addPowertag: this.#handleAddPowertag,
             deletePowertag: this.#handleDeletePowertag,
             deleteWeaknesstag: this.#handleDeleteWeaknesstag,
-            importCSV: this.#handleImportCSV
+            addSpecialImprovement: this.#handleAddSpecialImprovement,
+            importCSV: this.#handleImportCSV,
+            deleteSpecialImprovement: this.#handleDeleteSpecialImprovement
         },
         form: {
             // handler: DCCActorSheet.#onSubmitForm,
@@ -40,7 +42,7 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
     /** @inheritDoc */
     static PARTS = {
         header: {
-            template: 'systems/mist-engine-fvtt/templates/item/parts/item-header.hbs'
+            template: 'systems/mist-engine-fvtt/templates/item/parts/item-themekit-header.hbs'
         },
         tabs: {
             // Foundry-provided generic template
@@ -52,6 +54,12 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
         },
         weaknesstags: {
             template: 'systems/mist-engine-fvtt/templates/item/parts/item-themekit-weaknesstags.hbs'
+        },
+        specialimprovements:{
+            template: 'systems/mist-engine-fvtt/templates/item/parts/item-themekit-specialimprovements.hbs'
+        },
+        quest: {
+            template: 'systems/mist-engine-fvtt/templates/item/parts/item-themekit-quest.hbs'
         },
         description: {
             template: 'systems/mist-engine-fvtt/templates/shared/tab-description.hbs',
@@ -70,6 +78,8 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
                 [
                     { id: 'powertags', group: 'sheet', label: 'MIST_ENGINE.THEMEKITS.Powertags' },
                     { id: 'weaknesstags', group: 'sheet', label: 'MIST_ENGINE.THEMEKITS.WeaknessTags' },
+                    { id: 'specialimprovements', group: 'sheet', label: 'MIST_ENGINE.THEMEKITS.SpecialImprovements' },
+                    { id: 'quest', group: 'sheet', label: 'MIST_ENGINE.THEMEKITS.Quest' },
                     { id: 'description', group: 'sheet', label: 'MIST_ENGINE.LABELS.Description' },
                 ],
             initial: 'powertags'
@@ -233,6 +243,26 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
         if (index !== undefined) {
             weaknesstags.splice(index, 1);
             await item.update({ "system.weaknesstags": weaknesstags });
+        }
+    }
+
+    static async #handleAddSpecialImprovement(event, target) {
+        event.preventDefault();
+        // adds a new special improvement to the themekit
+        const item = this.document;
+        const specialImprovements = item.system.specialImprovements || [];
+        specialImprovements.push({ name: "New Special Improvement" });
+        await item.update({ "system.specialImprovements": specialImprovements });
+    }
+
+    static async #handleDeleteSpecialImprovement(event, target) {
+        event.preventDefault();
+        const item = this.document;
+        const specialImprovements = item.system.specialImprovements || [];
+        const index = target.dataset.index;
+        if (index !== undefined) {
+            specialImprovements.splice(index, 1);
+            await item.update({ "system.specialImprovements": specialImprovements });
         }
     }
 

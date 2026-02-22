@@ -1,6 +1,6 @@
 <section class="tab {{tabs.weaknesstags.id}} {{tabs.weaknesstags.cssClass}} scrollable" id="weaknesstags" data-tab="{{tabs.weaknesstags.id}}"
     data-group="{{tabs.weaknesstags.group}}">
-    <div class="flexrow">
+    <div class="flexrow  mb-10">
         <button data-action="addWeaknesstag">
              <i class='fas fa-plus'></i>
             Add Weakness Tag
@@ -14,7 +14,7 @@
         {{#each system.weaknesstags}}
         <div class="item-storytag-line flexrow">
             <input type="text" name="system.weaknesstags.{{@index}}.name" value="{{this.name}}" />
-            <a class="themebook-icon" data-action="deleteWeaknesstag" data-index="{{@index}}">
+            <a class="themebook-icon" data-action="deleteWeaknesstag" data-index="{{@index}}" style="flex-grow: 0.1;">
                 <i class='fas fa-trash'></i>
             </a>
         </div>

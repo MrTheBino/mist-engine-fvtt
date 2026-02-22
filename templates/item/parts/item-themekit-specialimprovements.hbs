@@ -1,0 +1,12 @@
+<section class="tab {{tabs.specialimprovements.id}} {{tabs.specialimprovements.cssClass}} scrollable" id="specialimprovements" data-tab="{{tabs.specialimprovements.id}}"
+    data-group="{{tabs.specialimprovements.group}}">
+    <div class="flexrow mb-10">
+        <button data-action="addSpecialImprovement">
+            <i class='fas fa-plus'></i>
+            Add Special Improvement
+        </button>
+    </div>
+    {{#each system.specialImprovements as |imp index|}}
+        {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-special-improvement-line.hbs" index=index imp=imp showDelete=true}}
+    {{/each}}
+</section>

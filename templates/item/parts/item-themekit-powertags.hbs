@@ -1,6 +1,6 @@
 <section class="tab {{tabs.powertags.id}} {{tabs.powertags.cssClass}} scrollable" id="powertags" data-tab="{{tabs.powertags.id}}"
     data-group="{{tabs.powertags.group}}">
-    <div class="flexrow">
+    <div class="flexrow  mb-10">
         <button data-action="addPowertag">
             <i class='fas fa-plus'></i>
             Add Powertag
@@ -14,7 +14,7 @@
         {{#each system.powertags}}
         <div class="item-storytag-line flexrow">
             <input type="text" name="system.powertags.{{@index}}.name" value="{{this.name}}" />
-            <a class="themebook-icon" data-action="deletePowertag" data-index="{{@index}}">
+            <a class="themebook-icon" data-action="deletePowertag" data-index="{{@index}}" style="flex-grow: 0.1;">
                 <i class='fas fa-trash'></i>
             </a>
         </div>

@@ -43,7 +43,7 @@ export function buildSpecialImprovements(){
             name: new fields.StringField({ blank: true }),
             active: new fields.BooleanField({ initial: false }),
             description: new fields.StringField({ blank: true })
-        }),{ min: 5, initial: Array(5).fill({name: "", active: false, description: ""}) });
+        }),{ min: 3, initial: Array(5).fill({name: "", active: false, description: ""}) });
 
   return schema;
 }
