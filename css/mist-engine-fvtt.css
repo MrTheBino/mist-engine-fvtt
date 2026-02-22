@@ -735,6 +735,12 @@ mt-10 {
   row-gap: 0.5em;
   background-size: cover;
 }
+.mist-engine.sheet.actor.litm-character h1.charname {
+  font-family: Labrada, serif;
+  font-size: 36px;
+  color: var(--litm-color-accent);
+  width: auto;
+}
 .mist-engine.sheet.actor.litm-fellowship-themecard .window-content {
   background-image: url("../assets/bg-yellow-old-paper-textures.webp");
   background-repeat: no-repeat;
@@ -1264,7 +1270,7 @@ mt-10 {
   border-radius: 2px;
   font-style: italic;
 }
-.mist-engine mark .status {
+.mist-engine mark.status {
   background-color: rgba(223, 182, 43, 0.75);
 }
 .mist-engine mark.green {
