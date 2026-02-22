@@ -1,0 +1,23 @@
+<section class="tab {{tabs.powertags.id}} {{tabs.powertags.cssClass}} scrollable" id="powertags" data-tab="{{tabs.powertags.id}}"
+    data-group="{{tabs.powertags.group}}">
+    <div class="flexrow">
+        <button data-action="addPowertag">
+            <i class='fas fa-plus'></i>
+            Add Powertag
+        </button>
+        <button data-action="importCSV" data-type="powertags">
+            <i class="fa-solid fa-file-import"></i>
+            Import
+        </button>
+    </div>
+    <div class="flexcol powertags-container">
+        {{#each system.powertags}}
+        <div class="item-storytag-line flexrow">
+            <input type="text" name="system.powertags.{{@index}}.name" value="{{this.name}}" />
+            <a class="themebook-icon" data-action="deletePowertag" data-index="{{@index}}">
+                <i class='fas fa-trash'></i>
+            </a>
+        </div>
+        {{/each}}
+    </div>
+</section>

@@ -1,0 +1,23 @@
+<section class="tab {{tabs.weaknesstags.id}} {{tabs.weaknesstags.cssClass}} scrollable" id="weaknesstags" data-tab="{{tabs.weaknesstags.id}}"
+    data-group="{{tabs.weaknesstags.group}}">
+    <div class="flexrow">
+        <button data-action="addWeaknesstag">
+             <i class='fas fa-plus'></i>
+            Add Weakness Tag
+        </button>
+        <button data-action="importCSV" data-type="weaknesstags">
+            <i class="fa-solid fa-file-import"></i>
+            Import
+        </button>
+    </div>
+    <div class="flexcol weaknesstags-container">
+        {{#each system.weaknesstags}}
+        <div class="item-storytag-line flexrow">
+            <input type="text" name="system.weaknesstags.{{@index}}.name" value="{{this.name}}" />
+            <a class="themebook-icon" data-action="deleteWeaknesstag" data-index="{{@index}}">
+                <i class='fas fa-trash'></i>
+            </a>
+        </div>
+        {{/each}}
+    </div>
+</section>

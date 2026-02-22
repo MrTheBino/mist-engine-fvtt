@@ -9,6 +9,7 @@ import { MistEngineLegendInTheMistNpcSheet } from "./sheets/litm-npc-sheet.mjs";
 import { MistEngineLegendInTheMistFellowshipThemecard } from "./sheets/litm-fellowship-themecard.mjs"
 import { MistEngineItemSheet } from "./sheets/item-sheet.mjs";
 import { MistEngineShortChallengeItemSheet } from "./sheets/item-shortchallenge-sheet.mjs";
+import { MistEngineItemThemekitSheet } from "./sheets/item-themekit-sheet.mjs";
 import { MistEngineLegendInTheMistJourneySheet } from "./sheets/litm-actor-journey-sheet.mjs";
 import { MistSceneApp } from "./apps/scene-app.mjs";
 
@@ -128,6 +129,13 @@ Hooks.once("init", function () {
     types: ["shortchallenge"],
     label: "MIST_ENGINE.SheetLabels.ShortChallengeItem",
   });
+
+  foundry.documents.collections.Items.registerSheet("mist-engine-fvtt", MistEngineItemThemekitSheet, {
+    makeDefault: true,
+    types: ["themekit"],
+    label: "MIST_ENGINE.SheetLabels.ThemekitItem",
+  });
+  
 
   Fonts.register();
   setupMistEngineKeyBindings();
