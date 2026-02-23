@@ -78,7 +78,6 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
         ...compendiumThemeKits
         ];
 
-        console.log("All themekits:", allThemeKits);
         // now we group them by property 'themekit_type', if themekit_type in uppercase is not set, we put it in a group called 'OTHER'
         // each group hash is {groupName: string, themekits: array of themekits}
         const themekitsByType = {};
@@ -128,6 +127,7 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
         if(this.actorThemebook){
             // we only set the UUID of the themebook with the currentSelectedThemekit
             await this.actorThemebook.update({ "system.themeKitUUID": this.currentSelectedThemekit.uuid });
+            ui.notifications.notify( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AssignedThemekit", { themekitName: this.currentSelectedThemekit.name, characterName: this.actor.name }));
             this.close();
             return;
         }
@@ -154,6 +154,6 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
 
         // now we create the themebook item in the actor's inventory
         await this.actor.createEmbeddedDocuments("Item", [themebookData]);
-        ui.notifications.info(`Added themekit ${this.currentSelectedThemekit.name} to actor ${this.actor.name}`);
+        ui.notifications.info( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedThemekit", { themekitName: this.currentSelectedThemekit.name, actorName: this.actor.name }));
     }
 }

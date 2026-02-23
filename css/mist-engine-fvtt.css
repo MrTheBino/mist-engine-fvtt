@@ -1088,6 +1088,7 @@ body {
   display: flex;
   flex-direction: row;
   column-gap: 0.25em;
+  min-width: 136px;
 }
 .mist-engine .fts-markings-container {
   text-align: center;
@@ -2167,10 +2168,10 @@ body {
 }
 
 #themekit-selection-app > section.window-content {
-  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-image: url("../assets/bg-dark-old-paper-textures.webp");
   background-repeat: no-repeat;
   font-family: Labrada, serif;
-  color: #724a32;
+  color: var(--litm-color-accent);
 }
 #themekit-selection-app > section.window-content .left-panel {
   flex-grow: 0.4;
@@ -2189,36 +2190,48 @@ body {
   height: 600px;
 }
 #themekit-selection-app > section.window-content .right-panel mark {
-  margin-bottom: 5px;
+  color: var(--litm-color-accent);
 }
 #themekit-selection-app > section.window-content h1,
 #themekit-selection-app > section.window-content h2,
 #themekit-selection-app > section.window-content h3,
 #themekit-selection-app > section.window-content h4 {
   font-family: Labrada, serif;
-  color: #724a32;
+  color: var(--litm-color-accent);
+}
+#themekit-selection-app > section.window-content h1.with-line::after,
+#themekit-selection-app > section.window-content h2.with-line::after,
+#themekit-selection-app > section.window-content h3.with-line::after,
+#themekit-selection-app > section.window-content h4.with-line::after {
+  content: "";
+  display: inline-block;
+  width: 105px;
+  height: 6px;
+  background-image: url(../assets/header-backline.webp);
+  background-repeat: no-repeat;
+  margin-left: 10px;
 }
 #themekit-selection-app > section.window-content .group-header {
   font-size: 1.2em;
   font-weight: bold;
-  color: #724a32;
+  color: var(--litm-color-accent);
 }
 #themekit-selection-app > section.window-content .tag-container {
   line-height: 1.5em;
 }
 
 #themekit-character-app > section.window-content {
-  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-image: url("../assets/bg-dark-old-paper-textures.webp");
   background-repeat: no-repeat;
   font-family: Labrada, serif;
-  color: #724a32;
+  color: var(--litm-color-accent);
 }
 #themekit-character-app > section.window-content h1,
 #themekit-character-app > section.window-content h2,
 #themekit-character-app > section.window-content h3,
 #themekit-character-app > section.window-content h4 {
   font-family: Labrada, serif;
-  color: #724a32;
+  color: var(--litm-color-accent);
 }
 #themekit-character-app > section.window-content h1.with-line::after,
 #themekit-character-app > section.window-content h2.with-line::after,
@@ -2232,10 +2245,13 @@ body {
   background-repeat: no-repeat;
   margin-left: 10px;
 }
+#themekit-character-app > section.window-content mark {
+  color: var(--litm-color-accent);
+}
 #themekit-character-app > section.window-content .group-header {
   font-size: 1.2em;
   font-weight: bold;
-  color: #724a32;
+  color: var(--litm-color-accent);
 }
 #themekit-character-app > section.window-content .tag-container {
   line-height: 1.5em;

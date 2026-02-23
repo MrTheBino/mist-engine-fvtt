@@ -24,14 +24,14 @@
                 <h2>{{currentSelectedThemekit.name}}</h2>
                 <p>{{currentSelectedThemekit.system.description}}</p>
                 <!-- list powertags -->
-                <h3>{{localize "MIST_ENGINE.THEMEKITS.Powertags"}}</h3>
+                <h3 class="with-line">{{localize "MIST_ENGINE.THEMEKITS.Powertags"}}</h3>
                 <div class="tag-container">
                     {{#each currentSelectedThemekit.system.powertags}}
                     <mark class="status green">{{this.name}}</mark>
                     {{/each}}
                 </div>
                 <!-- list weaknesses -->
-                <h3>{{localize "MIST_ENGINE.THEMEKITS.WeaknessTags"}}</h3>
+                <h3 class="with-line">{{localize "MIST_ENGINE.THEMEKITS.WeaknessTags"}}</h3>
                 <div class="tag-container">
                     {{#each currentSelectedThemekit.system.weaknesstags}}
                     <mark class="status yellow">{{this.name}}</mark>
@@ -39,13 +39,13 @@
                 </div>
                 <!-- show quest -->
                 {{#if currentSelectedThemekit.system.quest}}
-                <h3>{{localize "MIST_ENGINE.THEMEKITS.Quest"}}</h3>
+                <h3 class="with-line">{{localize "MIST_ENGINE.THEMEKITS.Quest"}}</h3>
                 <p>{{currentSelectedThemekit.system.quest}}</p>
                 {{/if}}
 
                 <!-- list specialImprovements, but only when the name is not empty -->
                 {{#if hasSpecialImprovements}}
-                <h3>{{localize "MIST_ENGINE.THEMEKITS.SpecialImprovements"}}</h3>
+                <h3 class="with-line">{{localize "MIST_ENGINE.THEMEKITS.SpecialImprovements"}}</h3>
                 <ul>
                     {{#each currentSelectedThemekit.system.specialImprovements}}
                     {{#if this.name}}

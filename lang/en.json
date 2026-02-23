@@ -19,7 +19,13 @@
       "RemoveThemekitConfirmation": "Are you sure you want to remove this themekit? This will not delete the themekit item, just unassign it from this character's themebook."
     },
     "NOTIFICATIONS":{
-      "NotAllowedToUploadFilesForCustomBackground": "You do not have permission to upload files. Please contact your GM."
+      "NotAllowedToUploadFilesForCustomBackground": "You do not have permission to upload files. Please contact your GM.",
+      "AddedThemekit": "Added themekit {themekitName} to actor {actorName}",
+      "AddedPowertag": "Added powertag {tagName}",
+      "AddedWeaknessTag": "Added weakness tag {tagName}",
+      "AddedSpecialImprovement": "Added special improvement {siName}",
+      "SetQuest": "Set quest to {quest}",
+      "AssignedThemekit": "Assigned themekit {themekitName} to character {characterName}"
     },
     "HELP": {
       "FellowshipCreation": "Create a Fellowship Themecard Actor and assign ownership to all party members to see it here.",

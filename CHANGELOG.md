@@ -6,6 +6,7 @@
 - added themekit assignment for empty characters
 - assign & remove themekits to exisiting themebooks
 - add powertags from themekits to themebooks
+- faster deletion of tags & statuses
 
 # 13.6.9
 - hotfix for CORS problem in the custom background editor, hope this fixes the issue with theForge

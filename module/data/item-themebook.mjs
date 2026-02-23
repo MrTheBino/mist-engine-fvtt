@@ -162,6 +162,8 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
                 this.hasAssignedThemekit = true;
             }).catch(err => {
                 console.error(`Error fetching themekit with UUID ${this.themeKitUUID}:`, err);
+                this.themekit = null;
+                this.themeKitUUID = null;
             });
         }
     }

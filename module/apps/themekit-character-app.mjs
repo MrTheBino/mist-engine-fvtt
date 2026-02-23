@@ -58,9 +58,8 @@ export class ThemekitCharacterApp extends HandlebarsApplicationMixin(Application
             const powertag = this.actorThemebook.system[`powertag${i}`];
             if(powertag && (!powertag.name || powertag.name.trim() === "")){
                 await this.actorThemebook.update({ [`system.powertag${i}.name`]: tagName });
-                console.log(`Added powertag ${tagName} to powertag${i}`);
                 this.actor.render();
-                ui.notifications.notify(`Added powertag ${tagName}`);
+                ui.notifications.notify( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedPowertag", { tagName }));
                 break;
             }
         }
@@ -73,9 +72,8 @@ export class ThemekitCharacterApp extends HandlebarsApplicationMixin(Application
             const weaknessTag = this.actorThemebook.system[`weaknesstag${i}`];
             if(weaknessTag && (!weaknessTag.name || weaknessTag.name.trim() === "")){
                 await this.actorThemebook.update({ [`system.weaknesstag${i}.name`]: tagName });
-                console.log(`Added weakness tag ${tagName} to weaknesstag${i}`);
                 this.actor.render();
-                ui.notifications.notify(`Added weakness tag ${tagName}`);
+                ui.notifications.notify( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedWeaknessTag", { tagName }));
                 break;
             }
         }
@@ -84,9 +82,8 @@ export class ThemekitCharacterApp extends HandlebarsApplicationMixin(Application
     static async #handleSetQuest(event,target){
         const quest = this.currentSelectedThemekit.system.quest;
         await this.actorThemebook.update({ [`system.quest`]: quest });
-        console.log(`Set quest to ${quest}`);
         this.actor.render();
-        ui.notifications.notify(`Set quest to ${quest}`);
+        ui.notifications.notify( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.SetQuest", { quest }));
     }
 
     static async #handleAddSpecialImprovement(event,target){
@@ -106,10 +103,8 @@ export class ThemekitCharacterApp extends HandlebarsApplicationMixin(Application
             for(let i = 0; i < specialImprovements.length; i++){
                 const si = specialImprovements[i];
                 if(!si.name || si.name.trim() === ""){
-                    console.log(`Adding special improvement ${improvementData.name} to specialImprovements.${i}`);
                     specialImprovements[i] = improvementData;
                     await this.actorThemebook.update({ [`system.specialImprovements`]: specialImprovements });
-                    console.log(`Added special improvement ${improvementData.name} to specialImprovements.${i}`);
                     this.actor.render();
                     added = true;
 
@@ -118,12 +113,11 @@ export class ThemekitCharacterApp extends HandlebarsApplicationMixin(Application
             }
             if(!added){
                 await this.actorThemebook.update({ [`system.specialImprovements`]: [...specialImprovements, improvementData] });
-                console.log(`Added special improvement ${improvementData.name} to specialImprovements.${specialImprovements.length}`);
                 this.actor.render();
             }
 
             // ui notification
-            ui.notifications.notify(`Added special improvement ${improvementData.name}`);
+            ui.notifications.notify( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedSpecialImprovement", { siName: improvementData.name }));
         }
     }
 

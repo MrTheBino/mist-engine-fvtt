@@ -1,8 +1,8 @@
 #themekit-selection-app>section.window-content {
-    background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+    background-image: url("../assets/bg-dark-old-paper-textures.webp");
     background-repeat: no-repeat;
     font-family: $font-primary;
-    color: $c-styled-text;
+    color: var(--litm-color-accent);
 
     .left-panel {
         flex-grow: 0.4;
@@ -23,7 +23,7 @@
         }
 
         mark {
-            margin-bottom: 5px;
+            color: var(--litm-color-accent);
         }
     }
 
@@ -32,13 +32,24 @@
     h3,
     h4 {
         font-family: $font-primary;
-        color: $c-styled-text;
+        color: var(--litm-color-accent);
+        &.with-line {
+            &::after {
+                content: "";
+                display: inline-block;
+                width: 105px;
+                height: 6px;
+                background-image: url(../assets/header-backline.webp);
+                background-repeat: no-repeat;
+                margin-left: 10px;
+            }
+        }
     }
 
     .group-header{
         font-size: 1.2em;
         font-weight: bold;
-        color: $c-styled-text;
+        color: var(--litm-color-accent);
     }
 
     .tag-container{

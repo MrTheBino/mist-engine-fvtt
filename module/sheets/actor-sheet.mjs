@@ -287,8 +287,26 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     static async #handleDeleteFloatingTagOrStatus(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
-        await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(this.actor, index);
-        this.sendFloatableTagOrStatusUpdate();
+         let confirmed = true;
+        if(target.dataset.confirm && target.dataset.confirm == "1"){
+            confirmed = await foundry.applications.api.DialogV2.confirm({
+                title: "Confirm Deletion",
+                content: "Are you sure you want to delete this tag/status?",
+                yes: {
+                    label: "Yes",
+                    callback: () => true
+                },
+                no: {
+                    label: "No",
+                    callback: () => false
+                }
+            });   
+        }
+        
+        if(confirmed){
+            await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(this.actor, index);
+            this.sendFloatableTagOrStatusUpdate();
+        }
     }
 
     async handleFtStatChanged(event) {

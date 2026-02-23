@@ -45,6 +45,7 @@
                 <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-index="{{@index}}">
                     {{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}
                 </span>
+                <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{@index}}" data-confirm="1" title="delete this tag/status"></i>
                 <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{@index}}" title="toggle between tag and status"></i>
                 </div>
             {{/if}}

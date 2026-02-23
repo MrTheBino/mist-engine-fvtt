@@ -40,7 +40,6 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             removeSceneAppRollMod: this.#handleRemoveSceneAppRollMod,
             clickToggleLock: this.#handleFtsEditableCheckboxChanged,
             toggleFloatingTagOrStatusMarking: this.#handleToggleFloatingTagOrStatusMarking,
-            deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus,
             toggleDiceRollModifier: this.#handleToggleDiceRollModifier,
             // story floating tags and statuses
             toggleFloatingTagOrStatusSelected: this.#handleToggleFloatingTagOrStatusSelected,
@@ -325,6 +324,26 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         
         if(game.user.isGM === false) return;
         if(!this.currentSceneDataItem) return;
+
+        let confirmed = true;
+        if(target.dataset.confirm && target.dataset.confirm == "1"){
+            confirmed = await foundry.applications.api.DialogV2.confirm({
+                title: "Confirm Deletion",
+                content: "Are you sure you want to delete this tag/status?",
+                yes: {
+                    label: "Yes",
+                    callback: () => true
+                },
+                no: {
+                    label: "No",
+                    callback: () => false
+                }
+            });   
+        }
+
+        if(!confirmed){
+                return;
+        }
 
         const index = target.dataset.index;
         await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(this.currentSceneDataItem, index);
