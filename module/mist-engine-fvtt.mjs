@@ -264,6 +264,30 @@ Hooks.once("ready", function () {
   );
 });
 
+//make live a little bit easier, themekits have OBSERVER rights per default
+Hooks.on("preCreateItem", (doc, data, options, userId) => {
+  // Nur GM darf Ownership setzen
+  if (!game.user.isGM) return;
+
+  // Nur für deinen Item-Typ
+  if (data.type !== "themekit"){
+    console.log(`Not setting default ownership for item ${data.name} because it is not a themekit`);
+    return;
+  }
+
+  // Falls bereits gesetzt: optional nicht überschreiben
+  const ownership = data.ownership ?? doc._source.ownership ?? {};
+
+  doc.updateSource({
+    ownership: {
+      ...ownership,
+      default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER
+    }
+  });
+
+  console.log(`Set default ownership for themekit ${data.name} to OBSERVER`);
+});
+
 // Intercept journal page render and replace text tags/statuses/limits with draggale marks
 Hooks.on("renderJournalEntrySheet", (_app, html) => {
   html.querySelectorAll(".journal-page-content").forEach((page) => {

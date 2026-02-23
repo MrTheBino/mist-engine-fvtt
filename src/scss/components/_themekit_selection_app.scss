@@ -1,0 +1,47 @@
+#themekit-selection-app>section.window-content {
+    background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+    background-repeat: no-repeat;
+    font-family: $font-primary;
+    color: $c-styled-text;
+
+    .left-panel {
+        flex-grow: 0.4;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding: 5px;
+        align-self:flex-start;
+    }
+
+    .right-panel {
+        align-self: flex-start;
+        margin-left: 10px;
+        flex-grow: 1;
+
+        .scrollable {
+            overflow-y: auto;
+            height: 600px;
+        }
+
+        mark {
+            margin-bottom: 5px;
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-family: $font-primary;
+        color: $c-styled-text;
+    }
+
+    .group-header{
+        font-size: 1.2em;
+        font-weight: bold;
+        color: $c-styled-text;
+    }
+
+    .tag-container{
+        line-height: 1.5em;
+    }
+}

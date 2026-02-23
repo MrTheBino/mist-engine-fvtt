@@ -3,6 +3,8 @@ import { DiceRollApp } from '../apps/dice-roll-app.mjs';
 import { PowerTagAdapter } from '../lib/power-tag-adapter.mjs';
 import { MistSceneApp } from '../apps/scene-app.mjs';
 import { CustomBackgroundEditorApp } from '../apps/custom_background_editor.mjs';
+import { ThemekitSelectionApp } from '../apps/themekit-selection-app.mjs';
+import { ThemekitCharacterApp } from '../apps/themekit-character-app.mjs';
 
 export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -27,7 +29,10 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             assignFellowshipThemecard: this.#handleAssignFellowshipThemecard,
             clickedCustomBackground: this.#handleClickedCustomBackground,
             clickedRemoveCustomBackground: this.#handleRemoveCustomBackground,
-            clickedCustomBackgroundEditor: this.#handleClickedCustomBackgroundEditor
+            clickedCustomBackgroundEditor: this.#handleClickedCustomBackgroundEditor,
+            openThemekitSelection: this.#handleOpenThemekitSelection,
+            openThemekitCharacterApp: this.#handleOpenThemekitCharacterApp,
+            removeThemekit: this.#handleRemoveThemekit
         },
         form: {
             submitOnChange: true
@@ -76,6 +81,21 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         this.activateSocketListeners();
         this.loadFellowshipThemecard();
     }
+
+    /** @override */
+  _getHeaderControls() {
+    const controls = super._getHeaderControls();
+
+    controls.unshift({
+      action: "openThemekit",
+      icon: "fa-solid fa-layer-group",
+      label: "Themekits",
+      visible: () => this.isEditable,
+      onClick: () => this.menuOpenThemekitSelection()
+    });
+
+    return controls;
+  }
 
     /**
    * Define the structure of tabs used by this sheet.
@@ -727,5 +747,60 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const app = new CustomBackgroundEditorApp();
         app.setActor(this.actor);
         app.render(true);
+    }
+
+    menuOpenThemekitSelection(){
+        const app = new ThemekitSelectionApp();
+        app.setActor(this.actor);
+        app.render(true);
+    }
+
+    static async #handleOpenThemekitSelection(event,target){
+        event.preventDefault();
+        const themebookId = target.dataset.themebookId;
+        const themebook = this.actor.items.get(themebookId);
+
+        const app = new ThemekitSelectionApp();
+        app.setActor(this.actor);
+        if(themebook){
+            app.setThemebook(themebook);
+        }
+        app.render(true);
+    }
+
+    static async #handleOpenThemekitCharacterApp(event,target){
+        event.preventDefault();
+
+        const themebookId = target.dataset.themebookId;
+        const themebook = this.actor.items.get(themebookId);
+
+        const app = new ThemekitCharacterApp();
+        app.setActor(this.actor);
+        app.setThemebook(themebook);
+        app.setThemekit(themebook.system.themekit);
+        app.render(true);
+    }
+
+    static async #handleRemoveThemekit(event,target){
+        event.preventDefault();
+
+        //confirm dialog if we really want to delete the themekit
+        const proceed = await foundry.applications.api.DialogV2.confirm({
+            content: game.i18n.format("MIST_ENGINE.QUESTIONS.RemoveThemekitConfirmation"),
+            rejectClose: false,
+        });
+        if (!proceed) {
+            return;
+        }
+        const themebookId = target.dataset.themebookId;
+        const themebook = this.actor.items.get(themebookId);
+        if(!themebook) return;
+
+        // simply set the themekitUUID to null, the themekit selection app will handle the rest
+        await themebook.update({
+            "system.themeKitUUID": ""
+        });
+        console.log("themekit removed from themebook ", themebook.name);
+        this.render();
     }
 }

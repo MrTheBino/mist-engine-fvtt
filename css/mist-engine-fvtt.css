@@ -58,6 +58,10 @@ body {
   cursor: pointer;
 }
 
+.clickable:hover, .clickable:focus {
+  cursor: pointer;
+}
+
 .mist-engine.tag {
   border-radius: 2px;
   font-weight: bold;
@@ -1289,6 +1293,16 @@ body {
   padding-right: 20px;
   clip-path: polygon(0% 50%, 10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%);
 }
+.mist-engine .themekit-container {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  min-height: 38px;
+}
+.mist-engine .themekit-container button {
+  margin-left: auto;
+  margin-right: auto;
+}
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
   font-weight: normal;
@@ -2150,6 +2164,84 @@ body {
 }
 .character-token-overlay .overlay-tag-entry {
   margin-bottom: 3px;
+}
+
+#themekit-selection-app > section.window-content {
+  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-repeat: no-repeat;
+  font-family: Labrada, serif;
+  color: #724a32;
+}
+#themekit-selection-app > section.window-content .left-panel {
+  flex-grow: 0.4;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 5px;
+  align-self: flex-start;
+}
+#themekit-selection-app > section.window-content .right-panel {
+  align-self: flex-start;
+  margin-left: 10px;
+  flex-grow: 1;
+}
+#themekit-selection-app > section.window-content .right-panel .scrollable {
+  overflow-y: auto;
+  height: 600px;
+}
+#themekit-selection-app > section.window-content .right-panel mark {
+  margin-bottom: 5px;
+}
+#themekit-selection-app > section.window-content h1,
+#themekit-selection-app > section.window-content h2,
+#themekit-selection-app > section.window-content h3,
+#themekit-selection-app > section.window-content h4 {
+  font-family: Labrada, serif;
+  color: #724a32;
+}
+#themekit-selection-app > section.window-content .group-header {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #724a32;
+}
+#themekit-selection-app > section.window-content .tag-container {
+  line-height: 1.5em;
+}
+
+#themekit-character-app > section.window-content {
+  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-repeat: no-repeat;
+  font-family: Labrada, serif;
+  color: #724a32;
+}
+#themekit-character-app > section.window-content h1,
+#themekit-character-app > section.window-content h2,
+#themekit-character-app > section.window-content h3,
+#themekit-character-app > section.window-content h4 {
+  font-family: Labrada, serif;
+  color: #724a32;
+}
+#themekit-character-app > section.window-content h1.with-line::after,
+#themekit-character-app > section.window-content h2.with-line::after,
+#themekit-character-app > section.window-content h3.with-line::after,
+#themekit-character-app > section.window-content h4.with-line::after {
+  content: "";
+  display: inline-block;
+  width: 105px;
+  height: 6px;
+  background-image: url(../assets/header-backline.webp);
+  background-repeat: no-repeat;
+  margin-left: 10px;
+}
+#themekit-character-app > section.window-content .group-header {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #724a32;
+}
+#themekit-character-app > section.window-content .tag-container {
+  line-height: 1.5em;
+}
+#themekit-character-app > section.window-content .used {
+  text-decoration: line-through;
 }
 
 /*# sourceMappingURL=mist-engine-fvtt.css.map */

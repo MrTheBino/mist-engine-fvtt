@@ -11,6 +11,13 @@
   }
 }
 
+.clickable {
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
+}
+
 .mist-engine.tag {
   border-radius: 2px;
   font-weight: bold;

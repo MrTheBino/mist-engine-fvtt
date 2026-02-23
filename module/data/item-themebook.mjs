@@ -18,6 +18,8 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
         schema.improve = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
         schema.milestone = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
 
+        schema.themeKitUUID = new fields.StringField({ blank: true });
+
         schema.powertag1 = new fields.SchemaField({
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),
@@ -151,5 +153,16 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
 
     prepareDerivedData() {
         this.hasSpecialImprovements = this.specialImprovements.some(imp => imp.active);
+
+        this.hasAssignedThemekit = false;
+        // if themeKitUUID is set, we try to get the themekit item and set it as a property of the themebook for easy access later
+        if(this.themeKitUUID && this.themeKitUUID.trim() !== ""){
+            fromUuid(this.themeKitUUID).then(themekit => {
+                this.themekit = themekit;
+                this.hasAssignedThemekit = true;
+            }).catch(err => {
+                console.error(`Error fetching themekit with UUID ${this.themeKitUUID}:`, err);
+            });
+        }
     }
 }

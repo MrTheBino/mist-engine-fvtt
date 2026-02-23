@@ -1,0 +1,64 @@
+<section class="{{tabs.dialog.id}} {{tabs.dialog.cssClass}} scrollable">
+    <div class="flexrow">
+        <div class="left-panel">
+
+            <!-- we list all available themekits , group first, then their children -->
+            {{#each availableThemekits}}
+            <div class="themekit-group">
+                <div class="group-header">{{this.groupName}}</div>
+                <ul>
+                    {{#each this.themekits}}
+                    <li>
+                        <a class="themekit-button" data-themekit-uuid="{{this.uuid}}" data-action="selectThemekit">
+                            {{this.name}}
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+        </div>
+        <div class="right-panel">
+            <div class="scrollable">
+                {{#if currentSelectedThemekitAvailable}}
+                <h2>{{currentSelectedThemekit.name}}</h2>
+                <p>{{currentSelectedThemekit.system.description}}</p>
+                <!-- list powertags -->
+                <h3>{{localize "MIST_ENGINE.THEMEKITS.Powertags"}}</h3>
+                <div class="tag-container">
+                    {{#each currentSelectedThemekit.system.powertags}}
+                    <mark class="status green">{{this.name}}</mark>
+                    {{/each}}
+                </div>
+                <!-- list weaknesses -->
+                <h3>{{localize "MIST_ENGINE.THEMEKITS.WeaknessTags"}}</h3>
+                <div class="tag-container">
+                    {{#each currentSelectedThemekit.system.weaknesstags}}
+                    <mark class="status yellow">{{this.name}}</mark>
+                    {{/each}}
+                </div>
+                <!-- show quest -->
+                {{#if currentSelectedThemekit.system.quest}}
+                <h3>{{localize "MIST_ENGINE.THEMEKITS.Quest"}}</h3>
+                <p>{{currentSelectedThemekit.system.quest}}</p>
+                {{/if}}
+
+                <!-- list specialImprovements, but only when the name is not empty -->
+                {{#if hasSpecialImprovements}}
+                <h3>{{localize "MIST_ENGINE.THEMEKITS.SpecialImprovements"}}</h3>
+                <ul>
+                    {{#each currentSelectedThemekit.system.specialImprovements}}
+                    {{#if this.name}}
+                    <li>
+                        <strong>{{this.name}}</strong>: {{{textWithTags this.description}}}
+                    </li>
+                    {{/if}}
+                    {{/each}}
+                </ul>
+                {{/if}}
+                <button class="themekit-button" data-action="addThemekit">{{addThemekitButtonStr}}</button>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</section>

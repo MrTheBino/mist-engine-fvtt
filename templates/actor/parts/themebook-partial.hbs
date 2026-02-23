@@ -12,6 +12,18 @@
             <i class="themebook-icon {{themebook.system.type}}"></i>
             {{/if}}
         </h2>
+        {{#if editMode}}
+            <div class="themekit-container">
+                {{#if themebook.system.hasAssignedThemekit}}
+                    <p>
+                        <strong data-action="openThemekitCharacterApp" class="clickable" data-themebook-id="{{themebook._id}}">{{themebook.system.themekit.name}} <i class="fa-solid fa-circle-arrow-up"></i></strong>
+                        <strong><i class="fa-solid fa-trash clickable" data-action="removeThemekit" data-themebook-id="{{themebook._id}}"></i></strong>
+                    </p>
+                {{else}}
+                    <button class="themekit-button" data-action="openThemekitSelection" data-themebook-id="{{themebook._id}}">{{localize "MIST_ENGINE.THEMEKITS.SelectThemekit"}}</button>
+                {{/if}}
+           </div>
+        {{/if}}
         <div class="powertags-container">
             {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=1 id=themebook._id
             powertag=themebook.system.powertag1 editMode=editMode firstTag=true}}

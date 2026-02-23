@@ -1,5 +1,12 @@
 # CHANGELOG
 
+# 13.7.0
+- themekit support, create themekits with powertags,weaknesstags,quest and special improvements. Easy import of tags via a fast CSV import
+- added themekit menu item to the actor sheet (top right 3 point menu)
+- added themekit assignment for empty characters
+- assign & remove themekits to exisiting themebooks
+- add powertags from themekits to themebooks
+
 # 13.6.9
 - hotfix for CORS problem in the custom background editor, hope this fixes the issue with theForge
   

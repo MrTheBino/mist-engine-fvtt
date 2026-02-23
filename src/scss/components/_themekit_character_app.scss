@@ -1,0 +1,40 @@
+#themekit-character-app>section.window-content {
+    background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+    background-repeat: no-repeat;
+    font-family: $font-primary;
+    color: $c-styled-text;
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-family: $font-primary;
+        color: $c-styled-text;
+        &.with-line {
+            &::after {
+                content: "";
+                display: inline-block;
+                width: 105px;
+                height: 6px;
+                background-image: url(../assets/header-backline.webp);
+                background-repeat: no-repeat;
+                margin-left: 10px;
+            }
+        }
+    }
+
+
+    .group-header{
+        font-size: 1.2em;
+        font-weight: bold;
+        color: $c-styled-text;
+    }
+
+    .tag-container{
+        line-height: 1.5em;
+    }
+
+    .used{
+        text-decoration: line-through;
+    }
+}

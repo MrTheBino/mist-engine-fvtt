@@ -1,0 +1,41 @@
+<section class="{{tabs.dialog.id}} {{tabs.dialog.cssClass}} scrollable">
+<div class="scrollable">
+    {{#if currentSelectedThemekitAvailable}}
+    <h2>{{currentSelectedThemekit.name}}</h2>
+    <p>{{currentSelectedThemekit.system.description}}</p>
+    <!-- list powertags -->
+    <h3 class="with-line">{{localize "MIST_ENGINE.THEMEKITS.Powertags"}}</h3>
+    <div class="tag-container">
+    {{#each currentSelectedThemekit.system.powertags}}
+        <mark class="status green {{#if this.used}}used{{/if}} clickable" data-action="addPowertag" data-tag="{{this.name}}">{{this.name}}</mark>
+    {{/each}}
+    </div>
+    <!-- list weaknesses -->
+    <h3 class="with-line">{{localize "MIST_ENGINE.THEMEKITS.WeaknessTags"}}</h3>
+    <div class="tag-container">
+    {{#each currentSelectedThemekit.system.weaknesstags}}
+        <mark class="status yellow {{#if this.used}}used{{/if}} clickable" data-action="addWeaknessTag" data-tag="{{this.name}}">{{this.name}}</mark>
+    {{/each}}
+    </div>
+    <!-- show quest -->
+    {{#if currentSelectedThemekit.system.quest}}
+    <h3 class="with-line">{{localize "MIST_ENGINE.THEMEKITS.Quest"}}</h3>
+    <p class="clickable" data-action="setQuest">{{currentSelectedThemekit.system.quest}}</p>
+    {{/if}}
+
+    <!-- list specialImprovements, but only when the name is not empty -->
+    {{#if hasSpecialImprovements}}
+    <h3 class="with-line">{{localize "MIST_ENGINE.THEMEKITS.SpecialImprovements"}}</h3>
+    <ul>
+        {{#each currentSelectedThemekit.system.specialImprovements}}
+        {{#if this.name}}
+        <li class="clickable" data-action="addSpecialImprovement" data-index="{{@index}}">
+            <strong>{{this.name}}</strong>: {{{textWithTags this.description}}}
+        </li>
+        {{/if}}
+        {{/each}}
+    </ul>
+    {{/if}}
+    {{/if}}
+</div>
+</section>
