@@ -10,7 +10,7 @@
             <div class="flexrow">
 
                 <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}"
-                    data-index="{{ftsIndex}}" data-actor-id="{{character.id}}"
+                    data-index="{{ftsIndex}}" data-actor-id="{{../character.id}}"
                     title="right click to toggle between tag or state">
                     {{#unless this.positive}}<i class="fa-light fa-angles-down"></i>{{/unless}}
                     {{fts.name}}{{#if fts.isStatus}}-{{fts.value}}{{/if}}</div>
@@ -21,7 +21,7 @@
             <div class="fts-markings-container">
                 {{#each fts.markings as |marking index|}}
                 <span class="fts-input-marking" data-marking-index="{{index}}"
-                    data-action="actorToggleFloatingTagOrStatusMarking" data-actor-id="{{character.id}}"
+                    data-action="actorToggleFloatingTagOrStatusMarking" data-actor-id="{{../../character.id}}"
                     data-index="{{ftsIndex}}">
                     <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne
                         index}}</i>
