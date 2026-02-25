@@ -43,6 +43,7 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
         context.availableThemekits = await this.getAllThemekits();
         context.currentSelectedThemekit = this.currentSelectedThemekit;
         context.currentSelectedThemekitAvailable = this.currentSelectedThemekit != null;
+        context.hasAvailableThemekits = Object.keys(context.availableThemekits).length > 0;
 
         if(this.actorThemebook){
             context.addThemekitButtonStr = game.i18n.localize("MIST_ENGINE.THEMEKITS.AssignThemekit");

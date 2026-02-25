@@ -15,6 +15,7 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
         },
         actions: {
             addPowertag: this.#handleAddPowertag,
+            addWeaknesstag: this.#handleAddWeaknesstag,
             deletePowertag: this.#handleDeletePowertag,
             deleteWeaknesstag: this.#handleDeleteWeaknesstag,
             addSpecialImprovement: this.#handleAddSpecialImprovement,
@@ -222,6 +223,15 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
             const powertags = item.system.powertags || [];
             powertags.push({ name: "New Powertag" });
             await item.update({ "system.powertags": powertags });
+    }
+
+    static async #handleAddWeaknesstag(event, target) {
+        event.preventDefault();
+        // adds a new weaknesstag to the themekit
+        const item = this.document;
+        const weaknesstags = item.system.weaknesstags || [];
+        weaknesstags.push({ name: "New Weaknesstag" });
+        await item.update({ "system.weaknesstags": weaknesstags });
     }
 
     static async #handleDeletePowertag(event, target) {

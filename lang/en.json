@@ -9,7 +9,8 @@
       "AddThemekit": "Add Themekit",
       "SelectThemekit": "Select Themekit",
       "RemoveThemekit": "Remove Themekit from Character",
-      "AssignThemekit": "Assign Themekit"
+      "AssignThemekit": "Assign Themekit",
+      "NoThemekitsAvailable": "No themekits available. Create themekit items first."
     },
     "QUESTIONS": {
       "DeleteItem": "Are you sure you want to delete this item?",

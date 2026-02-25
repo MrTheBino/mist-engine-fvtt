@@ -779,6 +779,7 @@ body {
   margin: 5px;
   color: #724a32;
   min-height: 23px;
+  font-style: italic;
   border-bottom: 1.5px solid rgba(0, 0, 0, 0.1);
 }
 .mist-engine .item-storytag-line {
@@ -1354,6 +1355,7 @@ body {
   border-bottom: 1.5px solid rgba(0, 0, 0, 0.1);
   position: relative;
   text-align: center;
+  font-style: italic;
 }
 .mist-engine .litm-pc-storytag:hover {
   cursor: pointer;
@@ -1396,6 +1398,7 @@ body {
   color: black;
   position: relative;
   text-align: center;
+  font-style: italic;
 }
 .mist-engine .litm-pc-weakness:hover {
   cursor: pointer;

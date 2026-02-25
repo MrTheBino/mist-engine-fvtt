@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 13.7.1
+- added message to themekit selection if there are now themekits available
+- fixed add weakness button in themekit item
+- Fix data-actor-id hierarchy #40 by trevorschadt
+
 # 13.7.0
 - themekit support, create themekits with powertags,weaknesstags,quest and special improvements. Easy import of tags via a fast CSV import
 - added themekit menu item to the actor sheet (top right 3 point menu)

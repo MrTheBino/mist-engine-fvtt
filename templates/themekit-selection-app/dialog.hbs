@@ -20,6 +20,9 @@
         </div>
         <div class="right-panel">
             <div class="scrollable">
+                {{#if (eq hasAvailableThemekits false)}}
+                <p>{{localize "MIST_ENGINE.THEMEKITS.NoThemekitsAvailable"}}</p>
+                {{/if}}
                 {{#if currentSelectedThemekitAvailable}}
                 <h2>{{currentSelectedThemekit.name}}</h2>
                 <p>{{currentSelectedThemekit.system.description}}</p>
