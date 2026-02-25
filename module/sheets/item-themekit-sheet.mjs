@@ -287,7 +287,7 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
         // use dialogv2 to create a dialog with a textarea input for the CSV data
         const csvData = await foundry.applications.api.DialogV2.prompt({
             window: {title: "Import Tags from CSV"},
-            content: `<p>Paste your CSV data below. Each line will be treated as a new tag, and commas will separate multiple tags on the same line.</p><textarea name="csvData" rows="10" style="width: 100%;"></textarea>`,
+            content: `<p>Paste your CSV data below. Commas separate tags.</p><textarea name="csvData" rows="10" style="width: 100%;"></textarea>`,
             ok: {
                 label: "Import",
                 callback: (event, button, dialog) => {

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 13.7.2
+- fixed explanation of CSV import for themekits
+  
 # 13.7.1
 - added message to themekit selection if there are now themekits available
 - fixed add weakness button in themekit item
