@@ -14,23 +14,19 @@
                 {{/each}}
             </div>
         </div>
-        {{!-- Tags & Statuses --}}
-        <div class="npc-tags-container">
+        {{!-- Secrets --}}
+        <div class="npc-secret-container">
             <div class="npc-subtitle-container-c">
-                <div class="npc-subtitle-text">{{localize "MIST_ENGINE.LABELS.Npc.TagsAndStatuses"}}</div>
+                <div class="npc-subtitle-text">{{localize "MIST_ENGINE.NPC.Secrets"}}</div>
             </div>
-            <div class="npc-tags-list flexcol">
-                {{#each system.tags_and_statuses as |tagOrStatus|}}
-                <div class="npc-tag-item">
-                    <div class="npc-tag-name icon-hover">
-                        {{#if (gt tagOrStatus.value 0)}}
-                        <span class="npc-tag-status-value" data-action="addSceneAppRollMod" data-value="{{tagOrStatus.value}}" data-name="{{tagOrStatus.name}}">{{tagOrStatus.name}}-{{tagOrStatus.value}}</span>
-                        {{else if (tagFilled tagOrStatus.symbol)}}
-                        <i class="tag-icon-litm-{{tagOrStatus.symbol}}"></i>&nbsp;
-                        <span class="npc-tag-with-symbol" data-action="addSceneAppRollMod" data-value="0" data-name="{{tagOrStatus.name}}">{{tagOrStatus.name}}</span>
-                        {{else}}
-                        <span class="npc-tag" data-action="addSceneAppRollMod" data-value="0" data-name="{{tagOrStatus.name}}">{{tagOrStatus.name}}</span>
-                        {{/if}}
+            <div class="npc-secrets-list flexcol">
+                {{#each system.secrets as |secret|}}
+                <div class="npc-secret-item">
+                    <div class="npc-secret-name">
+                        {{secret.name}}
+                    </div>
+                    <div class="npc-secret-description">
+                        {{{textWithTags secret.description}}}
                     </div>
                 </div>
                 {{/each}}

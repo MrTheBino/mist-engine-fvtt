@@ -731,6 +731,12 @@ body {
   background-repeat: no-repeat;
   row-gap: 0.5em;
 }
+.mist-engine.sheet.actor.npc .single-secret-container {
+  margin-bottom: 2px;
+}
+.mist-engine.sheet.actor.npc .single-secret-container .header {
+  margin-bottom: 2px;
+}
 .mist-engine.sheet.actor.npc h1.npc-name {
   font-family: Labrada, serif;
   font-size: 36px;
@@ -903,7 +909,7 @@ body {
   font-size: 1rem;
   color: white;
 }
-.mist-engine .npc-tag-name,
+.mist-engine .npc-secret-name,
 .mist-engine .npc-limit-name {
   font-family: Labrada, serif;
   display: flex;
@@ -927,16 +933,19 @@ body {
   padding-left: 0.2em;
   padding-right: 1em;
 }
-.mist-engine .npc-tags-list,
+.mist-engine .npc-secrets-list,
 .mist-engine .npc-limits-list {
   align-items: center;
 }
-.mist-engine .npc-tag-item,
+.mist-engine .npc-secret-item,
 .mist-engine .npc-limit-item {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
   color: #724a32;
   font-family: Labrada, serif;
+}
+.mist-engine .npc-secret-description {
+  text-align: center;
 }
 .mist-engine .trash-icon-container {
   flex-grow: 0;

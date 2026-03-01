@@ -12,12 +12,12 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     },
     actions: {
       createLimit: this.#handleCreateLimit,
-      createTagOrStatus: this.#handleCreateTagOrStatus,
+      createSecret: this.#handleCreateSecret,
       createSpecialFeature: this.#handleCreateSpecialFeature,
       createThreatAndConsequence: this.#handleCreateThreatAndConsequence,
       createThreatAndConsequenceEntry: this.#handleCreateThreatAndConsequenceEntry,
       deleteLimit: this.#handleDeleteLimit,
-      deleteTagOrStatus: this.#handleDeleteTagOrStatus,
+      deleteSecret: this.#handleDeleteSecret,
       deleteSpecialFeature: this.#handleDeleteSpecialFeature,
       deleteThreatAndConsequence: this.#handleDeleteThreadAndConsequence,
       deleteThreatAndConsequenceEntry: this.#handleDeleteThreadAndConsequenceEntry,
@@ -58,7 +58,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
       template: "systems/mist-engine-fvtt/templates/actor/parts/tab-litm-npc.hbs",
       templates: [
         "systems/mist-engine-fvtt/templates/actor/parts/npc-limits-edit-partial.hbs",
-        "systems/mist-engine-fvtt/templates/actor/parts/npc-tags-status-edit-partial.hbs",
+        "systems/mist-engine-fvtt/templates/actor/parts/npc-secrets.hbs",
         "systems/mist-engine-fvtt/templates/actor/parts/npc-special-features-edit-partial.hbs",
         "systems/mist-engine-fvtt/templates/actor/parts/npc-threats-edit-partial.hbs",
         "systems/mist-engine-fvtt/templates/actor/parts/npc-beautified-partial.hbs",
@@ -199,13 +199,13 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     await this.actor.sheet.render(true);
   }
 
-  static async #handleDeleteTagOrStatus(event, target) {
+  static async #handleDeleteSecret(event, target) {
     event.preventDefault();
     const index = target.dataset.index;
-    const tags_and_statuses = this.actor.system.tags_and_statuses;
-    if (tags_and_statuses && tags_and_statuses.length > 0) {
-      tags_and_statuses.splice(index, 1);
-      await this.actor.update({ "system.tags_and_statuses": tags_and_statuses });
+    const secrets = this.actor.system.secrets;
+    if (secrets && secrets.length > 0) {
+      secrets.splice(index, 1);
+      await this.actor.update({ "system.secrets": secrets });
     }
   }
 
@@ -275,18 +275,18 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     }
   }
 
-  static async #handleCreateTagOrStatus(event, target) {
+  static async #handleCreateSecret(event, target) {
     event.preventDefault();
 
-    const tags_and_statuses = this.actor.system.tags_and_statuses;
+    const secrets = this.actor.system.secrets;
 
-    if (tags_and_statuses) {
+    if (secrets) {
       await this.actor.update({
-        "system.tags_and_statuses": [...tags_and_statuses, { name: "", value: 0, symbol: "" }],
+        "system.secrets": [...secrets, { name: "", description: "" }],
       });
     } else {
       await this.actor.update({
-        "system.tags_and_statuses": [{ name: "", value: 0, symbol: "" }],
+        "system.secrets": [{ name: "", description: "" }],
       });
     }
   }

@@ -42,6 +42,7 @@
     "NPC":{
       "TagsAndStatuses": "Tags & Statuses",
       "SpecialFeatures": "Special Features",
+      "Secrets": "Secrets",
       "TagsStatus":{
         "Symbols":{
           "Adventure": "Adventure",
@@ -112,6 +113,7 @@
         "limits": "Limits",
         "TagsAndStatuses": "Tags & Statuses",
         "SpecialFeatures": "Special Features",
+        "Secrets": "Secrets",
         "ThreatsAndConsequences": "Threats & Consequences"
       },
       "Item": {

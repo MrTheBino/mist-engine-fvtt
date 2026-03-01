@@ -5,6 +5,13 @@
     row-gap: 0.5em;
   }
 
+  .single-secret-container{
+    margin-bottom: 2px;
+    .header{
+      margin-bottom: 2px;
+    }
+  }
+  
   h1.npc-name {
       font-family: $font-primary;
       font-size: 36px;
@@ -224,7 +231,7 @@
   color: white;
 }
 
-.npc-tag-name,
+.npc-secret-name,
 .npc-limit-name {
   font-family: $font-primary;
   display: flex;
@@ -251,17 +258,21 @@
   padding-right: 1em;
 }
 
-.npc-tags-list,
+.npc-secrets-list,
 .npc-limits-list {
   align-items: center;
 }
 
-.npc-tag-item,
+.npc-secret-item,
 .npc-limit-item {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
   color: $c-styled-text;
   font-family: $font-primary;
+}
+
+.npc-secret-description{
+  text-align: center;
 }
 
 .trash-icon-container {

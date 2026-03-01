@@ -3,6 +3,8 @@
 # 13.7.3
 - scene app can handle challenge tags & statuses
 - dice rolls can handle challenge tags & statuses
+- removed old tags & statuses from challenges
+- added secrets to challenges
   
 # 13.7.2
 - fixed explanation of CSV import for themekits

@@ -18,11 +18,10 @@ export default class MistEngineNPC extends MistEngineActorBase {
       { min: 0, required: false }
     )
 
-    schema.tags_and_statuses = new fields.ArrayField(
+    schema.secrets = new fields.ArrayField(
       new fields.SchemaField({
         name: new fields.StringField(),
-        value: new fields.NumberField(),
-        symbol: new fields.StringField(),
+        description: new fields.StringField(),
       }),
       { min: 0, required: false }
     )
