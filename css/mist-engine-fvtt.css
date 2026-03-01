@@ -298,8 +298,20 @@ body {
   src: url("../assets/fonts/Labrada-Regular.ttf") format("truetype");
   font-weight: normal;
 }
+@font-face {
+  font-family: Caveat-Regular;
+  src: url("../assets/fonts/Caveat-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
 .labrada-normal {
   font-family: "Labrada", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.caveat-regular {
+  font-family: "Caveat-Regular", cursive;
   font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;
@@ -395,11 +407,22 @@ body {
   text-transform: uppercase;
   font-weight: 900;
 }
-.journal-entry-content h3 {
+.journal-entry-content h1.with-line,
+.journal-entry-content h2.with-line,
+.journal-entry-content h3.with-line,
+.journal-entry-content h4.with-line,
+.journal-entry-content h5.with-line,
+.journal-entry-content h6.with-line {
   display: flex;
   align-items: center;
+  border-bottom: 0;
 }
-.journal-entry-content h3.with-line::after {
+.journal-entry-content h1.with-line::after,
+.journal-entry-content h2.with-line::after,
+.journal-entry-content h3.with-line::after,
+.journal-entry-content h4.with-line::after,
+.journal-entry-content h5.with-line::after,
+.journal-entry-content h6.with-line::after {
   content: "";
   display: inline-block;
   width: 105px;
@@ -435,6 +458,16 @@ body {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   padding: 30px;
+}
+.journal-entry-content .note-written-text {
+  font-family: Caveat-Regular, cursive;
+  font-size: 1.2em;
+}
+.journal-entry-content .callout {
+  border: 2px solid black;
+  color: #191813;
+  font-family: Labrada, serif;
+  font-size: 1.2em;
 }
 
 #pause.paused {

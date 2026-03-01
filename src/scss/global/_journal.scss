@@ -16,14 +16,12 @@
         font-family: $font-primary;
         text-transform: uppercase;
         font-weight: 900;
-    }
 
-    h3 {
-        // if want to display the image assets/icons/header-backline after the header text in the same line
-        display: flex;
-        align-items: center;
-
-        &.with-line {
+          &.with-line {
+            display: flex;
+            align-items: center;
+            border-bottom: 0;
+            
             &::after {
                 content: "";
                 display: inline-block;
@@ -71,5 +69,17 @@
         background-repeat: no-repeat;
         background-size: 100% 100%;
         padding: 30px;
+    }
+
+    .note-written-text{
+        font-family: $font-written;
+        font-size: 1.2em;
+    }
+
+    .callout{
+        border: 2px solid black;
+        color: $c-dark-styled-text;
+        font-family: $font-primary;
+        font-size: 1.2em;
     }
 }
