@@ -1,4 +1,12 @@
 <div class="grid grid-2col">
-    {{> "systems/mist-engine-fvtt/templates/scene-app/characters.hbs"}}
-    {{> "systems/mist-engine-fvtt/templates/scene-app/challenges.hbs"}}
+    {{#if isGM}}
+    <div>
+        <div class="scene-app-actor-header">{{localize "MIST_ENGINE.LABELS.Characters"}}</div>
+        {{> "systems/mist-engine-fvtt/templates/scene-app/characters.hbs"}}
+    </div>
+    <div>
+        <div class="scene-app-actor-header">{{localize "MIST_ENGINE.LABELS.Challenges"}}</div>
+        {{> "systems/mist-engine-fvtt/templates/scene-app/challenges.hbs"}}
+    </div>
+    {{/if}}
 </div>

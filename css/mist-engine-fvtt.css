@@ -1570,6 +1570,9 @@ body {
 .mist-engine .npc-tag-status-value {
   background-color: rgba(64, 134, 54, 0.75);
 }
+.mist-engine .fts-input-name {
+  padding: 2px;
+}
 .mist-engine .fts-input-name.tag {
   background-color: rgba(64, 134, 54, 0.75);
   color: #724a32;
@@ -1590,10 +1593,12 @@ body {
 .mist-engine .fts-tag-modifier-toggle {
   float: left;
   cursor: pointer;
+  margin-top: 2px;
 }
 .mist-engine .fts-tag-status-toggle {
   float: right;
   cursor: pointer;
+  margin-top: 2px;
 }
 .mist-engine .npc-limit-description .tag {
   background-color: rgba(64, 134, 54, 0.75);
@@ -2043,6 +2048,14 @@ body {
 .scene-app-characters .character-name {
   font-family: Labrada, serif;
   font-size: 1.2em;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.scene-app-actor-header {
+  font-family: Labrada, serif;
+  font-size: 1.3em;
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;

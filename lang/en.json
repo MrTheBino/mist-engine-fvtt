@@ -97,6 +97,8 @@
       "Name": "Name",
       "Value": "Value",
       "Symbol": "Symbol",
+      "Challenges": "Challenges",
+      "Characters": "Characters",
       "Actor": {
         "FloatingTagOrStatus": "Tags & Statuses"
       },

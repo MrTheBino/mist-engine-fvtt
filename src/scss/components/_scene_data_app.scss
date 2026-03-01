@@ -23,6 +23,14 @@
     }
 }
 
+.scene-app-actor-header{
+    font-family: $font-primary;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
 .scene-app-dice-roll-modifiers {
     .listing {
         .mod-entry {

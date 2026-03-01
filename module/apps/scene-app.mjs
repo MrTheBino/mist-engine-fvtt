@@ -209,7 +209,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     static async #handleClickOpenCharacterSheet(event, target) {
         event.preventDefault();
         const actorId = target.dataset.id;
-        const actor = game.actors.get(actorId);
+        const actor = this.getCorrectActor(actorId);
         if (actor) {
             actor.sheet.render(true);
         }
@@ -260,6 +260,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
         return actor;
     }
+
     // ToDo: this floating and status functions can be encapsulated in a separate class / helper file or whatever to use them in other places as well
     // no need to replicate all the code, but right now it's fine 
     static async #handleActorToggleFloatingTagOrStatusMarking(event, target) {
@@ -285,13 +286,23 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     static async #handleToggleFloatingTagOrStatusMarking(event, target) {
         event.preventDefault();
         if (game.user.isGM === false) return;
-        if (!this.currentSceneDataItem) return;
+        if (target.dataset.source == "litm-npc"){
+            const actor = this.getCorrectActor(target.dataset.actorId);
+            const index = target.dataset.index;
+            await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(actor, index, target.dataset.markingIndex);
 
-        const index = target.dataset.index;
-        await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(this.currentSceneDataItem, index, target.dataset.markingIndex);
+            this.sendUpdateHookEvent();
+            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        }else{
+            if (!this.currentSceneDataItem) return;
 
-        this.sendUpdateHookEvent();
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+            const index = target.dataset.index;
+            await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(this.currentSceneDataItem, index, target.dataset.markingIndex);
+
+            this.sendUpdateHookEvent();
+            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        }
+        
     }
 
     // Story Floating Tags and Statuses
@@ -373,7 +384,6 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         event.preventDefault();
 
         if (game.user.isGM === false) return;
-        if (!this.currentSceneDataItem) return;
 
         let confirmed = true;
         if (target.dataset.confirm && target.dataset.confirm == "1") {
@@ -395,10 +405,20 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             return;
         }
 
-        const index = target.dataset.index;
-        await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(this.currentSceneDataItem, index);
-        this.sendUpdateHookEvent();
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        if (target.dataset.source == "litm-npc"){
+            const actor = this.getCorrectActor(target.dataset.actorId);
+            const index = target.dataset.index;
+            await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(actor, index);
+            this.sendUpdateHookEvent();
+            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        }else{
+            if (!this.currentSceneDataItem) return;
+            const index = target.dataset.index;
+            await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(this.currentSceneDataItem, index);
+            this.sendUpdateHookEvent();
+            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        }
+        
     }
 
     static async #handleCreateFloatingTagOrStatus(event, target) {
