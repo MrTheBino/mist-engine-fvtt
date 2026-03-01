@@ -28,6 +28,19 @@
         </div>
         {{/each}}
     </div>
+     <div class="selected-tags-container flexcol">
+        <label class="resource-label">Challenge Tags / Status selected:</label>
+        {{#each challengeTags}}
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}}">
+            <span class="tag-icon">
+                {{#if this.positive}}<i class="fa-solid fa-circle-plus"></i>{{else}}<i
+                    class="fa-solid fa-circle-minus"></i>{{/if}}
+            </span>
+            {{#if this.toBurn}}🔥{{/if}}{{this.name}}{{#if (gt
+            this.value 0)}}-{{this.value}}{{/if}}
+        </div>
+        {{/each}}
+    </div>
     <div class="selected-tags-container flexcol">
         {{#each selectedGmTags}}
         <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}}">

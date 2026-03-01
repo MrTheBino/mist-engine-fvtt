@@ -14,6 +14,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.selectedTags = [];
         this.selectedGmTags = [];
         this.selectedStoryTags = [];
+        this.challengeTags = [];
         this.numModPositive = 0;
         this.numModNegative = 0;
         this.mightScale = 0;
@@ -79,10 +80,12 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.selectedTags = [];
         this.selectedGmTags = [];
         this.selectedStoryTags = [];
+        this.challengeTags = [];
 
         this.prepareTags();
         this.prepareGMTags();
         this.prepareSceneAndStoryTags();
+        this.prepareChallengeTags();
         if (renderFlag == true && this.rendered) {
             this.render(true, { focus: true })
         }
@@ -103,6 +106,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.selectedTags = this.selectedTags;
         context.selectedGmTags = this.selectedGmTags;
         context.selectedStoryTags = this.selectedStoryTags;
+        context.challengeTags = this.challengeTags;
         context.rollType = this.rollType;
         context.numModPositive = this.numModPositive || 0;
         context.numModNegative = this.numModNegative || 0;
@@ -111,7 +115,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if(context.mightUsageEnabled == false){ // just to be sure
             context.mightScale = 0;
         }
-        let countTags =  DiceRollApp.calculatePowerTags(DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags)); 
+        let countTags =  DiceRollApp.calculatePowerTags(DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags, this.challengeTags)); 
         context.powerAmount = (countTags.positive - countTags.negative) + context.mightScale + this.numModPositive - this.numModNegative;
         /*if(context.powerAmount < 0){
             context.powerAmount = 0;
@@ -140,6 +144,14 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             }
             return a.positive ? -1 : 1;
         });
+
+        // sort challenge tags
+        context.challengeTags.sort((a, b) => {
+            if (a.positive === b.positive) {
+                return a.name.localeCompare(b.name);
+            }
+            return a.positive ? -1 : 1;
+        });
         return context;
     }
 
@@ -160,6 +172,17 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         MistSceneApp.getInstance().getSceneAndStoryTags().forEach(element => {
             if (element.selected) {
                 this.selectedStoryTags.push({ name: element.name, positive: element.positive, source: "scene-and-story", value: element.value });
+            }
+        });
+    }
+
+    prepareChallengeTags(){
+        MistSceneApp.getInstance().getCombinedSelectedNPCTags().forEach(element => {
+            console.log(element);
+            if (element.selected) {
+                let t = { name: element.name, positive: element.positive, source: "npc", value: element.value, actorId: element.actorId };
+                console.log("Adding challenge tag to dice roll app:", t);
+                this.challengeTags.push(t);
             }
         });
     }
@@ -195,7 +218,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     applyRulesPreviewToSelectedTags() {
-        const tempTagsForRole = DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags);
+        const tempTagsForRole = DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags,this.challengeTags);
         // we got the result, now we add to the single selectedTags array a new property 'isAppliedInPreview' to indicate if the tag/status is applied in the preview
         this.selectedTags.forEach(tag => {
             const foundTag = tempTagsForRole.find(t => t.name === tag.name && t.positive === tag.positive && t.source === tag.source);
@@ -225,9 +248,19 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 tag.isAppliedInPreview = false;
             }
         });
+
+        // the same for challengeTags
+        this.challengeTags.forEach(tag => {
+            const foundTag = tempTagsForRole.find(t => t.name === tag.name && t.positive === tag.positive && t.source === tag.source && t.actorId === tag.actorId);
+            if (foundTag) {
+                tag.isAppliedInPreview = true;
+            } else {
+                tag.isAppliedInPreview = false;
+            }
+        });
     }
 
-    static applyRulesToSelectedTags(selectedTags, selectedGmTags, selectedStoryTags) {
+    static applyRulesToSelectedTags(selectedTags, selectedGmTags, selectedStoryTags,selectedChallengeTags) {
         const tagsForRole = [];
 
         // first the take all normal tags
@@ -249,9 +282,16 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             }
         });
 
+        selectedChallengeTags.forEach(tag => {
+            if (tag.value === 0 || tag.value === undefined) {
+                tagsForRole.push(tag);
+            }
+        });
+
         let statuses = selectedTags.filter(t => t.value && t.value > 0);
         statuses = selectedStoryTags.filter(t => t.value && t.value > 0).concat(statuses);
         statuses = selectedGmTags.filter(t => t.value && t.value > 0).concat(statuses);
+        statuses = selectedChallengeTags.filter(t => t.value && t.value > 0).concat(statuses);
 
         let positiveStatuses = statuses.filter(s => s.positive);
         let negativeStatuses = statuses.filter(s => !s.positive);
@@ -524,7 +564,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             mightScale = parseInt(target.form.might_scale.value);
         }
 
-        let tagsAndStatusForRoll = DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags);
+        let tagsAndStatusForRoll = DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags,this.challengeTags);
         let countTags = DiceRollApp.calculatePowerTags(tagsAndStatusForRoll);
         numPositiveTags += countTags.positive;
         numNegativeTags += countTags.negative;

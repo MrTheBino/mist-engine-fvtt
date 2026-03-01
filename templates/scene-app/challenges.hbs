@@ -1,0 +1,11 @@
+<div class="scene-app-challenges">
+    {{#if isGM}}
+    <div>
+        <div class="npc-limits-container">
+            {{#each challenges as |challenge index|}}
+                {{> "systems/mist-engine-fvtt/templates/scene-app/_single_challenge.hbs" challenge=challenge index=index}}
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+</div>

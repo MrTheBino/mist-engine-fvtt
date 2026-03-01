@@ -1893,6 +1893,7 @@ body {
   font-weight: bold;
   border-radius: 2px;
   text-align: center;
+  font-style: italic;
 }
 .roll-dialog-container .selected-tags-container .tag.positive {
   background-color: rgba(64, 134, 54, 0.75);
@@ -2036,6 +2037,7 @@ body {
 
 .floating-tags-and-status-entries {
   gap: 5px;
+  font-style: italic;
 }
 
 .scene-app-characters .character-name {
@@ -2054,6 +2056,7 @@ body {
   text-align: center;
   font-weight: bold;
   margin-bottom: 2px;
+  font-style: italic;
 }
 .scene-app-dice-roll-modifiers .listing .mod-entry.positive {
   background-color: rgba(64, 134, 54, 0.75);
@@ -2071,6 +2074,7 @@ body {
   font-weight: bold;
   border-radius: 2px;
   text-align: center;
+  font-style: italic;
 }
 .character-container .selected-tags-container .tag.positive {
   background-color: rgba(64, 134, 54, 0.75);

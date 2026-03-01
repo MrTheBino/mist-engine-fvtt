@@ -1,0 +1,39 @@
+<div class="seperator"></div>
+<div class="character-container">
+    <div class="npc-subtitle-container-c">
+        <div class="npc-subtitle-text pointer" data-action="clickOpenCharacterSheet" data-id="{{challenge.id}}">{{challenge.name}}</div>
+    </div>
+    {{#if challenge.hasFloatingTagsAndStatuses}}
+    <div class="floating-tags-and-status-entries">
+        {{#each challenge.floatingTagsAndStatuses as |fts ftsIndex|}}
+        <div class="floating-tag-and-status-entry flexcol">
+            <div class="flexrow">
+
+                <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}"
+                    data-index="{{ftsIndex}}" data-actor-id="{{../challenge.id}}"
+                    title="right click to toggle between tag or state">
+                    <i class="fa-solid {{#if this.positive}}fa-circle-plus{{else}}fa-circle-minus{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-source="litm-npc" data-index="{{@index}}" data-actor-id="{{../challenge.id}}" title="toggle between positive and negative"></i>
+                     <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-index="{{@index}}" data-source="litm-npc" data-actor-id="{{../challenge.id}}">
+                        {{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}
+                    </span>
+                </div>
+
+            </div>
+            {{#if fts.isStatus}}
+
+            <div class="fts-markings-container">
+                {{#each fts.markings as |marking index|}}
+                <span class="fts-input-marking" data-marking-index="{{index}}"
+                    data-action="actorToggleFloatingTagOrStatusMarking" data-actor-id="{{../../challenge.id}}"
+                    data-index="{{ftsIndex}}">
+                    <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne
+                        index}}</i>
+                </span>
+                {{/each}}
+            </div>
+            {{/if}}
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+</div>
