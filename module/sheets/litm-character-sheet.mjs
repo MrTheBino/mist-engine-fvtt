@@ -116,17 +116,26 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     activateSocketListeners() {
         game.socket.on("system.mist-engine-fvtt", (msg) => {
             console.log("socket message received in character sheet: ", msg);
-            if (msg?.type === "hook" && msg.hook == "fellowshipThemeCardUpdated") {
-                this.reloadFellowshipThemecard(false);
-                if (this.rendered) {
-                    this.render();
-                }
-
-            }
-            else if (msg?.type === "hook" && msg.hook == "floatingTagOrStatusUpdated" && msg.data?.actorId === this.actor.id) {
+            if (msg?.type === "hook" && msg.hook == "floatingTagOrStatusUpdated" && msg.data?.actorId === this.actor.id) {
                 this.render(true, { focus: true });
             }
         });
+
+        // Rerender on the fellowship so that you can see which tags get used
+        this._fellowshipUpdateHookId = Hooks.on("updateActor", (actor) => {
+            if (this.actorFellowshipThemecard?.id === actor.id && this.rendered) {
+                this.render();
+            }
+        });
+    }
+
+    /** @override */
+    _onClose(options) {
+        if (this._fellowshipUpdateHookId) {
+            Hooks.off("updateActor", this._fellowshipUpdateHookId);
+            this._fellowshipUpdateHookId = null;
+        }
+        super._onClose(options);
     }
 
     /** @override */
@@ -290,15 +299,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         }
     }
 
-    reloadFellowshipThemecard(sendMessageToOthers = false) {
+    reloadFellowshipThemecard() {
         this.loadFellowshipThemecard();
-        if (sendMessageToOthers == true) {
-            game.socket.emit("system.mist-engine-fvtt", {
-                type: "hook",
-                hook: "fellowshipThemeCardUpdated",
-                data: {}
-            });
-        }
     }
 
     _prepareItems() {
@@ -507,7 +509,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if (prop > 3) prop = 3;
 
         await object.update({ [path]: prop });
-        this.reloadFellowshipThemecard(true);
+        this.reloadFellowshipThemecard();
         this.render();
     }
 
@@ -534,7 +536,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if (prop < 0) prop = 0;
 
         await object.update({ [path]: prop });
-        this.reloadFellowshipThemecard(true);
+        this.reloadFellowshipThemecard();
         this.render();
     }
 
@@ -564,7 +566,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let prop = foundry.utils.getProperty(object, path);
 
         await object.update({ [path]: !prop });
-        this.reloadFellowshipThemecard(true);
+        this.reloadFellowshipThemecard();
         this.render();
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
@@ -601,7 +603,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             await object.update({ [toBurnPath]: false });
         }
 
-        this.reloadFellowshipThemecard(true);
+        this.reloadFellowshipThemecard();
         this.render();
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
@@ -640,7 +642,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         }
 
         if (source === "fellowship-themecard") {
-            this.reloadFellowshipThemecard(true);
+            this.reloadFellowshipThemecard();
         }
 
         if (this.rendered) {
@@ -757,7 +759,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let prop = foundry.utils.getProperty(object, path);
 
         await object.update({ [path]: powertag.toBurn });
-        this.reloadFellowshipThemecard(true);
+        this.reloadFellowshipThemecard();
         this.render();
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
