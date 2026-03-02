@@ -1,10 +1,9 @@
-import { MistEngineActorSheet } from './actor-sheet.mjs';
-import { DiceRollApp } from '../apps/dice-roll-app.mjs';
-import { PowerTagAdapter } from '../lib/power-tag-adapter.mjs';
-import { MistSceneApp } from '../apps/scene-app.mjs';
 import { CustomBackgroundEditorApp } from '../apps/custom_background_editor.mjs';
-import { ThemekitSelectionApp } from '../apps/themekit-selection-app.mjs';
+import { DiceRollApp } from '../apps/dice-roll-app.mjs';
+import { MistSceneApp } from '../apps/scene-app.mjs';
 import { ThemekitCharacterApp } from '../apps/themekit-character-app.mjs';
+import { ThemekitSelectionApp } from '../apps/themekit-selection-app.mjs';
+import { MistEngineActorSheet } from './actor-sheet.mjs';
 
 export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -206,6 +205,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
     _getFellowshipThemecards() {
         const assignedUserNotGM = game.users.find(u => u.character?._id === this.actor.id && !u.isGM);
+        
         if (assignedUserNotGM) {
             return game.actors.filter(a =>
                 a.id !== this.actor.id &&
@@ -213,7 +213,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
                 a.testUserPermission(assignedUserNotGM, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
             );
         }
-        // Solo / GM play — return all fellowship themecards in the world
+
         return game.actors.filter(a => a.type === "litm-fellowship-themecard");
     }
 
@@ -221,7 +221,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const fellowshipThemecards = this._getFellowshipThemecards();
 
         if (!fellowshipThemecards || fellowshipThemecards.length === 0) {
-            ui.notifications.warn("No Fellowship Themecard actors found. Use \"Create New\" to make one first.");
+            ui.notifications.warn(game.i18n.localize("MIST_ENGINE.NOTIFICATIONS.NoFellowshipThemecardFound"));
             return;
         }
 
@@ -229,21 +229,22 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if (fellowshipThemecards.length === 1) {
             selectedThemecard = fellowshipThemecards[0];
         } else {
-            // Multiple options — let the user pick one
             const options = fellowshipThemecards.map(a => `<option value="${a.id}">${a.name}</option>`).join('');
             let selectedId;
+
             try {
                 selectedId = await foundry.applications.api.DialogV2.prompt({
-                    window: { title: "Select Fellowship Themecard" },
+                    window: { title: game.i18n.localize("MIST_ENGINE.LABELS.SelectFellowshipThemecard") },
                     content: `<select name="themecardId">${options}</select>`,
                     ok: {
-                        label: "Select",
+                        label: game.i18n.localize("MIST_ENGINE.LABELS.Select"),
                         callback: (event, button, dialog) => button.form.elements.themecardId.value
                     }
                 });
             } catch (error) {
                 return;
             }
+
             if (!selectedId) return;
             selectedThemecard = game.actors.get(selectedId);
         }
@@ -260,10 +261,10 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let newName;
         try {
             newName = await foundry.applications.api.DialogV2.prompt({
-                window: { title: "Create Fellowship Themecard" },
-                content: `<label>Name</label><input name="themecardName" type="text" value="Fellowship" autofocus>`,
+                window: { title: game.i18n.localize("MIST_ENGINE.LABELS.CreateFellowshipThemecard") },
+                content: `<label>${game.i18n.localize("MIST_ENGINE.LABELS.Name")}</label><input name="themecardName" type="text" value="${game.i18n.localize("MIST_ENGINE.THEMEBOOKS.Fellowship")}" autofocus>`,
                 ok: {
-                    label: "Create",
+                    label: game.i18n.localize("MIST_ENGINE.LABELS.Create"),
                     callback: (event, button, dialog) => button.form.elements.themecardName.value
                 }
             });

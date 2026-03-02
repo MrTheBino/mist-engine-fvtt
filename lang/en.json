@@ -26,7 +26,8 @@
       "AddedWeaknessTag": "Added weakness tag {tagName}",
       "AddedSpecialImprovement": "Added special improvement {siName}",
       "SetQuest": "Set quest to {quest}",
-      "AssignedThemekit": "Assigned themekit {themekitName} to character {characterName}"
+      "AssignedThemekit": "Assigned themekit {themekitName} to character {characterName}",
+      "NoFellowshipThemecardFound": "No Fellowship Themecard actors found. Use \"Create New\" to make one first."
     },
     "HELP": {
       "FellowshipCreation": "No Fellowship Themecard is assigned. Create a new one, or assign an existing Fellowship Themecard Actor.",
@@ -102,6 +103,12 @@
       },
       "SpecialImprovements": "Special Improvements",
       "Quantity": "Quantity",
+      "CreateNew": "Create New",
+      "AssignExisting": "Assign Existing",
+      "SelectFellowshipThemecard": "Select Fellowship Themecard",
+      "CreateFellowshipThemecard": "Create Fellowship Themecard",
+      "Select": "Select",
+      "Create": "Create",
       "Npc": {
         "details": "Details",
         "biography": "Biography",
