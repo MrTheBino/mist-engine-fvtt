@@ -27,6 +27,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             deleteFellowship: this.#handleDeleteFellowship,
             removeFellowshipThemecard: this.#handleRemoveFellowshipThemecard,
             assignFellowshipThemecard: this.#handleAssignFellowshipThemecard,
+            createFellowshipThemecard: this.#handleCreateFellowshipThemecard,
             clickedCustomBackground: this.#handleClickedCustomBackground,
             clickedRemoveCustomBackground: this.#handleRemoveCustomBackground,
             clickedCustomBackgroundEditor: this.#handleClickedCustomBackgroundEditor,
@@ -183,10 +184,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
     static async #handleAssignFellowshipThemecard(event, target) {
         event.preventDefault();
-        if (this.isActorAssignedToUser()) {
-            await this.assignFellowshipThemecard();
-            this.render(true);
-        }
+        await this.assignFellowshipThemecard();
+        this.render(true);
+    }
+
+    static async #handleCreateFellowshipThemecard(event, target) {
+        event.preventDefault();
+        await this.createAndAssignFellowshipThemecard();
+        this.render(true);
     }
 
     isActorAssignedToUser() {
@@ -199,25 +204,82 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         return true;
     }
 
-    async assignFellowshipThemecard() {
-        let assignedUserNotGM = game.users.find(u => u.character?._id === this.actor.id && !u.isGM);
+    _getFellowshipThemecards() {
+        const assignedUserNotGM = game.users.find(u => u.character?._id === this.actor.id && !u.isGM);
         if (assignedUserNotGM) {
-            let ownedWorldActors = game.actors.filter(a =>
+            return game.actors.filter(a =>
+                a.id !== this.actor.id &&
+                a.type === "litm-fellowship-themecard" &&
                 a.testUserPermission(assignedUserNotGM, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
             );
-            ownedWorldActors = ownedWorldActors.filter(a => a.id !== this.actor.id)
-            ownedWorldActors = ownedWorldActors.filter(a => a.type === "litm-fellowship-themecard");
-            //console.log("owned world actors: ", ownedWorldActors);
-            if (ownedWorldActors && ownedWorldActors.length > 0) {
-                this.actorFellowshipThemecard = ownedWorldActors[0];
-                //console.log("found fellowship themecard: ", this.actorFellowshipThemecard.id);
-                await this.actor.update({ "system.actorSharedSingleThemecardId": this.actorFellowshipThemecard.id });
-                //console.log("assigned fellowship themecard");
-            } else {
-                this.actorFellowshipThemecard = false;
-                ui.notifications.error(`No fellowship themecard actors found that are owned by the user ${assignedUserNotGM.name}. Please create a fellowship themecard actor and assign ownership to the same user as this character. Press F5 to reload foundry and its permissions if you encounter problems.`);
-                //console.log("no owned world actors found");
+        }
+        // Solo / GM play — return all fellowship themecards in the world
+        return game.actors.filter(a => a.type === "litm-fellowship-themecard");
+    }
+
+    async assignFellowshipThemecard() {
+        const fellowshipThemecards = this._getFellowshipThemecards();
+
+        if (!fellowshipThemecards || fellowshipThemecards.length === 0) {
+            ui.notifications.warn("No Fellowship Themecard actors found. Use \"Create New\" to make one first.");
+            return;
+        }
+
+        let selectedThemecard;
+        if (fellowshipThemecards.length === 1) {
+            selectedThemecard = fellowshipThemecards[0];
+        } else {
+            // Multiple options — let the user pick one
+            const options = fellowshipThemecards.map(a => `<option value="${a.id}">${a.name}</option>`).join('');
+            let selectedId;
+            try {
+                selectedId = await foundry.applications.api.DialogV2.prompt({
+                    window: { title: "Select Fellowship Themecard" },
+                    content: `<select name="themecardId">${options}</select>`,
+                    ok: {
+                        label: "Select",
+                        callback: (event, button, dialog) => button.form.elements.themecardId.value
+                    }
+                });
+            } catch (error) {
+                return;
             }
+            if (!selectedId) return;
+            selectedThemecard = game.actors.get(selectedId);
+        }
+
+        if (selectedThemecard) {
+            this.actorFellowshipThemecard = selectedThemecard;
+            await this.actor.update({ "system.actorSharedSingleThemecardId": this.actorFellowshipThemecard.id });
+        }
+    }
+
+    async createAndAssignFellowshipThemecard() {
+        const assignedUserNotGM = game.users.find(u => u.character?._id === this.actor.id && !u.isGM);
+
+        let newName;
+        try {
+            newName = await foundry.applications.api.DialogV2.prompt({
+                window: { title: "Create Fellowship Themecard" },
+                content: `<label>Name</label><input name="themecardName" type="text" value="Fellowship" autofocus>`,
+                ok: {
+                    label: "Create",
+                    callback: (event, button, dialog) => button.form.elements.themecardName.value
+                }
+            });
+        } catch (error) {
+            return;
+        }
+        if (!newName || newName.trim().length === 0) return;
+
+        const actorData = { name: newName.trim(), type: "litm-fellowship-themecard" };
+        if (assignedUserNotGM) {
+            actorData.ownership = { [assignedUserNotGM.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER };
+        }
+        const created = await Actor.create(actorData);
+        if (created) {
+            this.actorFellowshipThemecard = created;
+            await this.actor.update({ "system.actorSharedSingleThemecardId": created.id });
         }
     }
 
