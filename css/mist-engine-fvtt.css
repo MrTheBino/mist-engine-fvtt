@@ -818,7 +818,6 @@ body {
   margin: 5px;
   color: #724a32;
   min-height: 23px;
-  font-style: italic;
   border-bottom: 1.5px solid rgba(0, 0, 0, 0.1);
 }
 .mist-engine .item-storytag-line {
@@ -946,6 +945,10 @@ body {
 }
 .mist-engine .npc-secret-description {
   text-align: center;
+}
+.mist-engine .npc-secret-icon {
+  height: 18px;
+  margin-right: 2px;
 }
 .mist-engine .trash-icon-container {
   flex-grow: 0;
@@ -1323,6 +1326,9 @@ body {
   font-style: italic;
 }
 .mist-engine mark.status {
+  background-color: rgba(64, 134, 54, 0.75);
+}
+.mist-engine mark.tag {
   background-color: rgba(223, 182, 43, 0.75);
 }
 .mist-engine mark.green {
@@ -1347,12 +1353,18 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+.mist-engine .letter-box {
+  min-width: 15px;
+}
 .mist-engine .litm-pc-powertag {
   font-family: Labrada, serif;
   font-weight: normal;
   color: black;
   position: relative;
   text-align: center;
+}
+.mist-engine .litm-pc-powertag.powertag-name {
+  font-style: italic;
 }
 .mist-engine .litm-pc-powertag:hover {
   cursor: pointer;

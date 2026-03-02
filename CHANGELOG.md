@@ -5,6 +5,7 @@
 - dice rolls can handle challenge tags & statuses
 - removed old tags & statuses from challenges
 - added secrets to challenges
+- added torch icon for secrets
   
 # 13.7.2
 - fixed explanation of CSV import for themekits

@@ -115,7 +115,6 @@
   margin: 5px;
   color: $c-styled-text;
   min-height: 23px;
-  font-style: italic;
   border-bottom: 1.5px solid rgb(0, 0, 0, 0.1);
 }
 
@@ -273,6 +272,11 @@
 
 .npc-secret-description{
   text-align: center;
+}
+
+.npc-secret-icon{
+  height: 18px;
+  margin-right: 2px;
 }
 
 .trash-icon-container {
@@ -748,6 +752,10 @@ mark {
   font-style: italic;
 
   &.status {
+    background-color: $c-tag-green;
+  }
+
+  &.tag {
     background-color: $c-tag-yellow;
   }
 
@@ -783,4 +791,8 @@ mark {
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+.letter-box{
+  min-width: 15px;
 }

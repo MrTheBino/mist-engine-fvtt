@@ -23,7 +23,7 @@
                 {{#each system.secrets as |secret|}}
                 <div class="npc-secret-item">
                     <div class="npc-secret-name">
-                        {{secret.name}}
+                        <img src="systems/mist-engine-fvtt/assets/icons/torch.webp" class="npc-secret-icon">{{secret.name}}
                     </div>
                     <div class="npc-secret-description">
                         {{{textWithTags secret.description}}}

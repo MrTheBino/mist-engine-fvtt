@@ -5,6 +5,10 @@
     position: relative;
     text-align: center;
 
+    &.powertag-name{
+        font-style: italic;
+    }
+    
     &:hover {
         cursor: pointer;
     }

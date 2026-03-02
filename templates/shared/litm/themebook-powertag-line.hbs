@@ -1,6 +1,6 @@
 <div class="item-powertag-line flexrow">
     {{#if editMode}}
-        <strong style="flex-grow:0.3;">{{questionIndexToLetter index}}</strong>
+        <strong style="flex-grow:0.3;" class="letter-box">{{questionIndexToLetter index}}</strong>
         <input type="checkbox" class="themebook-entry-input" data-item-id="{{id}}" data-key="system.powertag{{index}}.planned" data-source="{{source}}"
         {{#if powertag.planned}}checked{{/if}} title="{{localize "MIST_ENGINE.HELP.Titles.PlannedPowertag"}}" style="flex-grow:0.3; margin-right: 0.5em;"/>
         <input class="themebook-entry-input" data-item-id="{{id}}" type="text" data-key="system.powertag{{index}}.name" data-source="{{source}}"
