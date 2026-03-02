@@ -1,10 +1,9 @@
-import { MistEngineActorSheet } from './actor-sheet.mjs';
-import { DiceRollApp } from '../apps/dice-roll-app.mjs';
-import { PowerTagAdapter } from '../lib/power-tag-adapter.mjs';
-import { MistSceneApp } from '../apps/scene-app.mjs';
 import { CustomBackgroundEditorApp } from '../apps/custom_background_editor.mjs';
-import { ThemekitSelectionApp } from '../apps/themekit-selection-app.mjs';
+import { DiceRollApp } from '../apps/dice-roll-app.mjs';
+import { MistSceneApp } from '../apps/scene-app.mjs';
 import { ThemekitCharacterApp } from '../apps/themekit-character-app.mjs';
+import { ThemekitSelectionApp } from '../apps/themekit-selection-app.mjs';
+import { MistEngineActorSheet } from './actor-sheet.mjs';
 
 export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -27,6 +26,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             deleteFellowship: this.#handleDeleteFellowship,
             removeFellowshipThemecard: this.#handleRemoveFellowshipThemecard,
             assignFellowshipThemecard: this.#handleAssignFellowshipThemecard,
+            createFellowshipThemecard: this.#handleCreateFellowshipThemecard,
             clickedCustomBackground: this.#handleClickedCustomBackground,
             clickedRemoveCustomBackground: this.#handleRemoveCustomBackground,
             clickedCustomBackgroundEditor: this.#handleClickedCustomBackgroundEditor,
@@ -116,17 +116,26 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     activateSocketListeners() {
         game.socket.on("system.mist-engine-fvtt", (msg) => {
             console.log("socket message received in character sheet: ", msg);
-            if (msg?.type === "hook" && msg.hook == "fellowshipThemeCardUpdated") {
-                this.reloadFellowshipThemecard(false);
-                if (this.rendered) {
-                    this.render();
-                }
-
-            }
-            else if (msg?.type === "hook" && msg.hook == "floatingTagOrStatusUpdated" && msg.data?.actorId === this.actor.id) {
+            if (msg?.type === "hook" && msg.hook == "floatingTagOrStatusUpdated" && msg.data?.actorId === this.actor.id) {
                 this.render(true, { focus: true });
             }
         });
+
+        // Rerender on the fellowship so that you can see which tags get used
+        this._fellowshipUpdateHookId = Hooks.on("updateActor", (actor) => {
+            if (this.actorFellowshipThemecard?.id === actor.id && this.rendered) {
+                this.render();
+            }
+        });
+    }
+
+    /** @override */
+    _onClose(options) {
+        if (this._fellowshipUpdateHookId) {
+            Hooks.off("updateActor", this._fellowshipUpdateHookId);
+            this._fellowshipUpdateHookId = null;
+        }
+        super._onClose(options);
     }
 
     /** @override */
@@ -183,10 +192,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
     static async #handleAssignFellowshipThemecard(event, target) {
         event.preventDefault();
-        if (this.isActorAssignedToUser()) {
-            await this.assignFellowshipThemecard();
-            this.render(true);
-        }
+        await this.assignFellowshipThemecard();
+        this.render(true);
+    }
+
+    static async #handleCreateFellowshipThemecard(event, target) {
+        event.preventDefault();
+        await this.createAndAssignFellowshipThemecard();
+        this.render(true);
     }
 
     isActorAssignedToUser() {
@@ -199,25 +212,84 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         return true;
     }
 
-    async assignFellowshipThemecard() {
-        let assignedUserNotGM = game.users.find(u => u.character?._id === this.actor.id && !u.isGM);
+    _getFellowshipThemecards() {
+        const assignedUserNotGM = game.users.find(u => u.character?._id === this.actor.id && !u.isGM);
+        
         if (assignedUserNotGM) {
-            let ownedWorldActors = game.actors.filter(a =>
+            return game.actors.filter(a =>
+                a.id !== this.actor.id &&
+                a.type === "litm-fellowship-themecard" &&
                 a.testUserPermission(assignedUserNotGM, CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER)
             );
-            ownedWorldActors = ownedWorldActors.filter(a => a.id !== this.actor.id)
-            ownedWorldActors = ownedWorldActors.filter(a => a.type === "litm-fellowship-themecard");
-            //console.log("owned world actors: ", ownedWorldActors);
-            if (ownedWorldActors && ownedWorldActors.length > 0) {
-                this.actorFellowshipThemecard = ownedWorldActors[0];
-                //console.log("found fellowship themecard: ", this.actorFellowshipThemecard.id);
-                await this.actor.update({ "system.actorSharedSingleThemecardId": this.actorFellowshipThemecard.id });
-                //console.log("assigned fellowship themecard");
-            } else {
-                this.actorFellowshipThemecard = false;
-                ui.notifications.error(`No fellowship themecard actors found that are owned by the user ${assignedUserNotGM.name}. Please create a fellowship themecard actor and assign ownership to the same user as this character. Press F5 to reload foundry and its permissions if you encounter problems.`);
-                //console.log("no owned world actors found");
+        }
+
+        return game.actors.filter(a => a.type === "litm-fellowship-themecard");
+    }
+
+    async assignFellowshipThemecard() {
+        const fellowshipThemecards = this._getFellowshipThemecards();
+
+        if (!fellowshipThemecards || fellowshipThemecards.length === 0) {
+            ui.notifications.warn(game.i18n.localize("MIST_ENGINE.NOTIFICATIONS.NoFellowshipThemecardFound"));
+            return;
+        }
+
+        let selectedThemecard;
+        if (fellowshipThemecards.length === 1) {
+            selectedThemecard = fellowshipThemecards[0];
+        } else {
+            const options = fellowshipThemecards.map(a => `<option value="${a.id}">${a.name}</option>`).join('');
+            let selectedId;
+
+            try {
+                selectedId = await foundry.applications.api.DialogV2.prompt({
+                    window: { title: game.i18n.localize("MIST_ENGINE.LABELS.SelectFellowshipThemecard") },
+                    content: `<select name="themecardId">${options}</select>`,
+                    ok: {
+                        label: game.i18n.localize("MIST_ENGINE.LABELS.Select"),
+                        callback: (event, button, dialog) => button.form.elements.themecardId.value
+                    }
+                });
+            } catch (error) {
+                return;
             }
+
+            if (!selectedId) return;
+            selectedThemecard = game.actors.get(selectedId);
+        }
+
+        if (selectedThemecard) {
+            this.actorFellowshipThemecard = selectedThemecard;
+            await this.actor.update({ "system.actorSharedSingleThemecardId": this.actorFellowshipThemecard.id });
+        }
+    }
+
+    async createAndAssignFellowshipThemecard() {
+        const assignedUserNotGM = game.users.find(u => u.character?._id === this.actor.id && !u.isGM);
+
+        let newName;
+        try {
+            newName = await foundry.applications.api.DialogV2.prompt({
+                window: { title: game.i18n.localize("MIST_ENGINE.LABELS.CreateFellowshipThemecard") },
+                content: `<label>${game.i18n.localize("MIST_ENGINE.LABELS.Name")}</label><input name="themecardName" type="text" value="${game.i18n.localize("MIST_ENGINE.THEMEBOOKS.Fellowship")}" autofocus>`,
+                ok: {
+                    label: game.i18n.localize("MIST_ENGINE.LABELS.Create"),
+                    callback: (event, button, dialog) => button.form.elements.themecardName.value
+                }
+            });
+        } catch (error) {
+            return;
+        }
+        if (!newName || newName.trim().length === 0) return;
+
+        const actorData = { name: newName.trim(), type: "litm-fellowship-themecard" };
+        if (assignedUserNotGM) {
+            actorData.ownership = { [assignedUserNotGM.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER };
+        }
+        const created = await Actor.create(actorData);
+        if (created) {
+            this.actorFellowshipThemecard = created;
+            await this.actor.update({ "system.actorSharedSingleThemecardId": created.id });
         }
     }
 
@@ -227,15 +299,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         }
     }
 
-    reloadFellowshipThemecard(sendMessageToOthers = false) {
+    reloadFellowshipThemecard() {
         this.loadFellowshipThemecard();
-        if (sendMessageToOthers == true) {
-            game.socket.emit("system.mist-engine-fvtt", {
-                type: "hook",
-                hook: "fellowshipThemeCardUpdated",
-                data: {}
-            });
-        }
     }
 
     _prepareItems() {
@@ -444,7 +509,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if (prop > 3) prop = 3;
 
         await object.update({ [path]: prop });
-        this.reloadFellowshipThemecard(true);
+        this.reloadFellowshipThemecard();
         this.render();
     }
 
@@ -471,7 +536,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if (prop < 0) prop = 0;
 
         await object.update({ [path]: prop });
-        this.reloadFellowshipThemecard(true);
+        this.reloadFellowshipThemecard();
         this.render();
     }
 
@@ -501,7 +566,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let prop = foundry.utils.getProperty(object, path);
 
         await object.update({ [path]: !prop });
-        this.reloadFellowshipThemecard(true);
+        this.reloadFellowshipThemecard();
         this.render();
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
@@ -538,7 +603,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             await object.update({ [toBurnPath]: false });
         }
 
-        this.reloadFellowshipThemecard(true);
+        this.reloadFellowshipThemecard();
         this.render();
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
@@ -577,7 +642,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         }
 
         if (source === "fellowship-themecard") {
-            this.reloadFellowshipThemecard(true);
+            this.reloadFellowshipThemecard();
         }
 
         if (this.rendered) {
@@ -694,7 +759,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let prop = foundry.utils.getProperty(object, path);
 
         await object.update({ [path]: powertag.toBurn });
-        this.reloadFellowshipThemecard(true);
+        this.reloadFellowshipThemecard();
         this.render();
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);

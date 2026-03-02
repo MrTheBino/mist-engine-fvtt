@@ -77,7 +77,10 @@
         <div class="powertags-container">
             <div class="empty-message">
                 <p>{{localize 'MIST_ENGINE.HELP.FellowshipCreation'}}</p>
-                <button  data-action="assignFellowshipThemecard" style="margin-left: auto; margin-right: auto;"><i class="fa-solid fa-people-arrows icon-hover" title="assign fellowship themecard"></i>Assign </button>
+                <div class="flexrow" style="gap: 0.5em; justify-content: center;">
+                    <button data-action="createFellowshipThemecard"><i class="fa-solid fa-plus icon-hover"></i> {{localize 'MIST_ENGINE.LABELS.CreateNew'}}</button>
+                    <button data-action="assignFellowshipThemecard"><i class="fa-solid fa-people-arrows icon-hover"></i> {{localize 'MIST_ENGINE.LABELS.AssignExisting'}}</button>
+                </div>
             </div>
         </div>
     </div>

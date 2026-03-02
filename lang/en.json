@@ -26,10 +26,11 @@
       "AddedWeaknessTag": "Added weakness tag {tagName}",
       "AddedSpecialImprovement": "Added special improvement {siName}",
       "SetQuest": "Set quest to {quest}",
-      "AssignedThemekit": "Assigned themekit {themekitName} to character {characterName}"
+      "AssignedThemekit": "Assigned themekit {themekitName} to character {characterName}",
+      "NoFellowshipThemecardFound": "No Fellowship Themecard actors found. Use \"Create New\" to make one first."
     },
     "HELP": {
-      "FellowshipCreation": "Create a Fellowship Themecard Actor and assign ownership to all party members to see it here.",
+      "FellowshipCreation": "No Fellowship Themecard is assigned. Create a new one, or assign an existing Fellowship Themecard Actor.",
       "NoThemebooksInCharacter": "No Themebooks found. Create Themebook Items and drop them here.",
       "ChallengeTemplateDragNDrop": "Drag and drop challenge / vignette items on this NPC to use them. They serve as templates and will not modify the original item.",
       "FelllowshipThemeCardExplanation": "A Fellowship Themecard is a shared resource for all members of a fellowship. It contains power tags, weakness tags and special improvements. The actual tags are getting entered in the characters. Not here, here are only the questions of the tags.",
@@ -105,6 +106,12 @@
       },
       "SpecialImprovements": "Special Improvements",
       "Quantity": "Quantity",
+      "CreateNew": "Create New",
+      "AssignExisting": "Assign Existing",
+      "SelectFellowshipThemecard": "Select Fellowship Themecard",
+      "CreateFellowshipThemecard": "Create Fellowship Themecard",
+      "Select": "Select",
+      "Create": "Create",
       "Npc": {
         "details": "Details",
         "biography": "Biography",
