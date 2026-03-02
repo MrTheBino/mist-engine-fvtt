@@ -1,0 +1,150 @@
+{
+  "MIST_ENGINE": {
+    "QUESTIONS": {
+      "DeleteItem": "¿Estás seguro que quieres borrar este objeto?",
+      "DeleteChallenge": "¿Estás seguro que quieres borrar este Desafío?",
+      "RemoveFellowshipThemecardConfirmation": "¿Estás seguro que quieres quitar este tema de Compañía? Esto no borra el Tema, solo quita la asignación de este personaje.",
+      "RemoveCustomBackgroundConfirmation": "¿Estás seguro que quieres eliminar el fondo personalizado? Esto no borra la imagen, solo la elimina de este personaje."
+    },
+    "NOTIFICATIONS":{
+      "NotAllowedToUploadFilesForCustomBackground": "No tienes permiso para subir ficheros. Habla con tu GM."
+    },
+    "HELP": {
+      "FellowshipCreation": "Crea un tema de Compañía y asigna la propiedad a todos los miembtros del grupo para verlo.",
+      "NoThemebooksInCharacter": "No hay Temas. Crea un objeto Tema y suéltalo aquí.",
+      "ChallengeTemplateDragNDrop": "Arrastra un desafío/viñeta a este NPC para usarlo. Es una plantilla y no modifica el objeto original.",
+      "FelllowshipThemeCardExplanation": "Un Tema de Compañía es un recurso compartido para toda la Compañía. Contiene etiquetas de poder, debilidad y mejoras especiales. Las etiquetas se personalizan en los personajes. Aquí solo se muestran las preguntas sobre las etiquetas.",
+      "Titles":{
+        "RightClickToToggleBurnState": "Pulsa botón derecho para cambiar el estado a quemado",
+        "Powertag": "Etiqueta de Poder",
+        "PlannedPowertag": "Etiquetas de Poder o Debilidad. Seleccionala para ocultarla de la lista de etiquetas hasta que estés listo para usarlo."
+      }
+    },
+    "NPC":{
+      "TagsAndStatuses": "Etiquetas y Estados",
+      "SpecialFeatures": "Características Especiales",
+      "TagsStatus":{
+        "Symbols":{
+          "Adventure": "Aventura",
+          "Origin": "Origen",
+          "Variable": "Variable",
+          "Greatness": "Grandeza"
+        }
+      }
+    },
+    "PLACEHOLDERS": {
+      "QuestGoal": "Gesta/Obketivo",
+      "ThemebookStory": "Historia",
+      "SpecialImprovementName": "Nombre de la Mejora especial",
+      "SpecialImprovementDescription": "Descripción de la Mejora especial",
+      "Companion": "Compañero",
+      "Tag": "Etiqueta",
+      "Name": "Nombre",
+      "ShortDescription": "Descripción breve",
+      "Description": "Descripción"
+    },
+    "THEMEBOOKS": {
+      "FellowshipRelationship": "Relaciones de la Compañía",
+      "SpecialImprovements": "Mejoras Especiales",
+      "Fellowship": "Compañía",
+      "Backpack": "Mochila",
+      "Quintessences": "Quintaesencias"
+    },
+    "ROLL_TYPES": {
+      "quick": "Tirada Rápida",
+      "detailed": "Tirada Detallada",
+      "reaction": "Tirada de Reacción"
+    },
+    "LABELS": {
+      "JourneyConsequences": "Consecuencias y Viñetas",
+      "ThreatsAndConsequences": "Amenazas y Consecuencias",
+      "SelectedTagsAndStatuses": "Etiquetas y Estados seleccionados",
+      "SelectCustomBackground": "Selecciona un fondo personalizado",
+      "RemoveCustomBackground": "Elimina un fondo personalizado",
+      "Consequences": "Consecuencias",
+      "Positive": "Positivo",
+      "Negative": "Negativo",
+      "Milestone": "Hito",
+      "Abandon": "Abandono",
+      "Improve": "Mejora",
+      "Quest": "Gesta",
+      "Description": "Descripción",
+      "Form": "Datos",
+      "Themebooks": "Temas",
+      "Notes": "Notas",
+      "Biography": "Biografía",
+      "ToggleEditMode": "Cambiar a modo de Edición",
+      "Name": "Nombre",
+      "Value": "Valor",
+      "Symbol": "Símbolo",
+      "Actor": {
+        "FloatingTagOrStatus": "Etiquetas y Estados"
+      },
+      "SpecialImprovements": "Mejoras especiales",
+      "Quantity": "Cantidad",
+      "Npc": {
+        "details": "Detalles",
+        "biography": "Biografía",
+        "roles": "Roles",
+        "difficulty": "Dificultad",
+        "limits": "Límites",
+        "TagsAndStatuses": "Etiquetas y Estados",
+        "SpecialFeatures": "Características Especiales",
+        "ThreatsAndConsequences": "Amenazas y Consecuencias"
+      },
+      "Item": {
+        "TagStatusName": "Nombre de Etiqueta/Estado"
+      },
+      "SceneApp": {
+        "Header": "Etiquetas de Historia y Estados",
+        "CharactersHeader": "Personajes",
+        "DiceRollModifiers": "Modificadores de la tirada",
+        "MightModifiers": "Poderío"
+      },
+      "CustomBackgroundEditor": {
+        "Button": "Editor de Fondos Personalizados",
+        "PickBackground": "Escoge un fondo",
+        "Reset": "Resetear",
+        "ExportPng": "Exportar comoPNG",
+        "UploadOverlayArtwork": "Subir ilustracion superpuesta",
+        "SetAsCustomBackground": "Fijar como Fondo Personalizado",
+        "HelpText": "El Editor de Fondos Personalizados te permite crear un fondo personalizado para tu personaje subiendo (o copiando y pegando) una imagen y ajustando su posición y escala. También puedes exportar el fondo personalizado como archivo PNG o configurarlo directamente como fondo de tu personaje. Ten en cuenta que necesitas permiso para subir archivos y usar esta función. Habla con tu GM si no tienes los permisos necesarios. La línea a continuación es solo una guía para ayudarte a colocar tu ilustración; no será visible en la imagen exportada ni en el fondo del personaje."
+      }
+    },
+    "MOVES": {
+      "LEGEND": {
+        "quick": {
+          "fail": "El Narrador decide un desarrollo narrativo perjudicial para el Héroe, y puede otorgar o quitar una etiquetas o estados de manera que perjudique al Héroe.",
+          "neutral": "<p> La acción se desarrolla como se esperaba, o mejor aún, logrando el objetivo o superando un obstáculo. El Narrador también puede darte una etiqueta o estado útil. </p> <p> El Narrador decide un desarrollo narrativo perjudicial para el Héroe, y puede otorgar o quitar una etiquetas o estados de manera que perjudique al Héroe. </p>",
+          "success": "La acción se desarrolla como se esperaba, o mejor aún, logrando el objetivo o superando un obstáculo. El Narrador también puede darte una etiqueta o estado útil."
+        },
+        "detailed": {
+          "fail": "El Narrador decide un desarrollo narrativo perjudicial para el Héroe, y puede otorgar o quitar una etiquetas o estados de manera que perjudique al Héroe.",
+          "neutral": "Éxito (10+) &amp; Consecuencias como en simple.<p> La acción se desarrolla como se esperaba, o mejor aún, logrando el objetivo o superando un obstáculo. El Narrador también puede darte una etiqueta o estado útil. </p> <p> El Narrador decide un desarrollo narrativo perjudicial para el Héroe, y puede otorgar o quitar una etiquetas o estados de manera que perjudique al Héroe. </p><p>Gasta tu Poder: <ul> <li>Añadir o Tachar una etiqueta (2 de Poder)</li> <li>Añadir o reducir un Estado (1 de Poder por nivel)</li> <li>Descubrir un detalle valioso (1 de Poder)</li> </ul><p>Ver opciones avanzadas en página 154.</p></p>",
+          "success": "Gasta tu Poder: <ul> <li>Añadir o Tachar una etiqueta (2 de Poder)</li> <li>Añadir o reducir un Estado (1 de Poder por nivel)</li> <li>Descubrir un detalle valioso (1 de Poder)</li> </ul><p>Ver opciones avanzadas en página 154.</p><p>Sin Consecuencias.</p>"
+        },
+        "reaction": {
+          "fail": "Sufre las consecuencias tal como son",
+          "neutral": "Tienes éxito y puedes gastar Poder solo para disminuir las consecuencias.",
+          "success": "Tienes éxito y puedes gastar Poder +1, en cualquier efecto."
+        }
+      }
+    }
+  },
+  "TYPES": {
+    "Actor": {
+      "litm-character": "Personaje",
+      "litm-npc": "Desafío",
+      "litm-fellowship-themecard": "Tema de Compañía",
+      "litm-journey": "Viaje"
+    },
+    "Item": {
+      "item": "Objeto",
+      "themebook": "Tema",
+      "scene-data": "Datos de Escena",
+      "quintessence": "Quintaesencia",
+      "shortchallenge": "Desafío / Viñeta corta",
+      "backpack": "Mochila"
+    }
+  }
+}

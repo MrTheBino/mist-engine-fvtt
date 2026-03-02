@@ -6,6 +6,9 @@
 - removed old tags & statuses from challenges
 - added secrets to challenges
 - added torch icon for secrets
+- spanish fan translation by Quarel
+- solo mode fellowships by coreyhickson, solo fellowships are still seperate actors
+- many other small fixes and improvements
   
 # 13.7.2
 - fixed explanation of CSV import for themekits
