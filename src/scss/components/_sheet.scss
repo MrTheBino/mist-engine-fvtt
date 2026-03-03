@@ -6,7 +6,8 @@
   }
 
   .single-secret-container{
-    margin-bottom: 2px;
+    margin-bottom: 10px;
+    padding: 5px;
     .header{
       margin-bottom: 2px;
     }
@@ -403,7 +404,7 @@
   float: right;
 }
 
-.threat-and-consequence-container-entry {
+.threat-and-consequence-container-entry,.special-feature-entry {
   padding: 5px;
   margin-bottom: 10px;
 }
@@ -767,6 +768,14 @@ mark {
     background-color: $c-tag-orange;
   }
 
+  &.might{
+    font-style: normal;
+  }
+
+  &.transparent{
+    background-color: transparent;
+  }
+
   &.power {
     background-color: $c-tag-power;
     padding-left: 20px;
@@ -779,6 +788,12 @@ mark {
       90% 100%,      // rechte untere Schräge
       10% 100%       // linke untere Schräge
     );
+  }
+
+  .might-icon{
+    height: 12px;
+    background-color: transparent;
+    display: inline;
   }
 }
 

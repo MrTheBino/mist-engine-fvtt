@@ -175,6 +175,13 @@ Handlebars.registerHelper('questionIndexToLetter', function (n) {
   return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[n - 1];
 });
 
+Handlebars.registerHelper('simpleFormatText', function (str) {
+  // we convert \n to <br/> for simple text formatting in the sheets
+  if (!str) return "";
+  str = textWithTags(str);
+  return str.replace(/\n/g, "<br/>");
+});
+
 Handlebars.registerHelper('storyTagDraggableData', function (storytag, source) {
   if (source !== "backpack") {
     return "";

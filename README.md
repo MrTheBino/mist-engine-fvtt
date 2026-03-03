@@ -48,6 +48,8 @@ You can use these formatting in almost every text field to display a MIST engine
     [status-1] - a status with tier 1, tier 1-6
     [/s status] - a status without a tier, usage in a journal for example
     [/sg status-2] - a status with a green color instead of yellow
+    [/so status-2] - a status with a orange color instead of yellow
+    [/m might] - a might word with a sword icon before
     [/w weakness] - a weakness tag, usage in text and compendiums for example
     [/wo weakness] - a weakness tag in orange, usage in text and compendiums for example
 

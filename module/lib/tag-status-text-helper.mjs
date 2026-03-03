@@ -32,13 +32,13 @@ export function extractBrackets(text) {
 }
 
 export function makeStyledTagOrStatusText(source) {
-  let isStatus = false;
+  let isOfType = 1; // 1 = tag, 2 = status, 3 = might
   let extraClass = '';
   let extraIcon = '';
 
   // status
   if (source.includes("/s")) {
-    isStatus = true;
+    isOfType = 2;
 
     if (source.includes("/sg")) {
       extraClass = "green";
@@ -59,10 +59,20 @@ export function makeStyledTagOrStatusText(source) {
     }
   }
 
+  //might
+  if (source.includes("/m")) {
+    extraIcon = '<img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">';
+    source = source.replace("/m", "");
+    extraClass= "transparent";
+    isOfType = 3;
+  }
+
   if (!source.includes("-")) {
     let tag = source;
-    if (isStatus) {
+    if (isOfType === 2) {
       return `<mark class="draggable status ${extraClass}" draggable="true" data-type="status" data-name="${tag}" data-value="0">${extraIcon}${tag}</mark>`;
+    } else if (isOfType === 3) {
+      return `<mark class="draggable might ${extraClass}" data-type="might" data-name="${tag}">${extraIcon}${tag}</mark>`;
     } else {
       return `<mark class="draggable tag ${extraClass}" draggable="true" data-type="tag" data-name="${tag}">${extraIcon}${tag}</mark>`;
     }

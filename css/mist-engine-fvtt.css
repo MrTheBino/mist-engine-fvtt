@@ -47,6 +47,12 @@ body {
   margin-top: 10px;
 }
 
+.box-shadowed {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
 /* Global styles */
 .window-app {
   font-family: Labrada, serif;
@@ -321,23 +327,23 @@ body {
   height: 100%;
 }
 
-.editor-content h1 {
+.editor-content h1, .tab-notes h1 {
   color: #724a32;
   font-family: Labrada, serif;
 }
-.editor-content h2 {
+.editor-content h2, .tab-notes h2 {
   color: #724a32;
   font-family: Labrada, serif;
 }
-.editor-content h3 {
+.editor-content h3, .tab-notes h3 {
   color: #724a32;
   font-family: Labrada, serif;
 }
-.editor-content h3 {
+.editor-content h3, .tab-notes h3 {
   display: flex;
   align-items: center;
 }
-.editor-content h3.with-line::after {
+.editor-content h3.with-line::after, .tab-notes h3.with-line::after {
   content: "";
   display: inline-block;
   width: 105px;
@@ -346,45 +352,48 @@ body {
   background-repeat: no-repeat;
   margin-left: 10px;
 }
-.editor-content .line-with-image img {
+.editor-content .line-with-image img, .tab-notes .line-with-image img {
   display: inline;
   margin-right: 3px;
 }
-.editor-content .line-with-image p {
+.editor-content .line-with-image p, .tab-notes .line-with-image p {
   display: inline;
 }
-.editor-content table.example-actions-table {
+.editor-content table.example-actions-table, .tab-notes table.example-actions-table {
   background-color: transparent;
   border-collapse: collapse;
 }
-.editor-content table.example-actions-table td {
+.editor-content table.example-actions-table td, .tab-notes table.example-actions-table td {
   border: 1px solid black;
   text-align: center;
   border-top: 0;
   align-content: start;
+  width: 50%;
 }
-.editor-content table.example-actions-table td .black-strong {
+.editor-content table.example-actions-table td .black-strong, .tab-notes table.example-actions-table td .black-strong {
   color: black;
   font-weight: bold;
 }
-.editor-content table.example-actions-table tr:nth-child(odd) {
+.editor-content table.example-actions-table tr:nth-child(odd), .tab-notes table.example-actions-table tr:nth-child(odd) {
   background-color: transparent;
 }
-.editor-content table.example-actions-table tr:nth-child(even) {
+.editor-content table.example-actions-table tr:nth-child(even), .tab-notes table.example-actions-table tr:nth-child(even) {
   background-color: transparent;
 }
-.editor-content table.example-actions-table tr:first-child th {
+.editor-content table.example-actions-table tr:first-child th, .tab-notes table.example-actions-table tr:first-child th {
   border-top: 0;
 }
-.editor-content table.example-actions-table tr:last-child td {
+.editor-content table.example-actions-table tr:last-child td, .tab-notes table.example-actions-table tr:last-child td {
   border-bottom: 0;
 }
 .editor-content table.example-actions-table tr td:first-child,
-.editor-content table.example-actions-table tr th:first-child {
+.editor-content table.example-actions-table tr th:first-child, .tab-notes table.example-actions-table tr td:first-child,
+.tab-notes table.example-actions-table tr th:first-child {
   border-left: 0;
 }
 .editor-content table.example-actions-table tr td:last-child,
-.editor-content table.example-actions-table tr th:last-child {
+.editor-content table.example-actions-table tr th:last-child, .tab-notes table.example-actions-table tr td:last-child,
+.tab-notes table.example-actions-table tr th:last-child {
   border-right: 0;
 }
 
@@ -468,6 +477,11 @@ body {
   color: #191813;
   font-family: Labrada, serif;
   font-size: 1.2em;
+}
+
+/* fix for Campaign Codex */
+article.cc-enriched section.journal-entry-content {
+  background: transparent !important;
 }
 
 #pause.paused {
@@ -732,7 +746,8 @@ body {
   row-gap: 0.5em;
 }
 .mist-engine.sheet.actor.npc .single-secret-container {
-  margin-bottom: 2px;
+  margin-bottom: 10px;
+  padding: 5px;
 }
 .mist-engine.sheet.actor.npc .single-secret-container .header {
   margin-bottom: 2px;
@@ -1043,7 +1058,7 @@ body {
 .mist-engine .editModeToggle {
   float: right;
 }
-.mist-engine .threat-and-consequence-container-entry {
+.mist-engine .threat-and-consequence-container-entry, .mist-engine .special-feature-entry {
   padding: 5px;
   margin-bottom: 10px;
 }
@@ -1337,11 +1352,22 @@ body {
 .mist-engine mark.orange {
   background-color: rgba(223, 182, 43, 0.75);
 }
+.mist-engine mark.might {
+  font-style: normal;
+}
+.mist-engine mark.transparent {
+  background-color: transparent;
+}
 .mist-engine mark.power {
   background-color: rgb(227, 221, 217);
   padding-left: 20px;
   padding-right: 20px;
   clip-path: polygon(0% 50%, 10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%);
+}
+.mist-engine mark .might-icon {
+  height: 12px;
+  background-color: transparent;
+  display: inline;
 }
 .mist-engine .themekit-container {
   text-align: center;

@@ -4,7 +4,7 @@
   }
 }
 
-.editor-content {
+.editor-content,.tab-notes {
   h1 {
     color: $c-styled-text;
     font-family: $font-primary;
@@ -58,6 +58,7 @@
       text-align: center;
       border-top: 0;
       align-content: start;
+      width: 50%;
 
       .black-strong {
         color: black;

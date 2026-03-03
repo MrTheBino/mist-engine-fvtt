@@ -1,7 +1,7 @@
 <fieldset>
     <legend>{{localize "MIST_ENGINE.NPC.SpecialFeatures"}} <a data-action="createSpecialFeature"><i class='fas fa-plus'></i></a></legend>
     {{#each system.specialFeatures as |entry index|}}
-    <div class="form-group flexcol">
+    <div class="special-feature-entry flexcol box-shadowed">
         <div class="form-group flexrow">
             <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="specialFeatures"
                 data-key="name" id="threat-{{index}}" name="system.specialFeatures[{{index}}].name"

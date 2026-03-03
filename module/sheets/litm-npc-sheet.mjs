@@ -8,7 +8,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     classes: ["mist-engine", "sheet", "actor", "npc"],
     position: {
       width: 850,
-      height: 700,
+      height: 800,
     },
     actions: {
       createLimit: this.#handleCreateLimit,

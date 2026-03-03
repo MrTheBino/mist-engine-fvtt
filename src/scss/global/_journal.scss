@@ -83,3 +83,8 @@
         font-size: 1.2em;
     }
 }
+
+/* fix for Campaign Codex */
+article.cc-enriched section.journal-entry-content {
+    background: transparent!important;
+}
