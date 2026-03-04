@@ -11,6 +11,7 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
 
 
         schema.type = new fields.StringField({ blank: true });
+        schema.color = new fields.StringField({ blank: true });
         schema.quest = new fields.StringField({ blank: true });
         schema.story = new fields.StringField({ blank: true });
         schema.tabCategory = new fields.StringField({ blank: false, initial: "main" });
@@ -166,6 +167,11 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
                 this.themekit = null;
                 this.themeKitUUID = null;
             });
+        }
+
+        // if color is empty then we set it equal to type
+        if(!this.color || this.color.trim() === ""){
+            this.color = this.type;
         }
     }
 }

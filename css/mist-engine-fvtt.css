@@ -53,6 +53,15 @@ body {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
+.box-shadowed-container {
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
 /* Global styles */
 .window-app {
   font-family: Labrada, serif;
@@ -825,8 +834,18 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine.sheet.item {
   color: #724a32;
 }
-.mist-engine.sheet.item h2 {
+.mist-engine.sheet.item h1, .mist-engine.sheet.item h2, .mist-engine.sheet.item h3, .mist-engine.sheet.item h4 {
   color: #724a32;
+  font-family: Labrada, serif;
+}
+.mist-engine.sheet.item h1.with-line::after, .mist-engine.sheet.item h2.with-line::after, .mist-engine.sheet.item h3.with-line::after, .mist-engine.sheet.item h4.with-line::after {
+  content: "";
+  display: inline-block;
+  width: 105px;
+  height: 6px;
+  background-image: url(../assets/header-backline.webp);
+  background-repeat: no-repeat;
+  margin-left: 10px;
 }
 .mist-engine.sheet.actor.litm-character .window-content {
   background-image: url("../assets/default_sheet_background.webp");

@@ -275,7 +275,7 @@ Hooks.on("renderMistEngineLegendInTheMistCharacterSheet", (app, html) => {
   const menuItems = [
     {
       name: "Switch Tab",
-      icon: '<i class="fas fa-edit"></i>',
+      icon: '<i class="fa-solid fa-right-left"></i>',
       condition: li => true,
       callback: li => {
         const id = li.data("id");

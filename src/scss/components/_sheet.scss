@@ -55,8 +55,20 @@
 
   color: $c-styled-text;
 
-  h2 {
+  h1,h2,h3,h4 {
     color: $c-styled-text;
+    font-family: $font-primary;
+    &.with-line {
+            &::after {
+                content: "";
+                display: inline-block;
+                width: 105px;
+                height: 6px;
+                background-image: url(../assets/header-backline.webp);
+                background-repeat: no-repeat;
+                margin-left: 10px;
+            }
+        }
   }
 }
 
