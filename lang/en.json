@@ -77,6 +77,7 @@
       "reaction": "Reaction Roll"
     },
     "LABELS": {
+      "Other": "Other",
       "JourneyConsequences": "Consequences & Vignettes",
       "ThreatsAndConsequences": "Threats & Consequences",
       "SelectedTagsAndStatuses": "Selected Tags & Statuses",
@@ -92,7 +93,8 @@
       "Description": "Description",
       "Form": "Data",
       "Themekit": "Themekit",
-      "Themebooks": "ThemeBooks",
+      "MainThemebooks": "Main",
+      "OtherThemebooks": "Other",
       "Notes": "Notes",
       "Biography": "Biography",
       "ToggleEditMode": "Toggle Edit Mode",

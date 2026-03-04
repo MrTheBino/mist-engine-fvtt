@@ -271,6 +271,28 @@ Hooks.once("ready", function () {
   );
 });
 
+Hooks.on("renderMistEngineLegendInTheMistCharacterSheet", (app, html) => {
+  const menuItems = [
+    {
+      name: "Switch Tab",
+      icon: '<i class="fas fa-edit"></i>',
+      condition: li => true,
+      callback: li => {
+        const id = li.data("id");
+        const tabCategory = li.data("tab-category");
+        
+        const themebook = app.actor.items.get(id);
+        if(!themebook) return;
+        const newTabCategory = themebook.system.tabCategory === "main" ? "other" : "main";
+        themebook.update({"system.tabCategory": newTabCategory});
+      }
+    }
+  ];
+
+  // Wichtig: ContextMenu direkt initialisieren, nicht erst im Event.
+  new ContextMenu(html, ".themebook-container", menuItems,{fixed: true});
+});
+
 //make live a little bit easier, themekits have OBSERVER rights per default
 Hooks.on("preCreateItem", (doc, data, options, userId) => {
   // Nur GM darf Ownership setzen

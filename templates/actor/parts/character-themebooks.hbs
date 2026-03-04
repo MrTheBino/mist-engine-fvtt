@@ -9,8 +9,8 @@
     </div>
     {{/if}}
     {{!-- Iterate over each themebook and render the partial --}}
-    {{#each themebooks as |book id|}}
-    {{> 'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs' themebook=book id=id
+    {{#each themebooks as |book index|}}
+    {{> 'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs' themebook=book id=book._id
     editMode=../system.editMode}}
     {{/each}}
 </div>

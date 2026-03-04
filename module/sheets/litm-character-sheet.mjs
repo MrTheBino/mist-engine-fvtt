@@ -66,6 +66,11 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             template: 'systems/mist-engine-fvtt/templates/actor/parts/tab-litm-character.hbs',
             scrollable: ['']
         },
+        other: {
+            id: 'other',
+            template: 'systems/mist-engine-fvtt/templates/actor/parts/tab-litm-other.hbs',
+            scrollable: ['']
+        },
         biography: {
             id: 'biography',
             template: 'systems/mist-engine-fvtt/templates/shared/tab-biography.hbs'
@@ -105,7 +110,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         "litm-character-sheet": { // this is the group name
             tabs:
                 [
-                    { id: 'character', group: 'litm-character-sheet', label: 'MIST_ENGINE.LABELS.Themebooks' },
+                    { id: 'character', group: 'litm-character-sheet', label: 'MIST_ENGINE.LABELS.MainThemebooks' },
+                    { id: 'other', group: 'litm-character-sheet', label: 'MIST_ENGINE.LABELS.OtherThemebooks' },
                     { id: 'biography', group: 'litm-character-sheet', label: 'MIST_ENGINE.LABELS.Biography' },
                     { id: 'notes', group: 'litm-character-sheet', label: 'MIST_ENGINE.LABELS.Notes' }
                 ],
@@ -305,13 +311,19 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
     _prepareItems() {
         const themebooks = [];
+        const themebooksOther = [];
         const quintessences = [];
         let backpack = null;
 
         let inventory = this.options.document.items;
         for (let i of inventory) {
             if (i.type === 'themebook') {
-                themebooks.push(i);
+                if(i.system.tabCategory === "other"){
+                    themebooksOther.push(i);
+                }else{
+                    themebooks.push(i);
+                }
+                
             } else if (i.type === 'backpack') {
                 backpack = i;
             } else if (i.type === 'quintessence') {
@@ -319,7 +331,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             }
         }
 
-        return { themebooks: themebooks, backpack: backpack, quintessences: quintessences, themebooksEmpty: themebooks.length === 0 };
+        return { themebooks: themebooks, backpack: backpack, quintessences: quintessences, themebooksEmpty: themebooks.length === 0, themebooksOther: themebooksOther, themebooksOtherEmpty: themebooksOther.length === 0 };
     }
 
     getBackpack() {
