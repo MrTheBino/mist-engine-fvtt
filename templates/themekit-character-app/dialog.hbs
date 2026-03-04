@@ -7,14 +7,14 @@
     <h3 class="with-line">{{localize "MIST_ENGINE.THEMEKITS.Powertags"}}</h3>
     <div class="tag-container">
     {{#each currentSelectedThemekit.system.powertags}}
-        <mark class="status green {{#if this.used}}used{{/if}} clickable" data-action="addPowertag" data-tag="{{this.name}}">{{this.name}}</mark>
+        <mark class="tag yellow {{#if this.used}}used{{/if}} clickable" data-action="addPowertag" data-tag="{{this.name}}">{{this.name}}</mark>
     {{/each}}
     </div>
     <!-- list weaknesses -->
     <h3 class="with-line">{{localize "MIST_ENGINE.THEMEKITS.WeaknessTags"}}</h3>
     <div class="tag-container">
     {{#each currentSelectedThemekit.system.weaknesstags}}
-        <mark class="status yellow {{#if this.used}}used{{/if}} clickable" data-action="addWeaknessTag" data-tag="{{this.name}}">{{this.name}}</mark>
+        <mark class="tag orange {{#if this.used}}used{{/if}} clickable" data-action="addWeaknessTag" data-tag="{{this.name}}">{{this.name}}</mark>
     {{/each}}
     </div>
     <!-- show quest -->

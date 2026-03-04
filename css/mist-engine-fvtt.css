@@ -73,7 +73,7 @@ body {
   font-weight: bold;
   padding-left: 0.2em;
   padding-right: 0.2em;
-  background: rgba(223, 182, 43, 0.75);
+  background: rgba(238, 213, 146, 0.75);
 }
 
 .mist-engine.status {
@@ -528,6 +528,43 @@ article.cc-enriched section.journal-entry-content {
     filter: drop-shadow(0 0 0 transparent);
   }
 }
+#tooltip mark {
+  padding-left: 2px;
+  padding-right: 2px;
+  background-color: rgba(238, 213, 146, 0.75);
+  border-radius: 2px;
+  font-style: italic;
+}
+#tooltip mark.status {
+  background-color: rgba(64, 134, 54, 0.75);
+}
+#tooltip mark.tag {
+  background-color: rgba(238, 213, 146, 0.75);
+}
+#tooltip mark.green {
+  background-color: rgba(64, 134, 54, 0.75);
+}
+#tooltip mark.orange {
+  background-color: rgba(223, 182, 43, 0.75);
+}
+#tooltip mark.might {
+  font-style: normal;
+}
+#tooltip mark.transparent {
+  background-color: transparent;
+}
+#tooltip mark.power {
+  background-color: rgb(227, 221, 217);
+  padding-left: 20px;
+  padding-right: 20px;
+  clip-path: polygon(0% 50%, 10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%);
+}
+#tooltip mark .might-icon {
+  height: 12px;
+  background-color: transparent;
+  display: inline;
+}
+
 /* Styles limited to mist-engine-fvtt sheets */
 .mist-engine .item-form {
   font-family: Labrada, serif;
@@ -943,7 +980,7 @@ article.cc-enriched section.journal-entry-content {
   padding-right: 0.2em;
 }
 .mist-engine .npc-limit-name {
-  background: rgb(161, 61, 41);
+  background: rgb(208, 160, 141);
   padding-left: 0.2em;
   padding-right: 1em;
 }
@@ -983,7 +1020,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine .npc-threats-and-consequences-container .entry-name {
   font-weight: bold;
-  background-color: #c9c7b8;
+  background-color: rgb(206, 190, 179);
   padding: 2px 4px;
   text-transform: uppercase;
   clip-path: polygon(0 0.2em, 0.3em 0.2em, 0.3em 0, calc(100% - 0.3em) 0, calc(100% - 0.3em) 0.2em, 100% 0.3em, 100% calc(100% - 0.2em), calc(100% - 0.2em) calc(100% - 0.2em), calc(100% - 0.2em) 100%, 0.2em 100%, 0.3em calc(100% - 0.2em), 0 calc(100% - 0.2em));
@@ -996,11 +1033,12 @@ article.cc-enriched section.journal-entry-content {
   padding-left: 1.5em;
   background-image: url("../assets/icons/icon-litm-consequence.svg");
   background-repeat: no-repeat;
-  background-position: -0.5em 0;
+  background-position: -0.4em 0;
   background-size: 2em 1.5em;
+  line-height: 1.4em;
 }
 .mist-engine .npc-threats-and-consequences-container li.entry-item .tag {
-  background-color: rgba(223, 182, 43, 0.75);
+  background-color: rgba(238, 213, 146, 0.75);
   border-radius: 4px;
   padding: 0 2px;
 }
@@ -1066,7 +1104,7 @@ article.cc-enriched section.journal-entry-content {
   font-family: Labrada, serif;
 }
 .mist-engine .npc-biography .tag {
-  background-color: rgba(223, 182, 43, 0.75);
+  background-color: rgba(238, 213, 146, 0.75);
   border-radius: 4px;
 }
 .mist-engine .npc-biography .status {
@@ -1079,7 +1117,7 @@ article.cc-enriched section.journal-entry-content {
   height: 100%;
 }
 .mist-engine .tab-description .tag {
-  background-color: rgba(223, 182, 43, 0.75);
+  background-color: rgba(238, 213, 146, 0.75);
   border-radius: 4px;
 }
 .mist-engine .tab-description .status {
@@ -1336,7 +1374,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine mark {
   padding-left: 2px;
   padding-right: 2px;
-  background-color: rgba(223, 182, 43, 0.75);
+  background-color: rgba(238, 213, 146, 0.75);
   border-radius: 2px;
   font-style: italic;
 }
@@ -1344,7 +1382,7 @@ article.cc-enriched section.journal-entry-content {
   background-color: rgba(64, 134, 54, 0.75);
 }
 .mist-engine mark.tag {
-  background-color: rgba(223, 182, 43, 0.75);
+  background-color: rgba(238, 213, 146, 0.75);
 }
 .mist-engine mark.green {
   background-color: rgba(64, 134, 54, 0.75);
@@ -1612,7 +1650,7 @@ article.cc-enriched section.journal-entry-content {
   display: inline-block;
 }
 .mist-engine .npc-tag {
-  background-color: rgba(223, 182, 43, 0.75);
+  background-color: rgba(238, 213, 146, 0.75);
 }
 .mist-engine .npc-tag-status-value {
   background-color: rgba(64, 134, 54, 0.75);
@@ -1656,7 +1694,7 @@ article.cc-enriched section.journal-entry-content {
   font-weight: bold;
 }
 .mist-engine .npc-limit-description .status {
-  background-color: rgba(223, 182, 43, 0.75);
+  background-color: rgba(238, 213, 146, 0.75);
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -2109,7 +2147,7 @@ article.cc-enriched section.journal-entry-content {
 }
 
 .scene-app-dice-roll-modifiers .listing .mod-entry {
-  background-color: rgba(223, 182, 43, 0.75);
+  background-color: rgba(238, 213, 146, 0.75);
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -2272,18 +2310,23 @@ article.cc-enriched section.journal-entry-content {
   background-repeat: no-repeat;
   font-family: Labrada, serif;
   color: var(--litm-color-accent);
+  display: flex;
+  flex-flow: row nowrap;
 }
 #themekit-selection-app > section.window-content .left-panel {
-  flex-grow: 0.4;
+  flex: 1;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 5px;
   align-self: flex-start;
+  height: 100%;
 }
 #themekit-selection-app > section.window-content .right-panel {
   align-self: flex-start;
   margin-left: 10px;
-  flex-grow: 1;
+  padding-left: 10px;
+  flex: 2;
+  height: 100%;
 }
 #themekit-selection-app > section.window-content .right-panel .scrollable {
   overflow-y: auto;

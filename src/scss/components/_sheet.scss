@@ -253,7 +253,7 @@
 }
 
 .npc-limit-name {
-  background: $c-tag-red;
+  background: rgba(208,160,141);
   padding-left: 0.2em;
   padding-right: 1em;
 }
@@ -301,7 +301,7 @@
 
   .entry-name {
     font-weight: bold;
-    background-color: $c-faint;
+    background-color: rgba(206,190,179);
     padding: 2px 4px;
     text-transform: uppercase;
     clip-path: polygon(0 0.2em,
@@ -327,8 +327,9 @@
     padding-left: 1.5em;
     background-image: url("../assets/icons/icon-litm-consequence.svg");
     background-repeat: no-repeat;
-    background-position: -0.5em 0;
+    background-position: -0.4em 0;
     background-size: 2em 1.5em;
+    line-height: 1.4em;
 
     .tag {
       background-color: $c-tag-yellow;

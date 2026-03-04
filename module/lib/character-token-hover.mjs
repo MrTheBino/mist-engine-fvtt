@@ -61,7 +61,9 @@ export async function showCharacterTokenHover(token, hovered) {
         overlayVars
     );
     const { x, y } = tokenToScreen(token);
-    element.style.left = `${Math.round(x + 14)}px`;
-    element.style.top = `${Math.round(y + 14)}px`;
+
+    // I want the tooltip to be centered bellow the token, so I need to adjust the x coordinate by half of the tooltip width (300px) and also add a small offset to y to move it below the token
+    element.style.left = `${Math.round(x - 300)}px`;
+    element.style.top = `${Math.round(y + 60)}px`;
     element.style.display = "block";
 }

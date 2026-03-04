@@ -1,25 +1,5 @@
-<section class="{{tabs.dialog.id}} {{tabs.dialog.cssClass}} scrollable">
-    <div class="flexrow">
-        <div class="left-panel">
-
-            <!-- we list all available themekits , group first, then their children -->
-            {{#each availableThemekits}}
-            <div class="themekit-group">
-                <div class="group-header">{{this.groupName}}</div>
-                <ul>
-                    {{#each this.themekits}}
-                    <li>
-                        <a class="themekit-button" data-themekit-uuid="{{this.uuid}}" data-action="selectThemekit">
-                            {{this.name}}
-                        </a>
-                    </li>
-                    {{/each}}
-                </ul>
-            </div>
-            {{/each}}
-        </div>
-        <div class="right-panel">
-            <div class="scrollable">
+<div class="right-panel scrollable">
+            <div class="">
                 {{#if (eq hasAvailableThemekits false)}}
                 <p>{{localize "MIST_ENGINE.THEMEKITS.NoThemekitsAvailable"}}</p>
                 {{/if}}
@@ -30,14 +10,14 @@
                 <h3 class="with-line">{{localize "MIST_ENGINE.THEMEKITS.Powertags"}}</h3>
                 <div class="tag-container">
                     {{#each currentSelectedThemekit.system.powertags}}
-                    <mark class="status green">{{this.name}}</mark>
+                    <mark class="tag yellow">{{this.name}}</mark>
                     {{/each}}
                 </div>
                 <!-- list weaknesses -->
                 <h3 class="with-line">{{localize "MIST_ENGINE.THEMEKITS.WeaknessTags"}}</h3>
                 <div class="tag-container">
                     {{#each currentSelectedThemekit.system.weaknesstags}}
-                    <mark class="status yellow">{{this.name}}</mark>
+                    <mark class="tag orange">{{this.name}}</mark>
                     {{/each}}
                 </div>
                 <!-- show quest -->
@@ -63,5 +43,3 @@
                 {{/if}}
             </div>
         </div>
-    </div>
-</section>

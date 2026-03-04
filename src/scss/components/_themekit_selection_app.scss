@@ -3,19 +3,24 @@
     background-repeat: no-repeat;
     font-family: $font-primary;
     color: var(--litm-color-accent);
+    display: flex;
+    flex-flow: row nowrap;
 
     .left-panel {
-        flex-grow: 0.4;
+        flex: 1;
         background-color: rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         padding: 5px;
         align-self:flex-start;
+        height: 100%;
     }
 
     .right-panel {
         align-self: flex-start;
         margin-left: 10px;
-        flex-grow: 1;
+        padding-left: 10px;
+        flex: 2;
+        height: 100%;
 
         .scrollable {
             overflow-y: auto;

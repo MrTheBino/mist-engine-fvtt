@@ -1,0 +1,18 @@
+<div class="left-panel scrollable">
+
+            <!-- we list all available themekits , group first, then their children -->
+            {{#each availableThemekits}}
+            <div class="themekit-group">
+                <div class="group-header">{{this.groupName}}</div>
+                <ul>
+                    {{#each this.themekits}}
+                    <li>
+                        <a class="themekit-button" data-themekit-uuid="{{this.uuid}}" data-action="selectThemekit">
+                            {{this.name}}
+                        </a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
+    </div>

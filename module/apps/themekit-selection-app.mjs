@@ -30,8 +30,12 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
 
     /** @override */
     static PARTS = {
-        dialog: {
-            template: 'systems/mist-engine-fvtt/templates/themekit-selection-app/dialog.hbs',
+        left: {
+            template: 'systems/mist-engine-fvtt/templates/themekit-selection-app/left.hbs',
+            scrollable: ['']
+        },
+        right: {
+            template: 'systems/mist-engine-fvtt/templates/themekit-selection-app/right.hbs',
             scrollable: ['']
         }
     };

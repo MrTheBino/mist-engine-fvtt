@@ -1,5 +1,12 @@
 # CHANGELOG
 
+# 13.7.4
+- improved themekit selection dialog
+- added might as [/m MIGHT] in text
+- improvements on the challenge sheet
+- improvement on the tooltips
+- small fixes here and there
+  
 # 13.7.3
 - scene app can handle challenge tags & statuses
 - dice rolls can handle challenge tags & statuses
