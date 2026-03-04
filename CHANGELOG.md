@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 13.7.5
+- switch tab functionality for themebooks, no you can have more themebooks without scrumbling your character sheet
+- color option for themebooks
+  
 # 13.7.4
 - improved themekit selection dialog
 - added might as [/m MIGHT] in text
