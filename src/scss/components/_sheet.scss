@@ -556,6 +556,10 @@
   width: 100%;
 }
 
+.npc-floating-tags-and-status-container {
+    width: auto !important;
+}
+
 .floating-tags-and-status-entries {
   display: flex;
   flex-direction: column;

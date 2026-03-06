@@ -280,25 +280,41 @@ Hooks.once("ready", function () {
 });
 
 Hooks.on("renderMistEngineLegendInTheMistCharacterSheet", (app, html) => {
+
   const menuItems = [
     {
-      name: "Switch Tab",
+      name: "Move to Other Tab",
       icon: '<i class="fa-solid fa-right-left"></i>',
-      condition: li => true,
+      condition: li => {
+        const id = li.data("id");
+        const themebook = app.actor.items.get(id);
+        return themebook?.system?.tabCategory === "main";
+      },
       callback: li => {
         const id = li.data("id");
-        const tabCategory = li.data("tab-category");
-        
         const themebook = app.actor.items.get(id);
-        if(!themebook) return;
-        const newTabCategory = themebook.system.tabCategory === "main" ? "other" : "main";
-        themebook.update({"system.tabCategory": newTabCategory});
+        if (!themebook) return;
+        themebook.update({"system.tabCategory": "other"});
+      }
+    },
+    {
+      name: "Move to Main Tab",
+      icon: '<i class="fa-solid fa-right-left"></i>',
+      condition: li => {
+        const id = li.data("id");
+        const themebook = app.actor.items.get(id);
+        return themebook?.system?.tabCategory === "other";
+      },
+      callback: li => {
+        const id = li.data("id");
+        const themebook = app.actor.items.get(id);
+        if (!themebook) return;
+        themebook.update({"system.tabCategory": "main"});
       }
     }
   ];
 
-  // Wichtig: ContextMenu direkt initialisieren, nicht erst im Event.
-  new ContextMenu(html, ".themebook-container", menuItems,{fixed: true});
+  new ContextMenu(html, ".themebook-container", menuItems, {fixed: true});
 });
 
 //make live a little bit easier, themekits have OBSERVER rights per default

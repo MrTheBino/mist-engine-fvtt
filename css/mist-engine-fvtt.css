@@ -1289,6 +1289,9 @@ article.cc-enriched section.journal-entry-content {
   flex-direction: column;
   width: 100%;
 }
+.mist-engine .npc-floating-tags-and-status-container {
+  width: auto !important;
+}
 .mist-engine .floating-tags-and-status-entries {
   display: flex;
   flex-direction: column;
@@ -1523,9 +1526,10 @@ article.cc-enriched section.journal-entry-content {
   text-align: center;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  font-style: italic;
 }
 .mist-engine .litm-pc-powertag.powertag-name {
-  font-style: normal;
+  font-style: italic;
 }
 .mist-engine .litm-pc-powertag:hover {
   cursor: pointer;
@@ -1593,7 +1597,7 @@ article.cc-enriched section.journal-entry-content {
   color: black;
   position: relative;
   text-align: center;
-  font-style: normal;
+  font-style: italic;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -1734,7 +1738,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .fts-input-name .fts-tag-status-toggle {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.15s ease 0s;
+  transition: opacity 0.1s ease 0s;
   font-size: 0.75em;
   flex-shrink: 0;
 }
@@ -1742,7 +1746,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .fts-input-name:hover .fts-tag-status-toggle {
   opacity: 0.8;
   pointer-events: auto;
-  transition: opacity 0.15s ease 1s;
+  transition: opacity 0.1s ease 1s;
 }
 .mist-engine .fts-input-name.tag {
   background-color: hsla(32, 68%, 28%, 0.9);
@@ -1810,6 +1814,11 @@ article.cc-enriched section.journal-entry-content {
   min-width: 233px;
   grid-template-columns: repeat(4, 186px);
   justify-content: space-between;
+}
+.mist-engine .themebooks-container.edit-mode {
+  grid-template-columns: none;
+  flex-direction: row;
+  display: flex;
 }
 .mist-engine .themebooks-container-stylized > :nth-child(2) {
   top: 3.75rem;
@@ -2080,6 +2089,16 @@ article.cc-enriched section.journal-entry-content {
   margin-right: 2px;
   display: inline-block;
   background-image: url("../assets/icons/icon-litm-negative.svg");
+}
+.mist-engine .container-paper-background-with-border {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  -webkit-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  -o-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  font-family: Labrada, serif;
+  color: #724a32;
 }
 
 .roll-dialog-container .selected-tags-container {
@@ -2509,6 +2528,64 @@ article.cc-enriched section.journal-entry-content {
 }
 #themekit-character-app > section.window-content .used {
   text-decoration: line-through;
+}
+
+.how-to-play-dialog {
+  line-height: 1.4em;
+}
+.how-to-play-dialog h1, .how-to-play-dialog h2, .how-to-play-dialog h3, .how-to-play-dialog h4 {
+  color: #724a32;
+  font-family: Labrada, serif;
+}
+.how-to-play-dialog h1.with-line::after, .how-to-play-dialog h2.with-line::after, .how-to-play-dialog h3.with-line::after, .how-to-play-dialog h4.with-line::after {
+  content: "";
+  display: inline-block;
+  width: 105px;
+  height: 6px;
+  background-image: url(../assets/header-backline.webp);
+  background-repeat: no-repeat;
+  margin-left: 10px;
+}
+.how-to-play-dialog .icon-dice {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.htp-game-runs-on-tags {
+  flex-grow: 0.4;
+  align-self: flex-start;
+}
+
+.htp-themes {
+  align-self: flex-start;
+}
+
+.htp-story-tags {
+  align-self: flex-start;
+  flex-grow: 0.6;
+}
+
+.htp-hero-development {
+  align-self: flex-start;
+}
+
+.htp-fellowship {
+  align-self: flex-start;
+  flex-grow: 0.9;
+}
+
+.section-left-header {
+  text-align: right;
+  margin-right: 10px;
+  min-width: 150px;
+}
+
+.section-row {
+  align-items: start;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
 }
 
 /*# sourceMappingURL=mist-engine-fvtt.css.map */

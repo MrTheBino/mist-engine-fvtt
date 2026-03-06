@@ -6,9 +6,10 @@
     text-align: center;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    font-style: italic;
 
     &.powertag-name{
-        font-style: normal;
+        font-style: italic;
     }
     
     &:hover {
@@ -93,7 +94,7 @@
     color: black;
     position: relative;
     text-align: center;
-    font-style: normal;
+    font-style: italic;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 
@@ -260,7 +261,7 @@
     .fts-tag-status-toggle {
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.15s ease 0s;
+        transition: opacity 0.1s ease 0s;
         font-size: 0.75em;
         flex-shrink: 0;
     }
@@ -270,7 +271,7 @@
         .fts-tag-status-toggle {
             opacity: 0.8;
             pointer-events: auto;
-            transition: opacity 0.15s ease 1s;
+            transition: opacity 0.1s ease 1s;
         }
     }
 

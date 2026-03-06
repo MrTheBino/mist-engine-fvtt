@@ -1,4 +1,4 @@
-<div class="themebooks-container {{#unless system.editMode}}themebooks-container-stylized{{/unless}} grid grid-4col grid-themebook-container">
+<div class="themebooks-container {{#unless system.editMode}}themebooks-container-stylized{{/unless}} grid grid-4col grid-themebook-container {{#if system.editMode}}edit-mode{{/if}}">
     {{!-- If there are no themebooks, show a message --}}
     {{#if themebooksEmpty}}
     <div class="themebook-container">

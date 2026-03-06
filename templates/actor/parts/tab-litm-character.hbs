@@ -4,7 +4,7 @@
         <div class="right-side {{#if system.editMode}}edit-mode{{/if}}">
             <div class="litm-character-themebooks-container">
                 {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-themebooks.hbs' themebooks=themebooks}}
-                <div class="themebooks-container grid grid-4col grid-themebook-container">
+                <div class="themebooks-container grid grid-4col grid-themebook-container {{#if system.editMode}}edit-mode{{/if}}">
                     {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-quintessences-partial.hbs'
                     editMode=system.editMode}}
                     {{> 'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-partial.hbs'
@@ -13,7 +13,6 @@
                     editMode=system.editMode}}
                     {{> 'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-themebook-partial.hbs'
                     editMode=system.editMode}}
-                    <div></div>
                 </div>
             </div>
         </div>

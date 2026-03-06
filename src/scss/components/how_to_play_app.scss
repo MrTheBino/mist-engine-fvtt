@@ -1,0 +1,59 @@
+.how-to-play-dialog{
+    line-height: 1.4em;
+
+    h1,h2,h3,h4 {
+    color: $c-styled-text;
+    font-family: $font-primary;
+    &.with-line {
+            &::after {
+                content: "";
+                display: inline-block;
+                width: 105px;
+                height: 6px;
+                background-image: url(../assets/header-backline.webp);
+                background-repeat: no-repeat;
+                margin-left: 10px;
+            }
+        }
+  }
+
+  .icon-dice{
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+}
+.htp-game-runs-on-tags{
+    flex-grow: 0.4;
+    align-self: flex-start;
+}
+
+.htp-themes{
+    align-self: flex-start;
+}
+
+.htp-story-tags{
+    align-self: flex-start;
+    flex-grow: 0.6;
+}
+.htp-hero-development{
+    align-self: flex-start;
+}
+
+.htp-fellowship{
+    align-self: flex-start;
+    flex-grow: 0.9;
+}
+
+.section-left-header{
+    text-align:right;
+    margin-right: 10px;
+    min-width: 150px;
+}
+
+.section-row{
+    align-items: start;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}

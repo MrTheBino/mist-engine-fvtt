@@ -4,6 +4,11 @@
     min-width: 233px;
     grid-template-columns: repeat(4, 186px);
     justify-content: space-between;
+    &.edit-mode{
+        grid-template-columns: none;
+        flex-direction: row;
+        display: flex;
+    }
 }
 
 .themebooks-container-stylized {

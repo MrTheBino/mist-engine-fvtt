@@ -1,4 +1,5 @@
 import { MistSceneApp } from "../apps/scene-app.mjs";
+import { HowToPlayApp } from "../apps/how-to-play-app.mjs";
 
 function getActiveTextControl() {
   const el = document.activeElement;
@@ -58,6 +59,26 @@ function setupKBSzeneTagsApp(){
   });
 }
 
+function setupKBHowToPlayApp(){
+    game.keybindings.register("mist-engine-fvtt", "showHowToPlayApp", {
+    name: "Show HowToPlay App",
+    hint: "opens the how to play window",
+    editable: [
+      {
+        key: "KeyH",       
+        modifiers: ["Control"]
+      }
+    ],
+    onDown: () => {
+        HowToPlayApp.getInstance().render(true, { focus: true })
+      return true;
+    },
+    onUp: () => {},
+    restricted: false, // true = nur SL darf Shortcut nutzen
+    precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL
+  });
+}
+
 function setupKBTaggingBindings(){
     game.keybindings.register("mist-engine-fvtt", "enrichTextWithTags", {
     name: "Make Tags",
@@ -71,5 +92,6 @@ function setupKBTaggingBindings(){
 
 export function setupMistEngineKeyBindings(){
     setupKBSzeneTagsApp();
+    setupKBHowToPlayApp();
     //setupKBTaggingBindings(); not working yet
 }
