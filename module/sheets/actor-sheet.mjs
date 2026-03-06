@@ -202,6 +202,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         for (const input of themebookEntryInputs) {
             input.addEventListener("change", event => this.handleThemebookEntryInputChanged(event))
         }
+
     }
 
     async handleStoryTagBurnState(event) {
@@ -702,4 +703,5 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             instance.render(true, { focus: true });
         }
     }
+
 }
