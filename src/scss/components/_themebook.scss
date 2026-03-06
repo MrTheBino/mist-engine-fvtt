@@ -106,14 +106,15 @@
         }
 
         .quest-text {
-            font-family: var(--litm-font-accent);
+            font-family: var(--litm-font-text);
+            font-style: italic;
             font-weight: normal;
-            font-size: small;
+            font-size: 0.75rem;
+            line-height: 1.4;
             text-align: center;
-            padding: 2px;
-            color: $c-brown;
-            padding-left: 10px;
-            padding-right: 10px;
+            padding: 2px 10px;
+            color: darken($c-brown, 10%);
+            -webkit-font-smoothing: antialiased;
         }
     }
 }

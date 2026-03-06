@@ -5,7 +5,7 @@
     {{#if challenge.hasFloatingTagsAndStatuses}}
     <div class="floating-tags-and-status-entries">
         {{#each challenge.floatingTagsAndStatuses as |fts ftsIndex|}}
-        <div class="floating-tag-and-status-entry flexcol" data-fts-index="{{ftsIndex}}">
+        <div class="floating-tag-and-status-entry flexcol">
             <div class="flexrow">
 
                 <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}"
