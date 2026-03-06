@@ -3,7 +3,7 @@
 // for actors and items in a Foundry VTT system.
 export class FloatingTagAndStatusAdapter {
     static parseFloatingTagAndStatusString(srcString){
-        let ftsObject = { name: srcString, description: "", isStatus: false, value: 0, markings: Array(6).fill(false), positive: true };
+        let ftsObject = { name: srcString, description: "", isStatus: false, value: 0, markings: Array(6).fill(false) };
         if (srcString.includes("-")) {
             const parts = srcString.split("-");
             ftsObject.isStatus = true;
