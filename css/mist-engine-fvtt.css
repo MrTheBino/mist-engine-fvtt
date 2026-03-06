@@ -25,12 +25,9 @@ body {
   /* Fonts */
   --litm-font-heading: PackardAntique, CaslonAntique, "Palatino Linotype",
   	"Book Antiqua", Palatino, serif;
-  --litm-font-primary: CaslonAntique, LibreCaslonText, "Palatino Linotype",
-  	"Book Antiqua", Palatino, serif;
   --litm-font-accent: AlchemyItalic, "Brush Script MT", "Bradley Hand ITC",
   	"Lucida Calligraphy", "Lucida Handwriting", "Apple Chancery", cursive;
   --litm-font-text: Fraunces, LibreCaslonText, "Book Antiqua", Palatino, serif;
-  --litm-font-sc: PowellAntique, PackardAntique, Palatino, serif;
   --litm-premium-left-margin: 300px;
 }
 
@@ -382,37 +379,11 @@ body {
   font-style: normal;
 }
 @font-face {
-  font-family: PowellAntique;
-  src: url("../assets/fonts/powell.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: PowellAntique;
-  src: url("../assets/fonts/powell-b.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-@font-face {
   font-family: AlchemyItalic;
   src: url("../assets/fonts/alchemy-i.ttf") format("truetype");
   font-weight: normal;
   font-style: italic;
 }
-.labrada-normal {
-  font-family: "Labrada", serif;
-  font-optical-sizing: auto;
-  font-weight: normal;
-  font-style: normal;
-}
-
-.caveat-regular {
-  font-family: "Caveat-Regular", cursive;
-  font-optical-sizing: auto;
-  font-weight: normal;
-  font-style: normal;
-}
-
 .editor.prosemirror {
   height: 100%;
 }

@@ -4,6 +4,11 @@
   font-weight: normal;
 }
 
+@font-face {
+  font-family: Caveat-Regular;
+  src: url("../assets/fonts/Caveat-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
 
 @font-face {
   font-family: Fraunces;
@@ -90,24 +95,8 @@
 }
 
 @font-face {
-  font-family: PowellAntique;
-  src: url("../assets/fonts/powell.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: PowellAntique;
-  src: url("../assets/fonts/powell-b.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
   font-family: AlchemyItalic;
   src: url("../assets/fonts/alchemy-i.ttf") format("truetype");
   font-weight: normal;
   font-style: italic;
 }
-
-
