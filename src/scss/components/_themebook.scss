@@ -2,7 +2,8 @@
     margin-top: 0px;
     margin-bottom: 5px;
     min-width: 233px;
-
+    grid-template-columns: repeat(4, 186px);
+    justify-content: space-between;
 }
 
 .themebooks-container-stylized {
@@ -126,13 +127,15 @@
 
     h2 {
         text-align: center;
-        font-size: smaller;
+        font-family: var(--litm-font-heading);
+        font-size: 0.7rem;
         line-height: 1.5em;
         padding: 2px;
         height: 30px;
         margin: -7px -8px 0px -8px;
         text-transform: uppercase;
         color: $c-white;
+        -webkit-font-smoothing: antialiased;
     }
 
     &.litm-adventure {

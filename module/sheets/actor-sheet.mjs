@@ -202,6 +202,31 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         for (const input of themebookEntryInputs) {
             input.addEventListener("change", event => this.handleThemebookEntryInputChanged(event))
         }
+
+        // Tier badge popover toggle
+        const tierBadges = this.element.querySelectorAll('.tier-badge');
+        for (const badge of tierBadges) {
+            badge.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const chip = badge.closest('.fts-chip');
+                const popover = chip?.querySelector('.tier-popover');
+                if (!popover) return;
+                const isOpen = popover.classList.contains('open');
+                // Close all open popovers
+                this.element.querySelectorAll('.tier-popover.open')
+                    .forEach(p => p.classList.remove('open'));
+                if (!isOpen) popover.classList.add('open');
+            });
+        }
+
+        // Close popovers when clicking outside any chip
+        this.element.addEventListener('click', (e) => {
+            if (!e.target.closest('.fts-chip')) {
+                this.element.querySelectorAll('.tier-popover.open')
+                    .forEach(p => p.classList.remove('open'));
+            }
+        });
+
     }
 
     async handleStoryTagBurnState(event) {
@@ -702,4 +727,5 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             instance.render(true, { focus: true });
         }
     }
+
 }

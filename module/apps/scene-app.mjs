@@ -77,6 +77,11 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     /** @inheritDoc */
+    _onFirstRender(context, options) {
+        this.element.addEventListener("drop", this._onDrop.bind(this));
+    }
+
+    /** @inheritDoc */
     _onRender(context, options) {
         // Story floating tags and statuses
         const updateableFtsStats = this.element.querySelectorAll('.updateable-fts-stat')
@@ -84,7 +89,6 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             input.addEventListener("change", event => this.handleFtStatChanged(event))
         }
 
-        this.element.addEventListener("drop", this._onDrop.bind(this));
     }
 
     /**

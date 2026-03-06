@@ -200,6 +200,14 @@ Handlebars.registerHelper('indexPlusOne', function (n) {
   return parseInt(n) + 1;
 });
 
+Handlebars.registerHelper('activeTiersLabel', function (markings) {
+  if (!Array.isArray(markings)) return '';
+  return markings
+    .map((active, i) => active ? i + 1 : null)
+    .filter(Boolean)
+    .join(',');
+});
+
 Handlebars.registerHelper('itemTooltipHTML', function (item) {
   let t = textWithTags(item.system.description);
   // replace " with ' to avoid issues with HTML attributes
