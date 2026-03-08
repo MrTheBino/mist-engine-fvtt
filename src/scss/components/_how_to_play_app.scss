@@ -17,6 +17,7 @@
     h4 {
         color: $c-styled-text;
         font-family: $font-primary;
+        margin: 0;
 
         &.with-line {
             &::after {

@@ -278,6 +278,9 @@ Hooks.once("ready", function () {
       event.originalEvent.dataTransfer.setData("text/plain", JSON.stringify(event.target.dataset));
     }
   );
+
+  globalThis.MistSceneApp = MistSceneApp;
+  globalThis.HowToPlayApp = HowToPlayApp;
 });
 
 Hooks.on("renderMistEngineLegendInTheMistCharacterSheet", (app, html) => {

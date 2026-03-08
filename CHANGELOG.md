@@ -1,8 +1,11 @@
 # CHANGELOG
 
 # 13.7.5
-- switch tab functionality for themebooks, no you can have more themebooks without scrumbling your character sheet
+- switch tab functionality for themebooks, no you can have more themebooks without scrambling your character sheet
 - color option for themebooks
+- lots of styling
+- macro support for Scene Tags dialog and new How To Play Dialog
+- tag style polishment by coreyhickson
   
 # 13.7.4
 - improved themekit selection dialog

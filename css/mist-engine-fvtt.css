@@ -59,6 +59,22 @@ body {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
+.hr-red-line {
+  width: 100%;
+  background-image: url(../assets/red-line.webp);
+  background-repeat: no-repeat;
+  height: 10px;
+  background-size: contain;
+}
+
+.hr-gray-line {
+  width: 100%;
+  background-image: url(../assets/gray-line.webp);
+  background-repeat: no-repeat;
+  height: 10px;
+  background-size: contain;
+}
+
 /* Global styles */
 .window-app {
   font-family: Labrada, serif;
@@ -1012,7 +1028,7 @@ article.cc-enriched section.journal-entry-content {
   font-family: var(--litm-font-heading);
   color: var(--litm-color-accent-2);
   font-size: 0.72rem;
-  font-weight: normal;
+  font-weight: bold;
   letter-spacing: 0.12em;
   white-space: nowrap;
   margin: 0 4px;
@@ -2600,6 +2616,7 @@ article.cc-enriched section.journal-entry-content {
 .how-to-play-dialog h4 {
   color: #724a32;
   font-family: Labrada, serif;
+  margin: 0;
 }
 .how-to-play-dialog h1.with-line::after,
 .how-to-play-dialog h2.with-line::after,

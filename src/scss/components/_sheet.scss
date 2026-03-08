@@ -212,7 +212,7 @@
   font-family: var(--litm-font-heading);
   color: var(--litm-color-accent-2);
   font-size: 0.72rem;
-  font-weight: normal;
+  font-weight: bold;
   letter-spacing: 0.12em;
   white-space: nowrap;
   margin: 0 4px;
@@ -558,6 +558,7 @@
 
 .npc-floating-tags-and-status-container {
     width: auto !important;
+    
 }
 
 .floating-tags-and-status-entries {

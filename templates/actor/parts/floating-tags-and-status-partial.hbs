@@ -1,4 +1,4 @@
-<div class="floating-tags-and-status-container container-card-with-border {{class}}">
+<div class="{{#if classCustomContainer}}{{classCustomContainer}}{{else}}floating-tags-and-status-container{{/if}} container-card-with-border {{class}}">
     {{> 'systems/mist-engine-fvtt/templates/shared/floating-tags-and-status-partial.hbs'
     floatingTagsAndStatuses=system.floatingTagsAndStatuses
     floatingTagsAndStatusesEditable=system.floatingTagsAndStatusesEditable useGrid=useGrid}}
