@@ -57,3 +57,19 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+.text-container-long-paper-background{
+  border-style: solid;
+  border-width: 5px 5px 5px 5px;
+  -moz-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  -webkit-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  -o-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
+
+  font-family: $font-primary;
+  color: $c-dark-styled-text;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

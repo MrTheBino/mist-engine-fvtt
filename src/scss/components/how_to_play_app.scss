@@ -53,6 +53,51 @@
             padding: 0px;
             margin: 0;
     }
+
+    .roll-result-success{
+        background-image: url("../assets/htp_dice_result_success.webp");
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 5px;
+    text-align: center;
+    }
+
+    .roll-result-partial-success{
+        background-image: url("../assets/htp_dice_result_partial_success.webp");
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 5px;
+    text-align: center;
+    }
+
+    .roll-result-failure{
+        background-image: url("../assets/htp_dice_result_consequences.webp");
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 5px;
+    text-align: center;
+    }
+
+    .consequence-result-icon{
+        position: relative;
+        width: 24px;
+        height: 24px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+        display: inline-block;
+        top: 5px;
+        left: 0;
+    }
+
+    .npc-limit-name{
+        display: inline-block;
+    }
+    .npc-limit-value-armor{
+        display: inline-block;
+        left: 0.5em;
+    }
 }
 
 .htp-game-runs-on-tags {

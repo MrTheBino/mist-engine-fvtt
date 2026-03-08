@@ -2140,6 +2140,20 @@ article.cc-enriched section.journal-entry-content {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.mist-engine .text-container-long-paper-background {
+  border-style: solid;
+  border-width: 5px 5px 5px 5px;
+  -moz-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  -webkit-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  -o-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  font-family: Labrada, serif;
+  color: #191813;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
 .roll-dialog-container .selected-tags-container {
   margin: 10px 0;
@@ -2620,6 +2634,46 @@ article.cc-enriched section.journal-entry-content {
   background-position-y: 0.25em;
   padding: 0px;
   margin: 0;
+}
+.how-to-play-dialog .roll-result-success {
+  background-image: url("../assets/htp_dice_result_success.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5px;
+  text-align: center;
+}
+.how-to-play-dialog .roll-result-partial-success {
+  background-image: url("../assets/htp_dice_result_partial_success.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5px;
+  text-align: center;
+}
+.how-to-play-dialog .roll-result-failure {
+  background-image: url("../assets/htp_dice_result_consequences.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5px;
+  text-align: center;
+}
+.how-to-play-dialog .consequence-result-icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+  display: inline-block;
+  top: 5px;
+  left: 0;
+}
+.how-to-play-dialog .npc-limit-name {
+  display: inline-block;
+}
+.how-to-play-dialog .npc-limit-value-armor {
+  display: inline-block;
+  left: 0.5em;
 }
 
 .htp-game-runs-on-tags {
