@@ -848,7 +848,7 @@ article.cc-enriched section.journal-entry-content {
   border: none;
 }
 .mist-engine.sheet.actor.npc .window-content {
-  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-image: url("../assets/paper_background_1.webp");
   background-repeat: no-repeat;
   row-gap: 0.5em;
 }
@@ -2096,7 +2096,49 @@ article.cc-enriched section.journal-entry-content {
   -o-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
   border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
   font-family: Labrada, serif;
-  color: #724a32;
+  color: #191813;
+}
+.mist-engine .text-container-300 {
+  border-style: solid;
+  border-width: 5px 5px 5px 5px;
+  -moz-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  -webkit-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  -o-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  font-family: Labrada, serif;
+  color: #191813;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.mist-engine .text-container-500 {
+  border-style: solid;
+  border-width: 5px 5px 5px 5px;
+  -moz-border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
+  -webkit-border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
+  -o-border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
+  border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
+  font-family: Labrada, serif;
+  color: #191813;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.mist-engine .text-container-large-paper-background {
+  border-style: solid;
+  border-width: 5px 5px 5px 5px;
+  -moz-border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  -webkit-border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  -o-border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  font-family: Labrada, serif;
+  color: #191813;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .roll-dialog-container .selected-tags-container {
@@ -2528,14 +2570,27 @@ article.cc-enriched section.journal-entry-content {
   text-decoration: line-through;
 }
 
+.how-to-play-app .window-content {
+  background-image: url("../assets/paper_background_1.webp");
+  background-repeat: no-repeat;
+  row-gap: 0.5em;
+}
+
 .how-to-play-dialog {
   line-height: 1.4em;
+  color: #191813;
 }
-.how-to-play-dialog h1, .how-to-play-dialog h2, .how-to-play-dialog h3, .how-to-play-dialog h4 {
+.how-to-play-dialog h1,
+.how-to-play-dialog h2,
+.how-to-play-dialog h3,
+.how-to-play-dialog h4 {
   color: #724a32;
   font-family: Labrada, serif;
 }
-.how-to-play-dialog h1.with-line::after, .how-to-play-dialog h2.with-line::after, .how-to-play-dialog h3.with-line::after, .how-to-play-dialog h4.with-line::after {
+.how-to-play-dialog h1.with-line::after,
+.how-to-play-dialog h2.with-line::after,
+.how-to-play-dialog h3.with-line::after,
+.how-to-play-dialog h4.with-line::after {
   content: "";
   display: inline-block;
   width: 105px;
@@ -2544,10 +2599,27 @@ article.cc-enriched section.journal-entry-content {
   background-repeat: no-repeat;
   margin-left: 10px;
 }
-.how-to-play-dialog .icon-dice {
-  display: inline;
+.how-to-play-dialog .icon-dice-1 {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url(../assets/icons/icon-dice-1.webp);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-y: 0.25em;
+  padding: 0px;
   margin: 0;
-  padding: 0;
+}
+.how-to-play-dialog .icon-dice-6 {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url(../assets/icons/icon-dice-6.webp);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-y: 0.25em;
+  padding: 0px;
+  margin: 0;
 }
 
 .htp-game-runs-on-tags {
@@ -2566,6 +2638,12 @@ article.cc-enriched section.journal-entry-content {
 
 .htp-hero-development {
   align-self: flex-start;
+}
+
+.htp-camping {
+  align-self: flex-start;
+  font-family: Labrada, serif;
+  color: #191813;
 }
 
 .htp-fellowship {

@@ -12,6 +12,7 @@ import { MistEngineShortChallengeItemSheet } from "./sheets/item-shortchallenge-
 import { MistEngineItemThemekitSheet } from "./sheets/item-themekit-sheet.mjs";
 import { MistEngineLegendInTheMistJourneySheet } from "./sheets/litm-actor-journey-sheet.mjs";
 import { MistSceneApp } from "./apps/scene-app.mjs";
+import { HowToPlayApp } from "./apps/how-to-play-app.mjs";
 
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
@@ -396,6 +397,14 @@ Hooks.on("getSceneControlButtons", (controls) => {
       icon: "fas fa-scroll",
       visible: true,
       onChange: () => MistSceneApp.getInstance().render(true, { focus: true }),
+      button: true,
+    },
+    how_to_play_app: {
+      name: "how_to_play_app",
+      title: "How To Play",
+      icon: "fas fa-circle-question",
+      visible: true,
+      onChange: () => HowToPlayApp.getInstance().render(true, { focus: true }),
       button: true,
     },
   };

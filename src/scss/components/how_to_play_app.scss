@@ -1,10 +1,24 @@
-.how-to-play-dialog{
-    line-height: 1.4em;
+.how-to-play-app {
+    .window-content {
+        background-image: url("../assets/paper_background_1.webp");
+        background-repeat: no-repeat;
+        row-gap: 0.5em;
+    }
+}
 
-    h1,h2,h3,h4 {
-    color: $c-styled-text;
-    font-family: $font-primary;
-    &.with-line {
+.how-to-play-dialog {
+
+    line-height: 1.4em;
+    color: $c-dark-styled-text;
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        color: $c-styled-text;
+        font-family: $font-primary;
+
+        &.with-line {
             &::after {
                 content: "";
                 display: inline-block;
@@ -15,43 +29,67 @@
                 margin-left: 10px;
             }
         }
-  }
+    }
 
-  .icon-dice{
-    display: inline;
-    margin: 0;
-    padding: 0;
-  }
+    .icon-dice-1 {
+           display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-image: url(../assets/icons/icon-dice-1.webp);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position-y: 0.25em;
+            padding: 0px;
+            margin: 0;
+    }
+    .icon-dice-6 {
+           display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-image: url(../assets/icons/icon-dice-6.webp);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position-y: 0.25em;
+            padding: 0px;
+            margin: 0;
+    }
 }
-.htp-game-runs-on-tags{
+
+.htp-game-runs-on-tags {
     flex-grow: 0.4;
     align-self: flex-start;
 }
 
-.htp-themes{
+.htp-themes {
     align-self: flex-start;
 }
 
-.htp-story-tags{
+.htp-story-tags {
     align-self: flex-start;
     flex-grow: 0.6;
 }
-.htp-hero-development{
+
+.htp-hero-development {
     align-self: flex-start;
 }
 
-.htp-fellowship{
+.htp-camping{
+    align-self: flex-start;
+    font-family: $font-primary;
+    color: $c-dark-styled-text;
+}
+.htp-fellowship {
     align-self: flex-start;
     flex-grow: 0.9;
 }
 
-.section-left-header{
-    text-align:right;
+.section-left-header {
+    text-align: right;
     margin-right: 10px;
     min-width: 150px;
 }
 
-.section-row{
+.section-row {
     align-items: start;
     display: flex;
     flex-direction: row;
