@@ -1816,9 +1816,7 @@ article.cc-enriched section.journal-entry-content {
   justify-content: space-between;
 }
 .mist-engine .themebooks-container.edit-mode {
-  grid-template-columns: none;
-  flex-direction: row;
-  display: flex;
+  grid-template-columns: repeat(4, 260px);
 }
 .mist-engine .themebooks-container-stylized > :nth-child(2) {
   top: 3.75rem;
