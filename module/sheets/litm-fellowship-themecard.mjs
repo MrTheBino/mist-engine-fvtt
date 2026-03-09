@@ -77,10 +77,10 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
     }
 
     async handleThemebookEntryInputChanged(event) {
-        console.log("Themebook entry input changed", event.target);
-        console.log("Dataset:", event.target.dataset);
-        console.log("Value:", event.target.value);
-        console.log("Key:", event.target.dataset.key);
+        //console.log("Themebook entry input changed", event.target);
+        //console.log("Dataset:", event.target.dataset);
+        //console.log("Value:", event.target.value);
+        //console.log("Key:", event.target.dataset.key);
         await this.actor.update({ [event.target.dataset.key]: event.target.value });
     }
 }

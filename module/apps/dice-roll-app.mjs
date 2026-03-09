@@ -178,10 +178,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     prepareChallengeTags(){
         MistSceneApp.getInstance().getCombinedSelectedNPCTags().forEach(element => {
-            console.log(element);
             if (element.selected) {
                 let t = { name: element.name, positive: element.positive, source: "npc", value: element.value, actorId: element.actorId };
-                console.log("Adding challenge tag to dice roll app:", t);
                 this.challengeTags.push(t);
             }
         });

@@ -430,7 +430,10 @@ Hooks.on("renderItemDirectory", (app, html) => {
 });
 
 Hooks.on("mistengine:sceneAppUpdated", (data) => {
-  MistSceneApp.getInstance().render(true, { focus: true });
+  console.log("Received sceneAppUpdated , app rendered: ", MistSceneApp.getInstance().rendered);
+  if(MistSceneApp.getInstance().rendered) {
+    MistSceneApp.getInstance().render(true, { focus: true });
+  }
 });
 
 Hooks.on("canvasReady", (canvas) => {
@@ -447,6 +450,7 @@ Hooks.on("createToken", (tokenDocument, options, userId) => {
 
 
 Hooks.on("updateToken", (tokenDocument, changes) => {
+  console.log("Token updated, changes: ");
   const instance = MistSceneApp.getInstance();
   if (instance.rendered) { // only if shown
     instance.sceneUpdatedHook();

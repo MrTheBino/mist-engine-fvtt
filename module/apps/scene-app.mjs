@@ -127,11 +127,15 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     activateSocketListeners() {
         game.socket.on("system.mist-engine-fvtt", (msg) => {
             if (msg?.type === "hook" && msg.hook == "sceneAppUpdated") {
-                MistSceneApp.getInstance().render(true, { focus: true });
+                if(MistSceneApp.getInstance().rendered) {
+                    MistSceneApp.getInstance().render(true, { focus: true });
+                }
                 DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
             }
             else if (msg?.type === "hook" && msg.hook == "floatableTagOrStatusUpdate") {
-                MistSceneApp.getInstance().render(true, { focus: true });
+                if(MistSceneApp.getInstance().rendered) {
+                    MistSceneApp.getInstance().render(true, { focus: true });
+                }
                 DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
             }
         });
