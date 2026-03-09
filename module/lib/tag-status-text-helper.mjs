@@ -43,6 +43,14 @@ export function makeStyledTagOrStatusText(source) {
     if (source.includes("/sg")) {
       extraClass = "green";
       source = source.replace("/sg", "");
+    }
+    else if (source.includes("/sr")) {
+      extraClass = "red";
+      source = source.replace("/sr", "");
+    }
+    else if (source.includes("/so")) {
+      extraClass = "orange";
+      source = source.replace("/so", "");
     } else {
       source = source.replace("/s", "");
     }

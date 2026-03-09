@@ -171,7 +171,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "<p>The system comes with all themebooks from the core rule book but without the power tag questions from the books. See core rule book page 92.</p><p></p><div class=\"notes\"><p><strong>The power tag questions are completly optional. You don't need to enter any of them to be able to use the system. Son of Oak will provide commercial foundry modules in the future containing all themebooks prefilled.</strong></p></div><p></p><p>Drag and drop a themebook from the provided LiTM Themebooks compendium pack in your character. Open the edit mode of the character by clicking on the top left lock icon. Now you can enter all your powertags in the themebooks.</p><p></p><p>The checkbox next to a powertag entry is for checking the corresponding powertag as a planned powertag for the future. If you hover with the mouse over the checkbox you will see the corresponding help text.</p>"
+        "content": "<p>The system comes with all themebooks from the core rule book but without the power tag questions from the books. See core rule book page 92.</p><p></p><div class=\"notes\"><p><strong>The power tag questions are completly optional. You don't need to enter any of them to be able to use the system. Son of Oak will provide commercial foundry modules in the future containing all themebooks prefilled.</strong></p></div><p></p><p>Drag and drop a themebook from the provided LiTM Themebooks compendium pack in your character. Open the edit mode of the character by clicking on the top left lock icon. Now you can enter all your powertags in the themebooks.</p><p></p><p>The checkbox next to a powertag entry is for checking the corresponding powertag as a planned powertag for the future. If you hover with the mouse over the checkbox you will see the corresponding help text.</p><p></p><p>You can switch themebooks by right clicking on them in the character sheet. There you can switch themebooks from the main tab to the other tab of a character sheet.</p>"
       },
       "video": {
         "controls": true,
@@ -192,10 +192,49 @@
         "systemId": "mist-engine-fvtt",
         "systemVersion": "13.6.2",
         "createdTime": 1770893255261,
-        "modifiedTime": 1770894614344,
+        "modifiedTime": 1772621586552,
         "lastModifiedBy": "wgZHyBDokH67OG0A"
       },
       "_key": "!journal.pages!TrgMWh3RyxxBkZoB.TNrdkuLAGN0Bi8Or"
+    },
+    {
+      "sort": 400000,
+      "name": "Macros",
+      "type": "text",
+      "_id": "LOMCGxOsObrJIjIF",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>If you want to create a macro for showing the scene tags dialog. Use this code</p><pre><code>MistSceneApp.getInstance().render(true, { focus: true })</code></pre><p>If you want to create a macro for showing the how to play  dialog. Use this code</p><pre><code>HowToPlayApp.getInstance().render(true, { focus: true })</code></pre>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.7.4",
+        "createdTime": 1772987114722,
+        "modifiedTime": 1772987184058,
+        "lastModifiedBy": "wgZHyBDokH67OG0A"
+      },
+      "_key": "!journal.pages!TrgMWh3RyxxBkZoB.LOMCGxOsObrJIjIF"
     }
   ],
   "folder": null,

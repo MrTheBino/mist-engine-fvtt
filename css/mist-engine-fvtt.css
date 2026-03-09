@@ -633,6 +633,9 @@ article.cc-enriched section.journal-entry-content {
 #tooltip mark.orange {
   background-color: rgba(223, 182, 43, 0.75);
 }
+#tooltip mark.red {
+  background-color: rgb(208, 160, 141);
+}
 #tooltip mark.might {
   font-style: normal;
 }
@@ -904,18 +907,16 @@ article.cc-enriched section.journal-entry-content {
   width: 100%;
 }
 .mist-engine.sheet.item .window-content {
-  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-image: url("../assets/paper_background_1.webp");
   background-repeat: no-repeat;
   row-gap: 0.5em;
-}
-.mist-engine.sheet.item {
   color: #724a32;
 }
-.mist-engine.sheet.item h1, .mist-engine.sheet.item h2, .mist-engine.sheet.item h3, .mist-engine.sheet.item h4 {
+.mist-engine.sheet.item .window-content h1, .mist-engine.sheet.item .window-content h2, .mist-engine.sheet.item .window-content h3, .mist-engine.sheet.item .window-content h4 {
   color: #724a32;
   font-family: Labrada, serif;
 }
-.mist-engine.sheet.item h1.with-line::after, .mist-engine.sheet.item h2.with-line::after, .mist-engine.sheet.item h3.with-line::after, .mist-engine.sheet.item h4.with-line::after {
+.mist-engine.sheet.item .window-content h1.with-line::after, .mist-engine.sheet.item .window-content h2.with-line::after, .mist-engine.sheet.item .window-content h3.with-line::after, .mist-engine.sheet.item .window-content h4.with-line::after {
   content: "";
   display: inline-block;
   width: 105px;
@@ -937,12 +938,12 @@ article.cc-enriched section.journal-entry-content {
   width: auto;
 }
 .mist-engine.sheet.actor.litm-fellowship-themecard .window-content {
-  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-image: url("../assets/paper_background_1.webp");
   background-repeat: no-repeat;
   row-gap: 0.5em;
 }
 .mist-engine.sheet.actor.litm-journey .window-content {
-  background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+  background-image: url("../assets/paper_background_1.webp");
   background-repeat: no-repeat;
   row-gap: 0.5em;
 }
@@ -1135,16 +1136,6 @@ article.cc-enriched section.journal-entry-content {
   background-position: -0.4em 0;
   background-size: 2em 1.5em;
   line-height: 1.4em;
-}
-.mist-engine .npc-threats-and-consequences-container li.entry-item .tag {
-  background-color: rgba(238, 213, 146, 0.75);
-  border-radius: 4px;
-  padding: 0 2px;
-}
-.mist-engine .npc-threats-and-consequences-container li.entry-item .status {
-  background-color: rgba(64, 134, 54, 0.75);
-  border-radius: 4px;
-  padding: 0 2px;
 }
 .mist-engine .fellowship-promises {
   margin-left: auto;
@@ -1503,6 +1494,9 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine mark.orange {
   background-color: rgba(223, 182, 43, 0.75);
+}
+.mist-engine mark.red {
+  background-color: rgb(208, 160, 141);
 }
 .mist-engine mark.might {
   font-style: normal;

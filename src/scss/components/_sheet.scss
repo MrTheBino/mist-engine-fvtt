@@ -48,12 +48,11 @@
 
 &.sheet.item {
   .window-content {
-    background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+    background-image: url("../assets/paper_background_1.webp");
     background-repeat: no-repeat;
     row-gap: 0.5em;
-  }
 
-  color: $c-styled-text;
+    color: $c-styled-text;
 
   h1,h2,h3,h4 {
     color: $c-styled-text;
@@ -70,6 +69,9 @@
             }
         }
   }
+  }
+
+  
 }
 
 &.sheet.actor.litm-character {
@@ -90,7 +92,7 @@
 
 &.sheet.actor.litm-fellowship-themecard {
   .window-content {
-    background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+    background-image: url("../assets/paper_background_1.webp");
     background-repeat: no-repeat;
     row-gap: 0.5em;
   }
@@ -98,7 +100,7 @@
 
 &.sheet.actor.litm-journey {
   .window-content {
-    background-image: url("../assets/bg-yellow-old-paper-textures.webp");
+    background-image: url("../assets/paper_background_1.webp");
     background-repeat: no-repeat;
     row-gap: 0.5em;
   }
@@ -343,18 +345,6 @@
     background-position: -0.4em 0;
     background-size: 2em 1.5em;
     line-height: 1.4em;
-
-    .tag {
-      background-color: $c-tag-yellow;
-      border-radius: 4px;
-      padding: 0 2px;
-    }
-
-    .status {
-      background-color: $c-tag-green;
-      border-radius: 4px;
-      padding: 0 2px;
-    }
   }
 }
 
@@ -799,6 +789,10 @@ mark {
 
   &.orange {
     background-color: $c-tag-orange;
+  }
+
+  &.red{
+    background-color: rgb(208, 160, 141);
   }
 
   &.might{
