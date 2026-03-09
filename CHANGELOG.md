@@ -6,6 +6,7 @@
 - lots of styling
 - macro support for Scene Tags dialog and new How To Play Dialog
 - tag style polishment by coreyhickson
+- fix: SceneApp won't get re-rendered if it's not open
   
 # 13.7.4
 - improved themekit selection dialog
