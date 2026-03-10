@@ -78,6 +78,7 @@
     },
     "LABELS": {
       "Other": "Other",
+      "Consequence": "Consequence",
       "JourneyConsequences": "Consequences & Vignettes",
       "ThreatsAndConsequences": "Threats & Consequences",
       "SelectedTagsAndStatuses": "Selected Tags & Statuses",

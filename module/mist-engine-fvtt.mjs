@@ -249,6 +249,14 @@ Handlebars.registerHelper("notEmpty", function (str) {
   return false;
 });
 
+Handlebars.registerHelper("floatingTagStatusTitleHelper",function(entity){
+  if(entity.isStatus) {
+    return `${entity.name}-${entity.value} - ${entity.positive ? "Positive" : "Negative"} Status`;
+  }else{
+    return `${entity.name} - ${entity.positive ? "Positive" : "Negative"} Tag`;
+  }
+});
+
 Handlebars.registerHelper("times", function (n, block) {
   var accum = "";
   for (var i = 0; i < n; ++i) accum += block.fn(i);

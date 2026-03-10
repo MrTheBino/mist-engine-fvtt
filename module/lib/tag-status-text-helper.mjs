@@ -32,7 +32,7 @@ export function extractBrackets(text) {
 }
 
 export function makeStyledTagOrStatusText(source) {
-  let isOfType = 1; // 1 = tag, 2 = status, 3 = might
+  let isOfType = 1; // 1 = tag, 2 = status, 3 = might, 4 - bold
   let extraClass = '';
   let extraIcon = '';
 
@@ -75,13 +75,26 @@ export function makeStyledTagOrStatusText(source) {
     isOfType = 3;
   }
 
+  // bold
+  if(source.includes("/b")) {
+    source = source.replace("/b", "");
+    extraClass = "";
+    isOfType = 4;
+  }
+
   if (!source.includes("-")) {
     let tag = source;
+    tag = tag.trim();
     if (isOfType === 2) {
       return `<mark class="draggable status ${extraClass}" draggable="true" data-type="status" data-name="${tag}" data-value="0">${extraIcon}${tag}</mark>`;
     } else if (isOfType === 3) {
       return `<mark class="draggable might ${extraClass}" data-type="might" data-name="${tag}">${extraIcon}${tag}</mark>`;
-    } else {
+    } 
+    else if(isOfType === 4){
+      // remove all whitespace from the beginning and ending
+      return `<strong>${tag}</strong>`;
+    }
+    else {
       return `<mark class="draggable tag ${extraClass}" draggable="true" data-type="tag" data-name="${tag}">${extraIcon}${tag}</mark>`;
     }
   } else {

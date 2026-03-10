@@ -620,6 +620,7 @@ article.cc-enriched section.journal-entry-content {
   background-color: rgba(238, 213, 146, 0.75);
   border-radius: 2px;
   font-style: italic;
+  white-space: nowrap;
 }
 #tooltip mark.status {
   background-color: rgba(64, 134, 54, 0.75);
@@ -1075,6 +1076,15 @@ article.cc-enriched section.journal-entry-content {
   text-transform: uppercase;
   border-radius: 2px;
 }
+.mist-engine .npc-limit-consequence {
+  font-family: Labrada, serif;
+  text-align: center;
+  color: black;
+  font-size: 0.8rem;
+  clip-path: none;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
 .mist-engine .npc-tag-name span {
   padding-left: 0.2em;
   padding-right: 0.2em;
@@ -1083,6 +1093,7 @@ article.cc-enriched section.journal-entry-content {
   background: rgb(208, 160, 141);
   padding-left: 0.2em;
   padding-right: 1em;
+  white-space: nowrap;
 }
 .mist-engine .npc-secrets-list,
 .mist-engine .npc-limits-list {
@@ -1430,8 +1441,7 @@ article.cc-enriched section.journal-entry-content {
   font-weight: bold;
   color: black;
 }
-.mist-engine section [data-group=npc-sheet] .table-cell {
-  font-family: Labrada, serif;
+.mist-engine section [data-group=npc-sheet] .table-cell.header {
   color: black;
   font-weight: bold;
 }
@@ -1482,6 +1492,7 @@ article.cc-enriched section.journal-entry-content {
   background-color: rgba(238, 213, 146, 0.75);
   border-radius: 2px;
   font-style: italic;
+  white-space: nowrap;
 }
 .mist-engine mark.status {
   background-color: rgba(64, 134, 54, 0.75);
@@ -1527,6 +1538,11 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine .letter-box {
   min-width: 15px;
+}
+.mist-engine .help-text {
+  color: #724a32;
+  font-family: Labrada, serif;
+  font-weight: bold;
 }
 .mist-engine .litm-pc-powertag {
   font-family: var(--litm-font-text);
@@ -2098,6 +2114,18 @@ article.cc-enriched section.journal-entry-content {
   display: inline-block;
   background-image: url("../assets/icons/icon-litm-negative.svg");
 }
+.mist-engine .icon-round-arrow-up {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+  margin-right: 2px;
+  display: inline-block;
+  background-image: url("../assets/icons/round-arrow-up.webp");
+}
 .mist-engine .container-paper-background-with-border {
   border-style: solid;
   border-width: 10px 10px 10px 10px;
@@ -2163,6 +2191,21 @@ article.cc-enriched section.journal-entry-content {
   padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.mist-engine .floating-status-container-character {
+  border-style: solid;
+  border-width: 5px 5px 5px 5px;
+  -moz-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  -webkit-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  -o-border-image: url("../assets/text-container-3000.webp") 5 5 5 5 fill stretch stretch;
+  border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  font-family: Labrada, serif;
+  color: #191813;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 100%;
 }
 
 .roll-dialog-container .selected-tags-container {

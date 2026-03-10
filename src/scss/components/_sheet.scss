@@ -262,6 +262,16 @@
   border-radius: 2px;
 }
 
+.npc-limit-consequence{
+  font-family: $font-primary;
+  text-align: center;
+  color: black;
+  font-size: 0.8rem;
+  clip-path: none;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+
 .npc-tag-name span {
   padding-left: 0.2em;
   padding-right: 0.2em;
@@ -271,6 +281,7 @@
   background: rgba(208,160,141);
   padding-left: 0.2em;
   padding-right: 1em;
+  white-space: nowrap;
 }
 
 .npc-secrets-list,
@@ -707,8 +718,7 @@ section [data-group="npc-sheet"] {
     color: black;
   }
 
-  .table-cell {
-    font-family: $font-primary;
+  .table-cell.header {
     color: black;
     font-weight: bold;
   }
@@ -774,6 +784,7 @@ mark {
   background-color: $c-tag-yellow;
   border-radius: 2px;
   font-style: italic;
+  white-space: nowrap;
 
   &.status {
     background-color: $c-tag-green;
@@ -837,4 +848,10 @@ mark {
 
 .letter-box{
   min-width: 15px;
+}
+
+.help-text{
+  color: $c-styled-text;
+  font-family: $font-primary;
+  font-weight: bold;
 }

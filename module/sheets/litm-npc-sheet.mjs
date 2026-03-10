@@ -7,7 +7,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
   static DEFAULT_OPTIONS = {
     classes: ["mist-engine", "sheet", "actor", "npc"],
     position: {
-      width: 850,
+      width: 900,
       height: 800,
     },
     actions: {
@@ -121,11 +121,13 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     const npcUpdatableNpcArrayStats = this.element.querySelectorAll(".npc-updatable-npc-array-stat");
     for (let input of npcUpdatableNpcArrayStats) {
       input.addEventListener("change", (event) => this.handleNpcItemNpcArrayUpdate(event));
+      input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
     }
 
     const npcUpdatableThreatEntryStats = this.element.querySelectorAll(".npc-updatable-threat-entry-stat");
     for (let input of npcUpdatableThreatEntryStats) {
       input.addEventListener("change", (event) => this.handleNpcItemThreatEntryUpdate(event));
+      input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
     }
 
     const editableChallengeItems = this.element.querySelectorAll('.editable-challenge-item');
@@ -137,6 +139,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     for (const input of editableChallengeItemListEntries) {
       input.addEventListener("change", event => this.handleChallengeItemListUpdate(event)) // right click is for changing the burn state
     }
+
   }
 
   static async #handleAddSceneAppRollMod(event, target) {
@@ -196,8 +199,52 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     arrayData[arrayIndex].list[listIndex] = target.value;
 
     await this.actor.update({ [path]: arrayData });
-    await this.actor.sheet.render(true);
+    //await this.actor.sheet.render(true);
   }
+
+  handleInputShortCutsForGM(event) {
+  const input = event.currentTarget;
+
+  if(!( event.ctrlKey && event.shiftKey)){
+    return
+  }
+  else if(event.key.toLowerCase() !== "s" && event.key.toLowerCase() !== "y" && event.key.toLowerCase() !== "a" && event.key.toLowerCase() !== "x"){
+      return;
+  }
+
+  event.preventDefault();
+
+  const start = input.selectionStart ?? 0;
+  const end = input.selectionEnd ?? 0;
+  const value = input.value ?? "";
+
+  // Nur markierten Text einklammern
+  if (start === end) return;
+
+  const selectedText = value.slice(start, end);
+
+  if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "s")){
+    input.value = value.slice(0, start) + `[/s ${selectedText}]` + value.slice(end);
+  }
+
+  if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "y")){
+    input.value = value.slice(0, start) + `[/b ${selectedText}]` + value.slice(end);
+  }
+  
+  if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "a")){
+    input.value = value.slice(0, start) + `[${selectedText}]` + value.slice(end);
+  }
+
+  if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "x")){
+    input.value = value.slice(0, start) + `[/m ${selectedText}]` + value.slice(end);
+  }
+
+  // Markierung innerhalb der neuen Klammern wiederherstellen
+  input.setSelectionRange(start + 1, end + 1);
+
+  // Änderung an deine bestehende change-Logik weitergeben
+  input.dispatchEvent(new Event("change", { bubbles: true }));
+}
 
   static async #handleDeleteSecret(event, target) {
     event.preventDefault();

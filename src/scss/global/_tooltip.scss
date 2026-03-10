@@ -5,6 +5,7 @@
   background-color: $c-tag-yellow;
   border-radius: 2px;
   font-style: italic;
+  white-space: nowrap;
 
   &.status {
     background-color: $c-tag-green;

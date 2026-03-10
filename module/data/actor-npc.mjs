@@ -13,7 +13,8 @@ export default class MistEngineNPC extends MistEngineActorBase {
     schema.limits = new fields.ArrayField(
       new fields.SchemaField({
         name: new fields.StringField(),
-        value: new fields.StringField()
+        value: new fields.StringField(),
+        consequence: new fields.StringField()
       }),
       { min: 0, required: false }
     )

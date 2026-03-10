@@ -11,6 +11,9 @@
                     <div class="npc-limit-name">{{limit.name}}</div>
                     <span class="npc-limit-value-armor"><span class="npc-limit-value">{{npcLimitValue limit.value}}</span></span>
                 </div>
+                {{#if (notEmpty limit.consequence)}}
+                        <div class="npc-limit-consequence"><i class="icon-round-arrow-up"></i>{{{textWithTags limit.consequence}}}</div>
+                {{/if}}
                 {{/each}}
             </div>
         </div>
@@ -57,7 +60,7 @@
             {{#each system.threatsAndConsequences as |threat|}}
             <div class="entry">
                 <div class="entry-header">
-                    <span class="entry-name">{{threat.name}}</span> {{threat.description}}
+                    <span class="entry-name">{{threat.name}}</span> {{{textWithTags threat.description}}}
                 </div>
                 <ul class="entry-list">
                     {{#each threat.list as |entry|}}
