@@ -60,6 +60,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     setOptions(options) {
         if (options.actor) {
             this.actor = options.actor;
+            console.log("Actor set in options for DiceRollApp:", this.actor);
         }
         if (options.type) {
             this.rollType = options.type || 'quick'; // 'quick' or 'detailed'
@@ -627,7 +628,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         );
         ChatMessage.create({
             content: html,
-            speaker: ChatMessage.getSpeaker({ ctor: this.actor }),
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         });
 
         this.resetTags();
