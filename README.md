@@ -6,35 +6,10 @@ This is the official system implementation of Legend In The Mist from Son Of Oak
 
 The system contains 3 official pregenerated characters with full artwork for free.
 
-## Features
-
-* NPC / Adversary sheet
-* Character sheets
-* backpack, themebooks, fellowship relationships for character sheets 
-* milestone, abandon,improve, promises development markers
-* quick, detailed and reaction rolls
-* burning power tags
-* using weakness tags
-* scene window dialog for handing scene and story markers / tags (found in the left sidebar under Journal Notes > Scene Tags)
-* temporary statuses for characters and npcs
-* enclose tags with [] in text forms, eg. [super cool] or [burning-3]
-* drag'n'drop of tags & status from NPCs to characters, thanks to 3rddogpaul
-* shared fellowship themebook / cards (needs more testing)
-* special improvements for themebooks
-* basic documentation of the system as a compendium
-* all themebooks from Legend In The Mist are provided as compendium entries (only with their names and category, not the actual content from the rulebooks)
-* reactive dice roll dialog
-* journey actor
-* short challenges / vignettes
-* NPCs can use short challenges as templates via drag'n'drop
-* custom character background graphics
-  
-## Items
- * Quintessence
- * Themebooks
   
 ## KeyBindings  
  * Control + J -> Open Scene Tags
+ * Control + H -> Open How To Play
 
 ## Manifest-URL for manual installation of the system
 
@@ -47,9 +22,12 @@ You can use these formatting in almost every text field to display a MIST engine
     [tag] - a simple tag
     [status-1] - a status with tier 1, tier 1-6
     [/s status] - a status without a tier, usage in a journal for example
+    [/sn status] - a negative status
+    [/sn status-1] - a negative status with a tier
     [/sg status-2] - a status with a green color instead of yellow
     [/so status-2] - a status with a orange color instead of yellow
     [/m might] - a might word with a sword icon before
+    [/l limit] - a limit
     [/w weakness] - a weakness tag, usage in text and compendiums for example
     [/wo weakness] - a weakness tag in orange, usage in text and compendiums for example
 

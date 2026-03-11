@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 13.7.6
+- fix: The result of the roll shows a another Character Name in Chat Messages #45
+- Hello GM! Update: a lot of improvements for the GM to enter data into their world
+- styling fixes
+
 # 13.7.5
 - switch tab functionality for themebooks, no you can have more themebooks without scrambling your character sheet
 - color option for themebooks

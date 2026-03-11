@@ -132,12 +132,14 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
     const editableChallengeItems = this.element.querySelectorAll('.editable-challenge-item');
     for (const input of editableChallengeItems) {
-      input.addEventListener("change", event => this.handleChallengeItemUpdate(event)) // right click is for changing the burn state
+      input.addEventListener("change", event => this.handleChallengeItemUpdate(event));
+      input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
     }
 
     const editableChallengeItemListEntries = this.element.querySelectorAll('.editable-challenge-item-list-entry');
     for (const input of editableChallengeItemListEntries) {
-      input.addEventListener("change", event => this.handleChallengeItemListUpdate(event)) // right click is for changing the burn state
+      input.addEventListener("change", event => this.handleChallengeItemListUpdate(event));
+      input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
     }
 
   }

@@ -1,10 +1,10 @@
 <fieldset>
     <legend>{{localize 'MIST_ENGINE.LABELS.ThreatsAndConsequences'}} <a data-action="createThreatAndConsequence"><i class='fas fa-plus'></i></a>
     </legend>
-    <p class="help-text">Mark text, then CTL+SHIFT+S = Status, CTL+SHIFT+X = Might, CTL+SHIFT+A = Tag, CTL+SHIFT+Y = Bold</p>
     {{!-- <div class="form-group"> --}}
         {{#each system.threatsAndConsequences as |entry index|}}
         <div class="threat-and-consequence-container-entry box-shadowed">
+            <p class="help-text">Mark text, then CTL+SHIFT+S = Status, CTL+SHIFT+X = Might, CTL+SHIFT+A = Tag, CTL+SHIFT+Y = Bold</p>
             <div class="form-group flexcol">
                 <div class="form-group flexrow" style="margin-bottom: 5px;">
                     <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}"
