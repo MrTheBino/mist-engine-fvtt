@@ -879,10 +879,13 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine.sheet.actor.npc .single-secret-container .header {
   margin-bottom: 2px;
 }
+.mist-engine.sheet.actor.npc fieldset {
+  border-radius: 5px;
+}
 .mist-engine.sheet.actor.npc h1.npc-name {
   font-family: Labrada, serif;
   font-size: 36px;
-  color: #724a32;
+  color: #191813;
   width: auto;
 }
 .mist-engine.sheet.actor.npc h1.npc-name input {
@@ -903,6 +906,10 @@ article.cc-enriched section.journal-entry-content {
   font-family: var(--litm-font-accent);
   font-size: large;
   text-align: center;
+  color: #191813;
+}
+.mist-engine.sheet.actor.npc .npc-short-description {
+  color: #191813;
 }
 .mist-engine.sheet.actor.npc .npc-short-description textarea {
   width: 100%;
@@ -1095,6 +1102,31 @@ article.cc-enriched section.journal-entry-content {
   padding-right: 1em;
   white-space: nowrap;
 }
+.mist-engine .npc-limit-item-inline {
+  display: inline-block;
+}
+.mist-engine .npc-limit-item-inline .npc-limit-value-armor {
+  background-image: url(../assets/icons/icon-litm-limit-shield.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  left: -0.5em;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 0;
+  width: 1.2em;
+  height: auto;
+  text-align: center;
+  font-size: 1rem;
+  color: white;
+  margin-left: -4px;
+}
+.mist-engine .npc-limit-item-inline mark {
+  background-color: rgb(208, 160, 141);
+  padding-right: 16px;
+}
 .mist-engine .npc-secrets-list,
 .mist-engine .npc-limits-list {
   align-items: center;
@@ -1103,7 +1135,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .npc-limit-item {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
-  color: #724a32;
+  color: #191813;
   font-family: Labrada, serif;
 }
 .mist-engine .npc-secret-description {
@@ -1127,7 +1159,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine .npc-threats-and-consequences-container {
   font-family: Labrada, serif;
-  color: #724a32;
+  color: #191813;
 }
 .mist-engine .npc-threats-and-consequences-container .entry-name {
   font-weight: bold;
@@ -1497,6 +1529,12 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine mark.status {
   background-color: rgba(64, 134, 54, 0.75);
 }
+.mist-engine mark.status.red {
+  background-color: rgb(208, 160, 141);
+}
+.mist-engine mark.status.green {
+  background-color: rgba(64, 134, 54, 0.75);
+}
 .mist-engine mark.tag {
   background-color: rgba(238, 213, 146, 0.75);
 }
@@ -1820,19 +1858,17 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine .npc-limit-description .tag {
   background-color: rgba(64, 134, 54, 0.75);
-  color: #724a32;
+  color: #191813;
   font-family: Labrada, serif;
   border-radius: 2px;
   text-align: center;
-  font-weight: bold;
 }
 .mist-engine .npc-limit-description .status {
   background-color: rgba(238, 213, 146, 0.75);
-  color: #724a32;
+  color: #191813;
   font-family: Labrada, serif;
   border-radius: 2px;
   text-align: center;
-  font-weight: bold;
 }
 .mist-engine .themebooks-container {
   margin-top: 0px;

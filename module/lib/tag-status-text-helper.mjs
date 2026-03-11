@@ -32,7 +32,7 @@ export function extractBrackets(text) {
 }
 
 export function makeStyledTagOrStatusText(source) {
-  let isOfType = 1; // 1 = tag, 2 = status, 3 = might, 4 - bold
+  let isOfType = 1; // 1 = tag, 2 = status, 3 = might, 4 = bold, limit = 5
   let extraClass = '';
   let extraIcon = '';
 
@@ -44,9 +44,17 @@ export function makeStyledTagOrStatusText(source) {
       extraClass = "green";
       source = source.replace("/sg", "");
     }
+    if (source.includes("/sp")) {
+      extraClass = "green";
+      source = source.replace("/sp", "");
+    }
     else if (source.includes("/sr")) {
       extraClass = "red";
       source = source.replace("/sr", "");
+    }
+    else if (source.includes("/sn")) {
+      extraClass = "red";
+      source = source.replace("/sn", "");
     }
     else if (source.includes("/so")) {
       extraClass = "orange";
@@ -82,6 +90,13 @@ export function makeStyledTagOrStatusText(source) {
     isOfType = 4;
   }
 
+  // limit
+  if(source.includes("/l")) {
+    source = source.replace("/l", "");
+    extraClass = "limit";
+    isOfType = 5;
+  }
+
   if (!source.includes("-")) {
     let tag = source;
     tag = tag.trim();
@@ -99,8 +114,13 @@ export function makeStyledTagOrStatusText(source) {
     }
   } else {
     const value = source.split("-").pop();
-    const name = source.substring(0, source.lastIndexOf("-"));
-    return `<mark class="draggable status ${extraClass}" draggable="true" data-type="status" data-name="${name}" data-value="${value}">${name}-${value}</mark>`;
+    const name = source.substring(0, source.lastIndexOf("-")).trim();
+    if(isOfType === 5) { // limit
+      return `<div class="npc-limit-item-inline"><mark>${name}</mark><span class="npc-limit-value-armor">${value}</span></div>`;
+    }
+    else{
+      return `<mark class="draggable status ${extraClass}" draggable="true" data-type="status" data-name="${name}" data-value="${value}">${name}-${value}</mark>`;
+    }
   }
 
   /*const [name, value] = source.split("-");

@@ -12,11 +12,15 @@
       margin-bottom: 2px;
     }
   }
+
+  fieldset{
+    border-radius: 5px;
+  }
   
   h1.npc-name {
       font-family: $font-primary;
       font-size: 36px;
-      color: $c-styled-text;
+      color: $c-dark-styled-text;
       width: auto;
     input {
       height: 1.5em;
@@ -39,11 +43,16 @@
     font-family: var(--litm-font-accent);
     font-size: large;
     text-align: center;
+    color: $c-dark-styled-text;
   }
 
-  .npc-short-description textarea {
+  .npc-short-description 
+  {
+    color: $c-dark-styled-text;
+    textarea {
     width: 100%;
     }
+  }
 }
 
 &.sheet.item {
@@ -227,6 +236,8 @@
   }
 }
 
+
+
 .npc-limit-value-armor {
   background-image: url("../assets/icons/icon-litm-limit-shield.svg");
   background-repeat: no-repeat;
@@ -284,6 +295,32 @@
   white-space: nowrap;
 }
 
+.npc-limit-item-inline{
+  display: inline-block;
+  .npc-limit-value-armor{
+    background-image: url(../assets/icons/icon-litm-limit-shield.svg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    left: -0.5em;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 0;
+    width: 1.2em;
+    height: auto;
+    text-align: center;
+    font-size: 1rem;
+    color: white;
+    margin-left: -4px;
+  }
+  mark{
+    background-color: $c-status-red;
+    padding-right: 16px;
+  }
+}
+
 .npc-secrets-list,
 .npc-limits-list {
   align-items: center;
@@ -293,7 +330,7 @@
 .npc-limit-item {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
-  color: $c-styled-text;
+  color: $c-dark-styled-text;
   font-family: $font-primary;
 }
 
@@ -323,7 +360,7 @@
 
 .npc-threats-and-consequences-container {
   font-family: Labrada, serif;
-  color: $c-styled-text;
+  color: $c-dark-styled-text;
 
   .entry-name {
     font-weight: bold;
@@ -788,6 +825,12 @@ mark {
 
   &.status {
     background-color: $c-tag-green;
+    &.red{
+      background-color: $c-status-red;
+    }
+    &.green {
+      background-color: $c-tag-green;
+    }
   }
 
   &.tag {
@@ -803,7 +846,7 @@ mark {
   }
 
   &.red{
-    background-color: rgb(208, 160, 141);
+    background-color: $c-status-red;
   }
 
   &.might{

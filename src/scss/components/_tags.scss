@@ -340,19 +340,17 @@
 .npc-limit-description {
     .tag {
         background-color: $c-tag-green;
-        color: $c-styled-text;
+        color: $c-dark-styled-text;
         font-family: $font-primary;
         border-radius: 2px;
         text-align: center;
-        font-weight: bold;
     }
 
     .status {
         background-color: $c-tag-yellow;
-        color: $c-styled-text;
+        color: $c-dark-styled-text;
         font-family: $font-primary;
         border-radius: 2px;
         text-align: center;
-        font-weight: bold;
     }
 }

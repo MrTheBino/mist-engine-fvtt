@@ -74,7 +74,7 @@ export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixi
         super(options)
         this.#dragDrop = this.#createDragDropHandlers()
     }
-    
+
     /* @inheritDoc */
     async _prepareContext(options) {
         const context = await super._prepareContext(options)
@@ -106,7 +106,52 @@ export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixi
         const editableItems = this.element.querySelectorAll('.editable-item');
         for (const input of editableItems) {
             input.addEventListener("change", event => this.handleInputUpdate(event))
+            input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
         }
+    }
+
+    handleInputShortCutsForGM(event) {
+        const input = event.currentTarget;
+
+        if (!(event.ctrlKey && event.shiftKey)) {
+            return
+        }
+        else if (event.key.toLowerCase() !== "s" && event.key.toLowerCase() !== "y" && event.key.toLowerCase() !== "a" && event.key.toLowerCase() !== "x") {
+            return;
+        }
+
+        event.preventDefault();
+
+        const start = input.selectionStart ?? 0;
+        const end = input.selectionEnd ?? 0;
+        const value = input.value ?? "";
+
+        // Nur markierten Text einklammern
+        if (start === end) return;
+
+        const selectedText = value.slice(start, end);
+
+        if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "s")) {
+            input.value = value.slice(0, start) + `[/s ${selectedText}]` + value.slice(end);
+        }
+
+        if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "y")) {
+            input.value = value.slice(0, start) + `[/b ${selectedText}]` + value.slice(end);
+        }
+
+        if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "a")) {
+            input.value = value.slice(0, start) + `[${selectedText}]` + value.slice(end);
+        }
+
+        if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "x")) {
+            input.value = value.slice(0, start) + `[/m ${selectedText}]` + value.slice(end);
+        }
+
+        // Markierung innerhalb der neuen Klammern wiederherstellen
+        input.setSelectionRange(start + 1, end + 1);
+
+        // Änderung an deine bestehende change-Logik weitergeben
+        input.dispatchEvent(new Event("change", { bubbles: true }));
     }
 
     async handleInputUpdate(event) {
