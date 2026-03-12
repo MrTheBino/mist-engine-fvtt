@@ -751,8 +751,8 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     enableFloatingTagStatusContextMenus() {
         this._createContextMenu(() => [
             {
-                name: "Enable Might",
-                icon: '<i class="fa-solid fa-right-left"></i>',
+                name: "Add Might",
+                icon: '<i class="fa-solid fa-circle-plus"></i>',
                 condition: li => {
                     if(li.dataset.isStatus === "true"){
                         return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
@@ -767,8 +767,8 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 }
             },
             {
-                name: "Disable Might",
-                icon: '<i class="fa-solid fa-right-left"></i>',
+                name: "Remove Might",
+                icon: '<i class="fa-solid fa-circle-minus"></i>',
                 condition: li => {
                     if(li.dataset.isStatus === "true"){
                         return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed

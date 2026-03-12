@@ -177,6 +177,14 @@ Handlebars.registerHelper('questionIndexToLetter', function (n) {
   return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[n - 1];
 });
 
+Handlebars.registerHelper('isRenderBlockAllowed',function(showOnlyGM){
+  console.log("Checking if render block is allowed, showOnlyGM: ", showOnlyGM, " current user is GM: ", game.user.isGM);
+  if(showOnlyGM){
+    return game.user.isGM;
+  }
+  return true;
+});
+
 Handlebars.registerHelper('simpleFormatText', function (str) {
   // we convert \n to <br/> for simple text formatting in the sheets
   if (!str) return "";

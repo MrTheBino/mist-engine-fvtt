@@ -2317,6 +2317,11 @@ article.cc-enriched section.journal-entry-content {
   margin-left: auto;
   margin-right: auto;
 }
+.roll-dialog-container .might-icon {
+  width: 12px;
+  display: inline-block;
+  filter: invert(100%) sepia(100%) grayscale(100%) brightness(200%);
+}
 
 .message-content .selected-tags {
   margin-top: 5px;
@@ -2467,6 +2472,11 @@ article.cc-enriched section.journal-entry-content {
   border-radius: 5px solid black;
   color: #724a32;
   padding: 2px;
+}
+.character-container .selected-tags-container .might-icon {
+  width: 12px;
+  display: inline-block;
+  filter: invert(100%) sepia(100%) grayscale(100%) brightness(200%);
 }
 
 .custom-background-editor .toolbar {

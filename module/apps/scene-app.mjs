@@ -85,14 +85,18 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
 
         this.element.addEventListener("drop", this._onDrop.bind(this));
-        this.enableFloatingTagStatusContextMenus();
+
+        // only enable the context menu for GMS
+        if (game.user.isGM) {
+            this.enableFloatingTagStatusContextMenus();
+        }
     }
 
     enableFloatingTagStatusContextMenus() {
         this._createContextMenu(() => [
             {
-                name: "Enable Might",
-                icon: '<i class="fa-solid fa-right-left"></i>',
+                name: "Add Might",
+                icon: '<i class="fa-solid fa-circle-plus"></i>',
                 condition: li => {
                     if(li.dataset.isStatus === "true"){
                         return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
@@ -116,8 +120,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 }
             },
             {
-                name: "Disable Might",
-                icon: '<i class="fa-solid fa-right-left"></i>',
+                name: "Remove Might",
+                icon: '<i class="fa-solid fa-circle-minus"></i>',
                 condition: li => {
                     if(li.dataset.isStatus === "true"){
                         return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
@@ -348,7 +352,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     static async #handleToggleFloatingTagOrStatusMarking(event, target) {
         event.preventDefault();
         if (game.user.isGM === false) return;
-        if (target.dataset.source == "litm-npc"){
+        if (target.dataset.source == "litm-npc" || target.dataset.source == "litm-character"){
             const actor = this.getCorrectActor(target.dataset.actorId);
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(actor, index, target.dataset.markingIndex);
@@ -386,7 +390,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
         if (game.user.isGM === false) return;
         // check if the target has data-source and data-source is litm-npc
-        if (target.dataset.source == "litm-npc"){
+        if (target.dataset.source == "litm-npc" || target.dataset.source == "litm-character"){
             const actor = this.getCorrectActor(target.dataset.actorId);
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleTagStatusSelectedToggle(actor, index);
@@ -406,7 +410,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     static async #handleToggleFloatingTagOrStatus(event, target) {
         event.preventDefault();
         if (game.user.isGM === false) return;
-        if (target.dataset.source == "litm-npc"){
+        if (target.dataset.source == "litm-npc" ||target.dataset.source == "litm-character"){
             const actor = this.getCorrectActor(target.dataset.actorId);
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleTagStatusToggle(actor, index);
@@ -426,7 +430,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         event.preventDefault();
 
         if (game.user.isGM === false) return;
-        if (target.dataset.source == "litm-npc"){
+        if (target.dataset.source == "litm-npc" ||target.dataset.source == "litm-character"){
             const actor = this.getCorrectActor(target.dataset.actorId);
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleTagStatusModifierToggle(actor, index);
@@ -467,7 +471,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             return;
         }
 
-        if (target.dataset.source == "litm-npc"){
+        if (target.dataset.source == "litm-npc" || target.dataset.source == "litm-character"){
             const actor = this.getCorrectActor(target.dataset.actorId);
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(actor, index);

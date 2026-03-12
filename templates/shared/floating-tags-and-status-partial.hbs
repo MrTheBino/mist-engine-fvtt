@@ -16,11 +16,7 @@
             Edit Mode"}}
         {{/if}}
         {{localize 'MIST_ENGINE.LABELS.Actor.FloatingTagOrStatus'}}
-        {{#if gmCheck}}
-            {{#if userIsGM}}
-                <a data-action="createFloatingTagOrStatus"><i class='fas fa-plus'></i></a>
-            {{/if}}
-        {{else}}
+        {{#if (isRenderBlockAllowed gmCheck)}}
             <a data-action="createFloatingTagOrStatus"><i class='fas fa-plus'></i></a>
         {{/if}}
     </div>
@@ -41,15 +37,19 @@
             <a data-action="deleteFloatingTagOrStatus" data-index="{{@index}}"><i class='fas fa-trash'></i></a>
             {{else}}
             <div class="fts-input-name  {{#if this.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}">
-                <i class="fa-solid {{#if this.positive}}fa-circle-plus{{else}}fa-circle-minus{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-index="{{@index}}" title="toggle between positive and negative"></i>
+                {{#if (isRenderBlockAllowed ../gmCheck)}}
+                    <i class="fa-solid {{#if this.positive}}fa-circle-plus{{else}}fa-circle-minus{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-index="{{@index}}" title="toggle between positive and negative"></i>
+                {{/if}}
                 <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-index="{{@index}}" title="{{floatingTagStatusTitleHelper this}}">
                     {{#if this.might}}
                         <img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">
                     {{/if}}
                     {{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}
                 </span>
-                <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{@index}}" data-confirm="1" title="delete this tag/status"></i>
-                <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{@index}}" title="toggle between tag and status"></i>
+                {{#if (isRenderBlockAllowed ../gmCheck)}}
+                    <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{@index}}" data-confirm="1" title="delete this tag/status"></i>
+                    <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{@index}}" title="toggle between tag and status"></i>
+                {{/if}}
                 </div>
             {{/if}}
         </div>
