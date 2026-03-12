@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 13.7.7
+- added might for tags, right click on a tag and you can turn it into a mighty tag
+- scene app improvements for GMs, more control for us!
+- improvements for journeys
+
 # 13.7.6
 - fix: The result of the roll shows a another Character Name in Chat Messages #45
 - Hello GM! Update: a lot of improvements for the GM to enter data into their world
