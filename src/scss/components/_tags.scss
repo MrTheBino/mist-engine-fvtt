@@ -259,20 +259,9 @@
 
     .fts-tag-modifier-toggle,
     .fts-tag-status-toggle {
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.1s ease 0s;
+        pointer-events: cursor;
         font-size: 0.75em;
         flex-shrink: 0;
-    }
-
-    &:hover {
-        .fts-tag-modifier-toggle,
-        .fts-tag-status-toggle {
-            opacity: 0.8;
-            pointer-events: auto;
-            transition: opacity 0.1s ease 1s;
-        }
     }
 
     &.tag {

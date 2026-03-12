@@ -5,13 +5,16 @@
     {{#if character.hasFloatingTagsAndStatuses}}
     <div class="floating-tags-and-status-entries">
         {{#each character.floatingTagsAndStatuses as |fts ftsIndex|}}
-        <div class="floating-tag-and-status-entry flexcol">
+        <div class="floating-tag-and-status-entry flexcol" data-might="{{this.might}}" data-index="{{@index}}" data-actor-id="{{../character.id}}">
             <div class="flexrow">
 
                 <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}"
                     data-index="{{ftsIndex}}" data-actor-id="{{../character.id}}"
                     title="right click to toggle between tag or state">
                     {{#unless this.positive}}<i class="fa-light fa-angles-down"></i>{{/unless}}
+                    {{#if this.might}}
+                        <img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">
+                    {{/if}}
                     {{fts.name}}{{#if fts.isStatus}}-{{fts.value}}{{/if}}</div>
 
             </div>

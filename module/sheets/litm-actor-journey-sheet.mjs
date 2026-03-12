@@ -23,7 +23,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
             submitOnChange: true
         },
         actor: {
-            type: 'joruney'
+            type: 'journey'
         },
         dragDrop: [{
             dragSelector: '[draggable="true"]',
@@ -33,7 +33,8 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
             resizable: true,
             controls: [
             ]
-        }
+        },
+        scrollY: ['.journey-consequences']
     }
 
     static PARTS = {
@@ -101,12 +102,24 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
 
         const editableChallengeItems =  this.element.querySelectorAll('.editable-challenge-item');
         for (const input of editableChallengeItems) {
-            input.addEventListener("change", event => this.handleChallengeItemUpdate(event)) // right click is for changing the burn state
+            input.addEventListener("change", event => this.handleChallengeItemUpdate(event));
+            input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
         }
 
         const editableChallengeItemListEntries = this.element.querySelectorAll('.editable-challenge-item-list-entry');
         for (const input of editableChallengeItemListEntries) {
-            input.addEventListener("change", event => this.handleChallengeItemListUpdate(event)) // right click is for changing the burn state
+            //input.addEventListener("change", event => this.handleChallengeItemListUpdate(event));
+            input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
+        }
+
+        const textareasShortDescriptions = this.element.querySelectorAll('.textarea-short-description');
+        for (const input of textareasShortDescriptions) {
+            input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
+        }
+
+        const taggableText = this.element.querySelectorAll('.taggable-text');
+        for (const input of taggableText) {
+            input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
         }
     }
 

@@ -395,6 +395,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             container.addEventListener("click", event => this.handleFellowshipPromiseClick(event));
             container.addEventListener("contextmenu", event => this.handleFellowshipPromiseRightClick(event));
         }
+
+        this.enableFloatingTagStatusContextMenus();
     }
 
 

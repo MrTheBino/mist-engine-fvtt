@@ -8,6 +8,7 @@ export default class MistEngineJourney extends MistEngineActorBase {
     const schema = super.defineSchema();
 
     schema.tags = new fields.StringField({ required: true, blank: true });
+    schema.role = new fields.StringField({ required: true, blank: true });
 
     schema.generalConsequences = new fields.SchemaField({
         name: new fields.StringField(),

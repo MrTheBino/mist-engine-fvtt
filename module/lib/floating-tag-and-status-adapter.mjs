@@ -50,6 +50,22 @@ export class FloatingTagAndStatusAdapter {
         await objectToUpdate.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
     }
     
+    static async handleTagStatusMightToggle(objectToUpdate,arrayIndex){
+        if(objectToUpdate===undefined){
+            console.log("FloatingTagAndStatusAdapter.handleTagStatusModifierToggle: no object to update");
+            return;
+        }
+        const floatingTagsAndStatuses = objectToUpdate.system.floatingTagsAndStatuses;
+        if (!floatingTagsAndStatuses || arrayIndex >= floatingTagsAndStatuses.length){
+            console.log("FloatingTagAndStatusAdapter.handleTagStatusModifierToggle: invalid array index");
+            return;
+        }
+        let oldMight = floatingTagsAndStatuses[arrayIndex].might || 0;
+        // new might is either 0 or 3
+        let newMight = oldMight === 0 ? 3 : 0;
+        foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'might', newMight);
+        await objectToUpdate.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+    }
     static async handleTagStatusToggle(objectToUpdate,arrayIndex){
         if(objectToUpdate===undefined){
             console.log("FloatingTagAndStatusAdapter.handleTagStatusToggle: no object to update");
@@ -68,9 +84,10 @@ export class FloatingTagAndStatusAdapter {
         foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'isStatus', newStatus);
         if(!newStatus){ // if the new value is not a status, reset value to 0
             foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'value', 0);
+            foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'might', 0);
             foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'markings', [false,false,false,false,false,false]);
         }else{ // if the new value is a status, set initial value
-            foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'value', 1);
+            foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'might', 0);
             foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'markings', [true,false,false,false,false,false]);
         }
         

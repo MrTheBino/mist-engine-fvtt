@@ -18,6 +18,7 @@ import { HowToPlayApp } from "./apps/how-to-play-app.mjs";
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { MIST_ENGINE } from "./helpers/config.mjs";
 import { makeStyledTagOrStatusText,textWithTags } from "./lib/tag-status-text-helper.mjs";
+import { FloatingTagAndStatusAdapter } from "./lib/floating-tag-and-status-adapter.mjs";
 // Import DataModel classes
 import * as models from "./data/_module.mjs";
 import { setupMistEngineKeyBindings } from "./lib/key-binding.mjs";

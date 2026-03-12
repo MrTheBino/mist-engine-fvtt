@@ -85,6 +85,64 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
 
         this.element.addEventListener("drop", this._onDrop.bind(this));
+        this.enableFloatingTagStatusContextMenus();
+    }
+
+    enableFloatingTagStatusContextMenus() {
+        this._createContextMenu(() => [
+            {
+                name: "Enable Might",
+                icon: '<i class="fa-solid fa-right-left"></i>',
+                condition: li => {
+                    if(li.dataset.isStatus === "true"){
+                        return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
+                    }
+                    const might = Number(li.dataset.might ?? 0);
+                    return might <= 0;
+                },
+                callback: async li => {
+                    const index = Number(li.dataset.index);
+                    if (!li.dataset.actorId){
+                        console.log("Enabling might for scene tag/status at index", index);
+                        console.log("Current scene data item before update:", this.currentSceneDataItem);
+                        await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(this.currentSceneDataItem, index);
+                        this.sendUpdateHookEvent();
+                        return;
+                    }else{
+                        const actor = this.getCorrectActor(li.dataset.actorId);
+                        await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(actor, index);
+                        await actor.sheet.sendFloatableTagOrStatusUpdate();
+                    }
+                }
+            },
+            {
+                name: "Disable Might",
+                icon: '<i class="fa-solid fa-right-left"></i>',
+                condition: li => {
+                    if(li.dataset.isStatus === "true"){
+                        return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
+                    }
+                    const might = Number(li.dataset.might ?? 0);
+                    return might > 0;
+                },
+                callback: async li => {
+                    const index = Number(li.dataset.index);
+                    if (!li.dataset.actorId){
+                        console.log("Disabling might for scene tag/status at index", index);
+                        console.log("Current scene data item before update:", this.currentSceneDataItem);
+                        await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(this.currentSceneDataItem, index);
+                        this.sendUpdateHookEvent();
+                        return;
+                    }else{
+                        const actor = this.getCorrectActor(li.dataset.actorId);
+                        await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(actor, index);
+                        await actor.sheet.sendFloatableTagOrStatusUpdate();
+                    }
+                }
+            }
+        ], ".floating-tag-and-status-entry", {
+            fixed: true
+        });
     }
 
     /**

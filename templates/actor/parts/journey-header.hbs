@@ -9,14 +9,17 @@
             <div class="title">
                 <h1 class="journey-name"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" /></h1>
             </div>
-            <div class="short-description"><input name="system.shortDescription" type="text"
-                    value="{{system.shortDescription}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" /></div>
+            <div><input name="system.role" type="text" value="{{system.role}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Role'}}" /></div>
+            <div><textarea class="textarea-short-description" name="system.shortDescription" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}">{{system.shortDescription}}</textarea></div>
+            <div><input class="taggable-text" name="system.tags" type="text" value="{{system.tags}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Tags'}}" /></div>
             </div>
             {{else}}
             {{!-- Normal Layout --}}
             <div class="flexcol">
                 <h1 class="journey-name">{{actor.name}}</h1>
+                <div class="npc-roles">{{system.role}}</div>
                 <div class="short-description">{{{textWithTags system.shortDescription}}}</div>
+                <p class="tags"><strong>Tags:</strong> {{{textWithTags system.tags}}}</p>
             </div>
             {{/if}}
         </div>

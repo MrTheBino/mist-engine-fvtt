@@ -950,6 +950,9 @@ article.cc-enriched section.journal-entry-content {
   background-repeat: no-repeat;
   row-gap: 0.5em;
 }
+.mist-engine.sheet.actor.litm-journey {
+  color: #191813;
+}
 .mist-engine.sheet.actor.litm-journey .window-content {
   background-image: url("../assets/paper_background_1.webp");
   background-repeat: no-repeat;
@@ -958,12 +961,23 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine.sheet.actor.litm-journey h1.journey-name {
   font-family: Labrada, serif;
   font-size: 36px;
-  color: #724a32;
+  color: #191813;
   width: auto;
+  text-align: center;
 }
 .mist-engine.sheet.actor.litm-journey .short-description {
   font-family: Labrada, serif;
-  color: #724a32;
+  color: #191813;
+  text-align: start;
+}
+.mist-engine.sheet.actor.litm-journey fieldset {
+  border-radius: 5px;
+}
+.mist-engine.sheet.actor.litm-journey .npc-roles {
+  font-family: var(--litm-font-accent);
+  font-size: large;
+  text-align: center;
+  color: #191813;
 }
 .mist-engine .storytag-item-editable {
   flex-grow: 8;
@@ -1274,6 +1288,12 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine .fts-input-name {
   flex-grow: 1;
+  justify-content: center;
+}
+.mist-engine .fts-input-name .might-icon {
+  width: 12px;
+  display: inline-block;
+  filter: invert(100%) sepia(100%) grayscale(100%) brightness(200%);
 }
 .mist-engine .fts-input-value {
   flex-shrink: 2;
@@ -1800,17 +1820,9 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine .fts-input-name .fts-tag-modifier-toggle,
 .mist-engine .fts-input-name .fts-tag-status-toggle {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.1s ease 0s;
+  pointer-events: cursor;
   font-size: 0.75em;
   flex-shrink: 0;
-}
-.mist-engine .fts-input-name:hover .fts-tag-modifier-toggle,
-.mist-engine .fts-input-name:hover .fts-tag-status-toggle {
-  opacity: 0.8;
-  pointer-events: auto;
-  transition: opacity 0.1s ease 1s;
 }
 .mist-engine .fts-input-name.tag {
   background-color: hsla(32, 68%, 28%, 0.9);
