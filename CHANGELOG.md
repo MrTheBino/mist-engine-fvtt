@@ -7,6 +7,7 @@
 - fixed the "jumping" in sheet behaviour after updating some powertags or whatever, if you still see some jumping anywhere tell me!
 - move to other tab context menu moved to the title of the themebook fix for: Right-clicking to toggle Burned state prompts "Move to Other/Main Tab" #48
 - lots of small GM QOL features for editing stuff in the system
+- icons for tags & stasuses are visible per default, no hover effect anymore. Too many complains from users regarding the hover effect.
 
 # 13.7.6
 - fix: The result of the roll shows a another Character Name in Chat Messages #45
