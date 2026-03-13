@@ -8,7 +8,10 @@
     {{#each challenges}}
     {{> systems/mist-engine-fvtt/templates/actor/parts/challenge-partial.hbs challenge=this editMode=../editMode}}
     {{/each}}
-    {{#unless editMode}}
+    {{#if editMode}}
+        <div><a data-action="createChallenge"><i class='fas fa-plus'></i> Add Challenge</a></div>
+    {{else}}
         </div>
-    {{/unless}}
+    {{/if}}
+
 </section>

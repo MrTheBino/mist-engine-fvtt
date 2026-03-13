@@ -2,6 +2,7 @@
     {{#if editMode}}
         <fieldset>
             <legend><a data-action="createChallengeListEntry" data-item-id="{{challenge.id}}"><i class='fas fa-plus'></i></a> <a data-action="deleteChallenge" data-item-id="{{challenge.id}}"><i class='fas fa-trash'></i></a> </legend>
+            <p class="help-text">{{localize 'MIST_ENGINE.HELP.GMTagShortCuts'}}</p>
             <input type="text" class="editable-challenge-item" value="{{challenge.name}}" data-item-id="{{challenge.id}}" data-key="name"/>
             <div class="short-description">
                 <input type="text" class="editable-challenge-item" value="{{challenge.system.shortDescription}}" data-item-id="{{challenge.id}}" data-key="system.shortDescription" title="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}"/>

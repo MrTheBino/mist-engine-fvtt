@@ -34,6 +34,7 @@
       "NoThemebooksInCharacter": "No Themebooks found. Create Themebook Items and drop them here.",
       "ChallengeTemplateDragNDrop": "Drag and drop challenge / vignette items on this NPC to use them. They serve as templates and will not modify the original item.",
       "FelllowshipThemeCardExplanation": "A Fellowship Themecard is a shared resource for all members of a fellowship. It contains power tags, weakness tags and special improvements. The actual tags are getting entered in the characters. Not here, here are only the questions of the tags.",
+      "GMTagShortCuts": "Select text, then CTL+SHIFT+S = Status, CTL+SHIFT+X = Might, CTL+SHIFT+A = Tag, CTL+SHIFT+Y = Bold",
       "Titles":{
         "RightClickToToggleBurnState": "Right click to toggle burn state",
         "Powertag": "Powertag",
@@ -62,7 +63,9 @@
       "Tag": "Tag",
       "Name": "Name",
       "ShortDescription": "Short Description",
-      "Description": "Description"
+      "Description": "Description",
+      "Role": "Role",
+      "Tags": "Tags"
     },
     "THEMEBOOKS": {
       "FellowshipRelationship": "Fellowship Relationship",

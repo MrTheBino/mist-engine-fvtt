@@ -99,7 +99,8 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
     /** @inheritDoc */
     _onRender(context, options) {
         super._onRender(context, options);
-
+        this._restoreScrollPositions();
+        
         const editableChallengeItems =  this.element.querySelectorAll('.editable-challenge-item');
         for (const input of editableChallengeItems) {
             input.addEventListener("change", event => this.handleChallengeItemUpdate(event));
@@ -108,7 +109,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
 
         const editableChallengeItemListEntries = this.element.querySelectorAll('.editable-challenge-item-list-entry');
         for (const input of editableChallengeItemListEntries) {
-            //input.addEventListener("change", event => this.handleChallengeItemListUpdate(event));
+            input.addEventListener("change", event => this.handleChallengeItemListUpdate(event));
             input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
         }
 
@@ -125,6 +126,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
 
     async handleChallengeItemUpdate(event) {
         event.preventDefault();
+        this._saveScrollPositions();
         const itemId = event.currentTarget.dataset.itemId;
         const item = this.actor.items.get(itemId);
         const field = event.currentTarget.dataset.key;
@@ -136,6 +138,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
 
     async handleChallengeItemListUpdate(event) {
         event.preventDefault();
+        this._saveScrollPositions();
         const itemId = event.currentTarget.dataset.itemId;
         const item = this.actor.items.get(itemId);
         const index = parseInt(event.currentTarget.dataset.index);
@@ -147,6 +150,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
 
     static async #handleDeleteChallengeListItem(event, target) {
         event.preventDefault();
+        this._saveScrollPositions();
         const itemId = target.dataset.itemId;
         const item = this.actor.items.get(itemId);
         const index = parseInt(target.dataset.index);
@@ -157,6 +161,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
 
     static async #handleCreateChallengeListEntry(event, target) {
         event.preventDefault();
+        this._saveScrollPositions();
         const itemId = target.dataset.itemId;
         const item = this.actor.items.get(itemId);
         const list = item.system.list;
@@ -166,6 +171,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
 
     static async #handleCreateChallenge(event, target) {
         event.preventDefault();
+        this._saveScrollPositions();
         await this.actor.createEmbeddedDocuments("Item", [{
             name: "New Challenge",
             type: "shortchallenge",
