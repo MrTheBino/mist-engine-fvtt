@@ -64,12 +64,12 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         character: {
             id: 'character',
             template: 'systems/mist-engine-fvtt/templates/actor/parts/tab-litm-character.hbs',
-            scrollable: ['']
+            scrollable: ['.scrollable']
         },
         other: {
             id: 'other',
             template: 'systems/mist-engine-fvtt/templates/actor/parts/tab-litm-other.hbs',
-            scrollable: ['']
+            scrollable: ['.scrollable']
         },
         biography: {
             id: 'biography',
@@ -192,20 +192,20 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if (proceed) {
             await this.actor.update({ "system.actorSharedSingleThemecardId": "" });
             this.actorFellowshipThemecard = false;
-            this.render(true);
+            this.render(false);
         }
     }
 
     static async #handleAssignFellowshipThemecard(event, target) {
         event.preventDefault();
         await this.assignFellowshipThemecard();
-        this.render(true);
+        this.render(false);
     }
 
     static async #handleCreateFellowshipThemecard(event, target) {
         event.preventDefault();
         await this.createAndAssignFellowshipThemecard();
-        this.render(true);
+        this.render(false);
     }
 
     isActorAssignedToUser() {
@@ -341,6 +341,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     /** @inheritDoc */
     _onRender(context, options) {
         super._onRender(context, options);
+        // Restore scroll positions after render to prevent jumping
+        this._restoreScrollPositions();
 
         // If the actor has a custom background, set it as the background image of the sheet.
         if(this.actor.system.customBackground){
@@ -397,6 +399,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         }
 
         this.enableFloatingTagStatusContextMenus();
+        this.enableMoveThemebookContextMenu();
     }
 
 
@@ -450,6 +453,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const newValue = input.value;
         let fellowships = this.options.document.system.fellowships;
         if (!fellowships || index >= fellowships.length) return;
+        this._saveScrollPositions();
         foundry.utils.setProperty(fellowships[index], key, newValue);
         await this.options.document.update({ "system.fellowships": fellowships });
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
@@ -505,6 +509,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let object = this.actor.items.get(target.dataset.itemId);
         const source = target.dataset.source;
 
+        this._saveScrollPositions();
         if (source === "fellowship-themecard") {
             if (this.actorFellowshipThemecard) {
                 object = this.actorFellowshipThemecard;
@@ -528,6 +533,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     }
 
     async handleDevelopmentPartialRightClick(event) {
+        this._saveScrollPositions();
         const target = event.currentTarget;
         let object = this.actor.items.get(target.dataset.itemId);
         const source = target.dataset.source;
@@ -881,5 +887,42 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         });
         console.log("themekit removed from themebook ", themebook.name);
         this.render();
+    }
+
+    enableMoveThemebookContextMenu() {
+        this._createContextMenu(() => [
+            {
+                name: "Move to Other Tab",
+                icon: '<i class="fa-solid fa-right-left"></i>',
+                condition: li => {
+                    const id = li.dataset.id;
+                    const themebook = this.actor.items.get(id);
+                    return themebook?.system?.tabCategory === "main";
+                },
+                callback: li => {
+                    const id = li.dataset.id;
+                    const themebook = this.actor.items.get(id);
+                    if (!themebook) return;
+                    themebook.update({ "system.tabCategory": "other" });
+                }
+            },
+            {
+                name: "Move to Main Tab",
+                icon: '<i class="fa-solid fa-right-left"></i>',
+                condition: li => {
+                    const id = li.dataset.id;
+                    const themebook = this.actor.items.get(id);
+                    return themebook?.system?.tabCategory === "other";
+                },
+                callback: li => {
+                    const id = li.dataset.id;
+                    const themebook = this.actor.items.get(id);
+                    if (!themebook) return;
+                    themebook.update({ "system.tabCategory": "main" });
+                }
+            }
+        ], ".themebook-item", {
+            fixed: true
+        });
     }
 }

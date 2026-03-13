@@ -43,3 +43,17 @@
 @import 'components/themekit_character_app';
 @import 'components/how_to_play_app';
 
+/* Fix for sheet jumping - preserve scroll position */
+.scrollable {
+  scroll-behavior: smooth;
+  overflow-y: auto;
+}
+
+.sheet .window-content {
+  overflow: hidden;
+}
+
+.sheet .scrollable {
+  height: 100%;
+  padding-right: 8px; /* Account for scrollbar */
+}

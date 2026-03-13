@@ -65,7 +65,7 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
         description: {
             template: 'systems/mist-engine-fvtt/templates/shared/tab-description.hbs',
             id: 'description',
-            scrollable: ['scrollable']
+            scrollable: ['.scrollable']
         }
     }
 

@@ -51,7 +51,7 @@ export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixi
         description: {
             template: 'systems/mist-engine-fvtt/templates/shared/tab-description.hbs',
             id: 'description',
-            scrollable: ['scrollable']
+            scrollable: ['.scrollable']
         }
     }
 

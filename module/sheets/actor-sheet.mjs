@@ -9,6 +9,7 @@ import { StoryTagAdapter } from "../lib/story-tag-adapter.mjs";
 
 export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
+    #scrollPositions; // Store scroll positions to prevent jumping
 
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
@@ -243,6 +244,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const key = event.currentTarget.dataset.key;
         const itemId = event.currentTarget.dataset.itemId;
 
+        this._saveScrollPositions();
         if (event.currentTarget.type === 'checkbox') {
             await StoryTagAdapter.updateStoryTag(this.actor, itemId, key, index, event.currentTarget.checked);
         } else {
@@ -255,6 +257,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     static async #handleToggleFloatingTagOrStatusSelected(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
+        this._saveScrollPositions();
         await FloatingTagAndStatusAdapter.handleTagStatusSelectedToggle(this.actor, index);
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         this.sendFloatableTagOrStatusUpdate();
@@ -263,6 +266,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     static async #handleToggleFloatingTagOrStatusModifier(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
+        this._saveScrollPositions();
         await FloatingTagAndStatusAdapter.handleTagStatusModifierToggle(this.actor, index);
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         this.sendFloatableTagOrStatusUpdate();
@@ -271,6 +275,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     static async #handleToggleFloatingTagOrStatus(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
+        this._saveScrollPositions();
         await FloatingTagAndStatusAdapter.handleTagStatusToggle(this.actor, index);
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         this.sendFloatableTagOrStatusUpdate();
@@ -288,7 +293,8 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     static async #handleDeleteFloatingTagOrStatus(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
-         let confirmed = true;
+        this._saveScrollPositions();
+        let confirmed = true;
         if(target.dataset.confirm && target.dataset.confirm == "1"){
             confirmed = await foundry.applications.api.DialogV2.confirm({
                 title: "Confirm Deletion",
@@ -336,6 +342,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         let item = null;
         const source = event.target.dataset.source;
 
+        this._saveScrollPositions();
         // Update items like Themebooks
         if (source == null || source == undefined || source.trim().length === 0) {
             if (event.currentTarget.dataset.itemId == undefined) {
@@ -363,6 +370,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         let item = null;
         const source = event.target.dataset.source;
 
+        this._saveScrollPositions();
         // Update items like Themebooks
         if (source == null || source == undefined || source.trim().length === 0) {
             if (event.currentTarget.dataset.itemId == undefined) {
@@ -786,4 +794,44 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             fixed: true
         });
     }
+
+    
+  /**
+   * Store current scroll positions before updates that might trigger re-renders
+   * @private
+   */
+  _saveScrollPositions() {
+    this.#scrollPositions = {};
+    const scrollableElements = this.element?.querySelectorAll('.scrollable');
+    scrollableElements?.forEach((el, index) => {
+      this.#scrollPositions[index] = el.scrollTop;
+    });
+  }
+
+  /**
+   * Restore scroll positions after render to prevent sheet jumping
+   * @private
+   */
+  _restoreScrollPositions() {
+    if (this.#scrollPositions) {
+      // Use requestAnimationFrame to ensure DOM is fully rendered
+      requestAnimationFrame(() => {
+        const scrollableElements = this.element?.querySelectorAll('.scrollable');
+        scrollableElements?.forEach((el, index) => {
+          if (this.#scrollPositions[index] !== undefined) {
+            // Force instant scroll by temporarily disabling smooth behavior
+            const originalBehavior = el.style.scrollBehavior;
+            el.style.scrollBehavior = 'auto';
+            el.scrollTop = this.#scrollPositions[index];
+            // Restore original scroll behavior
+            if (originalBehavior) {
+              el.style.scrollBehavior = originalBehavior;
+            } else {
+              el.style.removeProperty('scroll-behavior');
+            }
+          }
+        });
+      });
+    }
+  }
 }

@@ -3,6 +3,7 @@ import { MistSceneApp } from '../apps/scene-app.mjs'
 
 export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
   #dragDrop; // Private field to hold dragDrop handlers
+
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["mist-engine", "sheet", "actor", "npc"],
@@ -64,7 +65,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         "systems/mist-engine-fvtt/templates/actor/parts/npc-beautified-partial.hbs",
         "systems/mist-engine-fvtt/templates/actor/parts/floating-tags-and-status-partial.hbs",
       ],
-      scrollable: [""],
+      scrollable: [".scrollable"],
     },
     biography: {
       id: "biography",
@@ -117,6 +118,9 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
   /** @inheritDoc */
   _onRender(context, options) {
     super._onRender(context, options);
+
+    // Restore scroll positions after render to prevent jumping
+    this._restoreScrollPositions();
 
     const npcUpdatableNpcArrayStats = this.element.querySelectorAll(".npc-updatable-npc-array-stat");
     for (let input of npcUpdatableNpcArrayStats) {
@@ -178,6 +182,10 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   async handleNpcItemNpcArrayUpdate(event) {
     event.preventDefault();
+    
+    // Save scroll position before update
+    this._saveScrollPositions();
+    
     const target = event.currentTarget;
     const arrayIndex = parseInt(target.dataset.index);
     const arrayName = target.dataset.array;
@@ -192,6 +200,10 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   async handleNpcItemThreatEntryUpdate(event) {
     event.preventDefault();
+    
+    // Save scroll position before update
+    this._saveScrollPositions();
+    
     const target = event.currentTarget;
     const arrayIndex = parseInt(target.dataset.index);
     const listIndex = parseInt(target.dataset.listindex);
@@ -244,7 +256,6 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
     threatsAndConsequences[index].list.push("");
     await this.actor.update({ "system.threatsAndConsequences": threatsAndConsequences });
-    await this.actor.sheet.render(true);
   }
 
   static async #handleCreateThreatAndConsequence(event, target) {
@@ -261,8 +272,6 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         "system.threatsAndConsequences": [{ name: "", description: "", list: [] }],
       });
     }
-
-    await this.actor.sheet.render(true);
   }
 
   static async #handleCreateSpecialFeature(event, target) {
@@ -315,6 +324,10 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   async handleChallengeItemUpdate(event) {
     event.preventDefault();
+    
+    // Save scroll position before update
+    this._saveScrollPositions();
+    
     const itemId = event.currentTarget.dataset.itemId;
     const item = this.actor.items.get(itemId);
     const field = event.currentTarget.dataset.key;
@@ -326,6 +339,10 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   async handleChallengeItemListUpdate(event) {
     event.preventDefault();
+    
+    // Save scroll position before update
+    this._saveScrollPositions();
+    
     const itemId = event.currentTarget.dataset.itemId;
     const item = this.actor.items.get(itemId);
     const index = parseInt(event.currentTarget.dataset.index);

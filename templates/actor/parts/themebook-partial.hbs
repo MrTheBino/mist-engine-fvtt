@@ -1,5 +1,6 @@
 <div class="themebook-container container-themebook-with-border" data-id="{{id}}" data-tab-category="{{themebook.system.tabCategory}}">
     <div class="themebook-style {{themebook.system.color}} flexcol">
+        <div class="themebook-item" data-id="{{id}}" data-tab-category="{{themebook.system.tabCategory}}">
         <h2 class="theme-name">{{themebook.name}}
             {{#if editMode}}
             <a data-action="editItem" data-item-id='{{themebook._id}}'>
@@ -12,6 +13,7 @@
             <i class="themebook-icon {{themebook.system.type}}"></i>
             {{/if}}
         </h2>
+        </div>
         {{#if editMode}}
             <div class="themekit-container">
                 {{#if themebook.system.hasAssignedThemekit}}

@@ -33,7 +33,7 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
         header: {
             id: 'header',
             template: 'systems/mist-engine-fvtt/templates/actor/parts/fellowship-themecard-header.hbs',
-            scrollable: ['']
+            scrollable: ['.scrollable']
         },
         tabs: {
             id: 'tabs',

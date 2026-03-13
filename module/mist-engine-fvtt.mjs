@@ -300,44 +300,6 @@ Hooks.once("ready", function () {
   globalThis.HowToPlayApp = HowToPlayApp;
 });
 
-Hooks.on("renderMistEngineLegendInTheMistCharacterSheet", (app, html) => {
-
-  const menuItems = [
-    {
-      name: "Move to Other Tab",
-      icon: '<i class="fa-solid fa-right-left"></i>',
-      condition: li => {
-        const id = li.data("id");
-        const themebook = app.actor.items.get(id);
-        return themebook?.system?.tabCategory === "main";
-      },
-      callback: li => {
-        const id = li.data("id");
-        const themebook = app.actor.items.get(id);
-        if (!themebook) return;
-        themebook.update({"system.tabCategory": "other"});
-      }
-    },
-    {
-      name: "Move to Main Tab",
-      icon: '<i class="fa-solid fa-right-left"></i>',
-      condition: li => {
-        const id = li.data("id");
-        const themebook = app.actor.items.get(id);
-        return themebook?.system?.tabCategory === "other";
-      },
-      callback: li => {
-        const id = li.data("id");
-        const themebook = app.actor.items.get(id);
-        if (!themebook) return;
-        themebook.update({"system.tabCategory": "main"});
-      }
-    }
-  ];
-
-  new ContextMenu(html, ".themebook-container", menuItems, {fixed: true});
-});
-
 //make live a little bit easier, themekits have OBSERVER rights per default
 Hooks.on("preCreateItem", (doc, data, options, userId) => {
   // Nur GM darf Ownership setzen
