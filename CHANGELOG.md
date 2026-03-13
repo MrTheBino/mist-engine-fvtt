@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 13.7.8 - "Twin Shields"
+- small improvements for challenge GM features during entering data
+
 # 13.7.7 - "Shield Bash"
 - added might for tags, right click on a tag and you can turn it into a mighty tag
 - scene app improvements for GMs, more control for us!

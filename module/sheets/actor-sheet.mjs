@@ -330,6 +330,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     static async #handleToggleFloatingTagOrStatusMarking(event, target) {
         event.preventDefault();
         const index = target.dataset.index;
+        this._saveScrollPositions();
         await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(this.actor, index, target.dataset.markingIndex);
 
         this.sendFloatableTagOrStatusUpdate();
@@ -448,6 +449,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     static async #handleCreateFloatingTagOrStatus(event, target) {
         event.preventDefault();
         const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
+        this._saveScrollPositions();
 
         let srcStatusTagStr = "New Status";
         try {
