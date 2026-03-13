@@ -1,5 +1,6 @@
 import { MistEngineActorSheet } from "./actor-sheet.mjs";
 import { MistSceneApp } from '../apps/scene-app.mjs'
+import { parseChallengeJSON } from '../lib/challenge-json-parser.mjs';
 
 export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
   #dragDrop; // Private field to hold dragDrop handlers
@@ -25,7 +26,8 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
       addSceneAppRollMod: this.#handleAddSceneAppRollMod,
       deleteChallengeListItem: this.#handleDeleteChallengeListItem,
       createChallengeListEntry: this.#handleCreateChallengeListEntry,
-      deleteChallenge: this.#handleDeleteChallenge
+      deleteChallenge: this.#handleDeleteChallenge,
+      importJSON: this.#handleImportJSON
     },
     form: {
       submitOnChange: true,
@@ -386,4 +388,26 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
       await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
     }
   }
+
+   static async #handleImportJSON(event, target) {
+        event.preventDefault();
+
+        const jsonText = await foundry.applications.api.DialogV2.prompt({
+            window: { title: "Import Character from JSON" },
+            content: `<textarea name="jsonData" rows="10" autofocus></textarea>`,
+            ok: {
+                label: "Import",
+                callback: (event, button, dialog) => button.form.elements.jsonData.value
+            }
+        });
+        if (!jsonText) return;
+
+        try {
+            const data = JSON.parse(jsonText);
+            parseChallengeJSON(this.actor, data);
+            ui.notifications.info("Character imported from JSON. Please check the imported data and adjust as necessary.");
+        } catch (error) {
+            ui.notifications.error("Failed to import character from JSON: " + error.message);
+        }
+    }
 }
