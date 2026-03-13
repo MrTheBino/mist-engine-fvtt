@@ -235,6 +235,45 @@
         "lastModifiedBy": "wgZHyBDokH67OG0A"
       },
       "_key": "!journal.pages!TrgMWh3RyxxBkZoB.LOMCGxOsObrJIjIF"
+    },
+    {
+      "sort": 500000,
+      "name": "Context Menus",
+      "type": "text",
+      "_id": "rxKkomgqbydE295L",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<h2>Moving themebooks in the character sheet</h2><p>You can right click on themebook's title in a character sheet to toggle the context menu for moving the themebook from the <strong>Main</strong> tab to the <strong>Other </strong>tab and reverse</p><p></p><h2>Tags &amp; Statuses</h2><p>You can right click a tag in the Tags &amp; Statuses Box of characters, challenges and the scene app to set the tag as a mighty tag.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.7.6",
+        "createdTime": 1773387846872,
+        "modifiedTime": 1773387951291,
+        "lastModifiedBy": "wgZHyBDokH67OG0A"
+      },
+      "_key": "!journal.pages!TrgMWh3RyxxBkZoB.rxKkomgqbydE295L"
     }
   ],
   "folder": null,

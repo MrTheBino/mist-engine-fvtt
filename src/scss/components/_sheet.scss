@@ -858,6 +858,9 @@ mark {
 
   &.tag {
     background-color: $c-tag-yellow;
+    &.negative{
+      background-color: $c-status-red;
+    }
   }
 
   &.green {

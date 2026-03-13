@@ -1,19 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-
-/* Fix for sheet jumping - preserve scroll position */
-.scrollable {
-  overflow-y: auto;
-}
-
-.sheet .window-content {
-  overflow: hidden;
-}
-
-.sheet .scrollable {
-  height: 100%;
-  padding-right: 8px; /* Account for scrollbar */
-}
-
 body {
   --litm-color-bg: hsl(40, 85%, 87%);
   --litm-color: hsl(40, 27%, 24%);
@@ -1572,6 +1557,9 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine mark.tag {
   background-color: rgba(238, 213, 146, 0.75);
+}
+.mist-engine mark.tag.negative {
+  background-color: rgb(208, 160, 141);
 }
 .mist-engine mark.green {
   background-color: rgba(64, 134, 54, 0.75);

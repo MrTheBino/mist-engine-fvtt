@@ -263,6 +263,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     const index = target.dataset.index;
     const threatsAndConsequences = this.actor.system.threatsAndConsequences;
 
+    this._saveScrollPositions();
     if (threatsAndConsequences) {
       await this.actor.update({
         "system.threatsAndConsequences": [...threatsAndConsequences, { name: "", description: "", list: [] }],
@@ -276,6 +277,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   static async #handleCreateSpecialFeature(event, target) {
     event.preventDefault();
+    this._saveScrollPositions();
 
     const specialFeatures = this.actor.system.specialFeatures;
 
@@ -292,6 +294,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   static async #handleCreateSecret(event, target) {
     event.preventDefault();
+    this._saveScrollPositions();
 
     const secrets = this.actor.system.secrets;
 

@@ -97,6 +97,13 @@ export function makeStyledTagOrStatusText(source) {
     isOfType = 5;
   }
 
+  // tag negative
+  if(source.includes("/n")) {
+    source = source.replace("/n", "");
+    extraClass = "negative";
+    isOfType = 1;
+  }
+
   if (!source.includes("-")) {
     let tag = source;
     tag = tag.trim();
