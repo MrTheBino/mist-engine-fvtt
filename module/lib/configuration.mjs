@@ -27,4 +27,13 @@ export function setupConfiguration() {
         type: Boolean,
         default: false
     });
+
+    game.settings.register("mist-engine-fvtt", "tidyTagsOnCharacterSheet", {
+        name: "Tidy Tags on Character Sheet",
+        hint: "Hide planned tags and eliminate blank lines in a character's themes",
+        scope: "user",
+        config: true,
+        type: Boolean,
+        default: false
+    });    
 }
