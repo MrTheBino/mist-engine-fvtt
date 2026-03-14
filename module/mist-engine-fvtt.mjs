@@ -200,7 +200,7 @@ Handlebars.registerHelper('storyTagDraggableData', function (storytag, source) {
 });
 
 Handlebars.registerHelper('npcLimitValue', function (n) {
-  if (parseInt(n) <= 0) {
+  if(n === undefined || n === null || parseInt(n) <= 0 || (typeof n === "string" && n.trim().length === 0)){
     return "-";
   }
   return n;

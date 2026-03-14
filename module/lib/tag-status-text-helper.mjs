@@ -32,7 +32,7 @@ export function extractBrackets(text) {
 }
 
 export function makeStyledTagOrStatusText(source) {
-  let isOfType = 1; // 1 = tag, 2 = status, 3 = might, 4 = bold, limit = 5
+  let isOfType = 1; // 1 = tag, 2 = status, 3 = might, 4 = bold, limit = 5, weakness = 6
   let extraClass = '';
   let extraIcon = '';
 
@@ -66,6 +66,7 @@ export function makeStyledTagOrStatusText(source) {
 
   // weakness
   if (source.includes("/w")) {
+    isOfType = 6;
     extraIcon = '<i class="fa-light fa-angles-down"></i>';
     if (source.includes("/wo")) {
       extraClass = "orange";
@@ -75,9 +76,31 @@ export function makeStyledTagOrStatusText(source) {
     }
   }
 
-  //might
-  if (source.includes("/m")) {
-    extraIcon = '<img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">';
+  
+  //might greatness
+  if (source.includes("/mg")) {
+    extraIcon = '<img src="systems/mist-engine-fvtt/assets/icons/might-icon-greatness.webp" alt="Might Icon" class="might-icon">';
+    source = source.replace("/mg", "");
+    extraClass= "transparent";
+    isOfType = 3;
+  }
+  //might origin
+  else if (source.includes("/mo")) {
+    extraIcon = '<img src="systems/mist-engine-fvtt/assets/icons/might-icon-origin.webp" alt="Might Icon" class="might-icon">';
+    source = source.replace("/mo", "");
+    extraClass= "transparent";
+    isOfType = 3;
+  }
+  //might adventure
+  else if (source.includes("/ma")) {
+    extraIcon = '<img src="systems/mist-engine-fvtt/assets/icons/might-icon-adventure.webp" alt="Might Icon" class="might-icon">';
+    source = source.replace("/ma", "");
+    extraClass= "transparent";
+    isOfType = 3;
+  }
+  //might standard
+  else if (source.includes("/m")) {
+    extraIcon = '<img src="systems/mist-engine-fvtt/assets/icons/might-icon-standard.webp" alt="Might Icon" class="might-icon">';
     source = source.replace("/m", "");
     extraClass= "transparent";
     isOfType = 3;
@@ -104,6 +127,13 @@ export function makeStyledTagOrStatusText(source) {
     isOfType = 1;
   }
 
+  // tag positive
+  if(source.includes("/t")) {
+    source = source.replace("/t", "");
+    extraClass = "";
+    isOfType = 1;
+  }
+
   if (!source.includes("-")) {
     let tag = source;
     tag = tag.trim();
@@ -116,6 +146,9 @@ export function makeStyledTagOrStatusText(source) {
       // remove all whitespace from the beginning and ending
       return `<strong>${tag}</strong>`;
     }
+    else if(isOfType === 6){
+      return `<mark class="draggable weakness ${extraClass}" draggable="true" data-type="weakness" data-name="${tag}">${extraIcon}${tag}</mark>`;
+    }
     else {
       return `<mark class="draggable tag ${extraClass}" draggable="true" data-type="tag" data-name="${tag}">${extraIcon}${tag}</mark>`;
     }
@@ -124,6 +157,12 @@ export function makeStyledTagOrStatusText(source) {
     const name = source.substring(0, source.lastIndexOf("-")).trim();
     if(isOfType === 5) { // limit
       return `<div class="npc-limit-item-inline"><mark>${name}</mark><span class="npc-limit-value-armor">${value}</span></div>`;
+    }
+    else if (isOfType === 1){ // tag 
+      return `<mark class="draggable tag ${extraClass}" draggable="true" data-type="tag" data-name="${source}">${extraIcon}${source}</mark>`;
+    }
+    else if (isOfType === 6){ // weakness
+      return `<mark class="draggable weakness ${extraClass}" draggable="true" data-type="weakness" data-name="${source}">${extraIcon}${source}</mark>`;
     }
     else{
       return `<mark class="draggable status ${extraClass}" draggable="true" data-type="status" data-name="${name}" data-value="${value}">${name}-${value}</mark>`;

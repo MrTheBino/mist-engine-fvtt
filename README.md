@@ -28,6 +28,9 @@ You can use these formatting in almost every text field to display a MIST engine
     [/sg status-2] - a status with a green color instead of yellow
     [/so status-2] - a status with a orange color instead of yellow
     [/m might] - a might word with a sword icon before
+    [/ma might] - a might of type adventure
+    [/mg might] - a might of type greatness
+    [/mo might] - a might of type origin
     [/l limit-X] - a limit with the value X
     [/w weakness] - a weakness tag, usage in text and compendiums for example
     [/wo weakness] - a weakness tag in orange, usage in text and compendiums for example
