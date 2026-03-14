@@ -13,9 +13,7 @@
                     title="right click to toggle between tag or state">
                     <i class="fa-solid {{#if this.positive}}fa-circle-plus{{else}}fa-circle-minus{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-source="litm-character" data-index="{{@index}}" data-actor-id="{{../character.id}}" title="toggle between positive and negative"></i>
                     <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-source="litm-character" data-index="{{@index}}" data-actor-id="{{../character.id}}" title="{{floatingTagStatusTitleHelper this}}">
-                    {{#if this.might}}
-                        <img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">
-                    {{/if}}
+                    {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
                     {{fts.name}}{{#if fts.isStatus}}-{{fts.value}}{{/if}}
                     </span>
                     <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{@index}}" data-confirm="1" title="delete this tag/status" data-source="litm-character" data-index="{{@index}}" data-actor-id="{{../character.id}}"></i>
@@ -45,9 +43,7 @@
         <label class="resource-label" style="text-align:center;">{{localize "MIST_ENGINE.LABELS.SelectedTagsAndStatuses"}}</label>
         {{#each character.selectedTagsForRoll}}
         <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">
-            {{#if this.might}}
-                <img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">
-            {{/if}}
+            {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
             {{#if this.toBurn}}🔥 {{else}}{{#unless this.positive}}<i class="fa-light fa-angles-down"></i>{{/unless}}{{/if}}{{this.name}}
             {{#if (gt this.value 0)}}-{{this.value}}{{/if}}</div>
         {{/each}}

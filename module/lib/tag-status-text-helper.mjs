@@ -100,7 +100,7 @@ export function makeStyledTagOrStatusText(source) {
   }
   //might standard
   else if (source.includes("/m")) {
-    extraIcon = '<img src="systems/mist-engine-fvtt/assets/icons/might-icon-standard.webp" alt="Might Icon" class="might-icon">';
+    extraIcon = '<img src="systems/mist-engine-fvtt/assets/icons/might-icon-adventure.webp" alt="Might Icon" class="might-icon">';
     source = source.replace("/m", "");
     extraClass= "transparent";
     isOfType = 3;

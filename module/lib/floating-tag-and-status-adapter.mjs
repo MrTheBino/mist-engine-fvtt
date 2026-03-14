@@ -50,20 +50,21 @@ export class FloatingTagAndStatusAdapter {
         await objectToUpdate.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
     }
     
-    static async handleTagStatusMightToggle(objectToUpdate,arrayIndex){
+    static async handleTagStatusMightToggle(objectToUpdate,arrayIndex,mightIcon){
         if(objectToUpdate===undefined){
-            console.log("FloatingTagAndStatusAdapter.handleTagStatusModifierToggle: no object to update");
+            console.log("FloatingTagAndStatusAdapter.handleTagStatusMightToggle: no object to update");
             return;
         }
         const floatingTagsAndStatuses = objectToUpdate.system.floatingTagsAndStatuses;
         if (!floatingTagsAndStatuses || arrayIndex >= floatingTagsAndStatuses.length){
-            console.log("FloatingTagAndStatusAdapter.handleTagStatusModifierToggle: invalid array index");
+            console.log("FloatingTagAndStatusAdapter.handleTagStatusMightToggle: invalid array index");
             return;
         }
         let oldMight = floatingTagsAndStatuses[arrayIndex].might || 0;
         // new might is either 0 or 3
         let newMight = oldMight === 0 ? 3 : 0;
-        foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'might', newMight);
+        await foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'might', newMight);
+        await foundry.utils.setProperty(floatingTagsAndStatuses[arrayIndex], 'mightIcon', mightIcon);
         await objectToUpdate.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
     }
     static async handleTagStatusToggle(objectToUpdate,arrayIndex){

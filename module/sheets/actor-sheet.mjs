@@ -761,7 +761,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     enableFloatingTagStatusContextMenus() {
         this._createContextMenu(() => [
             {
-                name: "Add Might",
+                name: "Add Adventure Might",
                 icon: '<i class="fa-solid fa-circle-plus"></i>',
                 condition: li => {
                     if(li.dataset.isStatus === "true"){
@@ -772,7 +772,39 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 },
                 callback: async li => {
                     const index = Number(li.dataset.index);
-                    await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(this.actor, index);
+                    await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(this.actor, index, "adventure");
+                    await this.sendFloatableTagOrStatusUpdate();
+                }
+            },
+            {
+                name: "Add Greatness Might",
+                icon: '<i class="fa-solid fa-circle-plus"></i>',
+                condition: li => {
+                    if(li.dataset.isStatus === "true"){
+                        return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
+                    }
+                    const might = Number(li.dataset.might ?? 0);
+                    return might <= 0;
+                },
+                callback: async li => {
+                    const index = Number(li.dataset.index);
+                    await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(this.actor, index, "greatness");
+                    await this.sendFloatableTagOrStatusUpdate();
+                }
+            },
+            {
+                name: "Add Origin Might",
+                icon: '<i class="fa-solid fa-circle-plus"></i>',
+                condition: li => {
+                    if(li.dataset.isStatus === "true"){
+                        return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
+                    }
+                    const might = Number(li.dataset.might ?? 0);
+                    return might <= 0;
+                },
+                callback: async li => {
+                    const index = Number(li.dataset.index);
+                    await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(this.actor, index, "origin");
                     await this.sendFloatableTagOrStatusUpdate();
                 }
             },

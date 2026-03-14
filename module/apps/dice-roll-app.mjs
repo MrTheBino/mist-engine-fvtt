@@ -165,14 +165,14 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         MistSceneApp.getInstance().getRollModifications().forEach(element => {
             // at present all gm tags are negative
             // the roll modifications have a flag positive(boolean) but it is not used for now
-            this.selectedGmTags.push({ name: element.name, positive: element.positive, source: "gm", value: element.value,might: element.might });
+            this.selectedGmTags.push({ name: element.name, positive: element.positive, source: "gm", value: element.value,might: element.might,mightIcon: element.mightIcon });
         });
     }
 
     prepareSceneAndStoryTags() {
         MistSceneApp.getInstance().getSceneAndStoryTags().forEach(element => {
             if (element.selected) {
-                this.selectedStoryTags.push({ name: element.name, positive: element.positive, source: "scene-and-story", value: element.value,might: element.might });
+                this.selectedStoryTags.push({ name: element.name, positive: element.positive, source: "scene-and-story", value: element.value,might: element.might,mightIcon: element.mightIcon });
             }
         });
     }
@@ -180,7 +180,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     prepareChallengeTags(){
         MistSceneApp.getInstance().getCombinedSelectedNPCTags().forEach(element => {
             if (element.selected) {
-                let t = { name: element.name, positive: element.positive, source: "npc", value: element.value, actorId: element.actorId,might: element.might };
+                let t = { name: element.name, positive: element.positive, source: "npc", value: element.value, actorId: element.actorId,might: element.might,mightIcon: element.mightIcon };
                 this.challengeTags.push(t);
             }
         });
@@ -398,7 +398,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (actor.system.floatingTagsAndStatuses && actor.system.floatingTagsAndStatuses.length > 0) {
             actor.system.floatingTagsAndStatuses.forEach((entry,index) => {
                 if (entry.selected) {
-                    let t = { name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value,index: index + 1,isStatus: true, might: entry.might };
+                    let t = { name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value,index: index + 1,isStatus: true, might: entry.might, mightIcon: entry.mightIcon };
                     if(entry.value === undefined || entry.value > 0){
                         t.isStatus = true;
                     }

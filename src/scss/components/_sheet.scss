@@ -542,10 +542,7 @@
   // height: 16px;
 
    .might-icon{
-    width: 12px;
-    display: inline-block;
-    
-    filter: invert(100%) sepia(100%) grayscale(100%) brightness(200%);
+      @include might-icon-def;
   }
 }
 
@@ -911,9 +908,7 @@ mark {
   }
 
   .might-icon{
-    height: 12px;
-    background-color: transparent;
-    display: inline;
+    @include might-icon-def;
   }
 }
 

@@ -1,0 +1,32 @@
+@mixin might-icon-def{
+    height: 16px;
+    width: 16px;
+    background-color: transparent;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    -webkit-filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 1));
+    filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 1));
+
+    background-image: url('../assets/icons/might-icon-adventure.webp');
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    &.adventure {
+        background-image: url('../assets/icons/might-icon-adventure.webp');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    &.greatness {
+        background-image: url('../assets/icons/might-icon-greatness.webp');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    &.origin {
+        background-image: url('../assets/icons/might-icon-origin.webp');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}

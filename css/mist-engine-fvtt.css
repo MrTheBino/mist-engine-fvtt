@@ -650,9 +650,32 @@ article.cc-enriched section.journal-entry-content {
   clip-path: polygon(0% 50%, 10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%);
 }
 #tooltip mark .might-icon {
-  height: 12px;
+  height: 16px;
+  width: 16px;
   background-color: transparent;
-  display: inline;
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  -webkit-filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
+  filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#tooltip mark .might-icon.adventure {
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#tooltip mark .might-icon.greatness {
+  background-image: url("../assets/icons/might-icon-greatness.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#tooltip mark .might-icon.origin {
+  background-image: url("../assets/icons/might-icon-origin.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 /* Styles limited to mist-engine-fvtt sheets */
@@ -1299,9 +1322,32 @@ article.cc-enriched section.journal-entry-content {
   justify-content: center;
 }
 .mist-engine .fts-input-name .might-icon {
-  width: 12px;
+  height: 16px;
+  width: 16px;
+  background-color: transparent;
   display: inline-block;
-  filter: invert(100%) sepia(100%) grayscale(100%) brightness(200%);
+  position: relative;
+  top: 3px;
+  -webkit-filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
+  filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.mist-engine .fts-input-name .might-icon.adventure {
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.mist-engine .fts-input-name .might-icon.greatness {
+  background-image: url("../assets/icons/might-icon-greatness.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.mist-engine .fts-input-name .might-icon.origin {
+  background-image: url("../assets/icons/might-icon-origin.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .mist-engine .fts-input-value {
   flex-shrink: 2;
@@ -1594,9 +1640,32 @@ article.cc-enriched section.journal-entry-content {
   clip-path: polygon(0% 50%, 10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%);
 }
 .mist-engine mark .might-icon {
-  height: 12px;
+  height: 16px;
+  width: 16px;
   background-color: transparent;
-  display: inline;
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  -webkit-filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
+  filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.mist-engine mark .might-icon.adventure {
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.mist-engine mark .might-icon.greatness {
+  background-image: url("../assets/icons/might-icon-greatness.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.mist-engine mark .might-icon.origin {
+  background-image: url("../assets/icons/might-icon-origin.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .mist-engine .themekit-container {
   text-align: center;
@@ -2332,9 +2401,32 @@ article.cc-enriched section.journal-entry-content {
   margin-right: auto;
 }
 .roll-dialog-container .might-icon {
-  width: 12px;
+  height: 16px;
+  width: 16px;
+  background-color: transparent;
   display: inline-block;
-  filter: invert(100%) sepia(100%) grayscale(100%) brightness(200%);
+  position: relative;
+  top: 3px;
+  -webkit-filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
+  filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.roll-dialog-container .might-icon.adventure {
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.roll-dialog-container .might-icon.greatness {
+  background-image: url("../assets/icons/might-icon-greatness.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.roll-dialog-container .might-icon.origin {
+  background-image: url("../assets/icons/might-icon-origin.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .message-content .selected-tags {

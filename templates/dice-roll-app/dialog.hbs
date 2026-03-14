@@ -7,9 +7,7 @@
                 {{#if this.positive}}<i class="fa-solid fa-circle-plus"></i>{{else}}<i
                     class="fa-solid fa-circle-minus"></i>{{/if}}
             </span>
-            {{#if this.might}}
-                <img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">
-            {{/if}}
+            {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
             {{#if this.toBurn}}🔥
             {{/if}}{{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
             <span class="deselect-icon">
@@ -26,9 +24,7 @@
                 {{#if this.positive}}<i class="fa-solid fa-circle-plus"></i>{{else}}<i
                     class="fa-solid fa-circle-minus"></i>{{/if}}
             </span>
-            {{#if this.might}}
-                <img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">
-            {{/if}}
+            {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
             {{#if this.toBurn}}🔥{{/if}}{{this.name}}{{#if (gt
             this.value 0)}}-{{this.value}}{{/if}}
         </div>
@@ -57,9 +53,7 @@
                 {{#if this.positive}}<i class="fa-solid fa-circle-plus"></i>{{else}}<i
                     class="fa-solid fa-circle-minus"></i>{{/if}}
             </span>
-            {{#if this.might}}
-                <img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">
-            {{/if}}
+            {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
             {{#if this.toBurn}}🔥{{/if}}{{this.name}}{{#if (gt
             this.value 0)}}-{{this.value}}{{/if}}
         </div>

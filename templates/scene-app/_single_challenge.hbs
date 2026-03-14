@@ -13,9 +13,7 @@
                     title="right click to toggle between tag or state">
                     <i class="fa-solid {{#if this.positive}}fa-circle-plus{{else}}fa-circle-minus{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-source="litm-npc" data-index="{{@index}}" data-actor-id="{{../challenge.id}}" title="toggle between positive and negative"></i>
                      <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-index="{{@index}}" data-source="litm-npc" data-actor-id="{{../challenge.id}}">
-                        {{#if this.might}}
-                            <img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">
-                        {{/if}}
+                        {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
                         {{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}
                     </span>
                     <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{@index}}" data-confirm="1" title="delete this tag/status" data-index="{{@index}}" data-source="litm-npc" data-actor-id="{{../challenge.id}}"></i>

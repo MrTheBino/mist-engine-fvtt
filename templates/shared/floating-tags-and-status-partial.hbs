@@ -41,9 +41,7 @@
                     <i class="fa-solid {{#if this.positive}}fa-circle-plus{{else}}fa-circle-minus{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-index="{{@index}}" title="toggle between positive and negative"></i>
                 {{/if}}
                 <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-index="{{@index}}" title="{{floatingTagStatusTitleHelper this}}">
-                    {{#if this.might}}
-                        <img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">
-                    {{/if}}
+                    {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
                     {{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}
                 </span>
                 {{#if (isRenderBlockAllowed ../gmCheck)}}

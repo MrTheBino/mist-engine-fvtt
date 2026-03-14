@@ -95,7 +95,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     enableFloatingTagStatusContextMenus() {
         this._createContextMenu(() => [
             {
-                name: "Add Might",
+                name: "Add Adventure Might",
                 icon: '<i class="fa-solid fa-circle-plus"></i>',
                 condition: li => {
                     if(li.dataset.isStatus === "true"){
@@ -107,14 +107,58 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 callback: async li => {
                     const index = Number(li.dataset.index);
                     if (!li.dataset.actorId){
-                        console.log("Enabling might for scene tag/status at index", index);
-                        console.log("Current scene data item before update:", this.currentSceneDataItem);
-                        await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(this.currentSceneDataItem, index);
+                        await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(this.currentSceneDataItem, index, "adventure");
                         this.sendUpdateHookEvent();
                         return;
                     }else{
                         const actor = this.getCorrectActor(li.dataset.actorId);
-                        await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(actor, index);
+                        await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(actor, index, "adventure");
+                        await actor.sheet.sendFloatableTagOrStatusUpdate();
+                    }
+                }
+            },
+            {
+                name: "Add Greatness Might",
+                icon: '<i class="fa-solid fa-circle-plus"></i>',
+                condition: li => {
+                    if(li.dataset.isStatus === "true"){
+                        return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
+                    }
+                    const might = Number(li.dataset.might ?? 0);
+                    return might <= 0;
+                },
+                callback: async li => {
+                    const index = Number(li.dataset.index);
+                    if (!li.dataset.actorId){
+                        await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(this.currentSceneDataItem, index, "greatness");
+                        this.sendUpdateHookEvent();
+                        return;
+                    }else{
+                        const actor = this.getCorrectActor(li.dataset.actorId);
+                        await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(actor, index, "greatness");
+                        await actor.sheet.sendFloatableTagOrStatusUpdate();
+                    }
+                }
+            },
+            {
+                name: "Add Origin Might",
+                icon: '<i class="fa-solid fa-circle-plus"></i>',
+                condition: li => {
+                    if(li.dataset.isStatus === "true"){
+                        return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
+                    }
+                    const might = Number(li.dataset.might ?? 0);
+                    return might <= 0;
+                },
+                callback: async li => {
+                    const index = Number(li.dataset.index);
+                    if (!li.dataset.actorId){
+                        await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(this.currentSceneDataItem, index, "origin");
+                        this.sendUpdateHookEvent();
+                        return;
+                    }else{
+                        const actor = this.getCorrectActor(li.dataset.actorId);
+                        await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(actor, index, "origin");
                         await actor.sheet.sendFloatableTagOrStatusUpdate();
                     }
                 }

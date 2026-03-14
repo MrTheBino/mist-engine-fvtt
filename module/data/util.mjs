@@ -15,6 +15,7 @@ export function buildFloatingTagsAndStatuses(){
       positive: new fields.BooleanField({ initial: false }),
       markings: new fields.ArrayField(new fields.BooleanField({ initial: false }), { min: 6, max: 6, initial: Array(6).fill(false) }),
       might: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
+      mightIcon: new fields.StringField({ blank: true ,default: "adventure"})
     }));
 
     return schema;
