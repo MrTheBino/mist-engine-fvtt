@@ -2,7 +2,7 @@ import { MistEngineActorSheet } from './actor-sheet.mjs';
 import { DiceRollApp } from '../apps/dice-roll-app.mjs';
 import { PowerTagAdapter } from '../lib/power-tag-adapter.mjs';
 import { MistSceneApp } from '../apps/scene-app.mjs';
-
+import { importVignetteForActorJSON} from '../lib/json-importer.mjs';
 export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet {
 #dragDrop // Private field to hold dragDrop handlers
     /** @inheritDoc */
@@ -17,7 +17,8 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
             deleteChallengeListItem: this.#handleDeleteChallengeListItem,
             createChallengeListEntry: this.#handleCreateChallengeListEntry,
             createChallenge: this.#handleCreateChallenge,
-            deleteChallenge: this.#handleDeleteChallenge
+            deleteChallenge: this.#handleDeleteChallenge,
+            importChallengeJSON: this.#handleImportChallengeJSON
         },
         form: {
             submitOnChange: true
@@ -194,4 +195,29 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
             await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
         }
     }
+
+    static async #handleImportChallengeJSON(event, target) {
+        event.preventDefault();
+        // Open dialog for entering JSON data
+        const jsonText = await foundry.applications.api.DialogV2.prompt({
+            window: { title: "Import Vignette from JSON" },
+            content: `<textarea name="jsonData" rows="10" autofocus></textarea>`,
+            ok: {
+                label: "Import",
+                callback: (event, button, dialog) => button.form.elements.jsonData.value
+            }
+        });
+        console.log("JSON data entered:", jsonText);
+        if (jsonText) {
+            try {
+                const parsedData = JSON.parse(jsonText);
+                await importVignetteForActorJSON(this.actor, parsedData);
+                ui.notifications.info(game.i18n.format("MIST_ENGINE.NOTIFICATIONS.ImportChallengeJSONSuccess"));
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
+                ui.notifications.error(game.i18n.format("MIST_ENGINE.NOTIFICATIONS.ImportChallengeJSONError"));
+            }
+        }
+    }
+
 }

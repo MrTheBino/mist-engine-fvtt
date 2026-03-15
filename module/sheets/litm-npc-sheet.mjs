@@ -1,6 +1,6 @@
 import { MistEngineActorSheet } from "./actor-sheet.mjs";
 import { MistSceneApp } from '../apps/scene-app.mjs'
-import { parseChallengeJSON } from '../lib/challenge-json-parser.mjs';
+import { parseChallengeJSON } from '../lib/json-importer.mjs';
 
 export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
   #dragDrop; // Private field to hold dragDrop handlers

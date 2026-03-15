@@ -1,9 +1,24 @@
 import { FloatingTagAndStatusAdapter } from "./floating-tag-and-status-adapter.mjs";
 
-export async function parseChallengeJSON(actor,jsonData) {
+export async function importVignetteForActorJSON(actor, jsonData) {
+
+    let challenge =
+    {
+        name: jsonData.title,
+        type: "shortchallenge",
+        system: {
+            shortDescription: jsonData.description || "",
+            list: jsonData.entries
+        }
+    };
+
+    await actor.createEmbeddedDocuments("Item", [challenge]);
+}
+
+export async function parseChallengeJSON(actor, jsonData) {
     if (jsonData.name) {
-       await actor.update({ name: jsonData.name });
-       await actor.update({"prototypeToken.name": jsonData.name});
+        await actor.update({ name: jsonData.name });
+        await actor.update({ "prototypeToken.name": jsonData.name });
     }
 
     if (jsonData.text) {
@@ -39,7 +54,7 @@ export async function parseChallengeJSON(actor,jsonData) {
         });
 
         await actor.update({
-            "system.floatingTagsAndStatuses":  tags
+            "system.floatingTagsAndStatuses": tags
         });
     }
 
