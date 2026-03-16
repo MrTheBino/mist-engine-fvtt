@@ -1,6 +1,7 @@
 const { ItemSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
+import { importShortChallengeForJSON } from '../lib/json-importer.mjs';
 
 export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
@@ -15,7 +16,8 @@ export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixi
         },
         actions: {
             createEntry: this.#handleCreateEntry,
-            deleteEntry: this.#handleDeleteEntry
+            deleteEntry: this.#handleDeleteEntry,
+            importShortChallengeJSON: this.#handleImportShortChallengeJSON
         },
         form: {
             // handler: DCCActorSheet.#onSubmitForm,
@@ -282,5 +284,29 @@ export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixi
         }
 
         return super._onDrop?.(event);
+    }
+
+    static async #handleImportShortChallengeJSON(event, target) {
+ event.preventDefault();
+        // Open dialog for entering JSON data
+        const jsonText = await foundry.applications.api.DialogV2.prompt({
+            window: { title: "Import Vignette from JSON" },
+            content: `<textarea name="jsonData" rows="10" autofocus></textarea>`,
+            ok: {
+                label: "Import",
+                callback: (event, button, dialog) => button.form.elements.jsonData.value
+            }
+        });
+        console.log("JSON data entered:", jsonText);
+        if (jsonText) {
+            try {
+                const parsedData = JSON.parse(jsonText);
+                await importShortChallengeForJSON(this.document, parsedData);
+                ui.notifications.info(game.i18n.format("MIST_ENGINE.NOTIFICATIONS.ImportChallengeJSONSuccess"));
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
+                ui.notifications.error(game.i18n.format("MIST_ENGINE.NOTIFICATIONS.ImportChallengeJSONError"));
+            }
+        }
     }
 }

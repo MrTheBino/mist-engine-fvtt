@@ -272,6 +272,10 @@ body {
   margin-top: 10px;
 }
 
+.mt-5 {
+  margin-top: 5px;
+}
+
 .mb-10 {
   margin-bottom: 10px;
 }
@@ -730,13 +734,15 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .sheet-header .header-fields .col-status {
   flex-grow: 0.75;
 }
-.mist-engine .sheet-header h1.charname {
+.mist-engine .sheet-header h1.charname,
+.mist-engine .sheet-header h1.journey-name {
   padding: 0px;
   border-bottom: 0;
   width: 100%;
   text-align: center;
 }
-.mist-engine .sheet-header h1.charname input {
+.mist-engine .sheet-header h1.charname input,
+.mist-engine .sheet-header h1.journey-name input {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -909,7 +915,9 @@ article.cc-enriched section.journal-entry-content {
   font-family: Labrada, serif;
   font-size: 36px;
   color: #191813;
-  width: auto;
+}
+.mist-engine.sheet.actor.npc h1.npc-name.edit-mode {
+  width: 100%;
 }
 .mist-engine.sheet.actor.npc h1.npc-name input {
   height: 1.5em;
@@ -966,7 +974,6 @@ article.cc-enriched section.journal-entry-content {
   font-family: Labrada, serif;
   font-size: 36px;
   color: var(--litm-color-accent);
-  width: auto;
 }
 .mist-engine.sheet.actor.litm-fellowship-themecard .window-content {
   background-image: url("../assets/paper_background_1.webp");
@@ -985,7 +992,7 @@ article.cc-enriched section.journal-entry-content {
   font-family: Labrada, serif;
   font-size: 36px;
   color: #191813;
-  width: auto;
+  width: 100%;
   text-align: center;
 }
 .mist-engine.sheet.actor.litm-journey .short-description {
@@ -1587,6 +1594,18 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .npc-challenges-container .list-entries .entry-content {
   flex-direction: row;
   display: flex;
+}
+.mist-engine .challenge-entry-container .list-entries .entry-content-no-edit .skull-icon,
+.mist-engine .npc-challenges-container .list-entries .entry-content-no-edit .skull-icon {
+  /*top: 5px;*/
+}
+.mist-engine .challenge-entry-container .list-entries .entry-content-no-edit .icon-col,
+.mist-engine .npc-challenges-container .list-entries .entry-content-no-edit .icon-col {
+  flex-grow: 0.075;
+}
+.mist-engine .challenge-entry-container .list-entries .entry-content-no-edit .text-col,
+.mist-engine .npc-challenges-container .list-entries .entry-content-no-edit .text-col {
+  flex-grow: 1;
 }
 .mist-engine .tab.journey-consequences a {
   font-family: Labrada, serif;

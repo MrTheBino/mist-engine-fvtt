@@ -6,20 +6,17 @@
             {{#if system.editMode}}
             {{!-- Edit Mode Layout --}}
             <div class="title">
-                <h1 class="npc-name">
+                <h1 class="npc-name edit-mode">
                     <input name="name" type="text" value="{{actor.name}}"
                         placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" />
                 </h1>
-                <button data-action="importJSON"><i class="fas fa-file-import" title="{{localize 'MIST_ENGINE.ACTIONS.ImportJSON'}}"></i></button>
             </div>
             <div class="npc-types">
                 <div class="field-roles">
-                    <label for="system.roles">{{localize "MIST_ENGINE.LABELS.Npc.roles"}}</label>
-                    <input type="text" name="system.roles" value="{{system.roles}}" />
+                    <input type="text" name="system.roles" value="{{system.roles}}" placeholder="{{localize "MIST_ENGINE.LABELS.Npc.roles"}}"/>
                 </div>
                 <div class="field-difficulty">
-                    <label for="system.difficulty">{{localize "MIST_ENGINE.LABELS.Npc.difficulty"}}</label>
-                    <input type="number" name="system.difficulty" value="{{system.difficulty}}" min="0" max="5" />
+                    <input type="number" name="system.difficulty" value="{{system.difficulty}}" min="0" max="5" placeholder="{{localize "MIST_ENGINE.LABELS.Npc.difficulty"}}"/>
                 </div>
             </div>
             <div class="npc-short-description">

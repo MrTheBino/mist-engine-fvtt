@@ -1,9 +1,11 @@
 <section class="tab {{tabs.journey-consequences.id}} {{tabs.journey-consequences.cssClass}} scrollable"
     data-tab="{{tabs.journey-consequences.id}}" data-group="{{tabs.journey-consequences.group}}">
     {{#if editMode}}
-        <div>
-            <button data-action="importChallengeJSON"><i class="fas fa-file-import"></i>Import Vignette / Challenge JSON</button>
-            <a data-action="createChallenge"><i class='fas fa-plus'></i> Add Challenge</a>
+        <div class="grid grid-2col">
+            <button data-action="createChallenge"><i class='fas fa-plus'></i> Add Challenge</button>
+            {{#if (isCustomJSONImportEnabled true)}}
+                <button data-action="importChallengeJSON"><i class="fas fa-file-import"></i>{{localize 'MIST_ENGINE.ACTIONS.ImportShortChallengeVignetteJSON'}}</button>
+            {{/if}}
         </div>
     {{else}}
         <div class="grid grid-2col">
@@ -12,7 +14,7 @@
     {{> systems/mist-engine-fvtt/templates/actor/parts/challenge-partial.hbs challenge=this editMode=../editMode}}
     {{/each}}
     {{#if editMode}}
-        <div><a data-action="createChallenge"><i class='fas fa-plus'></i> Add Challenge</a></div>
+        <div class="grid grid-2col"><button data-action="createChallenge"><i class='fas fa-plus'></i> Add Challenge</button></div>
     {{else}}
         </div>
     {{/if}}

@@ -79,6 +79,20 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
         let items = this._prepareItems();
         context.editMode = actorData.system.editMode;
 
+         context.notesHTML = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+            this.document.system.notes,
+            {
+                // Whether to show secret blocks in the finished html
+                secrets: this.document.isOwner,
+                // Necessary in v11, can be removed in v12
+                async: true,
+                // Data to fill in for inline rolls
+                rollData: this.document.getRollData(),
+                // Relative UUID resolution
+                relativeTo: this.document,
+            }
+        );
+
         foundry.utils.mergeObject(context, items);
 
         return context;

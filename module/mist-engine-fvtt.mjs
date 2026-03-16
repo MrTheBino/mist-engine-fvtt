@@ -199,6 +199,12 @@ Handlebars.registerHelper('storyTagDraggableData', function (storytag, source) {
   return `draggable="true" data-type="${source}" data-name="${storytag.name}"`;
 });
 
+Handlebars.registerHelper("isCustomJSONImportEnabled", function (n) {
+  let t = game.settings.get("mist-engine-fvtt", "showCustomJSONImport") === true;
+  console.log("Checking if custom JSON import is enabled: ", t);
+  return t;
+});
+
 Handlebars.registerHelper('npcLimitValue', function (n) {
   if(n === undefined || n === null || parseInt(n) <= 0 || (typeof n === "string" && n.trim().length === 0)){
     return "-";

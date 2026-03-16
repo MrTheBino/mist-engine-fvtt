@@ -21,7 +21,9 @@
       font-family: $font-primary;
       font-size: 36px;
       color: $c-dark-styled-text;
-      width: auto;
+      &.edit-mode{
+        width: 100%;
+      }
     input {
       height: 1.5em;
     }
@@ -95,7 +97,6 @@
     font-family: $font-primary;
     font-size: 36px;
     color: var(--litm-color-accent);
-    width: auto;
   }
 }
 
@@ -119,7 +120,7 @@
       font-family: $font-primary;
       font-size: 36px;
       color: $c-dark-styled-text;
-      width: auto;
+      width: 100%;
       text-align: center;
     }
 
@@ -833,7 +834,17 @@ nav.tabs [data-tab] {
       display: flex;
     }
 
-    .entry-content-no-edit {}
+    .entry-content-no-edit {
+      .skull-icon{
+        /*top: 5px;*/
+      }
+      .icon-col{
+        flex-grow: 0.075;
+      }
+      .text-col{
+        flex-grow: 1;
+      }
+    }
   }
 }
 

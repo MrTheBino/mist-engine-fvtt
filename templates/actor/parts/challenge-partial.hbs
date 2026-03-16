@@ -3,11 +3,13 @@
         <fieldset>
             <legend><a data-action="createChallengeListEntry" data-item-id="{{challenge.id}}"><i class='fas fa-plus'></i></a> <a data-action="deleteChallenge" data-item-id="{{challenge.id}}"><i class='fas fa-trash'></i></a> </legend>
             <p class="help-text">{{localize 'MIST_ENGINE.HELP.GMTagShortCuts'}}</p>
-            <input type="text" class="editable-challenge-item" value="{{challenge.name}}" data-item-id="{{challenge.id}}" data-key="name"/>
-            <div class="short-description">
-                <input type="text" class="editable-challenge-item" value="{{challenge.system.shortDescription}}" data-item-id="{{challenge.id}}" data-key="system.shortDescription" title="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}"/>
+            <div class="box-shadowed-container">
+                <input type="text" class="editable-challenge-item" value="{{challenge.name}}" data-item-id="{{challenge.id}}" data-key="name"/>
+                <div class="short-description mt-10">
+                    <input type="text" class="editable-challenge-item" value="{{challenge.system.shortDescription}}" data-item-id="{{challenge.id}}" data-key="system.shortDescription" title="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}"/>
+                </div>
             </div>
-            <div class="list-entries">
+            <div class="list-entries box-shadowed-container">
                 {{#each challenge.system.list as |entry index|}}
                     <div class="list-entry flexrow">
                         <div class="entry-content" style="flex-grow: 8;">
@@ -27,7 +29,11 @@
         <div class="list-entries">
             {{#each challenge.system.list as |entry index|}}
                 <div class="list-entry">
-                    <div class="entry-content-no-edit"><i class="skull-icon"></i> {{{textWithTags entry}}}</div>
+                    
+                    <div class="entry-content-no-edit flexrow">
+                        <div class="icon-col"><i class="skull-icon"></i></div>
+                        <div class="text-col">{{{textWithTags entry}}}</div>
+                    </div>
                 </div>
             {{/each}}
         </div>

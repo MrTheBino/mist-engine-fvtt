@@ -1,5 +1,9 @@
 {
   "MIST_ENGINE": {
+    "ACTIONS":{
+      "ImportChallengeJSON": "Import Challenge from JSON",
+      "ImportShortChallengeVignetteJSON": "Import Short Challenge / Vignette from JSON"
+    },
     "THEMEKITS": {
       "Powertags": "Powertags",
       "WeaknessTags": "Weakness Tags",

@@ -1,11 +1,14 @@
 # CHANGELOG
 
-# 13.7.8 - "Twin Shields"
+# 13.7.8 - "Iron Focus"
 - small improvements for challenge GM features during entering data
-- import challenges via special JSON files
+- import challenges, short challenges & vignettes via special JSON files, enabled via config settings
 - set adventure, origin and greatness might 
 - improvements here and there regarding challenge rendering
-
+- fixed notes for journeys
+- styling fixes
+- Feature Request: Add a scroll bar to the scene tags window #49
+  
 # 13.7.7 - "Shield Bash"
 - added might for tags, right click on a tag and you can turn it into a mighty tag
 - scene app improvements for GMs, more control for us!

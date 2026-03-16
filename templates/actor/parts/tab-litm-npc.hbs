@@ -1,7 +1,11 @@
 <section id="{{partId}}" class="tab {{tabs.details.cssClass}} scrollable" data-tab="{{tabs.details.id}}"
     data-group="{{tabs.details.group}}">
     {{#if editMode}}
-
+        {{#if (isCustomJSONImportEnabled true)}}
+            <div class="grid grid-2col">
+                <button data-action="importJSON"><i class="fas fa-file-import"></i>{{localize 'MIST_ENGINE.ACTIONS.ImportChallengeJSON'}}</button>
+            </div>
+        {{/if}}
         {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-limits-edit-partial.hbs"}}
         {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-secrets.hbs"}}
         {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-special-features-edit-partial.hbs"}}

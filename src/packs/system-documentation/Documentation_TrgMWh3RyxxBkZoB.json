@@ -274,6 +274,45 @@
         "lastModifiedBy": "wgZHyBDokH67OG0A"
       },
       "_key": "!journal.pages!TrgMWh3RyxxBkZoB.rxKkomgqbydE295L"
+    },
+    {
+      "sort": 600000,
+      "name": "JSON Import",
+      "type": "text",
+      "_id": "AB7WK9k5t3DDp7T7",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>You can import complete challenges, short challenges and vignettes via a custom json import. Enable via the config settings the JSON import and you will see the corresponding buttons.</p><p></p><p>The JSON format is defined here: <a href=\"https://github.com/MrTheBino/mist-engine-fvtt/wiki/Custom-JSON-Import\">https://github.com/MrTheBino/mist-engine-fvtt/wiki/Custom-JSON-Import</a></p><p></p><p></p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "13.7.7",
+        "createdTime": 1773655012086,
+        "modifiedTime": 1773655148387,
+        "lastModifiedBy": "wgZHyBDokH67OG0A"
+      },
+      "_key": "!journal.pages!TrgMWh3RyxxBkZoB.AB7WK9k5t3DDp7T7"
     }
   ],
   "folder": null,

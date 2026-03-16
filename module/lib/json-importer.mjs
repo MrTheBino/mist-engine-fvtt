@@ -1,5 +1,18 @@
 import { FloatingTagAndStatusAdapter } from "./floating-tag-and-status-adapter.mjs";
 
+export async function importShortChallengeForJSON(item, jsonData) {
+    let challenge =
+    {
+        name: jsonData.title,
+        system: {
+            shortDescription: jsonData.description || "",
+            list: jsonData.entries
+        }
+    };
+
+    await item.update(challenge);
+}
+
 export async function importVignetteForActorJSON(actor, jsonData) {
 
     let challenge =

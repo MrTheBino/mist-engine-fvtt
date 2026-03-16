@@ -18,6 +18,7 @@
             </div>
         </div>
         {{!-- Secrets --}}
+        {{#if hasSecrets}}
         <div class="npc-secret-container">
             <div class="npc-subtitle-container-c">
                 <div class="npc-subtitle-text">{{localize "MIST_ENGINE.NPC.Secrets"}}</div>
@@ -35,20 +36,23 @@
                 {{/each}}
             </div>
         </div>
+        {{/if}}
         {{!-- Special Features --}}
-        <div class="npc-limits-container">
-            <div class="npc-subtitle-container-c">
-                <div class="npc-subtitle-text">{{localize "MIST_ENGINE.LABELS.Npc.SpecialFeatures"}}</div>
-            </div>
-            <div class="npc-limits-list flexcol">
-                {{#each system.specialFeatures as |feature|}}
-                <div class="npc-limit-item">
-                    <div class="npc-special-feature-name">{{feature.name}}</div>
-                    <div class="npc-limit-description">{{{textWithTags feature.description}}}</div>
+        {{#if hasSpecialFeatures}}
+            <div class="npc-limits-container">
+                <div class="npc-subtitle-container-c">
+                    <div class="npc-subtitle-text">{{localize "MIST_ENGINE.LABELS.Npc.SpecialFeatures"}}</div>
                 </div>
-                {{/each}}
+                <div class="npc-limits-list flexcol">
+                    {{#each system.specialFeatures as |feature|}}
+                    <div class="npc-limit-item">
+                        <div class="npc-special-feature-name">{{feature.name}}</div>
+                        <div class="npc-limit-description">{{{textWithTags feature.description}}}</div>
+                    </div>
+                    {{/each}}
+                </div>
             </div>
-        </div>
+        {{/if}}
     </div>
 
     <div class="right-half">
