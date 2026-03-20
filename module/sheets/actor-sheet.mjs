@@ -233,6 +233,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const itemId = target.dataset.itemId;
         const key = target.dataset.key;
 
+        this._saveScrollPositions();
         await StoryTagAdapter.toggleStoryTagSelection(this.actor, itemId, key, index);
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
@@ -495,6 +496,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     static async #handleCreateItem(event, target) {
         event.preventDefault();
         const actor = this.actor;
+        this._saveScrollPositions();
         this._onItemCreate(event, target, actor);
     }
 

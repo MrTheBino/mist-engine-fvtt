@@ -30,7 +30,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         },
         position: {
             left: 100,
-            width: 600,
+            width: 800,
             height: 800
         },
         actions: {

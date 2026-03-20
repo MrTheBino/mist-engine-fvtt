@@ -2465,9 +2465,11 @@ article.cc-enriched section.journal-entry-content {
 }
 .message-content .selected-tags .tag.positive {
   background-color: rgba(64, 134, 54, 0.75);
+  color: white;
 }
 .message-content .selected-tags .tag.negative {
   background-color: rgba(223, 182, 43, 0.75);
+  color: black;
 }
 
 .consequence-container {
@@ -2535,6 +2537,16 @@ article.cc-enriched section.journal-entry-content {
   -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
   border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
   color: #724a32;
+}
+#scene-data-app > section.window-content .actor-img {
+  height: 28px;
+  display: inline-block;
+}
+#scene-data-app > section.window-content .npc-subtitle-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1em;
 }
 
 .floating-tags-and-status-entries {

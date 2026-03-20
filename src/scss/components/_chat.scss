@@ -17,12 +17,14 @@
 
             &.positive {
                 background-color: $c-tag-green;
+                color: white;
             }
 
             &.burned {}
 
             &.negative {
                 background-color: $c-tag-orange;
+                color: black;
             }
         }
     }

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 13.7.9 - "Iron Focus 2X"
+- hotfix release for case where character sheets are "jumping"
+- tiny styling issues
+- disabled JS for journal styling of tags, will come back in a better version, but at present they broke journal functionality
+
 # 13.7.8 - "Iron Focus"
 - small improvements for challenge GM features during entering data
 - import challenges, short challenges & vignettes via special JSON files, enabled via config settings

@@ -410,6 +410,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         let fellowships = this.options.document.system.fellowships;
         if (!fellowships || index >= fellowships.length) return;
         if (fellowships[index].scratched) return; // do not allow selecting scratched tags
+        this._saveScrollPositions();
         fellowships[index].selected = !fellowships[index].selected;
         await this.options.document.update({ "system.fellowships": fellowships });
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
@@ -472,6 +473,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     static async #handleCreateFellowship(event, target) {
         event.preventDefault();
         const currentFellowships = this.actor.system.fellowships;
+        this._saveScrollPositions();
         if (currentFellowships) {
             await this.actor.update({
                 "system.fellowships": [...currentFellowships, { companion: "", relationshipTag: "", selected: false }]
@@ -488,6 +490,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const index = target.dataset.index;
         let quintessences = this.actor.system.quintessences;
         if (!quintessences || index >= quintessences.length) return;
+        this._saveScrollPositions();
         quintessences.splice(index, 1);
         await this.actor.update({ "system.quintessences": quintessences });
     }
@@ -636,6 +639,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const source = tag.dataset.source;
         const actor = this.options.document;
         let object = this.actor.items.get(itemId);
+        this._saveScrollPositions();
 
         if (source === "fellowship-themecard") {
             if (this.actorFellowshipThemecard) {
@@ -678,6 +682,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const itemIndex = target.dataset.itemIndex;
         const backpackItems = backpack.system.items;
         if (!backpackItems || itemIndex >= backpackItems.length) return;
+        this._saveScrollPositions();
         backpackItems.splice(itemIndex, 1);
 
         await backpack.update({
@@ -689,6 +694,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     static async #handleCreateQuintessence(event, target) {
         event.preventDefault();
         const currentQuintessences = this.actor.system.quintessences;
+        this._saveScrollPositions();
         if (currentQuintessences) {
             await this.actor.update({
                 "system.quintessences": [
@@ -710,6 +716,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const backpack = this.actor.items.get(target.dataset.itemId);
 
         const backpackItems = backpack.system.items;
+        this._saveScrollPositions();
 
         let itemName = "New Item";
         try {

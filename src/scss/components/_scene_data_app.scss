@@ -6,6 +6,18 @@
     -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
     border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
     color: $c-styled-text;
+
+    .actor-img{
+        height: 28px;
+        display: inline-block;
+    }
+
+    .npc-subtitle-text {
+        display: inline-flex;   
+        align-items: center;    
+        gap: 0.5rem;       
+        font-size: 1em;     
+    }
 }
 
 .floating-tags-and-status-entries {
@@ -20,7 +32,7 @@
         font-weight: bold;
         text-transform: uppercase;
         text-align: center;
-    }
+    }    
 }
 
 .scene-app-actor-header{

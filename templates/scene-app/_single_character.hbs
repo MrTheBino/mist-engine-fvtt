@@ -1,6 +1,6 @@
 <div class="character-container" data-actor-id="{{character.id}}">
     <div class="npc-subtitle-container-c">
-        <div class="npc-subtitle-text pointer" data-action="clickOpenCharacterSheet" data-id="{{character.id}}">{{character.name}}</div>
+        <div class="npc-subtitle-text pointer" data-action="clickOpenCharacterSheet" data-id="{{character.id}}"><img src="{{character.img}}" alt="{{character.name}}" class="actor-img"> {{character.name}}</div>
     </div>
     {{#if character.hasFloatingTagsAndStatuses}}
     <div class="floating-tags-and-status-entries">

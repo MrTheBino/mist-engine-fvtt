@@ -331,14 +331,14 @@ Hooks.on("preCreateItem", (doc, data, options, userId) => {
 });
 
 // Intercept journal page render and replace text tags/statuses/limits with draggale marks
-Hooks.on("renderJournalEntrySheet", (_app, html) => {
+/*Hooks.on("renderJournalEntrySheet", (_app, html) => {
   html.querySelectorAll(".journal-page-content").forEach((page) => {
     const matches = [...page.innerHTML.matchAll(/\[(.*?)\]/g)].map(m => m[1])
     matches.forEach(tag => {
       page.innerHTML = page.innerHTML.replace(`[${tag}]`, makeStyledTagOrStatusText(tag));
     });
   });
-});
+});*/
 
 Hooks.on("createActor", async (actor, data, options, userId) => {
   // Creating a backpack for each new LITM-Character

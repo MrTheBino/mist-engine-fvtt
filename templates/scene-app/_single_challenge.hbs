@@ -1,6 +1,6 @@
 <div class="character-container" data-actor-id="{{challenge.id}}">
     <div class="npc-subtitle-container-c">
-        <div class="npc-subtitle-text pointer" data-action="clickOpenCharacterSheet" data-id="{{challenge.id}}">{{challenge.name}}</div>
+        <div class="npc-subtitle-text pointer" data-action="clickOpenCharacterSheet" data-id="{{challenge.id}}"><img src="{{challenge.img}}" class="actor-img">{{challenge.name}}</div>
     </div>
     {{#if challenge.hasFloatingTagsAndStatuses}}
     <div class="floating-tags-and-status-entries">
