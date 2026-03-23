@@ -100,9 +100,8 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     let items = this._prepareItems();
 
     foundry.utils.mergeObject(context, items);
-    context.hasSpecialFeatures = context.specialFeatures && context.specialFeatures.length > 0;
-    context.hasSecrets = context.secrets && context.secrets.length > 0;
-    context.hasLimits = context.limits && context.limits.length > 0;
+    context.hasSpecialFeatures = this.options.document.system.specialFeatures && this.options.document.system.specialFeatures.length > 0;
+    context.hasSecrets = this.options.document.system.secrets && this.options.document.system.secrets.length > 0;
 
     return context;
   }
