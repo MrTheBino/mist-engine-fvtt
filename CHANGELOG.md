@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 13.7.9.1
+- hotfix for secrets & special features for challenges
+  
 # 13.7.9 - "Iron Focus 2X"
 - hotfix release for case where character sheets are "jumping"
 - tiny styling issues
