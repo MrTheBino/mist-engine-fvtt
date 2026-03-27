@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 13.7.9.2
+- hotfix for scene app while activating another scene
+  
 # 13.7.9.1
 - hotfix for secrets & special features for challenges
   
