@@ -90,6 +90,12 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (game.user.isGM) {
             this.enableFloatingTagStatusContextMenus();
         }
+
+        // setr the title of the dialog
+        let titleElement = this.element.querySelector(".window-title");
+        if (titleElement) {
+            titleElement.textContent = `Scene: ${this.currentSceneName}`;
+        }
     }
 
     enableFloatingTagStatusContextMenus() {
@@ -614,7 +620,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.currentSceneId = newScene.id;
         this.currentSceneName = newScene.name;
         this.findOrCreateSceneDataItem();
-        this.sendUpdateHookEvent();
+        this.sendUpdateHookEvent(false);
     }
 
     sceneUpdatedHook() {
