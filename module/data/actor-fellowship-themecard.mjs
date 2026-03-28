@@ -1,5 +1,5 @@
 import MistEngineActorBase from "./base-actor.mjs";
-import { buildSpecialImprovements } from "./util.mjs";
+import { buildSpecialImprovements,buildPowerTag } from "./util.mjs";
 
 export default class MistEngineActorFellowshipThemecard extends MistEngineActorBase {
 
@@ -16,6 +16,9 @@ export default class MistEngineActorFellowshipThemecard extends MistEngineActorB
         schema.abandon = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
         schema.improve = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
         schema.milestone = new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 });
+
+        schema.powertags = new fields.ArrayField(buildPowerTag(), { min: 0, required: false });
+        schema.weaknesstags = new fields.ArrayField(buildPowerTag(), { min: 0, required: false });
 
         schema.powertag1 = new fields.SchemaField({
             name: new fields.StringField({ blank: true }),

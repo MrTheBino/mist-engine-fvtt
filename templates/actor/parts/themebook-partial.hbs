@@ -27,35 +27,25 @@
            </div>
         {{/if}}
         <div class="powertags-container">
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=1 id=themebook._id
-            powertag=themebook.system.powertag1 editMode=editMode firstTag=true}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=2 id=themebook._id
-            powertag=themebook.system.powertag2 editMode=editMode tidyTags=tidyTags}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=3 id=themebook._id
-            powertag=themebook.system.powertag3 editMode=editMode tidyTags=tidyTags}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=4 id=themebook._id
-            powertag=themebook.system.powertag4 editMode=editMode tidyTags=tidyTags}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=5 id=themebook._id
-            powertag=themebook.system.powertag5 editMode=editMode tidyTags=tidyTags}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=6 id=themebook._id
-            powertag=themebook.system.powertag6 editMode=editMode tidyTags=tidyTags}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=7 id=themebook._id
-            powertag=themebook.system.powertag7 editMode=editMode tidyTags=tidyTags}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=8 id=themebook._id
-            powertag=themebook.system.powertag8 editMode=editMode tidyTags=tidyTags}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=9 id=themebook._id
-            powertag=themebook.system.powertag9 editMode=editMode tidyTags=tidyTags}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=10 id=themebook._id
-            powertag=themebook.system.powertag10 editMode=editMode tidyTags=tidyTags}}
+            
+            {{#if editMode}}
+            <div class="themebook-icon-line">
+                <i class="fas fa-plus add-line-icon clickable" data-action="addEmptyPowertag" data-item-id="{{themebook._id}}" title="{{localize "MIST_ENGINE.LABELS.AddPowertag"}}"></i> {{localize "MIST_ENGINE.LABELS.AddPowertag"}} 
+            </div>
+            {{/if}}
+            {{#each themebook.system.powertags as |powertag index|}}
+            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-powertag-line.hbs" index=index id=../themebook._id
+            powertag=powertag editMode=../editMode tidyTags=../tidyTags}}
+            {{/each}}
 
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=1 id=themebook._id
-            weaknesstag=themebook.system.weaknesstag1 editMode=editMode}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=2 id=themebook._id
-            weaknesstag=themebook.system.weaknesstag2 editMode=editMode}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=3 id=themebook._id
-            weaknesstag=themebook.system.weaknesstag3 editMode=editMode}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=4 id=themebook._id
-            weaknesstag=themebook.system.weaknesstag4 editMode=editMode}}
+            {{#if editMode}}
+            <div class="themebook-icon-line">
+                <i class="fas fa-plus add-line-icon clickable" data-action="addEmptyWeaknessTag" data-item-id="{{themebook._id}}" title="{{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}}"></i> {{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}} 
+            </div>
+            {{/if}}
+            {{#each themebook.system.weaknesstags as |weaknesstag index|}}
+            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=index id=../themebook._id      weaknesstag=weaknesstag editMode=../editMode tidyTags=../tidyTags}}
+            {{/each}}
 
             {{#if themebook.system.hasSpecialImprovements}}
             <h3 class="special-improvement-section-label">{{localize 'MIST_ENGINE.LABELS.SpecialImprovements'}}</h3>

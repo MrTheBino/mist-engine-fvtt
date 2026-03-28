@@ -84,6 +84,8 @@
       "reaction": "Reaction Roll"
     },
     "LABELS": {
+      "AddPowertag": "Add Powertag",
+      "AddWeaknesstag": "Add Weakness Tag",
       "Other": "Other",
       "Consequence": "Consequence",
       "JourneyConsequences": "Consequences & Vignettes",

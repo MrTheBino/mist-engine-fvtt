@@ -150,11 +150,9 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
             }
         };
 
-        // we set the first powertag of the themebook to the first powertag of the themekit, if it exists
+        // copy powertags from the themekit to the new themebook
         if(this.currentSelectedThemekit.system.powertags && this.currentSelectedThemekit.system.powertags.length > 0){
-            themebookData.system.powertag1 = {
-                name: this.currentSelectedThemekit.system.powertags[0].name,
-            };
+            themebookData.system.powertags = this.currentSelectedThemekit.system.powertags.map(tag => ({ name: tag.name }));
         }
 
         // now we create the themebook item in the actor's inventory

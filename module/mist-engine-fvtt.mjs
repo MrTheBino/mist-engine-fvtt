@@ -25,6 +25,7 @@ import { setupMistEngineKeyBindings } from "./lib/key-binding.mjs";
 import { setupConfiguration } from "./lib/configuration.mjs";
 import { showCharacterTokenHover } from "./lib/character-token-hover.mjs";
 import {Fonts} from "./lib/fonts.mjs";
+import { registerMigrationSettings, needsMigration, migrateWorld } from "./migration.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -140,6 +141,7 @@ Hooks.once("init", function () {
   Fonts.register();
   setupMistEngineKeyBindings();
   setupConfiguration();
+  registerMigrationSettings();
 
   if(game.settings.get("mist-engine-fvtt", "disableCustomDice") !== true) {
     CONFIG.Dice.terms["6"] = D6ToD12;
@@ -209,7 +211,7 @@ Handlebars.registerHelper("weaknessTagQuestionPlaceholder", function (index, str
 });
 
 Handlebars.registerHelper('questionIndexToLetter', function (n) {
-  return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[n - 1];
+  return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[n];
 });
 
 Handlebars.registerHelper('isRenderBlockAllowed',function(showOnlyGM){
@@ -321,7 +323,9 @@ Handlebars.registerHelper("textWithTags", function (str) {
 /*  Ready Hook                                  */
 /* -------------------------------------------- */
 
-Hooks.once("ready", function () {
+Hooks.once("ready", async function () {
+  if (needsMigration()) await migrateWorld();
+
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
 

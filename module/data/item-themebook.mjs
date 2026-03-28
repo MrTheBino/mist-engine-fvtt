@@ -1,5 +1,5 @@
 import MistEngineItemBase from "./base-item.mjs";
-import {buildSpecialImprovements} from "./util.mjs";
+import {buildSpecialImprovements,buildPowerTag} from "./util.mjs";
 
 export default class MistEngineItemThemeBook extends MistEngineItemBase {
 
@@ -22,6 +22,13 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
 
         schema.themeKitUUID = new fields.StringField({ blank: true });
 
+        
+        // new schema for powertags and weaknesstags
+        schema.powertags = new fields.ArrayField(buildPowerTag(), { min: 0, required: false });
+        schema.weaknesstags = new fields.ArrayField(buildPowerTag(), { min: 0, required: false });
+
+
+        // deprecated old schema definitions for powertags & weaknesstags, we keep them for now to avoid breaking existing themebooks, but they will be removed in a future update
         schema.powertag1 = new fields.SchemaField({
             name: new fields.StringField({ blank: true }),
             question: new fields.StringField({ blank: true }),

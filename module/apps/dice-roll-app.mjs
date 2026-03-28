@@ -352,17 +352,17 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             }
 
             if (item.type === "themebook") {
-                for (let i = 0; i < 10; i++) {
-                    const powertagPath = `system.powertag${i + 1}.selected`;
-                    if (foundry.utils.getProperty(item, powertagPath)) {
-                        selectedTags.push({ name: item.system[`powertag${i + 1}`].name, positive: true, toBurn: item.system[`powertag${i + 1}`].toBurn, index: i + 1, themebookId: item.id, source: null });
+                item.system.powertags.forEach((tag, i) => {
+                    if (tag.selected) {
+                        selectedTags.push({ name: tag.name, positive: true, toBurn: tag.toBurn, index: i, themebookId: item.id, source: null });
                     }
+                });
 
-                    const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
-                    if (foundry.utils.getProperty(item, weaknesstagPath)) {
-                        selectedTags.push({ name: item.system[`weaknesstag${i + 1}`].name, positive: false, weakness: true, source: null,index: i+1,themebookId: item.id });
+                item.system.weaknesstags.forEach((tag, i) => {
+                    if (tag.selected) {
+                        selectedTags.push({ name: tag.name, positive: false, weakness: true, index: i, themebookId: item.id, source: null });
                     }
-                }
+                });
             }
         }
 
@@ -378,17 +378,17 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (actor.sheet.getActorFellowshipThemecard()) {
             let actorFellowshipThemecard = actor.sheet.getActorFellowshipThemecard();
             if (actorFellowshipThemecard) {
-                for (let i = 0; i < 10; i++) {
-                    const powertagPath = `system.powertag${i + 1}.selected`;
-                    if (foundry.utils.getProperty(actorFellowshipThemecard, powertagPath)) {
-                        selectedTags.push({ name: actorFellowshipThemecard.system[`powertag${i + 1}`].name, positive: true, toBurn: actorFellowshipThemecard.system[`powertag${i + 1}`].toBurn, index: i + 1, source: "fellowship-themecard" });
+                actorFellowshipThemecard.system.powertags.forEach((tag, i) => {
+                    if (tag.selected) {
+                        selectedTags.push({ name: tag.name, positive: true, toBurn: tag.toBurn, index: i, source: "fellowship-themecard" });
                     }
+                });
 
-                    const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
-                    if (foundry.utils.getProperty(actorFellowshipThemecard, weaknesstagPath)) {
-                        selectedTags.push({ name: actorFellowshipThemecard.system[`weaknesstag${i + 1}`].name, positive: false, weakness: true,index: i + 1, source: "fellowship-themecard" });
+                actorFellowshipThemecard.system.weaknesstags.forEach((tag, i) => {
+                    if (tag.selected) {
+                        selectedTags.push({ name: tag.name, positive: false, weakness: true, index: i, source: "fellowship-themecard" });
                     }
-                }
+                });
             }
         } else {
             console.log("No fellowship themecard in the actor getActorFellowshipThemecard():", actor.name);
@@ -472,29 +472,20 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 await item.update({ 'system.items': backpackItems });
             }
             if (item.type === "themebook") {
-                for (let i = 0; i < 10; i++) {
-                    const powertagPath = `system.powertag${i + 1}.selected`;
-                    item.update({ [powertagPath]: false });
-                    const powertagPathToBurn = `system.powertag${i + 1}.toBurn`;
-                    item.update({ [powertagPathToBurn]: false });
+                const powertags = item.system.powertags.map((tag, i) => {
+                    const burned = tag.burned || this.isTagToBurn(i, item._id);
+                    return { ...tag, selected: false, toBurn: false, burned };
+                });
 
-                    if (this.isTagToBurn(i + 1, item._id)) {
-                        const powertagToBurnPath = `system.powertag${i + 1}.burned`;
-                        item.update({ [powertagToBurnPath]: true });//mark as burned
+                for (const tag of item.system.weaknesstags) {
+                    if (tag.selected && item.system.improve < 3 && !alreadyImprovedThemebooks.includes(item.id)) {
+                        alreadyImprovedThemebooks.push(item.id);
+                        await item.update({ 'system.improve': item.system.improve + 1 });
                     }
                 }
-                for (let i = 0; i < 4; i++) {
-                    const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
-                    if(foundry.utils.getProperty(item, weaknesstagPath) == true){
-                        if(item.system.improve < 3){
-                            if(alreadyImprovedThemebooks.includes(item.id) == false){
-                                alreadyImprovedThemebooks.push(item.id);
-                                await item.update({ 'system.improve': item.system.improve + 1 });
-                            }
-                        }
-                    };
-                    await item.update({ [weaknesstagPath]: false });
-                }
+
+                const weaknesstags = item.system.weaknesstags.map(tag => ({ ...tag, selected: false }));
+                await item.update({ 'system.powertags': powertags, 'system.weaknesstags': weaknesstags });
             }
         }
 
@@ -518,29 +509,20 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (this.actor.sheet.getActorFellowshipThemecard()) {
             let actorFellowshipThemecard = this.actor.sheet.getActorFellowshipThemecard();
             if (actorFellowshipThemecard) {
-                for (let i = 0; i < 10; i++) {
-                    const powertagPath = `system.powertag${i + 1}.selected`;
-                    await actorFellowshipThemecard.update({ [powertagPath]: false });
-                    const powertagPathToBurn = `system.powertag${i + 1}.toBurn`;
-                    await actorFellowshipThemecard.update({ [powertagPathToBurn]: false });
+                const powertags = actorFellowshipThemecard.system.powertags.map((tag, i) => {
+                    const burned = tag.burned || this.wasTagSelected(i, null, "fellowship-themecard");
+                    return { ...tag, selected: false, toBurn: false, burned };
+                });
 
-                    if (this.wasTagSelected(i + 1, null, "fellowship-themecard")) {
-                        const powertagToBurnPath = `system.powertag${i + 1}.burned`;
-                        await actorFellowshipThemecard.update({ [powertagToBurnPath]: true });//mark as burned
+                for (const tag of actorFellowshipThemecard.system.weaknesstags) {
+                    if (tag.selected && actorFellowshipThemecard.system.improve < 3 && !alreadyImprovedThemebooks.includes(actorFellowshipThemecard.id)) {
+                        alreadyImprovedThemebooks.push(actorFellowshipThemecard.id);
+                        await actorFellowshipThemecard.update({ 'system.improve': actorFellowshipThemecard.system.improve + 1 });
                     }
                 }
-                for (let i = 0; i < 4; i++) {
-                    const weaknesstagPath = `system.weaknesstag${i + 1}.selected`;
-                    if(foundry.utils.getProperty(actorFellowshipThemecard, weaknesstagPath) == true){
-                        if(actorFellowshipThemecard.system.improve < 3){
-                            if(alreadyImprovedThemebooks.includes(actorFellowshipThemecard.id) == false){
-                                alreadyImprovedThemebooks.push(actorFellowshipThemecard.id);
-                                await actorFellowshipThemecard.update({ 'system.improve': actorFellowshipThemecard.system.improve + 1 });
-                            }
-                        }
-                    };
-                    await actorFellowshipThemecard.update({ [weaknesstagPath]: false });
-                }
+
+                const weaknesstags = actorFellowshipThemecard.system.weaknesstags.map(tag => ({ ...tag, selected: false }));
+                await actorFellowshipThemecard.update({ 'system.powertags': powertags, 'system.weaknesstags': weaknesstags });
             }
             if (this.actor.sheet) {
                 this.actor.sheet.reloadFellowshipThemecard(true); // true for emitting data to others    
@@ -704,10 +686,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             // we check if this is a power tag or weakness tag from a themebook and if a themebook id is provided
             if(tagToDeselect.source === null && tagToDeselect.themebookId){
                 if(tagToDeselect.weakness){
-                    await PowerTagAdapter.deselectPowerTag(this.actor, tagToDeselect.themebookId, `system.weaknesstag${tagToDeselect.index}.selected`, tagToDeselect.index - 1);
+                    await PowerTagAdapter.deselectPowerTag(this.actor, tagToDeselect.themebookId, `system.weaknesstags.${tagToDeselect.index}.selected`);
                 }
                 else{
-                    await PowerTagAdapter.deselectPowerTag(this.actor, tagToDeselect.themebookId, `system.powertag${tagToDeselect.index}.selected`, tagToDeselect.index - 1);
+                    await PowerTagAdapter.deselectPowerTag(this.actor, tagToDeselect.themebookId, `system.powertags.${tagToDeselect.index}.selected`);
                 }
                 this.updateTagsAndStatuses(true);
             }
@@ -731,10 +713,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 let fellowshipThemecard = this.actor.sheet.getActorFellowshipThemecard();
                 if(fellowshipThemecard){
                     if(tagToDeselect.weakness){
-                        await fellowshipThemecard.update({ [`system.weaknesstag${tagToDeselect.index}.selected`]: false });
+                        await fellowshipThemecard.update({ [`system.weaknesstags.${tagToDeselect.index}.selected`]: false });
                     }
                     else{
-                        await fellowshipThemecard.update({ [`system.powertag${tagToDeselect.index}.selected`]: false });
+                        await fellowshipThemecard.update({ [`system.powertags.${tagToDeselect.index}.selected`]: false });
                     }
                     this.updateTagsAndStatuses(true);
                     this.actor.render({force: false})

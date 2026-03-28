@@ -584,11 +584,10 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         if (!object) return;
         if (object.system.burned) return;
 
-        const ptIndex = tag.dataset.weaknesstagIndex;
-        let path = `system.weaknesstag${ptIndex}.selected`;
-        let prop = foundry.utils.getProperty(object, path);
-
-        await object.update({ [path]: !prop });
+        const ptIndex = parseInt(tag.dataset.weaknesstagIndex);
+        const weaknesstags = foundry.utils.getProperty(object, "system.weaknesstags");
+        weaknesstags[ptIndex].selected = !weaknesstags[ptIndex].selected;
+        await object.update({ "system.weaknesstags": weaknesstags });
         this.reloadFellowshipThemecard();
         this.render();
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
@@ -614,17 +613,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         }
 
         if (!object) return;
-        const ptIndex = tag.dataset.powertagIndex;
-        let path = `system.powertag${ptIndex}.burned`;
-        let prop = foundry.utils.getProperty(object, path);
-        await object.update({ [path]: !prop });
-
-        if (foundry.utils.getProperty(object, path) == true) {//if it was not burned and now is, remove selected and toBurn
-            let selectedPath = `system.powertag${ptIndex}.selected`;
-            let toBurnPath = `system.powertag${ptIndex}.toBurn`;
-            await object.update({ [selectedPath]: false });
-            await object.update({ [toBurnPath]: false });
+        const ptIndex = parseInt(tag.dataset.powertagIndex);
+        const powertags = foundry.utils.getProperty(object, "system.powertags");
+        powertags[ptIndex].burned = !powertags[ptIndex].burned;
+        if (powertags[ptIndex].burned) {
+            powertags[ptIndex].selected = false;
+            powertags[ptIndex].toBurn = false;
         }
+        await object.update({ "system.powertags": powertags });
 
         this.reloadFellowshipThemecard();
         this.render();
@@ -651,19 +647,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             return;
         }
         const ptIndex = parseInt(tag.dataset.powertagIndex);
-        let path = `system.powertag${ptIndex}.selected`;
-        let prop = foundry.utils.getProperty(object, path);
-
-        let burnedPath = `system.powertag${ptIndex}.burned`;
-        if (foundry.utils.getProperty(object, burnedPath)) {
-            return;
+        const powertags = foundry.utils.getProperty(object, "system.powertags");
+        if (powertags[ptIndex].burned) return;
+        const wasSelected = powertags[ptIndex].selected;
+        powertags[ptIndex].selected = !wasSelected;
+        if (wasSelected) {
+            powertags[ptIndex].toBurn = false;
         }
-
-        await object.update({ [path]: !prop });
-
-        if (!prop == false) {//if it was not selected and now is, remove toBurn
-            await object.update({ [`system.powertag${ptIndex}.toBurn`]: false });
-        }
+        await object.update({ "system.powertags": powertags });
 
         if (source === "fellowship-themecard") {
             this.reloadFellowshipThemecard();
@@ -770,22 +761,13 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             return;
         }
 
-        const powertagIndex = target.dataset.powertagIndex;
-        const powertag = foundry.utils.getProperty(object, `system.powertag${powertagIndex}`);
-        if (!powertag) return;
-
-        let burnedPath = `system.powertag${powertagIndex}.burned`;
-        if (foundry.utils.getProperty(object, burnedPath)) {
-            return;
-        }
-
-        powertag.toBurn = !powertag.toBurn;
-        await object.update({ [`system.powertag${powertagIndex}`]: powertag });
-
-        let path = `system.powertag${powertagIndex}.selected`;
-        let prop = foundry.utils.getProperty(object, path);
-
-        await object.update({ [path]: powertag.toBurn });
+        const powertagIndex = parseInt(target.dataset.powertagIndex);
+        const powertags = foundry.utils.getProperty(object, "system.powertags");
+        if (!powertags[powertagIndex]) return;
+        if (powertags[powertagIndex].burned) return;
+        powertags[powertagIndex].toBurn = !powertags[powertagIndex].toBurn;
+        powertags[powertagIndex].selected = powertags[powertagIndex].toBurn;
+        await object.update({ "system.powertags": powertags });
         this.reloadFellowshipThemecard();
         this.render();
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);

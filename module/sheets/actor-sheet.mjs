@@ -24,6 +24,8 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             editItem: this.#handleEditItem,
             deleteItem: this.#handleDeleteItem,
             createFloatingTagOrStatus: this.#handleCreateFloatingTagOrStatus,
+            addEmptyPowertag: this.#handleAddEmptyPowertag,
+            addEmptyWeaknessTag: this.#handleAddEmptyWeaknessTag,
             deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus,
             toggleFloatingTagOrStatusMarking: this.#handleToggleFloatingTagOrStatusMarking,
             toggleFloatingTagOrStatus: this.#handleToggleFloatingTagOrStatus,
@@ -32,7 +34,9 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             deleteStoryTag: this.#handleDeleteStoryTag,
             toggleStoryTagSelection: this.#handleToggleStoryTagSelection,
             toggleStoryTagBurn: this.#handleToggleStoryTagBurn,
-            clickToggleLock: this.#handleClickToggleLock
+            clickToggleLock: this.#handleClickToggleLock,
+            deletePowertag: this.#handleDeletePowertag,
+            deleteWeaknessTag: this.#handleDeleteWeaknessTag
         },
         form: {
             submitOnChange: true
@@ -146,7 +150,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     _onRender(context, options) {
         this.#dragDrop.forEach((d) => d.bind(this.element))
 
-        if(this.actor.type === "litm-character" || this.actor.type === "litm-npc" || this.actor.type === "litm-journey"){
+        if (this.actor.type === "litm-character" || this.actor.type === "litm-npc" || this.actor.type === "litm-journey") {
             this._renderModeToggle();
         }
 
@@ -297,7 +301,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const index = target.dataset.index;
         this._saveScrollPositions();
         let confirmed = true;
-        if(target.dataset.confirm && target.dataset.confirm == "1"){
+        if (target.dataset.confirm && target.dataset.confirm == "1") {
             confirmed = await foundry.applications.api.DialogV2.confirm({
                 title: "Confirm Deletion",
                 content: "Are you sure you want to delete this tag/status?",
@@ -309,10 +313,10 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                     label: "No",
                     callback: () => false
                 }
-            });   
+            });
         }
-        
-        if(confirmed){
+
+        if (confirmed) {
             await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(this.actor, index);
             this.sendFloatableTagOrStatusUpdate();
         }
@@ -437,7 +441,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                         let value = event.currentTarget.checked;
                         await this.actorFellowshipThemecard.update({ [key]: value });
                         return;
-                    }else{
+                    } else {
                         let value = event.currentTarget.value;
                         await this.actorFellowshipThemecard.update({ [key]: value });
                     }
@@ -563,7 +567,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const index = target.dataset.index;
         const key = target.dataset.key;
 
-        console.log("Deleting story tag", { itemId, index, key });
+        this._saveScrollPositions();
         StoryTagAdapter.deleteStoryTag(this.actor, itemId, key, index);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
         this.render(true);
@@ -720,10 +724,10 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     handleInputShortCutsForGM(event) {
         const input = event.currentTarget;
 
-        if(!( event.ctrlKey && event.shiftKey)){
-        return
+        if (!(event.ctrlKey && event.shiftKey)) {
+            return
         }
-        else if(event.key.toLowerCase() !== "s" && event.key.toLowerCase() !== "y" && event.key.toLowerCase() !== "a" && event.key.toLowerCase() !== "x"){
+        else if (event.key.toLowerCase() !== "s" && event.key.toLowerCase() !== "y" && event.key.toLowerCase() !== "a" && event.key.toLowerCase() !== "x") {
             return;
         }
 
@@ -738,20 +742,20 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
         const selectedText = value.slice(start, end);
 
-        if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "s")){
-        input.value = value.slice(0, start) + `[/s ${selectedText}]` + value.slice(end);
+        if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "s")) {
+            input.value = value.slice(0, start) + `[/s ${selectedText}]` + value.slice(end);
         }
 
-        if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "y")){
-        input.value = value.slice(0, start) + `[/b ${selectedText}]` + value.slice(end);
-        }
-        
-        if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "a")){
-        input.value = value.slice(0, start) + `[${selectedText}]` + value.slice(end);
+        if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "y")) {
+            input.value = value.slice(0, start) + `[/b ${selectedText}]` + value.slice(end);
         }
 
-        if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "x")){
-        input.value = value.slice(0, start) + `[/m ${selectedText}]` + value.slice(end);
+        if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "a")) {
+            input.value = value.slice(0, start) + `[${selectedText}]` + value.slice(end);
+        }
+
+        if ((event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "x")) {
+            input.value = value.slice(0, start) + `[/m ${selectedText}]` + value.slice(end);
         }
 
         // Markierung innerhalb der neuen Klammern wiederherstellen
@@ -767,7 +771,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 name: "Add Adventure Might",
                 icon: '<i class="fa-solid fa-circle-plus"></i>',
                 condition: li => {
-                    if(li.dataset.isStatus === "true"){
+                    if (li.dataset.isStatus === "true") {
                         return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
                     }
                     const might = Number(li.dataset.might ?? 0);
@@ -783,7 +787,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 name: "Add Greatness Might",
                 icon: '<i class="fa-solid fa-circle-plus"></i>',
                 condition: li => {
-                    if(li.dataset.isStatus === "true"){
+                    if (li.dataset.isStatus === "true") {
                         return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
                     }
                     const might = Number(li.dataset.might ?? 0);
@@ -799,7 +803,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 name: "Add Origin Might",
                 icon: '<i class="fa-solid fa-circle-plus"></i>',
                 condition: li => {
-                    if(li.dataset.isStatus === "true"){
+                    if (li.dataset.isStatus === "true") {
                         return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
                     }
                     const might = Number(li.dataset.might ?? 0);
@@ -815,7 +819,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 name: "Remove Might",
                 icon: '<i class="fa-solid fa-circle-minus"></i>',
                 condition: li => {
-                    if(li.dataset.isStatus === "true"){
+                    if (li.dataset.isStatus === "true") {
                         return false; // might only makes sense for tags, not for statuses, but this can be adjusted if needed
                     }
                     const might = Number(li.dataset.might ?? 0);
@@ -832,43 +836,112 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         });
     }
 
-    
-  /**
-   * Store current scroll positions before updates that might trigger re-renders
-   * @private
-   */
-  _saveScrollPositions() {
-    this.#scrollPositions = {};
-    const scrollableElements = this.element?.querySelectorAll('.scrollable');
-    scrollableElements?.forEach((el, index) => {
-      this.#scrollPositions[index] = el.scrollTop;
-    });
-  }
 
-  /**
-   * Restore scroll positions after render to prevent sheet jumping
-   * @private
-   */
-  _restoreScrollPositions() {
-    if (this.#scrollPositions) {
-      // Use requestAnimationFrame to ensure DOM is fully rendered
-      requestAnimationFrame(() => {
+    /**
+     * Store current scroll positions before updates that might trigger re-renders
+     * @private
+     */
+    _saveScrollPositions() {
+        this.#scrollPositions = {};
         const scrollableElements = this.element?.querySelectorAll('.scrollable');
         scrollableElements?.forEach((el, index) => {
-          if (this.#scrollPositions[index] !== undefined) {
-            // Force instant scroll by temporarily disabling smooth behavior
-            const originalBehavior = el.style.scrollBehavior;
-            el.style.scrollBehavior = 'auto';
-            el.scrollTop = this.#scrollPositions[index];
-            // Restore original scroll behavior
-            if (originalBehavior) {
-              el.style.scrollBehavior = originalBehavior;
-            } else {
-              el.style.removeProperty('scroll-behavior');
-            }
-          }
+            this.#scrollPositions[index] = el.scrollTop;
         });
-      });
     }
-  }
+
+    /**
+     * Restore scroll positions after render to prevent sheet jumping
+     * @private
+     */
+    _restoreScrollPositions() {
+        if (this.#scrollPositions) {
+            // Use requestAnimationFrame to ensure DOM is fully rendered
+            requestAnimationFrame(() => {
+                const scrollableElements = this.element?.querySelectorAll('.scrollable');
+                scrollableElements?.forEach((el, index) => {
+                    if (this.#scrollPositions[index] !== undefined) {
+                        // Force instant scroll by temporarily disabling smooth behavior
+                        const originalBehavior = el.style.scrollBehavior;
+                        el.style.scrollBehavior = 'auto';
+                        el.scrollTop = this.#scrollPositions[index];
+                        // Restore original scroll behavior
+                        if (originalBehavior) {
+                            el.style.scrollBehavior = originalBehavior;
+                        } else {
+                            el.style.removeProperty('scroll-behavior');
+                        }
+                    }
+                });
+            });
+        }
+    }
+
+    static async #handleAddEmptyPowertag(event, target) {
+        event.preventDefault();
+        const itemId = target.dataset.itemId;
+        const item = this.actor.items.get(itemId);
+        if (!item) {
+            console.error("Item not found for adding powertag", { itemId });
+            return;
+        }
+        this._saveScrollPositions();
+        let powertags = item.system.powertags || [];
+        powertags.push({ name: "New Powertag", value: "" });
+        await item.update({ "system.powertags": powertags });
+    }
+
+    static async #handleAddEmptyWeaknessTag(event, target) {
+        event.preventDefault();
+        const itemId = target.dataset.itemId;
+        const item = this.actor.items.get(itemId);
+        if (!item) {
+            console.error("Item not found for adding weakness", { itemId });
+            return;
+        }
+        this._saveScrollPositions();
+        let weaknesses = item.system.weaknesstags || [];
+        weaknesses.push({ name: "New Weakness", value: "" });
+        await item.update({ "system.weaknesstags": weaknesses });
+        console.log("Added weakness", { itemId, weaknesses });
+    }
+
+    static async #handleDeletePowertag(event, target) {
+        event.preventDefault();
+        const itemId = target.dataset.itemId;
+        const index = target.dataset.index;
+        const item = this.actor.items.get(itemId);
+        
+        if (!item) {
+            console.error("Item not found for deleting powertag", { itemId });
+            return;
+        }
+        this._saveScrollPositions();
+        let powertags = item.system.powertags || [];
+        if (index < 0 || index >= powertags.length) {
+            console.error("Invalid powertag index for deletion", { itemId, index });
+            return;
+        }
+        powertags.splice(index, 1);
+        await item.update({ "system.powertags": powertags });
+    }
+
+    static async #handleDeleteWeaknessTag(event, target) {
+        event.preventDefault();
+        const itemId = target.dataset.itemId;
+        const index = target.dataset.index;
+        const item = this.actor.items.get(itemId);
+
+        if (!item) {
+            console.error("Item not found for deleting weakness", { itemId });
+            return;
+        }
+        this._saveScrollPositions();
+        let weaknesses = item.system.weaknesstags || [];
+        if (index < 0 || index >= weaknesses.length) {
+            console.error("Invalid weakness index for deletion", { itemId, index });
+            return;
+        }
+        weaknesses.splice(index, 1);
+        await item.update({ "system.weaknesstags": weaknesses });
+    }
 }

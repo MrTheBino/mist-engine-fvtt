@@ -2083,6 +2083,10 @@ article.cc-enriched section.journal-entry-content {
   flex-grow: 0.25;
   padding-bottom: 8px;
 }
+.mist-engine .themebook-container .themebook-icon-line {
+  margin: 2px 0;
+  color: black;
+}
 .mist-engine .themebook-container .quest-container h3 {
   font-family: Labrada, serif;
   font-weight: 800;
