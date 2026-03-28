@@ -417,6 +417,20 @@ body {
   height: 100%;
 }
 
+/* Status-Mark */
+.editor-content mark.status,
+prosemirror-editor mark.status,
+.prosemirror mark.status {
+  background-color: rgba(238, 213, 146, 0.75);
+}
+
+/* Tag-Mark */
+.editor-content mark.tag,
+prosemirror-editor mark.tag,
+.prosemirror mark.tag {
+  background-color: rgba(238, 213, 146, 0.75);
+}
+
 .editor-content h1, .tab-notes h1 {
   color: #724a32;
   font-family: Labrada, serif;
@@ -448,6 +462,10 @@ body {
 }
 .editor-content .line-with-image p, .tab-notes .line-with-image p {
   display: inline;
+}
+.editor-content .inline-img, .tab-notes .inline-img {
+  display: inline;
+  margin-right: 3px;
 }
 .editor-content table.example-actions-table, .tab-notes table.example-actions-table {
   background-color: transparent;

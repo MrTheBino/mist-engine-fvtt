@@ -30,8 +30,6 @@ import {Fonts} from "./lib/fonts.mjs";
 /*  Init Hook                                   */
 /* -------------------------------------------- */
 
-
-
 Hooks.once("init", function () {
   // Add utility classes to the global game object so that they're more easily
   // accessible in global contexts.
@@ -149,6 +147,43 @@ Hooks.once("init", function () {
 
   // Preload Handlebars templates.
   return preloadHandlebarsTemplates();
+});
+
+Hooks.on("getProseMirrorMenuItems", (menu, config) => {
+  const schema = menu.schema;
+  const markType = schema?.marks?.mark;
+  if (!markType) return;
+
+  const toggleMark = (cssClass) => (state, dispatch) => {
+    const { from, to } = state.selection;
+    const mark = markType.create({ _preserve: { class: cssClass } });
+    const hasMark = state.doc.rangeHasMark(from, to, markType);
+    if (dispatch) {
+      const tr = hasMark
+        ? state.tr.removeMark(from, to, markType)
+        : state.tr.addMark(from, to, mark);
+      dispatch(tr);
+    }
+    return true;
+  };
+
+  config.push({
+    action: "toggle-status",
+    title: "Als Status markieren",
+    icon: '<i class="fa-solid fa-tag fa-fw"></i>',
+    scope: "text",
+    cmd: toggleMark("tag"),
+    priority: 8,
+  });
+
+  config.push({
+    action: "toggle-tag",
+    title: "Als Tag markieren",
+    icon: '<i class="fa-solid fa-hashtag fa-fw"></i>',
+    scope: "text",
+    cmd: toggleMark("status"),
+    priority: 7,
+  });
 });
 
 /* -------------------------------------------- */

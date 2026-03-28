@@ -4,6 +4,20 @@
   }
 }
 
+/* Status-Mark */
+.editor-content mark.status,
+prosemirror-editor mark.status,
+.prosemirror mark.status {
+  background-color: $c-status;
+}
+
+/* Tag-Mark */
+.editor-content mark.tag,
+prosemirror-editor mark.tag,
+.prosemirror mark.tag {
+  background-color: $c-status;
+}
+
 .editor-content,.tab-notes {
   h1 {
     color: $c-styled-text;
@@ -47,6 +61,11 @@
     p {
       display: inline;
     }
+  }
+
+  .inline-img{
+    display: inline;
+    margin-right: 3px;
   }
 
   table.example-actions-table {
