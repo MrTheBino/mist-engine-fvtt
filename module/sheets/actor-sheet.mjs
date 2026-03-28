@@ -125,6 +125,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         // Adding a pointer to CONFIG.MISTENGINE
         context.config = CONFIG.MISTENGINE;
 
+        context.tidyTags = game.settings.get("mist-engine-fvtt", "tidyTagsOnCharacterSheet");
         context.biographyHTML = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
             this.document.system.biography,
             {

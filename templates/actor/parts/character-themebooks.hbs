@@ -1,4 +1,5 @@
 <div class="themebooks-container {{#unless system.editMode}}themebooks-container-stylized{{/unless}} grid grid-4col grid-themebook-container {{#if system.editMode}}edit-mode{{/if}}">
+
     {{!-- If there are no themebooks, show a message --}}
     {{#if themebooksEmpty}}
     <div class="themebook-container">
@@ -11,6 +12,6 @@
     {{!-- Iterate over each themebook and render the partial --}}
     {{#each themebooks as |book index|}}
     {{> 'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs' themebook=book id=book._id
-    editMode=../system.editMode}}
+    editMode=../system.editMode tidyTags=../tidyTags}}
     {{/each}}
 </div>
