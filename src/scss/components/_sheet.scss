@@ -57,7 +57,7 @@
   }
 }
 
-&.sheet.item {
+&.sheet.item, &.sheet.themebook {
   .window-content {
     background-image: url("../assets/paper_background_1.webp");
     background-repeat: no-repeat;
@@ -534,6 +534,26 @@
 .powertags-container {
   margin: 2px;
   flex-grow: 1;
+
+   .themebook-section-header {
+    background-color:rgb(120 70 37);
+    font-family: $font-primary;
+    text-align: center;
+    padding: 2px 4px;
+    text-transform: uppercase;
+    clip-path: polygon(0 0.2em,
+        0.3em 0.2em,
+        0.3em 0,
+        calc(100% - 0.3em) 0,
+        calc(100% - 0.3em) 0.2em,
+        100% 0.3em,
+        100% calc(100% - 0.2em),
+        calc(100% - 0.2em) calc(100% - 0.2em),
+        calc(100% - 0.2em) 100%,
+        0.2em 100%,
+        0.3em calc(100% - 0.2em),
+        0 calc(100% - 0.2em));
+  }
 }
 
 .fts-input-name {

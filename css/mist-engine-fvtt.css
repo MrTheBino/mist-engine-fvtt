@@ -963,17 +963,17 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine.sheet.actor.npc .npc-short-description textarea {
   width: 100%;
 }
-.mist-engine.sheet.item .window-content {
+.mist-engine.sheet.item .window-content, .mist-engine.sheet.themebook .window-content {
   background-image: url("../assets/paper_background_1.webp");
   background-repeat: no-repeat;
   row-gap: 0.5em;
   color: #724a32;
 }
-.mist-engine.sheet.item .window-content h1, .mist-engine.sheet.item .window-content h2, .mist-engine.sheet.item .window-content h3, .mist-engine.sheet.item .window-content h4 {
+.mist-engine.sheet.item .window-content h1, .mist-engine.sheet.item .window-content h2, .mist-engine.sheet.item .window-content h3, .mist-engine.sheet.item .window-content h4, .mist-engine.sheet.themebook .window-content h1, .mist-engine.sheet.themebook .window-content h2, .mist-engine.sheet.themebook .window-content h3, .mist-engine.sheet.themebook .window-content h4 {
   color: #724a32;
   font-family: Labrada, serif;
 }
-.mist-engine.sheet.item .window-content h1.with-line::after, .mist-engine.sheet.item .window-content h2.with-line::after, .mist-engine.sheet.item .window-content h3.with-line::after, .mist-engine.sheet.item .window-content h4.with-line::after {
+.mist-engine.sheet.item .window-content h1.with-line::after, .mist-engine.sheet.item .window-content h2.with-line::after, .mist-engine.sheet.item .window-content h3.with-line::after, .mist-engine.sheet.item .window-content h4.with-line::after, .mist-engine.sheet.themebook .window-content h1.with-line::after, .mist-engine.sheet.themebook .window-content h2.with-line::after, .mist-engine.sheet.themebook .window-content h3.with-line::after, .mist-engine.sheet.themebook .window-content h4.with-line::after {
   content: "";
   display: inline-block;
   width: 105px;
@@ -1341,6 +1341,14 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .powertags-container {
   margin: 2px;
   flex-grow: 1;
+}
+.mist-engine .powertags-container .themebook-section-header {
+  background-color: rgb(120, 70, 37);
+  font-family: Labrada, serif;
+  text-align: center;
+  padding: 2px 4px;
+  text-transform: uppercase;
+  clip-path: polygon(0 0.2em, 0.3em 0.2em, 0.3em 0, calc(100% - 0.3em) 0, calc(100% - 0.3em) 0.2em, 100% 0.3em, 100% calc(100% - 0.2em), calc(100% - 0.2em) calc(100% - 0.2em), calc(100% - 0.2em) 100%, 0.2em 100%, 0.3em calc(100% - 0.2em), 0 calc(100% - 0.2em));
 }
 .mist-engine .fts-input-name {
   flex-grow: 1;

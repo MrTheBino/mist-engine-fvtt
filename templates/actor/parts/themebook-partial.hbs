@@ -29,8 +29,8 @@
         <div class="powertags-container">
             
             {{#if editMode}}
-            <div class="themebook-icon-line">
-                <i class="fas fa-plus add-line-icon clickable" data-action="addEmptyPowertag" data-item-id="{{themebook._id}}" title="{{localize "MIST_ENGINE.LABELS.AddPowertag"}}"></i> {{localize "MIST_ENGINE.LABELS.AddPowertag"}} 
+            <div class="themebook-section-header clickable" data-action="addEmptyPowertag" data-item-id="{{themebook._id}}">
+                <i class="fas fa-plus add-line-icon "  title="{{localize "MIST_ENGINE.LABELS.AddPowertag"}}"></i> {{localize "MIST_ENGINE.LABELS.AddPowertag"}} 
             </div>
             {{/if}}
             {{#each themebook.system.powertags as |powertag index|}}
@@ -39,8 +39,8 @@
             {{/each}}
 
             {{#if editMode}}
-            <div class="themebook-icon-line">
-                <i class="fas fa-plus add-line-icon clickable" data-action="addEmptyWeaknessTag" data-item-id="{{themebook._id}}" title="{{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}}"></i> {{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}} 
+            <div class="themebook-section-header clickable" data-action="addEmptyWeaknessTag" data-item-id="{{themebook._id}}">
+                <i class="fas fa-plus add-line-icon "  title="{{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}}"></i> {{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}} 
             </div>
             {{/if}}
             {{#each themebook.system.weaknesstags as |weaknesstag index|}}
