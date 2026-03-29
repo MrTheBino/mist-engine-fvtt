@@ -11,6 +11,7 @@ import { MistEngineItemSheet } from "./sheets/item-sheet.mjs";
 import { MistEngineShortChallengeItemSheet } from "./sheets/item-shortchallenge-sheet.mjs";
 import { MistEngineItemThemekitSheet } from "./sheets/item-themekit-sheet.mjs";
 import { MistEngineLegendInTheMistJourneySheet } from "./sheets/litm-actor-journey-sheet.mjs";
+import { MistEngineThemebookItemSheet } from "./sheets/item-themebook-sheet.mjs";
 import { MistSceneApp } from "./apps/scene-app.mjs";
 import { HowToPlayApp } from "./apps/how-to-play-app.mjs";
 
@@ -136,6 +137,12 @@ Hooks.once("init", function () {
     types: ["themekit"],
     label: "MIST_ENGINE.SheetLabels.ThemekitItem",
   });
+
+  foundry.documents.collections.Items.registerSheet("mist-engine-fvtt",MistEngineThemebookItemSheet,{
+    makeDefault: true,
+    types: ["themebook"],
+    label: "MIST_ENGINE.SheetLabels.Themebook",
+  })
   
 
   Fonts.register();
@@ -193,7 +200,7 @@ Hooks.on("getProseMirrorMenuItems", (menu, config) => {
 /* -------------------------------------------- */
 
 Handlebars.registerHelper("powerTagQuestionPlaceholder", function (index, str) {
-  let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index - 1];
+  let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index];
   let qText = str;
   if (!qText || qText.length <= 0) {
     qText = "PowerTag Question";
@@ -202,7 +209,7 @@ Handlebars.registerHelper("powerTagQuestionPlaceholder", function (index, str) {
 });
 
 Handlebars.registerHelper("weaknessTagQuestionPlaceholder", function (index, str) {
-  let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index - 1];
+  let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index];
   let qText = str;
   if (!qText || qText.length <= 0) {
     qText = "Weakness Question";
@@ -215,7 +222,6 @@ Handlebars.registerHelper('questionIndexToLetter', function (n) {
 });
 
 Handlebars.registerHelper('isRenderBlockAllowed',function(showOnlyGM){
-  console.log("Checking if render block is allowed, showOnlyGM: ", showOnlyGM, " current user is GM: ", game.user.isGM);
   if(showOnlyGM){
     return game.user.isGM;
   }

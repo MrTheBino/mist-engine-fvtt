@@ -53,30 +53,21 @@ export class ThemekitCharacterApp extends HandlebarsApplicationMixin(Application
 
     static async #handleAddPowertag(event,target){
         const tagName = target.dataset.tag;
-        // we find the first empty powertag in the actors themebook and set the name to the tagName, then we break the loop
-        for(let i = 1; i <= 10; i++){
-            const powertag = this.actorThemebook.system[`powertag${i}`];
-            if(powertag && (!powertag.name || powertag.name.trim() === "")){
-                await this.actorThemebook.update({ [`system.powertag${i}.name`]: tagName });
-                this.actor.render();
-                ui.notifications.notify( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedPowertag", { tagName }));
-                break;
-            }
-        }
+
+        let powertags = this.actorThemebook.system.powertags || [];
+        powertags.push({ name: tagName, value: "" });
+        await this.actorThemebook.update({ "system.powertags": powertags });
+        this.actor.render();
+        ui.notifications.notify( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedPowertag", { tagName }));
     }
 
     static async #handleAddWeaknessTag(event,target){
         const tagName = target.dataset.tag;
-        // we find the first empty weakness tag in the actors themebook and set the name to the tagName, then we break the loop
-        for(let i = 1; i <= 10; i++){
-            const weaknessTag = this.actorThemebook.system[`weaknesstag${i}`];
-            if(weaknessTag && (!weaknessTag.name || weaknessTag.name.trim() === "")){
-                await this.actorThemebook.update({ [`system.weaknesstag${i}.name`]: tagName });
-                this.actor.render();
-                ui.notifications.notify( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedWeaknessTag", { tagName }));
-                break;
-            }
-        }
+
+        let weaknesses = this.actorThemebook.system.weaknesstags || [];
+        weaknesses.push({ name: tagName, value: "" });
+        await this.actorThemebook.update({ "system.weaknesstags": weaknesses });
+        ui.notifications.notify( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedWeaknessTag", { tagName }));
     }
 
     static async #handleSetQuest(event,target){

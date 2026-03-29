@@ -28,10 +28,16 @@
         <div class="item-powertag-line flexrow">
             <h4 class="with-line">Questions</h4>
         </div>
+        <div class="themebook-icon-line">
+                <i class="fas fa-plus add-line-icon clickable" data-action="addEmptyPowertag" data-item-id="{{themebook._id}}" title="{{localize "MIST_ENGINE.LABELS.AddPowertag"}}"></i> {{localize "MIST_ENGINE.LABELS.AddPowertag"}} 
+            </div>
         {{#each system.powertags as |powertag index|}}
         {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-powertag-line.hbs" index=index powertag=powertag}}
         {{/each}}
 
+<div class="themebook-icon-line">
+                    <i class="fas fa-plus add-line-icon clickable" data-action="addEmptyWeaknessTag" data-item-id="{{themebook._id}}" title="{{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}}"></i> {{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}} 
+            </div>
         {{#each system.weaknesstags as |weakness index|}}
         {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-weakness-line.hbs" index=index weakness=weakness}}
         {{/each}}
