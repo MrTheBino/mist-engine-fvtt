@@ -18,8 +18,20 @@ prosemirror-editor mark.tag,
   background-color: $c-status;
 }
 
-.editor-content,.tab-notes {
-  h1, h2, h3 {
+.editor-content,
+.tab-notes {
+
+  .themekit-box{
+    @include themekit-box;
+  }
+
+  .letter-box{
+    @include letter-box;
+  }
+
+  h1,
+  h2,
+  h3 {
     color: $c-styled-text;
     font-family: $font-primary;
   }
@@ -52,15 +64,16 @@ prosemirror-editor mark.tag,
     }
   }
 
-  .inline-img{
+  .inline-img {
     display: inline;
     margin-right: 3px;
   }
 
   table.example-actions-table {
-    
+
     background-color: transparent;
     border-collapse: collapse;
+
     td {
       border: 1px solid black;
       text-align: center;

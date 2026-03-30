@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+/* journal styling */
 body {
   --litm-color-bg: hsl(40, 85%, 87%);
   --litm-color: hsl(40, 27%, 24%);
@@ -431,15 +432,79 @@ prosemirror-editor mark.tag,
   background-color: rgba(238, 213, 146, 0.75);
 }
 
-.editor-content h1, .editor-content h2, .editor-content h3, .tab-notes h1, .tab-notes h2, .tab-notes h3 {
+.editor-content .themekit-box,
+.tab-notes .themekit-box {
+  border: 2px solid black;
+  background-color: #E7E3E0;
+  color: #6E5933;
+  min-width: 250px;
+  margin: 10px;
+  text-align: center;
+  min-height: 150px;
+}
+.editor-content .themekit-box .heading,
+.tab-notes .themekit-box .heading {
+  font-size: 1em;
+  font-family: Labrada, serif;
+  color: #6E5933;
+  text-decoration: none;
+  border-bottom: 0;
+  font-weight: bold;
+}
+.editor-content .themekit-box mark,
+.tab-notes .themekit-box mark {
+  display: block;
+  margin-bottom: 2px;
+}
+.editor-content .themekit-box.origin,
+.tab-notes .themekit-box.origin {
+  border-color: #4D8061;
+}
+.editor-content .themekit-box.origin .heading,
+.tab-notes .themekit-box.origin .heading {
+  color: #4D8061;
+}
+.editor-content .themekit-box.adventure,
+.tab-notes .themekit-box.adventure {
+  border-color: #7D3C3C;
+}
+.editor-content .themekit-box.adventure .heading,
+.tab-notes .themekit-box.adventure .heading {
+  color: #7D3C3C;
+}
+.editor-content .themekit-box.greatness,
+.tab-notes .themekit-box.greatness {
+  border-color: #5B5B91;
+}
+.editor-content .themekit-box.greatness .heading,
+.tab-notes .themekit-box.greatness .heading {
+  color: #5B5B91;
+}
+.editor-content .letter-box,
+.tab-notes .letter-box {
+  background-color: #AA9980;
+  color: white;
+  min-width: 20px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 3px;
+}
+.editor-content h1,
+.editor-content h2,
+.editor-content h3,
+.tab-notes h1,
+.tab-notes h2,
+.tab-notes h3 {
   color: #724a32;
   font-family: Labrada, serif;
 }
-.editor-content h3, .tab-notes h3 {
+.editor-content h3,
+.tab-notes h3 {
   display: flex;
   align-items: center;
 }
-.editor-content h3.with-line::after, .tab-notes h3.with-line::after {
+.editor-content h3.with-line::after,
+.tab-notes h3.with-line::after {
   content: "";
   display: inline-block;
   width: 105px;
@@ -448,45 +513,55 @@ prosemirror-editor mark.tag,
   background-repeat: no-repeat;
   margin-left: 10px;
 }
-.editor-content .line-with-image img, .tab-notes .line-with-image img {
+.editor-content .line-with-image img,
+.tab-notes .line-with-image img {
   display: inline;
   margin-right: 3px;
 }
-.editor-content .line-with-image p, .tab-notes .line-with-image p {
+.editor-content .line-with-image p,
+.tab-notes .line-with-image p {
   display: inline;
 }
-.editor-content .inline-img, .tab-notes .inline-img {
+.editor-content .inline-img,
+.tab-notes .inline-img {
   display: inline;
   margin-right: 3px;
 }
-.editor-content table.example-actions-table, .tab-notes table.example-actions-table {
+.editor-content table.example-actions-table,
+.tab-notes table.example-actions-table {
   background-color: transparent;
   border-collapse: collapse;
 }
-.editor-content table.example-actions-table td, .tab-notes table.example-actions-table td {
+.editor-content table.example-actions-table td,
+.tab-notes table.example-actions-table td {
   border: 1px solid black;
   text-align: center;
   border-top: 0;
   align-content: start;
   width: 50%;
 }
-.editor-content table.example-actions-table td .black-strong, .tab-notes table.example-actions-table td .black-strong {
+.editor-content table.example-actions-table td .black-strong,
+.tab-notes table.example-actions-table td .black-strong {
   color: black;
   font-weight: bold;
 }
-.editor-content table.example-actions-table tr:first-child th, .tab-notes table.example-actions-table tr:first-child th {
+.editor-content table.example-actions-table tr:first-child th,
+.tab-notes table.example-actions-table tr:first-child th {
   border-top: 0;
 }
-.editor-content table.example-actions-table tr:last-child td, .tab-notes table.example-actions-table tr:last-child td {
+.editor-content table.example-actions-table tr:last-child td,
+.tab-notes table.example-actions-table tr:last-child td {
   border-bottom: 0;
 }
 .editor-content table.example-actions-table tr td:first-child,
-.editor-content table.example-actions-table tr th:first-child, .tab-notes table.example-actions-table tr td:first-child,
+.editor-content table.example-actions-table tr th:first-child,
+.tab-notes table.example-actions-table tr td:first-child,
 .tab-notes table.example-actions-table tr th:first-child {
   border-left: 0;
 }
 .editor-content table.example-actions-table tr td:last-child,
-.editor-content table.example-actions-table tr th:last-child, .tab-notes table.example-actions-table tr td:last-child,
+.editor-content table.example-actions-table tr th:last-child,
+.tab-notes table.example-actions-table tr td:last-child,
 .tab-notes table.example-actions-table tr th:last-child {
   border-right: 0;
 }
@@ -498,6 +573,53 @@ prosemirror-editor mark.tag,
   color: #191813;
   font-family: Labrada, serif;
   font-size: 1.1em;
+}
+.journal-entry-content .themekit-box {
+  border: 2px solid black;
+  background-color: #E7E3E0;
+  color: #6E5933;
+  min-width: 250px;
+  margin: 10px;
+  text-align: center;
+  min-height: 150px;
+}
+.journal-entry-content .themekit-box .heading {
+  font-size: 1em;
+  font-family: Labrada, serif;
+  color: #6E5933;
+  text-decoration: none;
+  border-bottom: 0;
+  font-weight: bold;
+}
+.journal-entry-content .themekit-box mark {
+  display: block;
+  margin-bottom: 2px;
+}
+.journal-entry-content .themekit-box.origin {
+  border-color: #4D8061;
+}
+.journal-entry-content .themekit-box.origin .heading {
+  color: #4D8061;
+}
+.journal-entry-content .themekit-box.adventure {
+  border-color: #7D3C3C;
+}
+.journal-entry-content .themekit-box.adventure .heading {
+  color: #7D3C3C;
+}
+.journal-entry-content .themekit-box.greatness {
+  border-color: #5B5B91;
+}
+.journal-entry-content .themekit-box.greatness .heading {
+  color: #5B5B91;
+}
+.journal-entry-content .letter-box {
+  background-color: #AA9980;
+  color: white;
+  min-width: 20px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 3px;
 }
 .journal-entry-content h1,
 .journal-entry-content h2,

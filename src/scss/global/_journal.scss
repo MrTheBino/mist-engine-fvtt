@@ -6,6 +6,14 @@
     font-family: $font-primary;
     font-size: 1.1em;
 
+    .themekit-box{
+    @include themekit-box;
+  }
+
+  .letter-box{
+    @include letter-box;
+  }
+  
     h1,
     h2,
     h3,
