@@ -2,9 +2,10 @@ import { MistEngineActorSheet } from './actor-sheet.mjs';
 import { DiceRollApp } from '../apps/dice-roll-app.mjs';
 import { PowerTagAdapter } from '../lib/power-tag-adapter.mjs';
 import { MistSceneApp } from '../apps/scene-app.mjs';
-import { importVignetteForActorJSON} from '../lib/json-importer.mjs';
+import { importVignetteForActorJSON } from '../lib/json-importer.mjs';
+
 export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet {
-#dragDrop // Private field to hold dragDrop handlers
+    #dragDrop // Private field to hold dragDrop handlers
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
         classes: ['mist-engine', 'sheet', 'actor', 'litm-journey'],
@@ -57,17 +58,17 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
         }
     }
 
-      /**
-   * Define the structure of tabs used by this sheet.
-   * @type {Record<string, ApplicationTabsConfiguration>}
-   */
+    /**
+ * Define the structure of tabs used by this sheet.
+ * @type {Record<string, ApplicationTabsConfiguration>}
+ */
     static TABS = {
         "litm-journey-sheet": { // this is the group name
             tabs:
                 [
                     { id: 'journey-consequences', group: 'litm-journey-sheet', label: 'MIST_ENGINE.LABELS.JourneyConsequences' },
                     { id: 'notes', group: 'litm-journey-sheet', label: 'MIST_ENGINE.LABELS.Notes' }
-                    
+
                 ],
             initial: 'journey-consequences'
         }
@@ -79,7 +80,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
         let items = this._prepareItems();
         context.editMode = actorData.system.editMode;
 
-         context.notesHTML = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+        context.notesHTML = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
             this.document.system.notes,
             {
                 // Whether to show secret blocks in the finished html
@@ -108,15 +109,15 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
             }
         }
 
-        return { challenges: challenges};
+        return { challenges: challenges };
     }
 
     /** @inheritDoc */
     _onRender(context, options) {
         super._onRender(context, options);
         this._restoreScrollPositions();
-        
-        const editableChallengeItems =  this.element.querySelectorAll('.editable-challenge-item');
+
+        const editableChallengeItems = this.element.querySelectorAll('.editable-challenge-item');
         for (const input of editableChallengeItems) {
             input.addEventListener("change", event => this.handleChallengeItemUpdate(event));
             input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
@@ -146,7 +147,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
         const item = this.actor.items.get(itemId);
         const field = event.currentTarget.dataset.key;
         const value = event.currentTarget.type === "checkbox" ? event.currentTarget.checked : event.currentTarget.value;
-      
+
 
         await item.update({ [field]: value });
     }

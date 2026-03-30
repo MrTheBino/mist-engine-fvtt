@@ -1,26 +1,31 @@
-<section class="tab {{tabs.form.id}} {{tabs.form.cssClass}} scrollable" id="form"
-    data-tab="{{tabs.form.id}}" data-group="{{tabs.form.group}}">
+<section class="tab {{tabs.form.id}} {{tabs.form.cssClass}} scrollable" id="form" data-tab="{{tabs.form.id}}"
+    data-group="{{tabs.form.group}}">
     <div class="box-shadowed-container">
         <div class="flexrow">
             <label><strong>Type</strong></label>
-            <select name="system.type" >
+            <select name="system.type">
                 <option value="">-</option>
-                <option value="litm-origin" {{#if (eq system.type "litm-origin")}}selected{{/if}}>LitM - Origin</option>
-                <option value="litm-adventure" {{#if (eq system.type "litm-adventure")}}selected{{/if}}>LitM - Adventure</option>
-                <option value="litm-variable" {{#if (eq system.type "litm-variable")}}selected{{/if}}>LitM - Variable</option>
-                <option value="litm-greatness" {{#if (eq system.type "litm-greatness")}}selected{{/if}}>LitM - Greatness</option>
+                <option value="litm-origin" {{#if (eq system.type "litm-origin" )}}selected{{/if}}>LitM - Origin
+                </option>
+                <option value="litm-adventure" {{#if (eq system.type "litm-adventure" )}}selected{{/if}}>LitM -
+                    Adventure</option>
+                <option value="litm-variable" {{#if (eq system.type "litm-variable" )}}selected{{/if}}>LitM - Variable
+                </option>
+                <option value="litm-greatness" {{#if (eq system.type "litm-greatness" )}}selected{{/if}}>LitM -
+                    Greatness</option>
             </select>
         </div>
     </div>
     <div class="box-shadowed-container">
         <div class="flexrow">
             <label><strong>Color</strong></label>
-            <select name="system.color" >
+            <select name="system.color">
                 <option value="">-</option>
-                <option value="litm-origin" {{#if (eq system.color "litm-origin")}}selected{{/if}}>Green</option>
-                <option value="litm-adventure" {{#if (eq system.color "litm-adventure")}}selected{{/if}}>Brown</option>
-                <option value="litm-variable" {{#if (eq system.color "litm-variable")}}selected{{/if}}>Black</option>
-                <option value="litm-greatness" {{#if (eq system.color "litm-greatness")}}selected{{/if}}>Purple</option>
+                <option value="litm-origin" {{#if (eq system.color "litm-origin" )}}selected{{/if}}>Green</option>
+                <option value="litm-adventure" {{#if (eq system.color "litm-adventure" )}}selected{{/if}}>Brown</option>
+                <option value="litm-variable" {{#if (eq system.color "litm-variable" )}}selected{{/if}}>Black</option>
+                <option value="litm-greatness" {{#if (eq system.color "litm-greatness" )}}selected{{/if}}>Purple
+                </option>
             </select>
         </div>
     </div>
@@ -28,16 +33,19 @@
         <div class="item-powertag-line flexrow">
             <h4 class="with-line">Questions</h4>
         </div>
-        <div class="themebook-icon-line">
-                <i class="fas fa-plus add-line-icon clickable" data-action="addEmptyPowertag" data-item-id="{{themebook._id}}" title="{{localize "MIST_ENGINE.LABELS.AddPowertag"}}"></i> {{localize "MIST_ENGINE.LABELS.AddPowertag"}} 
-            </div>
+        <div class="themebook-section-header clickable" data-action="addEmptyPowertag" data-item-id="{{themebook._id}}">
+            <i class="fas fa-plus add-line-icon " title="{{localize " MIST_ENGINE.LABELS.AddPowertag"}}"></i> {{localize
+            "MIST_ENGINE.LABELS.AddPowertag"}}
+        </div>
         {{#each system.powertags as |powertag index|}}
         {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-powertag-line.hbs" index=index powertag=powertag}}
         {{/each}}
 
-<div class="themebook-icon-line">
-                    <i class="fas fa-plus add-line-icon clickable" data-action="addEmptyWeaknessTag" data-item-id="{{themebook._id}}" title="{{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}}"></i> {{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}} 
-            </div>
+        <div class="themebook-section-header clickable" data-action="addEmptyWeaknessTag"
+            data-item-id="{{themebook._id}}">
+            <i class="fas fa-plus add-line-icon " title="{{localize " MIST_ENGINE.LABELS.AddWeaknesstag"}}"></i>
+            {{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}}
+        </div>
         {{#each system.weaknesstags as |weakness index|}}
         {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-weakness-line.hbs" index=index weakness=weakness}}
         {{/each}}
@@ -45,7 +53,7 @@
     <div class="box-shadowed-container">
         <h4 class="with-line">Special Improvements</h4>
         {{#each system.specialImprovements as |imp index|}}
-            {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-special-improvement-line.hbs" index=index imp=imp}}
+        {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-special-improvement-line.hbs" index=index imp=imp}}
         {{/each}}
     </div>
 </section>

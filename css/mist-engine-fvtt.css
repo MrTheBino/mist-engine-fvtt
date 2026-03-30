@@ -969,11 +969,32 @@ article.cc-enriched section.journal-entry-content {
   row-gap: 0.5em;
   color: #724a32;
 }
-.mist-engine.sheet.item .window-content h1, .mist-engine.sheet.item .window-content h2, .mist-engine.sheet.item .window-content h3, .mist-engine.sheet.item .window-content h4, .mist-engine.sheet.themebook .window-content h1, .mist-engine.sheet.themebook .window-content h2, .mist-engine.sheet.themebook .window-content h3, .mist-engine.sheet.themebook .window-content h4 {
+.mist-engine.sheet.item .window-content .themebook-section-header, .mist-engine.sheet.themebook .window-content .themebook-section-header {
+  background-color: rgb(120, 70, 37);
+  font-family: Labrada, serif;
+  text-align: center;
+  color: white;
+  padding: 2px 4px;
+  text-transform: uppercase;
+  clip-path: polygon(0 0.2em, 0.3em 0.2em, 0.3em 0, calc(100% - 0.3em) 0, calc(100% - 0.3em) 0.2em, 100% 0.3em, 100% calc(100% - 0.2em), calc(100% - 0.2em) calc(100% - 0.2em), calc(100% - 0.2em) 100%, 0.2em 100%, 0.3em calc(100% - 0.2em), 0 calc(100% - 0.2em));
+}
+.mist-engine.sheet.item .window-content h1,
+.mist-engine.sheet.item .window-content h2,
+.mist-engine.sheet.item .window-content h3,
+.mist-engine.sheet.item .window-content h4, .mist-engine.sheet.themebook .window-content h1,
+.mist-engine.sheet.themebook .window-content h2,
+.mist-engine.sheet.themebook .window-content h3,
+.mist-engine.sheet.themebook .window-content h4 {
   color: #724a32;
   font-family: Labrada, serif;
 }
-.mist-engine.sheet.item .window-content h1.with-line::after, .mist-engine.sheet.item .window-content h2.with-line::after, .mist-engine.sheet.item .window-content h3.with-line::after, .mist-engine.sheet.item .window-content h4.with-line::after, .mist-engine.sheet.themebook .window-content h1.with-line::after, .mist-engine.sheet.themebook .window-content h2.with-line::after, .mist-engine.sheet.themebook .window-content h3.with-line::after, .mist-engine.sheet.themebook .window-content h4.with-line::after {
+.mist-engine.sheet.item .window-content h1.with-line::after,
+.mist-engine.sheet.item .window-content h2.with-line::after,
+.mist-engine.sheet.item .window-content h3.with-line::after,
+.mist-engine.sheet.item .window-content h4.with-line::after, .mist-engine.sheet.themebook .window-content h1.with-line::after,
+.mist-engine.sheet.themebook .window-content h2.with-line::after,
+.mist-engine.sheet.themebook .window-content h3.with-line::after,
+.mist-engine.sheet.themebook .window-content h4.with-line::after {
   content: "";
   display: inline-block;
   width: 105px;
@@ -1299,7 +1320,8 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .editModeToggle {
   float: right;
 }
-.mist-engine .threat-and-consequence-container-entry, .mist-engine .special-feature-entry {
+.mist-engine .threat-and-consequence-container-entry,
+.mist-engine .special-feature-entry {
   padding: 5px;
   margin-bottom: 10px;
 }

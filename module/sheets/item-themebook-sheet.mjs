@@ -1,9 +1,8 @@
 const { ItemSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
-import { importShortChallengeForJSON } from '../lib/json-importer.mjs';
-
-export class MistEngineThemebookItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
+import { MistEngineItemSheet } from "./item-sheet.mjs"
+export class MistEngineThemebookItemSheet extends MistEngineItemSheet {
     #dragDrop // Private field to hold dragDrop handlers
 
     /** @inheritDoc */
@@ -12,11 +11,13 @@ export class MistEngineThemebookItemSheet extends HandlebarsApplicationMixin(Ite
         tag: 'form',
         position: {
             width: 600,
-            height: 550
+            height: 750
         },
         actions: {
             addEmptyPowertag: this.#handleAddEmptyPowertag,
-            addEmptyWeaknessTag: this.#handleEmptyWeaknessTag
+            addEmptyWeaknessTag: this.#handleEmptyWeaknessTag,
+            deletePowertag: this.#handleDeletePowertag,
+            deleteWeaknessTag: this.#handleDeleteWeaknessTag
         },
         form: {
             // handler: DCCActorSheet.#onSubmitForm,
@@ -47,7 +48,7 @@ export class MistEngineThemebookItemSheet extends HandlebarsApplicationMixin(Ite
             // classes: ['sysclass'], // Optionally add extra classes to the part for extra customization
         },
         form: {
-            template: 'systems/mist-engine-fvtt/templates/item/item-themebook-sheet.hbs'
+            template: 'systems/mist-engine-fvtt/templates/item/item-themebook-sheet.hbs',
         },
         description: {
             template: 'systems/mist-engine-fvtt/templates/shared/tab-description.hbs',
@@ -104,6 +105,7 @@ export class MistEngineThemebookItemSheet extends HandlebarsApplicationMixin(Ite
 
     _onRender(context, options) {
         super._onRender(context, options)
+        this._restoreScrollPositions();
     }
 
     async handleInputUpdate(event) {
@@ -121,6 +123,7 @@ export class MistEngineThemebookItemSheet extends HandlebarsApplicationMixin(Ite
 
     /** @override */
     async _processSubmitData(event, form, formData) {
+        this._saveScrollPositions();
         // Process the actor data normally
         const result = await super._processSubmitData(event, form, formData)
         return result
@@ -215,6 +218,7 @@ export class MistEngineThemebookItemSheet extends HandlebarsApplicationMixin(Ite
     }
 
     static async #handleAddEmptyPowertag(event,target){
+        this._saveScrollPositions();
         // we add an empty powertag to the powertags array
         let powertags = this.document.system.powertags || [];
         powertags.push({ name: "", question: "", burned: false, toBurn: false, planned: false, selected: false });
@@ -222,9 +226,41 @@ export class MistEngineThemebookItemSheet extends HandlebarsApplicationMixin(Ite
     }
 
     static async #handleEmptyWeaknessTag(event,target){
+        this._saveScrollPositions();
         // we add an empty weakness tag to the weakness tags array
         let weaknessTags = this.document.system.weaknesstags || [];
         weaknessTags.push({ name: "", question: "", burned: false, toBurn: false, planned: false, selected: false });
         await this.document.update({ "system.weaknesstags": weaknessTags });
+    }
+
+    static async #handleDeletePowertag(event, target) {
+        event.preventDefault();
+        const itemId = target.dataset.itemId;
+        const index = target.dataset.index;
+        
+        
+        this._saveScrollPositions();
+        let powertags = this.document.system.powertags || [];
+        if (index < 0 || index >= powertags.length) {
+            console.error("Invalid powertag index for deletion", { itemId, index });
+            return;
+        }
+        powertags.splice(index, 1);
+        await this.document.update({ "system.powertags": powertags });
+    }
+
+    static async #handleDeleteWeaknessTag(event, target) {
+        event.preventDefault();
+        const itemId = target.dataset.itemId;
+        const index = target.dataset.index;
+
+        this._saveScrollPositions();
+        let weaknesses = this.document.system.weaknesstags || [];
+        if (index < 0 || index >= weaknesses.length) {
+            console.error("Invalid weakness index for deletion", { itemId, index });
+            return;
+        }
+        weaknesses.splice(index, 1);
+        await this.document.update({ "system.weaknesstags": weaknesses });
     }
 }

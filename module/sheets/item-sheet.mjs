@@ -4,6 +4,7 @@ const { TextEditor, DragDrop } = foundry.applications.ux
 
 export class MistEngineItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
+    #scrollPositions; // Store scroll positions to prevent jumping
 
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
@@ -211,5 +212,44 @@ export class MistEngineItemSheet extends HandlebarsApplicationMixin(ItemSheetV2)
         }
 
         return super._onDrop?.(event);
+    }
+
+    /**
+     * Store current scroll positions before updates that might trigger re-renders
+     * @private
+     */
+    _saveScrollPositions() {
+        this.#scrollPositions = {};
+        const scrollableElements = this.element?.querySelectorAll('.scrollable');
+        scrollableElements?.forEach((el, index) => {
+            this.#scrollPositions[index] = el.scrollTop;
+        });
+    }
+
+    /**
+     * Restore scroll positions after render to prevent sheet jumping
+     * @private
+     */
+    _restoreScrollPositions() {
+        if (this.#scrollPositions) {
+            // Use requestAnimationFrame to ensure DOM is fully rendered
+            requestAnimationFrame(() => {
+                const scrollableElements = this.element?.querySelectorAll('.scrollable');
+                scrollableElements?.forEach((el, index) => {
+                    if (this.#scrollPositions[index] !== undefined) {
+                        // Force instant scroll by temporarily disabling smooth behavior
+                        const originalBehavior = el.style.scrollBehavior;
+                        el.style.scrollBehavior = 'auto';
+                        el.scrollTop = this.#scrollPositions[index];
+                        // Restore original scroll behavior
+                        if (originalBehavior) {
+                            el.style.scrollBehavior = originalBehavior;
+                        } else {
+                            el.style.removeProperty('scroll-behavior');
+                        }
+                    }
+                });
+            });
+        }
     }
 }

@@ -1,3 +1,4 @@
 <div class="item-weakness-line flexrow">
     <strong style="flex-grow:0.3;">{{questionIndexToLetter index}}</strong> <input type="text" name="system.weaknesstags.{{index}}.question" value="{{weakness.question}}" placeholder="{{weaknessTagQuestionPlaceholder index weakness.question}}" style="flex-grow:8;"/>
+    <i class="fa-solid fa-trash clickable" data-action="deleteWeaknessTag" data-index="{{index}}" style="flex-grow:0.3; margin-left: 0.5em;" title="{{localize "MIST_ENGINE.HELP.DeleteWeaknessTag"}}"></i>
 </div>
