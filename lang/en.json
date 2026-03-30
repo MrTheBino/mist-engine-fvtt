@@ -42,7 +42,8 @@
       "Titles":{
         "RightClickToToggleBurnState": "Right click to toggle burn state",
         "Powertag": "Powertag",
-        "PlannedPowertag": "Planned Power Or Weakness Tag. Select it to hide it from the active tags list until you are ready to use it."
+        "PlannedPowertag": "Planned Power Or Weakness Tag. Select it to hide it from the active tags list until you are ready to use it.",
+        "PlannedStorytag": "Planned Story Tag. Select it to hide it from the active story tags list until you are ready to use it."
       }
     },
     "NPC":{

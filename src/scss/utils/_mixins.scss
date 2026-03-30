@@ -30,3 +30,13 @@
         background-repeat: no-repeat;
     }
 }
+
+@mixin styled-fielset{
+    font-family: $font-primary;
+    border-radius: 5px;
+    legend{
+        button{
+            display: inline-block;
+        }
+    }
+}

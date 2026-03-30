@@ -7,7 +7,7 @@
     {{/if}}
     <textarea data-dtype="String" class="textarea-short-description editable-item" name="system.shortDescription" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}">{{system.shortDescription}}</textarea>
     <fieldset>
-    <legend>Consequences <a data-action="createEntry"><i class='fas fa-plus'></i></a></legend>
+    <legend>Consequences <button data-action="createEntry"><i class='fas fa-plus'></i></button></legend>
     {{#each system.list as |entry index|}}
         <div class="list-entry flexrow">
             <input type="text" value="{{entry}}" class="editable-item" data-index="{{index}}" style="flex-grow: 8;"/>

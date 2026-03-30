@@ -258,6 +258,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     const index = parseInt(target.dataset.index);
     if (!threatsAndConsequences || threatsAndConsequences.length <= index) return;
 
+    this._saveScrollPositions();
     threatsAndConsequences[index].list.push("");
     await this.actor.update({ "system.threatsAndConsequences": threatsAndConsequences });
   }

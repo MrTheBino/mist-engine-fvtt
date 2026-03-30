@@ -15,7 +15,7 @@
   }
 
   fieldset {
-    border-radius: 5px;
+    @include styled-fielset;
   }
 
   h1.npc-name {
@@ -70,6 +70,10 @@
     row-gap: 0.5em;
 
     color: $c-styled-text;
+
+    fieldset {
+      @include styled-fielset;
+    }
 
     .themebook-section-header {
       background-color: rgb(120 70 37);
@@ -163,7 +167,7 @@
   }
 
   fieldset {
-    border-radius: 5px;
+    @include styled-fielset;
   }
 
   .npc-roles {
@@ -197,6 +201,8 @@
 .item-weakness-line {
   margin: 5px;
   color: $c-styled-text;
+  
+  text-shadow: 0 0 5px rgba(220, 107, 0,0.5), 0 0 10px rgba(220, 107, 0,0.5), 0 0 20px rgba(220, 107, 0,0.5), 0 0 40px rgba(220, 107, 0,0.5);
 
   input {
     border: 2px solid red;
@@ -215,14 +221,6 @@
   margin: 5px;
   overflow-y: clip;
 }
-
-// .npc-beautified-container {
-//     background-image: url("../assets/bg2-litm.webp");
-//     background-repeat: no-repeat;
-//     background-size: cover;
-//     padding: 20px;
-//     color: black;
-// }
 
 .npc-beautified-container-stats {
   gap: 10px;
@@ -496,6 +494,8 @@
     font-family: $font-primary;
     font-size: 14px;
     color: var(--litm-color-accent);
+    text-align: center;
+    flex-grow: 1;
   }
 
   .difficulty-icons {
@@ -506,11 +506,6 @@
       height: 26px;
       margin-top: 7px;
     }
-  }
-
-  .short-description {
-    text-align: center;
-    flex-grow: 1;
   }
 }
 
@@ -560,7 +555,6 @@
 
 .roll-button {
   margin: 5px;
-  //margin-top: 25px;
   font-family: $font-primary;
   width: 100%;
 }
@@ -597,8 +591,6 @@
 .fts-input-name {
   flex-grow: 1;
   justify-content: center;
-  // margin-right: 2px;
-  // height: 16px;
 
   .might-icon {
     @include might-icon-def;
@@ -607,8 +599,6 @@
 
 .fts-input-value {
   flex-shrink: 2;
-  // flex-grow: 0.5;
-  // height: 16px;
 }
 
 .fts-selectable {
@@ -722,10 +712,6 @@
 
 .tab-notes,
 .tab-biography {
-  // padding: 10px;
-  // background-image: url("../assets/bg2-litm.webp");
-  // background-repeat: no-repeat;
-  // background-size: cover;
   height: 100%;
   color: $c-styled-text;
   font-family: $font-primary;
@@ -830,7 +816,6 @@ section [data-group="litm-character-sheet"] {
   color: $c-brown;
   text-transform: uppercase;
   font-size: 0.8rem;
-  font-weight: 800;
   white-space: nowrap;
   margin: 3px 2px 3px 2px;
   text-shadow: 1px 1px 2px rgb(255, 249, 249);
@@ -893,10 +878,6 @@ nav.tabs [data-tab] {
     }
 
     .entry-content-no-edit {
-      .skull-icon {
-        /*top: 5px;*/
-      }
-
       .icon-col {
         flex-grow: 0.075;
       }

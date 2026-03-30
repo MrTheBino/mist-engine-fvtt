@@ -19,23 +19,12 @@ prosemirror-editor mark.tag,
 }
 
 .editor-content,.tab-notes {
-  h1 {
-    color: $c-styled-text;
-    font-family: $font-primary;
-  }
-
-  h2 {
+  h1, h2, h3 {
     color: $c-styled-text;
     font-family: $font-primary;
   }
 
   h3 {
-    color: $c-styled-text;
-    font-family: $font-primary;
-  }
-
-  h3 {
-    // if want to display the image assets/icons/header-backline after the header text in the same line
     display: flex;
     align-items: center;
 
@@ -83,14 +72,6 @@ prosemirror-editor mark.tag,
         color: black;
         font-weight: bold;
       }
-    }
-
-    tr:nth-child(odd) {
-      background-color: transparent;
-    }
-
-    tr:nth-child(even) {
-      background-color: transparent;
     }
 
     tr:first-child th {

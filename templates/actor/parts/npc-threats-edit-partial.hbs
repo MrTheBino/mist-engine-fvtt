@@ -1,5 +1,5 @@
 <fieldset>
-    <legend>{{localize 'MIST_ENGINE.LABELS.ThreatsAndConsequences'}} <a data-action="createThreatAndConsequence"><i class='fas fa-plus'></i></a>
+    <legend>{{localize 'MIST_ENGINE.LABELS.ThreatsAndConsequences'}} <button data-action="createThreatAndConsequence"><i class='fas fa-plus'></i></button>
     </legend>
     {{!-- <div class="form-group"> --}}
         {{#each system.threatsAndConsequences as |entry index|}}
@@ -23,8 +23,7 @@
                     placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Description'}}" />
             </div>
             <fieldset>
-                <legend>{{localize 'MIST_ENGINE.LABELS.Consequences'}} <a data-action="createThreatAndConsequenceEntry" data-index="{{index}}"><i
-                            class='fas fa-plus'></i></a></legend>
+                <legend>{{localize 'MIST_ENGINE.LABELS.Consequences'}} <button data-action="createThreatAndConsequenceEntry" data-index="{{index}}"><i class='fas fa-plus'></i></button></legend>
                 {{#each entry.list as |listEntry listIndex|}}
                 <div class="threat-entry-container form-group flexrow">
                     <input type="text" class="npc-updatable-threat-entry-stat value-input-huge"

@@ -79,6 +79,13 @@
         color: gray;
     }
 
+    &.empty {
+        color: rgba(0, 0, 0, 0.5);
+
+        &:hover {
+            cursor: default;
+        }
+    }
 }
 
 .special-improvement-label {
@@ -131,7 +138,7 @@
     text-align: center;
 
     &:hover {
-        cursor: pointer
+        cursor: pointer;
     }
 
     &.selected {

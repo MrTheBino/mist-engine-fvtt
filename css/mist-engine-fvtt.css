@@ -111,7 +111,7 @@ body {
   font-weight: bold;
   padding-left: 0.2em;
   padding-right: 0.2em;
-  background: rgb(161, 61, 41);
+  background: rgba(161, 61, 41, 0.75);
 }
 
 .grid,
@@ -431,15 +431,7 @@ prosemirror-editor mark.tag,
   background-color: rgba(238, 213, 146, 0.75);
 }
 
-.editor-content h1, .tab-notes h1 {
-  color: #724a32;
-  font-family: Labrada, serif;
-}
-.editor-content h2, .tab-notes h2 {
-  color: #724a32;
-  font-family: Labrada, serif;
-}
-.editor-content h3, .tab-notes h3 {
+.editor-content h1, .editor-content h2, .editor-content h3, .tab-notes h1, .tab-notes h2, .tab-notes h3 {
   color: #724a32;
   font-family: Labrada, serif;
 }
@@ -481,12 +473,6 @@ prosemirror-editor mark.tag,
 .editor-content table.example-actions-table td .black-strong, .tab-notes table.example-actions-table td .black-strong {
   color: black;
   font-weight: bold;
-}
-.editor-content table.example-actions-table tr:nth-child(odd), .tab-notes table.example-actions-table tr:nth-child(odd) {
-  background-color: transparent;
-}
-.editor-content table.example-actions-table tr:nth-child(even), .tab-notes table.example-actions-table tr:nth-child(even) {
-  background-color: transparent;
 }
 .editor-content table.example-actions-table tr:first-child th, .tab-notes table.example-actions-table tr:first-child th {
   border-top: 0;
@@ -927,7 +913,11 @@ article.cc-enriched section.journal-entry-content {
   margin-bottom: 2px;
 }
 .mist-engine.sheet.actor.npc fieldset {
+  font-family: Labrada, serif;
   border-radius: 5px;
+}
+.mist-engine.sheet.actor.npc fieldset legend button {
+  display: inline-block;
 }
 .mist-engine.sheet.actor.npc h1.npc-name {
   font-family: Labrada, serif;
@@ -968,6 +958,13 @@ article.cc-enriched section.journal-entry-content {
   background-repeat: no-repeat;
   row-gap: 0.5em;
   color: #724a32;
+}
+.mist-engine.sheet.item .window-content fieldset, .mist-engine.sheet.themebook .window-content fieldset {
+  font-family: Labrada, serif;
+  border-radius: 5px;
+}
+.mist-engine.sheet.item .window-content fieldset legend button, .mist-engine.sheet.themebook .window-content fieldset legend button {
+  display: inline-block;
 }
 .mist-engine.sheet.item .window-content .themebook-section-header, .mist-engine.sheet.themebook .window-content .themebook-section-header {
   background-color: rgb(120, 70, 37);
@@ -1040,7 +1037,11 @@ article.cc-enriched section.journal-entry-content {
   text-align: start;
 }
 .mist-engine.sheet.actor.litm-journey fieldset {
+  font-family: Labrada, serif;
   border-radius: 5px;
+}
+.mist-engine.sheet.actor.litm-journey fieldset legend button {
+  display: inline-block;
 }
 .mist-engine.sheet.actor.litm-journey .npc-roles {
   font-family: var(--litm-font-accent);
@@ -1066,6 +1067,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .item-weakness-line {
   margin: 5px;
   color: #724a32;
+  text-shadow: 0 0 5px rgba(220, 107, 0, 0.5), 0 0 10px rgba(220, 107, 0, 0.5), 0 0 20px rgba(220, 107, 0, 0.5), 0 0 40px rgba(220, 107, 0, 0.5);
 }
 .mist-engine .item-weakness-line input {
   border: 2px solid red;
@@ -1304,6 +1306,8 @@ article.cc-enriched section.journal-entry-content {
   font-family: Labrada, serif;
   font-size: 14px;
   color: var(--litm-color-accent);
+  text-align: center;
+  flex-grow: 1;
 }
 .mist-engine .sheet-header .difficulty-icons {
   display: flex;
@@ -1312,10 +1316,6 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .sheet-header .difficulty-icons img {
   height: 26px;
   margin-top: 7px;
-}
-.mist-engine .sheet-header .short-description {
-  text-align: center;
-  flex-grow: 1;
 }
 .mist-engine .editModeToggle {
   float: right;
@@ -1592,7 +1592,6 @@ article.cc-enriched section.journal-entry-content {
   color: #724a32;
   text-transform: uppercase;
   font-size: 0.8rem;
-  font-weight: 800;
   white-space: nowrap;
   margin: 3px 2px 3px 2px;
   text-shadow: 1px 1px 2px rgb(255, 249, 249);
@@ -1642,10 +1641,6 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .npc-challenges-container .list-entries .entry-content {
   flex-direction: row;
   display: flex;
-}
-.mist-engine .challenge-entry-container .list-entries .entry-content-no-edit .skull-icon,
-.mist-engine .npc-challenges-container .list-entries .entry-content-no-edit .skull-icon {
-  /*top: 5px;*/
 }
 .mist-engine .challenge-entry-container .list-entries .entry-content-no-edit .icon-col,
 .mist-engine .npc-challenges-container .list-entries .entry-content-no-edit .icon-col {
@@ -1818,6 +1813,12 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .litm-pc-storytag.burned {
   text-decoration: line-through;
   color: gray;
+}
+.mist-engine .litm-pc-storytag.empty {
+  color: rgba(0, 0, 0, 0.5);
+}
+.mist-engine .litm-pc-storytag.empty:hover {
+  cursor: default;
 }
 .mist-engine .special-improvement-label {
   font-family: var(--litm-font-text);
@@ -2125,7 +2126,6 @@ article.cc-enriched section.journal-entry-content {
   color: #724a32;
   text-transform: uppercase;
   font-size: 0.8rem;
-  font-weight: 800;
   white-space: nowrap;
   margin: 3px 2px;
   padding: 2px;
@@ -2236,12 +2236,12 @@ article.cc-enriched section.journal-entry-content {
   background-repeat: no-repeat;
   background-size: contain;
 }
-.mist-engine .themebook-style .themebook-icon .litm-fellowship-relationship {
+.mist-engine .themebook-style .themebook-icon.litm-fellowship-relationship {
   background-image: url("../assets/icons/icon-variable-litm.svg");
   background-repeat: no-repeat;
   background-size: contain;
 }
-.mist-engine .themebook-style .themebook-icon .litm-fellowship-themecard {
+.mist-engine .themebook-style .themebook-icon.litm-fellowship-themecard {
   background-image: url("../assets/icons/icon-variable-litm.svg");
   background-repeat: no-repeat;
   background-size: contain;
@@ -2249,22 +2249,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .themebook-style .development-container {
   margin-top: auto;
 }
-.mist-engine .themebook-style .development-partial-container {
-  color: #724a32;
-  font-family: Labrada, serif;
-  font-size: xx-small;
-  text-transform: uppercase;
-  text-align: center;
-}
-.mist-engine .themebook-style .development-partial-container .marker {
-  color: #f6eeea;
-}
-.mist-engine .themebook-style .development-partial-container .marker.checked {
-  color: #724a32;
-}
-.mist-engine .themebook-style .fellowship-entries {
-  flex-grow: 1;
-}
+.mist-engine .themebook-style .development-partial-container,
 .mist-engine .themebook-style .fellowship-promises-container {
   color: #724a32;
   font-family: Labrada, serif;
@@ -2272,11 +2257,16 @@ article.cc-enriched section.journal-entry-content {
   text-transform: uppercase;
   text-align: center;
 }
+.mist-engine .themebook-style .development-partial-container .marker,
 .mist-engine .themebook-style .fellowship-promises-container .marker {
   color: #f6eeea;
 }
+.mist-engine .themebook-style .development-partial-container .marker.checked,
 .mist-engine .themebook-style .fellowship-promises-container .marker.checked {
   color: #724a32;
+}
+.mist-engine .themebook-style .fellowship-entries {
+  flex-grow: 1;
 }
 .mist-engine .tab {
   flex-grow: 1;
@@ -2652,13 +2642,11 @@ article.cc-enriched section.journal-entry-content {
 }
 .character-container .selected-tags-container .tag.positive {
   background-color: rgba(64, 134, 54, 0.75);
-  border-radius: 5px solid black;
   color: #724a32;
   padding: 2px;
 }
 .character-container .selected-tags-container .tag.negative {
   background-color: rgba(223, 182, 43, 0.75);
-  border-radius: 5px solid black;
   color: #724a32;
   padding: 2px;
 }

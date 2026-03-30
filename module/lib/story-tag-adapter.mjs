@@ -11,14 +11,17 @@ export class StoryTagAdapter {
         }
     }
 
-    static async updateStoryTag(actor,itemId,key,index,value){
+    static async updateStoryTag(actor,itemId,key,index,value,subKey){
         const item = actor.items.get(itemId);
         if(item){
             const data = foundry.utils.getProperty(item,key)
             if(data && index < data.length){
-                data[index].name = value;
+                if(subKey != null){
+                    data[index][subKey] = value;
+                }else{
+                    data[index].name = value;
+                }
                 await item.update({ [key]: data });
-                console.log("StoryTagAdapter.updateStoryTagName: updated", {itemId,key,index,value});
             } else {
                 console.log("StoryTagAdapter.updateStoryTagName: invalid index ", {itemId,key,index,value});
             }

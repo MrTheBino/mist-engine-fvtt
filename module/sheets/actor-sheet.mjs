@@ -248,13 +248,16 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         event.preventDefault();
         const index = event.currentTarget.dataset.index;
         const key = event.currentTarget.dataset.key;
+        const subKey = event.currentTarget.dataset.subKey;
         const itemId = event.currentTarget.dataset.itemId;
 
         this._saveScrollPositions();
         if (event.currentTarget.type === 'checkbox') {
-            await StoryTagAdapter.updateStoryTag(this.actor, itemId, key, index, event.currentTarget.checked);
+            console.log("Updating story tag selection to", event.currentTarget.checked);
+            console.log("Item ID:", itemId, "Key:", key, "Index:", index);
+            await StoryTagAdapter.updateStoryTag(this.actor, itemId, key, index, event.currentTarget.checked,subKey);
         } else {
-            await StoryTagAdapter.updateStoryTag(this.actor, itemId, key, index, event.currentTarget.value);
+            await StoryTagAdapter.updateStoryTag(this.actor, itemId, key, index, event.currentTarget.value,null);
         }
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
