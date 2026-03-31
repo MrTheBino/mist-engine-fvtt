@@ -420,6 +420,18 @@ body {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: ManuskriptAntique;
+  src: url("../assets/fonts/ManuskriptAntD-Reg.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: CCDreamland-Regular;
+  src: url("../assets/fonts/CCDreamland-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 .editor.prosemirror {
   height: 100%;
 }
@@ -508,6 +520,37 @@ prosemirror-editor mark.tag.weakness,
   min-width: 250px;
   margin: 10px;
   text-align: center;
+  background-image: url("../assets/boxes/box-adventure.webp");
+  background-size: cover;
+  font-family: ManuskriptAntique, serif;
+  flex: 1;
+}
+.editor-content .themekit-big-box .heading,
+.tab-notes .themekit-big-box .heading {
+  color: white;
+  font-family: Labrada, serif;
+  margin-top: 10px;
+}
+.editor-content .themekit-big-box .themekit-title,
+.tab-notes .themekit-big-box .themekit-title {
+  font-size: 1.5em;
+  margin-top: 10px;
+}
+.editor-content .themekit-big-box .powertags, .editor-content .themekit-big-box .weaknesstags,
+.tab-notes .themekit-big-box .powertags,
+.tab-notes .themekit-big-box .weaknesstags {
+  font-size: 0.8em;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.editor-content .themekit-big-box .line,
+.tab-notes .themekit-big-box .line {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+.editor-content .themekit-big-box .quest,
+.tab-notes .themekit-big-box .quest {
+  font-family: CCDreamland-Regular, serif;
+  color: black;
 }
 .editor-content h1,
 .editor-content h2,
@@ -598,6 +641,12 @@ header.journal-page-header {
   font-family: Labrada, serif;
   font-size: 1.1em;
 }
+.journal-entry-content .themekit-box-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
 .journal-entry-content .themekit-box {
   border: 2px solid black;
   background-color: #E7E3E0;
@@ -652,6 +701,31 @@ header.journal-page-header {
   min-width: 250px;
   margin: 10px;
   text-align: center;
+  background-image: url("../assets/boxes/box-adventure.webp");
+  background-size: cover;
+  font-family: ManuskriptAntique, serif;
+  flex: 1;
+}
+.journal-entry-content .themekit-big-box .heading {
+  color: white;
+  font-family: Labrada, serif;
+  margin-top: 10px;
+}
+.journal-entry-content .themekit-big-box .themekit-title {
+  font-size: 1.5em;
+  margin-top: 10px;
+}
+.journal-entry-content .themekit-big-box .powertags, .journal-entry-content .themekit-big-box .weaknesstags {
+  font-size: 0.8em;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.journal-entry-content .themekit-big-box .line {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+.journal-entry-content .themekit-big-box .quest {
+  font-family: CCDreamland-Regular, serif;
+  color: black;
 }
 .journal-entry-content h1,
 .journal-entry-content h2,

@@ -10,6 +10,13 @@ header.journal-page-header{
     font-family: $font-primary;
     font-size: 1.1em;
 
+    .themekit-box-container{
+         display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
     .themekit-box {
         @include themekit-box;
     }

@@ -418,12 +418,15 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         }
         else if (source === "fellowship-themecard") {
             if (this.actorFellowshipThemecard) {
+                console.log("I'm hERE!!!!!!!");
                 if (event.currentTarget.dataset.array !== undefined) { // update for arrays
                     let arrayName = event.currentTarget.dataset.array;
 
                     let index = parseInt(event.currentTarget.dataset.index);
                     let key = event.currentTarget.dataset.key;
                     let array = foundry.utils.getProperty(this.actorFellowshipThemecard, arrayName);
+                    console.log("array name:", arrayName, "index:", index, "key:", key);
+                    console.log("Array before update:", array);
 
                     if (isNaN(index) || index < 0 || index >= array.length) {
                         console.error("Invalid index for array update", event.currentTarget.dataset);
@@ -432,10 +435,10 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
                     if (event.target.type === 'checkbox') {
                         let keyToUpdate = arrayName + `.${index}.` + key;
-                        foundry.utils.setProperty(this.actorFellowshipThemecard, keyToUpdate, event.target.checked);
+                        array[index][key] = event.target.checked;
                         await this.actorFellowshipThemecard.update({ [arrayName]: array });
                     } else {
-                        foundry.utils.setProperty(this.actorFellowshipThemecard, arrayName + "." + key, event.target.value);
+                        array[index][key] = event.target.value;
                         await this.actorFellowshipThemecard.update({ [arrayName]: array });
                     }
                 } else {
@@ -882,7 +885,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     static async #handleAddEmptyPowertag(event, target) {
         event.preventDefault();
         this._saveScrollPositions();
-        
+
         const itemId = target.dataset.itemId;
         const source = target.dataset.source;
         if(source === "fellowship-themecard") {

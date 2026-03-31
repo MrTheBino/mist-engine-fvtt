@@ -58,6 +58,35 @@
     min-width: 250px;
     margin: 10px;
     text-align: center;
+    background-image: url('../assets/boxes/box-adventure.webp');
+    background-size: cover;
+    font-family: $font-manuscript;
+    flex: 1;
+    
+    .heading{
+        color: white;
+        font-family: $font-primary;
+        margin-top: 10px;
+    }
+
+    .themekit-title{
+        font-size: 1.5em;
+        margin-top: 10px;
+    }
+    .powertags,.weaknesstags{
+        font-size: 0.8em;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .line{
+        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    }
+
+    .quest{
+        font-family: $font-dreamland;
+        color: black;
+    }
 }
 
 @mixin themekit-box{
