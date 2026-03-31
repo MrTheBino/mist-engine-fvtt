@@ -414,6 +414,12 @@ body {
   font-weight: normal;
   font-style: italic;
 }
+@font-face {
+  font-family: Ysgarth;
+  src: url("../assets/fonts/ysgarth.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 .editor.prosemirror {
   height: 100%;
 }
@@ -430,6 +436,11 @@ prosemirror-editor mark.status,
 prosemirror-editor mark.tag,
 .prosemirror mark.tag {
   background-color: rgba(238, 213, 146, 0.75);
+}
+.editor-content mark.tag.weakness,
+prosemirror-editor mark.tag.weakness,
+.prosemirror mark.tag.weakness {
+  background-color: rgba(223, 182, 43, 0.75);
 }
 
 .editor-content .themekit-box,
@@ -488,6 +499,15 @@ prosemirror-editor mark.tag,
   text-align: center;
   display: inline-block;
   border-radius: 3px;
+}
+.editor-content .themekit-big-box,
+.tab-notes .themekit-big-box {
+  border: 2px solid black;
+  background-color: #E7E3E0;
+  color: #6E5933;
+  min-width: 250px;
+  margin: 10px;
+  text-align: center;
 }
 .editor-content h1,
 .editor-content h2,
@@ -566,6 +586,10 @@ prosemirror-editor mark.tag,
   border-right: 0;
 }
 
+header.journal-page-header {
+  display: none;
+}
+
 .journal-entry-content {
   background-image: url(../assets/bg-pargement-texture.webp);
   background-repeat: no-repeat;
@@ -621,6 +645,14 @@ prosemirror-editor mark.tag,
   display: inline-block;
   border-radius: 3px;
 }
+.journal-entry-content .themekit-big-box {
+  border: 2px solid black;
+  background-color: #E7E3E0;
+  color: #6E5933;
+  min-width: 250px;
+  margin: 10px;
+  text-align: center;
+}
 .journal-entry-content h1,
 .journal-entry-content h2,
 .journal-entry-content h3,
@@ -655,6 +687,36 @@ prosemirror-editor mark.tag,
   background-image: url(../assets/header-backline.webp);
   background-repeat: no-repeat;
   margin-left: 10px;
+}
+.journal-entry-content .heading-wrapper-medival {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+.journal-entry-content .heading-wrapper-medival h1 {
+  border-bottom: 0;
+  font-family: Ysgarth, serif;
+}
+.journal-entry-content .themebook-title-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+.journal-entry-content .themebook-title-wrapper img {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  top: -5px;
+  margin-right: 5px;
+}
+.journal-entry-content .themebook-title-wrapper h2 {
+  border-bottom: 0;
+}
+.journal-entry-content .underline-graphic {
+  display: block;
+  width: 100%;
+  margin-top: -8px;
+  /* an den Text heranschieben */
 }
 .journal-entry-content .line-with-image img {
   display: inline;

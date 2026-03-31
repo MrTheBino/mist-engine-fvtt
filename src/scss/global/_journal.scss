@@ -1,3 +1,7 @@
+header.journal-page-header{
+    display: none;
+}
+
 .journal-entry-content {
     background-image: url(../assets/bg-pargement-texture.webp);
     background-repeat: no-repeat;
@@ -6,14 +10,20 @@
     font-family: $font-primary;
     font-size: 1.1em;
 
-    .themekit-box{
-    @include themekit-box;
-  }
+    .themekit-box {
+        @include themekit-box;
+    }
 
-  .letter-box{
-    @include letter-box;
-  }
-  
+    .letter-box {
+        @include letter-box;
+    }
+
+    .themekit-big-box {
+        @include themekit-big-box;
+    }
+
+
+
     h1,
     h2,
     h3,
@@ -25,11 +35,11 @@
         text-transform: uppercase;
         font-weight: 900;
 
-          &.with-line {
+        &.with-line {
             display: flex;
             align-items: center;
             border-bottom: 0;
-            
+
             &::after {
                 content: "";
                 display: inline-block;
@@ -40,6 +50,41 @@
                 margin-left: 10px;
             }
         }
+    }
+
+    .heading-wrapper-medival {
+        position: relative;
+        display: inline-block;
+        text-align: center;
+        h1 {
+            border-bottom: 0;
+            font-family: Ysgarth, serif;
+        }
+    }
+
+    .themebook-title-wrapper{
+        // flexrow
+        display: flex;
+        align-items: flex-end;
+
+        img{
+            display: inline-block;
+             width: 30px;
+             height: 30px;
+             position: relative;
+                top: -5px;
+                margin-right: 5px;
+        }
+        h2{
+            border-bottom: 0;
+        }
+    }
+
+    .underline-graphic {
+        display: block;
+        width: 100%;
+        margin-top: -8px;
+        /* an den Text heranschieben */
     }
 
     .line-with-image {
@@ -79,12 +124,12 @@
         padding: 30px;
     }
 
-    .note-written-text{
+    .note-written-text {
         font-family: $font-written;
         font-size: 1.2em;
     }
 
-    .callout{
+    .callout {
         border: 2px solid black;
         color: $c-dark-styled-text;
         font-family: $font-primary;
@@ -94,5 +139,5 @@
 
 /* fix for Campaign Codex */
 article.cc-enriched section.journal-entry-content {
-    background: transparent!important;
+    background: transparent !important;
 }

@@ -16,7 +16,12 @@ prosemirror-editor mark.status,
 prosemirror-editor mark.tag,
 .prosemirror mark.tag {
   background-color: $c-status;
+  &.weakness {
+    background-color: $c-tag-orange;
+  }
 }
+
+
 
 .editor-content,
 .tab-notes {
@@ -27,6 +32,10 @@ prosemirror-editor mark.tag,
 
   .letter-box{
     @include letter-box;
+  }
+
+  .themekit-big-box{
+    @include themekit-big-box;
   }
 
   h1,
