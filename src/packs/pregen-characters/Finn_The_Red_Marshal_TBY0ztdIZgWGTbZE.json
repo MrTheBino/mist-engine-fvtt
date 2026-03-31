@@ -105,7 +105,8 @@
     "floatingTagsAndStatusesEditable": false,
     "floatingTagsAndStatuses": [],
     "promises": 0,
-    "notes": "<h3 class=\"with-line\">Taking Actions</h3><p>When you get the spotlight, the Narrator will tell you if you need one, two, or all three steps:</p><p><strong>1. DESCRIBE YOUR ACTION</strong></p><p><strong>2. MAKE A ROLL</strong></p><p>Count your action's POWER</p><ul><li><p>+1 Power for every [helpful tag]</p></li><li><p>-1 Power for every [hindering tag]</p></li><li><p>+ tier of highest [/sg helpful status ]</p></li><li><p>- tier of highest [/sg hindering status]</p></li></ul><p>Roll two six-sided dice and add your Power to the total:</p><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-positive.svg\" width=\"20\" height=\"20\"><p>10 or more: Success!</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-neutral.svg\" width=\"20\" height=\"20\"><p>7-9: Success and Consequences</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-negative.svg\" width=\"20\" height=\"20\"><p>6 or less: Consequences</p></div><p><strong>3. SPEND YOUR POWER</strong></p><ul><li><p>Give or remove a [/sg status]: 1 Power per tier</p></li><li><p>Give or remove a [tag]: 2 Power per tag</p></li><li><p>Discover a detail: 1 Power</p></li><li><p>Perform an extra feat: 1 Power</p></li></ul><h3 class=\"with-line\">Reactions</h3><p>When you receive a negative status or tag, or lose a good status or tag, the Narrator may allow you to react to lessen the blow.</p><p>Describe your reaction, make a roll, and spend your Power to buy down the Consequences (1 Power per status tier, 2 Power per tag).</p><ul><li><p>10 or more: Spend Power+1, on any Effect</p></li><li><p>7-9: Spend Power, only to lessen</p></li><li><p>6 or less: Take the full Consequences</p></li></ul><h3 class=\"with-line\">Hero Development</h3><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>IMPROVE:</strong> Mark whenever the theme's weakness tag is invoked. When full, choose a new power tag or Special Improvement for that theme and reset the track</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>ABANDON:</strong> Mark whenever you ignore or betray the theme's Quest. When full, your theme is <strong>replaced</strong>.</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>MILESTONE:</strong> Mark whenever you achieve a goal of the theme's Quest. When full, your theme evolves.</p></div>"
+    "notes": "<h3 class=\"with-line\">Example Actions</h3><p></p><table class=\"example-actions-table\"><tbody><tr><td><p class=\"black-strong\">Land a swordstroke</p><p><mark class=\"tag\">Martial Training</mark></p><p>+</p><p><mark class=\"tag\">Swordsmanship</mark></p><p>+</p><p><mark class=\"tag\">Athletic</mark></p><p>+</p><p><mark class=\"tag\">Brute strength</mark></p><p><mark class=\"tag power\">POWER 4</mark></p><p>Give <mark class=\"tag green\">wounded</mark></p></td><td><p class=\"black-strong\">Protect a Dalesperson</p><p><mark class=\"tag\">Protector of the Dales</mark></p><p>+</p><p><mark class=\"tag\">Aspiring Local Hero</mark></p><p>+</p><p><mark class=\"tag\">A villager’s shield</mark></p><p><mark class=\"tag power\">POWER 3</mark></p><p>Quick Outcome or lessen <mark class=\"tag green\">wounded</mark> (if allowed)</p></td></tr><tr><td><p class=\"black-strong\">Climb a ledge</p><p><mark class=\"tag\">Athletic</mark></p><p>+</p><p><mark class=\"tag\">Brute strength</mark></p><p><mark class=\"tag power\">POWER 2</mark></p><p>Quick outcome</p></td><td><p class=\"black-strong\">Resist fear</p><p><mark class=\"tag\">Aspiring Local Hero</mark></p><p>+</p><p><mark class=\"tag\">Feign courage</mark></p><p>+</p><p><mark class=\"tag\">Protector of the Dales</mark></p><p><mark class=\"tag power\">POWER 3</mark></p><p>Lessen or remove <mark class=\"tag green\">scared</mark></p></td></tr></tbody></table><h3 class=\"with-line\">Taking Actions</h3><p>When you get the spotlight, the Narrator will tell you if you need one, two, or all three steps:</p><p><strong>1. DESCRIBE YOUR ACTION</strong></p><p><strong>2. MAKE A ROLL</strong></p><p>Count your action's POWER</p><ul><li><p>+1 Power for every <mark class=\"tag\">helpful tag</mark></p></li><li><p>-1 Power for every <mark class=\"tag\">hindering tag</mark></p></li><li><p>+ tier of highest <mark class=\"status green\">helpful status</mark></p></li><li><p>- tier of highest <mark class=\"status green\">hindering status</mark></p></li></ul><p>Roll two six-sided dice and add your Power to the total:</p><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-positive.svg\" width=\"20\" height=\"20\"><p>10 or more: Success!</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-neutral.svg\" width=\"20\" height=\"20\"><p>7-9: Success and Consequences</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-negative.svg\" width=\"20\" height=\"20\"><p>6 or less: Consequences</p></div><p><strong>3. SPEND YOUR POWER</strong></p><ul><li><p>Give or remove a <mark class=\"tag green\">status</mark>: 1 Power per tier</p></li><li><p>Give or remove a <mark class=\"tag\">tag</mark>: 2 Power per tag</p></li><li><p>Discover a detail: 1 Power</p></li><li><p>Perform an extra feat: 1 Power</p></li></ul><h3 class=\"with-line\">Reactions</h3><p>When you receive a negative status or tag, or lose a good status or tag, the Narrator may allow you to react to lessen the blow.</p><p>Describe your reaction, make a roll, and spend your Power to buy down the Consequences (1 Power per status tier, 2 Power per tag).</p><ul><li><p>10 or more: Spend Power+1, on any Effect</p></li><li><p>7-9: Spend Power, only to lessen</p></li><li><p>6 or less: Take the full Consequences</p></li></ul><h3 class=\"with-line\">Hero Development</h3><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>IMPROVE:</strong> Mark whenever the theme's weakness tag is invoked. When full, choose a new power tag or Special Improvement for that theme and reset the track</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>ABANDON:</strong> Mark whenever you ignore or betray the theme's Quest. When full, your theme is <strong>replaced</strong>.</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>MILESTONE:</strong> Mark whenever you achieve a goal of the theme's Quest. When full, your theme evolves.</p></div>",
+    "customFontColor": ""
   },
   "items": [
     {
@@ -114,35 +115,35 @@
       "system": {
         "items": [
           {
-            "name": "Green quilted gambeson",
+            "name": "Green Quilted Gambeson",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "A good sword",
+            "name": "A Good Sword",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Soothing salve",
+            "name": "Soothing Salve",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Old seeing glass",
+            "name": "Old Seeing Glass",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Hemp rope",
+            "name": "Hemp Rope",
             "burned": false,
             "toBurn": false,
             "planned": false,
@@ -156,7 +157,7 @@
             "selected": false
           },
           {
-            "name": "Bread, eggs, and cheese",
+            "name": "Bread, Eggs, and Cheese",
             "selected": false,
             "burned": false,
             "toBurn": false,
@@ -174,20 +175,19 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "ownership": {
-        "default": 0,
-        "wgZHyBDokH67OG0A": 3
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.6.2",
+        "systemVersion": "13.7.9.2",
         "lastModifiedBy": null
       },
-      "_key": "!actors.items!0GCdtCs7rDCGwhyB.uxEk5zF9sMsCewgW"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!TBY0ztdIZgWGTbZE.uxEk5zF9sMsCewgW"
     },
     {
       "folder": "U1NyV4jSRswOk6kl",
@@ -206,7 +206,7 @@
           "planned": false,
           "selected": false,
           "question": "Who or what are you Devoted to?",
-          "name": "PROTECTOR  of THE DALES"
+          "name": "Protector  of the Dales"
         },
         "powertag2": {
           "burned": false,
@@ -214,7 +214,7 @@
           "planned": false,
           "selected": false,
           "question": "What action do you most commonly take in service of your Devotion?",
-          "name": "The Red Armor"
+          "name": "The red armor"
         },
         "powertag3": {
           "burned": false,
@@ -334,15 +334,71 @@
         ],
         "type": "litm-origin",
         "quest": "“I am sworn to guard this \nland and its people.“",
-        "story": "Finn is a new arrival at the village: a Red Marshal \nassigned to keep the peace and safety of the \nDalish people, taking over from his retired \npredecessor. Everyone knows nothing ever \nhappens in this quiet little dale, but nevertheless \nhe often struts around in his a-little-too-shiny Red \nArmor, a practical boiled-leather vest that also \nserves as symbol of his station and a reminder of \nthe responsibility he bears."
+        "story": "Finn is a new arrival at the village: a Red Marshal \nassigned to keep the peace and safety of the \nDalish people, taking over from his retired \npredecessor. Everyone knows nothing ever \nhappens in this quiet little dale, but nevertheless \nhe often struts around in his a-little-too-shiny Red \nArmor, a practical boiled-leather vest that also \nserves as symbol of his station and a reminder of \nthe responsibility he bears.",
+        "powertags": [
+          {
+            "name": "Protector  of the Dales",
+            "question": "Who or what are you Devoted to?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "The red armor",
+            "question": "What action do you most commonly take in service of your Devotion?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Stand watch",
+            "question": "What feeling does your Devotion fill you with that you can call upon?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Reassuring presence",
+            "question": "What possession do you carry or have that symbolizes your Devotion?",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Know these lands",
+            "question": "Where or when can you connect with your Devotion?",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Loyal riding horse",
+            "question": "What does the object of your Devotion often help you with?",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          }
+        ],
+        "weaknesstags": [
+          {
+            "name": "Burden of responsibility",
+            "question": "What are you blind to because of your Devotion?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          }
+        ],
+        "tabCategory": "main"
       },
       "effects": [],
       "sort": 0,
-      "ownership": {
-        "default": 0,
-        "fXOlRnJPiyvuihOi": 3,
-        "wgZHyBDokH67OG0A": 3
-      },
       "flags": {},
       "_stats": {
         "compendiumSource": null,
@@ -350,10 +406,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.6.2",
+        "systemVersion": "13.7.9.2",
         "lastModifiedBy": null
       },
-      "_key": "!actors.items!0GCdtCs7rDCGwhyB.O8lX89tVnusEiQnF"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!TBY0ztdIZgWGTbZE.O8lX89tVnusEiQnF"
     },
     {
       "folder": "U1NyV4jSRswOk6kl",
@@ -372,7 +431,7 @@
           "planned": false,
           "selected": false,
           "question": "What Skill or Trade are you good at?",
-          "name": "MARTIAL TRAINING"
+          "name": "Martial Training"
         },
         "powertag2": {
           "burned": false,
@@ -500,15 +559,71 @@
         ],
         "type": "litm-origin",
         "quest": "“Training keeps me ready \nfor whatever may come.”",
-        "story": "After volunteering to join the Red Marshals, Finn \napprenticed at Fort Gherdorn, their Barleytown \nbarracks, spending years of rigorous arms \ntraining. He learned to wield swords, knives, axes \nand bows, or fi ght bare-handed, practicing in the \nsanded courtyard until he was bloody. He also \nlearned to read missives and write reports. Today, \nhe wonders what it was all for; it seems these \nskills will never truly be put to good use."
+        "story": "After volunteering to join the Red Marshals, Finn \napprenticed at Fort Gherdorn, their Barleytown \nbarracks, spending years of rigorous arms \ntraining. He learned to wield swords, knives, axes \nand bows, or fi ght bare-handed, practicing in the \nsanded courtyard until he was bloody. He also \nlearned to read missives and write reports. Today, \nhe wonders what it was all for; it seems these \nskills will never truly be put to good use.",
+        "powertags": [
+          {
+            "name": "Martial Training",
+            "question": "What Skill or Trade are you good at?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Swordsmanship",
+            "question": "What specific technique within this Skill set is your specialty?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Rally comrades",
+            "question": "What tool, equipment, or outfit is a staple of your Trade?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Practiced footwork",
+            "question": "Who most respects, values, or requires your abilities?",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Iron focus",
+            "question": "What unusual or inventive application have you found for your Skill?",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Archery",
+            "question": "In what conditions can you work with the most confidence and efficiency?",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          }
+        ],
+        "weaknesstags": [
+          {
+            "name": "Experienced foes",
+            "question": "What challenge or feat is quite beyond your everyday ability?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          }
+        ],
+        "tabCategory": "main"
       },
       "effects": [],
       "sort": 0,
-      "ownership": {
-        "default": 0,
-        "fXOlRnJPiyvuihOi": 3,
-        "wgZHyBDokH67OG0A": 3
-      },
       "flags": {},
       "_stats": {
         "compendiumSource": null,
@@ -516,10 +631,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.6.2",
+        "systemVersion": "13.7.9.2",
         "lastModifiedBy": null
       },
-      "_key": "!actors.items!0GCdtCs7rDCGwhyB.8Lbphx2lNhvvABkn"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!TBY0ztdIZgWGTbZE.8Lbphx2lNhvvABkn"
     },
     {
       "folder": "U1NyV4jSRswOk6kl",
@@ -538,7 +656,7 @@
           "planned": false,
           "selected": false,
           "question": "What is your most defining Trait?",
-          "name": "ATHLETIC"
+          "name": "Athletic"
         },
         "powertag2": {
           "burned": false,
@@ -666,15 +784,71 @@
         ],
         "type": "litm-origin",
         "quest": "“I’ll race you!”",
-        "story": "Red Marshal’s duty involves not only preparing \nfor battle but also patrolling through the hills \n                    and woods, saving a stray farm animal from a \n                    deep ravine, or helping farmers to stack hay bales. \n                    Strapping and vigorous, Finn has the natural \n                    stamina and strength to help the people of his dale, \n                    and his training has only improved these abilities."
+        "story": "Red Marshal’s duty involves not only preparing \nfor battle but also patrolling through the hills \n                    and woods, saving a stray farm animal from a \n                    deep ravine, or helping farmers to stack hay bales. \n                    Strapping and vigorous, Finn has the natural \n                    stamina and strength to help the people of his dale, \n                    and his training has only improved these abilities.",
+        "powertags": [
+          {
+            "name": "Athletic",
+            "question": "What is your most defining Trait?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Brute strength",
+            "question": "What is a specific or common way you put this Trait to use?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Runner’s stamina",
+            "question": "How is this Trait helping you keep safe?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Climbing",
+            "question": "What item or ally helps you get the most of your Trait?",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Hardened physique",
+            "question": "What can you do that only those with this Trait can?",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "All-terrain trekker",
+            "question": "In which situation is this Trait especially useful to you?",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          }
+        ],
+        "weaknesstags": [
+          {
+            "name": "This is gonna hurt later",
+            "question": "What happens when you overuse your Trait?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          }
+        ],
+        "tabCategory": "main"
       },
       "effects": [],
       "sort": 0,
-      "ownership": {
-        "default": 0,
-        "fXOlRnJPiyvuihOi": 3,
-        "wgZHyBDokH67OG0A": 3
-      },
       "flags": {},
       "_stats": {
         "compendiumSource": null,
@@ -682,10 +856,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.6.2",
+        "systemVersion": "13.7.9.2",
         "lastModifiedBy": null
       },
-      "_key": "!actors.items!0GCdtCs7rDCGwhyB.e1jp3MWDhDIIP1es"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!TBY0ztdIZgWGTbZE.e1jp3MWDhDIIP1es"
     },
     {
       "folder": "U1NyV4jSRswOk6kl",
@@ -704,7 +881,7 @@
           "planned": false,
           "selected": false,
           "question": "What Personality trait is most central to you?",
-          "name": "ASPIRING  LOCAL HERO"
+          "name": "Aspiring Local Hero"
         },
         "powertag2": {
           "burned": false,
@@ -832,15 +1009,71 @@
         ],
         "type": "litm-origin",
         "quest": "“No one remembers”",
-        "story": "In his heart, Finn dreams of becoming a \nrenowned hero and so he seeks adventure and \njumps head first whenever the opportunity \npresents itself to show his mettle. While this has \nearned him the respect of some folk, others see \nhim as a brash fool obsessed with glory. It seems \na hero is in there, somewhere, but Finn must first \nfind what truly matters to him most."
+        "story": "In his heart, Finn dreams of becoming a \nrenowned hero and so he seeks adventure and \njumps head first whenever the opportunity \npresents itself to show his mettle. While this has \nearned him the respect of some folk, others see \nhim as a brash fool obsessed with glory. It seems \na hero is in there, somewhere, but Finn must first \nfind what truly matters to him most.",
+        "powertags": [
+          {
+            "name": "Aspiring Local Hero",
+            "question": "What Personality trait is most central to you?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Feign courage",
+            "question": "In what situations does your Personality truly shine?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "A villager’s shield",
+            "question": "How do you influence other people?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Shortcuts to greatness",
+            "question": "What item or garment best expresses your personal style?",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Seize attention",
+            "question": "What interpersonal or social skill or talent do you possess?",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Village folk’s blessing",
+            "question": "When in trouble or stressed, what emotion or behavior do you turn to?",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          }
+        ],
+        "weaknesstags": [
+          {
+            "name": "Rash",
+            "question": "In what situations does your Personality get you into trouble?",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          }
+        ],
+        "tabCategory": "main"
       },
       "effects": [],
       "sort": 0,
-      "ownership": {
-        "default": 0,
-        "fXOlRnJPiyvuihOi": 3,
-        "wgZHyBDokH67OG0A": 3
-      },
       "flags": {},
       "_stats": {
         "compendiumSource": null,
@@ -848,17 +1081,16 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.6.2",
+        "systemVersion": "13.7.9.2",
         "lastModifiedBy": null
       },
-      "_key": "!actors.items!0GCdtCs7rDCGwhyB.UKolxEbIL3XWd1Xt"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!TBY0ztdIZgWGTbZE.UKolxEbIL3XWd1Xt"
     }
   ],
   "effects": [],
-  "ownership": {
-    "default": 0,
-    "wgZHyBDokH67OG0A": 3
-  },
   "flags": {},
   "_stats": {
     "compendiumSource": null,
@@ -866,12 +1098,16 @@
     "exportSource": null,
     "coreVersion": "13.351",
     "systemId": "mist-engine-fvtt",
-    "systemVersion": "13.6.2",
-    "createdTime": 1771328722630,
-    "modifiedTime": 1771328725489,
+    "systemVersion": "13.7.9.2",
+    "createdTime": 1774946550757,
+    "modifiedTime": 1774946553592,
     "lastModifiedBy": "wgZHyBDokH67OG0A"
   },
-  "_id": "0GCdtCs7rDCGwhyB",
+  "ownership": {
+    "default": 0,
+    "wgZHyBDokH67OG0A": 3
+  },
+  "_id": "TBY0ztdIZgWGTbZE",
   "sort": 100000,
-  "_key": "!actors!0GCdtCs7rDCGwhyB"
+  "_key": "!actors!TBY0ztdIZgWGTbZE"
 }

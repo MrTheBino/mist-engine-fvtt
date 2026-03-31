@@ -105,7 +105,8 @@
     "floatingTagsAndStatusesEditable": false,
     "floatingTagsAndStatuses": [],
     "promises": 0,
-    "notes": "<h3 class=\"with-line\">Taking Actions</h3><p>When you get the spotlight, the Narrator will tell you if you need one, two, or all three steps:</p><p><strong>1. DESCRIBE YOUR ACTION</strong></p><p><strong>2. MAKE A ROLL</strong></p><p>Count your action's POWER</p><ul><li><p>+1 Power for every [helpful tag]</p></li><li><p>-1 Power for every [hindering tag]</p></li><li><p>+ tier of highest [/sg helpful status ]</p></li><li><p>- tier of highest [/sg hindering status]</p></li></ul><p>Roll two six-sided dice and add your Power to the total:</p><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-positive.svg\" width=\"20\" height=\"20\"><p>10 or more: Success!</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-neutral.svg\" width=\"20\" height=\"20\"><p>7-9: Success and Consequences</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-negative.svg\" width=\"20\" height=\"20\"><p>6 or less: Consequences</p></div><p><strong>3. SPEND YOUR POWER</strong></p><ul><li><p>Give or remove a [/sg status]: 1 Power per tier</p></li><li><p>Give or remove a [tag]: 2 Power per tag</p></li><li><p>Discover a detail: 1 Power</p></li><li><p>Perform an extra feat: 1 Power</p></li></ul><h3 class=\"with-line\">Reactions</h3><p>When you receive a negative status or tag, or lose a good status or tag, the Narrator may allow you to react to lessen the blow.</p><p>Describe your reaction, make a roll, and spend your Power to buy down the Consequences (1 Power per status tier, 2 Power per tag).</p><ul><li><p>10 or more: Spend Power+1, on any Effect</p></li><li><p>7-9: Spend Power, only to lessen</p></li><li><p>6 or less: Take the full Consequences</p></li></ul><h3 class=\"with-line\">Hero Development</h3><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>IMPROVE:</strong> Mark whenever the theme's weakness tag is invoked. When full, choose a new power tag or Special Improvement for that theme and reset the track</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>ABANDON:</strong> Mark whenever you ignore or betray the theme's Quest. When full, your theme is <strong>replaced</strong>.</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>MILESTONE:</strong> Mark whenever you achieve a goal of the theme's Quest. When full, your theme evolves.</p></div>"
+    "notes": "<h3 class=\"with-line\">Example Actions</h3><p></p><table class=\"example-actions-table\"><tbody><tr><td><p class=\"black-strong\">Diagnose a condition</p><p><mark class=\"tag\">Apothecary</mark></p><p>+</p><p><mark class=\"tag\">Quick diagnosis</mark></p><p>+</p><p><mark class=\"tag\">Oldways Practitioner</mark></p><p>+</p><p><mark class=\"tag\">Seen a Thing or Two</mark></p><p><mark class=\"tag power\">POWER 4</mark></p><p>Discover new details</p></td><td><p class=\"black-strong\">Banish an unwanted spirit</p><p><mark class=\"tag\">Oldways Practitioner</mark></p><p>+</p><p><mark class=\"tag\">Wards and protections</mark></p><p>+</p><p><mark class=\"tag\">Twilight encounters</mark></p><p><mark class=\"tag power\">POWER 3</mark></p><p>Give <mark class=\"tag green\">banished</mark></p></td></tr><tr><td><p class=\"black-strong\">Recall important lore</p><p><mark class=\"tag\">Oldways Practitioner</mark></p><p>+</p><p><mark class=\"tag\">Ancient Dalish lore</mark></p><p>+</p><p><mark class=\"tag\">Storyteller</mark></p><p><mark class=\"tag power\">POWER 3</mark></p><p>Discover new details</p></td><td><p class=\"black-strong\">Concoct medicine</p><p><mark class=\"tag\">Apothecary</mark></p><p>+</p><p><mark class=\"tag\">Medicine bag</mark></p><p><mark class=\"tag power\">POWER 2</mark></p><p>Create medicine bag</p></td></tr></tbody></table><h3 class=\"with-line\">Taking Actions</h3><p>When you get the spotlight, the Narrator will tell you if you need one, two, or all three steps:</p><p><strong>1. DESCRIBE YOUR ACTION</strong></p><p><strong>2. MAKE A ROLL</strong></p><p>Count your action's POWER</p><ul><li><p>+1 Power for every <mark class=\"tag\">helpful tag</mark></p></li><li><p>-1 Power for every <mark class=\"tag\">hindering tag</mark></p></li><li><p>+ tier of highest <mark class=\"status green\">helpful status</mark></p></li><li><p>- tier of highest <mark class=\"status green\">hindering status</mark></p></li></ul><p>Roll two six-sided dice and add your Power to the total:</p><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-positive.svg\" width=\"20\" height=\"20\"><p>10 or more: Success!</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-neutral.svg\" width=\"20\" height=\"20\"><p>7-9: Success and Consequences</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/icon-litm-negative.svg\" width=\"20\" height=\"20\"><p>6 or less: Consequences</p></div><p><strong>3. SPEND YOUR POWER</strong></p><ul><li><p>Give or remove a <mark class=\"tag green\">status</mark>: 1 Power per tier</p></li><li><p>Give or remove a <mark class=\"tag\">tag</mark>: 2 Power per tag</p></li><li><p>Discover a detail: 1 Power</p></li><li><p>Perform an extra feat: 1 Power</p></li></ul><h3 class=\"with-line\">Reactions</h3><p>When you receive a negative status or tag, or lose a good status or tag, the Narrator may allow you to react to lessen the blow.</p><p>Describe your reaction, make a roll, and spend your Power to buy down the Consequences (1 Power per status tier, 2 Power per tag).</p><ul><li><p>10 or more: Spend Power+1, on any Effect</p></li><li><p>7-9: Spend Power, only to lessen</p></li><li><p>6 or less: Take the full Consequences</p></li></ul><h3 class=\"with-line\">Hero Development</h3><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>IMPROVE:</strong> Mark whenever the theme's weakness tag is invoked. When full, choose a new power tag or Special Improvement for that theme and reset the track</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>ABANDON:</strong> Mark whenever you ignore or betray the theme's Quest. When full, your theme is <strong>replaced</strong>.</p></div><div class=\"line-with-image\"><img src=\"systems/mist-engine-fvtt/assets/icons/improve-tracker.webp\"><p><strong>MILESTONE:</strong> Mark whenever you achieve a goal of the theme's Quest. When full, your theme evolves.</p></div>",
+    "customFontColor": ""
   },
   "items": [
     {
@@ -114,49 +115,49 @@
       "system": {
         "items": [
           {
-            "name": "Focusing wand of hazel",
+            "name": "Focusing Wand of Hazel",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "A small cauldron",
+            "name": "A Small Cauldron",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Poison-neutralizing balm",
+            "name": "Poison-neutralizing Balm",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Wide straw hat",
+            "name": "Wide Straw Hat",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Charm against accident",
+            "name": "Charm against Accident",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Warm knitted sweater",
+            "name": "Warm Knitted Sweater",
             "burned": false,
             "toBurn": false,
             "planned": false,
             "selected": false
           },
           {
-            "name": "Dried fruit bag",
+            "name": "Dried Fruit Bag",
             "burned": false,
             "toBurn": false,
             "planned": false,
@@ -174,20 +175,19 @@
       "effects": [],
       "folder": null,
       "sort": 0,
-      "ownership": {
-        "default": 0,
-        "wgZHyBDokH67OG0A": 3
-      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.6.2",
+        "systemVersion": "13.7.9.2",
         "lastModifiedBy": null
       },
-      "_key": "!actors.items!xvDBNlUQmdZhhu8I.6xTIReZQg7jJioVx"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!wgniQ6W1R9qTxop5.6xTIReZQg7jJioVx"
     },
     {
       "folder": "BmgEu8IcX0N16vpv",
@@ -206,7 +206,7 @@
           "planned": false,
           "selected": false,
           "question": "",
-          "name": "APOTHECARY"
+          "name": "Apothecary"
         },
         "powertag2": {
           "burned": false,
@@ -334,15 +334,71 @@
         ],
         "type": "litm-origin",
         "quest": "“Well, I couldn’t just leave them sick!”",
-        "story": "An old traditional herbalist, Rosamund has been \nthe primary physician of Ravenhome for many \nyears, despite living in the woods on the edge of the \ndale some distance away from the village. When \nsomeone in the dale falls ill or stumbles into a bush \nof poison brambles, they send for her. Rosamund \nknows a remedy for just about any ailment, bur her \ngruf f  attitude is no balm for the soul."
+        "story": "An old traditional herbalist, Rosamund has been \nthe primary physician of Ravenhome for many \nyears, despite living in the woods on the edge of the \ndale some distance away from the village. When \nsomeone in the dale falls ill or stumbles into a bush \nof poison brambles, they send for her. Rosamund \nknows a remedy for just about any ailment, bur her \ngruf f  attitude is no balm for the soul.",
+        "powertags": [
+          {
+            "name": "Apothecary",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Medicine bag",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Quick diagnosis",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Respected physician",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Wondrous concoctions",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Forage for ingredients",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          }
+        ],
+        "weaknesstags": [
+          {
+            "name": "Poor bedside manners",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          }
+        ],
+        "tabCategory": "main"
       },
       "effects": [],
       "sort": 0,
-      "ownership": {
-        "default": 0,
-        "b16EOKUCwwbnVrnm": 3,
-        "wgZHyBDokH67OG0A": 3
-      },
       "flags": {},
       "_stats": {
         "compendiumSource": null,
@@ -350,10 +406,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.6.2",
+        "systemVersion": "13.7.9.2",
         "lastModifiedBy": null
       },
-      "_key": "!actors.items!xvDBNlUQmdZhhu8I.vLcwxbJZtsjT1Ifk"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!wgniQ6W1R9qTxop5.vLcwxbJZtsjT1Ifk"
     },
     {
       "folder": "JuEAktEDADzvlIae",
@@ -372,7 +431,7 @@
           "planned": false,
           "selected": false,
           "question": "",
-          "name": "OLDWAYS  PRACTITIONER"
+          "name": "Oldways Practitioner"
         },
         "powertag2": {
           "burned": false,
@@ -380,7 +439,7 @@
           "planned": false,
           "selected": false,
           "question": "",
-          "name": "Ancient Dalish lore"
+          "name": "Ancient dalish lore"
         },
         "powertag3": {
           "burned": false,
@@ -412,7 +471,7 @@
           "planned": true,
           "selected": false,
           "question": "",
-          "name": "See the Unseen"
+          "name": "See the unseen"
         },
         "powertag7": {
           "burned": false,
@@ -500,15 +559,72 @@
         ],
         "type": "litm-variable",
         "quest": "“I should find a worthy apprentice to whom the Oldways shall pass.",
-        "story": "Rosamund also serves as the reluctant local \nWise One, a mystical mediator with the Unseen. \nShe is a disciple of the Oldways, a collection \nof traditions and ritual practices passed down \nthrough generations, able to sense otherwordly \ninfl uences, invite protective and benevolent \nauras, and banish malicious Creatures of \nTwilight. But this old teaching is slowly fading \nout of memory, and the aging Wise One may be \none of its last followers."
+        "story": "Rosamund also serves as the reluctant local \nWise One, a mystical mediator with the Unseen. \nShe is a disciple of the Oldways, a collection \nof traditions and ritual practices passed down \nthrough generations, able to sense otherwordly \ninfl uences, invite protective and benevolent \nauras, and banish malicious Creatures of \nTwilight. But this old teaching is slowly fading \nout of memory, and the aging Wise One may be \none of its last followers.",
+        "color": "litm-origin",
+        "powertags": [
+          {
+            "name": "Oldways Practitioner",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Ancient dalish lore",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Wards and protections",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Strength in spirit",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Banishing rites",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "See the unseen",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          }
+        ],
+        "weaknesstags": [
+          {
+            "name": "Invocations must be spoken",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          }
+        ],
+        "tabCategory": "main"
       },
       "effects": [],
       "sort": 0,
-      "ownership": {
-        "default": 0,
-        "b16EOKUCwwbnVrnm": 3,
-        "wgZHyBDokH67OG0A": 3
-      },
       "flags": {},
       "_stats": {
         "compendiumSource": null,
@@ -516,10 +632,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.6.2",
+        "systemVersion": "13.7.9.2",
         "lastModifiedBy": null
       },
-      "_key": "!actors.items!xvDBNlUQmdZhhu8I.o5qbpBEhokXquzJF"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!wgniQ6W1R9qTxop5.o5qbpBEhokXquzJF"
     },
     {
       "folder": "BmgEu8IcX0N16vpv",
@@ -538,7 +657,7 @@
           "planned": false,
           "selected": false,
           "question": "",
-          "name": "OUTLAND  RECLUSE"
+          "name": "Outland Recluse"
         },
         "powertag2": {
           "burned": false,
@@ -570,7 +689,7 @@
           "planned": true,
           "selected": false,
           "question": "",
-          "name": "Self-suffi cient"
+          "name": "Self-sufficient"
         },
         "powertag6": {
           "burned": false,
@@ -666,15 +785,71 @@
         ],
         "type": "litm-origin",
         "quest": "“I am better out here.“",
-        "story": "Despite her sense of responsibility, Rosamund has never really liked people; she left Ravenhome for a rustic cabin in the woods. Living alone with the dangers of the wild has tempered her and taught her to rely on herself, but the solitude has done little for her disposition. It doesn’t help that at times, she comes upon strange and wondrous Creatures in the woods that only sight beyond sight can reveal."
+        "story": "Despite her sense of responsibility, Rosamund has never really liked people; she left Ravenhome for a rustic cabin in the woods. Living alone with the dangers of the wild has tempered her and taught her to rely on herself, but the solitude has done little for her disposition. It doesn’t help that at times, she comes upon strange and wondrous Creatures in the woods that only sight beyond sight can reveal.",
+        "powertags": [
+          {
+            "name": "Outland Recluse",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Twilight encounters",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Tough cookie",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Hideaway",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Self-sufficient",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Woodland companions",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          }
+        ],
+        "weaknesstags": [
+          {
+            "name": "Grumpy",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          }
+        ],
+        "tabCategory": "main"
       },
       "effects": [],
       "sort": 0,
-      "ownership": {
-        "default": 0,
-        "b16EOKUCwwbnVrnm": 3,
-        "wgZHyBDokH67OG0A": 3
-      },
       "flags": {},
       "_stats": {
         "compendiumSource": null,
@@ -682,10 +857,13 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.6.2",
+        "systemVersion": "13.7.9.2",
         "lastModifiedBy": null
       },
-      "_key": "!actors.items!xvDBNlUQmdZhhu8I.N9kkYIP41WuYIn6l"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!wgniQ6W1R9qTxop5.N9kkYIP41WuYIn6l"
     },
     {
       "folder": "BmgEu8IcX0N16vpv",
@@ -704,7 +882,7 @@
           "planned": false,
           "selected": false,
           "question": "",
-          "name": "SEEN a THING or TWO"
+          "name": "Seen a Thing or Two"
         },
         "powertag2": {
           "burned": false,
@@ -832,15 +1010,71 @@
         ],
         "type": "litm-origin",
         "quest": "“It’s hard to surprise an old soul.”",
-        "story": "Rosamund has too little patience to let wear and tear slow her down. Proud of the wisdom and knowledge she accumulated over the years, she secretly enjoys the admiration it brings her. Don’t get her started on one of her tales; she may not like to hear other chatter but she certainly likes to retell old stories. Savvy villagers also know not to try to excuse themselves, as lying to the old witch rarely fares well."
+        "story": "Rosamund has too little patience to let wear and tear slow her down. Proud of the wisdom and knowledge she accumulated over the years, she secretly enjoys the admiration it brings her. Don’t get her started on one of her tales; she may not like to hear other chatter but she certainly likes to retell old stories. Savvy villagers also know not to try to excuse themselves, as lying to the old witch rarely fares well.",
+        "powertags": [
+          {
+            "name": "Seen a Thing or Two",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Storyteller",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Can’t fool me",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          },
+          {
+            "name": "Trusty walking stick",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Cautious",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          },
+          {
+            "name": "Stubborn rebuff",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": true,
+            "selected": false
+          }
+        ],
+        "weaknesstags": [
+          {
+            "name": "Old bones",
+            "question": "",
+            "burned": false,
+            "toBurn": false,
+            "planned": false,
+            "selected": false
+          }
+        ],
+        "tabCategory": "main"
       },
       "effects": [],
       "sort": 0,
-      "ownership": {
-        "default": 0,
-        "b16EOKUCwwbnVrnm": 3,
-        "wgZHyBDokH67OG0A": 3
-      },
       "flags": {},
       "_stats": {
         "compendiumSource": null,
@@ -848,17 +1082,16 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "mist-engine-fvtt",
-        "systemVersion": "13.6.2",
+        "systemVersion": "13.7.9.2",
         "lastModifiedBy": null
       },
-      "_key": "!actors.items!xvDBNlUQmdZhhu8I.Zq8KUUt40y3H1FjG"
+      "ownership": {
+        "default": 0
+      },
+      "_key": "!actors.items!wgniQ6W1R9qTxop5.Zq8KUUt40y3H1FjG"
     }
   ],
   "effects": [],
-  "ownership": {
-    "default": 0,
-    "wgZHyBDokH67OG0A": 3
-  },
   "flags": {},
   "_stats": {
     "compendiumSource": null,
@@ -866,12 +1099,16 @@
     "exportSource": null,
     "coreVersion": "13.351",
     "systemId": "mist-engine-fvtt",
-    "systemVersion": "13.6.2",
-    "createdTime": 1771328723937,
-    "modifiedTime": 1771328725489,
+    "systemVersion": "13.7.9.2",
+    "createdTime": 1774946552164,
+    "modifiedTime": 1774946553592,
     "lastModifiedBy": "wgZHyBDokH67OG0A"
   },
-  "_id": "xvDBNlUQmdZhhu8I",
+  "ownership": {
+    "default": 0,
+    "wgZHyBDokH67OG0A": 3
+  },
+  "_id": "wgniQ6W1R9qTxop5",
   "sort": 300000,
-  "_key": "!actors!xvDBNlUQmdZhhu8I"
+  "_key": "!actors!wgniQ6W1R9qTxop5"
 }
