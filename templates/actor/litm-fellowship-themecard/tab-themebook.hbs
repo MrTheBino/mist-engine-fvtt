@@ -1,20 +1,34 @@
-<section class="tab {{tabs.themebook.id}} {{tabs.themebook.cssClass}} scrollable"
-    id="themebook" data-tab="{{tabs.themebook.id}}"
-    data-group="{{tabs.themebook.group}}">
+<section class="tab {{tabs.themebook.id}} {{tabs.themebook.cssClass}} scrollable" id="themebook"
+    data-tab="{{tabs.themebook.id}}" data-group="{{tabs.themebook.group}}">
     <div class="themebook-container">
         <p class="help-text">{{localize "MIST_ENGINE.HELP.FelllowshipThemeCardExplanation"}}</p>
         <div class="themebook-style fellowship flexcol">
             <div class="powertags-container">
+                <div class="themebook-section-header clickable" data-action="addEmptyPowertag"
+                    data-item-id="{{themebook._id}}">
+                    <i class="fas fa-plus add-line-icon " title="{{localize " MIST_ENGINE.LABELS.AddPowertag"}}"></i>
+                    {{localize
+                    "MIST_ENGINE.LABELS.AddPowertag"}}
+                </div>
                 {{#each system.powertags as |powertag index|}}
-                {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-powertag-line.hbs" index=index powertag=powertag}}
+                {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-powertag-line.hbs" index=index
+                powertag=powertag}}
                 {{/each}}
 
+                <div class="themebook-section-header clickable" data-action="addEmptyWeaknessTag"
+                    data-item-id="{{themebook._id}}">
+                    <i class="fas fa-plus add-line-icon " title="{{localize " MIST_ENGINE.LABELS.AddWeaknesstag"}}"></i>
+                    {{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}}
+                </div>
                 {{#each system.weaknesstags as |weakness index|}}
-                {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-weakness-line.hbs" index=index weakness=weakness}}
+                {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-weakness-line.hbs" index=index
+                weakness=weakness}}
                 {{/each}}
             </div>
             <div class="quest-container">
-                    <textarea class="themebook-entry-input quest-textarea" data-item-id="{{themebook._id}}" data-key="system.quest" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.QuestGoal'}}">{{system.quest}}</textarea>
+                <textarea class="themebook-entry-input quest-textarea" data-item-id="{{themebook._id}}"
+                    data-key="system.quest"
+                    placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.QuestGoal'}}">{{system.quest}}</textarea>
             </div>
         </div>
     </div>

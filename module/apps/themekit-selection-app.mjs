@@ -155,6 +155,22 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
             themebookData.system.powertags = this.currentSelectedThemekit.system.powertags.map(tag => ({ name: tag.name }));
         }
 
+        // we set the first three as active (not planned) and the other ones as planned
+        if(themebookData.system.powertags && themebookData.system.powertags.length > 0){
+            themebookData.system.powertags = themebookData.system.powertags.map((tag, index) => ({ ...tag, planned: index >= 3 }));
+        }
+
+
+        // we copy the weaknesstags from the themekit to the new themebook
+        if(this.currentSelectedThemekit.system.weaknesstags && this.currentSelectedThemekit.system.weaknesstags.length > 0){
+            themebookData.system.weaknesstags = this.currentSelectedThemekit.system.weaknesstags.map(tag => ({ name: tag.name }));
+        }
+
+        // we set the first one as active (not planned) and the other ones as planned
+        if(themebookData.system.weaknesstags && themebookData.system.weaknesstags.length > 0){
+            themebookData.system.weaknesstags = themebookData.system.weaknesstags.map((tag, index) => ({ ...tag, planned: index >= 1 }));
+        }
+
         // now we create the themebook item in the actor's inventory
         await this.actor.createEmbeddedDocuments("Item", [themebookData]);
         ui.notifications.info( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedThemekit", { themekitName: this.currentSelectedThemekit.name, actorName: this.actor.name }));

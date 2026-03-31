@@ -881,13 +881,25 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     static async #handleAddEmptyPowertag(event, target) {
         event.preventDefault();
+        this._saveScrollPositions();
+        
         const itemId = target.dataset.itemId;
+        const source = target.dataset.source;
+        if(source === "fellowship-themecard") {
+            if (this.actorFellowshipThemecard) {
+                let powertags = this.actorFellowshipThemecard.system.powertags || [];
+                powertags.push({ name: "New Powertag", value: "" });
+                await this.actorFellowshipThemecard.update({ "system.powertags": powertags });
+            }
+            return;
+        }
         const item = this.actor.items.get(itemId);
+        
         if (!item) {
             console.error("Item not found for adding powertag", { itemId });
             return;
         }
-        this._saveScrollPositions();
+        
         let powertags = item.system.powertags || [];
         powertags.push({ name: "New Powertag", value: "" });
         await item.update({ "system.powertags": powertags });
@@ -895,13 +907,24 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     static async #handleAddEmptyWeaknessTag(event, target) {
         event.preventDefault();
+        this._saveScrollPositions();
         const itemId = target.dataset.itemId;
+        const source = target.dataset.source;
+        if(source === "fellowship-themecard") {
+            if (this.actorFellowshipThemecard) {
+                let weaknesses = this.actorFellowshipThemecard.system.weaknesstags || [];
+                weaknesses.push({ name: "New Weakness", value: "" });
+                await this.actorFellowshipThemecard.update({ "system.weaknesstags": weaknesses });
+            }
+            return;
+        }
+
         const item = this.actor.items.get(itemId);
         if (!item) {
             console.error("Item not found for adding weakness", { itemId });
             return;
         }
-        this._saveScrollPositions();
+        
         let weaknesses = item.system.weaknesstags || [];
         weaknesses.push({ name: "New Weakness", value: "" });
         await item.update({ "system.weaknesstags": weaknesses });
@@ -910,15 +933,30 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     static async #handleDeletePowertag(event, target) {
         event.preventDefault();
+        this._saveScrollPositions();
+
         const itemId = target.dataset.itemId;
         const index = target.dataset.index;
+        const source = target.dataset.source;
+        if(source === "fellowship-themecard") {
+            if (this.actorFellowshipThemecard) {
+                let powertags = this.actorFellowshipThemecard.system.powertags || [];
+                if (index < 0 || index >= powertags.length) {
+                    console.error("Invalid powertag index for deletion", { itemId, index });
+                    return;
+                }
+                powertags.splice(index, 1);
+                await this.actorFellowshipThemecard.update({ "system.powertags": powertags });
+            }
+            return;
+        }
         const item = this.actor.items.get(itemId);
         
         if (!item) {
             console.error("Item not found for deleting powertag", { itemId });
             return;
         }
-        this._saveScrollPositions();
+        
         let powertags = item.system.powertags || [];
         if (index < 0 || index >= powertags.length) {
             console.error("Invalid powertag index for deletion", { itemId, index });
@@ -930,15 +968,31 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     static async #handleDeleteWeaknessTag(event, target) {
         event.preventDefault();
+        this._saveScrollPositions();
+
         const itemId = target.dataset.itemId;
         const index = target.dataset.index;
+        const source = target.dataset.source;
+        if(source === "fellowship-themecard") {
+            if (this.actorFellowshipThemecard) {
+                let weaknesses = this.actorFellowshipThemecard.system.weaknesstags || [];
+                if (index < 0 || index >= weaknesses.length) {
+                    console.error("Invalid weakness index for deletion", { itemId, index });
+                    return;
+                }
+                weaknesses.splice(index, 1);
+                await this.actorFellowshipThemecard.update({ "system.weaknesstags": weaknesses });
+            }
+            return;
+        }
+
         const item = this.actor.items.get(itemId);
 
         if (!item) {
             console.error("Item not found for deleting weakness", { itemId });
             return;
         }
-        this._saveScrollPositions();
+        
         let weaknesses = item.system.weaknesstags || [];
         if (index < 0 || index >= weaknesses.length) {
             console.error("Invalid weakness index for deletion", { itemId, index });

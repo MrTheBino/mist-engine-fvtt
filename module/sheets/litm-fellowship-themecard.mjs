@@ -11,6 +11,10 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
             height: 850
         },
         actions: {
+            deletePowertag: this.#handleDeletePowertag,
+            deleteWeaknessTag: this.#handleDeleteWeaknessTag,
+            addEmptyPowertag: this.#handleAddEmptyPowertag,
+            addEmptyWeaknessTag: this.#handleAddEmptyWeaknessTag
         },
         form: {
             submitOnChange: true
@@ -82,5 +86,55 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
         //console.log("Value:", event.target.value);
         //console.log("Key:", event.target.dataset.key);
         await this.actor.update({ [event.target.dataset.key]: event.target.value });
+    }
+
+    /*
+        @override
+    */
+    static async #handleAddEmptyPowertag(event, target) {
+        event.preventDefault();
+
+        this._saveScrollPositions();
+        let powertags = this.actor.system.powertags || [];
+        powertags.push({ name: "New Powertag", value: "" });
+        await this.actor.update({ "system.powertags": powertags });
+    }
+
+    static async #handleAddEmptyWeaknessTag(event, target) {
+        event.preventDefault();
+        
+        this._saveScrollPositions();
+        let weaknesses = this.actor.system.weaknesstags || [];
+        weaknesses.push({ name: "New Weakness", value: "" });
+        await this.actor.update({ "system.weaknesstags": weaknesses });
+    }
+
+    static async #handleDeletePowertag(event, target) {
+        event.preventDefault();
+        const index = target.dataset.index;
+        
+        this._saveScrollPositions();
+        let powertags = this.actor.system.powertags || [];
+        if (index < 0 || index >= powertags.length) {
+            console.error("Invalid powertag index for deletion", { itemId, index });
+            return;
+        }
+        powertags.splice(index, 1);
+        await this.actor.update({ "system.powertags": powertags });
+    }
+
+    static async #handleDeleteWeaknessTag(event, target) {
+        event.preventDefault();
+        const index = target.dataset.index;
+
+        this._saveScrollPositions();
+        let weaknesses = this.actor.system.weaknesstags || [];
+        if (index < 0 || index >= weaknesses.length) {
+            console.error("Invalid weakness index for deletion", { index });
+            return;
+        }
+        
+        weaknesses.splice(index, 1);
+        await this.actor.update({ "system.weaknesstags": weaknesses });
     }
 }

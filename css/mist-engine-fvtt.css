@@ -41,7 +41,7 @@ body {
   background-image: url(../assets/separator.webp);
   background-repeat: no-repeat;
   height: 15px;
-  background-size: contain;
+  background-size: cover;
   margin-top: 10px;
 }
 
