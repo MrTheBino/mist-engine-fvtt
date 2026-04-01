@@ -332,93 +332,25 @@ body {
   font-weight: normal;
 }
 @font-face {
+  font-family: Labrada-italic;
+  src: url("../assets/fonts/Labrada-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
   font-family: Caveat-Regular;
   src: url("../assets/fonts/Caveat-Regular.ttf") format("truetype");
   font-weight: normal;
 }
 @font-face {
-  font-family: Fraunces;
-  src: url("../assets/fonts/fraunces.ttf") format("truetype");
+  font-family: Caveat-Regular;
+  src: url("../assets/fonts/Caveat-Regular.ttf") format("truetype");
   font-weight: normal;
-  font-style: normal;
 }
 @font-face {
-  font-family: Fraunces;
-  src: url("../assets/fonts/fraunces-i.ttf") format("truetype");
+  font-family: CaveatBrush-Regular;
+  src: url("../assets/fonts/CaveatBrush-Regular.ttf") format("truetype");
   font-weight: normal;
-  font-style: italic;
-}
-@font-face {
-  font-family: CaslonAntique;
-  src: url("../assets/fonts/caslon.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: CaslonAntique;
-  src: url("../assets/fonts/caslon-i.ttf") format("truetype");
-  font-weight: normal;
-  font-style: italic;
-}
-@font-face {
-  font-family: CaslonAntique;
-  src: url("../assets/fonts/caslon-b.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-@font-face {
-  font-family: CaslonAntique;
-  src: url("../assets/fonts/caslon-bi.ttf") format("truetype");
-  font-weight: bold;
-  font-style: italic;
-}
-@font-face {
-  font-family: LibreCaslonText;
-  src: url("../assets/fonts/caslon.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: LibreCaslonText;
-  src: url("../assets/fonts/caslon-i.ttf") format("truetype");
-  font-weight: normal;
-  font-style: italic;
-}
-@font-face {
-  font-family: LibreCaslonText;
-  src: url("../assets/fonts/caslon-b.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-@font-face {
-  font-family: LibreCaslonText;
-  src: url("../assets/fonts/caslon-bi.ttf") format("truetype");
-  font-weight: bold;
-  font-style: italic;
-}
-@font-face {
-  font-family: PackardAntique;
-  src: url("../assets/fonts/packard.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: PackardAntique;
-  src: url("../assets/fonts/packard-b.ttf") format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-@font-face {
-  font-family: AlchemyItalic;
-  src: url("../assets/fonts/alchemy-i.ttf") format("truetype");
-  font-weight: normal;
-  font-style: italic;
-}
-@font-face {
-  font-family: Ysgarth;
-  src: url("../assets/fonts/ysgarth.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
 }
 @font-face {
   font-family: ManuskriptAntique;
@@ -640,6 +572,13 @@ header.journal-page-header {
   color: #191813;
   font-family: Labrada, serif;
   font-size: 1.1em;
+}
+.journal-entry-content .written-block {
+  font-family: Caveat-Regular, cursive;
+}
+.journal-entry-content .written-block h2 {
+  font-family: CaveatBrush-Regular, cursive;
+  border-bottom: 0;
 }
 .journal-entry-content .themekit-box-container {
   display: flex;
@@ -2006,7 +1945,7 @@ article.cc-enriched section.journal-entry-content {
   font-weight: bold;
 }
 .mist-engine .litm-pc-powertag {
-  font-family: var(--litm-font-text);
+  font-family: Labrada-italic, serif;
   font-weight: normal;
   color: black;
   position: relative;
@@ -2043,7 +1982,7 @@ article.cc-enriched section.journal-entry-content {
   cursor: default;
 }
 .mist-engine .litm-pc-storytag {
-  font-family: var(--litm-font-text);
+  font-family: Labrada-italic, serif;
   font-weight: normal;
   color: black;
   min-height: 23px;
@@ -2085,8 +2024,7 @@ article.cc-enriched section.journal-entry-content {
   text-align: center;
 }
 .mist-engine .litm-pc-weakness {
-  font-family: var(--litm-font-text);
-  font-weight: normal;
+  font-family: Labrada-italic, serif;
   color: black;
   position: relative;
   text-align: center;
@@ -2109,13 +2047,13 @@ article.cc-enriched section.journal-entry-content {
   pointer-events: none;
 }
 .mist-engine .litm-pc-fellowship-relationship-companion {
-  font-family: var(--litm-font-text);
+  font-family: Labrada-italic, serif;
   font-weight: normal;
   color: black;
   margin-right: 5px;
 }
 .mist-engine .litm-pc-fellowship-relationship {
-  font-family: var(--litm-font-text);
+  font-family: Labrada-italic, serif;
   font-weight: normal;
   color: black;
   position: relative;
@@ -2140,7 +2078,7 @@ article.cc-enriched section.journal-entry-content {
   color: gray;
 }
 .mist-engine .litm-pc-quintessence {
-  font-family: var(--litm-font-text);
+  font-family: Labrada-italic, serif;
   font-weight: normal;
   color: black;
   flex-grow: 8;
@@ -2389,10 +2327,10 @@ article.cc-enriched section.journal-entry-content {
   padding: 2px;
 }
 .mist-engine .themebook-container .quest-container .quest-text {
-  font-family: var(--litm-font-text);
+  font-family: CCDreamland-Regular, serif;
   font-style: italic;
-  font-weight: normal;
-  font-size: 0.75rem;
+  font-weight: bold;
+  font-size: 0.8rem;
   line-height: 1.4;
   text-align: center;
   padding: 2px 10px;

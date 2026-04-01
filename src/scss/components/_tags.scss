@@ -1,5 +1,5 @@
 .litm-pc-powertag {
-    font-family: var(--litm-font-text);
+    font-family: $font-primary-italic;
     font-weight: normal;
     color: black;
     position: relative;
@@ -46,7 +46,7 @@
 
 
 .litm-pc-storytag {
-    font-family: var(--litm-font-text);
+    font-family: $font-primary-italic;
     font-weight: normal;
     color: black;
     min-height: 23px;
@@ -96,8 +96,7 @@
 }
 
 .litm-pc-weakness {
-    font-family: var(--litm-font-text);
-    font-weight: normal;
+    font-family: $font-primary-italic;
     color: black;
     position: relative;
     text-align: center;
@@ -124,14 +123,14 @@
 }
 
 .litm-pc-fellowship-relationship-companion {
-    font-family: var(--litm-font-text);
+    font-family: $font-primary-italic;
     font-weight: normal;
     color: black;
     margin-right: 5px;
 }
 
 .litm-pc-fellowship-relationship {
-    font-family: var(--litm-font-text);
+    font-family: $font-primary-italic;
     font-weight: normal;
     color: black;
     position: relative;
@@ -161,7 +160,7 @@
 }
 
 .litm-pc-quintessence {
-    font-family: var(--litm-font-text);
+    font-family: $font-primary-italic;
     font-weight: normal;
     color: black;
     flex-grow: 8;

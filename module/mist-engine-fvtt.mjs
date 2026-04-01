@@ -25,7 +25,6 @@ import * as models from "./data/_module.mjs";
 import { setupMistEngineKeyBindings } from "./lib/key-binding.mjs";
 import { setupConfiguration } from "./lib/configuration.mjs";
 import { showCharacterTokenHover } from "./lib/character-token-hover.mjs";
-import {Fonts} from "./lib/fonts.mjs";
 import { registerMigrationSettings, needsMigration, migrateWorld } from "./migration.mjs";
 
 /* -------------------------------------------- */
@@ -145,7 +144,6 @@ Hooks.once("init", function () {
   })
   
 
-  Fonts.register();
   setupMistEngineKeyBindings();
   setupConfiguration();
   registerMigrationSettings();

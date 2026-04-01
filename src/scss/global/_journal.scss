@@ -10,6 +10,14 @@ header.journal-page-header{
     font-family: $font-primary;
     font-size: 1.1em;
 
+    .written-block{
+        font-family: $font-written;
+        h2{
+            font-family: $font-written-brush;
+            border-bottom: 0;
+        }
+    }
+    
     .themekit-box-container{
          display: flex;
         flex-direction: row;
