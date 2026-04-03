@@ -405,8 +405,10 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                     foundry.utils.setProperty(item, keyToUpdate, event.target.checked);
                     item.update({ [arrayName]: array });
                 } else {
-                    foundry.utils.setProperty(item, arrayName + "." + key, event.target.value);
-                    item.update({ [arrayName]: array });
+                    // fetch the array and set the value at the right index
+                    let tArray = foundry.utils.getProperty(item, arrayName);
+                    tArray[index][key] = event.target.value;
+                    await item.update({ [arrayName]: array });
                 }
             }
             // update for hashmaps

@@ -15,7 +15,7 @@ const MIGRATION_VERSION_KEY = "systemMigrationVersion";
 
 /**
  * Collect a numbered tag series from raw system data into a plain array,
- * skipping entries that have no name.
+ * skipping entries where both name and question are empty.
  *
  * @param {object} sys   - item.system (plain object from _source or live data)
  * @param {string} prefix - e.g. "powertag" or "weaknesstag"
@@ -26,7 +26,8 @@ function collectNumberedTags(sys, prefix, count) {
     const result = [];
     for (let i = 1; i <= count; i++) {
         const tag = sys[`${prefix}${i}`];
-        if (!tag || !tag.name?.trim()) continue;
+        console.log(`Collecting ${prefix}${i}:`, tag);
+        if (!tag || (!tag.name?.trim() && !tag.question?.trim())) continue;
         result.push({
             name:     tag.name     ?? "",
             question: tag.question ?? "",
@@ -121,16 +122,26 @@ export async function migrateWorld() {
  * @returns {{ _id: string, "system.powertags": object[], "system.weaknesstags": object[] } | null}
  */
 function buildFellowshipActorUpdate(actor) {
-    if (actor.type !== "litm-fellowship-themecard") return null;
+    if (actor.type !== "litm-fellowship-themecard"){
+        return null;
+    } 
+    console.log(`Checking fellowship themecard actor "${actor.name}" for powertag/weaknesstag migration...`);
 
     const sys = actor.system;
 
-    if (sys.powertags?.length > 0 || sys.weaknesstags?.length > 0) return null;
+    if (sys.powertags?.length > 0 || sys.weaknesstags?.length > 0){
+        console.log(`Fellowship themecard actor "${actor.name}" already has powertags/weaknesstags, skipping migration.`);
+        return null;
+    }
 
+    console.log("sys.powertag1:", sys.powertag1);
     const powertags    = collectNumberedTags(sys, "powertag",    10);
     const weaknesstags = collectNumberedTags(sys, "weaknesstag",  4);
 
-    if (!powertags.length && !weaknesstags.length) return null;
+    if (!powertags.length && !weaknesstags.length) {
+        console.log(`Fellowship themecard actor "${actor.name}" has no powertags/weaknesstags, skipping migration.`);
+        return null;
+    }
 
     return {
         _id: actor.id,
