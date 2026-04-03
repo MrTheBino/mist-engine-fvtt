@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# 14.0.0 "Happy Eastern!"
+- Foundry 14 compatible
+- migration to unlimited powertags & weaknesstags for characters
+- lots of small improvements
+
+MAKE BACKUP OF YOUR WORLD BEFORE USING THIS VERSION!
+
+A small roadmap:
+
+- options for themebooks so they behave like simple tag containers if wanted (e.g story themes or whatever)
+- improvements for themekits
+- unified coloring of tags, statuses and improvements on their look
+- huge improvements for challenges regarding their look
+
 # 13.7.9.2
 - hotfix for scene app while activating another scene
   
