@@ -1,6 +1,6 @@
 # CHANGELOG
 
-# 14.0.0 "Happy Eastern!"
+# 14.0.0 "Happy Easter!"
 - Foundry 14 compatible
 - migration to unlimited powertags & weaknesstags for characters
 - lots of small improvements
