@@ -64,7 +64,12 @@
             {{#each system.threatsAndConsequences as |threat|}}
             <div class="entry">
                 <div class="entry-header">
-                    <span class="entry-name">{{threat.name}}</span> <strong>{{{textWithTags threat.description}}}</strong>
+                    {{#if (notEmpty threat.name)}}
+                        <span class="entry-name">{{threat.name}}</span>
+                    {{/if}}
+                    {{#if (notEmpty threat.description)}}
+                        <strong>{{{textWithTags threat.description}}}</strong>
+                    {{/if}}
                 </div>
                 <ul class="entry-list">
                     {{#each threat.list as |entry|}}
