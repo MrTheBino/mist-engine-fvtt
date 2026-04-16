@@ -11,11 +11,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
 
       # run the npm command 'npm run pack-compendiums' to create the compendium packs before creating the release, so I need to set up node first
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v6
         with:
           node-version: '25' # Specify the Node.js version you want to use
       - name: Install Dependencies
