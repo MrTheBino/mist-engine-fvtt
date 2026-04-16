@@ -4,6 +4,7 @@ import { MistSceneApp } from '../apps/scene-app.mjs';
 import { ThemekitCharacterApp } from '../apps/themekit-character-app.mjs';
 import { ThemekitSelectionApp } from '../apps/themekit-selection-app.mjs';
 import { MistEngineActorSheet } from './actor-sheet.mjs';
+import { ThemeKitAdapter } from '../lib/themekit-adapter.mjs';
 
 export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -876,6 +877,22 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         });
         console.log("themekit removed from themebook ", themebook.name);
         this.render();
+    }
+
+    /** @override */
+    async _onDrop(event) {
+        const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
+
+        if (data.type === "Item") {
+            const item = await fromUuid(data.uuid);
+            if (item?.type === "themekit") {
+                const adapter = new ThemeKitAdapter();
+                await adapter.importThemekitToCharacter(this.actor, item);
+                return;
+            }
+        }
+
+        return super._onDrop(event);
     }
 
     enableMoveThemebookContextMenu() {

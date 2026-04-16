@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 14.1.0 
+- drag'n'drop support for themekits onto a character ([Feature Request] Themekit interface improvements and/or Drag-and-Drop for Themekits. #53)
+- added themebook types (Origin, Greatness etc) to themekits
+- fix: first powertag of a themebook is bigger in size
+
 # 14.0.0 "Happy Easter!"
 - Foundry 14 compatible
 - migration to unlimited powertags & weaknesstags for characters

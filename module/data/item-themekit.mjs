@@ -1,6 +1,7 @@
 import MistEngineItemBase from "./base-item.mjs";
 import {buildPowerTag,buildSpecialImprovements} from "./util.mjs";
-export default class MistEngineItemBackpack extends MistEngineItemBase {
+
+export default class MistEngineItemThemekit extends MistEngineItemBase {
 
     static defineSchema() {
         const fields = foundry.data.fields;
@@ -9,6 +10,7 @@ export default class MistEngineItemBackpack extends MistEngineItemBase {
         const requiredInteger = { required: true, nullable: false, integer: true };
 
         schema.themekit_type = new fields.StringField({ blank: true });
+        schema.themebook_type = new fields.StringField({ blank: true });
         
         schema.quest = new fields.StringField({ blank: true });
         schema.story = new fields.StringField({ blank: true });

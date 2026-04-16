@@ -595,7 +595,11 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         });
 
         if (this.currentSceneId && !this.currentSceneDataItem) {
-            // ToDo: is this the correct way? maybe move them to a compendium?
+            // check if the current user is gm
+            if (!game.user.isGM) {
+                return;
+            }
+
             Item.create({
                 name: `Scene Data: ${this.currentSceneName}`,
                 type: "scene-data",

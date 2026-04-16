@@ -41,6 +41,13 @@
             cursor: default;
         }
     }
+
+    &.first{
+        font-weight: 600;
+        font-size: 1.2em; 
+        line-height:1.2em; 
+        top:-5px;
+    }
 }
 
 

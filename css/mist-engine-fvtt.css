@@ -1981,6 +1981,12 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .litm-pc-powertag.empty:hover {
   cursor: default;
 }
+.mist-engine .litm-pc-powertag.first {
+  font-weight: 600;
+  font-size: 1.2em;
+  line-height: 1.2em;
+  top: -5px;
+}
 .mist-engine .litm-pc-storytag {
   font-family: Labrada-italic, serif;
   font-weight: normal;

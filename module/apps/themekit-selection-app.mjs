@@ -1,5 +1,5 @@
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
-
+import { ThemeKitAdapter } from '../lib/themekit-adapter.mjs';
 
 export class ThemekitSelectionApp extends HandlebarsApplicationMixin(ApplicationV2) {
     currentSelectedThemekit = null;
@@ -136,43 +136,7 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
             this.close();
             return;
         }
-
-        // first we create a themebook item from the selected themekit
-        // we use the themekit_type as the name for the themebook, then we set the themeKitUUID to the uuid of the selected themekit, we also copy the quest and story fields from the themekit to the themebook
-        const themebookData = {
-            name: this.currentSelectedThemekit.system.themekit_type || "Themebook",
-            type: "themebook",
-            system: {
-                themeKitUUID: this.currentSelectedThemekit.uuid,
-                quest: this.currentSelectedThemekit.system.quest,
-                story: this.currentSelectedThemekit.system.story,
-                type: "litm-origin"
-            }
-        };
-
-        // copy powertags from the themekit to the new themebook
-        if(this.currentSelectedThemekit.system.powertags && this.currentSelectedThemekit.system.powertags.length > 0){
-            themebookData.system.powertags = this.currentSelectedThemekit.system.powertags.map(tag => ({ name: tag.name }));
-        }
-
-        // we set the first three as active (not planned) and the other ones as planned
-        if(themebookData.system.powertags && themebookData.system.powertags.length > 0){
-            themebookData.system.powertags = themebookData.system.powertags.map((tag, index) => ({ ...tag, planned: index >= 3 }));
-        }
-
-
-        // we copy the weaknesstags from the themekit to the new themebook
-        if(this.currentSelectedThemekit.system.weaknesstags && this.currentSelectedThemekit.system.weaknesstags.length > 0){
-            themebookData.system.weaknesstags = this.currentSelectedThemekit.system.weaknesstags.map(tag => ({ name: tag.name }));
-        }
-
-        // we set the first one as active (not planned) and the other ones as planned
-        if(themebookData.system.weaknesstags && themebookData.system.weaknesstags.length > 0){
-            themebookData.system.weaknesstags = themebookData.system.weaknesstags.map((tag, index) => ({ ...tag, planned: index >= 1 }));
-        }
-
-        // now we create the themebook item in the actor's inventory
-        await this.actor.createEmbeddedDocuments("Item", [themebookData]);
-        ui.notifications.info( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedThemekit", { themekitName: this.currentSelectedThemekit.name, actorName: this.actor.name }));
+        
+        await ThemeKitAdapter.importThemekitToCharacter(this.actor, this.currentSelectedThemekit);
     }
 }
