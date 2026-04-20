@@ -27,6 +27,10 @@ export default class MistEngineItemThemeBook extends MistEngineItemBase {
         schema.powertags = new fields.ArrayField(buildPowerTag(), { min: 0, required: false });
         schema.weaknesstags = new fields.ArrayField(buildPowerTag(), { min: 0, required: false });
 
+        schema.options = new fields.SchemaField({
+            isStoryTheme: new fields.BooleanField({ initial: false }),
+        });
+
 
         // deprecated old schema definitions for powertags & weaknesstags, we keep them for now to avoid breaking existing themebooks, but they will be removed in a future update
         schema.powertag1 = new fields.SchemaField({

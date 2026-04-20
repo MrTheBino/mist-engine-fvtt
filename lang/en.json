@@ -77,7 +77,10 @@
       "SpecialImprovements": "Special Improvements",
       "Fellowship": "Fellowship",
       "Backpack": "Backpack",
-      "Quintessences": "Quintessences"
+      "Quintessences": "Quintessences",
+      "Options":{
+        "IsStoryTheme": "Is Story Theme"
+      }
     },
     "ROLL_TYPES": {
       "quick": "Quick Roll",
@@ -85,6 +88,7 @@
       "reaction": "Reaction Roll"
     },
     "LABELS": {
+      "Options": "Options",
       "AddPowertag": "Powertags",
       "AddWeaknesstag": "Weaknesses",
       "Other": "Other",
@@ -184,7 +188,7 @@
     },
     "Item": {
       "item": "Item",
-      "themebook": "Theme Book",
+      "themebook": "Theme Book / Story Theme",
       "scene-data": "Scene Data",
       "quintessence": "Quintessence",
       "shortchallenge": "Short Challenge / Vignette",
