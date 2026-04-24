@@ -1,0 +1,11 @@
+<section class="tab {{tabs.options.id}} {{tabs.options.cssClass}} scrollable" id="options" data-tab="{{tabs.options.id}}"
+    data-group="{{tabs.options.group}}">
+    <div class="box-shadowed-container">
+        <div class="flexrow">
+            <label>
+                {{localize "MIST_ENGINE.THEMEBOOKS.Options.IsStoryTheme"}}
+            </label>
+            <input type="checkbox" name="system.options.isStoryTheme" {{#if system.options.isStoryTheme}}checked{{/if}} />
+        </div>
+    </div>
+</section>

@@ -50,6 +50,9 @@ export class MistEngineThemebookItemSheet extends MistEngineItemSheet {
         form: {
             template: 'systems/mist-engine-fvtt/templates/item/item-themebook-sheet.hbs',
         },
+        options: {
+            template: 'systems/mist-engine-fvtt/templates/item/parts/themebook-options-tab.hbs',
+        },
         description: {
             template: 'systems/mist-engine-fvtt/templates/shared/tab-description.hbs',
             id: 'description',
@@ -66,6 +69,7 @@ export class MistEngineThemebookItemSheet extends MistEngineItemSheet {
             tabs:
                 [
                     { id: 'form', group: 'sheet', label: 'MIST_ENGINE.LABELS.Form' },
+                    { id: 'options', group: 'sheet', label: 'MIST_ENGINE.LABELS.Options' },
                     { id: 'description', group: 'sheet', label: 'MIST_ENGINE.LABELS.Description' },
                 ],
             initial: 'form'

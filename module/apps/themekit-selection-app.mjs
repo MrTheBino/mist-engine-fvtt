@@ -136,7 +136,7 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
             this.close();
             return;
         }
-        
-        await ThemeKitAdapter.importThemekitToCharacter(this.actor, this.currentSelectedThemekit);
+        const adapter = new ThemeKitAdapter();
+        await adapter.importThemekitToCharacter(this.actor, this.currentSelectedThemekit);
     }
 }

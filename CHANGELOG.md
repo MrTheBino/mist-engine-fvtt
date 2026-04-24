@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 14.2.0
+- themekits have a new option called "story theme", which hides quests, storys, improvements etc, to make them a Story Theme
+- fixed a bug in open and using a themekit selection app
+  
 # 14.1.0 
 - drag'n'drop support for themekits onto a character ([Feature Request] Themekit interface improvements and/or Drag-and-Drop for Themekits. #53)
 - added themebook types (Origin, Greatness etc) to themekits

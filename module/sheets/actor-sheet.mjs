@@ -705,7 +705,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                     }
                 }
             default:
-                console.warn("Unknown drop type", data);
+                //console.warn("Unknown drop type", data);
                 break;
         }
 

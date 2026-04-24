@@ -14,18 +14,20 @@
             {{/if}}
         </h2>
         </div>
-        {{#if editMode}}
-            <div class="themekit-container">
-                {{#if themebook.system.hasAssignedThemekit}}
-                    <p>
-                        <strong data-action="openThemekitCharacterApp" class="clickable" data-themebook-id="{{themebook._id}}">{{themebook.system.themekit.name}} <i class="fa-solid fa-circle-arrow-up"></i></strong>
-                        <strong><i class="fa-solid fa-trash clickable" data-action="removeThemekit" data-themebook-id="{{themebook._id}}"></i></strong>
-                    </p>
-                {{else}}
-                    <button class="themekit-button" data-action="openThemekitSelection" data-themebook-id="{{themebook._id}}">{{localize "MIST_ENGINE.THEMEKITS.SelectThemekit"}}</button>
-                {{/if}}
-           </div>
-        {{/if}}
+        {{#unless themebook.system.options.isStoryTheme}}
+            {{#if editMode}}
+                <div class="themekit-container">
+                    {{#if themebook.system.hasAssignedThemekit}}
+                        <p>
+                            <strong data-action="openThemekitCharacterApp" class="clickable" data-themebook-id="{{themebook._id}}">{{themebook.system.themekit.name}} <i class="fa-solid fa-circle-arrow-up"></i></strong>
+                            <strong><i class="fa-solid fa-trash clickable" data-action="removeThemekit" data-themebook-id="{{themebook._id}}"></i></strong>
+                        </p>
+                    {{else}}
+                        <button class="themekit-button" data-action="openThemekitSelection" data-themebook-id="{{themebook._id}}">{{localize "MIST_ENGINE.THEMEKITS.SelectThemekit"}}</button>
+                    {{/if}}
+            </div>
+            {{/if}}
+        {{/unless}}
         <div class="powertags-container">
             
             {{#if editMode}}
@@ -47,38 +49,49 @@
             {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-weakness-line.hbs" index=index id=../themebook._id      weaknesstag=weaknesstag editMode=../editMode tidyTags=../tidyTags}}
             {{/each}}
 
-            {{#if themebook.system.hasSpecialImprovements}}
-            <h3 class="special-improvement-section-label">{{localize 'MIST_ENGINE.LABELS.SpecialImprovements'}}</h3>
-            {{/if}}
-            {{#each themebook.system.specialImprovements as |specialImprovement index|}}
-            {{#if (notEmpty specialImprovement.name)}}
-            {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-special-improvement-line.hbs" index=index
-            id=../themebook._id
-            specialImprovement=specialImprovement editMode=../editMode}}
-            {{/if}}
-            {{/each}}
+            {{#unless themebook.system.options.isStoryTheme}}
+                {{#if themebook.system.hasSpecialImprovements}}
+                <h3 class="special-improvement-section-label">{{localize 'MIST_ENGINE.LABELS.SpecialImprovements'}}</h3>
+                {{/if}}
+            
+                {{#each themebook.system.specialImprovements as |specialImprovement index|}}
+                {{#if (notEmpty specialImprovement.name)}}
+                {{> "systems/mist-engine-fvtt/templates/shared/litm/themebook-special-improvement-line.hbs" index=index
+                id=../themebook._id
+                specialImprovement=specialImprovement editMode=../editMode}}
+                {{/if}}
+                {{/each}}
+            {{/unless}}
 
         </div>
         <div class="quest-container">
-            {{#if editMode}}
-            <textarea class="item-editable-stat quest-textarea" data-item-id={{themebook._id}}
-                data-item-stat="system.quest"
-                placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.QuestGoal'}}">{{themebook.system.quest}}</textarea>
-            <textarea class="item-editable-stat quest-textarea" data-item-id={{themebook._id}}
-                data-item-stat="system.story"
-                placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ThemebookStory'}}">{{themebook.system.story}}</textarea>
-            {{else}}
-            <h3>{{localize 'MIST_ENGINE.LABELS.Quest'}}</h3>
-            <p class="quest-text" data-tooltip="{{themebook.system.story}}" data-tooltip-direction="DOWN">{{themebook.system.quest}}</p>
-            {{/if}}
+            {{#unless themebook.system.options.isStoryTheme}}
+                {{#if editMode}}
+                <textarea class="item-editable-stat quest-textarea" data-item-id={{themebook._id}}
+                    data-item-stat="system.quest"
+                    placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.QuestGoal'}}">{{themebook.system.quest}}</textarea>
+                <textarea class="item-editable-stat quest-textarea" data-item-id={{themebook._id}}
+                    data-item-stat="system.story"
+                    placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ThemebookStory'}}">{{themebook.system.story}}</textarea>
+                {{else}}
+                <h3>{{localize 'MIST_ENGINE.LABELS.Quest'}}</h3>
+                <p class="quest-text" data-tooltip="{{themebook.system.story}}" data-tooltip-direction="DOWN">{{themebook.system.quest}}</p>
+                {{/if}}
+            {{/unless}}
         </div>
         <div class="development-container flexrow">
+            {{#unless themebook.system.options.isStoryTheme}}
             {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize
             'MIST_ENGINE.LABELS.Abandon') id=themebook._id key="system.abandon" value=themebook.system.abandon}}
+            {{/unless}}
+            {{#unless themebook.system.options.isStoryTheme}}
             {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize
             'MIST_ENGINE.LABELS.Improve') id=themebook._id key="system.improve" value=themebook.system.improve}}
+            {{/unless}}
+            {{#unless themebook.system.options.isStoryTheme}}
             {{> "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs" name=(localize
             'MIST_ENGINE.LABELS.Milestone') id=themebook._id key="system.milestone" value=themebook.system.milestone}}
+            {{/unless}}
         </div>
     </div>
 </div>
