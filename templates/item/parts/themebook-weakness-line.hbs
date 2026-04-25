@@ -1,4 +1,10 @@
 <div class="item-weakness-line flexrow">
-    <strong style="flex-grow:0.3;">{{questionIndexToLetter index}}</strong> <input type="text" name="system.weaknesstags.{{index}}.question" value="{{weakness.question}}" placeholder="{{weaknessTagQuestionPlaceholder index weakness.question}}" style="flex-grow:8;"/>
+    <strong style="flex-grow:0.3;">{{questionIndexToLetter index}}</strong> 
+    <input type="checkbox" name="system.weaknesstags.{{index}}.planned" style="flex-grow:0.3;" title="{{localize "MIST_ENGINE.HELP.Titles.PlannedWeaknessTag"}}"  {{#if weakness.planned}}checked{{/if}}/>
+    <input type="checkbox" name="system.weaknesstags.{{index}}.burned" {{#if weakness.burned}}checked{{/if}} style="display: none;"/>
+    <div  style="flex-grow:8;">
+        <input type="text" name="system.weaknesstags.{{index}}.question" value="{{weakness.question}}" title="{{questionIndexToLetter index}} - Question" placeholder="{{weaknessTagQuestionPlaceholder index weakness.question}}"/>
+        <input type="text" name="system.weaknesstags.{{index}}.name" value="{{weakness.name}}" title="{{questionIndexToLetter index}} - Tag" placeholder="Answer / The Tag" />
+    </div>
     <i class="fa-solid fa-trash clickable" data-action="deleteWeaknessTag" data-index="{{index}}" style="flex-grow:0.3; margin-left: 0.5em;" title="{{localize "MIST_ENGINE.HELP.DeleteWeaknessTag"}}"></i>
 </div>

@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 14.2.1
+- fix for themekits and disappearing tags
+  
 # 14.2.0
 - themekits have a new option called "story theme", which hides quests, storys, improvements etc, to make them a Story Theme
 - fixed a bug in open and using a themekit selection app
