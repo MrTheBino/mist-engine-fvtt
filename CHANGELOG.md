@@ -1,5 +1,8 @@
 # CHANGELOG
 
+# 14.2.2
+- hotfix for roll dialog
+  
 # 14.2.1
 - fix for themekits and disappearing tags
   

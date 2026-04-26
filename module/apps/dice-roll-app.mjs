@@ -352,17 +352,21 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             }
 
             if (item.type === "themebook") {
-                item.system.powertags.forEach((tag, i) => {
-                    if (tag.selected) {
-                        selectedTags.push({ name: tag.name, positive: true, toBurn: tag.toBurn, index: i, themebookId: item.id, source: null });
-                    }
-                });
+                if(item.system.powertags){
+                    item.system.powertags.forEach((tag, i) => {
+                        if (tag.selected) {
+                            selectedTags.push({ name: tag.name, positive: true, toBurn: tag.toBurn, index: i, themebookId: item.id, source: null });
+                        }
+                    });
+                }
 
-                item.system.weaknesstags.forEach((tag, i) => {
-                    if (tag.selected) {
-                        selectedTags.push({ name: tag.name, positive: false, weakness: true, index: i, themebookId: item.id, source: null });
-                    }
-                });
+                if(item.system.weaknesstags){
+                    item.system.weaknesstags.forEach((tag, i) => {
+                        if (tag.selected) {
+                            selectedTags.push({ name: tag.name, positive: false, weakness: true, index: i, themebookId: item.id, source: null });
+                        }
+                    });
+                }
             }
         }
 
@@ -378,17 +382,22 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (actor.sheet.getActorFellowshipThemecard()) {
             let actorFellowshipThemecard = actor.sheet.getActorFellowshipThemecard();
             if (actorFellowshipThemecard) {
-                actorFellowshipThemecard.system.powertags.forEach((tag, i) => {
-                    if (tag.selected) {
-                        selectedTags.push({ name: tag.name, positive: true, toBurn: tag.toBurn, index: i, source: "fellowship-themecard" });
-                    }
-                });
+                // check if ther are any powertags
+                if(actorFellowshipThemecard.system.powertags){
+                    actorFellowshipThemecard.system.powertags.forEach((tag, i) => {
+                        if (tag.selected) {
+                            selectedTags.push({ name: tag.name, positive: true, toBurn: tag.toBurn, index: i, source: "fellowship-themecard" });
+                        }
+                    });
+                }
 
-                actorFellowshipThemecard.system.weaknesstags.forEach((tag, i) => {
-                    if (tag.selected) {
-                        selectedTags.push({ name: tag.name, positive: false, weakness: true, index: i, source: "fellowship-themecard" });
-                    }
-                });
+                if (actorFellowshipThemecard.system.weaknesstags){
+                    actorFellowshipThemecard.system.weaknesstags.forEach((tag, i) => {
+                        if (tag.selected) {
+                            selectedTags.push({ name: tag.name, positive: false, weakness: true, index: i, source: "fellowship-themecard" });
+                        }
+                    });
+                }
             }
         } else {
             console.log("No fellowship themecard in the actor getActorFellowshipThemecard():", actor.name);
@@ -509,20 +518,28 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (this.actor.sheet.getActorFellowshipThemecard()) {
             let actorFellowshipThemecard = this.actor.sheet.getActorFellowshipThemecard();
             if (actorFellowshipThemecard) {
-                const powertags = actorFellowshipThemecard.system.powertags.map((tag, i) => {
-                    const burned = tag.burned || this.wasTagSelected(i, null, "fellowship-themecard");
-                    return { ...tag, selected: false, toBurn: false, burned };
-                });
-
-                for (const tag of actorFellowshipThemecard.system.weaknesstags) {
-                    if (tag.selected && actorFellowshipThemecard.system.improve < 3 && !alreadyImprovedThemebooks.includes(actorFellowshipThemecard.id)) {
-                        alreadyImprovedThemebooks.push(actorFellowshipThemecard.id);
-                        await actorFellowshipThemecard.update({ 'system.improve': actorFellowshipThemecard.system.improve + 1 });
-                    }
+                
+                if (actorFellowshipThemecard.system.powertags) {
+                    const powertags = actorFellowshipThemecard.system.powertags.map((tag, i) => {
+                        const burned = tag.burned || this.wasTagSelected(i, null, "fellowship-themecard");
+                        return { ...tag, selected: false, toBurn: false, burned };
+                    });
+                    await actorFellowshipThemecard.update({ 'system.powertags': powertags });
                 }
 
-                const weaknesstags = actorFellowshipThemecard.system.weaknesstags.map(tag => ({ ...tag, selected: false }));
-                await actorFellowshipThemecard.update({ 'system.powertags': powertags, 'system.weaknesstags': weaknesstags });
+                if(actorFellowshipThemecard.system.weaknesstags){
+                    for (const tag of actorFellowshipThemecard.system.weaknesstags) {
+                        if (tag.selected && actorFellowshipThemecard.system.improve < 3 && !alreadyImprovedThemebooks.includes(actorFellowshipThemecard.id)) {
+                            alreadyImprovedThemebooks.push(actorFellowshipThemecard.id);
+                            await actorFellowshipThemecard.update({ 'system.improve': actorFellowshipThemecard.system.improve + 1 });
+                        }
+                    }
+                    const weaknesstags = actorFellowshipThemecard.system.weaknesstags.map(tag => ({ ...tag, selected: false }));
+                    await actorFellowshipThemecard.update({'system.weaknesstags': weaknesstags });
+                }
+
+                
+                
             }
             if (this.actor.sheet) {
                 this.actor.sheet.reloadFellowshipThemecard(true); // true for emitting data to others    
