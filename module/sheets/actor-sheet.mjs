@@ -1,6 +1,7 @@
 const { ActorSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
+import { CustomBackgroundEditorApp } from '../apps/custom_background_editor.mjs';
 import { MistSceneApp } from '../apps/scene-app.mjs'
 import { DiceRollApp } from '../apps/dice-roll-app.mjs'
 import { MistEngineItem } from '../documents/item.mjs'
@@ -36,7 +37,11 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             toggleStoryTagBurn: this.#handleToggleStoryTagBurn,
             clickToggleLock: this.#handleClickToggleLock,
             deletePowertag: this.#handleDeletePowertag,
-            deleteWeaknessTag: this.#handleDeleteWeaknessTag
+            deleteWeaknessTag: this.#handleDeleteWeaknessTag,
+            clickedCustomBackground: this.#handleClickedCustomBackground,
+            clickedRemoveCustomBackground: this.#handleRemoveCustomBackground,
+            clickedCustomBackgroundEditor: this.#handleClickedCustomBackgroundEditor,
+
         },
         form: {
             submitOnChange: true
@@ -579,6 +584,48 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         StoryTagAdapter.deleteStoryTag(this.actor, itemId, key, index);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
         this.render(true);
+    }
+
+    static async #handleClickedCustomBackground(event,target){
+        event.preventDefault();
+            const picker = new foundry.applications.apps.FilePicker.implementation({
+            type: "image",
+            current: this.actor.system.customBackground || "",
+            callback: async (path) => {
+            await this.actor.update({
+                "system.customBackground": path
+            });
+            }
+        });
+
+        picker.render(true);
+    }
+
+    static async #handleRemoveCustomBackground(event,target){
+        event.preventDefault();
+        // question if we shall remove the background
+        const proceed = await foundry.applications.api.DialogV2.confirm({
+            content: game.i18n.format("MIST_ENGINE.QUESTIONS.RemoveCustomBackgroundConfirmation"),
+            rejectClose: false,
+        });
+        if (proceed) {
+            await this.actor.update({
+                "system.customBackground": null
+            });
+            
+            this.render(true); // this doesn't work
+            // so let's enforce it by directly setting the background to default here as well
+            // after reloading the sheet it works, but this way the user gets immediate feedback that the background was removed without needing to wait for the sheet to reload
+            const el = this.element.querySelector?.(".window-content") ?? this.element;
+                el.style.backgroundImage = `url(/systems/mist-engine-fvtt/assets/default_sheet_background.webp)`;
+        }
+    }
+
+    static async #handleClickedCustomBackgroundEditor(event,target){
+        event.preventDefault();
+        const app = new CustomBackgroundEditorApp();
+        app.setActor(this.actor);
+        app.render(true);
     }
 
     /**

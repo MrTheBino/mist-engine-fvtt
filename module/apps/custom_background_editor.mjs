@@ -136,7 +136,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
     static async #pickBackground(event, target) {
         const startPath = CustomBackgroundEditorApp.DEFAULT_BG_DIR;
 
-        const fp = new FilePicker({
+        const fp = new foundry.applications.apps.FilePicker.implementation({
             type: "image",
             current: this.backgroundSrc,
             startPath,
