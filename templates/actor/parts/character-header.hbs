@@ -7,12 +7,12 @@
             <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"
                 height="120" />
             <div class="col-character-name edit-mode">
-                <h1 class="charname"><input name="name" type="text" value="{{actor.name}}"
+                <h1 class="charname"><input name="name" type="text" class="custom-font-color" value="{{actor.name}}"
                         placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" /></h1>
 
                 <div class="flexcol">
                     <div class="short-description"><input name="system.shortDescription" type="text"
-                            value="{{system.shortDescription}}"
+                            class="custom-font-color" value="{{system.shortDescription}}"
                             placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" /></div>
                 </div>
                 <div class="grid grid-4col roll-buttons-container">
@@ -24,7 +24,7 @@
                         'MIST_ENGINE.LABELS.RemoveCustomBackground'}}</button>
                     <div class="flexrow">
                         <label for="customFontColor">Character Name Color </label><input type="text" id="customFontColor"
-                            name="system.customFontColor" value="{{system.customFontColor}}"
+                            name="system.customFontColor" class="custom-font-color" value="{{system.customFontColor}}"
                             placeholder="e.g. white" title="CSS color like white, red, #FFFFF etc."/>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                 <div class="character-name-container">
 
                     <div class="title">
-                        <h1 class="charname">{{actor.name}}</h1>
+                        <h1 class="charname custom-font-color">{{actor.name}}</h1>
                     </div>
                     <div class="short-description">{{system.shortDescription}}</div>
                 </div>

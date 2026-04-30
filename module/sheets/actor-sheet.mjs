@@ -159,6 +159,19 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             this._renderModeToggle();
         }
 
+        // If the actor has a custom background, set it as the background image of the sheet.
+        if(this.actor.system.customBackground){
+             const el = this.element.querySelector?.(".window-content") ?? this.element;
+             el.style.backgroundImage = `url("${this.actor.system.customBackground}")`;
+        }
+
+        // set custom font color if defined for the actor-name
+        if (this.actor.system.customFontColor && this.actor.system.customFontColor.trim() !== "") {
+            this.element
+            .querySelectorAll(".custom-font-color")
+            .forEach((el) => (el.style.color = this.actor.system.customFontColor));
+        }
+
         // Input Event Listener for preventing toggling the enter mode, this is a strange behaviour of foundry, didn't know to handle it otherwise
         const constAllInputs = this.element.querySelectorAll('input');
         for (const input of constAllInputs) {
@@ -168,8 +181,6 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 }
             });
         };
-
-
 
         const expandableTriggerElements = this.element.querySelectorAll('.expandable-trigger');
         for (const trigger of expandableTriggerElements) {

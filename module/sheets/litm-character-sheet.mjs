@@ -341,21 +341,6 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         // Restore scroll positions after render to prevent jumping
         this._restoreScrollPositions();
 
-        // If the actor has a custom background, set it as the background image of the sheet.
-        if(this.actor.system.customBackground){
-             const el = this.element.querySelector?.(".window-content") ?? this.element;
-             el.style.backgroundImage = `url("${this.actor.system.customBackground}")`;
-        }
-
-        // set custom font color if defined for the charname
-        if(this.actor.system.customFontColor && this.actor.system.customFontColor.trim() !== ""){
-             const el = this.element.querySelector?.(".charname") ?? this.element;
-             el.style.color = this.actor.system.customFontColor;
-
-             const elShort = this.element.querySelector?.(".short-description") ?? this.element;
-             elShort.style.color = this.actor.system.customFontColor;
-        }
-
         const selectablePowertags = this.element.querySelectorAll('.pt-selectable');
         for (const tag of selectablePowertags) {
             tag.addEventListener("click", event => this.handlePowerTagSelectableClick(event));
