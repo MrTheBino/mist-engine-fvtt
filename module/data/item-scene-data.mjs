@@ -5,7 +5,7 @@ export default class MistEngineSceneData extends MistEngineItemBase {
   static defineSchema() {
     const fields = foundry.data.fields;
     const requiredInteger = { required: true, nullable: false, integer: true };
-    const schema = {};
+    const schema = super.defineSchema();
 
     schema.sceneKey = new fields.StringField({ required: true, blank: true });
     foundry.utils.mergeObject(schema, buildFloatingTagsAndStatuses());

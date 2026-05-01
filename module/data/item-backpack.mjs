@@ -4,7 +4,7 @@ export default class MistEngineItemBackpack extends MistEngineItemBase {
 
     static defineSchema() {
         const fields = foundry.data.fields;
-        const schema = {};
+        const schema = super.defineSchema();
 
         const requiredInteger = { required: true, nullable: false, integer: true };
 
