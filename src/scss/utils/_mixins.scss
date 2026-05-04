@@ -1,3 +1,18 @@
+// Replaces background-color on <mark> with a solid text outline.
+// Usage: @include mark-outline($some-color);
+@mixin mark-outline($color) {
+    background-color: transparent;
+    text-shadow:
+        -1px -1px 0 $color,
+         0   -1px 0 $color,
+         1px -1px 0 $color,
+         1px  0   0 $color,
+         1px  1px 0 $color,
+         0    1px 0 $color,
+        -1px  1px 0 $color,
+        -1px  0   0 $color;
+}
+
 @mixin might-icon-def{
     height: 16px;
     width: 16px;

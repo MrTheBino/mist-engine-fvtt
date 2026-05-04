@@ -8,16 +8,16 @@
 .editor-content mark.status,
 prosemirror-editor mark.status,
 .prosemirror mark.status {
-  background-color: $c-status;
+  @include mark-outline($c-status);
 }
 
 /* Tag-Mark */
 .editor-content mark.tag,
 prosemirror-editor mark.tag,
 .prosemirror mark.tag {
-  background-color: $c-status;
+  @include mark-outline($c-status);
   &.weakness {
-    background-color: $c-tag-orange;
+    @include mark-outline($c-tag-orange);
   }
 }
 

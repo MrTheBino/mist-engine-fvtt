@@ -3,6 +3,7 @@
 }
 
 .sheet-header {
+  font-family: Labrada, serif;
   flex: 0 auto;
   overflow: hidden;
   display: flex;
@@ -21,11 +22,8 @@
     width: 100%;
     flex: 1;
     gap: 0.5rem;
-
     display: flex;
-    flex: 1;
     flex-direction: row;
-    display: flex;
 
     &.npc,
     &.journey {
@@ -35,9 +33,9 @@
     }
 
     .change-custom-background-btn {
+      margin: 5px;
       margin-left: auto;
       margin-right: auto;
-      margin: 5px;
     }
 
     .col-character-name {
@@ -71,6 +69,49 @@
       width: 100%;
       height: 100%;
       margin: 0;
+    }
+  }
+
+  .character-name-container {
+    position: absolute;
+    top: 32rem;
+    max-width: 300px;
+    width: 300px;
+  }
+
+  label {
+    font-family: var(--font-body);
+  }
+
+  .portrait-img {
+    height: 150px;
+    border: 1px solid black;
+    margin-right: 10px;
+    border-radius: 6px;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1em;
+    justify-content: center;
+  }
+
+  .short-description {
+    font-family: $font-primary;
+    font-size: 14px;
+    color: var(--litm-color-accent);
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  .difficulty-icons {
+    display: flex;
+    flex-direction: row;
+
+    img {
+      height: 26px;
+      margin-top: 7px;
     }
   }
 }
@@ -116,4 +157,10 @@ p.help-text {
   font-size: 0.9em;
   color: $c-dark-styled-text;
   margin-bottom: 10px;
+}
+
+.help-text {
+  color: $c-styled-text;
+  font-family: $font-primary;
+  font-weight: bold;
 }

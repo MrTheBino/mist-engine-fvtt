@@ -123,12 +123,12 @@ header.journal-page-header{
     }
 
     .tag {
-        background-color: $c-tag-orange;
+        @include mark-outline($c-tag-orange);
         font-style: italic;
     }
 
     .status {
-        background-color: $c-tag-green;
+        @include mark-outline($c-tag-green);
         font-style: italic;
     }
 

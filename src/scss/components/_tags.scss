@@ -8,10 +8,10 @@
     text-rendering: optimizeLegibility;
     font-style: italic;
 
-    &.powertag-name{
+    &.powertag-name {
         font-style: italic;
     }
-    
+
     &:hover {
         cursor: pointer;
     }
@@ -42,15 +42,13 @@
         }
     }
 
-    &.first{
+    &.first {
         font-weight: 600;
-        font-size: 1.2em; 
-        line-height:1.2em; 
-        top:-5px;
+        font-size: 1.2em;
+        line-height: 1.2em;
+        top: -5px;
     }
 }
-
-
 
 .litm-pc-storytag {
     font-family: $font-primary-italic;
@@ -183,7 +181,7 @@
     align-self: flex-start;
 }
 
-.weakness-indicator{
+.weakness-indicator {
     flex-grow: 0.15;
     align-self: flex-start;
 }
@@ -257,13 +255,40 @@
     background-color: $c-tag-green;
 }
 
+// Floating tags and statuses.
+.floating-tags-and-status-container {
+    color: $c-styled-text;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 
+.npc-floating-tags-and-status-container {
+    width: auto !important;
+}
 
+.floating-tags-and-status-entries {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5em;
+
+    &.grid {
+        display: grid;
+        gap: 0.4em 0.6em;
+    }
+}
+
+.floating-tag-and-status-entry {
+    position: relative;
+}
+
+// Floating tag/status input rows.
 .fts-input-name {
     padding: 2px 5px;
     display: flex;
     align-items: center;
     gap: 3px;
+    flex-grow: 1;
 
     .fts-selectable {
         flex: 1;
@@ -275,6 +300,10 @@
         pointer-events: cursor;
         font-size: 0.75em;
         flex-shrink: 0;
+    }
+
+    .might-icon {
+        @include might-icon-def;
     }
 
     &.tag {
@@ -329,6 +358,74 @@
             inset 0 1px 2px rgba(255, 160, 60, 0.14),
             inset 0 -1px 2px rgba(100, 40, 4, 0.22);
     }
+}
+
+.fts-input-value {
+    flex-shrink: 2;
+}
+
+.fts-selectable {
+    cursor: pointer;
+    position: relative;
+
+    &.selected {
+        z-index: 1;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: -8px -10px;
+            background: url("../assets/circle-selection.svg") no-repeat center;
+            background-size: 100% 100%;
+            pointer-events: none;
+        }
+    }
+}
+
+.fts-input-marking {
+    flex-grow: 0.1;
+    text-align: center;
+    cursor: pointer;
+
+    i.marking-circle {
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.08);
+        color: rgba(0, 0, 0, 0.35);
+        width: 22px;
+        height: 22px;
+        display: inline-block;
+        font-family: var(--litm-font-text);
+        font-style: normal;
+        font-size: 0.68em;
+        line-height: 22px;
+        text-align: center;
+        border: 1.5px solid rgba(0, 0, 0, 0.15);
+        transition: background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+    }
+
+    i.marking-circle.inactive {
+        opacity: 0.4;
+    }
+
+    i.active {
+        background-color: rgba(0, 0, 0, 0.72);
+        color: rgba(255, 255, 255, 0.9);
+        border-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.fts-tag-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.25em;
+    width: 100%;
+}
+
+.fts-markings-container {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    margin-top: 3px;
 }
 
 .fts-tag-modifier-toggle {

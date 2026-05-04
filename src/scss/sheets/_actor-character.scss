@@ -1,0 +1,71 @@
+// Character actor sheet styles.
+
+&.sheet.actor.litm-character {
+  .window-content {
+    background-image: url("../assets/default_sheet_background.webp");
+    background-repeat: no-repeat;
+    row-gap: 0.5em;
+    background-size: cover;
+  }
+
+  h1.charname {
+    font-family: $font-primary;
+    font-size: 36px;
+    color: var(--litm-color-accent);
+  }
+}
+
+.litm-character-themebooks-container {
+  margin: 5px;
+  overflow-y: clip;
+}
+
+.character-sheet-divider {
+  align-items: start;
+
+  .right-side {
+    margin-left: var(--litm-premium-left-margin);
+    min-width: 0;
+
+    &.edit-mode {
+      margin-left: 0;
+    }
+  }
+}
+
+.storytag-item-editable {
+  flex-grow: 8;
+}
+
+.character-updatable-fellowship {
+  flex-grow: 4;
+}
+
+.item-powertag-line {
+  margin: 5px;
+  color: $c-styled-text;
+  min-height: 23px;
+  border-bottom: 1.5px solid rgb(0, 0, 0, 0.1);
+}
+
+.item-storytag-line {
+  margin: 5px;
+}
+
+.item-weakness-line {
+  margin: 5px;
+  color: $c-styled-text;
+  text-shadow:
+    0 0 5px  rgba(220, 107, 0, 0.5),
+    0 0 10px rgba(220, 107, 0, 0.5),
+    0 0 20px rgba(220, 107, 0, 0.5),
+    0 0 40px rgba(220, 107, 0, 0.5);
+
+  input {
+    border: 2px solid red;
+
+    &[type="checkbox"] {
+      border: none;
+    }
+  }
+}

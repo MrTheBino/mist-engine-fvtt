@@ -1,56 +1,32 @@
-#tooltip{
+#tooltip {
     mark {
-  padding-left: 2px;
-  padding-right: 2px;
-  background-color: $c-tag-yellow;
-  border-radius: 2px;
-  font-style: italic;
-  white-space: nowrap;
+        @include mark-outline($c-tag-yellow);
+        padding-left: 2px;
+        padding-right: 2px;
+        border-radius: 2px;
+        font-style: italic;
+        white-space: nowrap;
 
-  &.status {
-    background-color: $c-tag-green;
-  }
+        &.status      { @include mark-outline($c-tag-green); }
+        &.tag         { @include mark-outline($c-tag-yellow); }
+        &.green       { @include mark-outline($c-tag-green); }
+        &.orange      { @include mark-outline($c-tag-orange); }
+        &.red         { @include mark-outline($c-status-red); }
+        &.might       { font-style: normal; }
+        &.transparent { text-shadow: none; }
 
-  &.tag {
-    background-color: $c-tag-yellow;
-  }
+        &.power {
+            @include mark-outline($c-tag-power);
+            padding-left: 20px;
+            padding-right: 20px;
+            clip-path: polygon(
+                0% 50%, 10% 0%, 90% 0%,
+                100% 50%, 90% 100%, 10% 100%
+            );
+        }
 
-  &.green {
-    background-color: $c-tag-green;
-  }
-
-  &.orange {
-    background-color: $c-tag-orange;
-  }
-
-  &.red{
-    background-color: rgb(208, 160, 141);
-  }
-
-  &.might{
-    font-style: normal;
-  }
-
-  &.transparent{
-    background-color: transparent;
-  }
-
-  &.power {
-    background-color: $c-tag-power;
-    padding-left: 20px;
-    padding-right: 20px;
-    clip-path: polygon(
-      0% 50%,        // linke Spitze
-      10% 0%,        // linke obere Schräge
-      90% 0%,        // rechte obere Schräge
-      100% 50%,      // rechte Spitze
-      90% 100%,      // rechte untere Schräge
-      10% 100%       // linke untere Schräge
-    );
-  }
-
-  .might-icon{
-    @include might-icon-def;
-  }
-}
+        .might-icon {
+            @include might-icon-def;
+        }
+    }
 }

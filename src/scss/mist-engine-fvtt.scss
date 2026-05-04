@@ -1,40 +1,46 @@
-// Add custom fonts by visiting and search https://fonts.google.com
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-// Import utilities.
+// Utilities
 @import 'utils/typography';
 @import 'utils/colors';
 @import 'utils/mixins';
 @import 'utils/variables';
 @import 'utils/misc';
 
-/* Global styles */
-@import 'global/window';
-@import 'global/grid';
-@import 'global/flex';
+// Global styles
 @import 'global/font';
+@import 'global/window';
+@import 'global/flex';
+@import 'global/grid';
 @import 'global/editor';
 @import 'global/journal';
 @import 'global/pause';
 @import 'global/tooltip';
 
-
-/* Styles limited to mist-engine-fvtt sheets */
+// Styles scoped to .mist-engine sheets
 .mist-engine {
   @import 'components/forms';
   @import 'components/resource';
   @import 'components/items';
   @import 'components/effects';
-  @import 'components/sheet';
   @import 'components/tags';
   @import 'components/themebook';
   @import 'components/tabs';
   @import 'components/icons';
   @import 'components/containers';
+
+  // Per-sheet styles
+  @import 'sheets/shared';
+  @import 'sheets/actor-npc';
+  @import 'sheets/actor-character';
+  @import 'sheets/actor-journey';
+  @import 'sheets/actor-fellowship';
+  @import 'sheets/item';
 }
 
-@import 'components/roll_dialog';
+// App and standalone styles (not scoped to .mist-engine)
 @import 'components/chat';
+@import 'components/roll_dialog';
 @import 'components/scene_data_app';
 @import 'components/custom_background_editor';
 @import 'components/dice_roller_app';
@@ -43,7 +49,7 @@
 @import 'components/themekit_character_app';
 @import 'components/how_to_play_app';
 
-/* Fix for sheet jumping - preserve scroll position */
+// Scroll behaviour fix
 .scrollable {
   scroll-behavior: smooth;
   overflow-y: auto;
@@ -55,5 +61,5 @@
 
 .sheet .scrollable {
   height: 100%;
-  padding-right: 8px; /* Account for scrollbar */
+  padding-right: 8px;
 }

@@ -1,0 +1,36 @@
+// Journey actor sheet styles.
+
+&.sheet.actor.litm-journey {
+  color: $c-dark-styled-text;
+
+  .window-content {
+    background-image: url("../assets/paper_background_1.webp");
+    background-repeat: no-repeat;
+    row-gap: 0.5em;
+  }
+
+  h1.journey-name {
+    font-family: $font-primary;
+    font-size: 36px;
+    color: $c-dark-styled-text;
+    width: 100%;
+    text-align: center;
+  }
+
+  .short-description {
+    font-family: $font-primary;
+    color: $c-dark-styled-text;
+    text-align: start;
+  }
+
+  fieldset {
+    @include styled-fielset;
+  }
+
+  .npc-roles {
+    font-family: var(--litm-font-accent);
+    font-size: large;
+    text-align: center;
+    color: $c-dark-styled-text;
+  }
+}

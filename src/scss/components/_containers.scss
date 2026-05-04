@@ -10,7 +10,25 @@
   color: $c-dark-styled-text;
 }
 
-.text-container-300{
+.container-card-with-border {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  -webkit-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+}
+
+.container-themebook-with-border {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  -webkit-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  -o-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+}
+
+.text-container-300 {
   border-style: solid;
   border-width: 5px 5px 5px 5px;
   -moz-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
@@ -20,13 +38,10 @@
 
   font-family: $font-primary;
   color: $c-dark-styled-text;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 15px;
 }
 
-.text-container-500{
+.text-container-500 {
   border-style: solid;
   border-width: 5px 5px 5px 5px;
   -moz-border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
@@ -36,13 +51,10 @@
 
   font-family: $font-primary;
   color: $c-dark-styled-text;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 15px;
 }
 
-.text-container-large-paper-background{
+.text-container-large-paper-background {
   border-style: solid;
   border-width: 5px 5px 5px 5px;
   -moz-border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
@@ -52,13 +64,10 @@
 
   font-family: $font-primary;
   color: $c-dark-styled-text;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 15px;
 }
 
-.text-container-long-paper-background{
+.text-container-long-paper-background {
   border-style: solid;
   border-width: 5px 5px 5px 5px;
   -moz-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
@@ -68,13 +77,10 @@
 
   font-family: $font-primary;
   color: $c-dark-styled-text;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 15px;
 }
 
-.floating-status-container-character{
+.floating-status-container-character {
   border-style: solid;
   border-width: 5px 5px 5px 5px;
   -moz-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
@@ -84,9 +90,6 @@
 
   font-family: $font-primary;
   color: $c-dark-styled-text;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 15px;
   height: 100%;
 }

@@ -1,4 +1,4 @@
-// Flexbox.
+// Flexbox utilities.
 .flex-group-center,
 .flex-group-left,
 .flex-group-right {
@@ -43,4 +43,8 @@
 .align-center {
   justify-content: center;
   text-align: center;
+}
+
+.align-start {
+  align-items: flex-start;
 }

@@ -1,0 +1,15 @@
+// Fellowship themecard actor sheet styles.
+
+&.sheet.actor.litm-fellowship-themecard {
+  .window-content {
+    background-image: url("../assets/paper_background_1.webp");
+    background-repeat: no-repeat;
+    row-gap: 0.5em;
+  }
+}
+
+.fellowship-promises {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
