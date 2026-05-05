@@ -11,7 +11,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
         classes: ['mist-engine', 'sheet', 'actor', 'litm-journey'],
         tag: 'form',
         position: {
-            width: 1000,
+            width: 800,
             height: 750
         },
         actions: {
@@ -46,7 +46,8 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
         },
         tabs: {
             id: 'tabs',
-            template: 'templates/generic/tab-navigation.hbs'
+            template: 'templates/generic/tab-navigation.hbs',
+            classes: ["litm-journey-sheet-tabs"]
         },
         "journey-consequences": {
             id: 'journey-consequences',
@@ -116,6 +117,16 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
     _onRender(context, options) {
         super._onRender(context, options);
         this._restoreScrollPositions();
+
+        // If the actor has a custom background, set it as the background image of the sheet.
+        const el = this.element.querySelector?.(".window-content") ?? this.element;
+        if (this.actor.system.customBackground){
+            el.style.setProperty("background-image", `url("${this.actor.system.customBackground}"), url("systems/mist-engine-fvtt/assets/paper_background_1.webp")`);
+            el.style.setProperty("background-size", "contain, cover");
+        } else {
+            el.style.removeProperty("background-image");
+            el.style.removeProperty("background-size");
+        }
 
         const editableChallengeItems = this.element.querySelectorAll('.editable-challenge-item');
         for (const input of editableChallengeItems) {

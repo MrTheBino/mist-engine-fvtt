@@ -34,7 +34,8 @@
       "Tag": "Trait",
       "Name": "Nom",
       "ShortDescription": "Description Courte",
-      "Description": "Description"
+      "Description": "Description",
+      "ColorPicker": "Sélectionnez une couleur"
     },
     "THEMEBOOKS": {
       "FellowshipRelationship": "Relation de Communauté",
@@ -49,7 +50,7 @@
       "reaction": "Jet de Réaction"
     },
     "LABELS": {
-      "JourneyConsequences": "Conséquences & Vignettes",
+      "JourneyConsequences": "Vignettes & Conséquences",
       "ThreatsAndConsequences": "Menaces & Conséquences",
       "SelectedTagsAndStatuses": "Traits & Conditions Sélectionnés",
       "Consequences": "Conséquences",

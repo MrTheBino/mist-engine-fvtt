@@ -41,7 +41,8 @@
       "Tag": "Etiqueta",
       "Name": "Nombre",
       "ShortDescription": "Descripción breve",
-      "Description": "Descripción"
+      "Description": "Descripción",
+      "ColorPicker": "Selecciona un color"
     },
     "THEMEBOOKS": {
       "FellowshipRelationship": "Relaciones de la Compañía",
@@ -56,7 +57,7 @@
       "reaction": "Tirada de Reacción"
     },
     "LABELS": {
-      "JourneyConsequences": "Consecuencias y Viñetas",
+      "JourneyConsequences": "Viñetas y Consecuencias",
       "ThreatsAndConsequences": "Amenazas y Consecuencias",
       "SelectedTagsAndStatuses": "Etiquetas y Estados seleccionados",
       "SelectCustomBackground": "Selecciona un fondo personalizado",

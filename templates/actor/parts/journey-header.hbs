@@ -1,35 +1,37 @@
 <div>
     <header class="sheet-header">
-        <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"
-            height="120" />
         <div class="header-fields journey">
             {{#if system.editMode}}
-            <div class="flexcol">
-                {{!-- Edit Mode Layout --}}
+            {{!-- Edit Mode Layout --}}
+            <div class="flexcol gap-5">
                 <div class="title">
-                    <h1 class="journey-name"><input name="name" type="text" value="{{actor.name}}"
-                            placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" /></h1>
+                    <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img"
+                        title="{{actor.name}}" height="120" />
+                    <h1 class="journey-name">
+                        <input name="name" type="text" class="custom-font-color" value="{{actor.name}}"
+                            placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" />
+                    </h1>
                 </div>
-                <div><input name="system.role" type="text" value="{{system.role}}"
-                        placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Role'}}" /></div>
-                <div class="mt-5"><textarea class="textarea-short-description" name="system.shortDescription"
+                <div>
+                    <input name="system.role" type="text" class="custom-font-color" value="{{system.role}}"
+                        placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Role'}}" />
+                </div>
+                <div class="mt-5">
+                    <textarea class="textarea-short-description custom-font-color" name="system.shortDescription"
                         placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}">{{system.shortDescription}}</textarea>
                 </div>
-                <div><input class="taggable-text" name="system.tags" type="text" value="{{system.tags}}"
-                        placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Tags'}}" /></div>
+                <div>
+                    <input class="taggable-text custom-font-color" name="system.tags" type="text"
+                        value="{{system.tags}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Tags'}}" />
+                </div>
             </div>
-            <div class="grid grid-4col roll-buttons-container">
+            <div class="grid grid-3col">
                 <button data-action="clickedCustomBackground" class="change-custom-background-btn">{{localize
                     'MIST_ENGINE.LABELS.SelectCustomBackground'}}</button>
-                <button data-action="clickedCustomBackgroundEditor" class="change-custom-background-btn">{{localize
-                    'MIST_ENGINE.LABELS.CustomBackgroundEditor.Button'}}</button>
                 <button data-action="clickedRemoveCustomBackground" class="change-custom-background-btn">{{localize
                     'MIST_ENGINE.LABELS.RemoveCustomBackground'}}</button>
-                <div class="flexrow">
-                    <label for="customFontColor">Character Name Color </label><input type="text" id="customFontColor"
-                        name="system.customFontColor" value="{{system.customFontColor}}" placeholder="e.g. white"
-                        title="CSS color like white, red, #FFFFF etc." />
-                </div>
+                <color-picker id="customFontColor" name="system.customFontColor" value="{{system.customFontColor}}"
+                    placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ColorPicker'}}"></color-picker>
             </div>
             {{else}}
             {{!-- Normal Layout --}}
@@ -37,7 +39,7 @@
                 <h1 class="journey-name custom-font-color">{{actor.name}}</h1>
                 <div class="npc-roles custom-font-color">{{system.role}}</div>
                 <div class="short-description custom-font-color">{{{simpleFormatText system.shortDescription}}}</div>
-                <p class="tags"><strong>Tags:</strong> {{{textWithTags system.tags}}}</p>
+                <p class="tags">{{{textWithTags system.tags}}}</p>
             </div>
             {{/if}}
         </div>

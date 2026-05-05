@@ -113,7 +113,7 @@ body {
 }
 @font-face {
   font-family: CCDreamland-Regular;
-  src: url("../assets/fonts/CCDreamland-Regular.ttf") format("truetype");
+  src: url("../assets/fonts/CCDreamland-Regular.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -202,6 +202,10 @@ body {
 
 .align-start {
   align-items: flex-start;
+}
+
+.gap-5 {
+  gap: 5px;
 }
 
 .grid,
@@ -920,9 +924,11 @@ article.cc-enriched section.journal-entry-content {
   color: #724a32;
 }
 .mist-engine .sheet-header .header-fields .change-custom-background-btn {
-  margin: 5px;
-  margin-left: auto;
-  margin-right: auto;
+  height: auto;
+  color: var(--litm-tab-text-color);
+}
+.mist-engine .sheet-header .header-fields .change-custom-background-btn:not(:hover) {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .mist-engine .sheet-header .header-fields .col-character-name {
   min-width: var(--litm-premium-left-margin);
@@ -1801,6 +1807,14 @@ article.cc-enriched section.journal-entry-content {
   margin-left: var(--litm-premium-left-margin);
   background-color: rgba(0, 0, 0, 0.5);
 }
+.mist-engine nav.tabs [data-group=litm-journey-sheet] {
+  color: var(--litm-tab-text-color);
+  font-family: Labrada, serif;
+  font-weight: bold;
+}
+.mist-engine .litm-journey-sheet-tabs {
+  background-color: rgba(0, 0, 0, 0.5);
+}
 .mist-engine .item-storytag-line .fa-trash, .mist-engine .fellowship-entries .fa-trash {
   color: black;
 }
@@ -1959,9 +1973,6 @@ article.cc-enriched section.journal-entry-content {
   font-family: Labrada, serif;
   width: 100%;
 }
-.mist-engine .roll-buttons-container {
-  padding-right: 10px;
-}
 .mist-engine .lock-toggle-container {
   cursor: pointer;
   color: black;
@@ -2081,6 +2092,10 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .challenge-entry-container .list-entries .entry-content-no-edit .text-col,
 .mist-engine .npc-challenges-container .list-entries .entry-content-no-edit .text-col {
   flex-grow: 1;
+}
+.mist-engine .challenge-entry-container .list-entries .entry-content-no-edit,
+.mist-engine .npc-challenges-container .list-entries .entry-content-no-edit {
+  gap: 3px;
 }
 .mist-engine .tab.journey-consequences a {
   font-family: Labrada, serif;
@@ -2494,6 +2509,11 @@ article.cc-enriched section.journal-entry-content {
   background-image: url("../assets/paper_background_1.webp");
   background-repeat: no-repeat;
   row-gap: 0.5em;
+  background-size: cover;
+}
+.mist-engine.sheet.actor.litm-journey .portrait-img {
+  height: 102px;
+  width: 102px;
 }
 .mist-engine.sheet.actor.litm-journey h1.journey-name {
   font-family: Labrada, serif;
@@ -2506,6 +2526,9 @@ article.cc-enriched section.journal-entry-content {
   font-family: Labrada, serif;
   color: #191813;
   text-align: start;
+}
+.mist-engine.sheet.actor.litm-journey .tags {
+  text-align: center;
 }
 .mist-engine.sheet.actor.litm-journey fieldset {
   font-family: Labrada, serif;

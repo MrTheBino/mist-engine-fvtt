@@ -7,6 +7,12 @@
     background-image: url("../assets/paper_background_1.webp");
     background-repeat: no-repeat;
     row-gap: 0.5em;
+    background-size: cover;
+  }
+
+  .portrait-img {
+    height: 102px;
+    width: 102px;
   }
 
   h1.journey-name {
@@ -23,6 +29,10 @@
     text-align: start;
   }
 
+  .tags {
+    text-align: center;
+  }
+
   fieldset {
     @include styled-fielset;
   }
@@ -33,4 +43,5 @@
     text-align: center;
     color: $c-dark-styled-text;
   }
+
 }

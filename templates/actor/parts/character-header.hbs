@@ -7,26 +7,24 @@
             <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"
                 height="120" />
             <div class="col-character-name edit-mode">
-                <h1 class="charname"><input name="name" type="text" class="custom-font-color" value="{{actor.name}}"
-                        placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" /></h1>
-
+                <h1 class="charname">
+                    <input name="name" type="text" class="custom-font-color" value="{{actor.name}}"
+                        placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" />
+                </h1>
                 <div class="flexcol">
                     <div class="short-description"><input name="system.shortDescription" type="text"
                             class="custom-font-color" value="{{system.shortDescription}}"
                             placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" /></div>
                 </div>
-                <div class="grid grid-4col roll-buttons-container">
+                <div class="grid grid-4col">
                     <button data-action="clickedCustomBackground" class="change-custom-background-btn">{{localize
                         'MIST_ENGINE.LABELS.SelectCustomBackground'}}</button>
                     <button data-action="clickedCustomBackgroundEditor" class="change-custom-background-btn">{{localize
                         'MIST_ENGINE.LABELS.CustomBackgroundEditor.Button'}}</button>
                     <button data-action="clickedRemoveCustomBackground" class="change-custom-background-btn">{{localize
                         'MIST_ENGINE.LABELS.RemoveCustomBackground'}}</button>
-                    <div class="flexrow">
-                        <label for="customFontColor">Character Name Color </label><input type="text" id="customFontColor"
-                            name="system.customFontColor" class="custom-font-color" value="{{system.customFontColor}}"
-                            placeholder="e.g. white" title="CSS color like white, red, #FFFFF etc."/>
-                    </div>
+                    <color-picker id="customFontColor" name="system.customFontColor"
+                        value="{{system.customFontColor}}"></color-picker>
                 </div>
             </div>
         </div>
@@ -34,7 +32,6 @@
         <div class="header-fields">
             <div class="col-character-name">
                 <div class="character-name-container">
-
                     <div class="title">
                         <h1 class="charname custom-font-color">{{actor.name}}</h1>
                     </div>
@@ -42,7 +39,7 @@
                 </div>
             </div>
             <div class="col-main">
-                <div class="flexcol roll-buttons-container">
+                <div class="flexcol">
                     <button data-action="clickRoll" class="roll-button" data-roll-type="quick"><i
                             class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.quick'}}</button>
                     <button data-action="clickRoll" class="roll-button" data-roll-type="detailed"><i
@@ -52,7 +49,8 @@
                 </div>
             </div>
             <div class="col-status">
-                {{> 'systems/mist-engine-fvtt/templates/actor/parts/floating-tags-and-status-partial.hbs' useGrid=true classCustomContainer="floating-status-container-character"}}
+                {{> 'systems/mist-engine-fvtt/templates/actor/parts/floating-tags-and-status-partial.hbs' useGrid=true
+                classCustomContainer="floating-status-container-character"}}
             </div>
         </div>
         {{/if}}

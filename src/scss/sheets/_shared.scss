@@ -54,10 +54,6 @@
   width: 100%;
 }
 
-.roll-buttons-container {
-  padding-right: 10px;
-}
-
 .lock-toggle-container {
   cursor: pointer;
   color: black;
@@ -179,6 +175,7 @@ section [data-group="litm-character-sheet"] {
     .entry-content-no-edit {
       .icon-col { flex-grow: 0.075; }
       .text-col { flex-grow: 1; }
+      gap: 3px;
     }
   }
 }

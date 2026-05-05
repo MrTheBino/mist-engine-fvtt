@@ -12,8 +12,8 @@ export default class MistEngineActorBase extends MistEngineDataModel {
     schema.editMode = new fields.BooleanField({ initial: true });
     schema.shortDescription = new fields.StringField({ required: true, blank: true }); // equivalent to passing ({initial: ""}) for StringFields
 
-    schema.customBackground = new fields.StringField({ required: true, blank: true }); // equivalent to passing ({initial: ""}) for StringFields
-    schema.customFontColor = new fields.StringField({ required: true, blank: true });
+    schema.customBackground = new fields.StringField({ required: false, null: true }); // equivalent to passing ({initial: ""}) for StringFields
+    schema.customFontColor = new fields.StringField({ required: false, null: true });
     foundry.utils.mergeObject(schema, buildFloatingTagsAndStatuses());
 
     return schema;

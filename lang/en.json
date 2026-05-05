@@ -70,7 +70,8 @@
       "ShortDescription": "Short Description",
       "Description": "Description",
       "Role": "Role",
-      "Tags": "Tags"
+      "Tags": "Tags",
+      "ColorPicker": "Select a color"
     },
     "THEMEBOOKS": {
       "FellowshipRelationship": "Fellowship Relationship",
@@ -93,7 +94,7 @@
       "AddWeaknesstag": "Weaknesses",
       "Other": "Other",
       "Consequence": "Consequence",
-      "JourneyConsequences": "Consequences & Vignettes",
+      "JourneyConsequences": "Vignettes & Consequences",
       "ThreatsAndConsequences": "Threats & Consequences",
       "SelectedTagsAndStatuses": "Selected Tags & Statuses",
       "SelectCustomBackground": "Select Custom Background",

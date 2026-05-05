@@ -33,9 +33,11 @@
     }
 
     .change-custom-background-btn {
-      margin: 5px;
-      margin-left: auto;
-      margin-right: auto;
+      height: auto;
+      color: var(--litm-tab-text-color);
+      &:not(:hover) {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
     }
 
     .col-character-name {

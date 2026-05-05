@@ -159,17 +159,13 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             this._renderModeToggle();
         }
 
-        // If the actor has a custom background, set it as the background image of the sheet.
-        if(this.actor.system.customBackground){
-             const el = this.element.querySelector?.(".window-content") ?? this.element;
-             el.style.backgroundImage = `url("${this.actor.system.customBackground}")`;
-        }
-
         // set custom font color if defined for the actor-name
         if (this.actor.system.customFontColor && this.actor.system.customFontColor.trim() !== "") {
             this.element
             .querySelectorAll(".custom-font-color")
-            .forEach((el) => (el.style.color = this.actor.system.customFontColor));
+            .forEach((el) => {
+                el.style.color = this.actor.system.customFontColor ?? "black";
+            });
         }
 
         // Input Event Listener for preventing toggling the enter mode, this is a strange behaviour of foundry, didn't know to handle it otherwise
@@ -620,15 +616,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             rejectClose: false,
         });
         if (proceed) {
-            await this.actor.update({
-                "system.customBackground": null
-            });
-            
-            this.render(true); // this doesn't work
-            // so let's enforce it by directly setting the background to default here as well
-            // after reloading the sheet it works, but this way the user gets immediate feedback that the background was removed without needing to wait for the sheet to reload
-            const el = this.element.querySelector?.(".window-content") ?? this.element;
-                el.style.backgroundImage = `url(/systems/mist-engine-fvtt/assets/default_sheet_background.webp)`;
+            this.actor.update({ system: { customBackground: globalThis._del }}, { render: true });
         }
     }
 

@@ -28,3 +28,13 @@ nav.tabs [data-group="litm-character-sheet"] {
     margin-left: var(--litm-premium-left-margin);
     background-color: rgba(0, 0, 0, 0.5);
 }
+
+nav.tabs [data-group="litm-journey-sheet"] {
+    color: var(--litm-tab-text-color);
+    font-family: $font-primary;
+    font-weight: bold;
+}
+
+.litm-journey-sheet-tabs {
+    background-color: rgba(0, 0, 0, 0.5);
+}

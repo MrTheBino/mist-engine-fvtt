@@ -8,7 +8,8 @@
             "Tag": "Tag",
             "Name": "Name",
             "ShortDescription": "Kurze Beschreibung",
-            "Description": "Beschreibung"
+            "Description": "Beschreibung",
+            "ColorPicker": "Wählen Sie eine Farbe aus"
         },
         "ROLL_TYPES": {
             "quick": "Schneller Wurf",
@@ -16,6 +17,7 @@
             "reaction": "Reaktionswurf"
         },
         "LABELS": {
+            "JourneyConsequences": "Vignetten & Konsequenzen",
             "Milestone": "Meilenstein",
             "Abandon": "Aufgeben",
             "Improve": "Verbessern",
