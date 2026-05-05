@@ -1,0 +1,310 @@
+{
+  "name": "Alone in the Woods",
+  "type": "litm-journey",
+  "prototypeToken": {
+    "name": "Test Journey",
+    "displayName": 0,
+    "actorLink": false,
+    "width": 1,
+    "height": 1,
+    "depth": 1,
+    "texture": {
+      "src": "systems/mist-engine-fvtt/assets/journey/alone-in-the-woods.webp",
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "scaleX": 1,
+      "scaleY": 1,
+      "tint": "#ffffff",
+      "alphaThreshold": 0.75
+    },
+    "lockRotation": false,
+    "rotation": 0,
+    "alpha": 1,
+    "disposition": -1,
+    "displayBars": 0,
+    "bar1": {
+      "attribute": "health"
+    },
+    "bar2": {
+      "attribute": "power"
+    },
+    "light": {
+      "negative": false,
+      "priority": 0,
+      "alpha": 0.5,
+      "angle": 360,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "dim": 0,
+      "attenuation": 0.5,
+      "luminosity": 0.5,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "animation": {
+        "type": null,
+        "speed": 5,
+        "intensity": 5,
+        "reverse": false
+      },
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "sight": {
+      "enabled": false,
+      "range": 0,
+      "angle": 360,
+      "visionMode": "basic",
+      "color": null,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "saturation": 0,
+      "contrast": 0
+    },
+    "detectionModes": {},
+    "occludable": {
+      "radius": 0
+    },
+    "ring": {
+      "enabled": false,
+      "colors": {
+        "ring": null,
+        "background": null
+      },
+      "effects": 1,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "turnMarker": {
+      "mode": 1,
+      "animation": null,
+      "src": null,
+      "disposition": false
+    },
+    "movementAction": null,
+    "flags": {},
+    "randomImg": false,
+    "appendNumber": false,
+    "prependAdjective": false
+  },
+  "_id": "CWxjPHe0ln8V5JcF",
+  "img": "systems/mist-engine-fvtt/assets/journey/alone-in-the-woods_token.webp",
+  "system": {
+    "biography": "",
+    "editMode": false,
+    "shortDescription": "Too far from home to mmake it back before sunset, you are forced to spend the night deep in the woods. Easy, right? Find a safe spot, build a fire to stay warm and keep predators away. It'll be morning before you know it.",
+    "customFontColor": "#feffff",
+    "floatingTagsAndStatusesEditable": false,
+    "floatingTagsAndStatuses": [
+      {
+        "name": "this is a tag",
+        "value": 0,
+        "isStatus": false,
+        "burned": false,
+        "toBurn": false,
+        "selected": false,
+        "positive": false,
+        "markings": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "might": 0
+      },
+      {
+        "name": "this is a status",
+        "value": 0,
+        "isStatus": false,
+        "burned": false,
+        "toBurn": false,
+        "selected": false,
+        "positive": false,
+        "markings": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "might": 0
+      },
+      {
+        "name": "this is a status",
+        "value": 0,
+        "isStatus": false,
+        "burned": false,
+        "toBurn": false,
+        "selected": false,
+        "positive": false,
+        "markings": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "might": 0
+      },
+      {
+        "name": "Braver by the Minute",
+        "value": 0,
+        "markings": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "isStatus": false,
+        "burned": false,
+        "toBurn": false,
+        "selected": false,
+        "positive": false,
+        "might": 0
+      }
+    ],
+    "tags": "[Braver by the Minute] [/s Jumpy] [/s Cold] [/s Exhausted] [Lost]",
+    "role": "Obstacle",
+    "notes": "",
+    "generalConsequences": {
+      "list": []
+    },
+    "customBackground": "systems/mist-engine-fvtt/assets/journey/alone-in-the-woods_background.webp"
+  },
+  "items": [
+    {
+      "name": "Find a Safe Campsite",
+      "type": "shortchallenge",
+      "system": {
+        "shortDescription": "You need to find a safe site to set up camp for the night. Somewhere not too far from the trail, or you risk becoming lost in the deep woods, but also somewhere nocturnal predators - bears, wolves, or worse - won't find you.",
+        "list": [
+          "Your chosen site is too far from the trail. In the morning you find you are [lost].",
+          "A nocturnal predator stumbles across your poorly chosen site. You need to fight them off or risk being eaten."
+        ],
+        "description": ""
+      },
+      "_id": "mHstkw5woAuJtci8",
+      "img": "icons/svg/item-bag.svg",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "AJBIbeXn9BuD6pTm": 3
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.360",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "14.2.1",
+        "createdTime": 1777999421037,
+        "modifiedTime": 1777999421037,
+        "lastModifiedBy": "AJBIbeXn9BuD6pTm",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!CWxjPHe0ln8V5JcF.mHstkw5woAuJtci8"
+    },
+    {
+      "name": "Build a Campfire",
+      "type": "shortchallenge",
+      "system": {
+        "shortDescription": "You need to forage around for dry wood and kindling to build a campfire, then find some way of starting it. Did you bring your flint & steel, or are you going to have to use a few twigs and a lot of patience?",
+        "list": [
+          "Unable to start a fire, as the night progresses you become increasingly [/s cold].",
+          "Without a fire to deter them, your night is disturbed by frequent visits from curious animals, including a few predators. By morning, you have had very little sleep and are [/s exhausted]."
+        ],
+        "description": ""
+      },
+      "_id": "qRphjN9nTqzoPmWm",
+      "img": "icons/svg/item-bag.svg",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "AJBIbeXn9BuD6pTm": 3
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.360",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "14.2.1",
+        "createdTime": 1777999421037,
+        "modifiedTime": 1777999421037,
+        "lastModifiedBy": "AJBIbeXn9BuD6pTm",
+        "exportSource": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      },
+      "_key": "!actors.items!CWxjPHe0ln8V5JcF.qRphjN9nTqzoPmWm"
+    },
+    {
+      "name": "Eat a Hearty Meal",
+      "type": "shortchallenge",
+      "system": {
+        "shortDescription": "A night in the woods is much easier if you have a full stomach. Did you bring food? Will you have to forage for it? Will you go hungry?",
+        "list": [
+          "If you did not bring food, you will have to forage for it, which means straying away from your campsite and potentially becoming [lost].",
+          "If you have to forage, you'll need to track and hunt your meal. Failure to do so means you become [hungry]."
+        ],
+        "description": ""
+      },
+      "_id": "MAAHFp6KmzlehCAM",
+      "img": "icons/svg/item-bag.svg",
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0,
+        "AJBIbeXn9BuD6pTm": 3
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.360",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "14.2.1",
+        "createdTime": 1777999772151,
+        "modifiedTime": 1777999939045,
+        "lastModifiedBy": "AJBIbeXn9BuD6pTm",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!actors.items!CWxjPHe0ln8V5JcF.MAAHFp6KmzlehCAM"
+    }
+  ],
+  "effects": [],
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "AJBIbeXn9BuD6pTm": 3
+  },
+  "flags": {},
+  "_stats": {
+    "coreVersion": "14.360",
+    "systemId": "mist-engine-fvtt",
+    "systemVersion": "14.2.1",
+    "createdTime": 1777999421037,
+    "modifiedTime": 1777999945001,
+    "lastModifiedBy": "AJBIbeXn9BuD6pTm",
+    "exportSource": null,
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "sort": 0,
+  "_key": "!actors!CWxjPHe0ln8V5JcF"
+}
