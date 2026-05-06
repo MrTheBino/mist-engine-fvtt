@@ -10,6 +10,11 @@ export default class MistEngineJourney extends MistEngineActorBase {
     schema.tags = new fields.StringField({ required: true, blank: true });
     schema.role = new fields.StringField({ required: true, blank: true });
     schema.notes = new fields.StringField({ required: true, blank: true });
+    schema.customBackground = new fields.StringField({ 
+      required: true, 
+      blank: true, 
+      initial: "systems/mist-engine-fvtt/assets/journey/alone-in-the-woods_background.webp" 
+    });
 
     schema.generalConsequences = new fields.SchemaField({
         name: new fields.StringField(),
