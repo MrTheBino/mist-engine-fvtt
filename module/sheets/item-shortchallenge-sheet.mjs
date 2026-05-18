@@ -173,7 +173,7 @@ export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixi
         event.preventDefault();
         const item = this.document;
         const index = parseInt(target.dataset.index);
-        const data = duplicate(item.system);
+        const data = foundry.utils.duplicate(item.system);
 
         // Remove the entry at the specified index
         data.list.splice(index, 1);
@@ -183,7 +183,7 @@ export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixi
     static async #handleCreateEntry(event, target) {
         event.preventDefault();
         const item = this.document;
-        const data = duplicate(item.system);
+        const data = foundry.utils.duplicate(item.system);
 
         // Create a new entry in the consequences array
         data.list = data.list || [];
