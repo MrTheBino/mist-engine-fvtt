@@ -1,7 +1,7 @@
 <div class="challenge-entry-container {{#unless editMode}}text-container-500{{/unless}}">
     {{#if editMode}}
         <fieldset>
-            <legend><button data-action="createChallengeListEntry" data-item-id="{{challenge.id}}"><i class='fas fa-plus'></i></button> <button data-action="deleteChallenge" data-item-id="{{challenge.id}}"><i class='fas fa-trash'></i></button> </legend>
+            <legend>{{challenge.name}} <button data-action="createChallengeListEntry" data-item-id="{{challenge.id}}"><i class='fas fa-plus'></i></button> <button data-action="deleteChallenge" data-item-id="{{challenge.id}}"><i class='fas fa-trash'></i></button> </legend>
             <p class="help-text">{{localize 'MIST_ENGINE.HELP.GMTagShortCuts'}}</p>
             <div class="box-shadowed-container">
                 <input type="text" class="editable-challenge-item" value="{{challenge.name}}" data-item-id="{{challenge.id}}" data-key="name"/>

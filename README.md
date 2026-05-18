@@ -1,6 +1,6 @@
 # Legend In The Mist for FoundryVTT
 
-![Foundry v13](https://img.shields.io/badge/foundry-v13-green) [![Github All Releases](https://img.shields.io/github/downloads/MrTheBino/mist-engine-fvtt/total.svg)]()
+![Foundry v14](https://img.shields.io/badge/foundry-v14-green) [![Github All Releases](https://img.shields.io/github/downloads/MrTheBino/mist-engine-fvtt/total.svg)]()
 
 This is the official system implementation of Legend In The Mist from Son Of Oaks for FoundryVTT.
 
