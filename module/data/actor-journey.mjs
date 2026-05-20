@@ -16,11 +16,7 @@ export default class MistEngineJourney extends MistEngineActorBase {
       initial: "systems/mist-engine-fvtt/assets/journey/alone-in-the-woods_background.webp" 
     });
 
-    schema.generalConsequences = new fields.SchemaField({
-        name: new fields.StringField(),
-        description: new fields.StringField(),
-        list: new fields.ArrayField(new fields.StringField())
-      });
+    schema.generalConsequences = new fields.ArrayField(new fields.StringField());
       
     return schema
   }

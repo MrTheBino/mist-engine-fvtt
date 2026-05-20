@@ -1,5 +1,12 @@
 {
   "MIST_ENGINE": {
+    "ACTIONS":{
+      "ImportChallengeJSON": "Défi d'importation de JSON",
+      "ImportShortChallengeVignetteJSON": "Défi court d'importation / Vignette de JSON",
+      "AddChallenge": "Ajouter un défi",
+      "AddConsequence": "Ajouter une conséquence",
+      "AddGeneralConsequence": "Ajouter une conséquence générale"
+    },
     "QUESTIONS": {
       "DeleteItem": "Êtes-vous sûr de vouloir supprimer cet élément ?",
       "DeleteChallenge": "Êtes-vous sûr de vouloir supprimer ce Défi ?",

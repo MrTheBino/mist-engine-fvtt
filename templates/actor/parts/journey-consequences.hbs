@@ -3,10 +3,28 @@
     {{#if editMode}}
     {{!-- Edit Mode Layout --}}
     <div class="flexcol gap-5">
+        <div class="challenge-entry-container">
+            <div class="list-entries box-shadowed-container">
+                {{#each system.generalConsequences as | entry index | }}
+                <div class="list-entry flexrow">
+                    <div class="entry-content">
+                        <input type="text" name="system.generalConsequences.{{index}}" value="{{entry}}"
+                            class="editable-challenge-item-list-entry" data-index="{{index}}" />
+                        <a class="themebook-icon" data-action="deleteChallengeListItem" data-index="{{index}}">
+                            <i class='fas fa-trash'></i>
+                        </a>
+                    </div>
+                </div>
+                {{/each}}
+                <button data-action="createGeneralConsequence"><i class='fas fa-plus'></i>{{localize
+                    "MIST_ENGINE.ACTIONS.AddGeneralConsequence"}}</button>
+            </div>
+        </div>
         {{#each challenges}}
         {{> systems/mist-engine-fvtt/templates/actor/parts/challenge-partial.hbs challenge=this editMode=true}}
         {{/each}}
-        <button data-action="createChallenge"><i class='fas fa-plus'></i>Add Challenge</button>
+        <button data-action="createChallenge"><i class='fas fa-plus'></i>{{localize
+            "MIST_ENGINE.ACTIONS.AddChallenge"}}</button>
         {{#if (isCustomJSONImportEnabled true)}}
         <button data-action="importChallengeJSON"><i class="fas fa-file-import"></i>{{localize
             'MIST_ENGINE.ACTIONS.ImportShortChallengeVignetteJSON'}}</button>
@@ -15,6 +33,21 @@
     {{else}}
     {{!-- Normal Layout --}}
     <div class="grid grid-2col">
+        {{#if system.generalConsequences}}
+        <div class="challenge-entry-container text-container-large-paper-background">
+            <h2>{{localize "MIST_ENGINE.LABELS.GeneralConsequences"}}</h2>
+            <div class="list-entries">
+                {{#each system.generalConsequences as | consequence | }}
+                <div class="list-entry">
+                    <div class="entry-content-no-edit flexrow">
+                        <div class="icon-col"><i class="skull-icon"></i></div>
+                        <div class="text-col">{{{textWithTags consequence}}}</div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
         {{#each challenges}}
         {{> systems/mist-engine-fvtt/templates/actor/parts/challenge-partial.hbs challenge=this editMode=false}}
         {{/each}}

@@ -15,6 +15,8 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
             height: 750
         },
         actions: {
+            createGeneralConsequence: this.#handleCreateGeneralConsequence,
+            deleteGeneralConsequence: this.#handleDeleteGeneralConsequence,
             deleteChallengeListItem: this.#handleDeleteChallengeListItem,
             createChallengeListEntry: this.#handleCreateChallengeListEntry,
             createChallenge: this.#handleCreateChallenge,
@@ -173,6 +175,20 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
         const list = item.system.list;
         list[index] = value;
         await item.update({ 'system.list': list });
+    }
+
+    static async #handleCreateGeneralConsequence(event, target) {
+        event.preventDefault();
+        this._saveScrollPositions();
+        this.actor.system.generalConsequences.push("");
+        this.actor.update({ system: { generalConsequences: this.actor.system.generalConsequences } });
+    }
+
+    static async #handleDeleteGeneralConsequence(event, target) {
+        event.preventDefault();
+        this._saveScrollPositions();
+        this.actor.system.generalConsequences.splice(target.dataset.index, 1);
+        this.actor.update({ system: { generalConsequences: this.actor.system.generalConsequences } });
     }
 
     static async #handleDeleteChallengeListItem(event, target) {

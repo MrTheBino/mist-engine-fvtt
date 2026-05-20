@@ -159,6 +159,24 @@
       {
         "name": "Braver by the Minute",
         "value": 0,
+        "isStatus": false,
+        "burned": false,
+        "toBurn": false,
+        "selected": false,
+        "positive": false,
+        "markings": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "might": 0
+      },
+      {
+        "name": "cold",
+        "value": 0,
         "markings": [
           false,
           false,
@@ -175,12 +193,13 @@
         "might": 0
       }
     ],
-    "tags": "[Braver by the Minute] [/s Jumpy] [/s Cold] [/s Exhausted] [Lost]",
+    "tags": "Heroes are likely to be [/s cold], [/s tired], and [/s jumpy], but as the night goes on they will get [braver by the minute]",
     "role": "Obstacle",
     "notes": "",
-    "generalConsequences": {
-      "list": []
-    },
+    "generalConsequences": [
+      "Being so far away from the warmth and conmfort of home might make you [jumpy] or [sad]",
+      "How will anyone know where you are? If you're [lost] how will they find you?"
+    ],
     "customBackground": "systems/mist-engine-fvtt/assets/journey/alone-in-the-woods_background.webp"
   },
   "items": [
@@ -209,8 +228,8 @@
         "coreVersion": "14.360",
         "systemId": "mist-engine-fvtt",
         "systemVersion": "14.2.1",
-        "createdTime": 1777999421037,
-        "modifiedTime": 1777999421037,
+        "createdTime": 1779319077985,
+        "modifiedTime": 1779319077985,
         "lastModifiedBy": "AJBIbeXn9BuD6pTm",
         "exportSource": null,
         "compendiumSource": null,
@@ -243,8 +262,8 @@
         "coreVersion": "14.360",
         "systemId": "mist-engine-fvtt",
         "systemVersion": "14.2.1",
-        "createdTime": 1777999421037,
-        "modifiedTime": 1777999421037,
+        "createdTime": 1779319077985,
+        "modifiedTime": 1779319077985,
         "lastModifiedBy": "AJBIbeXn9BuD6pTm",
         "exportSource": null,
         "compendiumSource": null,
@@ -277,12 +296,12 @@
         "coreVersion": "14.360",
         "systemId": "mist-engine-fvtt",
         "systemVersion": "14.2.1",
-        "createdTime": 1777999772151,
-        "modifiedTime": 1777999939045,
+        "createdTime": 1779319077985,
+        "modifiedTime": 1779319077985,
         "lastModifiedBy": "AJBIbeXn9BuD6pTm",
+        "exportSource": null,
         "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null
+        "duplicateSource": null
       },
       "_key": "!actors.items!CWxjPHe0ln8V5JcF.MAAHFp6KmzlehCAM"
     }
@@ -298,8 +317,8 @@
     "coreVersion": "14.360",
     "systemId": "mist-engine-fvtt",
     "systemVersion": "14.2.1",
-    "createdTime": 1777999421037,
-    "modifiedTime": 1777999945001,
+    "createdTime": 1779319077985,
+    "modifiedTime": 1779319077985,
     "lastModifiedBy": "AJBIbeXn9BuD6pTm",
     "exportSource": null,
     "compendiumSource": null,

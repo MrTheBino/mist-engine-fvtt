@@ -2,7 +2,10 @@
   "MIST_ENGINE": {
     "ACTIONS":{
       "ImportChallengeJSON": "Import Challenge from JSON",
-      "ImportShortChallengeVignetteJSON": "Import Short Challenge / Vignette from JSON"
+      "ImportShortChallengeVignetteJSON": "Import Short Challenge / Vignette from JSON",
+      "AddChallenge": "Add Challenge",
+      "AddConsequence": "Add Consequence",
+      "AddGeneralConsequence": "Add General Consequence"
     },
     "THEMEKITS": {
       "Powertags": "Powertags",
@@ -95,6 +98,7 @@
       "Other": "Other",
       "Consequence": "Consequence",
       "JourneyConsequences": "Vignettes & Consequences",
+      "GeneralConsequences": "General Consequences",
       "ThreatsAndConsequences": "Threats & Consequences",
       "SelectedTagsAndStatuses": "Selected Tags & Statuses",
       "SelectCustomBackground": "Select Custom Background",

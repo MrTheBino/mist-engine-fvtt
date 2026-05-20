@@ -1,5 +1,12 @@
 {
     "MIST_ENGINE": {
+        "ACTIONS":{
+        "ImportChallengeJSON": "Import-Herausforderung von JSON",
+        "ImportShortChallengeVignetteJSON": "Import-Kurz-Herausforderung / Vignette von JSON",
+        "AddChallenge": "Herausforderung hinzufügen",
+        "AddConsequence": "Konsequenz hinzufügen",
+        "AddGeneralConsequence": "Fügen Sie Gen Calonsequence hinzu"
+        },
         "PLACEHOLDERS": {
             "QuestGoal": "Quest/Ziel",
             "SpecialImprovementName": "Spezialverbesserung Name",
