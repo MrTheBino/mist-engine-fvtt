@@ -916,30 +916,30 @@ article.cc-enriched section.journal-entry-content {
     filter: drop-shadow(0 0 0 transparent);
   }
 }
-#tooltip mark {
+.mist-engine #tooltip mark {
   padding-left: 2px;
   padding-right: 3px;
   border-radius: 2px;
   font-style: italic;
   white-space: nowrap;
 }
-#tooltip mark.tag, #tooltip mark.tag.yellow {
+.mist-engine #tooltip mark.tag, .mist-engine #tooltip mark.tag.yellow {
   background: linear-gradient(to bottom, transparent 20%, rgb(239, 214, 147) 21%, rgb(239, 214, 147) 90%, transparent 91%);
 }
-#tooltip mark.status, #tooltip mark.tag.green {
+.mist-engine #tooltip mark.status, .mist-engine #tooltip mark.tag.green {
   background: linear-gradient(to bottom, transparent 20%, rgb(188, 205, 175) 21%, rgb(188, 205, 175) 90%, transparent 91%);
 }
-#tooltip mark.weakness, #tooltip mark.tag.orange {
+.mist-engine #tooltip mark.weakness, .mist-engine #tooltip mark.tag.orange {
   background: linear-gradient(to bottom, transparent 20%, rgb(236, 186, 133) 21%, rgb(236, 186, 133) 90%, transparent 91%);
 }
-#tooltip mark.limit, #tooltip mark.tag.red {
+.mist-engine #tooltip mark.limit, .mist-engine #tooltip mark.tag.red {
   background: linear-gradient(to bottom, transparent 20%, rgb(208, 160, 141) 21%, rgb(208, 160, 141) 90%, transparent 91%);
 }
-#tooltip mark.might {
+.mist-engine #tooltip mark.might {
   background: transparent;
   font-weight: bold;
 }
-#tooltip mark .might-icon {
+.mist-engine #tooltip mark .might-icon {
   height: 1em;
   background-color: transparent;
   background-size: contain;
@@ -950,25 +950,25 @@ article.cc-enriched section.journal-entry-content {
   margin-right: 0.2em;
   background-image: url("../assets/icons/might-icon-adventure.webp");
 }
-#tooltip mark .might-icon.adventure {
+.mist-engine #tooltip mark .might-icon.adventure {
   background-image: url("../assets/icons/might-icon-adventure.webp");
 }
-#tooltip mark .might-icon.greatness {
+.mist-engine #tooltip mark .might-icon.greatness {
   background-image: url("../assets/icons/might-icon-greatness.webp");
 }
-#tooltip mark .might-icon.origin {
+.mist-engine #tooltip mark .might-icon.origin {
   background-image: url("../assets/icons/might-icon-origin.webp");
 }
-#tooltip .limit-inline,
-#tooltip .npc-limit-item {
+.mist-engine #tooltip .limit-inline,
+.mist-engine #tooltip .npc-limit-item {
   display: inline-block;
 }
-#tooltip .limit-inline mark.limit,
-#tooltip .npc-limit-item mark.limit {
+.mist-engine #tooltip .limit-inline mark.limit,
+.mist-engine #tooltip .npc-limit-item mark.limit {
   padding-right: 0.8em;
 }
-#tooltip .limit-inline .limit-value,
-#tooltip .npc-limit-item .limit-value {
+.mist-engine #tooltip .limit-inline .limit-value,
+.mist-engine #tooltip .npc-limit-item .limit-value {
   background-image: url("../assets/icons/icon-litm-limit-shield.svg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -981,7 +981,7 @@ article.cc-enriched section.journal-entry-content {
   text-align: center;
   color: white;
 }
-#tooltip {
+.mist-engine #tooltip {
   height: 1em;
   background-color: transparent;
   background-size: contain;
@@ -992,16 +992,15 @@ article.cc-enriched section.journal-entry-content {
   margin-right: 0.2em;
   background-image: url("../assets/icons/might-icon-adventure.webp");
 }
-#tooltip.adventure {
+.mist-engine #tooltip.adventure {
   background-image: url("../assets/icons/might-icon-adventure.webp");
 }
-#tooltip.greatness {
+.mist-engine #tooltip.greatness {
   background-image: url("../assets/icons/might-icon-greatness.webp");
 }
-#tooltip.origin {
+.mist-engine #tooltip.origin {
   background-image: url("../assets/icons/might-icon-origin.webp");
 }
-
 .mist-engine .item-form {
   font-family: Labrada, serif;
 }

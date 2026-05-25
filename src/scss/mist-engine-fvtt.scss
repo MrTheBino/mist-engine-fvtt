@@ -1,53 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
 // Utilities
-@import 'utils/typography';
-@import 'utils/colors';
-@import 'utils/mixins';
-@import 'utils/variables';
-@import 'utils/misc';
+@import "utils/typography";
+@import "utils/colors";
+@import "utils/mixins";
+@import "utils/variables";
+@import "utils/misc";
 
 // Global styles
-@import 'global/font';
-@import 'global/window';
-@import 'global/flex';
-@import 'global/grid';
-@import 'global/editor';
-@import 'global/journal';
-@import 'global/pause';
-@import 'global/tooltip';
+@import "global/font";
+@import "global/window";
+@import "global/flex";
+@import "global/grid";
+@import "global/editor";
+@import "global/journal";
+@import "global/pause";
 
 // Styles scoped to .mist-engine sheets
 .mist-engine {
-  @import 'components/forms';
-  @import 'components/resource';
-  @import 'components/items';
-  @import 'components/effects';
-  @import 'components/tags';
-  @import 'components/themebook';
-  @import 'components/tabs';
-  @import 'components/icons';
-  @import 'components/containers';
+  @import "components/tooltip";
+  @import "components/forms";
+  @import "components/resource";
+  @import "components/items";
+  @import "components/effects";
+  @import "components/tags";
+  @import "components/themebook";
+  @import "components/tabs";
+  @import "components/icons";
+  @import "components/containers";
 
   // Per-sheet styles
-  @import 'sheets/shared';
-  @import 'sheets/actor-npc';
-  @import 'sheets/actor-character';
-  @import 'sheets/actor-journey';
-  @import 'sheets/actor-fellowship';
-  @import 'sheets/item';
+  @import "sheets/shared";
+  @import "sheets/actor-npc";
+  @import "sheets/actor-character";
+  @import "sheets/actor-journey";
+  @import "sheets/actor-fellowship";
+  @import "sheets/item";
 }
 
 // App and standalone styles (not scoped to .mist-engine)
-@import 'components/chat';
-@import 'components/roll_dialog';
-@import 'components/scene_data_app';
-@import 'components/custom_background_editor';
-@import 'components/dice_roller_app';
-@import 'components/character_overlay';
-@import 'components/themekit_selection_app';
-@import 'components/themekit_character_app';
-@import 'components/how_to_play_app';
+@import "components/chat";
+@import "components/roll_dialog";
+@import "components/scene_data_app";
+@import "components/custom_background_editor";
+@import "components/dice_roller_app";
+@import "components/character_overlay";
+@import "components/themekit_selection_app";
+@import "components/themekit_character_app";
+@import "components/how_to_play_app";
 
 // Scroll behaviour fix
 .scrollable {
