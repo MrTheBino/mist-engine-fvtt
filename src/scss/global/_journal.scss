@@ -3,6 +3,8 @@ header.journal-page-header{
 }
 
 .journal-entry-content {
+  @include tag-mark-def;
+
     background-image: url(../assets/bg-pargement-texture.webp);
     background-repeat: no-repeat;
     row-gap: 0.5em;
@@ -120,16 +122,6 @@ header.journal-page-header{
 
     .redish-text {
         color: $c-text-redish;
-    }
-
-    .tag {
-        @include mark-outline($c-tag-orange);
-        font-style: italic;
-    }
-
-    .status {
-        @include mark-outline($c-tag-green);
-        font-style: italic;
     }
 
     .notes {

@@ -1,32 +1,4 @@
 #tooltip {
-    mark {
-        @include mark-outline($c-tag-yellow);
-        padding-left: 2px;
-        padding-right: 2px;
-        border-radius: 2px;
-        font-style: italic;
-        white-space: nowrap;
-
-        &.status      { @include mark-outline($c-tag-green); }
-        &.tag         { @include mark-outline($c-tag-yellow); }
-        &.green       { @include mark-outline($c-tag-green); }
-        &.orange      { @include mark-outline($c-tag-orange); }
-        &.red         { @include mark-outline($c-status-red); }
-        &.might       { font-style: normal; }
-        &.transparent { text-shadow: none; }
-
-        &.power {
-            @include mark-outline($c-tag-power);
-            padding-left: 20px;
-            padding-right: 20px;
-            clip-path: polygon(
-                0% 50%, 10% 0%, 90% 0%,
-                100% 50%, 90% 100%, 10% 100%
-            );
-        }
-
-        .might-icon {
-            @include might-icon-def;
-        }
-    }
+  @include tag-mark-def;
+  @include might-icon-def;
 }

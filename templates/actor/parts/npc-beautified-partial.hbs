@@ -7,9 +7,9 @@
             </div>
             <div class="npc-limits-list flexcol">
                 {{#each system.limits as |limit|}}
-                <div class="npc-limit-item flexrow">
-                    <div class="npc-limit-name">{{limit.name}}</div>
-                    <span class="npc-limit-value-armor"><span class="npc-limit-value">{{npcLimitValue limit.value}}</span></span>
+                <div class="npc-limit-item">
+                    <mark class="limit">{{limit.name}}</mark>
+                    <span class="limit-value">{{npcLimitValue limit.value}}</span>
                 </div>
                 {{#if (notEmpty limit.consequence)}}
                         <div class="npc-limit-consequence"><i class="icon-round-arrow-up"></i>{{{textWithTags limit.consequence}}}</div>

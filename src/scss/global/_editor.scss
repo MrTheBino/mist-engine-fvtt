@@ -4,27 +4,10 @@
   }
 }
 
-/* Status-Mark */
-.editor-content mark.status,
-prosemirror-editor mark.status,
-.prosemirror mark.status {
-  @include mark-outline($c-status);
-}
-
-/* Tag-Mark */
-.editor-content mark.tag,
-prosemirror-editor mark.tag,
-.prosemirror mark.tag {
-  @include mark-outline($c-status);
-  &.weakness {
-    @include mark-outline($c-tag-orange);
-  }
-}
-
-
-
 .editor-content,
 .tab-notes {
+
+  @include tag-mark-def;
 
   .themekit-box{
     @include themekit-box;

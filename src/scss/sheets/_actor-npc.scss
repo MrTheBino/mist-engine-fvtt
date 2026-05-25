@@ -117,27 +117,7 @@
   }
 }
 
-.npc-limit-value-armor {
-  background-image: url("../assets/icons/icon-litm-limit-shield.svg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: center;
-  position: relative;
-  left: -0.5em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  padding: 0;
-  width: 1.2em;
-  height: auto;
-  text-align: center;
-  font-size: 1rem;
-  color: white;
-}
-
-.npc-secret-name,
-.npc-limit-name {
+.npc-secret-name {
   font-family: $font-primary;
   display: flex;
   flex-direction: row;
@@ -152,10 +132,8 @@
   border-radius: 2px;
 }
 
-.npc-limit-name {
-  background: rgba(208, 160, 141);
-  padding-right: 1em;
-  white-space: nowrap;
+.npc-limit-item {
+  text-transform: uppercase;
 }
 
 .npc-limit-consequence {
@@ -182,41 +160,12 @@
   text-transform: uppercase;
 }
 
-.npc-limit-item-inline {
-  display: inline-block;
-
-  .npc-limit-value-armor {
-    background-image: url(../assets/icons/icon-litm-limit-shield.svg);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    left: -0.5em;
-    display: inline-block;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    padding: 0;
-    width: 1.2em;
-    height: auto;
-    text-align: center;
-    font-size: 1rem;
-    color: white;
-    margin-left: -4px;
-  }
-
-  mark {
-    @include mark-outline($c-status-red);
-    padding-right: 16px;
-  }
-}
-
 .npc-secrets-list,
 .npc-limits-list {
   align-items: center;
 }
 
-.npc-secret-item,
-.npc-limit-item {
+.npc-secret-item {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
   color: $c-dark-styled-text;

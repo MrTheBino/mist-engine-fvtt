@@ -284,11 +284,11 @@
 
 // Floating tag/status input rows.
 .fts-input-name {
-    padding: 2px 5px;
+    padding: 1px 3px;
     display: flex;
+    flex-grow: 1;
     align-items: center;
     gap: 3px;
-    flex-grow: 1;
 
     .fts-selectable {
         flex: 1;
@@ -307,8 +307,7 @@
     }
 
     &.tag {
-        background-color: hsla(32, 68%, 28%, 0.9);
-        color: hsl(42, 75%, 88%);
+        background-color: $c-tag-yellow;
         font-family: var(--litm-font-text);
         font-style: normal;
         border-radius: 3px 2px 3px 2px;
@@ -317,11 +316,13 @@
         box-shadow:
             inset 0 1px 2px rgba(255, 205, 90, 0.12),
             0 1px 3px rgba(0, 0, 0, 0.2);
+        &.negative {
+            background-color: $c-tag-orange;
+        }
     }
 
     &.status {
-        background-color: hsla(118, 28%, 28%, 0.88);
-        color: hsl(44, 60%, 86%);
+        background-color: $c-tag-green;
         font-family: var(--litm-font-text);
         font-style: normal;
         border-radius: 3px 2px 3px 2px;
@@ -330,33 +331,6 @@
         box-shadow:
             inset 0 1px 2px rgba(100, 200, 80, 0.12),
             inset 0 -1px 2px rgba(10, 40, 8, 0.15);
-    }
-
-    &.positive {
-        background-color: hsla(38, 70%, 42%, 0.9);
-        color: hsl(48, 90%, 92%);
-        border-color: rgba(160, 110, 20, 0.6);
-        box-shadow:
-            inset 0 1px 2px rgba(255, 220, 100, 0.18),
-            0 1px 3px rgba(0, 0, 0, 0.2);
-    }
-
-    &.status.positive {
-        background-color: hsla(118, 42%, 36%, 0.92);
-        color: hsl(120, 40%, 90%);
-        border-color: rgba(30, 90, 25, 0.6);
-        box-shadow:
-            inset 0 1px 2px rgba(100, 220, 80, 0.15),
-            0 1px 3px rgba(0, 0, 0, 0.2);
-    }
-
-    &.negative {
-        background-color: hsla(22, 68%, 32%, 0.92);
-        color: hsl(32, 80%, 92%);
-        border-color: rgba(150, 70, 10, 0.6);
-        box-shadow:
-            inset 0 1px 2px rgba(255, 160, 60, 0.14),
-            inset 0 -1px 2px rgba(100, 40, 4, 0.22);
     }
 }
 

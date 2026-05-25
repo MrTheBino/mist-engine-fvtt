@@ -1,11 +1,12 @@
 <form class="roll-dialog-container scrollable">
+    {{!-- Selected Tags --}}
     <div class="selected-tags-container flexcol">
         <label class="resource-label">You selected:</label>
         {{#each selectedTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}} {{#if this.isStatus}}clickable{{/if}}" {{#if this.isStatus}}data-action="clickTagStatusModifierToggle" data-index="{{this.index}}"{{/if}}>
+        <div class="selected-tag tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}} {{#if this.isStatus}}status clickable{{/if}}" {{#if this.isStatus}}data-action="clickTagStatusModifierToggle" data-index="{{this.index}}"{{/if}}>
             <span class="tag-icon">
-                {{#if this.positive}}<i class="fa-solid fa-circle-plus"></i>{{else}}<i
-                    class="fa-solid fa-circle-minus"></i>{{/if}}
+                {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
+                    class="fa-solid fa-thumbs-down"></i>{{/if}}
             </span>
             {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
             {{#if this.toBurn}}🔥
@@ -16,13 +17,14 @@
         </div>
         {{/each}}
     </div>
+    {{!-- Story Tags --}}
     <div class="selected-tags-container flexcol">
         <label class="resource-label">Story Tags / Status selected:</label>
         {{#each selectedStoryTags}}
         <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}}">
             <span class="tag-icon">
-                {{#if this.positive}}<i class="fa-solid fa-circle-plus"></i>{{else}}<i
-                    class="fa-solid fa-circle-minus"></i>{{/if}}
+                {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
+                    class="fa-solid fa-thumbs-down"></i>{{/if}}
             </span>
             {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
             {{#if this.toBurn}}🔥{{/if}}{{this.name}}{{#if (gt
@@ -30,13 +32,14 @@
         </div>
         {{/each}}
     </div>
+    {{!-- Challenge Tags --}}
      <div class="selected-tags-container flexcol">
         <label class="resource-label">Challenge Tags / Status selected:</label>
         {{#each challengeTags}}
         <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}}">
             <span class="tag-icon">
-                {{#if this.positive}}<i class="fa-solid fa-circle-plus"></i>{{else}}<i
-                    class="fa-solid fa-circle-minus"></i>{{/if}}
+                {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
+                    class="fa-solid fa-thumbs-down"></i>{{/if}}
             </span>
             {{#if this.might}}
                 <img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">
@@ -46,12 +49,13 @@
         </div>
         {{/each}}
     </div>
+    {{!-- GM Tags --}}
     <div class="selected-tags-container flexcol">
         {{#each selectedGmTags}}
         <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}}">
             <span class="tag-icon">
-                {{#if this.positive}}<i class="fa-solid fa-circle-plus"></i>{{else}}<i
-                    class="fa-solid fa-circle-minus"></i>{{/if}}
+                {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
+                    class="fa-solid fa-thumbs-down"></i>{{/if}}
             </span>
             {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
             {{#if this.toBurn}}🔥{{/if}}{{this.name}}{{#if (gt
@@ -59,6 +63,7 @@
         </div>
         {{/each}}
     </div>
+    {{!-- Positive & Negative Mods --}}
     <div class="form-group">
         <label class="resource-label">Positive Mods:</label>
         <div class="flexrow">
@@ -81,6 +86,7 @@
                 data-action="clickModNegativePlus"></i>
         </div>
     </div>
+    {{!-- Might --}}
     {{#if mightUsageEnabled}}
     {{> "systems/mist-engine-fvtt/templates/dice-roll-app/might.hbs"}}
     {{/if}}

@@ -707,24 +707,17 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const data = TextEditor.getDragEventData(event);
 
         // Handle different data types
+        const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
         switch (data.type) {
             case 'tag':
+                floatingTagsAndStatuses.push({ name: data.name });
+                this.actor.update({
+                    "system.floatingTagsAndStatuses": floatingTagsAndStatuses,
+                });
+                break;
             case 'status':
-                const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
-                let value = data.value;
-                if (value == undefined || value == null || isNaN(parseInt(value))) {
-                    value = 0;
-                }
-
-                let newEntry = { name: data.name, value: parseInt(value), description: "", markings: Array(6).fill(false) };
-                if (parseInt(value) > 0 && parseInt(value) <= 6) {
-                    newEntry.markings[parseInt(value) - 1] = true;
-                    newEntry.isStatus = true;
-                } else {
-                    newEntry.isStatus = false;
-                }
-
-                floatingTagsAndStatuses.push(newEntry);
+                const value = parseInt(data.value) || 0;
+                floatingTagsAndStatuses.push({ name: data.name, isStatus: true, value, description: "", markings: Array(6).fill(false).fill(true, Math.max(value - 1, 0), value) });
                 this.actor.update({
                     "system.floatingTagsAndStatuses": floatingTagsAndStatuses,
                 });

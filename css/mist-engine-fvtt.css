@@ -131,30 +131,6 @@ body {
   cursor: pointer;
 }
 
-.mist-engine.tag {
-  border-radius: 2px;
-  font-weight: bold;
-  padding-left: 0.2em;
-  padding-right: 0.2em;
-  background: rgba(238, 213, 146, 0.75);
-}
-
-.mist-engine.status {
-  border-radius: 2px;
-  font-weight: bold;
-  padding-left: 0.2em;
-  padding-right: 0.2em;
-  background: rgba(64, 134, 54, 0.75);
-}
-
-.mist-engine.limit {
-  border-radius: 2px;
-  font-weight: bold;
-  padding-left: 0.2em;
-  padding-right: 0.2em;
-  background: rgba(161, 61, 41, 0.75);
-}
-
 .flex-group-center,
 .flex-group-left,
 .flex-group-right {
@@ -366,28 +342,91 @@ body {
   height: 100%;
 }
 
-/* Status-Mark */
-.editor-content mark.status,
-prosemirror-editor mark.status,
-.prosemirror mark.status {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(238, 213, 146, 0.75), 0 -1px 0 rgba(238, 213, 146, 0.75), 1px -1px 0 rgba(238, 213, 146, 0.75), 1px 0 0 rgba(238, 213, 146, 0.75), 1px 1px 0 rgba(238, 213, 146, 0.75), 0 1px 0 rgba(238, 213, 146, 0.75), -1px 1px 0 rgba(238, 213, 146, 0.75), -1px 0 0 rgba(238, 213, 146, 0.75);
+.editor-content mark,
+.tab-notes mark {
+  padding-left: 2px;
+  padding-right: 3px;
+  border-radius: 2px;
+  font-style: italic;
+  white-space: nowrap;
 }
-
-/* Tag-Mark */
-.editor-content mark.tag,
-prosemirror-editor mark.tag,
-.prosemirror mark.tag {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(238, 213, 146, 0.75), 0 -1px 0 rgba(238, 213, 146, 0.75), 1px -1px 0 rgba(238, 213, 146, 0.75), 1px 0 0 rgba(238, 213, 146, 0.75), 1px 1px 0 rgba(238, 213, 146, 0.75), 0 1px 0 rgba(238, 213, 146, 0.75), -1px 1px 0 rgba(238, 213, 146, 0.75), -1px 0 0 rgba(238, 213, 146, 0.75);
+.editor-content mark.tag, .editor-content mark.tag.yellow,
+.tab-notes mark.tag,
+.tab-notes mark.tag.yellow {
+  background: linear-gradient(to bottom, transparent 20%, rgb(239, 214, 147) 21%, rgb(239, 214, 147) 90%, transparent 91%);
 }
-.editor-content mark.tag.weakness,
-prosemirror-editor mark.tag.weakness,
-.prosemirror mark.tag.weakness {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(223, 182, 43, 0.75), 0 -1px 0 rgba(223, 182, 43, 0.75), 1px -1px 0 rgba(223, 182, 43, 0.75), 1px 0 0 rgba(223, 182, 43, 0.75), 1px 1px 0 rgba(223, 182, 43, 0.75), 0 1px 0 rgba(223, 182, 43, 0.75), -1px 1px 0 rgba(223, 182, 43, 0.75), -1px 0 0 rgba(223, 182, 43, 0.75);
+.editor-content mark.status, .editor-content mark.tag.green,
+.tab-notes mark.status,
+.tab-notes mark.tag.green {
+  background: linear-gradient(to bottom, transparent 20%, rgb(188, 205, 175) 21%, rgb(188, 205, 175) 90%, transparent 91%);
 }
-
+.editor-content mark.weakness, .editor-content mark.tag.orange,
+.tab-notes mark.weakness,
+.tab-notes mark.tag.orange {
+  background: linear-gradient(to bottom, transparent 20%, rgb(236, 186, 133) 21%, rgb(236, 186, 133) 90%, transparent 91%);
+}
+.editor-content mark.limit, .editor-content mark.tag.red,
+.tab-notes mark.limit,
+.tab-notes mark.tag.red {
+  background: linear-gradient(to bottom, transparent 20%, rgb(208, 160, 141) 21%, rgb(208, 160, 141) 90%, transparent 91%);
+}
+.editor-content mark.might,
+.tab-notes mark.might {
+  background: transparent;
+  font-weight: bold;
+}
+.editor-content mark .might-icon,
+.tab-notes mark .might-icon {
+  height: 1em;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 0.2em;
+  margin-right: 0.2em;
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+}
+.editor-content mark .might-icon.adventure,
+.tab-notes mark .might-icon.adventure {
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+}
+.editor-content mark .might-icon.greatness,
+.tab-notes mark .might-icon.greatness {
+  background-image: url("../assets/icons/might-icon-greatness.webp");
+}
+.editor-content mark .might-icon.origin,
+.tab-notes mark .might-icon.origin {
+  background-image: url("../assets/icons/might-icon-origin.webp");
+}
+.editor-content .limit-inline,
+.editor-content .npc-limit-item,
+.tab-notes .limit-inline,
+.tab-notes .npc-limit-item {
+  display: inline-block;
+}
+.editor-content .limit-inline mark.limit,
+.editor-content .npc-limit-item mark.limit,
+.tab-notes .limit-inline mark.limit,
+.tab-notes .npc-limit-item mark.limit {
+  padding-right: 0.8em;
+}
+.editor-content .limit-inline .limit-value,
+.editor-content .npc-limit-item .limit-value,
+.tab-notes .limit-inline .limit-value,
+.tab-notes .npc-limit-item .limit-value {
+  background-image: url("../assets/icons/icon-litm-limit-shield.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  display: inline-block;
+  margin: 0 0 0 -0.5em;
+  padding: 0 0 0.1em 0;
+  width: 1.1em;
+  height: auto;
+  text-align: center;
+  color: white;
+}
 .editor-content .themekit-box,
 .tab-notes .themekit-box {
   border: 2px solid black;
@@ -566,6 +605,71 @@ header.journal-page-header {
   display: none;
 }
 
+.journal-entry-content mark {
+  padding-left: 2px;
+  padding-right: 3px;
+  border-radius: 2px;
+  font-style: italic;
+  white-space: nowrap;
+}
+.journal-entry-content mark.tag, .journal-entry-content mark.tag.yellow {
+  background: linear-gradient(to bottom, transparent 20%, rgb(239, 214, 147) 21%, rgb(239, 214, 147) 90%, transparent 91%);
+}
+.journal-entry-content mark.status, .journal-entry-content mark.tag.green {
+  background: linear-gradient(to bottom, transparent 20%, rgb(188, 205, 175) 21%, rgb(188, 205, 175) 90%, transparent 91%);
+}
+.journal-entry-content mark.weakness, .journal-entry-content mark.tag.orange {
+  background: linear-gradient(to bottom, transparent 20%, rgb(236, 186, 133) 21%, rgb(236, 186, 133) 90%, transparent 91%);
+}
+.journal-entry-content mark.limit, .journal-entry-content mark.tag.red {
+  background: linear-gradient(to bottom, transparent 20%, rgb(208, 160, 141) 21%, rgb(208, 160, 141) 90%, transparent 91%);
+}
+.journal-entry-content mark.might {
+  background: transparent;
+  font-weight: bold;
+}
+.journal-entry-content mark .might-icon {
+  height: 1em;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 0.2em;
+  margin-right: 0.2em;
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+}
+.journal-entry-content mark .might-icon.adventure {
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+}
+.journal-entry-content mark .might-icon.greatness {
+  background-image: url("../assets/icons/might-icon-greatness.webp");
+}
+.journal-entry-content mark .might-icon.origin {
+  background-image: url("../assets/icons/might-icon-origin.webp");
+}
+.journal-entry-content .limit-inline,
+.journal-entry-content .npc-limit-item {
+  display: inline-block;
+}
+.journal-entry-content .limit-inline mark.limit,
+.journal-entry-content .npc-limit-item mark.limit {
+  padding-right: 0.8em;
+}
+.journal-entry-content .limit-inline .limit-value,
+.journal-entry-content .npc-limit-item .limit-value {
+  background-image: url("../assets/icons/icon-litm-limit-shield.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  display: inline-block;
+  margin: 0 0 0 -0.5em;
+  padding: 0 0 0.1em 0;
+  width: 1.1em;
+  height: auto;
+  text-align: center;
+  color: white;
+}
 .journal-entry-content {
   background-image: url(../assets/bg-pargement-texture.webp);
   background-repeat: no-repeat;
@@ -673,7 +777,7 @@ header.journal-page-header {
 .journal-entry-content h4,
 .journal-entry-content h5,
 .journal-entry-content h6 {
-  color: #742A2B;
+  color: #742a2b;
   font-family: Labrada, serif;
   text-transform: uppercase;
   font-weight: 900;
@@ -740,21 +844,11 @@ header.journal-page-header {
   display: inline;
 }
 .journal-entry-content .bigger-redish-text {
-  color: #742A2B;
+  color: #742a2b;
   font-size: 1.2em;
 }
 .journal-entry-content .redish-text {
-  color: #742A2B;
-}
-.journal-entry-content .tag {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(223, 182, 43, 0.75), 0 -1px 0 rgba(223, 182, 43, 0.75), 1px -1px 0 rgba(223, 182, 43, 0.75), 1px 0 0 rgba(223, 182, 43, 0.75), 1px 1px 0 rgba(223, 182, 43, 0.75), 0 1px 0 rgba(223, 182, 43, 0.75), -1px 1px 0 rgba(223, 182, 43, 0.75), -1px 0 0 rgba(223, 182, 43, 0.75);
-  font-style: italic;
-}
-.journal-entry-content .status {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(64, 134, 54, 0.75), 0 -1px 0 rgba(64, 134, 54, 0.75), 1px -1px 0 rgba(64, 134, 54, 0.75), 1px 0 0 rgba(64, 134, 54, 0.75), 1px 1px 0 rgba(64, 134, 54, 0.75), 0 1px 0 rgba(64, 134, 54, 0.75), -1px 1px 0 rgba(64, 134, 54, 0.75), -1px 0 0 rgba(64, 134, 54, 0.75);
-  font-style: italic;
+  color: #742a2b;
 }
 .journal-entry-content .notes {
   background-image: url(../assets/notes_darker_2.webp);
@@ -823,74 +917,89 @@ article.cc-enriched section.journal-entry-content {
   }
 }
 #tooltip mark {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(238, 213, 146, 0.75), 0 -1px 0 rgba(238, 213, 146, 0.75), 1px -1px 0 rgba(238, 213, 146, 0.75), 1px 0 0 rgba(238, 213, 146, 0.75), 1px 1px 0 rgba(238, 213, 146, 0.75), 0 1px 0 rgba(238, 213, 146, 0.75), -1px 1px 0 rgba(238, 213, 146, 0.75), -1px 0 0 rgba(238, 213, 146, 0.75);
   padding-left: 2px;
-  padding-right: 2px;
+  padding-right: 3px;
   border-radius: 2px;
   font-style: italic;
   white-space: nowrap;
 }
-#tooltip mark.status {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(64, 134, 54, 0.75), 0 -1px 0 rgba(64, 134, 54, 0.75), 1px -1px 0 rgba(64, 134, 54, 0.75), 1px 0 0 rgba(64, 134, 54, 0.75), 1px 1px 0 rgba(64, 134, 54, 0.75), 0 1px 0 rgba(64, 134, 54, 0.75), -1px 1px 0 rgba(64, 134, 54, 0.75), -1px 0 0 rgba(64, 134, 54, 0.75);
+#tooltip mark.tag, #tooltip mark.tag.yellow {
+  background: linear-gradient(to bottom, transparent 20%, rgb(239, 214, 147) 21%, rgb(239, 214, 147) 90%, transparent 91%);
 }
-#tooltip mark.tag {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(238, 213, 146, 0.75), 0 -1px 0 rgba(238, 213, 146, 0.75), 1px -1px 0 rgba(238, 213, 146, 0.75), 1px 0 0 rgba(238, 213, 146, 0.75), 1px 1px 0 rgba(238, 213, 146, 0.75), 0 1px 0 rgba(238, 213, 146, 0.75), -1px 1px 0 rgba(238, 213, 146, 0.75), -1px 0 0 rgba(238, 213, 146, 0.75);
+#tooltip mark.status, #tooltip mark.tag.green {
+  background: linear-gradient(to bottom, transparent 20%, rgb(188, 205, 175) 21%, rgb(188, 205, 175) 90%, transparent 91%);
 }
-#tooltip mark.green {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(64, 134, 54, 0.75), 0 -1px 0 rgba(64, 134, 54, 0.75), 1px -1px 0 rgba(64, 134, 54, 0.75), 1px 0 0 rgba(64, 134, 54, 0.75), 1px 1px 0 rgba(64, 134, 54, 0.75), 0 1px 0 rgba(64, 134, 54, 0.75), -1px 1px 0 rgba(64, 134, 54, 0.75), -1px 0 0 rgba(64, 134, 54, 0.75);
+#tooltip mark.weakness, #tooltip mark.tag.orange {
+  background: linear-gradient(to bottom, transparent 20%, rgb(236, 186, 133) 21%, rgb(236, 186, 133) 90%, transparent 91%);
 }
-#tooltip mark.orange {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(223, 182, 43, 0.75), 0 -1px 0 rgba(223, 182, 43, 0.75), 1px -1px 0 rgba(223, 182, 43, 0.75), 1px 0 0 rgba(223, 182, 43, 0.75), 1px 1px 0 rgba(223, 182, 43, 0.75), 0 1px 0 rgba(223, 182, 43, 0.75), -1px 1px 0 rgba(223, 182, 43, 0.75), -1px 0 0 rgba(223, 182, 43, 0.75);
-}
-#tooltip mark.red {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgb(208, 160, 141), 0 -1px 0 rgb(208, 160, 141), 1px -1px 0 rgb(208, 160, 141), 1px 0 0 rgb(208, 160, 141), 1px 1px 0 rgb(208, 160, 141), 0 1px 0 rgb(208, 160, 141), -1px 1px 0 rgb(208, 160, 141), -1px 0 0 rgb(208, 160, 141);
+#tooltip mark.limit, #tooltip mark.tag.red {
+  background: linear-gradient(to bottom, transparent 20%, rgb(208, 160, 141) 21%, rgb(208, 160, 141) 90%, transparent 91%);
 }
 #tooltip mark.might {
-  font-style: normal;
-}
-#tooltip mark.transparent {
-  text-shadow: none;
-}
-#tooltip mark.power {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgb(227, 221, 217), 0 -1px 0 rgb(227, 221, 217), 1px -1px 0 rgb(227, 221, 217), 1px 0 0 rgb(227, 221, 217), 1px 1px 0 rgb(227, 221, 217), 0 1px 0 rgb(227, 221, 217), -1px 1px 0 rgb(227, 221, 217), -1px 0 0 rgb(227, 221, 217);
-  padding-left: 20px;
-  padding-right: 20px;
-  clip-path: polygon(0% 50%, 10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%);
+  background: transparent;
+  font-weight: bold;
 }
 #tooltip mark .might-icon {
-  height: 16px;
-  width: 16px;
+  height: 1em;
   background-color: transparent;
-  display: inline-block;
-  position: relative;
-  top: 3px;
-  -webkit-filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
-  filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
-  background-image: url("../assets/icons/might-icon-adventure.webp");
   background-size: contain;
   background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 0.2em;
+  margin-right: 0.2em;
+  background-image: url("../assets/icons/might-icon-adventure.webp");
 }
 #tooltip mark .might-icon.adventure {
   background-image: url("../assets/icons/might-icon-adventure.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 #tooltip mark .might-icon.greatness {
   background-image: url("../assets/icons/might-icon-greatness.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 #tooltip mark .might-icon.origin {
   background-image: url("../assets/icons/might-icon-origin.webp");
+}
+#tooltip .limit-inline,
+#tooltip .npc-limit-item {
+  display: inline-block;
+}
+#tooltip .limit-inline mark.limit,
+#tooltip .npc-limit-item mark.limit {
+  padding-right: 0.8em;
+}
+#tooltip .limit-inline .limit-value,
+#tooltip .npc-limit-item .limit-value {
+  background-image: url("../assets/icons/icon-litm-limit-shield.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  display: inline-block;
+  margin: 0 0 0 -0.5em;
+  padding: 0 0 0.1em 0;
+  width: 1.1em;
+  height: auto;
+  text-align: center;
+  color: white;
+}
+#tooltip {
+  height: 1em;
+  background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 0.2em;
+  margin-right: 0.2em;
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+}
+#tooltip.adventure {
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+}
+#tooltip.greatness {
+  background-image: url("../assets/icons/might-icon-greatness.webp");
+}
+#tooltip.origin {
+  background-image: url("../assets/icons/might-icon-origin.webp");
 }
 
 .mist-engine .item-form {
@@ -1360,10 +1469,10 @@ article.cc-enriched section.journal-entry-content {
   display: inline-block;
 }
 .mist-engine .npc-tag {
-  background-color: rgba(238, 213, 146, 0.75);
+  background-color: rgb(239, 214, 147);
 }
 .mist-engine .npc-tag-status-value {
-  background-color: rgba(64, 134, 54, 0.75);
+  background-color: rgb(188, 205, 175);
 }
 .mist-engine .floating-tags-and-status-container {
   color: #724a32;
@@ -1387,11 +1496,11 @@ article.cc-enriched section.journal-entry-content {
   position: relative;
 }
 .mist-engine .fts-input-name {
-  padding: 2px 5px;
+  padding: 1px 3px;
   display: flex;
+  flex-grow: 1;
   align-items: center;
   gap: 3px;
-  flex-grow: 1;
 }
 .mist-engine .fts-input-name .fts-selectable {
   flex: 1;
@@ -1404,36 +1513,27 @@ article.cc-enriched section.journal-entry-content {
   flex-shrink: 0;
 }
 .mist-engine .fts-input-name .might-icon {
-  height: 16px;
-  width: 16px;
+  height: 1em;
   background-color: transparent;
-  display: inline-block;
-  position: relative;
-  top: 3px;
-  -webkit-filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
-  filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
-  background-image: url("../assets/icons/might-icon-adventure.webp");
   background-size: contain;
   background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 0.2em;
+  margin-right: 0.2em;
+  background-image: url("../assets/icons/might-icon-adventure.webp");
 }
 .mist-engine .fts-input-name .might-icon.adventure {
   background-image: url("../assets/icons/might-icon-adventure.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 .mist-engine .fts-input-name .might-icon.greatness {
   background-image: url("../assets/icons/might-icon-greatness.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 .mist-engine .fts-input-name .might-icon.origin {
   background-image: url("../assets/icons/might-icon-origin.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 .mist-engine .fts-input-name.tag {
-  background-color: hsla(32, 68%, 28%, 0.9);
-  color: hsl(42, 75%, 88%);
+  background-color: rgb(239, 214, 147);
   font-family: var(--litm-font-text);
   font-style: normal;
   border-radius: 3px 2px 3px 2px;
@@ -1441,33 +1541,17 @@ article.cc-enriched section.journal-entry-content {
   border: 1px solid rgba(100, 55, 8, 0.65);
   box-shadow: inset 0 1px 2px rgba(255, 205, 90, 0.12), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
+.mist-engine .fts-input-name.tag.negative {
+  background-color: rgb(236, 186, 133);
+}
 .mist-engine .fts-input-name.status {
-  background-color: hsla(118, 28%, 28%, 0.88);
-  color: hsl(44, 60%, 86%);
+  background-color: rgb(188, 205, 175);
   font-family: var(--litm-font-text);
   font-style: normal;
   border-radius: 3px 2px 3px 2px;
   text-align: center;
   border: 1px solid rgba(20, 60, 18, 0.55);
   box-shadow: inset 0 1px 2px rgba(100, 200, 80, 0.12), inset 0 -1px 2px rgba(10, 40, 8, 0.15);
-}
-.mist-engine .fts-input-name.positive {
-  background-color: hsla(38, 70%, 42%, 0.9);
-  color: hsl(48, 90%, 92%);
-  border-color: rgba(160, 110, 20, 0.6);
-  box-shadow: inset 0 1px 2px rgba(255, 220, 100, 0.18), 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-.mist-engine .fts-input-name.status.positive {
-  background-color: hsla(118, 42%, 36%, 0.92);
-  color: hsl(120, 40%, 90%);
-  border-color: rgba(30, 90, 25, 0.6);
-  box-shadow: inset 0 1px 2px rgba(100, 220, 80, 0.15), 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-.mist-engine .fts-input-name.negative {
-  background-color: hsla(22, 68%, 32%, 0.92);
-  color: hsl(32, 80%, 92%);
-  border-color: rgba(150, 70, 10, 0.6);
-  box-shadow: inset 0 1px 2px rgba(255, 160, 60, 0.14), inset 0 -1px 2px rgba(100, 40, 4, 0.22);
 }
 .mist-engine .fts-input-value {
   flex-shrink: 2;
@@ -1534,14 +1618,14 @@ article.cc-enriched section.journal-entry-content {
   cursor: pointer;
 }
 .mist-engine .npc-limit-description .tag {
-  background-color: rgba(64, 134, 54, 0.75);
+  background-color: rgb(188, 205, 175);
   color: #191813;
   font-family: Labrada, serif;
   border-radius: 2px;
   text-align: center;
 }
 .mist-engine .npc-limit-description .status {
-  background-color: rgba(238, 213, 146, 0.75);
+  background-color: rgb(239, 214, 147);
   color: #191813;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -1930,6 +2014,71 @@ article.cc-enriched section.journal-entry-content {
   padding: 10px 15px;
   height: 100%;
 }
+.mist-engine mark {
+  padding-left: 2px;
+  padding-right: 3px;
+  border-radius: 2px;
+  font-style: italic;
+  white-space: nowrap;
+}
+.mist-engine mark.tag, .mist-engine mark.tag.yellow {
+  background: linear-gradient(to bottom, transparent 20%, rgb(239, 214, 147) 21%, rgb(239, 214, 147) 90%, transparent 91%);
+}
+.mist-engine mark.status, .mist-engine mark.tag.green {
+  background: linear-gradient(to bottom, transparent 20%, rgb(188, 205, 175) 21%, rgb(188, 205, 175) 90%, transparent 91%);
+}
+.mist-engine mark.weakness, .mist-engine mark.tag.orange {
+  background: linear-gradient(to bottom, transparent 20%, rgb(236, 186, 133) 21%, rgb(236, 186, 133) 90%, transparent 91%);
+}
+.mist-engine mark.limit, .mist-engine mark.tag.red {
+  background: linear-gradient(to bottom, transparent 20%, rgb(208, 160, 141) 21%, rgb(208, 160, 141) 90%, transparent 91%);
+}
+.mist-engine mark.might {
+  background: transparent;
+  font-weight: bold;
+}
+.mist-engine mark .might-icon {
+  height: 1em;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 0.2em;
+  margin-right: 0.2em;
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+}
+.mist-engine mark .might-icon.adventure {
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+}
+.mist-engine mark .might-icon.greatness {
+  background-image: url("../assets/icons/might-icon-greatness.webp");
+}
+.mist-engine mark .might-icon.origin {
+  background-image: url("../assets/icons/might-icon-origin.webp");
+}
+.mist-engine .limit-inline,
+.mist-engine .npc-limit-item {
+  display: inline-block;
+}
+.mist-engine .limit-inline mark.limit,
+.mist-engine .npc-limit-item mark.limit {
+  padding-right: 0.8em;
+}
+.mist-engine .limit-inline .limit-value,
+.mist-engine .npc-limit-item .limit-value {
+  background-image: url("../assets/icons/icon-litm-limit-shield.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  display: inline-block;
+  margin: 0 0 0 -0.5em;
+  padding: 0 0 0.1em 0;
+  width: 1.1em;
+  height: auto;
+  text-align: center;
+  color: white;
+}
 .mist-engine .editModeToggle {
   float: right;
 }
@@ -2019,7 +2168,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .tab-biography h4,
 .mist-engine .tab-biography h5,
 .mist-engine .tab-biography h6 {
-  color: #742A2B;
+  color: #742a2b;
   font-family: Labrada, serif;
   text-transform: uppercase;
   font-weight: 900;
@@ -2058,11 +2207,11 @@ article.cc-enriched section.journal-entry-content {
   height: 100%;
 }
 .mist-engine .tab-description .tag {
-  background-color: rgba(238, 213, 146, 0.75);
+  background-color: rgb(239, 214, 147);
   border-radius: 4px;
 }
 .mist-engine .tab-description .status {
-  background-color: rgba(64, 134, 54, 0.75);
+  background-color: rgb(188, 205, 175);
   border-radius: 4px;
 }
 .mist-engine .challenge-entry-container,
@@ -2100,92 +2249,6 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .tab.journey-consequences a {
   font-family: Labrada, serif;
   color: #724a32;
-}
-.mist-engine mark {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(238, 213, 146, 0.75), 0 -1px 0 rgba(238, 213, 146, 0.75), 1px -1px 0 rgba(238, 213, 146, 0.75), 1px 0 0 rgba(238, 213, 146, 0.75), 1px 1px 0 rgba(238, 213, 146, 0.75), 0 1px 0 rgba(238, 213, 146, 0.75), -1px 1px 0 rgba(238, 213, 146, 0.75), -1px 0 0 rgba(238, 213, 146, 0.75);
-  padding-left: 2px;
-  padding-right: 2px;
-  border-radius: 2px;
-  font-style: italic;
-  white-space: nowrap;
-}
-.mist-engine mark.status {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(64, 134, 54, 0.75), 0 -1px 0 rgba(64, 134, 54, 0.75), 1px -1px 0 rgba(64, 134, 54, 0.75), 1px 0 0 rgba(64, 134, 54, 0.75), 1px 1px 0 rgba(64, 134, 54, 0.75), 0 1px 0 rgba(64, 134, 54, 0.75), -1px 1px 0 rgba(64, 134, 54, 0.75), -1px 0 0 rgba(64, 134, 54, 0.75);
-}
-.mist-engine mark.status.red {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgb(208, 160, 141), 0 -1px 0 rgb(208, 160, 141), 1px -1px 0 rgb(208, 160, 141), 1px 0 0 rgb(208, 160, 141), 1px 1px 0 rgb(208, 160, 141), 0 1px 0 rgb(208, 160, 141), -1px 1px 0 rgb(208, 160, 141), -1px 0 0 rgb(208, 160, 141);
-}
-.mist-engine mark.status.green {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(64, 134, 54, 0.75), 0 -1px 0 rgba(64, 134, 54, 0.75), 1px -1px 0 rgba(64, 134, 54, 0.75), 1px 0 0 rgba(64, 134, 54, 0.75), 1px 1px 0 rgba(64, 134, 54, 0.75), 0 1px 0 rgba(64, 134, 54, 0.75), -1px 1px 0 rgba(64, 134, 54, 0.75), -1px 0 0 rgba(64, 134, 54, 0.75);
-}
-.mist-engine mark.tag {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(238, 213, 146, 0.75), 0 -1px 0 rgba(238, 213, 146, 0.75), 1px -1px 0 rgba(238, 213, 146, 0.75), 1px 0 0 rgba(238, 213, 146, 0.75), 1px 1px 0 rgba(238, 213, 146, 0.75), 0 1px 0 rgba(238, 213, 146, 0.75), -1px 1px 0 rgba(238, 213, 146, 0.75), -1px 0 0 rgba(238, 213, 146, 0.75);
-}
-.mist-engine mark.tag.negative {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgb(208, 160, 141), 0 -1px 0 rgb(208, 160, 141), 1px -1px 0 rgb(208, 160, 141), 1px 0 0 rgb(208, 160, 141), 1px 1px 0 rgb(208, 160, 141), 0 1px 0 rgb(208, 160, 141), -1px 1px 0 rgb(208, 160, 141), -1px 0 0 rgb(208, 160, 141);
-}
-.mist-engine mark.weakness {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(223, 182, 43, 0.75), 0 -1px 0 rgba(223, 182, 43, 0.75), 1px -1px 0 rgba(223, 182, 43, 0.75), 1px 0 0 rgba(223, 182, 43, 0.75), 1px 1px 0 rgba(223, 182, 43, 0.75), 0 1px 0 rgba(223, 182, 43, 0.75), -1px 1px 0 rgba(223, 182, 43, 0.75), -1px 0 0 rgba(223, 182, 43, 0.75);
-}
-.mist-engine mark.green {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(64, 134, 54, 0.75), 0 -1px 0 rgba(64, 134, 54, 0.75), 1px -1px 0 rgba(64, 134, 54, 0.75), 1px 0 0 rgba(64, 134, 54, 0.75), 1px 1px 0 rgba(64, 134, 54, 0.75), 0 1px 0 rgba(64, 134, 54, 0.75), -1px 1px 0 rgba(64, 134, 54, 0.75), -1px 0 0 rgba(64, 134, 54, 0.75);
-}
-.mist-engine mark.orange {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgba(223, 182, 43, 0.75), 0 -1px 0 rgba(223, 182, 43, 0.75), 1px -1px 0 rgba(223, 182, 43, 0.75), 1px 0 0 rgba(223, 182, 43, 0.75), 1px 1px 0 rgba(223, 182, 43, 0.75), 0 1px 0 rgba(223, 182, 43, 0.75), -1px 1px 0 rgba(223, 182, 43, 0.75), -1px 0 0 rgba(223, 182, 43, 0.75);
-}
-.mist-engine mark.red {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgb(208, 160, 141), 0 -1px 0 rgb(208, 160, 141), 1px -1px 0 rgb(208, 160, 141), 1px 0 0 rgb(208, 160, 141), 1px 1px 0 rgb(208, 160, 141), 0 1px 0 rgb(208, 160, 141), -1px 1px 0 rgb(208, 160, 141), -1px 0 0 rgb(208, 160, 141);
-}
-.mist-engine mark.might {
-  font-style: normal;
-}
-.mist-engine mark.transparent {
-  text-shadow: none;
-}
-.mist-engine mark.power {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgb(227, 221, 217), 0 -1px 0 rgb(227, 221, 217), 1px -1px 0 rgb(227, 221, 217), 1px 0 0 rgb(227, 221, 217), 1px 1px 0 rgb(227, 221, 217), 0 1px 0 rgb(227, 221, 217), -1px 1px 0 rgb(227, 221, 217), -1px 0 0 rgb(227, 221, 217);
-  padding-left: 20px;
-  padding-right: 20px;
-  clip-path: polygon(0% 50%, 10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%);
-}
-.mist-engine mark .might-icon {
-  height: 16px;
-  width: 16px;
-  background-color: transparent;
-  display: inline-block;
-  position: relative;
-  top: 3px;
-  -webkit-filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
-  filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
-  background-image: url("../assets/icons/might-icon-adventure.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.mist-engine mark .might-icon.adventure {
-  background-image: url("../assets/icons/might-icon-adventure.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.mist-engine mark .might-icon.greatness {
-  background-image: url("../assets/icons/might-icon-greatness.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.mist-engine mark .might-icon.origin {
-  background-image: url("../assets/icons/might-icon-origin.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 .mist-engine.sheet.actor.npc .window-content {
   background-image: url("../assets/paper_background_1.webp");
@@ -2293,26 +2356,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .npc-subtitle-text a:hover {
   opacity: 1;
 }
-.mist-engine .npc-limit-value-armor {
-  background-image: url("../assets/icons/icon-litm-limit-shield.svg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: center;
-  position: relative;
-  left: -0.5em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  padding: 0;
-  width: 1.2em;
-  height: auto;
-  text-align: center;
-  font-size: 1rem;
-  color: white;
-}
-.mist-engine .npc-secret-name,
-.mist-engine .npc-limit-name {
+.mist-engine .npc-secret-name {
   font-family: Labrada, serif;
   display: flex;
   flex-direction: row;
@@ -2326,10 +2370,8 @@ article.cc-enriched section.journal-entry-content {
   text-transform: uppercase;
   border-radius: 2px;
 }
-.mist-engine .npc-limit-name {
-  background: rgb(208, 160, 141);
-  padding-right: 1em;
-  white-space: nowrap;
+.mist-engine .npc-limit-item {
+  text-transform: uppercase;
 }
 .mist-engine .npc-limit-consequence {
   font-family: Labrada, serif;
@@ -2352,38 +2394,11 @@ article.cc-enriched section.journal-entry-content {
   text-align: center;
   text-transform: uppercase;
 }
-.mist-engine .npc-limit-item-inline {
-  display: inline-block;
-}
-.mist-engine .npc-limit-item-inline .npc-limit-value-armor {
-  background-image: url(../assets/icons/icon-litm-limit-shield.svg);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: center;
-  left: -0.5em;
-  display: inline-block;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  padding: 0;
-  width: 1.2em;
-  height: auto;
-  text-align: center;
-  font-size: 1rem;
-  color: white;
-  margin-left: -4px;
-}
-.mist-engine .npc-limit-item-inline mark {
-  background-color: transparent;
-  text-shadow: -1px -1px 0 rgb(208, 160, 141), 0 -1px 0 rgb(208, 160, 141), 1px -1px 0 rgb(208, 160, 141), 1px 0 0 rgb(208, 160, 141), 1px 1px 0 rgb(208, 160, 141), 0 1px 0 rgb(208, 160, 141), -1px 1px 0 rgb(208, 160, 141), -1px 0 0 rgb(208, 160, 141);
-  padding-right: 16px;
-}
 .mist-engine .npc-secrets-list,
 .mist-engine .npc-limits-list {
   align-items: center;
 }
-.mist-engine .npc-secret-item,
-.mist-engine .npc-limit-item {
+.mist-engine .npc-secret-item {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
   color: #191813;
@@ -2428,11 +2443,11 @@ article.cc-enriched section.journal-entry-content {
   font-family: Labrada, serif;
 }
 .mist-engine .npc-biography .tag {
-  background-color: rgba(238, 213, 146, 0.75);
+  background-color: rgb(239, 214, 147);
   border-radius: 4px;
 }
 .mist-engine .npc-biography .status {
-  background-color: rgba(64, 134, 54, 0.75);
+  background-color: rgb(188, 205, 175);
   border-radius: 4px;
 }
 .mist-engine .npc-sheet-divider {
@@ -2615,11 +2630,11 @@ article.cc-enriched section.journal-entry-content {
   border-radius: 5px;
 }
 .message-content .selected-tags .tag.positive {
-  background-color: rgba(64, 134, 54, 0.75);
+  background-color: rgb(188, 205, 175);
   color: white;
 }
 .message-content .selected-tags .tag.negative {
-  background-color: rgba(223, 182, 43, 0.75);
+  background-color: rgb(236, 186, 133);
   color: black;
 }
 
@@ -2684,34 +2699,31 @@ article.cc-enriched section.journal-entry-content {
   margin: 10px 0;
   gap: 2px;
 }
-.roll-dialog-container .selected-tags-container .tag {
+.roll-dialog-container .selected-tags-container .tag,
+.roll-dialog-container .selected-tags-container .status {
   font-family: Labrada, serif;
   font-weight: bold;
   border-radius: 2px;
   text-align: center;
   font-style: italic;
+  color: #724a32;
+  padding: 2px;
 }
 .roll-dialog-container .selected-tags-container .tag.positive {
-  background-color: rgba(64, 134, 54, 0.75);
-  border-radius: 5px;
-  color: #724a32;
-  padding: 2px;
+  background-color: rgb(239, 214, 147);
 }
 .roll-dialog-container .selected-tags-container .tag.negative {
-  background-color: rgba(223, 182, 43, 0.75);
-  border-radius: 5px;
-  color: #724a32;
-  padding: 2px;
+  background-color: rgb(236, 186, 133);
 }
 .roll-dialog-container .selected-tags-container .tag.unapplied-preview {
   opacity: 0.75;
-  background-color: #a9a9a9;
-  border-radius: 5px;
-  color: #724a32;
-  padding: 2px;
+  background-color: rgb(169, 169, 169);
 }
 .roll-dialog-container .selected-tags-container .tag.clickable {
   cursor: pointer;
+}
+.roll-dialog-container .selected-tags-container .status.positive {
+  background-color: rgb(188, 205, 175);
 }
 .roll-dialog-container .selected-tags-container .tag-icon {
   float: left;
@@ -2742,32 +2754,24 @@ article.cc-enriched section.journal-entry-content {
   margin-right: auto;
 }
 .roll-dialog-container .might-icon {
-  height: 16px;
-  width: 16px;
+  height: 1em;
   background-color: transparent;
-  display: inline-block;
-  position: relative;
-  top: 3px;
-  -webkit-filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
-  filter: drop-shadow(1px 1px 1px rgb(255, 255, 255));
-  background-image: url("../assets/icons/might-icon-adventure.webp");
   background-size: contain;
   background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 0.2em;
+  margin-right: 0.2em;
+  background-image: url("../assets/icons/might-icon-adventure.webp");
 }
 .roll-dialog-container .might-icon.adventure {
   background-image: url("../assets/icons/might-icon-adventure.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 .roll-dialog-container .might-icon.greatness {
   background-image: url("../assets/icons/might-icon-greatness.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 .roll-dialog-container .might-icon.origin {
   background-image: url("../assets/icons/might-icon-origin.webp");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 #scene-data-app > section.window-content {
@@ -2811,7 +2815,7 @@ article.cc-enriched section.journal-entry-content {
 }
 
 .scene-app-dice-roll-modifiers .listing .mod-entry {
-  background-color: rgba(238, 213, 146, 0.75);
+  background-color: rgb(239, 214, 147);
   color: #724a32;
   font-family: Labrada, serif;
   border-radius: 2px;
@@ -2821,10 +2825,10 @@ article.cc-enriched section.journal-entry-content {
   font-style: italic;
 }
 .scene-app-dice-roll-modifiers .listing .mod-entry.positive {
-  background-color: rgba(64, 134, 54, 0.75);
+  background-color: rgb(188, 205, 175);
 }
 .scene-app-dice-roll-modifiers .listing .mod-entry.negative {
-  background-color: rgba(223, 182, 43, 0.75);
+  background-color: rgb(236, 186, 133);
 }
 
 .character-container .selected-tags-container {
@@ -2839,12 +2843,12 @@ article.cc-enriched section.journal-entry-content {
   font-style: italic;
 }
 .character-container .selected-tags-container .tag.positive {
-  background-color: rgba(64, 134, 54, 0.75);
+  background-color: rgb(188, 205, 175);
   color: #724a32;
   padding: 2px;
 }
 .character-container .selected-tags-container .tag.negative {
-  background-color: rgba(223, 182, 43, 0.75);
+  background-color: rgb(236, 186, 133);
   color: #724a32;
   padding: 2px;
 }
@@ -2966,7 +2970,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .character-token-overlay .weakness {
   font-style: italic;
-  color: rgba(223, 182, 43, 0.75);
+  color: rgb(236, 186, 133);
 }
 .character-token-overlay .overlay-tag-entry {
   margin-bottom: 3px;
@@ -3154,13 +3158,6 @@ article.cc-enriched section.journal-entry-content {
   display: inline-block;
   top: 5px;
   left: 0;
-}
-.how-to-play-dialog .npc-limit-name {
-  display: inline-block;
-}
-.how-to-play-dialog .npc-limit-value-armor {
-  display: inline-block;
-  left: 0.5em;
 }
 
 .htp-game-runs-on-tags {

@@ -3,38 +3,39 @@
         margin: 10px 0;
         gap: 2px;
 
-
-        .tag {
+        .tag,
+        .status {
             font-family: Labrada, serif;
             font-weight: bold;
             border-radius: 2px;
             text-align: center;
             font-style: italic;
+            color: $c-styled-text;
+            padding: 2px;
+        }
 
+        .tag {
             &.positive {
-                background-color: $c-tag-green;
-                border-radius: 5px;
-                color: $c-styled-text;
-                padding: 2px;
+                background-color: $c-tag-yellow;
             }
 
             &.negative {
                 background-color: $c-tag-orange;
-                border-radius: 5px;
-                color: $c-styled-text;
-                padding: 2px;
             }
 
             &.unapplied-preview {
                 opacity: 0.75;
                 background-color: $c-tag-gray;
-                border-radius: 5px;
-                color: $c-styled-text;
-                padding: 2px;
             }
 
             &.clickable {
                 cursor: pointer;
+            }
+        }
+
+        .status {
+            &.positive {
+                background-color: $c-tag-green;
             }
         }
 

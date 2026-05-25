@@ -1,49 +1,91 @@
-// Replaces background-color on <mark> with a solid text outline.
-// Usage: @include mark-outline($some-color);
-@mixin mark-outline($color) {
-    background-color: transparent;
-    text-shadow:
-        -1px -1px 0 $color,
-         0   -1px 0 $color,
-         1px -1px 0 $color,
-         1px  0   0 $color,
-         1px  1px 0 $color,
-         0    1px 0 $color,
-        -1px  1px 0 $color,
-        -1px  0   0 $color;
+@mixin tag-mark-def {
+  mark {
+    padding-left: 2px;
+    padding-right: 3px;
+    border-radius: 2px;
+    font-style: italic;
+    white-space: nowrap;
+
+    // Use a linear gradient so that the tag colour doesn't fill the whole of the line height.
+    // Makes it mlook better for tags in long text, such as journal entries.
+
+    &.tag,
+    &.tag.yellow {
+      background: linear-gradient(to bottom, transparent 20%, $c-tag-yellow 21%, $c-tag-yellow 90%, transparent 91%);
+    }
+
+    &.status,
+    &.tag.green {
+      background: linear-gradient(to bottom, transparent 20%, $c-tag-green 21%, $c-tag-green 90%, transparent 91%);
+    }
+
+    &.weakness,
+    &.tag.orange {
+      background: linear-gradient(to bottom, transparent 20%, $c-tag-orange 21%, $c-tag-orange 90%, transparent 91%);
+    }
+
+    &.limit,
+    &.tag.red {
+      background: linear-gradient(to bottom, transparent 20%, $c-limit-red 21%, $c-limit-red 90%, transparent 91%);
+    }
+
+    &.might {
+      background: transparent;
+      font-weight: bold;
+    }
+
+    .might-icon {
+      @include might-icon-def;
+    }
+  }
+
+  .limit-inline,
+  .npc-limit-item {
+    display: inline-block;
+
+    mark.limit {
+      padding-right: 0.8em;
+    }
+
+    .limit-value {
+      background-image: url("../assets/icons/icon-litm-limit-shield.svg");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-position: center;
+      display: inline-block;
+      margin: 0 0 0 -0.5em;
+      padding: 0 0 0.1em 0;
+      width: 1.1em;
+      height: auto;
+      text-align: center;
+      color: white;
+    }
+  }
 }
 
-@mixin might-icon-def{
-    height: 16px;
-    width: 16px;
-    background-color: transparent;
-    display: inline-block;
-    position: relative;
-    top: 3px;
-    -webkit-filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 1));
-    filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 1));
+@mixin might-icon-def {
+  height: 1em;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 0.2em;
+  margin-right: 0.2em;
 
-    background-image: url('../assets/icons/might-icon-adventure.webp');
-    background-size: contain;
-    background-repeat: no-repeat;
+  background-image: url("../assets/icons/might-icon-adventure.webp");
 
-    &.adventure {
-        background-image: url('../assets/icons/might-icon-adventure.webp');
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
+  &.adventure {
+    background-image: url("../assets/icons/might-icon-adventure.webp");
+  }
 
-    &.greatness {
-        background-image: url('../assets/icons/might-icon-greatness.webp');
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
+  &.greatness {
+    background-image: url("../assets/icons/might-icon-greatness.webp");
+  }
 
-    &.origin {
-        background-image: url('../assets/icons/might-icon-origin.webp');
-        background-size: contain;
-        background-repeat: no-repeat;
-    }
+  &.origin {
+    background-image: url("../assets/icons/might-icon-origin.webp");
+  }
 }
 
 @mixin styled-fielset{
