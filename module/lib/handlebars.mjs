@@ -1,6 +1,11 @@
 import { textWithTags } from "./tag-status-text-helper.mjs";
 
 export function registerHandlebarHelpers() {
+
+  Handlebars.registerHelper("log", function (obj) {
+    console.log(...Array.from(arguments).slice(0, -1));
+  });
+
   Handlebars.registerHelper("powerTagQuestionPlaceholder", function (index, str) {
     let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index];
     let qText = str;
