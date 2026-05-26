@@ -22,10 +22,15 @@ export class ThemeKitAdapter{
             themebook.system.weaknesstags = themebook.system.weaknesstags.map((tag, index) => ({ ...tag, planned: index >= 1 }));
         }
         await themebook.update({ [`system.weaknesstags`]: themebook.system.weaknesstags, [`system.powertags`]: themebook.system.powertags });
-        
+
         await themebook.update({ [`system.themeKitUUID`]: themekit.uuid });
 
         await themebook.update({ [`system.quest`]: themekit.system.quest, [`system.story`]: themekit.system.story });
+
+        if (themekit.system.specialImprovements?.length > 0) {
+            const specialImprovements = themekit.system.specialImprovements.map(imp => ({ name: imp.name, active: imp.active, description: imp.description }));
+            await themebook.update({ [`system.specialImprovements`]: specialImprovements });
+        }
 
         // now we create the themebook item in the actor's inventory
         ui.notifications.info( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedThemekit", { themekitName: themekit.name, actorName: actor.name }));
@@ -66,6 +71,10 @@ export class ThemeKitAdapter{
         // we set the first one as active (not planned) and the other ones as planned
         if(themebookData.system.weaknesstags && themebookData.system.weaknesstags.length > 0){
             themebookData.system.weaknesstags = themebookData.system.weaknesstags.map((tag, index) => ({ ...tag, planned: index >= 1 }));
+        }
+
+        if (themekit.system.specialImprovements?.length > 0) {
+            themebookData.system.specialImprovements = themekit.system.specialImprovements.map(imp => ({ name: imp.name, active: imp.active, description: imp.description }));
         }
 
         // now we create the themebook item in the actor's inventory
