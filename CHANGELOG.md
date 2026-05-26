@@ -19,6 +19,9 @@ If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/m
 - FIX: journal page headers are working again
 - FIX: fixed style for code blocks in the journals
 
+# 14.2.3
+- hotfix for roll dialog  
+
 # 14.2.1
 - fix for themekits and disappearing tags
   
