@@ -97,6 +97,18 @@
         color: var(--litm-color-accent);
     }
 
+    .themekit-group li {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .source-icon {
+            font-size: 0.75em;
+            opacity: 0.6;
+            flex-shrink: 0;
+        }
+    }
+
     .tag-container{
         line-height: 1.5em;
     }

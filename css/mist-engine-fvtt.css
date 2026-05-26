@@ -3063,6 +3063,16 @@ article.cc-enriched section.journal-entry-content {
   font-weight: bold;
   color: var(--litm-color-accent);
 }
+#themekit-selection-app > section.window-content .themekit-group li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+#themekit-selection-app > section.window-content .themekit-group li .source-icon {
+  font-size: 0.75em;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
 #themekit-selection-app > section.window-content .tag-container {
   line-height: 1.5em;
 }

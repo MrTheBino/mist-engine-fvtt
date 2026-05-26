@@ -15,14 +15,19 @@
                 <ul>
                     {{#each this.themekits}}
                     <li
-                        data-search-powertags="{{#each this.system.powertags}}{{this.name}} {{/each}}"
-                        data-search-weaknesstags="{{#each this.system.weaknesstags}}{{this.name}} {{/each}}"
-                        data-search-specialimprovements="{{#each this.system.specialImprovements}}{{this.name}} {{/each}}"
-                        data-search-quest="{{this.system.quest}}"
-                        data-search-story="{{this.system.story}}"
+                        data-search-powertags="{{#each this.themekit.system.powertags}}{{this.name}} {{/each}}"
+                        data-search-weaknesstags="{{#each this.themekit.system.weaknesstags}}{{this.name}} {{/each}}"
+                        data-search-specialimprovements="{{#each this.themekit.system.specialImprovements}}{{this.name}} {{/each}}"
+                        data-search-quest="{{this.themekit.system.quest}}"
+                        data-search-story="{{this.themekit.system.story}}"
                     >
-                        <a class="themekit-button" data-themekit-uuid="{{this.uuid}}" data-action="selectThemekit">
-                            {{this.name}}
+                        {{#if this.isCompendium}}
+                        <i class="fa-solid fa-book source-icon" title="Compendium"></i>
+                        {{else}}
+                        <i class="fa-solid fa-globe source-icon" title="World"></i>
+                        {{/if}}
+                        <a class="themekit-button" data-themekit-uuid="{{this.themekit.uuid}}" data-action="selectThemekit">
+                            {{this.themekit.name}}
                         </a>
                     </li>
                     {{/each}}

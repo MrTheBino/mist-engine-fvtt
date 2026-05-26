@@ -101,12 +101,12 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
             if(!themekitsByType[type]){
                 themekitsByType[type] = { groupName: type, themekits: [] };
             }
-            themekitsByType[type].themekits.push(themekit);
+            themekitsByType[type].themekits.push({ themekit, isCompendium: themekit.pack != null });
         }
 
         // sort themekits by name
         for(let themekitType in themekitsByType){
-            themekitsByType[themekitType].themekits.sort((a, b) => a.name.localeCompare(b.name));
+            themekitsByType[themekitType].themekits.sort((a, b) => a.themekit.name.localeCompare(b.themekit.name));
         }
         return themekitsByType;
     }
