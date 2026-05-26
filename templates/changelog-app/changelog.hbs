@@ -1,0 +1,16 @@
+<div class="changelog-wrapper">
+    <div class="changelog-header-banner">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>{{localize "MIST_ENGINE.CHANGELOG.UpdatedTo"}} <strong>{{version}}</strong></span>
+    </div>
+    <div class="changelog-content">
+        {{{changelogHtml}}}
+    </div>
+    <div class="changelog-footer">
+        <label class="changelog-dont-show-label">
+            <input type="checkbox" class="changelog-dont-show">
+            {{localize "MIST_ENGINE.CHANGELOG.DontShowAgain"}}
+        </label>
+        <button type="button" data-action="closeDialog">{{localize "Close"}}</button>
+    </div>
+</div>

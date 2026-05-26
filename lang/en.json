@@ -1,5 +1,9 @@
 {
   "MIST_ENGINE": {
+    "CHANGELOG": {
+      "UpdatedTo": "Updated to version",
+      "DontShowAgain": "Don't show again for this version"
+    },
     "ACTIONS":{
       "ImportChallengeJSON": "Import Challenge from JSON",
       "ImportShortChallengeVignetteJSON": "Import Short Challenge / Vignette from JSON",

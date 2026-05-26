@@ -1,5 +1,21 @@
 # CHANGELOG
 
+If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
+
+# 14.3.0
+- FEAT: added icons for the themekits in the selection app to indicate if it's from a compendium or not
+- FEAT: Themekit interface improvements and/or Drag-and-Drop for Themekits. #53
+- FEAT: CSV import for power tags and weakness tags does not support quotes to escape commas within the tag text
+- FEAT: update on the styling of tags & powertags made by the great Paul Umbers! Thanks guy!
+- FEAT: Improved journey sheets made by Paul Umbers
+- FEAT: changes in styles for the upcomming premium modules
+- FEAT: Added changelog dialog on foundry / world start up
+- FIX: fixed color coding in the themekit selection
+- FIX: Themekit drag-and-drop does not populate Special Improvements on character sheet #63
+- FIX: Themekit assignment from a Themebook does not populate power tags, weakness tags, or the Quest text. #65
+- FIX: changed negative & positive icons in the scene app to it matches the roll dialog
+- FIX: fix for toggling tags from the tags & status in the roll dialog
+
 # 14.2.1
 - fix for themekits and disappearing tags
   

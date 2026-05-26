@@ -14,6 +14,7 @@ import { MistEngineLegendInTheMistJourneySheet } from "./sheets/litm-actor-journ
 import { MistEngineThemebookItemSheet } from "./sheets/item-themebook-sheet.mjs";
 import { MistSceneApp } from "./apps/scene-app.mjs";
 import { HowToPlayApp } from "./apps/how-to-play-app.mjs";
+import { ChangelogApp } from "./apps/changelog-app.mjs";
 
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
@@ -182,6 +183,9 @@ Hooks.once("ready", async function () {
 
   globalThis.MistSceneApp = MistSceneApp;
   globalThis.HowToPlayApp = HowToPlayApp;
+  globalThis.ChangelogApp = ChangelogApp;
+
+  ChangelogApp.checkAndShow();
 });
 
 setupHooks();

@@ -1,0 +1,106 @@
+#changelog-app > section.window-content {
+    background-image: url("../assets/bg-dark-old-paper-textures.webp");
+    background-repeat: no-repeat;
+    font-family: $font-primary;
+    color: var(--litm-color-accent);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+    .changelog-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .changelog-header-banner {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        background-color: rgba(0, 0, 0, 0.35);
+        border-bottom: 1px solid var(--litm-color-accent);
+        font-size: 1em;
+        flex-shrink: 0;
+
+        i {
+            font-size: 1.1em;
+        }
+    }
+
+    .changelog-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 12px 18px;
+        scroll-behavior: smooth;
+
+        h2.version-header {
+            font-family: $font-primary;
+            color: var(--litm-color-accent);
+            font-size: 1.15em;
+            margin: 16px 0 4px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid rgba(var(--litm-color-accent), 0.3);
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+
+        ul {
+            margin: 4px 0 8px 16px;
+            padding: 0;
+            list-style: disc;
+        }
+
+        li {
+            margin-bottom: 2px;
+            line-height: 1.5;
+        }
+
+        p.changelog-note {
+            font-style: italic;
+            opacity: 0.75;
+            margin: 4px 0;
+            font-size: 0.9em;
+        }
+    }
+
+    .changelog-footer {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 12px;
+        border-top: 1px solid rgba(0, 0, 0, 0.3);
+        background-color: rgba(0, 0, 0, 0.2);
+
+        .changelog-dont-show-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85em;
+            cursor: pointer;
+
+            input[type="checkbox"] {
+                accent-color: var(--litm-color-accent);
+                cursor: pointer;
+            }
+        }
+
+        button {
+            font-family: $font-primary;
+            color: var(--litm-color-accent);
+            background-color: transparent;
+            border: 1px solid var(--litm-color-accent);
+            padding: 4px 16px;
+            border-radius: 3px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.3);
+            }
+        }
+    }
+}

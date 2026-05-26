@@ -1,5 +1,13 @@
 export function setupConfiguration() {
 
+    game.settings.register("mist-engine-fvtt", "systemVersion", {
+        scope: "world",
+        config: false,
+        type: String,
+        default: ""
+    });
+
+
     // game.settings.get("mist-engine-fvtt", "mightUsageEnabled");
     game.settings.register("mist-engine-fvtt", "mightUsageEnabled", {
         name: "Might Usage Enabled",
