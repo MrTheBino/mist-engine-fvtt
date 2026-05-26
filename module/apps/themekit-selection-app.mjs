@@ -1,10 +1,20 @@
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 import { ThemeKitAdapter } from '../lib/themekit-adapter.mjs';
 
+const FILTER_DATASET_KEYS = {
+    powertags:            'searchPowertags',
+    weaknesstags:         'searchWeaknesstags',
+    specialimprovements:  'searchSpecialimprovements',
+    quest:                'searchQuest',
+    story:                'searchStory',
+};
+
 export class ThemekitSelectionApp extends HandlebarsApplicationMixin(ApplicationV2) {
     currentSelectedThemekit = null;
     actor = null;
     actorThemebook = null;
+    _searchQuery = '';
+    _activeFilters = new Set();
 
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
@@ -99,6 +109,52 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
             themekitsByType[themekitType].themekits.sort((a, b) => a.name.localeCompare(b.name));
         }
         return themekitsByType;
+    }
+
+    _onRender(context, options) {
+        const search = this.element.querySelector('.themekit-search');
+        if (!search) return;
+
+        // Restore state after re-render triggered by themekit selection
+        search.value = this._searchQuery;
+        this.element.querySelectorAll('.search-filter-toggle input[type="checkbox"]').forEach(cb => {
+            cb.checked = this._activeFilters.has(cb.dataset.filter);
+        });
+
+        const applyFilter = () => {
+            this._searchQuery = search.value;
+            const query = search.value.trim().toLowerCase();
+            this.element.querySelectorAll('.themekit-group').forEach(group => {
+                let anyVisible = false;
+                group.querySelectorAll('li').forEach(li => {
+                    const name = (li.querySelector('.themekit-button')?.textContent ?? '').toLowerCase();
+                    let matches = !query || name.includes(query);
+
+                    if (!matches && query) {
+                        for (const filter of this._activeFilters) {
+                            const val = (li.dataset[FILTER_DATASET_KEYS[filter]] ?? '').toLowerCase();
+                            if (val.includes(query)) { matches = true; break; }
+                        }
+                    }
+
+                    li.style.display = matches ? '' : 'none';
+                    if (matches) anyVisible = true;
+                });
+                group.style.display = anyVisible ? '' : 'none';
+            });
+        };
+
+        search.addEventListener('input', applyFilter);
+
+        this.element.querySelectorAll('.search-filter-toggle input[type="checkbox"]').forEach(cb => {
+            cb.addEventListener('change', () => {
+                if (cb.checked) this._activeFilters.add(cb.dataset.filter);
+                else this._activeFilters.delete(cb.dataset.filter);
+                applyFilter();
+            });
+        });
+
+        applyFilter();
     }
 
     static async #handleSelectThemekit(event, target){

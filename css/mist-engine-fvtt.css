@@ -2991,6 +2991,43 @@ article.cc-enriched section.journal-entry-content {
   align-self: flex-start;
   height: 100%;
 }
+#themekit-selection-app > section.window-content .left-panel .themekit-search {
+  width: 100%;
+  margin-bottom: 6px;
+  padding: 4px 6px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--litm-color-accent);
+  border-radius: 3px;
+  color: var(--litm-color-accent);
+  font-family: Labrada, serif;
+  font-size: 0.9em;
+  box-sizing: border-box;
+}
+#themekit-selection-app > section.window-content .left-panel .themekit-search::placeholder {
+  color: rgba(var(--litm-color-accent), 0.5);
+  opacity: 0.6;
+}
+#themekit-selection-app > section.window-content .left-panel .search-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+#themekit-selection-app > section.window-content .left-panel .search-filters .search-filter-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--litm-color-accent);
+  font-family: Labrada, serif;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+#themekit-selection-app > section.window-content .left-panel .search-filters .search-filter-toggle input[type=checkbox] {
+  accent-color: var(--litm-color-accent);
+  cursor: pointer;
+  width: 13px;
+  height: 13px;
+}
 #themekit-selection-app > section.window-content .right-panel {
   align-self: flex-start;
   margin-left: 10px;

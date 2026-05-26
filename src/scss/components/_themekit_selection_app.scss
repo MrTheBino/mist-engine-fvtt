@@ -13,6 +13,48 @@
         padding: 5px;
         align-self:flex-start;
         height: 100%;
+
+        .themekit-search {
+            width: 100%;
+            margin-bottom: 6px;
+            padding: 4px 6px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--litm-color-accent);
+            border-radius: 3px;
+            color: var(--litm-color-accent);
+            font-family: $font-primary;
+            font-size: 0.9em;
+            box-sizing: border-box;
+
+            &::placeholder {
+                color: rgba(var(--litm-color-accent), 0.5);
+                opacity: 0.6;
+            }
+        }
+
+        .search-filters {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 8px;
+
+            .search-filter-toggle {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                color: var(--litm-color-accent);
+                font-family: $font-primary;
+                font-size: 0.8em;
+                cursor: pointer;
+
+                input[type="checkbox"] {
+                    accent-color: var(--litm-color-accent);
+                    cursor: pointer;
+                    width: 13px;
+                    height: 13px;
+                }
+            }
+        }
     }
 
     .right-panel {
