@@ -276,6 +276,33 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
         }
     }
 
+    // CSV parsing from hell.... handles commas within quotes and trims whitespace
+    parseCSV(str) {
+        const entries = [];
+        let current = '';
+        let inQuotes = false;
+        for (let i = 0; i < str.length; i++) {
+            const ch = str[i];
+            if (ch === '"') {
+                if (inQuotes && str[i + 1] === '"') {
+                    current += '"';
+                    i++;
+                } else {
+                    inQuotes = !inQuotes;
+                }
+            } else if (ch === ',' && !inQuotes) {
+                const trimmed = current.trim();
+                if (trimmed.length > 0) entries.push(trimmed);
+                current = '';
+            } else {
+                current += ch;
+            }
+        }
+        const trimmed = current.trim();
+        if (trimmed.length > 0) entries.push(trimmed);
+        return entries;
+    }
+
     static async #handleImportCSV(event, target) {
         // we open a foundry input dialog to paste CSV data, then parse it and add powertags accordingly
         event.preventDefault();
@@ -287,7 +314,7 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
         // use dialogv2 to create a dialog with a textarea input for the CSV data
         const csvData = await foundry.applications.api.DialogV2.prompt({
             window: {title: "Import Tags from CSV"},
-            content: `<p>Paste your CSV data below. Commas separate tags.</p><textarea name="csvData" rows="10" style="width: 100%;"></textarea>`,
+            content: `<p>Paste your CSV data below. Commas separate tags. Wrap a tag in quotes to include commas within it (e.g. "maps, plans, and schematics").</p><textarea name="csvData" rows="10" style="width: 100%;"></textarea>`,
             ok: {
                 label: "Import",
                 callback: (event, button, dialog) => {
@@ -296,10 +323,9 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
             }
         });
 
-        // we clear each entry in the csv and split by commas, then add each as a powertag or weaknesstag
         if (csvData) {
             const tags = item.system[type] || [];
-            const csvEntries = csvData.split(',').map(sub => sub.trim()).filter(sub => sub.length > 0);
+            const csvEntries = this.parseCSV(csvData);
             for (const entry of csvEntries) {
                 tags.push({ name: entry });
             }
