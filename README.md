@@ -26,7 +26,6 @@ You can use these formatting in almost every text field to display a MIST engine
     [/sn status] - a negative status
     [/sn status-1] - a negative status with a tier
     [/sg status-2] - a status with a green color instead of yellow
-    [/so status-2] - a status with a orange color instead of yellow
     [/m might] - a might word with a sword icon before
     [/ma might] - a might of type adventure
     [/mg might] - a might of type greatness

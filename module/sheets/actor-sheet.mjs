@@ -575,7 +575,6 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             } else {
                 const item = this.actor.items.get(target.dataset.itemId);
                 item.delete();
-                li.slideUp(200, () => this.render(false));
             }
         }
 

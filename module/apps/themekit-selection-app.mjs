@@ -130,11 +130,16 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
         }
 
         if(this.actorThemebook){
-            // we only set the UUID of the themebook with the currentSelectedThemekit
+            // we only set the UUID of the themebook with the currentSelectedThemekit in the beginning
             await this.actorThemebook.update({ "system.themeKitUUID": this.currentSelectedThemekit.uuid });
             ui.notifications.notify( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AssignedThemekit", { themekitName: this.currentSelectedThemekit.name, characterName: this.actor.name }));
+            // if the themebook is empty, we populate it with the themekit data
+            if((!this.actorThemebook.system.powertags || this.actorThemebook.system.powertags.length === 0) && (!this.actorThemebook.system.weaknesstags || this.actorThemebook.system.weaknesstags.length === 0)){
+                const adapter = new ThemeKitAdapter();
+                await adapter.populateThemekitForThemebook(this.actor, this.actorThemebook, this.currentSelectedThemekit);        
+            }
             this.close();
-            return;
+            return;    
         }
         const adapter = new ThemeKitAdapter();
         await adapter.importThemekitToCharacter(this.actor, this.currentSelectedThemekit);

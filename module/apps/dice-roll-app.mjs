@@ -60,7 +60,6 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     setOptions(options) {
         if (options.actor) {
             this.actor = options.actor;
-            console.log("Actor set in options for DiceRollApp:", this.actor);
         }
         if (options.type) {
             this.rollType = options.type || 'quick'; // 'quick' or 'detailed'
