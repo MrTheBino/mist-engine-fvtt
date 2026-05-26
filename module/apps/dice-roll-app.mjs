@@ -402,7 +402,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (actor.system.floatingTagsAndStatuses && actor.system.floatingTagsAndStatuses.length > 0) {
             actor.system.floatingTagsAndStatuses.forEach((entry,index) => {
                 if (entry.selected) {
-                    let t = { name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value,index: index + 1,isStatus: entry.isStatus, might: entry.might, mightIcon: entry.mightIcon };
+                    let t = { name: entry.name, positive: entry.positive, source: "floating-tag", value: entry.value,index: index + 1,isStatus: entry.isStatus, might: entry.might, mightIcon: entry.mightIcon, isClickable: true };
                     if(entry.value === undefined || entry.value > 0){
                         t.isStatus = true;
                     }
