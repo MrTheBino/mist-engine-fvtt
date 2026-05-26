@@ -605,6 +605,10 @@ body {
   min-height: 40px;
 }
 
+.journal-page-content pre code {
+  white-space: pre-wrap;
+}
+
 .journal-entry-content mark {
   padding-left: 2px;
   padding-right: 3px;
@@ -3348,5 +3352,3 @@ article.cc-enriched section.journal-entry-content {
   height: 100%;
   padding-right: 8px;
 }
-
-/*# sourceMappingURL=mist-engine-fvtt.css.map */

@@ -20,19 +20,15 @@ The system contains 3 official pregenerated characters with full artwork for fre
 You can use these formatting in almost every text field to display a MIST engine style tag or status
 
     [tag] - a simple tag
-    [/n tag] - a simple negative tag
     [status-1] - a status with tier 1, tier 1-6
     [/s status] - a status without a tier, usage in a journal for example
-    [/sn status] - a negative status
-    [/sn status-1] - a negative status with a tier
-    [/sg status-2] - a status with a green color instead of yellow
+    [/s status-2] - a status  of tier 2
     [/m might] - a might word with a sword icon before
     [/ma might] - a might of type adventure
     [/mg might] - a might of type greatness
     [/mo might] - a might of type origin
     [/l limit-X] - a limit with the value X
     [/w weakness] - a weakness tag, usage in text and compendiums for example
-    [/wo weakness] - a weakness tag in orange, usage in text and compendiums for example
 
 An Example
 

@@ -313,6 +313,45 @@
         "lastModifiedBy": "wgZHyBDokH67OG0A"
       },
       "_key": "!journal.pages!TrgMWh3RyxxBkZoB.AB7WK9k5t3DDp7T7"
+    },
+    {
+      "sort": 700000,
+      "name": "Tags & Statuses",
+      "type": "text",
+      "_id": "kl5naCLpcBfq9FIt",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<p>You can use these formatting in almost every text field to display a MIST engine style tag or status.</p><pre><code>\n[tag] - a simple tag\n[status-1] - a status with tier 1, tier 1-6\n[/s status] - a status without a tier, usage in a journal for example\n[/s status-2] - a status  of tier 2\n[/m might] - a might word with a sword icon before\n[/ma might] - a might of type adventure\n[/mg might] - a might of type greatness\n[/mo might] - a might of type origin\n[/l limit-X] - a limit with the value X\n[/w weakness] - a weakness tag, usage in text and compendiums for example</code></pre><p></p><p>You can find the latest markdown for tags &amp; status <a href=\"https://github.com/MrTheBino/mist-engine-fvtt\">here</a>.</p>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.363",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "14.2.2",
+        "createdTime": 1779787022474,
+        "modifiedTime": 1779787205848,
+        "lastModifiedBy": "wgZHyBDokH67OG0A",
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      },
+      "_key": "!journal.pages!TrgMWh3RyxxBkZoB.kl5naCLpcBfq9FIt"
     }
   ],
   "folder": null,

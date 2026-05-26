@@ -10,12 +10,14 @@ If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/m
 - FEAT: Improved journey sheets made by Paul Umbers
 - FEAT: changes in styles for the upcomming premium modules
 - FEAT: Added changelog dialog on foundry / world start up
+- FEAT: added updated formatting options in the documentation
 - FIX: fixed color coding in the themekit selection
 - FIX: Themekit drag-and-drop does not populate Special Improvements on character sheet #63
 - FIX: Themekit assignment from a Themebook does not populate power tags, weakness tags, or the Quest text. #65
 - FIX: changed negative & positive icons in the scene app to it matches the roll dialog
 - FIX: fix for toggling tags from the tags & status in the roll dialog
 - FIX: journal page headers are working again
+- FIX: fixed style for code blocks in the journals
 
 # 14.2.1
 - fix for themekits and disappearing tags
