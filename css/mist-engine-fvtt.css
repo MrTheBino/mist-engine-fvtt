@@ -3039,9 +3039,6 @@ article.cc-enriched section.journal-entry-content {
   overflow-y: auto;
   height: 600px;
 }
-#themekit-selection-app > section.window-content .right-panel mark {
-  color: var(--litm-color-accent);
-}
 #themekit-selection-app > section.window-content h1,
 #themekit-selection-app > section.window-content h2,
 #themekit-selection-app > section.window-content h3,
@@ -3094,9 +3091,6 @@ article.cc-enriched section.journal-entry-content {
   background-image: url(../assets/header-backline.webp);
   background-repeat: no-repeat;
   margin-left: 10px;
-}
-#themekit-character-app > section.window-content mark {
-  color: var(--litm-color-accent);
 }
 #themekit-character-app > section.window-content .group-header {
   font-size: 1.2em;
@@ -3251,3 +3245,5 @@ article.cc-enriched section.journal-entry-content {
   height: 100%;
   padding-right: 8px;
 }
+
+/*# sourceMappingURL=mist-engine-fvtt.css.map */
