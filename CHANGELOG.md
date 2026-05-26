@@ -15,6 +15,7 @@ If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/m
 - FIX: Themekit assignment from a Themebook does not populate power tags, weakness tags, or the Quest text. #65
 - FIX: changed negative & positive icons in the scene app to it matches the roll dialog
 - FIX: fix for toggling tags from the tags & status in the roll dialog
+- FIX: journal page headers are working again
 
 # 14.2.1
 - fix for themekits and disappearing tags
