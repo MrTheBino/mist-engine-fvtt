@@ -11,7 +11,7 @@
                 <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}"
                     data-index="{{ftsIndex}}" data-actor-id="{{../character.id}}"
                     title="right click to toggle between tag or state">
-                    <i class="fa-solid {{#if this.positive}}fa-circle-plus{{else}}fa-circle-minus{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-source="litm-character" data-index="{{@index}}" data-actor-id="{{../character.id}}" title="toggle between positive and negative"></i>
+                    <i class="fa-solid {{#if this.positive}}fa-thumbs-up{{else}}fa-thumbs-down{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-source="litm-character" data-index="{{@index}}" data-actor-id="{{../character.id}}" title="toggle between positive and negative"></i>
                     <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-source="litm-character" data-index="{{@index}}" data-actor-id="{{../character.id}}" title="{{floatingTagStatusTitleHelper this}}">
                     {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
                     {{fts.name}}{{#if fts.isStatus}}-{{fts.value}}{{/if}}
