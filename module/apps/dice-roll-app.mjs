@@ -352,17 +352,21 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             }
 
             if (item.type === "themebook") {
-                item.system.powertags.forEach((tag, i) => {
-                    if (tag.selected) {
-                        selectedTags.push({ name: tag.name, positive: true, toBurn: tag.toBurn, index: i, themebookId: item.id, source: null });
-                    }
-                });
+                if(item.system.powertags){
+                    item.system.powertags.forEach((tag, i) => {
+                        if (tag.selected) {
+                            selectedTags.push({ name: tag.name, positive: true, toBurn: tag.toBurn, index: i, themebookId: item.id, source: null });
+                        }
+                    });
+                }
 
-                item.system.weaknesstags.forEach((tag, i) => {
-                    if (tag.selected) {
-                        selectedTags.push({ name: tag.name, positive: false, weakness: true, index: i, themebookId: item.id, source: null });
-                    }
-                });
+                if(item.system.weaknesstags){
+                    item.system.weaknesstags.forEach((tag, i) => {
+                        if (tag.selected) {
+                            selectedTags.push({ name: tag.name, positive: false, weakness: true, index: i, themebookId: item.id, source: null });
+                        }
+                    });
+                }
             }
         }
 
