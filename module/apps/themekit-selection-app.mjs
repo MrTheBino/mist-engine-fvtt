@@ -194,6 +194,12 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
                 const adapter = new ThemeKitAdapter();
                 await adapter.populateThemekitForThemebook(this.actor, this.actorThemebook, this.currentSelectedThemekit);        
             }
+            else{
+                const adapter = new ThemeKitAdapter();
+                await adapter.mergeThemekitForThemebook(this.actor, this.actorThemebook, this.currentSelectedThemekit);        
+            }
+            
+
             this.close();
             return;    
         }

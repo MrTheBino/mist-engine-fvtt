@@ -1,4 +1,54 @@
 export class ThemeKitAdapter{
+
+    async mergeThemekitForThemebook(actor, actorThemebook, currentSelectedThemekit){
+        const themebook = actorThemebook;
+        const themekit = currentSelectedThemekit;
+        const updateData = {};
+
+        if (themekit.system.powertags?.length > 0) {
+            const existing = themebook.system.powertags ? [...themebook.system.powertags] : [];
+            const merged = themekit.system.powertags.map((kitTag, i) =>
+                i < existing.length
+                    ? { ...existing[i], name: kitTag.name, planned: i >= 3 }
+                    : { name: kitTag.name, planned: i >= 3 }
+            );
+            updateData[`system.powertags`] = merged;
+        }
+
+        if (themekit.system.weaknesstags?.length > 0) {
+            const existing = themebook.system.weaknesstags ? [...themebook.system.weaknesstags] : [];
+            const merged = themekit.system.weaknesstags.map((kitTag, i) =>
+                i < existing.length
+                    ? { ...existing[i], name: kitTag.name, planned: i >= 1 }
+                    : { name: kitTag.name, planned: i >= 1 }
+            );
+            updateData[`system.weaknesstags`] = merged;
+        }
+
+        if (themekit.system.specialImprovements?.length > 0) {
+            const existing = themebook.system.specialImprovements ? [...themebook.system.specialImprovements] : [];
+            const merged = themekit.system.specialImprovements.map((kitImp, i) =>
+                i < existing.length
+                    ? { ...existing[i], name: kitImp.name, active: kitImp.active, description: kitImp.description }
+                    : { name: kitImp.name, active: kitImp.active, description: kitImp.description }
+            );
+            updateData[`system.specialImprovements`] = merged;
+        }
+
+        updateData[`system.themeKitUUID`] = themekit.uuid;
+
+        // we also overwrite the quest & story if there is a quest & story set in the themekit
+        if (themekit.system.quest) {
+            updateData[`system.quest`] = themekit.system.quest;
+        }
+        if (themekit.system.story) {
+            updateData[`system.story`] = themekit.system.story;
+        }
+
+        await themebook.update(updateData);
+        ui.notifications.info(game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedThemekit", { themekitName: themekit.name, actorName: actor.name }));
+    }
+
     async populateThemekitForThemebook(actor,themebook, themekit){
         // copy powertags from the themekit to the new themebook
         if(themekit.system.powertags && themekit.system.powertags.length > 0){
@@ -36,6 +86,7 @@ export class ThemeKitAdapter{
         ui.notifications.info( game.i18n.format("MIST_ENGINE.NOTIFICATIONS.AddedThemekit", { themekitName: themekit.name, actorName: actor.name }));
         // we need to save the themebook after updating it, because the changes we made to the themebook are not saved yet
     }
+
     async importThemekitToCharacter(actor,themekit){
 
         // first we create a themebook item from the selected themekit
