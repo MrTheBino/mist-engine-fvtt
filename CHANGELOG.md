@@ -2,6 +2,12 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.3.1
+- FIX: [UI] Special Features text in Challenge Sheet is now All Caps #72
+- FIX: [CSS BUG: 14.3.0] Special Features on Challenges #69
+- FIX: Foundry package page directs Update Notes to changelog.md #68
+- FIX: [UI]: Might Icons Disappeared from Tags & Status Panel in Challenge Sheets #71
+
 # 14.3.0
 - FEAT: added icons for the themekits in the selection app to indicate if it's from a compendium or not
 - FEAT: Themekit interface improvements and/or Drag-and-Drop for Themekits. #53

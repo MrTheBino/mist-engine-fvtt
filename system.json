@@ -23,7 +23,7 @@
   "license": "LICENSE.txt",
   "readme": "README.md",
   "bugs": "https://github.com/MrTheBino/mist-engine-fvtt/issues",
-  "changelog": "CHANGELOG.md",
+  "changelog": "https://github.com/MrTheBino/mist-engine-fvtt/CHANGELOG.md",
   "media": [
     {
       "type": "setup",

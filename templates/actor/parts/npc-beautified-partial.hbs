@@ -46,7 +46,7 @@
                 <div class="npc-special-features-list flexcol">
                     {{#each system.specialFeatures as |feature|}}
                     <div class="npc-special-feature-item">
-                        <div class="npc-special-feature-name">{{feature.name}}</div>
+                        <div class="npc-special-feature-name">{{{textWithTags feature.name}}}</div>
                         <div class="npc-special-feature-description">{{{textWithTags feature.description}}}</div>
                     </div>
                     {{/each}}

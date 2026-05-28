@@ -378,6 +378,7 @@ body {
 .editor-content mark .might-icon,
 .tab-notes mark .might-icon {
   height: 1em;
+  width: 1em;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -634,6 +635,7 @@ body {
 }
 .journal-entry-content mark .might-icon {
   height: 1em;
+  width: 1em;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -1035,6 +1037,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine #tooltip mark .might-icon {
   height: 1em;
+  width: 1em;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -1077,6 +1080,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine #tooltip {
   height: 1em;
+  width: 1em;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -1607,6 +1611,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine .fts-input-name .might-icon {
   height: 1em;
+  width: 1em;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -2050,6 +2055,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine mark .might-icon {
   height: 1em;
+  width: 1em;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -2766,6 +2772,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .roll-dialog-container .might-icon {
   height: 1em;
+  width: 1em;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
