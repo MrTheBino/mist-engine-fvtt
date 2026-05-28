@@ -95,7 +95,10 @@ export function makeStyledTagOrStatusText(markup) {
     isOfType = BOLD;
   }
 
-  if (!markup.includes("-")) {
+  const lastSegment = markup.split("-").pop().trim();
+  const hasNumericSuffix = markup.includes("-") && /^\d+$/.test(lastSegment);
+
+  if (!hasNumericSuffix) {
     // Name without value
     const name = markup.trim();
     if (isOfType === STATUS) {
@@ -112,8 +115,8 @@ export function makeStyledTagOrStatusText(markup) {
       return `<mark class="draggable tag" draggable="true" data-type="tag" data-name="${name}">${name}</mark>`;
     }
   } else {
-    // Name with value
-    const value = parseInt(markup.split("-").pop()) || 0;
+    // Name with numeric value
+    const value = parseInt(lastSegment);
     const name = markup.substring(0, markup.lastIndexOf("-")).trim();
     if (isOfType === LIMIT) {
       return `<div class="limit-inline"><mark class="draggable limit" draggable="true" data-type="limit" data-name="${name}" data-value="${value}">${name}</mark><span class="limit-value">${value}</span></div>`;
