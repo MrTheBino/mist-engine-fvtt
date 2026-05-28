@@ -40,6 +40,40 @@ export function setupHooks() {
     });
   });
 
+  Hooks.on("getProseMirrorMenuDropDowns", (menu, menus) => {
+    const divNode = menu.schema?.nodes?.div;
+    if (!divNode) return;
+
+    const wrapInFrame = (cssClass) => () => {
+      menu._toggleBlock(divNode, foundry.prosemirror.commands.wrapIn, {
+        attrs: { _preserve: { class: cssClass } },
+      });
+    };
+
+    menus.textframes = {
+      title: "Textframes",
+      cssClass: "textframes",
+      icon: '<i class="fa-solid fa-layer-group fa-fw"></i>',
+      entries: [
+        {
+          action: "text-container-long-paper-background",
+          title: "Long Paper Background",
+          cmd: wrapInFrame("text-container-long-paper-background"),
+        },
+        {
+          action: "text-container-300",
+          title: "Container 300",
+          cmd: wrapInFrame("text-container-300"),
+        },
+        {
+          action: "text-container-500",
+          title: "Container 500",
+          cmd: wrapInFrame("text-container-500"),
+        },
+      ],
+    };
+  });
+
   //make live a little bit easier, themekits have OBSERVER rights per default
   Hooks.on("preCreateItem", (doc, data, _options, _userId) => {
     // Nur GM darf Ownership setzen

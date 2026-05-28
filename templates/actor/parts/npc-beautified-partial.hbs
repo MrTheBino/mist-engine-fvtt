@@ -39,15 +39,15 @@
         {{/if}}
         {{!-- Special Features --}}
         {{#if hasSpecialFeatures}}
-            <div class="npc-limits-container">
+            <div class="npc-special-features-container">
                 <div class="npc-subtitle-container-c">
                     <div class="npc-subtitle-text">{{localize "MIST_ENGINE.LABELS.Npc.SpecialFeatures"}}</div>
                 </div>
-                <div class="npc-limits-list flexcol">
+                <div class="npc-special-features-list flexcol">
                     {{#each system.specialFeatures as |feature|}}
-                    <div class="npc-limit-item">
+                    <div class="npc-special-feature-item">
                         <div class="npc-special-feature-name">{{feature.name}}</div>
-                        <div class="npc-limit-description">{{{textWithTags feature.description}}}</div>
+                        <div class="npc-special-feature-description">{{{textWithTags feature.description}}}</div>
                     </div>
                     {{/each}}
                 </div>

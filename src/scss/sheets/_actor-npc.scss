@@ -165,14 +165,14 @@
   align-items: center;
 }
 
-.npc-secret-item {
+.npc-secret-item, .npc-special-feature-item {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
   color: $c-dark-styled-text;
   font-family: $font-primary;
 }
 
-.npc-secret-description {
+.npc-secret-description, .npc-special-feature-description {
   text-align: center;
 }
 

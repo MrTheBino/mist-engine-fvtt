@@ -16,6 +16,9 @@
 @import "global/journal";
 @import "global/pause";
 
+// Container classes available globally (used in sheets and journal pages)
+@import "components/containers";
+
 // Styles scoped to .mist-engine sheets
 .mist-engine {
   @import "components/tooltip";
@@ -27,7 +30,6 @@
   @import "components/themebook";
   @import "components/tabs";
   @import "components/icons";
-  @import "components/containers";
 
   // Per-sheet styles
   @import "sheets/shared";

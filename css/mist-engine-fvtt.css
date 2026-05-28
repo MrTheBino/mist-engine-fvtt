@@ -920,6 +920,96 @@ article.cc-enriched section.journal-entry-content {
     filter: drop-shadow(0 0 0 transparent);
   }
 }
+.container-paper-background-with-border {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  -webkit-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  -o-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  font-family: Labrada, serif;
+  color: #191813;
+}
+
+.container-card-with-border {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  -webkit-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+}
+
+.container-themebook-with-border {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  -webkit-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  -o-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+  border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
+}
+
+.text-container-300 {
+  border-style: solid;
+  border-width: 5px 5px 5px 5px;
+  -moz-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  -webkit-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  -o-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  font-family: Labrada, serif;
+  color: #191813;
+  padding: 10px 15px;
+}
+
+.text-container-500 {
+  border-style: solid;
+  border-width: 5px 5px 5px 5px;
+  -moz-border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
+  -webkit-border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
+  -o-border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
+  border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
+  font-family: Labrada, serif;
+  color: #191813;
+  padding: 10px 15px;
+}
+
+.text-container-large-paper-background {
+  border-style: solid;
+  border-width: 5px 5px 5px 5px;
+  -moz-border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  -webkit-border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  -o-border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  font-family: Labrada, serif;
+  color: #191813;
+  padding: 10px 15px;
+}
+
+.text-container-long-paper-background {
+  border-style: solid;
+  border-width: 5px 5px 5px 5px;
+  -moz-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  -webkit-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  -o-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
+  font-family: Labrada, serif;
+  color: #191813;
+  padding: 10px 15px;
+}
+
+.floating-status-container-character {
+  border-style: solid;
+  border-width: 5px 5px 5px 5px;
+  -moz-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  -webkit-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  -o-border-image: url("../assets/text-container-3000.webp") 5 5 5 5 fill stretch stretch;
+  border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
+  font-family: Labrada, serif;
+  color: #191813;
+  padding: 10px 15px;
+  height: 100%;
+}
+
 .mist-engine #tooltip mark {
   padding-left: 2px;
   padding-right: 3px;
@@ -1935,88 +2025,6 @@ article.cc-enriched section.journal-entry-content {
   display: inline-block;
   background-image: url("../assets/icons/round-arrow-up.webp");
 }
-.mist-engine .container-paper-background-with-border {
-  border-style: solid;
-  border-width: 10px 10px 10px 10px;
-  -moz-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
-  -webkit-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
-  -o-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
-  border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
-  font-family: Labrada, serif;
-  color: #191813;
-}
-.mist-engine .container-card-with-border {
-  border-style: solid;
-  border-width: 10px 10px 10px 10px;
-  -moz-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
-  -webkit-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
-  -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
-  border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
-}
-.mist-engine .container-themebook-with-border {
-  border-style: solid;
-  border-width: 10px 10px 10px 10px;
-  -moz-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
-  -webkit-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
-  -o-border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
-  border-image: url("../assets/litm-themebook-bg.webp") 10 10 10 10 fill stretch stretch;
-}
-.mist-engine .text-container-300 {
-  border-style: solid;
-  border-width: 5px 5px 5px 5px;
-  -moz-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
-  -webkit-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
-  -o-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
-  border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
-  font-family: Labrada, serif;
-  color: #191813;
-  padding: 10px 15px;
-}
-.mist-engine .text-container-500 {
-  border-style: solid;
-  border-width: 5px 5px 5px 5px;
-  -moz-border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
-  -webkit-border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
-  -o-border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
-  border-image: url("../assets/text-container-500.webp") 5 5 5 5 fill stretch stretch;
-  font-family: Labrada, serif;
-  color: #191813;
-  padding: 10px 15px;
-}
-.mist-engine .text-container-large-paper-background {
-  border-style: solid;
-  border-width: 5px 5px 5px 5px;
-  -moz-border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
-  -webkit-border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
-  -o-border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
-  border-image: url("../assets/large_paper_background.webp") 5 5 5 5 fill stretch stretch;
-  font-family: Labrada, serif;
-  color: #191813;
-  padding: 10px 15px;
-}
-.mist-engine .text-container-long-paper-background {
-  border-style: solid;
-  border-width: 5px 5px 5px 5px;
-  -moz-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
-  -webkit-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
-  -o-border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
-  border-image: url("../assets/long_paper_background.webp") 5 5 5 5 fill stretch stretch;
-  font-family: Labrada, serif;
-  color: #191813;
-  padding: 10px 15px;
-}
-.mist-engine .floating-status-container-character {
-  border-style: solid;
-  border-width: 5px 5px 5px 5px;
-  -moz-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
-  -webkit-border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
-  -o-border-image: url("../assets/text-container-3000.webp") 5 5 5 5 fill stretch stretch;
-  border-image: url("../assets/text-container-300.webp") 5 5 5 5 fill stretch stretch;
-  font-family: Labrada, serif;
-  color: #191813;
-  padding: 10px 15px;
-  height: 100%;
-}
 .mist-engine mark {
   padding-left: 2px;
   padding-right: 3px;
@@ -2401,13 +2409,13 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .npc-limits-list {
   align-items: center;
 }
-.mist-engine .npc-secret-item {
+.mist-engine .npc-secret-item, .mist-engine .npc-special-feature-item {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
   color: #191813;
   font-family: Labrada, serif;
 }
-.mist-engine .npc-secret-description {
+.mist-engine .npc-secret-description, .mist-engine .npc-special-feature-description {
   text-align: center;
 }
 .mist-engine .npc-secret-icon {
@@ -3352,3 +3360,5 @@ article.cc-enriched section.journal-entry-content {
   height: 100%;
   padding-right: 8px;
 }
+
+/*# sourceMappingURL=mist-engine-fvtt.css.map */
