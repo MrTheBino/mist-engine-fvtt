@@ -2,6 +2,11 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.3.2
+- FIX: deleting consequences in a journey
+- FEAT: migration of themekits into a themebook, now all 3 possible ways to import themekits to themebook should be covered
+- FEAT: parsing of tags & stasuses improved
+
 # 14.3.1
 - FIX: [UI] Special Features text in Challenge Sheet is now All Caps #72
 - FIX: [CSS BUG: 14.3.0] Special Features on Challenges #69

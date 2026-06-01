@@ -28,8 +28,11 @@ const WEAKNESS = 6;
 export function textWithTags(str) {
   let result = str;
 
-  str.matchAll(/\[(.*?)\]/g).forEach(([token, markup]) => {
-    result = result.replace(token, makeStyledTagOrStatusText(markup.trim()));
+  // Use regex to find all tokens in the string and replace them with the corresponding HTML
+  str.matchAll(/@\w+\[.*?\](?:\{.*?\})?|\[(.*?)\]/g).forEach(([token, markup]) => {
+    if (markup !== undefined) {
+      result = result.replace(token, makeStyledTagOrStatusText(markup.trim()));
+    }
   });
 
   return result;
