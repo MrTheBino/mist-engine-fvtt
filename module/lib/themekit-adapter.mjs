@@ -25,14 +25,13 @@ export class ThemeKitAdapter{
             updateData[`system.weaknesstags`] = merged;
         }
 
+        // just add them specialImprovements
         if (themekit.system.specialImprovements?.length > 0) {
             const existing = themebook.system.specialImprovements ? [...themebook.system.specialImprovements] : [];
-            const merged = themekit.system.specialImprovements.map((kitImp, i) =>
-                i < existing.length
-                    ? { ...existing[i], name: kitImp.name, active: kitImp.active, description: kitImp.description }
-                    : { name: kitImp.name, active: kitImp.active, description: kitImp.description }
-            );
-            updateData[`system.specialImprovements`] = merged;
+            const incoming = themekit.system.specialImprovements
+                .filter(kitImp => kitImp.name || kitImp.description)
+                .map(kitImp => ({ name: kitImp.name, active: kitImp.active, description: kitImp.description }));
+            updateData[`system.specialImprovements`] = [...existing, ...incoming];
         }
 
         updateData[`system.themeKitUUID`] = themekit.uuid;
