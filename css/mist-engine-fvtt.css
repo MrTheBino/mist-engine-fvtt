@@ -436,6 +436,8 @@ body {
   margin: 10px;
   text-align: center;
   min-height: 150px;
+  background-image: url("../assets/boxes/box-square-neutral.webp");
+  background-size: 100% 100%;
 }
 .editor-content .themekit-box .heading,
 .tab-notes .themekit-box .heading {
@@ -811,6 +813,8 @@ body {
   margin: 10px;
   text-align: center;
   min-height: 150px;
+  background-image: url("../assets/boxes/box-square-neutral.webp");
+  background-size: 100% 100%;
 }
 .journal-entry-content .themekit-box .heading {
   font-size: 1em;
