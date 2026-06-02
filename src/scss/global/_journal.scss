@@ -18,6 +18,7 @@
 
     .written-block{
         font-family: $font-written;
+        font-size: 1.2em;
         h2{
             font-family: $font-written-brush;
             border-bottom: 0;
@@ -31,6 +32,95 @@
         align-items: flex-start;
     }
 
+    .tropes-wrapper{
+        .tropes-grid{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .trope{
+            background-image: url(../assets/boxes/box-square-paper.webp);
+            background-size: 100% 100%;
+            max-width: 400px;
+            min-width: 400px;
+            padding: 20px;
+        }
+    }
+
+    .trope-title {
+        color: $c-brown;
+        font-weight: bold;
+        text-transform: none;
+        font-style: normal;
+        border-bottom: 0;
+        margin-bottom: 0.2em;
+    }
+
+    .theme-kits-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        p {
+            margin: 0;
+            font-family: $font-primary;
+            font-size: 0.8em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: $c-styled-text;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        &::after {
+            content: "";
+            display: block;
+            flex: 1;
+            height: 2px;
+            background-color: $c-beige;
+        }
+    }
+
+    .tropes-label {
+        display: inline-block;
+        padding: 8px 20px 12px;
+        min-width: 220px;
+
+        h1 {
+            color: white;
+            border-bottom: 0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.1;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+
+            .trope-type {
+                display: block;
+                font-size: 0.45em;
+                font-weight: normal;
+                font-style: italic;
+                text-transform: none;
+                letter-spacing: 0.08em;
+                opacity: 0.85;
+                margin-bottom: 0.1em;
+                line-height: 1.3;
+            }
+
+            &::after {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 8px;
+                background-image: url(../assets/lines/line-white.webp);
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                margin-top: 4px;
+            }
+        }
+    }
+
     .themekit-box {
         @include themekit-box;
     }
@@ -41,6 +131,10 @@
 
     .themekit-big-box {
         @include themekit-big-box;
+        &.origin{
+            background-image: url('../assets/boxes/box-no-header-origin.webp');
+            background: 100% 100%;
+        }
     }
 
 
