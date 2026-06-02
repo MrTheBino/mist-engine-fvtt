@@ -110,7 +110,6 @@
 }
 
 @mixin themekit-big-box{
-    border: 2px solid black;
     background-color: #E7E3E0;
     color: #6E5933;
     min-width: 250px;
@@ -120,29 +119,60 @@
     font-family: $font-manuscript;
     flex: 1;
     
+    background-image: url('../assets/boxes/box-no-header-origin.webp');
+    background-size: 100% 100%;
+
+
     .heading{
         color: white;
         font-family: $font-primary;
         margin-top: 10px;
+        background-image: url('../assets/headers/header-origin.webp');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        margin-top: 0;
+        padding: 10px 14px 8px;
+
+        p {
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.85em;
+        }
     }
 
     .themekit-title{
-        font-size: 1.5em;
-        margin-top: 10px;
+        font-size: 1.8em;
+        font-weight: bold;
+        font-style: italic;
+        width: fit-content;
+        margin: 8px auto 0;
+        padding: 0 6px;
+        p{
+          background-color: $c-tag-yellow;
+        }
     }
     .powertags,.weaknesstags{
-        font-size: 0.8em;
         padding-left: 15px;
         padding-right: 15px;
     }
 
-    .line{
-        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    .line {
+        width: 80%;
+        margin: 4px auto;
+
+        p {
+            margin: 0;
+            background-image: url('../assets/tag-divider.webp');
+            background-repeat: no-repeat;
+        }
     }
 
     .quest{
         font-family: $font-dreamland;
         color: black;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 }
 

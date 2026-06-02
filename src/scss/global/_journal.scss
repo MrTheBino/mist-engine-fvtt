@@ -131,9 +131,27 @@
 
     .themekit-big-box {
         @include themekit-big-box;
-        &.origin{
+        &.origin {
             background-image: url('../assets/boxes/box-no-header-origin.webp');
-            background: 100% 100%;
+
+            .heading {
+                background-image: url('../assets/headers/header-origin.webp');
+            }
+        }
+        &.adventure {
+            background-image: url('../assets/boxes/box-no-header-adventure.webp');
+
+            .heading {
+                background-image: url('../assets/headers/header-adventure.webp');
+            }
+        }
+
+        &.greatness {
+            background-image: url('../assets/boxes/box-no-header-greatness.webp');
+
+            .heading {
+                background-image: url('../assets/headers/header-greatness.webp');
+            }
         }
     }
 
