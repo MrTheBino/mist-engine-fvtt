@@ -72,20 +72,21 @@
   display: inline-block;
   position: relative;
   top: 0.2em;
-  margin-right: 0.2em;
-
+  
   background-image: url("../assets/icons/might-icon-adventure.webp");
-
+  margin-right: 0.2em;
+  
   &.adventure {
     background-image: url("../assets/icons/might-icon-adventure.webp");
   }
-
+  
   &.greatness {
     background-image: url("../assets/icons/might-icon-greatness.webp");
   }
 
   &.origin {
     background-image: url("../assets/icons/might-icon-origin.webp");
+    margin-right: 0; // origin icon is slightly smaller, so doesn't need right margin
   }
 }
 
