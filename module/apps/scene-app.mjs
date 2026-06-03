@@ -251,9 +251,26 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
             }
         });
+
+        // ToDo: remove all the emit events and refactor all code to use hook.on
+        Hooks.on("updateActor", (actor, changes, options, userId) => {
+            const scene = game.scenes.active;
+            if (!scene) return;
+            const isInScene = scene.tokens.contents.some(t => t.actor?.id === actor.id);
+            if (!isInScene) return;
+            if (MistSceneApp.getInstance().rendered) {
+                MistSceneApp.getInstance().render(true, { focus: true });
+            }
+            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        });
     }
 
+    /**
+     * Deprecated function to send an update event for the scene app, which can be used to trigger updates in other apps like the dice roll app. Consider using a more specific hook for better performance and to avoid unnecessary renders in other apps.
+     * @param {boolean} forceRender - Whether to force a render of the scene app.
+     */
     sendUpdateHookEvent(forceRender = true) {
+        console.log("Deprecated: sendUpdateHookEvent - consider using a more specific hook for better performance and to avoid unnecessary renders in other apps");
         if (forceRender) {
             this.render(true, { focus: true });
         } else if (this.rendered) {
@@ -692,6 +709,19 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (!floatingTagsAndStatuses) return;
         floatingTagsAndStatuses.forEach(t => t.selected = false);
         this.currentSceneDataItem.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+
+        const scene = game.scenes.active;
+        if (scene) {
+            const actors = scene.tokens.contents.map(t => t.actor).filter(a => a && a.type == "litm-npc");
+            const uniqueActors = [...new Set(actors)];
+            for (const actor of uniqueActors) {
+                console.log("Resetting selection for actor", actor.name);
+                const npcTags = actor.system.floatingTagsAndStatuses;
+                if (npcTags && npcTags.some(t => t.selected)) {
+                    actor.update({ 'system.floatingTagsAndStatuses': npcTags.map(t => ({ ...t, selected: false })) });
+                }
+            }
+        }
 
         this.sendUpdateHookEvent();
     }
