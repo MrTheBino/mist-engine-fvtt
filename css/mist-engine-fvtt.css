@@ -117,6 +117,10 @@ body {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: Ecstasy;
+  src: url("../assets/fonts/Ecstasy.ttf") format("truetype");
+}
 .window-app {
   font-family: Labrada, serif;
 }
@@ -977,19 +981,82 @@ body {
   font-family: Ysgarth, serif;
 }
 .journal-entry-content .themebook-title-wrapper {
-  display: flex;
-  align-items: flex-end;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: 100% 100%;
+  min-height: 160px;
+  padding-left: 45px;
+  padding-top: 8px;
+}
+.journal-entry-content .themebook-title-wrapper .main-title {
+  top: -20px;
+  position: relative;
+}
+.journal-entry-content .themebook-title-wrapper .sub-title {
+  font-style: italic;
+  padding-left: 20px;
+}
+.journal-entry-content .themebook-title-wrapper.origin {
+  background-image: url(../assets/lines/underline-origin-mirror.webp);
+}
+.journal-entry-content .themebook-title-wrapper.origin .sub-title {
+  color: #4E8061;
+}
+.journal-entry-content .themebook-title-wrapper.adventure {
+  background-image: url(../assets/lines/underline-adventure-mirror.webp);
+}
+.journal-entry-content .themebook-title-wrapper.adventure .sub-title {
+  color: #7C3C3B;
+}
+.journal-entry-content .themebook-title-wrapper.greatness {
+  background-image: url(../assets/lines/underline-greatness-mirror.webp);
+}
+.journal-entry-content .themebook-title-wrapper.greatness .sub-title {
+  color: #5D5B90;
+}
+.journal-entry-content .themebook-title-wrapper.neutral {
+  background-image: url(../assets/lines/underline-neutral-mirror.webp);
+}
+.journal-entry-content .themebook-title-wrapper.neutral .sub-title {
+  color: #595448;
+}
+.journal-entry-content .themebook-title-wrapper.neutral .main-title {
+  top: 0px;
+  left: 20px;
 }
 .journal-entry-content .themebook-title-wrapper img {
   display: inline-block;
-  width: 30px;
-  height: 30px;
-  position: relative;
-  top: -5px;
-  margin-right: 5px;
+  width: 42px;
+  height: 42px;
+  vertical-align: middle;
+  margin-right: 6px;
+  margin-top: 0;
 }
 .journal-entry-content .themebook-title-wrapper h2 {
+  display: inline-block;
+  font-family: Ecstasy, serif;
+  font-weight: normal;
+  text-transform: none;
+  color: #191813;
   border-bottom: 0;
+  vertical-align: middle;
+  font-size: 3.2em;
+}
+.journal-entry-content .theme-description {
+  font-weight: bold;
+}
+.journal-entry-content .theme-description.neutral {
+  color: #595448;
+}
+.journal-entry-content .theme-description.greatness {
+  color: #5D5B90;
+}
+.journal-entry-content .theme-description.adventure {
+  color: #7C3C3B;
+}
+.journal-entry-content .theme-description.origin {
+  color: #4E8061;
 }
 .journal-entry-content .underline-graphic {
   display: block;

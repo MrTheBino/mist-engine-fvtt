@@ -195,24 +195,94 @@
         }
     }
 
-    .themebook-title-wrapper{
-        // flexrow
-        display: flex;
-        align-items: flex-end;
+    .themebook-title-wrapper {
+           display: block;
+            
+            background-repeat: no-repeat;
+            background-position: bottom left;
+            background-size: 100% 100%;
+            min-height: 160px;
+            padding-left: 45px;
+            padding-top: 8px;
 
-        img{
-            display: inline-block;
-             width: 30px;
-             height: 30px;
-             position: relative;
-                top: -5px;
-                margin-right: 5px;
+        .main-title{
+            top: -20px;
+            position: relative;
         }
-        h2{
+
+        .sub-title{
+           font-style: italic;
+           padding-left: 20px;
+        }
+
+        &.origin{
+            background-image: url(../assets/lines/underline-origin-mirror.webp);
+            .sub-title{
+                color: #4E8061;
+            }
+        }
+
+        &.adventure{
+            background-image: url(../assets/lines/underline-adventure-mirror.webp);
+            .sub-title{
+                color: #7C3C3B;
+            }
+        }
+        
+        &.greatness{
+            background-image: url(../assets/lines/underline-greatness-mirror.webp);
+            .sub-title{
+                color: #5D5B90;
+            }
+        }
+
+        &.neutral{
+            background-image: url(../assets/lines/underline-neutral-mirror.webp);
+            .sub-title{
+                color: #595448;
+            }
+            .main-title{
+                top: 0px;
+                left: 20px;
+            }
+        }
+
+        img {
+            display: inline-block;
+            width: 42px;
+            height: 42px;
+            vertical-align: middle;
+            margin-right: 6px;
+            margin-top: 0;
+        }
+
+        h2 {
+            display: inline-block;
+            font-family: Ecstasy, serif;
+            font-weight: normal;
+            text-transform: none;
+            color: $c-dark;
             border-bottom: 0;
+            vertical-align: middle;
+            font-size: 3.2em;
         }
     }
 
+    .theme-description{
+        font-weight: bold;
+        &.neutral{
+            color: #595448;
+        }
+        &.greatness{
+            color: #5D5B90;
+        }
+        &.adventure{
+            color: #7C3C3B;
+        }
+        &.origin{
+            color: #4E8061;
+        }
+    }
     .underline-graphic {
         display: block;
         width: 100%;
