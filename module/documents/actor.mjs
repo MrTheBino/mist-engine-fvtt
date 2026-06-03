@@ -12,7 +12,7 @@ export class MistEngineActor extends Actor {
     super.prepareData();
   }
 
-   static async create(data, options = {}) {
+  static async create(data, options = {}) {
     //make default Friendly and Linked on Creation
     data.prototypeToken = data.prototypeToken || {};
 
@@ -22,6 +22,18 @@ export class MistEngineActor extends Actor {
         actorLink: true,
         disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
       };
+    }
+
+    let image = null;
+
+    switch (data.type) {
+      case 'litm-npc':
+        image = "systems/mist-engine-fvtt/assets/icons/icon-challenge.svg";
+        break;
+    }
+
+    if (image != null) {
+      data.img = image
     }
 
 
@@ -73,7 +85,7 @@ export class MistEngineActor extends Actor {
    * @returns {object} Plain object either via deepClone or the spread operator.
    */
   toPlainObject() {
-    const result = {...this};
+    const result = { ...this };
 
     // Simplify system data.
     result.system = this.system.toPlainObject();
