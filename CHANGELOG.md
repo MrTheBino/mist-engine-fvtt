@@ -6,6 +6,7 @@ If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/m
 - FIX: Challenges tags don’t uncheck after a roll #78
 - FIX: Negative TAGs and Statuses on Challenges displayed as positive in detailed roll #62
 - FEAT: assigned themekit to existing themebooks appends special improvements to the themebook
+- FEAT: Change default token image for Challenges #76
  
 # 14.3.2
 - FIX: deleting consequences in a journey
