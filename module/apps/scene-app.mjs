@@ -693,8 +693,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         uniqueActors.forEach(actor => {
             actor.system.floatingTagsAndStatuses.forEach(fts => {
                 if (fts.selected) {
-                    // attention, positive for a NPCs means in almost all use case a negative effecr for the players, because they represent challenges, weaknesses or threats, so we need to invert the positive/negative for the NPC tags
-                    combinedSelectedTags.push({ name: fts.name, value: fts.value, isStatus: fts.isStatus, positive: !fts.positive, source: 'litm-npc',actorId: actor.id,selected: fts.selected});
+                    combinedSelectedTags.push({ name: fts.name, value: fts.value, isStatus: fts.isStatus, positive: fts.positive, source: 'litm-npc',actorId: actor.id,selected: fts.selected});
                 }
             });
         });

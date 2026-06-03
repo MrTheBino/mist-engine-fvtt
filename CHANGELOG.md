@@ -2,6 +2,11 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.3.3
+- FIX: Challenges tags don’t uncheck after a roll #78
+- FIX: Negative TAGs and Statuses on Challenges displayed as positive in detailed roll #62
+- FEAT: assigned themekit to existing themebooks appends special improvements to the themebook
+ 
 # 14.3.2
 - FIX: deleting consequences in a journey
 - FEAT: migration of themekits into a themebook, now all 3 possible ways to import themekits to themebook should be covered
