@@ -85,6 +85,8 @@
       "Name": "Nombre",
       "Value": "Valor",
       "Symbol": "Símbolo",
+      "NoCharactersInScene": "No se encontraron personajes. Coloca actores de tipo personaje en la escena actual para verlos aquí.",
+      "NoChallengesInScene": "No se encontraron desafíos. Coloca actores de tipo desafío en la escena actual para verlos aquí.",
       "Actor": {
         "FloatingTagOrStatus": "Etiquetas y Estados"
       },

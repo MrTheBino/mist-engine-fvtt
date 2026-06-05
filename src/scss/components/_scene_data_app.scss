@@ -35,6 +35,14 @@
     }    
 }
 
+.scene-app-no-actors {
+    p {
+        font-family: var(--litm-font-text);
+        text-align: center;
+        padding: 1rem;
+    }
+}
+
 .scene-app-actor-header{
     font-family: $font-primary;
     font-size: 1.3em;

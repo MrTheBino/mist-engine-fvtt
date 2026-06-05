@@ -2,6 +2,11 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.3.4
+- FIX: #82 Fixed negative status remains green ( by Paul Umbers)
+- FIX: #77 Fixed might icons overlaying each on other ( by Paul Umbers)
+- FEAT: scene app information if there are missing actors on the scene
+  
 # 14.3.3
 - FIX: Challenges tags don’t uncheck after a roll #78
 - FIX: Negative TAGs and Statuses on Challenges displayed as positive in detailed roll #62

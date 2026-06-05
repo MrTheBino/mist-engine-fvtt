@@ -38,6 +38,8 @@
             "Name": "Name",
             "Value": "Wert",
             "Symbol": "Symbol",
+            "NoCharactersInScene": "Keine Charaktere gefunden. Platziere Charakter-Akteure auf der aktuellen Szene, um sie hier zu sehen.",
+            "NoChallengesInScene": "Keine Herausforderungen gefunden. Platziere Herausforderungs-Akteure auf der aktuellen Szene, um sie hier zu sehen.",
             "Actor": {
                 "FloatingTagOrStatus": "Tags & Statuses"
             },

@@ -127,6 +127,8 @@
       "Symbol": "Symbol",
       "Challenges": "Challenges",
       "Characters": "Characters",
+      "NoCharactersInScene": "No characters found. Place character actors on the current scene to see them here.",
+      "NoChallengesInScene": "No challenges found. Place challenge actors on the current scene to see them here.",
       "Actor": {
         "FloatingTagOrStatus": "Tags & Statuses"
       },

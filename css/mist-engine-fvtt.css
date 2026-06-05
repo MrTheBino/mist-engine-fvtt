@@ -3053,6 +3053,12 @@ article.cc-enriched section.journal-entry-content {
   text-align: center;
 }
 
+.scene-app-no-actors p {
+  font-family: var(--litm-font-text);
+  text-align: center;
+  padding: 1rem;
+}
+
 .scene-app-actor-header {
   font-family: Labrada, serif;
   font-size: 1.3em;
