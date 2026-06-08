@@ -389,8 +389,8 @@ body {
   display: inline-block;
   position: relative;
   top: 0.2em;
-  margin-right: 0.2em;
   background-image: url("../assets/icons/might-icon-adventure.webp");
+  margin-right: 0.2em;
 }
 .editor-content mark .might-icon.adventure,
 .tab-notes mark .might-icon.adventure {
@@ -403,6 +403,7 @@ body {
 .editor-content mark .might-icon.origin,
 .tab-notes mark .might-icon.origin {
   background-image: url("../assets/icons/might-icon-origin.webp");
+  margin-right: 0;
 }
 .editor-content .limit-inline,
 .editor-content .npc-limit-item,
@@ -677,8 +678,8 @@ body {
   display: inline-block;
   position: relative;
   top: 0.2em;
-  margin-right: 0.2em;
   background-image: url("../assets/icons/might-icon-adventure.webp");
+  margin-right: 0.2em;
 }
 .journal-entry-content mark .might-icon.adventure {
   background-image: url("../assets/icons/might-icon-adventure.webp");
@@ -688,6 +689,7 @@ body {
 }
 .journal-entry-content mark .might-icon.origin {
   background-image: url("../assets/icons/might-icon-origin.webp");
+  margin-right: 0;
 }
 .journal-entry-content .limit-inline,
 .journal-entry-content .npc-limit-item {
@@ -1317,8 +1319,8 @@ article.cc-enriched section.journal-entry-content {
   display: inline-block;
   position: relative;
   top: 0.2em;
-  margin-right: 0.2em;
   background-image: url("../assets/icons/might-icon-adventure.webp");
+  margin-right: 0.2em;
 }
 .mist-engine #tooltip mark .might-icon.adventure {
   background-image: url("../assets/icons/might-icon-adventure.webp");
@@ -1328,6 +1330,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine #tooltip mark .might-icon.origin {
   background-image: url("../assets/icons/might-icon-origin.webp");
+  margin-right: 0;
 }
 .mist-engine #tooltip .limit-inline,
 .mist-engine #tooltip .npc-limit-item {
@@ -1360,8 +1363,8 @@ article.cc-enriched section.journal-entry-content {
   display: inline-block;
   position: relative;
   top: 0.2em;
-  margin-right: 0.2em;
   background-image: url("../assets/icons/might-icon-adventure.webp");
+  margin-right: 0.2em;
 }
 .mist-engine #tooltip.adventure {
   background-image: url("../assets/icons/might-icon-adventure.webp");
@@ -1371,6 +1374,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine #tooltip.origin {
   background-image: url("../assets/icons/might-icon-origin.webp");
+  margin-right: 0;
 }
 .mist-engine .item-form {
   font-family: Labrada, serif;
@@ -1891,8 +1895,8 @@ article.cc-enriched section.journal-entry-content {
   display: inline-block;
   position: relative;
   top: 0.2em;
-  margin-right: 0.2em;
   background-image: url("../assets/icons/might-icon-adventure.webp");
+  margin-right: 0.2em;
 }
 .mist-engine .fts-input-name .might-icon.adventure {
   background-image: url("../assets/icons/might-icon-adventure.webp");
@@ -1902,6 +1906,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine .fts-input-name .might-icon.origin {
   background-image: url("../assets/icons/might-icon-origin.webp");
+  margin-right: 0;
 }
 .mist-engine .fts-input-name.tag {
   background-color: rgb(239, 214, 147);
@@ -1912,9 +1917,6 @@ article.cc-enriched section.journal-entry-content {
   border: 1px solid rgba(100, 55, 8, 0.65);
   box-shadow: inset 0 1px 2px rgba(255, 205, 90, 0.12), 0 1px 3px rgba(0, 0, 0, 0.2);
 }
-.mist-engine .fts-input-name.tag.negative {
-  background-color: rgb(236, 186, 133);
-}
 .mist-engine .fts-input-name.status {
   background-color: rgb(188, 205, 175);
   font-family: var(--litm-font-text);
@@ -1923,6 +1925,9 @@ article.cc-enriched section.journal-entry-content {
   text-align: center;
   border: 1px solid rgba(20, 60, 18, 0.55);
   box-shadow: inset 0 1px 2px rgba(100, 200, 80, 0.12), inset 0 -1px 2px rgba(10, 40, 8, 0.15);
+}
+.mist-engine .fts-input-name.negative {
+  background-color: rgb(236, 186, 133);
 }
 .mist-engine .fts-input-value {
   flex-shrink: 2;
@@ -2335,8 +2340,8 @@ article.cc-enriched section.journal-entry-content {
   display: inline-block;
   position: relative;
   top: 0.2em;
-  margin-right: 0.2em;
   background-image: url("../assets/icons/might-icon-adventure.webp");
+  margin-right: 0.2em;
 }
 .mist-engine mark .might-icon.adventure {
   background-image: url("../assets/icons/might-icon-adventure.webp");
@@ -2346,6 +2351,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .mist-engine mark .might-icon.origin {
   background-image: url("../assets/icons/might-icon-origin.webp");
+  margin-right: 0;
 }
 .mist-engine .limit-inline,
 .mist-engine .npc-limit-item {
@@ -3052,8 +3058,8 @@ article.cc-enriched section.journal-entry-content {
   display: inline-block;
   position: relative;
   top: 0.2em;
-  margin-right: 0.2em;
   background-image: url("../assets/icons/might-icon-adventure.webp");
+  margin-right: 0.2em;
 }
 .roll-dialog-container .might-icon.adventure {
   background-image: url("../assets/icons/might-icon-adventure.webp");
@@ -3063,6 +3069,7 @@ article.cc-enriched section.journal-entry-content {
 }
 .roll-dialog-container .might-icon.origin {
   background-image: url("../assets/icons/might-icon-origin.webp");
+  margin-right: 0;
 }
 
 #scene-data-app > section.window-content {
@@ -3095,6 +3102,12 @@ article.cc-enriched section.journal-entry-content {
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
+}
+
+.scene-app-no-actors p {
+  font-family: var(--litm-font-text);
+  text-align: center;
+  padding: 1rem;
 }
 
 .scene-app-actor-header {

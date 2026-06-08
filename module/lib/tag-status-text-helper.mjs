@@ -67,28 +67,24 @@ export function makeStyledTagOrStatusText(markup) {
     markup = markup.replace("/l", "");
   }
 
-  //might
+  // might
   if (markup.includes("/mg")) {
     isOfType = MIGHT;
-    extraIcon =
-      '<img src="systems/mist-engine-fvtt/assets/icons/might-icon-greatness.webp" alt="Greatness Icon" class="might-icon">';
+    extraIcon = '<i class="might-icon greatness"></i>';
     markup = markup.replace("/mg", "");
   } else if (markup.includes("/mo")) {
     //might origin
     isOfType = MIGHT;
-    extraIcon =
-      '<img src="systems/mist-engine-fvtt/assets/icons/might-icon-origin.webp" alt="Origin Icon" class="might-icon">';
+    extraIcon = '<i class="might-icon origin"></i>';
     markup = markup.replace("/mo", "");
   } else if (markup.includes("/ma")) {
     isOfType = MIGHT;
-    extraIcon =
-      '<img src="systems/mist-engine-fvtt/assets/icons/might-icon-adventure.webp" alt="Might Icon" class="might-icon">';
+    extraIcon = '<i class="might-icon adventure"></i>';
     markup = markup.replace("/ma", "");
   } else if (markup.includes("/m")) {
     //might standard
     isOfType = MIGHT;
-    extraIcon =
-      '<img src="systems/mist-engine-fvtt/assets/icons/might-icon-adventure.webp" alt="Might Icon" class="might-icon">';
+    extraIcon = '<i class="might-icon"></i>';
     markup = markup.replace("/m", "");
   }
 

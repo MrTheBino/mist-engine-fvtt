@@ -5,6 +5,11 @@
             {{#each characters as |character index|}}
                 {{> "systems/mist-engine-fvtt/templates/scene-app/_single_character.hbs" character=character index=index}}
             {{/each}}
+            {{#unless characters}}
+            <div class="scene-app-no-actors">
+                <p>{{localize "MIST_ENGINE.LABELS.NoCharactersInScene"}}</p>
+            </div>
+            {{/unless}}
         </div>
     </div>
     {{/if}}

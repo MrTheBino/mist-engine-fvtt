@@ -76,6 +76,8 @@
       "Name": "Nom",
       "Value": "Valeur",
       "Symbol": "Symbole",
+      "NoCharactersInScene": "Aucun personnage trouvé. Placez des acteurs de type personnage sur la scène actuelle pour les voir ici.",
+      "NoChallengesInScene": "Aucun défi trouvé. Placez des acteurs de type défi sur la scène actuelle pour les voir ici.",
       "Actor": {
         "FloatingTagOrStatus": "Traits & Conditions"
       },

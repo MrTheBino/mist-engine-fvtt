@@ -4,6 +4,11 @@
             {{#each challenges as |challenge index|}}
                 {{> "systems/mist-engine-fvtt/templates/scene-app/_single_challenge.hbs" challenge=challenge index=index}}
             {{/each}}
+            {{#unless challenges}}
+            <div class="scene-app-no-actors">
+                <p>{{localize "MIST_ENGINE.LABELS.NoChallengesInScene"}}</p>
+            </div>
+            {{/unless}}
         </div>
     </div>
 </div>
