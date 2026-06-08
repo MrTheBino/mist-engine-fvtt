@@ -25,6 +25,10 @@
         }
     }
     
+    .text-container-300{
+        padding: 30px;
+    }
+    
     .themekit-box-container{
          display: flex;
         flex-direction: row;
@@ -127,10 +131,42 @@
 
     .letter-box {
         @include letter-box;
+        margin-right: 5px;
     }
 
     .themekit-big-box {
         @include themekit-big-box;
+        max-width: 300px;
+        min-height: 370px;
+
+        .heading {
+            position: relative;
+
+            .header-icon {
+                display: block;
+                width: 20px;
+                height: 20px;
+                background-color: white;
+                mask-size: contain;
+                mask-repeat: no-repeat;
+                mask-position: center;
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+
+                &.origin {
+                    mask-image: url('../assets/icons/icon-origin-litm.svg');
+                }
+                &.adventure {
+                    mask-image: url('../assets/icons/icon-adventure-litm.svg');
+                }
+                &.greatness {
+                    mask-image: url('../assets/icons/icon-greatness-litm.svg');
+                }
+            }
+        }
+
         &.origin {
             background-image: url('../assets/boxes/box-no-header-origin.webp');
 
@@ -189,9 +225,29 @@
         position: relative;
         display: inline-block;
         text-align: center;
+
+        p {
+            margin: 0;
+            font-family: $font-primary;
+            font-size: 0.8em;
+            color: $c-text-redish;
+            letter-spacing: 0.1em;
+            text-align: left;
+            margin-left: 40px;
+            font-weight: bold;
+            font-style: italic;
+        }
+
         h1 {
             border-bottom: 0;
-            font-family: Ysgarth, serif;
+            font-family: Ecstasy, serif;
+            color: $c-dark;
+            text-transform: none;
+            font-weight: normal;
+            margin: 0;
+            font-size: 4.2em;
+            text-align: left;
+            margin-left: 30px;
         }
     }
 

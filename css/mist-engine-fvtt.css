@@ -727,6 +727,9 @@ body {
   font-family: CaveatBrush-Regular, cursive;
   border-bottom: 0;
 }
+.journal-entry-content .text-container-300 {
+  padding: 30px;
+}
 .journal-entry-content .themekit-box-container {
   display: flex;
   flex-direction: row;
@@ -859,6 +862,7 @@ body {
   text-align: center;
   display: inline-block;
   border-radius: 3px;
+  margin-right: 5px;
 }
 .journal-entry-content .themekit-big-box {
   background-color: #E7E3E0;
@@ -918,6 +922,35 @@ body {
   padding-left: 15px;
   padding-right: 15px;
 }
+.journal-entry-content .themekit-big-box {
+  max-width: 300px;
+  min-height: 370px;
+}
+.journal-entry-content .themekit-big-box .heading {
+  position: relative;
+}
+.journal-entry-content .themekit-big-box .heading .header-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.journal-entry-content .themekit-big-box .heading .header-icon.origin {
+  mask-image: url("../assets/icons/icon-origin-litm.svg");
+}
+.journal-entry-content .themekit-big-box .heading .header-icon.adventure {
+  mask-image: url("../assets/icons/icon-adventure-litm.svg");
+}
+.journal-entry-content .themekit-big-box .heading .header-icon.greatness {
+  mask-image: url("../assets/icons/icon-greatness-litm.svg");
+}
 .journal-entry-content .themekit-big-box.origin {
   background-image: url("../assets/boxes/box-no-header-origin.webp");
 }
@@ -976,9 +1009,27 @@ body {
   display: inline-block;
   text-align: center;
 }
+.journal-entry-content .heading-wrapper-medival p {
+  margin: 0;
+  font-family: Labrada, serif;
+  font-size: 0.8em;
+  color: #742a2b;
+  letter-spacing: 0.1em;
+  text-align: left;
+  margin-left: 40px;
+  font-weight: bold;
+  font-style: italic;
+}
 .journal-entry-content .heading-wrapper-medival h1 {
   border-bottom: 0;
-  font-family: Ysgarth, serif;
+  font-family: Ecstasy, serif;
+  color: #191813;
+  text-transform: none;
+  font-weight: normal;
+  margin: 0;
+  font-size: 4.2em;
+  text-align: left;
+  margin-left: 30px;
 }
 .journal-entry-content .themebook-title-wrapper {
   display: block;
