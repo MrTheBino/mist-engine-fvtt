@@ -991,6 +991,22 @@ body {
   font-size: 1.25em;
   border-bottom: none;
 }
+.journal-entry-content p.fh3 {
+  color: #742a2b;
+  font-family: CaveatBrush-Regular, cursive;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 1em;
+  border-bottom: none;
+}
+.journal-entry-content p.fh1 {
+  color: #742a2b;
+  font-family: CaveatBrush-Regular, cursive;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 1.5em;
+  border-bottom: none;
+}
 .journal-entry-content h1,
 .journal-entry-content h2,
 .journal-entry-content h3,

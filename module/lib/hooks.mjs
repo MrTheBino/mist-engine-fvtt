@@ -50,6 +50,39 @@ export function setupHooks() {
       });
     };
 
+    const paragraphNode = menu.schema?.nodes?.paragraph;
+    const setFakeHeading = (cssClass) => () => {
+      if (!paragraphNode) return;
+      const cmd = foundry.prosemirror.commands.setBlockType(
+        paragraphNode,
+        { _preserve: { class: cssClass } }
+      );
+      cmd(menu.view.state, menu.view.dispatch, menu.view);
+    };
+
+    menus.fakeHeadings = {
+      title: "Fake Headings",
+      cssClass: "fake-headings",
+      icon: '<i class="fa-solid fa-heading fa-fw"></i>',
+      entries: [
+        {
+          action: "fake-h1",
+          title: "Fake Heading 1",
+          cmd: setFakeHeading("fh1"),
+        },
+        {
+          action: "fake-h2",
+          title: "Fake Heading 2",
+          cmd: setFakeHeading("fh2"),
+        },
+        {
+          action: "fake-h3",
+          title: "Fake Heading 3",
+          cmd: setFakeHeading("fh3"),
+        },
+      ],
+    };
+
     menus.textframes = {
       title: "Textframes",
       cssClass: "textframes",
