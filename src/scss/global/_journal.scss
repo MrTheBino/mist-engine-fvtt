@@ -206,6 +206,33 @@
 
 
 
+    p.fh2 {
+        color: $c-text-redish;
+        font-family: CaveatBrush-Regular, cursive;
+        text-transform: uppercase;
+        font-weight: 900;
+        font-size: 1.25em;
+        border-bottom: none;
+    }
+
+    p.fh3 {
+        color: $c-text-redish;
+        font-family: CaveatBrush-Regular, cursive;
+        text-transform: uppercase;
+        font-weight: 900;
+        font-size: 1.0em;
+        border-bottom: none;
+    }
+
+    p.fh1 {
+        color: $c-text-redish;
+        font-family: CaveatBrush-Regular, cursive;
+        text-transform: uppercase;
+        font-weight: 900;
+        font-size: 1.5em;
+        border-bottom: none;
+    }
+
     h1,
     h2,
     h3,
@@ -396,6 +423,27 @@
         color: $c-dark-styled-text;
         font-family: $font-primary;
         font-size: 1.2em;
+    }
+
+    .content-with-sidebar {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: flex-start;
+
+        .left-bar {
+            flex: 0 0 60%;
+            min-width: 0;
+        }
+
+        .right-bar {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+
+        .written-block {
+            font-size: 0.9em;
+        }
     }
 }
 

@@ -983,6 +983,14 @@ body {
 .journal-entry-content .themekit-big-box.greatness .heading {
   background-image: url("../assets/headers/header-greatness.webp");
 }
+.journal-entry-content p.fh2 {
+  color: #742a2b;
+  font-family: CaveatBrush-Regular, cursive;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 1.25em;
+  border-bottom: none;
+}
 .journal-entry-content h1,
 .journal-entry-content h2,
 .journal-entry-content h3,
@@ -1158,6 +1166,23 @@ body {
   color: #191813;
   font-family: Labrada, serif;
   font-size: 1.2em;
+}
+.journal-entry-content .content-with-sidebar {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+}
+.journal-entry-content .content-with-sidebar .left-bar {
+  flex: 0 0 60%;
+  min-width: 0;
+}
+.journal-entry-content .content-with-sidebar .right-bar {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.journal-entry-content .content-with-sidebar .written-block {
+  font-size: 0.9em;
 }
 
 /* fix for Campaign Codex */
