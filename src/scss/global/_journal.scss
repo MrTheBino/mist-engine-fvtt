@@ -65,6 +65,10 @@
         }
     }
 
+    .torch-icon{
+        background-image: url(../assets/icons/torch.webp)
+    }
+    
     .trope-title {
         color: $c-brown;
         font-weight: bold;
@@ -423,6 +427,25 @@
         color: $c-dark-styled-text;
         font-family: $font-primary;
         font-size: 1.2em;
+    }
+
+    .four-grid-with-borders {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        align-items: start;
+
+        > p {
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            padding: 4px 6px;
+        }
+    }
+
+    .half-half {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        align-items: start;
     }
 
     .content-with-sidebar {

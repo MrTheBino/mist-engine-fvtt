@@ -762,6 +762,9 @@ body {
   min-width: 400px;
   padding: 20px;
 }
+.journal-entry-content .torch-icon {
+  background-image: url(../assets/icons/torch.webp);
+}
 .journal-entry-content .trope-title {
   color: #724a32;
   font-weight: bold;
@@ -1182,6 +1185,22 @@ body {
   color: #191813;
   font-family: Labrada, serif;
   font-size: 1.2em;
+}
+.journal-entry-content .four-grid-with-borders {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.journal-entry-content .four-grid-with-borders > p {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 4px 6px;
+}
+.journal-entry-content .half-half {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
 }
 .journal-entry-content .content-with-sidebar {
   display: flex;
