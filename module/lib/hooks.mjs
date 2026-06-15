@@ -3,6 +3,7 @@ import { HowToPlayApp } from "../apps/how-to-play-app.mjs";
 import { showCharacterTokenHover } from "./character-token-hover.mjs";
 
 export function setupHooks() {
+  // prosemirror extensions ..... 
   Hooks.on("getProseMirrorMenuItems", (menu, config) => {
     const schema = menu.schema;
     const markType = schema?.marks?.mark;
@@ -38,6 +39,87 @@ export function setupHooks() {
       cmd: toggleMark("status"),
       priority: 7,
     });
+
+    const applyLimit = (state, dispatch) => {
+      const { from, to } = state.selection;
+      if (from === to) return false;
+
+      const hasMark = state.doc.rangeHasMark(from, to, markType);
+      if (hasMark) {
+        if (dispatch) dispatch(state.tr.removeMark(from, to, markType));
+        return true;
+      }
+
+      const selectedText = state.doc.textBetween(from, to);
+      const parts = selectedText.split("-");
+      const lastSegment = parts[parts.length - 1].trim();
+      const hasValue = parts.length > 1 && /^\d+$/.test(lastSegment);
+
+      const value = hasValue ? parseInt(lastSegment) : 0;
+      const name = hasValue
+        ? selectedText.substring(0, selectedText.lastIndexOf("-")).trim()
+        : selectedText.trim();
+
+      const limitMark = markType.create({ _preserve: {
+        class: "draggable limit",
+        draggable: "true",
+        "data-type": "limit",
+        "data-name": name,
+        "data-value": String(value),
+      }});
+
+      const newText = state.schema.text(name, [limitMark]);
+      if (dispatch) dispatch(state.tr.replaceWith(from, to, newText));
+      return true;
+    };
+
+    config.push({
+      action: "toggle-limit",
+      title: "Mark as Limit",
+      icon: '<i class="fa-solid fa-shield fa-fw"></i>',
+      scope: "text",
+      cmd: applyLimit,
+      priority: 6,
+    });
+
+    const applyWeakness = (state, dispatch) => {
+      const { from, to } = state.selection;
+      if (from === to) return false;
+
+      const hasMark = state.doc.rangeHasMark(from, to, markType);
+      if (hasMark) {
+        if (dispatch) dispatch(state.tr.removeMark(from, to, markType));
+        return true;
+      }
+
+      const name = state.doc.textBetween(from, to).trim();
+
+      const weaknessMark = markType.create({ _preserve: {
+        class: "draggable weakness",
+        draggable: "true",
+        "data-type": "weakness",
+        "data-name": name,
+      }});
+
+      // Use the schema's icon node type so the icon renders as <i>, not <mark>.
+      // Applying weaknessMark to both the icon node and the name text causes ProseMirror's
+      // serializer to merge them under a single <mark class="weakness"> wrapper.
+      const iconNodeType = state.schema.nodes.icon;
+      const iconNode = iconNodeType.create({ classes: "fa-light fa-angles-down" }, null, [weaknessMark]);
+      const nameNode = state.schema.text(name, [weaknessMark]);
+
+      if (dispatch) dispatch(state.tr.replaceWith(from, to, [iconNode, nameNode]));
+      return true;
+    };
+
+    config.push({
+      action: "toggle-weakness",
+      title: "Mark as Weakness",
+      icon: '<i class="fa-light fa-angles-down fa-fw"></i>',
+      scope: "text",
+      cmd: applyWeakness,
+      priority: 5,
+    });
   });
 
   Hooks.on("getProseMirrorMenuDropDowns", (menu, menus) => {
@@ -51,6 +133,20 @@ export function setupHooks() {
     };
 
     const paragraphNode = menu.schema?.nodes?.paragraph;
+
+    const wrapInContentSidebar = () => {
+      const { state } = menu.view;
+      const { $from, $to } = state.selection;
+      const range = $from.blockRange($to);
+      if (!range) return;
+      const selectedContent = state.doc.slice(range.start, range.end).content;
+      const leftContent = selectedContent.size > 0 ? selectedContent : paragraphNode.create();
+      const leftBar = divNode.create({ _preserve: { class: "left-bar" } }, leftContent);
+      const rightBar = divNode.create({ _preserve: { class: "right-bar" } }, paragraphNode.create({}, menu.schema.text("PLACEHOLDER")));
+      const sidebar = divNode.create({ _preserve: { class: "content-with-sidebar" } }, [leftBar, rightBar]);
+      menu.view.dispatch(state.tr.replaceWith(range.start, range.end, sidebar));
+    };
+
     const setFakeHeading = (cssClass) => () => {
       if (!paragraphNode) return;
       const cmd = foundry.prosemirror.commands.setBlockType(
@@ -59,6 +155,37 @@ export function setupHooks() {
       );
       cmd(menu.view.state, menu.view.dispatch, menu.view);
     };
+
+    const markType = menu.schema?.marks?.mark;
+    const iconNodeType = menu.schema?.nodes?.icon;
+
+    if (markType) {
+      const insertIcon = (cssClass) => () => {
+        const state = menu.view.state;
+        const mark = markType.create({ _preserve: { class: cssClass } });
+        const iconNode = state.schema.text('​', [mark]);
+        menu.view.dispatch(state.tr.insert(state.selection.from, iconNode));
+      };
+
+      const insertIconElement = (cssClass) => () => {
+        if (!iconNodeType) return;
+        const state = menu.view.state;
+        const node = iconNodeType.create({ classes: cssClass });
+        menu.view.dispatch(state.tr.insert(state.selection.from, node));
+      };
+
+      menus.icons = {
+        title: "Icons",
+        cssClass: "icons",
+        icon: '<i class="fa-solid fa-icons fa-fw"></i>',
+        entries: [
+          { action: "icon-origin",    title: "Origin Icon",    cmd: insertIcon("icon-origin") },
+          { action: "icon-adventure", title: "Adventure Icon", cmd: insertIcon("icon-adventure") },
+          { action: "icon-greatness", title: "Greatness Icon", cmd: insertIcon("icon-greatness") },
+          { action: "icon-hint", title: "Hint Icon", cmd: insertIconElement("fa-solid fa-circle-question icon-hint") },
+        ],
+      };
+    }
 
     menus.fakeHeadings = {
       title: "Fake Headings",
@@ -88,6 +215,16 @@ export function setupHooks() {
       cssClass: "textframes",
       icon: '<i class="fa-solid fa-layer-group fa-fw"></i>',
       entries: [
+        {
+          action: "content-with-sidebar",
+          title: "Content with Sidebar",
+          cmd: wrapInContentSidebar,
+        },
+        {
+          action: "written-block",
+          title: "Written Block",
+          cmd: wrapInFrame("written-block"),
+        },
         {
           action: "text-container-long-paper-background",
           title: "Long Paper Background",

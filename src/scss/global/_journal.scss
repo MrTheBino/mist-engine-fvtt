@@ -422,6 +422,37 @@
         font-size: 1.2em;
     }
 
+    .icon-origin,
+    .icon-adventure,
+    .icon-greatness {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        background-color: $c-icon-brown;
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        vertical-align: middle;
+    }
+
+    .icon-origin {
+        mask-image: url("../assets/icons/icon-origin-litm.svg");
+    }
+
+    .icon-adventure {
+        mask-image: url("../assets/icons/icon-adventure-litm.svg");
+    }
+
+    .icon-greatness {
+        mask-image: url("../assets/icons/icon-greatness-litm.svg");
+    }
+
+    .icon-hint {
+        color: $c-icon-brown;
+        vertical-align: middle;
+        font-size: 1em;
+    }
+
     .callout {
         border: 2px solid black;
         color: $c-dark-styled-text;

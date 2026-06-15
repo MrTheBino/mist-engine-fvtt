@@ -1180,6 +1180,32 @@ body {
   font-family: Caveat-Regular, cursive;
   font-size: 1.2em;
 }
+.journal-entry-content .icon-origin,
+.journal-entry-content .icon-adventure,
+.journal-entry-content .icon-greatness {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: #734a33;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  vertical-align: middle;
+}
+.journal-entry-content .icon-origin {
+  mask-image: url("../assets/icons/icon-origin-litm.svg");
+}
+.journal-entry-content .icon-adventure {
+  mask-image: url("../assets/icons/icon-adventure-litm.svg");
+}
+.journal-entry-content .icon-greatness {
+  mask-image: url("../assets/icons/icon-greatness-litm.svg");
+}
+.journal-entry-content .icon-hint {
+  color: #734a33;
+  vertical-align: middle;
+  font-size: 1em;
+}
 .journal-entry-content .callout {
   border: 2px solid black;
   color: #191813;

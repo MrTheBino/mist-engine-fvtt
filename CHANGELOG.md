@@ -2,6 +2,10 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.3.5
+- FIX: SceneApp won't open if minimzed, improved behaviour of the application
+- FEAT: styling for premium modules
+  
 # 14.3.4
 - FIX: #82 Fixed negative status remains green ( by Paul Umbers)
 - FIX: #77 Fixed might icons overlaying each on other ( by Paul Umbers)
