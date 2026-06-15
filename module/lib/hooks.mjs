@@ -210,9 +210,10 @@ export function setupHooks() {
   });
 
   Hooks.on("mistengine:sceneAppUpdated", (_data) => {
-    console.log("Received sceneAppUpdated , app rendered: ", MistSceneApp.getInstance().rendered);
-    if(MistSceneApp.getInstance().rendered) {
-      MistSceneApp.getInstance().render(true, { focus: true });
+    const instance = MistSceneApp.getInstance();
+    console.log("Received sceneAppUpdated , app rendered: ", instance.rendered);
+    if (instance.rendered && !instance.minimized) {
+      instance.render(true);
     }
   });
 
@@ -224,16 +225,16 @@ export function setupHooks() {
     const instance = MistSceneApp.getInstance();
     if (instance.rendered) { // only if shown
       instance.sceneUpdatedHook();
-      instance.render(true, { focus: true });
     }
   });
 
-  Hooks.on("updateToken", (_tokenDocument, _changes) => {
-    console.log("Token updated, changes: ");
+  const TOKEN_POSITIONAL_KEYS = new Set(["x", "y", "rotation", "elevation", "_id"]);
+  Hooks.on("updateToken", (_tokenDocument, changes) => {
+    const hasNonPositionalChange = Object.keys(changes).some(k => !TOKEN_POSITIONAL_KEYS.has(k));
+    if (!hasNonPositionalChange) return;
     const instance = MistSceneApp.getInstance();
     if (instance.rendered) { // only if shown
       instance.sceneUpdatedHook();
-      instance.render(true, { focus: true });
     }
   });
 
@@ -241,7 +242,6 @@ export function setupHooks() {
     const instance = MistSceneApp.getInstance();
     if (instance.rendered) { // only if shown
       instance.sceneUpdatedHook();
-      instance.render(true, { focus: true });
     }
   });
 

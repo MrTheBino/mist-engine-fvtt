@@ -238,15 +238,16 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     activateSocketListeners() {
         game.socket.on("system.mist-engine-fvtt", (msg) => {
+            const instance = MistSceneApp.getInstance();
             if (msg?.type === "hook" && msg.hook == "sceneAppUpdated") {
-                if(MistSceneApp.getInstance().rendered) {
-                    MistSceneApp.getInstance().render(true, { focus: true });
+                if (instance.rendered && !instance.minimized) {
+                    instance.render(true);
                 }
                 DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
             }
             else if (msg?.type === "hook" && msg.hook == "floatableTagOrStatusUpdate") {
-                if(MistSceneApp.getInstance().rendered) {
-                    MistSceneApp.getInstance().render(true, { focus: true });
+                if (instance.rendered && !instance.minimized) {
+                    instance.render(true);
                 }
                 DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
             }
@@ -258,8 +259,9 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             if (!scene) return;
             const isInScene = scene.tokens.contents.some(t => t.actor?.id === actor.id);
             if (!isInScene) return;
-            if (MistSceneApp.getInstance().rendered) {
-                MistSceneApp.getInstance().render(true, { focus: true });
+            const instance = MistSceneApp.getInstance();
+            if (instance.rendered && !instance.minimized) {
+                instance.render(true);
             }
             DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         });
@@ -271,10 +273,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
      */
     sendUpdateHookEvent(forceRender = true) {
         console.log("Deprecated: sendUpdateHookEvent - consider using a more specific hook for better performance and to avoid unnecessary renders in other apps");
-        if (forceRender) {
-            this.render(true, { focus: true });
-        } else if (this.rendered) {
-            this.render(true, { focus: true });
+        if (this.rendered && !this.minimized) {
+            this.render(true);
         }
 
         //if (game.user.isGM) {
