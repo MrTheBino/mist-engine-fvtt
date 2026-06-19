@@ -161,7 +161,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     prepareGMTags() {
-        MistSceneApp.getInstance().getRollModifications().forEach(element => {
+        const sceneApp = MistSceneApp.instance;
+        if (!sceneApp) return;
+        sceneApp.getRollModifications().forEach(element => {
             // at present all gm tags are negative
             // the roll modifications have a flag positive(boolean) but it is not used for now
             this.selectedGmTags.push({ name: element.name, positive: element.positive, source: "gm", value: element.value, might: element.might, mightIcon: element.mightIcon });
@@ -169,7 +171,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     prepareSceneAndStoryTags() {
-        MistSceneApp.getInstance().getSceneAndStoryTags().forEach(element => {
+        const sceneApp = MistSceneApp.instance;
+        if (!sceneApp) return;
+        sceneApp.getSceneAndStoryTags().forEach(element => {
             if (element.selected) {
                 this.selectedStoryTags.push({ name: element.name, positive: element.positive, source: "scene-and-story", value: element.value, might: element.might, mightIcon: element.mightIcon });
             }
@@ -177,7 +181,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     prepareChallengeTags() {
-        MistSceneApp.getInstance().getCombinedSelectedNPCTags().forEach(element => {
+        const sceneApp = MistSceneApp.instance;
+        if (!sceneApp) return;
+        sceneApp.getCombinedSelectedNPCTags().forEach(element => {
             if (element.selected) {
                 let t = { name: element.name, positive: element.positive, source: "npc", value: element.value, actorId: element.actorId, might: element.might, mightIcon: element.mightIcon };
                 this.challengeTags.push(t);
@@ -565,7 +571,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
 
         this.actor.sheet.render();
-        MistSceneApp.getInstance().resetSelection();
+        MistSceneApp.instance?.resetSelection();
     }
 
     static async #rollCallback(event, target) {
