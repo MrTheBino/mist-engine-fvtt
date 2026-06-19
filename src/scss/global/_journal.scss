@@ -454,10 +454,13 @@
     }
 
     .callout {
-        border: 2px solid black;
+        border: none;
         color: $c-dark-styled-text;
-        font-family: $font-primary;
+        font-family: $font-written;
         font-size: 1.2em;
+        h3{
+            font-family: $font-written;
+        }
     }
 
     .four-grid-with-borders {
@@ -487,6 +490,48 @@
 
         .left-bar {
             flex: 0 0 60%;
+            min-width: 0;
+        }
+
+        .right-bar {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+
+        .written-block {
+            font-size: 1em;
+        }
+    }
+
+    .content-with-sidebar-inverted {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: flex-start;
+
+        .left-bar {
+            flex: 0 0 40%;
+            min-width: 0;
+        }
+
+        .right-bar {
+            flex: 1 1 0;
+            min-width: 0;
+        }
+
+        .written-block {
+            font-size: 0.9em;
+        }
+    }
+
+     .content-with-sidebar-half-half {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: flex-start;
+
+        .left-bar {
+            flex: 0 0 50%;
             min-width: 0;
         }
 

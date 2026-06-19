@@ -1207,10 +1207,13 @@ body {
   font-size: 1em;
 }
 .journal-entry-content .callout {
-  border: 2px solid black;
+  border: none;
   color: #191813;
-  font-family: Labrada, serif;
+  font-family: Caveat-Regular, cursive;
   font-size: 1.2em;
+}
+.journal-entry-content .callout h3 {
+  font-family: Caveat-Regular, cursive;
 }
 .journal-entry-content .four-grid-with-borders {
   display: grid;
@@ -1243,6 +1246,40 @@ body {
   min-width: 0;
 }
 .journal-entry-content .content-with-sidebar .written-block {
+  font-size: 1em;
+}
+.journal-entry-content .content-with-sidebar-inverted {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+}
+.journal-entry-content .content-with-sidebar-inverted .left-bar {
+  flex: 0 0 40%;
+  min-width: 0;
+}
+.journal-entry-content .content-with-sidebar-inverted .right-bar {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.journal-entry-content .content-with-sidebar-inverted .written-block {
+  font-size: 0.9em;
+}
+.journal-entry-content .content-with-sidebar-half-half {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+}
+.journal-entry-content .content-with-sidebar-half-half .left-bar {
+  flex: 0 0 50%;
+  min-width: 0;
+}
+.journal-entry-content .content-with-sidebar-half-half .right-bar {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.journal-entry-content .content-with-sidebar-half-half .written-block {
   font-size: 0.9em;
 }
 
