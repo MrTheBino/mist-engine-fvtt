@@ -7,7 +7,7 @@
     "ACTIONS":{
       "ImportChallengeJSON": "Import Challenge from JSON",
       "ImportShortChallengeVignetteJSON": "Import Short Challenge / Vignette from JSON",
-      "AddChallenge": "Add Challenge",
+      "AddChallenge": "Add Short Challenge / Vignette",
       "AddConsequence": "Add Consequence",
       "AddGeneralConsequence": "Add General Consequence"
     },
