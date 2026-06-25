@@ -17,18 +17,18 @@
                         </a>
                     </div>
                 </div>
-                <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}"
+                <textarea class="npc-updatable-npc-array-stat" data-index="{{index}}"
                     data-array="threatsAndConsequences" data-key="description" id="limit-{{index}}"
-                    name="system.threatsAndConsequences[{{index}}].description" value="{{entry.description}}"
-                    placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Description'}}" />
+                    name="system.threatsAndConsequences[{{index}}].description"
+                    placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Description'}}">{{entry.description}}</textarea>
             </div>
             <fieldset>
                 <legend>{{localize 'MIST_ENGINE.LABELS.Consequences'}} <button data-action="createThreatAndConsequenceEntry" data-index="{{index}}"><i class='fas fa-plus'></i></button></legend>
                 {{#each entry.list as |listEntry listIndex|}}
                 <div class="threat-entry-container form-group flexrow">
-                    <input type="text" class="npc-updatable-threat-entry-stat value-input-huge"
+                    <textarea class="npc-updatable-threat-entry-stat value-input-huge"
                         id="npc-thread-list-{{index}}-{{listIndex}}" data-index="{{index}}"
-                        data-listIndex="{{listIndex}}" value="{{listEntry}}" placeholder="" />
+                        data-listIndex="{{listIndex}}" placeholder="">{{listEntry}}</textarea>
                     <div class="trash-icon-container">
                         <a class="" data-action="deleteThreatAndConsequenceEntry" data-index="{{index}}"
                             data-listIndex="{{listIndex}}">
