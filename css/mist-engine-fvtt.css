@@ -1282,6 +1282,107 @@ body {
 .journal-entry-content .content-with-sidebar-half-half .written-block {
   font-size: 0.9em;
 }
+.journal-entry-content {
+  /* Book-style tables (see the "Oracle" tables in Vol. II as reference):
+     red small-caps header band, zebra-striped warm parchment rows. */
+}
+.journal-entry-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8em 0;
+  font-family: Labrada, serif;
+  font-size: 0.95em;
+  line-height: 1.3;
+  border: 1px solid rgba(114, 74, 50, 0.35);
+}
+.journal-entry-content table p {
+  margin: 0;
+}
+.journal-entry-content table th {
+  background-color: rgba(114, 74, 50, 0.22);
+  color: #742a2b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  font-size: 0.82em;
+  text-align: left;
+  padding: 0.5em 0.8em;
+  border-bottom: 2px solid rgba(114, 74, 50, 0.55);
+}
+.journal-entry-content table td {
+  padding: 0.4em 0.8em;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(114, 74, 50, 0.15);
+}
+.journal-entry-content table tr:nth-of-type(even) td {
+  background-color: rgba(114, 74, 50, 0.13);
+}
+.journal-entry-content table td:first-child {
+  white-space: nowrap;
+  font-weight: 600;
+}
+.journal-entry-content {
+  /* Book-style "Rotes" (Vol. II "ROTES" section): titled cards with coloured
+     POWER / SUCCESS / CONSEQUENCES banner ribbons, green/red power markers,
+     and skull-bulleted consequences. */
+}
+.journal-entry-content .rote {
+  border: 1px solid rgba(114, 74, 50, 0.4);
+  border-radius: 4px;
+  background-color: rgba(246, 238, 234, 0.4);
+  padding: 0.5em 1em 0.8em;
+  margin: 1em 0;
+}
+.journal-entry-content .rote .rote-title {
+  font-family: CaveatBrush-Regular, cursive;
+  color: #742a2b;
+  font-size: 1.7em;
+  line-height: 1.1;
+  border-bottom: 0;
+  margin: 0.1em 0 0.3em;
+}
+.journal-entry-content .rote .rote-banner {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  font-size: 0.8em;
+  color: #f6eeea;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  padding: 0.28em 0.5em;
+  margin: 0.8em 0 0.45em;
+  border-radius: 2px;
+}
+.journal-entry-content .rote .rote-banner.power {
+  background-color: #967e6f;
+}
+.journal-entry-content .rote .rote-banner.success {
+  background-color: #cc9a54;
+}
+.journal-entry-content .rote .rote-banner.consequences {
+  background-color: #665c7a;
+}
+.journal-entry-content .rote .rote-power {
+  font-style: normal;
+  font-weight: 700;
+  margin-right: 0.2em;
+}
+.journal-entry-content .rote .rote-power.up {
+  color: #4d8061;
+}
+.journal-entry-content .rote .rote-power.down {
+  color: #8f4024;
+}
+.journal-entry-content .rote .rote-banner.consequences + ul {
+  list-style: none;
+  padding-left: 0.25em;
+}
+.journal-entry-content .rote .rote-banner.consequences + ul .skull-icon {
+  width: 1.15em;
+  height: 1.15em;
+  top: 0.22em;
+  margin-right: 0.15em;
+}
 
 /* fix for Campaign Codex */
 article.cc-enriched section.journal-entry-content {
