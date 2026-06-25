@@ -2,6 +2,13 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.3.6
+- FEAT: styling for premium modules
+- FIX: [Improvement] Rename "Add Challenge" button in Journey form to "Add Short Challenge / Vignette" #89
+- FIX: [BUG] Special Improvements can no longer be deleted from Themebooks #80
+- FEAT: [Improvement] Resizable text field and scrollbar for chalenge description
+ #79
+
 # 14.3.5
 - FIX: SceneApp won't open if minimzed, improved behaviour of the application
 - FEAT: styling for premium modules
