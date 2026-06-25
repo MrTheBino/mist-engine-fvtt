@@ -54,7 +54,7 @@
     <div class="box-shadowed-container">
         <h4 class="with-line">Special Improvements</h4>
         {{#each system.specialImprovements as |imp index|}}
-        {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-special-improvement-line.hbs" index=index imp=imp}}
+        {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-special-improvement-line.hbs" index=index imp=imp showDelete=true}}
         {{/each}}
     </div>
     {{/unless}}

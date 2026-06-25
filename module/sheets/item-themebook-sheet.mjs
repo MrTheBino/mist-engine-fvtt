@@ -17,7 +17,8 @@ export class MistEngineThemebookItemSheet extends MistEngineItemSheet {
             addEmptyPowertag: this.#handleAddEmptyPowertag,
             addEmptyWeaknessTag: this.#handleEmptyWeaknessTag,
             deletePowertag: this.#handleDeletePowertag,
-            deleteWeaknessTag: this.#handleDeleteWeaknessTag
+            deleteWeaknessTag: this.#handleDeleteWeaknessTag,
+            deleteSpecialImprovement: this.#handleDeleteSpecialImprovement
         },
         form: {
             // handler: DCCActorSheet.#onSubmitForm,
@@ -266,5 +267,16 @@ export class MistEngineThemebookItemSheet extends MistEngineItemSheet {
         }
         weaknesses.splice(index, 1);
         await this.document.update({ "system.weaknesstags": weaknesses });
+    }
+
+    static async #handleDeleteSpecialImprovement(event, target) {
+        event.preventDefault();
+        const item = this.document;
+        const specialImprovements = item.system.specialImprovements || [];
+        const index = target.dataset.index;
+        if (index !== undefined) {
+            specialImprovements.splice(index, 1);
+            await item.update({ "system.specialImprovements": specialImprovements });
+        }
     }
 }
