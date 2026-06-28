@@ -2,6 +2,10 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.3.7
+- FEAT: [Feature Request] Option for CTRL+Hover to show token tags #94
+- FEAT: final styling for premium modules
+
 # 14.3.6
 - FEAT: styling for premium modules
 - FIX: [Improvement] Rename "Add Challenge" button in Journey form to "Add Short Challenge / Vignette" #89
