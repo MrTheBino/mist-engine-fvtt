@@ -49,5 +49,22 @@
         {{/each}}
     </div>
     {{/if}}
+
+    {{!-- GM-only: all of the character's weakness tags (issue #85). Click to toggle. --}}
+    {{#if character.hasWeaknessTags}}
+    <div class="weakness-tags-container flexcol">
+        <label class="resource-label" style="text-align:center;">{{localize "MIST_ENGINE.SCENE_APP.Weaknesses"}}</label>
+        <div class="scene-weakness-tags">
+            {{#each character.weaknessTags}}
+            <span class="scene-weakness-tag {{#if this.selected}}selected{{/if}} {{#if this.burned}}burned{{/if}}"
+                data-action="toggleWeaknessTag" data-actor-id="{{../character.id}}" data-source="{{this.source}}"
+                data-themebook-id="{{this.themebookId}}" data-index="{{this.index}}"
+                title="{{localize 'MIST_ENGINE.SCENE_APP.WeaknessToggleHint'}}">
+                <i class="fa-light fa-angles-down"></i>{{this.name}}
+            </span>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
 </div>
 <div class="seperator"></div>

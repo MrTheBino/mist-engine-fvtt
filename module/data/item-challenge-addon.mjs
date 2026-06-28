@@ -1,19 +1,21 @@
-import MistEngineActorBase from "./base-actor.mjs";
+import MistEngineItemBase from "./base-item.mjs";
+import { buildFloatingTagsAndStatuses } from "./util.mjs";
 
-export default class MistEngineNPC extends MistEngineActorBase {
+export default class MistEngineChallengeAddon extends MistEngineItemBase {
 
   static defineSchema() {
     const fields = foundry.data.fields;
     const requiredInteger = { required: true, nullable: false, integer: true };
     const schema = super.defineSchema();
 
-    schema.difficulty = new fields.NumberField({ ...requiredInteger, initial: 1, min: 0 });
-    // Roles are a list of short descriptive labels (e.g. "Aggressor", "Pursuer").
+    // How much this add-on raises the Challenge's rating when joined
+    schema.ratingIncrease = new fields.NumberField({ ...requiredInteger, initial: 1, min: 0 });
+
+    // Roles this add-on contributes (e.g. "Mystery", "Sapper").
     schema.roles = new fields.ArrayField(new fields.StringField(), { required: false, initial: [] });
 
-    // Names of Challenge Add-ons applied to this Challenge (issue #55), used to
-    // warn before re-applying the same add-on.
-    schema.appliedAddons = new fields.ArrayField(new fields.StringField(), { required: false, initial: [] });
+    // Tags & statuses 
+    Object.assign(schema, buildFloatingTagsAndStatuses());
 
     schema.limits = new fields.ArrayField(
       new fields.SchemaField({
@@ -22,15 +24,15 @@ export default class MistEngineNPC extends MistEngineActorBase {
         consequence: new fields.StringField()
       }),
       { min: 0, required: false }
-    )
+    );
 
     schema.secrets = new fields.ArrayField(
       new fields.SchemaField({
         name: new fields.StringField(),
-        description: new fields.StringField(),
+        description: new fields.StringField()
       }),
       { min: 0, required: false }
-    )
+    );
 
     schema.specialFeatures = new fields.ArrayField(
       new fields.SchemaField({
@@ -38,7 +40,7 @@ export default class MistEngineNPC extends MistEngineActorBase {
         description: new fields.StringField()
       }),
       { min: 0, required: false }
-    )
+    );
 
     schema.threatsAndConsequences = new fields.ArrayField(
       new fields.SchemaField({
@@ -48,18 +50,7 @@ export default class MistEngineNPC extends MistEngineActorBase {
       }),
       { min: 0, required: false }
     );
-    return schema
-  }
 
-  /** Migrate legacy `roles` stored as a comma-separated string into a list. */
-  static migrateData(source) {
-    if (typeof source?.roles === "string") {
-      source.roles = source.roles.split(",").map(r => r.trim()).filter(Boolean);
-    }
-    return super.migrateData(source);
-  }
-
-  prepareDerivedData() {
-    super.prepareDerivedData();
+    return schema;
   }
 }

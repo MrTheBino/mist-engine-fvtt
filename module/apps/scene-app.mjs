@@ -1,5 +1,6 @@
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adapter.mjs";
+import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
 import { DiceRollApp } from "./dice-roll-app.mjs";
 
 export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
@@ -43,7 +44,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             toggleFloatingTagOrStatusSelected: this.#handleToggleFloatingTagOrStatusSelected,
             toggleFloatingTagOrStatusModifier: this.#handleToggleFloatingTagOrStatusModifier,
             toggleFloatingTagOrStatus: this.#handleToggleFloatingTagOrStatus,
-            clickOpenCharacterSheet: this.#handleClickOpenCharacterSheet
+            clickOpenCharacterSheet: this.#handleClickOpenCharacterSheet,
+            toggleWeaknessTag: this.#handleToggleWeaknessTag
         },
     };
 
@@ -276,6 +278,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         characterActors.forEach(actor => {
             let selectedTags = DiceRollApp.getPreparedTagsAndStatusesForRoll(actor);
             let floatingTagAndStatuses = actor.system.floatingTagsAndStatuses || [];
+            // All weakness tags are exposed to the GM only (issue #85).
+            let weaknessTags = game.user.isGM ? this.getCharacterWeaknessTags(actor) : [];
             if (!context.characters) context.characters = [];
             context.characters.push({
                 id: actor.id,
@@ -284,7 +288,9 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 floatingTagsAndStatuses: floatingTagAndStatuses,
                 hasFloatingTagsAndStatuses: floatingTagAndStatuses.length > 0,
                 selectedTagsForRoll: selectedTags,
-                hasSelectedTagsForRoll: selectedTags.length > 0
+                hasSelectedTagsForRoll: selectedTags.length > 0,
+                weaknessTags: weaknessTags,
+                hasWeaknessTags: weaknessTags.length > 0
             });
         });
 
@@ -314,12 +320,58 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return context;
     }
 
+    /**
+     * Collect ALL named weakness tags for a character (issue #85) from its
+     * themebooks and its linked fellowship themecard, with the info needed to
+     * display them and to toggle their selected state from the scene app.
+     */
+    getCharacterWeaknessTags(actor) {
+        const result = [];
+        const collect = (tags, source, themebookId) => {
+            (tags ?? []).forEach((tag, index) => {
+                if (!tag?.name || !tag.name.trim()) return;
+                if (tag.planned) return; // we don't show planned ones
+                result.push({ name: tag.name, selected: !!tag.selected, burned: !!tag.burned, source, themebookId, index });
+            });
+        };
+        for (const item of actor.items) {
+            if (item.type === "themebook") collect(item.system.weaknesstags, "themebook", item.id);
+        }
+        const themecard = game.actors.get(actor.system.actorSharedSingleThemecardId);
+        if (themecard) collect(themecard.system.weaknesstags, "fellowship-themecard", null);
+        return result;
+    }
+
     static async #handleClickOpenCharacterSheet(event, target) {
         event.preventDefault();
         const actor = this.resolveTargetActor(target);
         if (actor) {
             actor.sheet.render(true);
         }
+    }
+
+    /**
+     * GM OBLY: character weakness tag's selected state directly from the
+     * scene app
+     */
+    static async #handleToggleWeaknessTag(event, target) {
+        event.preventDefault();
+        if (!game.user.isGM) return;
+        const actor = this.resolveTargetActor(target);
+        if (!actor) return;
+        const index = parseInt(target.dataset.index);
+        let doc = null;
+        if (target.dataset.source === "themebook") {
+            doc = actor.items.get(target.dataset.themebookId);
+        } else if (target.dataset.source === "fellowship-themecard") {
+            doc = game.actors.get(actor.system.actorSharedSingleThemecardId);
+        }
+        if (!doc) return;
+        await ArrayFieldAdapter.toggle(doc, "system.weaknesstags", index, "selected");
+        // Themebook edits refresh via the central updateItem hook; this also
+        // covers the fellowship-themecard (separate actor) and the dice app.
+        this.sendUpdateHookEvent();
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
     }
 
     static async #handleToggleDiceRollModifier(event, target) {

@@ -109,4 +109,47 @@
             filter: invert(100%) sepia(100%) grayscale(100%) brightness(200%);
         }
     }
+
+    .weakness-tags-container {
+        margin: 10px 0;
+
+        .scene-weakness-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+        }
+
+        .scene-weakness-tag {
+            font-family: Labrada, serif;
+            font-weight: bold;
+            font-style: italic;
+            font-size: 0.85rem;
+            border-radius: 2px;
+            padding: 2px 6px;
+            cursor: pointer;
+            background-color: $c-tag-orange;
+            color: $c-styled-text;
+            opacity: 0.55; // inactive weaknesses are dimmed
+            transition: opacity 0.15s ease, box-shadow 0.15s ease;
+
+            i {
+                margin-right: 3px;
+            }
+
+            &:hover {
+                opacity: 0.85;
+            }
+
+            &.selected {
+                opacity: 1;
+                box-shadow: 0 0 0 2px $c-text-redish; // "circled" = active in scene
+            }
+
+            &.burned {
+                opacity: 0.4;
+                text-decoration: line-through;
+            }
+        }
+    }
 }

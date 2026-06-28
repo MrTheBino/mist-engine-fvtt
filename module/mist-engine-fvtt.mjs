@@ -12,6 +12,7 @@ import { MistEngineShortChallengeItemSheet } from "./sheets/item-shortchallenge-
 import { MistEngineItemThemekitSheet } from "./sheets/item-themekit-sheet.mjs";
 import { MistEngineLegendInTheMistJourneySheet } from "./sheets/litm-actor-journey-sheet.mjs";
 import { MistEngineThemebookItemSheet } from "./sheets/item-themebook-sheet.mjs";
+import { MistEngineChallengeAddonItemSheet } from "./sheets/item-challenge-addon-sheet.mjs";
 import { MistSceneApp } from "./apps/scene-app.mjs";
 import { HowToPlayApp } from "./apps/how-to-play-app.mjs";
 import { ChangelogApp } from "./apps/changelog-app.mjs";
@@ -77,7 +78,8 @@ Hooks.once("init", function () {
     "scene-data": models.MistEngineSceneData,
     quintessence: models.MistEngineQuintessence,
     shortchallenge: models.MistEngineShortChallenge,
-    themekit: models.MistEngineThemekit
+    themekit: models.MistEngineThemekit,
+    "challenge-addon": models.MistEngineChallengeAddon
   };
 
   // Active Effects are never copied to the Actor,
@@ -143,6 +145,12 @@ Hooks.once("init", function () {
     types: ["themebook"],
     label: "MIST_ENGINE.SheetLabels.Themebook",
   })
+
+  foundry.documents.collections.Items.registerSheet("mist-engine-fvtt", MistEngineChallengeAddonItemSheet, {
+    makeDefault: true,
+    types: ["challenge-addon"],
+    label: "MIST_ENGINE.SheetLabels.ChallengeAddon",
+  });
   
 
   setupMistEngineKeyBindings();

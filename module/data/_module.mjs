@@ -16,3 +16,4 @@ export {default as MistEngineActorFellowshipThemecard} from "./actor-fellowship-
 export {default as MistEngineQuintessence} from "./item-quintessence.mjs";
 export {default as MistEngineShortChallenge} from "./item-short-challenge.mjs";
 export {default as MistEngineThemekit} from "./item-themekit.mjs";
+export {default as MistEngineChallengeAddon} from "./item-challenge-addon.mjs";

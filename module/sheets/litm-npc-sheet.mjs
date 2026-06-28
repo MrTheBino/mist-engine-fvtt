@@ -2,6 +2,7 @@ import { MistEngineActorSheet } from "./actor-sheet.mjs";
 import { MistSceneApp } from '../apps/scene-app.mjs'
 import { parseChallengeJSON } from '../lib/json-importer.mjs';
 import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
+import { ChallengeAddonAdapter } from "../lib/challenge-addon-adapter.mjs";
 
 export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
   #dragDrop; // Private field to hold dragDrop handlers
@@ -133,6 +134,9 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
       input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
     }
 
+    const rolesInput = this.element.querySelector(".npc-roles-input");
+    rolesInput?.addEventListener("change", (event) => this.handleRolesInput(event));
+
     const npcUpdatableThreatEntryStats = this.element.querySelectorAll(".npc-updatable-threat-entry-stat");
     for (let input of npcUpdatableThreatEntryStats) {
       input.addEventListener("change", (event) => this.handleNpcItemThreatEntryUpdate(event));
@@ -152,6 +156,26 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     }
 
     this.enableFloatingTagStatusContextMenus();
+  }
+
+  /** Parse the comma-separated roles input into the `system.roles` list. easies way*/
+  handleRolesInput(event) {
+    event.preventDefault();
+    const roles = event.currentTarget.value.split(",").map(r => r.trim()).filter(Boolean);
+    this.actor.update({ "system.roles": roles });
+  }
+
+  /** @override Apply a dropped Challenge Add-on, otherwise fall back to the base drop handling. */
+  async _onDrop(event) {
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
+    if (data.type === "Item") {
+      const item = await fromUuid(data.uuid);
+      if (item?.type === "challenge-addon") {
+        await ChallengeAddonAdapter.applyToChallenge(this.actor, item);
+        return;
+      }
+    }
+    return super._onDrop(event);
   }
 
   static async #handleAddSceneAppRollMod(event, target) {

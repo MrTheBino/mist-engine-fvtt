@@ -46,6 +46,7 @@
       "ChallengeTemplateDragNDrop": "Drag and drop challenge / vignette items on this NPC to use them. They serve as templates and will not modify the original item.",
       "FelllowshipThemeCardExplanation": "A Fellowship Themecard is a shared resource for all members of a fellowship. It contains power tags, weakness tags and special improvements. The actual tags are getting entered in the characters. Not here, here are only the questions of the tags.",
       "GMTagShortCuts": "Select text, then CTL+SHIFT+S = Status, CTL+SHIFT+X = Might, CTL+SHIFT+A = Tag, CTL+SHIFT+Y = Bold",
+      "ChallengeAddon": "Define a reusable set of roles, tags/statuses, limits, threats, secrets and special features. Drag this add-on onto a Challenge to merge it in and raise the Challenge's rating.",
       "Titles":{
         "RightClickToToggleBurnState": "Right click to toggle burn state",
         "Powertag": "Powertag",
@@ -65,6 +66,24 @@
           "Greatness": "Greatness"
         }
       }
+    },
+    "SCENE_APP": {
+      "Weaknesses": "Weaknesses (GM)",
+      "WeaknessToggleHint": "Click to toggle this weakness as active in the scene"
+    },
+    "CHALLENGE_ADDON": {
+      "RatingIncrease": "Rating Increase",
+      "RolesPlaceholder": "e.g. Mystery, Sapper",
+      "TagsAndStatuses": "Tags & Statuses",
+      "IsStatus": "Status?",
+      "OnlyOnChallenges": "Challenge Add-ons can only be dropped onto a Challenge (NPC).",
+      "ConfirmTitle": "Apply Challenge Add-on",
+      "ConfirmApply": "Apply the add-on \"{name}\" to {challenge}? This will merge in its roles, tags, statuses, limits, threats, secrets and special features, and raise the Challenge's rating.",
+      "ConfirmReapply": "\"{name}\" has already been applied to {challenge}. Apply it again anyway? This will merge it in a second time.",
+      "Applied": "Applied add-on \"{addon}\" to {challenge}."
+    },
+    "SheetLabels": {
+      "ChallengeAddon": "Challenge Add-on"
     },
     "PLACEHOLDERS": {
       "QuestGoal": "Quest/Goal",
@@ -205,7 +224,8 @@
       "quintessence": "Quintessence",
       "shortchallenge": "Short Challenge / Vignette",
       "backpack": "Backpack",
-      "themekit": "Themekit"
+      "themekit": "Themekit",
+      "challenge-addon": "Challenge Add-on"
     }
   }
 }

@@ -97,6 +97,13 @@ export function registerHandlebarHelpers() {
     return a === b;
   });
 
+  // Join an array with a separator: {{join roles ", "}}. The last 
+  // arg of Handlebars is always the options object, so only use `sep` when it's a string.
+  Handlebars.registerHelper("join", function (arr, sep) {
+    if (!Array.isArray(arr)) return arr ?? "";
+    return arr.join(typeof sep === "string" ? sep : ", ");
+  });
+
   Handlebars.registerHelper("tagFilled", function (str) {
     if (str && str.trim().length > 0) {
       return true;

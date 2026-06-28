@@ -13,7 +13,7 @@
             </div>
             <div class="npc-types">
                 <div class="field-roles">
-                    <input type="text" name="system.roles" value="{{system.roles}}" placeholder="{{localize "MIST_ENGINE.LABELS.Npc.roles"}}"/>
+                    <input type="text" class="npc-roles-input" value="{{join system.roles ", "}}" placeholder="{{localize "MIST_ENGINE.LABELS.Npc.roles"}}"/>
                 </div>
                 <div class="field-difficulty">
                     <input type="number" name="system.difficulty" value="{{system.difficulty}}" min="0" max="5" placeholder="{{localize "MIST_ENGINE.LABELS.Npc.difficulty"}}"/>
@@ -34,7 +34,7 @@
                     {{/times}}
                 </div>
             </div>
-            <div class="npc-roles">{{system.roles}}</div>
+            <div class="npc-roles">{{join system.roles ", "}}</div>
             <div class="npc-short-description">{{{simpleFormatText system.shortDescription}}}</div>
             {{/if}}
         </div>

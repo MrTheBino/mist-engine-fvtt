@@ -1,0 +1,55 @@
+<div class="scrollable">
+    <p class="help-text">{{localize 'MIST_ENGINE.HELP.ChallengeAddon'}}</p>
+
+    <div class="grid grid-2col">
+        <div class="form-group">
+            <label>{{localize 'MIST_ENGINE.CHALLENGE_ADDON.RatingIncrease'}}</label>
+            <input type="number" name="system.ratingIncrease" value="{{system.ratingIncrease}}" min="0" max="5" />
+        </div>
+        <div class="form-group">
+            <label>{{localize 'MIST_ENGINE.LABELS.Npc.roles'}}</label>
+            <input type="text" class="addon-roles-input" value="{{join system.roles ", "}}"
+                placeholder="{{localize 'MIST_ENGINE.CHALLENGE_ADDON.RolesPlaceholder'}}" />
+        </div>
+    </div>
+
+    <fieldset>
+        <legend>{{localize 'MIST_ENGINE.CHALLENGE_ADDON.TagsAndStatuses'}}
+            <button type="button" data-action="createTagStatus"><i class='fas fa-plus'></i></button>
+        </legend>
+        <div class="table-group">
+            <div class="table-row">
+                <div class="table-cell header">{{localize 'MIST_ENGINE.LABELS.Name'}}</div>
+                <div class="table-cell header">{{localize 'MIST_ENGINE.LABELS.Value'}}</div>
+                <div class="table-cell header">{{localize 'MIST_ENGINE.CHALLENGE_ADDON.IsStatus'}}</div>
+                <div class="table-cell header"></div>
+            </div>
+            {{#each system.floatingTagsAndStatuses as |fts index|}}
+            <div class="table-row">
+                <div class="table-cell">
+                    <input type="text" class="addon-tagstatus-input" data-index="{{index}}" data-key="name"
+                        value="{{fts.name}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" />
+                </div>
+                <div class="table-cell">
+                    <input type="number" class="addon-tagstatus-input" data-index="{{index}}" data-key="value"
+                        value="{{fts.value}}" min="0" max="6" />
+                </div>
+                <div class="table-cell">
+                    <input type="checkbox" class="addon-tagstatus-input" data-index="{{index}}" data-key="isStatus"
+                        {{#if fts.isStatus}}checked{{/if}} />
+                </div>
+                <div class="table-cell">
+                    <div class="trash-icon-container">
+                        <a data-action="deleteTagStatus" data-index="{{index}}"><i class='fas fa-trash'></i></a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </fieldset>
+
+    {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-limits-edit-partial.hbs"}}
+    {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-threats-edit-partial.hbs"}}
+    {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-secrets.hbs"}}
+    {{> "systems/mist-engine-fvtt/templates/actor/parts/npc-special-features-edit-partial.hbs"}}
+</div>
