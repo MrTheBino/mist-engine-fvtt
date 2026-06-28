@@ -1,6 +1,7 @@
 import { MistEngineActorSheet } from "./actor-sheet.mjs";
 import { MistSceneApp } from '../apps/scene-app.mjs'
 import { parseChallengeJSON } from '../lib/json-importer.mjs';
+import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
 
 export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
   #dragDrop; // Private field to hold dragDrop handlers
@@ -176,12 +177,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   static async #handleDeleteThreadAndConsequence(event, target) {
     event.preventDefault();
-    const index = target.dataset.index;
-    const threatsAndConsequences = this.actor.system.threatsAndConsequences;
-    if (threatsAndConsequences && threatsAndConsequences.length > 0) {
-      threatsAndConsequences.splice(index, 1);
-      await this.actor.update({ "system.threatsAndConsequences": threatsAndConsequences });
-    }
+    await ArrayFieldAdapter.remove(this.actor, "system.threatsAndConsequences", parseInt(target.dataset.index));
   }
 
   async handleNpcItemNpcArrayUpdate(event) {
@@ -195,11 +191,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     const arrayName = target.dataset.array;
     const key = target.dataset.key;
 
-    let path = `system.${arrayName}`;
-    let arrayData = foundry.utils.getProperty(this.actor, path);
-    foundry.utils.setProperty(arrayData[arrayIndex], key, target.value);
-
-    await this.actor.update({ [path]: arrayData });
+    await ArrayFieldAdapter.set(this.actor, `system.${arrayName}`, arrayIndex, key, target.value);
   }
 
   async handleNpcItemThreatEntryUpdate(event) {
@@ -211,45 +203,23 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     const target = event.currentTarget;
     const arrayIndex = parseInt(target.dataset.index);
     const listIndex = parseInt(target.dataset.listindex);
-    const key = target.dataset.key;
-    const arrayName = "threatsAndConsequences";
-    let path = `system.${arrayName}`;
-    let arrayData = foundry.utils.getProperty(this.actor, path);
-    arrayData[arrayIndex].list[listIndex] = target.value;
 
-    await this.actor.update({ [path]: arrayData });
-    //await this.actor.sheet.render(true);
+    await ArrayFieldAdapter.set(this.actor, "system.threatsAndConsequences", arrayIndex, `list.${listIndex}`, target.value);
   }
 
   static async #handleDeleteSecret(event, target) {
     event.preventDefault();
-    const index = target.dataset.index;
-    const secrets = this.actor.system.secrets;
-    if (secrets && secrets.length > 0) {
-      secrets.splice(index, 1);
-      await this.actor.update({ "system.secrets": secrets });
-    }
+    await ArrayFieldAdapter.remove(this.actor, "system.secrets", parseInt(target.dataset.index));
   }
 
   static async #handleDeleteLimit(event, target) {
     event.preventDefault();
-    const index = target.dataset.index;
-
-    const limits = this.actor.system.limits;
-    if (limits && limits.length > 0) {
-      limits.splice(index, 1);
-      await this.actor.update({ "system.limits": limits });
-    }
+    await ArrayFieldAdapter.remove(this.actor, "system.limits", parseInt(target.dataset.index));
   }
 
   static async #handleDeleteSpecialFeature(event, target) {
     event.preventDefault();
-    const index = target.dataset.index;
-    const specialFeatures = this.actor.system.specialFeatures;
-    if (specialFeatures && specialFeatures.length > 0) {
-      specialFeatures.splice(index, 1);
-      await this.actor.update({ "system.specialFeatures": specialFeatures });
-    }
+    await ArrayFieldAdapter.remove(this.actor, "system.specialFeatures", parseInt(target.dataset.index));
   }
 
   static async #handleCreateThreatAndConsequenceEntry(event, target) {
@@ -265,69 +235,25 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   static async #handleCreateThreatAndConsequence(event, target) {
     event.preventDefault();
-    const index = target.dataset.index;
-    const threatsAndConsequences = this.actor.system.threatsAndConsequences;
-
     this._saveScrollPositions();
-    if (threatsAndConsequences) {
-      await this.actor.update({
-        "system.threatsAndConsequences": [...threatsAndConsequences, { name: "", description: "", list: [] }],
-      });
-    } else {
-      await this.actor.update({
-        "system.threatsAndConsequences": [{ name: "", description: "", list: [] }],
-      });
-    }
+    await ArrayFieldAdapter.add(this.actor, "system.threatsAndConsequences", { name: "", description: "", list: [] });
   }
 
   static async #handleCreateSpecialFeature(event, target) {
     event.preventDefault();
     this._saveScrollPositions();
-
-    const specialFeatures = this.actor.system.specialFeatures;
-
-    if (specialFeatures) {
-      await this.actor.update({
-        "system.specialFeatures": [...specialFeatures, { name: "", description: "" }],
-      });
-    } else {
-      await this.actor.update({
-        "system.specialFeatures": [{ name: "", description: "" }],
-      });
-    }
+    await ArrayFieldAdapter.add(this.actor, "system.specialFeatures", { name: "", description: "" });
   }
 
   static async #handleCreateSecret(event, target) {
     event.preventDefault();
     this._saveScrollPositions();
-
-    const secrets = this.actor.system.secrets;
-
-    if (secrets) {
-      await this.actor.update({
-        "system.secrets": [...secrets, { name: "", description: "" }],
-      });
-    } else {
-      await this.actor.update({
-        "system.secrets": [{ name: "", description: "" }],
-      });
-    }
+    await ArrayFieldAdapter.add(this.actor, "system.secrets", { name: "", description: "" });
   }
 
   static async #handleCreateLimit(event, target) {
     event.preventDefault();
-
-    const limits = this.actor.system.limits;
-
-    if (limits) {
-      await this.actor.update({
-        "system.limits": [...limits, { name: "", value: 0, positive: false }],
-      });
-    } else {
-      await this.actor.update({
-        "system.limits": [{ name: "", value: 0, positive: false }],
-      });
-    }
+    await ArrayFieldAdapter.add(this.actor, "system.limits", { name: "", value: 0, positive: false });
   }
 
   async handleChallengeItemUpdate(event) {
@@ -351,32 +277,21 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     // Save scroll position before update
     this._saveScrollPositions();
     
-    const itemId = event.currentTarget.dataset.itemId;
-    const item = this.actor.items.get(itemId);
+    const item = this.actor.items.get(event.currentTarget.dataset.itemId);
     const index = parseInt(event.currentTarget.dataset.index);
-    const value = event.currentTarget.value;
-    const list = item.system.list;
-    list[index] = value;
-    await item.update({ 'system.list': list });
+    await ArrayFieldAdapter.setIndex(item, "system.list", index, event.currentTarget.value);
   }
 
   static async #handleDeleteChallengeListItem(event, target) {
     event.preventDefault();
-    const itemId = target.dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    const index = parseInt(target.dataset.index);
-    const list = item.system.list;
-    list.splice(index, 1);
-    await item.update({ 'system.list': list });
+    const item = this.actor.items.get(target.dataset.itemId);
+    await ArrayFieldAdapter.remove(item, "system.list", parseInt(target.dataset.index));
   }
 
   static async #handleCreateChallengeListEntry(event, target) {
     event.preventDefault();
-    const itemId = target.dataset.itemId;
-    const item = this.actor.items.get(itemId);
-    const list = item.system.list;
-    list.push("");
-    await item.update({ 'system.list': list });
+    const item = this.actor.items.get(target.dataset.itemId);
+    await ArrayFieldAdapter.add(item, "system.list", "");
   }
 
   static async #handleDeleteChallenge(event, target) {

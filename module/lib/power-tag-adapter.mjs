@@ -1,7 +1,8 @@
+import { ArrayFieldAdapter } from "./array-field-adapter.mjs";
+
 export class PowerTagAdapter{
     /**
-     * Deselect a single power/weakness tag by fetching the full array,
-     * setting selected=false at the given index, and writing the array back.
+     * Deselect a single power/weakness tag.
      *
      * @param {Actor}  actor
      * @param {string} itemId
@@ -16,19 +17,12 @@ export class PowerTagAdapter{
         }
 
         // key format: "system.powertags.N.selected" or "system.weaknesstags.N.selected"
-        const parts = key.split(".");                      // ["system", "powertags", "N", "selected"]
-        const arrayPath = parts.slice(0, 2).join(".");     // "system.powertags"
+        const parts = key.split(".");                  // ["system", "powertags", "N", "selected"]
+        const arrayPath = parts.slice(0, 2).join(".");  // "system.powertags"
         const tagIndex  = parseInt(parts[2]);
-        const field     = parts[3];                        // "selected"
+        const field     = parts[3];                     // "selected"
 
-        const array = foundry.utils.getProperty(item, arrayPath);
-        if(!array || tagIndex < 0 || tagIndex >= array.length){
-            console.warn("PowerTagAdapter.deselectPowerTag: invalid array or index", {arrayPath, tagIndex, array});
-            return;
-        }
-
-        array[tagIndex][field] = false;
-        await item.update({ [arrayPath]: array });
-        await actor.render({force: false});
+        const ok = await ArrayFieldAdapter.set(item, arrayPath, tagIndex, field, false);
+        if(ok) await actor.render({force: false});
     }
 }

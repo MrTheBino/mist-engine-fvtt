@@ -7,6 +7,7 @@ import { DiceRollApp } from '../apps/dice-roll-app.mjs'
 import { MistEngineItem } from '../documents/item.mjs'
 import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adapter.mjs";
 import { StoryTagAdapter } from "../lib/story-tag-adapter.mjs";
+import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
 
 export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
@@ -922,126 +923,45 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         }
     }
 
+    /**
+     * Resolve the document a powertag/weakness action targets: either the
+     * fellowship themecard actor or a themebook item owned by this actor.
+     * @returns {Document|null}
+     */
+    _resolvePowertagTarget(target) {
+        if (target.dataset.source === "fellowship-themecard") return this.actorFellowshipThemecard ?? null;
+        return this.actor.items.get(target.dataset.itemId) ?? null;
+    }
+
     static async #handleAddEmptyPowertag(event, target) {
         event.preventDefault();
         this._saveScrollPositions();
-
-        const itemId = target.dataset.itemId;
-        const source = target.dataset.source;
-        if(source === "fellowship-themecard") {
-            if (this.actorFellowshipThemecard) {
-                let powertags = this.actorFellowshipThemecard.system.powertags || [];
-                powertags.push({ name: "New Powertag", value: "" });
-                await this.actorFellowshipThemecard.update({ "system.powertags": powertags });
-            }
-            return;
-        }
-        const item = this.actor.items.get(itemId);
-        
-        if (!item) {
-            console.error("Item not found for adding powertag", { itemId });
-            return;
-        }
-        
-        let powertags = item.system.powertags || [];
-        powertags.push({ name: "New Powertag", value: "" });
-        await item.update({ "system.powertags": powertags });
+        const doc = this._resolvePowertagTarget(target);
+        if (!doc) { console.error("Item not found for adding powertag", { itemId: target.dataset.itemId }); return; }
+        await ArrayFieldAdapter.add(doc, "system.powertags", { name: "New Powertag", question: "" });
     }
 
     static async #handleAddEmptyWeaknessTag(event, target) {
         event.preventDefault();
         this._saveScrollPositions();
-        const itemId = target.dataset.itemId;
-        const source = target.dataset.source;
-        if(source === "fellowship-themecard") {
-            if (this.actorFellowshipThemecard) {
-                let weaknesses = this.actorFellowshipThemecard.system.weaknesstags || [];
-                weaknesses.push({ name: "New Weakness", value: "" });
-                await this.actorFellowshipThemecard.update({ "system.weaknesstags": weaknesses });
-            }
-            return;
-        }
-
-        const item = this.actor.items.get(itemId);
-        if (!item) {
-            console.error("Item not found for adding weakness", { itemId });
-            return;
-        }
-        
-        let weaknesses = item.system.weaknesstags || [];
-        weaknesses.push({ name: "New Weakness", value: "" });
-        await item.update({ "system.weaknesstags": weaknesses });
-        console.log("Added weakness", { itemId, weaknesses });
+        const doc = this._resolvePowertagTarget(target);
+        if (!doc) { console.error("Item not found for adding weakness", { itemId: target.dataset.itemId }); return; }
+        await ArrayFieldAdapter.add(doc, "system.weaknesstags", { name: "New Weakness", question: "" });
     }
 
     static async #handleDeletePowertag(event, target) {
         event.preventDefault();
         this._saveScrollPositions();
-
-        const itemId = target.dataset.itemId;
-        const index = target.dataset.index;
-        const source = target.dataset.source;
-        if(source === "fellowship-themecard") {
-            if (this.actorFellowshipThemecard) {
-                let powertags = this.actorFellowshipThemecard.system.powertags || [];
-                if (index < 0 || index >= powertags.length) {
-                    console.error("Invalid powertag index for deletion", { itemId, index });
-                    return;
-                }
-                powertags.splice(index, 1);
-                await this.actorFellowshipThemecard.update({ "system.powertags": powertags });
-            }
-            return;
-        }
-        const item = this.actor.items.get(itemId);
-        
-        if (!item) {
-            console.error("Item not found for deleting powertag", { itemId });
-            return;
-        }
-        
-        let powertags = item.system.powertags || [];
-        if (index < 0 || index >= powertags.length) {
-            console.error("Invalid powertag index for deletion", { itemId, index });
-            return;
-        }
-        powertags.splice(index, 1);
-        await item.update({ "system.powertags": powertags });
+        const doc = this._resolvePowertagTarget(target);
+        if (!doc) { console.error("Item not found for deleting powertag", { itemId: target.dataset.itemId }); return; }
+        await ArrayFieldAdapter.remove(doc, "system.powertags", parseInt(target.dataset.index));
     }
 
     static async #handleDeleteWeaknessTag(event, target) {
         event.preventDefault();
         this._saveScrollPositions();
-
-        const itemId = target.dataset.itemId;
-        const index = target.dataset.index;
-        const source = target.dataset.source;
-        if(source === "fellowship-themecard") {
-            if (this.actorFellowshipThemecard) {
-                let weaknesses = this.actorFellowshipThemecard.system.weaknesstags || [];
-                if (index < 0 || index >= weaknesses.length) {
-                    console.error("Invalid weakness index for deletion", { itemId, index });
-                    return;
-                }
-                weaknesses.splice(index, 1);
-                await this.actorFellowshipThemecard.update({ "system.weaknesstags": weaknesses });
-            }
-            return;
-        }
-
-        const item = this.actor.items.get(itemId);
-
-        if (!item) {
-            console.error("Item not found for deleting weakness", { itemId });
-            return;
-        }
-        
-        let weaknesses = item.system.weaknesstags || [];
-        if (index < 0 || index >= weaknesses.length) {
-            console.error("Invalid weakness index for deletion", { itemId, index });
-            return;
-        }
-        weaknesses.splice(index, 1);
-        await item.update({ "system.weaknesstags": weaknesses });
+        const doc = this._resolvePowertagTarget(target);
+        if (!doc) { console.error("Item not found for deleting weakness", { itemId: target.dataset.itemId }); return; }
+        await ArrayFieldAdapter.remove(doc, "system.weaknesstags", parseInt(target.dataset.index));
     }
 }

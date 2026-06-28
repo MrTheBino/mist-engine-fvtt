@@ -4,6 +4,7 @@ import { ThemekitCharacterApp } from '../apps/themekit-character-app.mjs';
 import { ThemekitSelectionApp } from '../apps/themekit-selection-app.mjs';
 import { MistEngineActorSheet } from './actor-sheet.mjs';
 import { ThemeKitAdapter } from '../lib/themekit-adapter.mjs';
+import { ArrayFieldAdapter } from '../lib/array-field-adapter.mjs';
 
 export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -395,27 +396,24 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
     async handleFellowshipRelationshipSelectableClick(event) {
         event.preventDefault();
-        const tag = event.currentTarget;
-        const index = tag.dataset.index;
-        let fellowships = this.options.document.system.fellowships;
-        if (!fellowships || index >= fellowships.length) return;
+        const index = parseInt(event.currentTarget.dataset.index);
+        const doc = this.options.document;
+        const fellowships = doc.system.fellowships;
+        if (!fellowships || index < 0 || index >= fellowships.length) return;
         if (fellowships[index].scratched) return; // do not allow selecting scratched tags
         this._saveScrollPositions();
-        fellowships[index].selected = !fellowships[index].selected;
-        await this.options.document.update({ "system.fellowships": fellowships });
+        await ArrayFieldAdapter.toggle(doc, "system.fellowships", index, "selected");
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     async handleFellowshipRelationshipSelectableToggleClick(event) {
         event.preventDefault();
-        const tag = event.currentTarget;
-        const index = tag.dataset.index;
-        let fellowships = this.options.document.system.fellowships;
-        if (!fellowships || index >= fellowships.length) return;
-        fellowships[index].scratched = !fellowships[index].scratched;
-        fellowships[index].selected = false;
-        await this.options.document.update({ "system.fellowships": fellowships });
+        const index = parseInt(event.currentTarget.dataset.index);
+        const doc = this.options.document;
+        const fellowships = doc.system.fellowships;
+        if (!fellowships || index < 0 || index >= fellowships.length) return;
+        await ArrayFieldAdapter.patch(doc, "system.fellowships", index, { scratched: !fellowships[index].scratched, selected: false });
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
@@ -439,61 +437,41 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     async handleCharacterUpdatableFellowshipChange(event) {
         event.preventDefault();
         const input = event.currentTarget;
-        const index = input.dataset.index;
-        const key = input.dataset.key;
-        const newValue = input.value;
-        let fellowships = this.options.document.system.fellowships;
-        if (!fellowships || index >= fellowships.length) return;
+        const index = parseInt(input.dataset.index);
+        const doc = this.options.document;
+        const fellowships = doc.system.fellowships;
+        if (!fellowships || index < 0 || index >= fellowships.length) return;
         this._saveScrollPositions();
-        foundry.utils.setProperty(fellowships[index], key, newValue);
-        await this.options.document.update({ "system.fellowships": fellowships });
+        await ArrayFieldAdapter.set(doc, "system.fellowships", index, input.dataset.key, input.value);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     static async #handleDeleteFellowship(event, target) {
         event.preventDefault();
-        const index = target.dataset.index;
-        let fellowships = this.actor.system.fellowships;
-        if (!fellowships || index >= fellowships.length) return;
-        fellowships.splice(index, 1);
-        await this.actor.update({ "system.fellowships": fellowships });
-        MistSceneApp.getInstance().sendUpdateHookEvent(false);
+        const ok = await ArrayFieldAdapter.remove(this.actor, "system.fellowships", parseInt(target.dataset.index));
+        if (ok) MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     static async #handleCreateFellowship(event, target) {
         event.preventDefault();
-        const currentFellowships = this.actor.system.fellowships;
         this._saveScrollPositions();
-        if (currentFellowships) {
-            await this.actor.update({
-                "system.fellowships": [...currentFellowships, { companion: "", relationshipTag: "", selected: false }]
-            });
-        } else {
-            await this.actor.update({
-                "system.fellowships": [{ companion: "", relationshipTag: "", selected: false }]
-            });
-        }
+        await ArrayFieldAdapter.add(this.actor, "system.fellowships", { companion: "", relationshipTag: "", selected: false });
     }
 
     static async #handleDeleteQuintessence(event, target) {
         event.preventDefault();
-        const index = target.dataset.index;
-        let quintessences = this.actor.system.quintessences;
-        if (!quintessences || index >= quintessences.length) return;
+        const index = parseInt(target.dataset.index);
+        const quintessences = this.actor.system.quintessences;
+        if (!quintessences || index < 0 || index >= quintessences.length) return;
         this._saveScrollPositions();
-        quintessences.splice(index, 1);
-        await this.actor.update({ "system.quintessences": quintessences });
+        await ArrayFieldAdapter.remove(this.actor, "system.quintessences", index);
     }
 
     async handleCharacterUpdatableQuintessenceChange(event) {
         event.preventDefault();
         const input = event.currentTarget;
-        const index = input.dataset.index;
-        const newName = input.value;
-        let quintessences = this.options.document.system.quintessences;
-        if (!quintessences || index >= quintessences.length) return;
-        quintessences[index] = newName;
-        await this.options.document.update({ "system.quintessences": quintessences });
+        const index = parseInt(input.dataset.index);
+        await ArrayFieldAdapter.setIndex(this.options.document, "system.quintessences", index, input.value);
     }
 
     async handleDevelopmentPartialClick(event) {
@@ -660,43 +638,22 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     static async #handleDeleteBackpackItem(event, target) {
         event.preventDefault();
         const backpack = this.actor.items.get(target.dataset.itemId);
-        const itemIndex = target.dataset.itemIndex;
-        const backpackItems = backpack.system.items;
-        if (!backpackItems || itemIndex >= backpackItems.length) return;
+        const itemIndex = parseInt(target.dataset.itemIndex);
+        if (!backpack?.system?.items || itemIndex < 0 || itemIndex >= backpack.system.items.length) return;
         this._saveScrollPositions();
-        backpackItems.splice(itemIndex, 1);
-
-        await backpack.update({
-            "system.items": backpackItems
-        });
+        await ArrayFieldAdapter.remove(backpack, "system.items", itemIndex);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
     static async #handleCreateQuintessence(event, target) {
         event.preventDefault();
-        const currentQuintessences = this.actor.system.quintessences;
         this._saveScrollPositions();
-        if (currentQuintessences) {
-            await this.actor.update({
-                "system.quintessences": [
-                    ...currentQuintessences,
-                    "New Quintessence"
-                ]
-            });
-        } else {
-            await this.actor.update({
-                "system.quintessences": [
-                    "New Quintessence"
-                ]
-            });
-        }
+        await ArrayFieldAdapter.add(this.actor, "system.quintessences", "New Quintessence");
     }
 
     static async #handleCreateBackpackItem(event, target) {
         event.preventDefault();
         const backpack = this.actor.items.get(target.dataset.itemId);
-
-        const backpackItems = backpack.system.items;
         this._saveScrollPositions();
 
         let itemName = "New Item";
@@ -717,21 +674,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             return;
         }
 
-        if (backpackItems) {
-            await backpack.update({
-                "system.items": [
-                    ...backpackItems,
-                    { name: itemName, selected: false }
-                ]
-            });
-        } else {
-            await backpack.update({
-                "system.items": [
-                    { name: itemName, selected: false }
-                ]
-            });
-        }
-
+        await ArrayFieldAdapter.add(backpack, "system.items", { name: itemName, selected: false });
     }
 
     static async #handleToggleToBurn(event, target) {

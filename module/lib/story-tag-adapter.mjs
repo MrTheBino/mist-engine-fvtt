@@ -1,97 +1,47 @@
+import { ArrayFieldAdapter } from "./array-field-adapter.mjs";
+
+// Adapter for story tags stored as an ArrayField on an item within an actor.
+// `key` is the dot-path of the array on the item (e.g. "system.items").
+// Element mutations delegate to ArrayFieldAdapter (read -> mutate -> write).
 export class StoryTagAdapter {
-    static async deleteStoryTag(actor,itemId,key,index){
+    static async deleteStoryTag(actor, itemId, key, index){
         const item = actor.items.get(itemId);
-        if(item){
-            const data = foundry.utils.getProperty(item,key)
-            data.splice(index, 1);
-            await item.update({ [key]: data });
-            console.log("StoryTagAdapter.deleteStoryTag: deleted", {itemId,key,index});
-        } else {
-            console.log("StoryTagAdapter.deleteStoryTag: item not found");
-        }
+        if(!item) return false;
+        return ArrayFieldAdapter.remove(item, key, index);
     }
 
-    static async updateStoryTag(actor,itemId,key,index,value,subKey){
+    static async updateStoryTag(actor, itemId, key, index, value, subKey){
         const item = actor.items.get(itemId);
-        if(item){
-            const data = foundry.utils.getProperty(item,key)
-            if(data && index < data.length){
-                if(subKey != null){
-                    data[index][subKey] = value;
-                }else{
-                    data[index].name = value;
-                }
-                await item.update({ [key]: data });
-            } else {
-                console.log("StoryTagAdapter.updateStoryTagName: invalid index ", {itemId,key,index,value});
-            }
-        } else {
-            console.log("StoryTagAdapter.updateStoryTagName: item not found");
-        }
+        if(!item) return false;
+        return ArrayFieldAdapter.set(item, key, index, subKey != null ? subKey : "name", value);
     }
 
-    static async toggleStoryTagSelection(actor,itemId,key,index){
+    static async toggleStoryTagSelection(actor, itemId, key, index){
         const item = actor.items.get(itemId);
-        if(item){
-            const data = foundry.utils.getProperty(item,key)
-            if(data && index < data.length){
-                if(data[index].burned){
-                    return; // cannot select burned tags
-                }
-                let oldSelected = data[index].selected || false;
-                let newSelected = !oldSelected;
-                foundry.utils.setProperty(data[index], 'selected', newSelected);
-                await item.update({ [key]: data });
-                console.log("StoryTagAdapter.toggleStoryTagSelection: toggled", {itemId,key,index,newSelected});
-            } else {
-                console.log("StoryTagAdapter.toggleStoryTagSelection: invalid index ", {itemId,key,index});
-            }
-        } else {
-            console.log("StoryTagAdapter.toggleStoryTagSelection: item not found");
-        }
+        if(!item) return false;
+        const data = foundry.utils.getProperty(item, key);
+        if(!data || index < 0 || index >= data.length) return false;
+        if(data[index].burned) return false; // cannot select burned tags
+        return ArrayFieldAdapter.toggle(item, key, index, "selected");
     }
 
-    static async toggleBurnSelection(actor,itemId,key,index){
+    static async toggleBurnSelection(actor, itemId, key, index){
         const item = actor.items.get(itemId);
-        if(item){
-            const data = foundry.utils.getProperty(item,key)
-            if(data && index < data.length){
-                if(data[index].burned){
-                    return; // cannot toggle burned tags
-                }
-                let oldToBurn = data[index].toBurn || false;
-                let newToBurn = !oldToBurn;
-                foundry.utils.setProperty(data[index], 'toBurn', newToBurn);
-                await item.update({ [key]: data });
-                console.log("StoryTagAdapter.toggleBurnSelection: toggled", {itemId,key,index,newToBurn});
-            }
-            else {
-                console.log("StoryTagAdapter.toggleBurnSelection: invalid index ", {itemId,key,index});
-            }
-        } else {
-            console.log("StoryTagAdapter.toggleBurnSelection: item not found");
-        }
+        if(!item) return false;
+        const data = foundry.utils.getProperty(item, key);
+        if(!data || index < 0 || index >= data.length) return false;
+        if(data[index].burned) return false; // cannot toggle burned tags
+        return ArrayFieldAdapter.toggle(item, key, index, "toBurn");
     }
 
-    static async toggleBurnedState(actor,itemId,key,index){
+    static async toggleBurnedState(actor, itemId, key, index){
         const item = actor.items.get(itemId);
-        if(item){
-            const data = foundry.utils.getProperty(item,key)
-            if(data && index < data.length){
-                let oldBurned = data[index].burned || false;
-                let newBurned = !oldBurned;
-                foundry.utils.setProperty(data[index], 'burned', newBurned);
-                if(newBurned){
-                    foundry.utils.setProperty(data[index], 'toBurn', false); // cannot be toBurn if already burned
-                    foundry.utils.setProperty(data[index], 'selected', false); // cannot be selected if burned
-                }
-                await item.update({ [key]: data });
-                console.log("StoryTagAdapter.toggleBurnedState: toggled", {itemId,key,index,newBurned});
-            } else {
-                console.log("StoryTagAdapter.toggleBurnedState: invalid index ", {itemId,key,index});
-            }
-        } else {
-            console.log("StoryTagAdapter.toggleBurnedState: item not found");
-        }   
+        if(!item) return false;
+        const data = foundry.utils.getProperty(item, key);
+        if(!data || index < 0 || index >= data.length) return false;
+        const newBurned = !(data[index].burned || false);
+        // a burned tag can no longer be queued-to-burn or selected
+        const patch = newBurned ? { burned: true, toBurn: false, selected: false } : { burned: false };
+        return ArrayFieldAdapter.patch(item, key, index, patch);
     }
 }
