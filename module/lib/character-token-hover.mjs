@@ -1,4 +1,6 @@
 
+let ctrlHeld = false;
+const hoveredTokens = new Set();
 
 function ensureOverlay(element_id) {
     let el = document.getElementById(element_id);
@@ -28,30 +30,14 @@ function tokenToScreen(token) {
     return { x: p.x, y: p.y };
 }
 
-export async function showCharacterTokenHover(token, hovered) {
-    // we show the tooltip only for GMs
-    if (game.settings.get("mist-engine-fvtt", "disableCharacterHoverTooltip")) {
-        return;
-    }
-    if (!game.user.isGM) {
-        return;
-    }
-
-    // get the actor of the token
+async function renderOverlay(token) {
     const actor = token.actor;
     const elementID = `character-hover-${token.id}`;
     const element = ensureOverlay(elementID);
 
-    if (!hovered) {
-        element.style.display = "none";
-        return;
-    }
-
     const overlayVars = {};
-    // get themebook items from actor
     overlayVars.themebooks = actor.items.filter(i => i.type === "themebook");
     overlayVars.actor = actor;
-    // get the single backitemm, if it exists
     overlayVars.backpack = actor.items.find(i => i.type === "backpack");
     overlayVars.fellowshipThemecard = actor.sheet.getActorFellowshipThemecard();
     overlayVars.hasFellowshipThemecard = !!overlayVars.fellowshipThemecard;
@@ -61,9 +47,50 @@ export async function showCharacterTokenHover(token, hovered) {
         overlayVars
     );
     const { x, y } = tokenToScreen(token);
-
-    // I want the tooltip to be centered bellow the token, so I need to adjust the x coordinate by half of the tooltip width (300px) and also add a small offset to y to move it below the token
     element.style.left = `${Math.round(x - 300)}px`;
     element.style.top = `${Math.round(y + 60)}px`;
     element.style.display = "block";
+}
+
+function isTooltipEnabled() {
+    return !game.settings.get("mist-engine-fvtt", "disableCharacterHoverTooltip") && game.user.isGM;
+}
+
+export function initCharacterTokenHoverKeyListeners() {
+    window.addEventListener("keydown", async (e) => {
+        if (e.key !== "Control" || ctrlHeld) return;
+        ctrlHeld = true;
+        if (!isTooltipEnabled()) return;
+        for (const token of hoveredTokens) {
+            await renderOverlay(token);
+        }
+    });
+
+    window.addEventListener("keyup", (e) => {
+        if (e.key !== "Control") return;
+        ctrlHeld = false;
+        for (const token of hoveredTokens) {
+            const element = document.getElementById(`character-hover-${token.id}`);
+            if (element) element.style.display = "none";
+        }
+    });
+}
+
+export async function showCharacterTokenHover(token, hovered) {
+    if (!isTooltipEnabled()) return;
+
+    const elementID = `character-hover-${token.id}`;
+    const element = ensureOverlay(elementID);
+
+    if (!hovered) {
+        element.style.display = "none";
+        hoveredTokens.delete(token);
+        return;
+    }
+
+    hoveredTokens.add(token);
+
+    if (!ctrlHeld) return;
+
+    await renderOverlay(token);
 }

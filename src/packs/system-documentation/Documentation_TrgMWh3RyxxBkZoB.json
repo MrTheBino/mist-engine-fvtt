@@ -352,6 +352,45 @@
         "exportSource": null
       },
       "_key": "!journal.pages!TrgMWh3RyxxBkZoB.kl5naCLpcBfq9FIt"
+    },
+    {
+      "sort": 800000,
+      "name": "Hotkeys",
+      "type": "text",
+      "_id": "HotkeysDocPage01",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "format": 1,
+        "content": "<h2>Global Shortcuts</h2><table><thead><tr><th>Shortcut</th><th>Action</th><th>Who</th></tr></thead><tbody><tr><td><strong>CTRL+J</strong></td><td>Open Scene Tags App</td><td>Everyone</td></tr><tr><td><strong>CTRL+H</strong></td><td>Open How To Play</td><td>Everyone</td></tr></tbody></table><h2>Text Field Shortcuts</h2><p>Select text in any input field or textarea first, then press:</p><table><thead><tr><th>Shortcut</th><th>Result</th></tr></thead><tbody><tr><td><strong>CTRL+SHIFT+A</strong></td><td>Wrap as Tag <code>[selected text]</code></td></tr><tr><td><strong>CTRL+SHIFT+S</strong></td><td>Wrap as Status <code>[/s selected text]</code></td></tr><tr><td><strong>CTRL+SHIFT+X</strong></td><td>Wrap as Might <code>[/m selected text]</code></td></tr><tr><td><strong>CTRL+SHIFT+Y</strong></td><td>Wrap as Bold <code>[/b selected text]</code></td></tr></tbody></table><h2>Canvas</h2><table><thead><tr><th>Shortcut</th><th>Action</th><th>Who</th></tr></thead><tbody><tr><td><strong>CTRL+Hover</strong></td><td>Show character tags &amp; statuses overlay on token</td><td>GM only</td></tr></tbody></table>"
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "14.363",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "14.3.7",
+        "createdTime": 1751068800000,
+        "modifiedTime": 1751068800000,
+        "lastModifiedBy": "wgZHyBDokH67OG0A"
+      },
+      "_key": "!journal.pages!TrgMWh3RyxxBkZoB.HotkeysDocPage01"
     }
   ],
   "folder": null,

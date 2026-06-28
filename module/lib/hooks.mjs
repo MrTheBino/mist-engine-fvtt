@@ -1,8 +1,9 @@
 import { MistSceneApp } from "../apps/scene-app.mjs";
 import { HowToPlayApp } from "../apps/how-to-play-app.mjs";
-import { showCharacterTokenHover } from "./character-token-hover.mjs";
+import { showCharacterTokenHover, initCharacterTokenHoverKeyListeners } from "./character-token-hover.mjs";
 
 export function setupHooks() {
+  initCharacterTokenHoverKeyListeners();
   // prosemirror extensions ..... 
   Hooks.on("getProseMirrorMenuItems", (menu, config) => {
     const schema = menu.schema;

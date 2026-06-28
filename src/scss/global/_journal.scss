@@ -258,12 +258,23 @@
                 display: inline-block;
                 width: 105px;
                 height: 6px;
-                background-image: url(../assets/header-backline.webp);
-                background-repeat: no-repeat;
+                // Tint the line with the heading's own text color (currentColor) so the
+                // line always matches the heading; the webp now supplies only the shape.
+                background-color: currentColor;
+                mask-image: url(../assets/header-backline.webp);
+                -webkit-mask-image: url(../assets/header-backline.webp);
+                mask-repeat: no-repeat;
+                -webkit-mask-repeat: no-repeat;
                 margin-left: 10px;
             }
         }
     }
+
+    h1, h2, h3, h4, h5, h6 { letter-spacing: 0.02em; }
+    h3 { font-size: 1.3em; }
+    h4 { font-size: 1.08em; }
+    h5 { font-size: 0.98em; }
+    h6 { font-size: 0.9em; }
 
     .heading-wrapper-medival {
         position: relative;
@@ -480,6 +491,30 @@
         grid-template-columns: 1fr 1fr;
         gap: 20px;
         align-items: start;
+    }
+
+    .loot-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, auto);
+        grid-auto-flow: column;
+        column-gap: 28px;
+        row-gap: 12px;
+        align-items: start;
+
+        .loot-cell {
+            min-width: 0;
+        }
+
+        h3 {
+            text-align: center;
+            margin: 0.3em 0 0.4em;
+        }
+
+        p {
+            text-align: center;
+            margin: 0.15em 0;
+        }
     }
 
     .content-with-sidebar {
