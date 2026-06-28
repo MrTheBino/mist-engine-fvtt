@@ -1,23 +1,23 @@
-<div class="character-container" data-actor-id="{{challenge.id}}">
+<div class="character-container" data-actor-id="{{challenge.id}}" data-token-id="{{challenge.tokenId}}">
     <div class="npc-subtitle-container-c">
-        <div class="npc-subtitle-text pointer" data-action="clickOpenCharacterSheet" data-id="{{challenge.id}}"><img src="{{challenge.img}}" class="actor-img">{{challenge.name}}</div>
+        <div class="npc-subtitle-text pointer" data-action="clickOpenCharacterSheet" data-id="{{challenge.id}}" data-token-id="{{challenge.tokenId}}"><img src="{{challenge.img}}" class="actor-img">{{challenge.name}}</div>
     </div>
     {{#if challenge.hasFloatingTagsAndStatuses}}
     <div class="floating-tags-and-status-entries">
         {{#each challenge.floatingTagsAndStatuses as |fts ftsIndex|}}
-        <div class="floating-tag-and-status-entry flexcol" data-might="{{this.might}}" data-index="{{@index}}" data-actor-id="{{../challenge.id}}" data-is-status="{{fts.isStatus}}">
+        <div class="floating-tag-and-status-entry flexcol" data-might="{{this.might}}" data-index="{{@index}}" data-actor-id="{{../challenge.id}}" data-token-id="{{../challenge.tokenId}}" data-is-status="{{fts.isStatus}}">
             <div class="flexrow">
 
                 <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}"
-                    data-index="{{ftsIndex}}" data-actor-id="{{../challenge.id}}"
+                    data-index="{{ftsIndex}}" data-actor-id="{{../challenge.id}}" data-token-id="{{../challenge.tokenId}}"
                     title="right click to toggle between tag or state">
-                    <i class="fa-solid {{#if this.positive}}fa-thumbs-up{{else}}fa-thumbs-down{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-source="litm-npc" data-index="{{@index}}" data-actor-id="{{../challenge.id}}" title="toggle between positive and negative"></i>
-                     <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-index="{{@index}}" data-source="litm-npc" data-actor-id="{{../challenge.id}}">
+                    <i class="fa-solid {{#if this.positive}}fa-thumbs-up{{else}}fa-thumbs-down{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-source="litm-npc" data-index="{{@index}}" data-actor-id="{{../challenge.id}}" data-token-id="{{../challenge.tokenId}}" title="toggle between positive and negative"></i>
+                     <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-index="{{@index}}" data-source="litm-npc" data-actor-id="{{../challenge.id}}" data-token-id="{{../challenge.tokenId}}">
                         {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
                         {{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}
                     </span>
-                    <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{@index}}" data-confirm="1" title="delete this tag/status" data-index="{{@index}}" data-source="litm-npc" data-actor-id="{{../challenge.id}}"></i>
-                    <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{@index}}" title="toggle between tag and status" data-index="{{@index}}" data-source="litm-npc" data-actor-id="{{../challenge.id}}"></i>
+                    <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{@index}}" data-confirm="1" title="delete this tag/status" data-index="{{@index}}" data-source="litm-npc" data-actor-id="{{../challenge.id}}" data-token-id="{{../challenge.tokenId}}"></i>
+                    <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{@index}}" title="toggle between tag and status" data-index="{{@index}}" data-source="litm-npc" data-actor-id="{{../challenge.id}}" data-token-id="{{../challenge.tokenId}}"></i>
                 </div>
 
             </div>
@@ -26,7 +26,7 @@
             <div class="fts-markings-container">
                 {{#each fts.markings as |marking index|}}
                 <span class="fts-input-marking" data-marking-index="{{index}}"
-                    data-action="actorToggleFloatingTagOrStatusMarking" data-actor-id="{{../../challenge.id}}"
+                    data-action="actorToggleFloatingTagOrStatusMarking" data-actor-id="{{../../challenge.id}}" data-token-id="{{../../challenge.tokenId}}"
                     data-index="{{ftsIndex}}">
                     <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne
                         index}}</i>

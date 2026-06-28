@@ -93,7 +93,28 @@
     flex-grow: 0.25;
     padding-bottom: 8px;
 
-    .themebook-icon-line {  
+    // Drag-and-drop reordering / tab-move of cards in the Main/Other grid.
+    &.drag-over {
+        outline: 2px dashed $c-brown;
+        outline-offset: -2px;
+        border-radius: 4px;
+    }
+
+    .card-drag-handle {
+        cursor: grab;
+        color: rgba($c-icon-brown, 0.3);
+        margin-right: 4px;
+        font-size: 0.8em;
+        vertical-align: middle;
+        transition: color 0.15s ease;
+
+        &:active { cursor: grabbing; }
+        &:hover { color: $c-icon-brown; }
+    }
+
+    &:hover .card-drag-handle { color: rgba($c-icon-brown, 0.7); }
+
+    .themebook-icon-line {
         margin: 2px 0;
         color: black;
     }
@@ -124,6 +145,14 @@
             -webkit-font-smoothing: antialiased;
         }
     }
+}
+
+// A Main/Other tab button acting as a drop target while dragging a card.
+.sheet-tabs a[data-action="tab"].drag-over {
+    background-color: rgba($c-brown, 0.25);
+    outline: 2px dashed $c-brown;
+    outline-offset: -2px;
+    border-radius: 4px;
 }
 
 .themebook-style {

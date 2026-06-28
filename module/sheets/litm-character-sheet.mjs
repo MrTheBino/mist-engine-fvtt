@@ -81,7 +81,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
     constructor(options = {}) {
         super(options)
-        this.activateSocketListeners();
+        this.activateRefreshHooks();
         this.loadFellowshipThemecard();
     }
 
@@ -117,15 +117,11 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         }
     }
 
-    activateSocketListeners() {
-        game.socket.on("system.mist-engine-fvtt", (msg) => {
-            console.log("socket message received in character sheet: ", msg);
-            if (msg?.type === "hook" && msg.hook == "floatingTagOrStatusUpdated" && msg.data?.actorId === this.actor.id) {
-                this.render(true, { focus: true });
-            }
-        });
-
-        // Rerender on the fellowship so that you can see which tags get used
+    activateRefreshHooks() {
+        // The character sheet auto-re-renders on its own actor's updates; the
+        // scene tracker / dice roll app are refreshed by the central hooks in
+        // lib/hooks.mjs. The only cross-document case left is re-rendering when
+        // the *linked* fellowship themecard (a separate actor) changes.
         this._fellowshipUpdateHookId = Hooks.on("updateActor", (actor) => {
             if (this.actorFellowshipThemecard?.id === actor.id && this.rendered) {
                 this.render();
@@ -173,7 +169,76 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
         foundry.utils.mergeObject(context, items);
 
+        // Build the ordered card lists for the Main/Other tab grids.
+        const cards = this._orderedCardEntries();
+        const toDescriptor = (c) => ({ key: c.key, type: c.type, themebook: c.themebook });
+        context.mainCards = cards.filter(c => c.tab === "main").map(toDescriptor);
+        context.otherCards = cards.filter(c => c.tab === "other").map(toDescriptor);
+
         return context;
+    }
+
+    /**
+     * The stable keys for the four singleton cards, in default display order
+     * (after the themebooks). `key` doubles as the descriptor `type`.
+     * @type {string[]}
+     */
+    static SINGLETON_CARD_KEYS = ["quintessences", "fellowships", "backpack", "fellowship-themecard"];
+
+    /**
+     * Reconcile the persisted `system.cardLayout` against the live set of cards
+     * (themebook items + the four singletons) and return an ordered list of card
+     * entries: `{ key, type, tab, themebook? }`.
+     *
+     * Self-healing: keeps saved order/tab for still-valid keys, appends any
+     * missing cards (themebooks default to their `tabCategory`, singletons to
+     * "main") in a stable default order, and drops entries for deleted items.
+     * Rendering therefore never depends on the layout being complete; the first
+     * drag persists a fully-normalized layout.
+     * @returns {Array<{key:string,type:string,tab:string,themebook?:Item}>}
+     */
+    _orderedCardEntries() {
+        const themebookItems = this.actor.items.filter(i => i.type === "themebook");
+
+        // Expected cards keyed by their stable key.
+        const expected = new Map();
+        for (const t of themebookItems) {
+            expected.set(`themebook:${t.id}`, {
+                key: `themebook:${t.id}`,
+                type: "themebook",
+                defaultTab: t.system.tabCategory === "other" ? "other" : "main",
+                themebook: t,
+            });
+        }
+        for (const key of MistEngineLegendInTheMistCharacterSheet.SINGLETON_CARD_KEYS) {
+            expected.set(key, { key, type: key, defaultTab: "main" });
+        }
+
+        const result = [];
+        const used = new Set();
+
+        // 1) Honour the persisted layout order/tab for keys that still exist.
+        for (const entry of (this.actor.system.cardLayout ?? [])) {
+            const exp = expected.get(entry.key);
+            if (!exp || used.has(entry.key)) continue;
+            used.add(entry.key);
+            result.push({ ...exp, tab: entry.tab === "other" ? "other" : "main" });
+        }
+
+        // 2) Append any not-yet-placed cards in a stable default order:
+        //    themebooks first (item order), then the singletons.
+        const defaultOrder = [
+            ...themebookItems.map(t => `themebook:${t.id}`),
+            ...MistEngineLegendInTheMistCharacterSheet.SINGLETON_CARD_KEYS,
+        ];
+        for (const key of defaultOrder) {
+            if (used.has(key)) continue;
+            const exp = expected.get(key);
+            used.add(key);
+            result.push({ ...exp, tab: exp.defaultTab });
+        }
+
+        return result;
     }
 
     getActorFellowshipThemecard() {
@@ -329,7 +394,11 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             }
         }
 
-        return { themebooks: themebooks, backpack: backpack, quintessences: quintessences, themebooksEmpty: themebooks.length === 0, themebooksOther: themebooksOther, themebooksOtherEmpty: themebooksOther.length === 0 };
+        // The empty-state / "open themekit selection" prompt is about the
+        // character having NO themebooks at all (placement is driven by
+        // cardLayout now, not the per-themebook tabCategory).
+        const totalThemebooks = themebooks.length + themebooksOther.length;
+        return { themebooks: themebooks, backpack: backpack, quintessences: quintessences, themebooksEmpty: totalThemebooks === 0, themebooksOther: themebooksOther, themebooksOtherEmpty: themebooksOther.length === 0 };
     }
 
     getBackpack() {
@@ -770,8 +839,31 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     }
 
     /** @override */
+    _onDragOver(event) {
+        // Highlight the card the dragged card would be inserted before, or the
+        // Main/Other tab button it would be moved to.
+        for (const el of this.element.querySelectorAll(".drag-over")) {
+            el.classList.remove("drag-over");
+        }
+        if (event.target.closest(".card-grid")) {
+            event.target.closest(".themebook-container")?.classList.add("drag-over");
+        } else {
+            const tabBtn = event.target.closest('a[data-action="tab"]');
+            if (tabBtn?.dataset.tab === "character" || tabBtn?.dataset.tab === "other") {
+                tabBtn.classList.add("drag-over");
+            }
+        }
+        return super._onDragOver?.(event);
+    }
+
+    /** @override */
     async _onDrop(event) {
         const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
+
+        // Reorder / move a card within the Main/Other tab grid.
+        if (data.dragType === "card" && data.cardKey) {
+            return this._onDropCard(event, data.cardKey);
+        }
 
         if (data.type === "Item") {
             const item = await fromUuid(data.uuid);
@@ -785,37 +877,92 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         return super._onDrop(event);
     }
 
+    /**
+     * Resolve a card drop into a new persisted `system.cardLayout`.
+     * Destination tab comes from the grid wrapper under the cursor; the dragged
+     * card is inserted before the card it was dropped on (or appended when
+     * dropped on empty grid space).
+     * @param {DragEvent} event
+     * @param {string} cardKey  The dragged card's stable key.
+     */
+    async _onDropCard(event, cardKey) {
+        // Destination tab: a card grid under the cursor, or a Main/Other tab
+        // navigation button (so a card can be moved to the hidden tab).
+        let destTab = null;
+        // Target the grid wrapper specifically via `.card-grid` — themebook
+        // cards also carry a (now-stale) `data-tab-category`, so a bare
+        // `[data-tab-category]` match would read the wrong tab when dropping
+        // onto a themebook.
+        const grid = event.target.closest(".card-grid");
+        if (grid) {
+            destTab = grid.dataset.tabCategory === "other" ? "other" : "main";
+        } else {
+            const tabBtn = event.target.closest('a[data-action="tab"]');
+            if (tabBtn?.dataset.tab === "character") destTab = "main";
+            else if (tabBtn?.dataset.tab === "other") destTab = "other";
+        }
+        if (!destTab) return; // dropped somewhere irrelevant → ignore
+
+        const targetEl = event.target.closest(".themebook-container[data-card-key]");
+        const targetKey = targetEl?.dataset.cardKey || null;
+        if (targetKey === cardKey) return; // dropped onto itself → no-op
+
+        // Start from the reconciled, fully-materialized layout (prunes stale keys).
+        const entries = this._orderedCardEntries().map(c => ({ key: c.key, tab: c.tab }));
+        const dragged = entries.find(e => e.key === cardKey);
+        if (!dragged) return;
+
+        const without = entries.filter(e => e.key !== cardKey);
+        dragged.tab = destTab;
+
+        let insertAt = without.length;
+        if (targetKey) {
+            const idx = without.findIndex(e => e.key === targetKey);
+            if (idx !== -1) insertAt = idx;
+        }
+        without.splice(insertAt, 0, dragged);
+
+        this._saveScrollPositions();
+        await this.actor.update({ "system.cardLayout": without });
+    }
+
+    /**
+     * The tab a card currently lives in, per the reconciled layout.
+     * @param {string} cardKey
+     * @returns {"main"|"other"}
+     */
+    _getCardTab(cardKey) {
+        const entry = this._orderedCardEntries().find(c => c.key === cardKey);
+        return entry ? entry.tab : "main";
+    }
+
+    /**
+     * Move a card to a tab (used by the right-click menu), keeping its position.
+     * @param {string} cardKey
+     * @param {"main"|"other"} tab
+     */
+    async _setCardTab(cardKey, tab) {
+        const entries = this._orderedCardEntries().map(c => ({ key: c.key, tab: c.tab }));
+        const entry = entries.find(e => e.key === cardKey);
+        if (!entry || entry.tab === tab) return;
+        entry.tab = tab;
+        this._saveScrollPositions();
+        await this.actor.update({ "system.cardLayout": entries });
+    }
+
     enableMoveThemebookContextMenu() {
         this._createContextMenu(() => [
             {
                 name: "Move to Other Tab",
                 icon: '<i class="fa-solid fa-right-left"></i>',
-                condition: li => {
-                    const id = li.dataset.id;
-                    const themebook = this.actor.items.get(id);
-                    return themebook?.system?.tabCategory === "main";
-                },
-                callback: li => {
-                    const id = li.dataset.id;
-                    const themebook = this.actor.items.get(id);
-                    if (!themebook) return;
-                    themebook.update({ "system.tabCategory": "other" });
-                }
+                condition: li => this._getCardTab("themebook:" + li.dataset.id) === "main",
+                callback: li => this._setCardTab("themebook:" + li.dataset.id, "other")
             },
             {
                 name: "Move to Main Tab",
                 icon: '<i class="fa-solid fa-right-left"></i>',
-                condition: li => {
-                    const id = li.dataset.id;
-                    const themebook = this.actor.items.get(id);
-                    return themebook?.system?.tabCategory === "other";
-                },
-                callback: li => {
-                    const id = li.dataset.id;
-                    const themebook = this.actor.items.get(id);
-                    if (!themebook) return;
-                    themebook.update({ "system.tabCategory": "main" });
-                }
+                condition: li => this._getCardTab("themebook:" + li.dataset.id) === "other",
+                callback: li => this._setCardTab("themebook:" + li.dataset.id, "main")
             }
         ], ".themebook-item", {
             fixed: true

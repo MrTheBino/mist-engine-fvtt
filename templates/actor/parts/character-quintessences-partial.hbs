@@ -1,6 +1,6 @@
-<div class="themebook-container container-themebook-with-border" data-id="{{id}}">
+<div class="themebook-container container-themebook-with-border" data-id="{{id}}" data-card-key="{{cardKey}}">
     <div class="themebook-style litm-quintessence flexcol">
-        <h2 class="theme-name">{{localize 'MIST_ENGINE.THEMEBOOKS.Quintessences'}}
+        <h2 class="theme-name"><i class="card-drag-handle fa-solid fa-grip-vertical" draggable="true" data-drag-type="card" data-card-key="{{cardKey}}" title="{{localize 'MIST_ENGINE.LABELS.DragCardHint'}}"></i>{{localize 'MIST_ENGINE.THEMEBOOKS.Quintessences'}}
 
             {{#if editMode}}
             <a data-action="createItem" data-type="quintessence" >

@@ -2367,6 +2367,28 @@ article.cc-enriched section.journal-entry-content {
   flex-grow: 0.25;
   padding-bottom: 8px;
 }
+.mist-engine .themebook-container.drag-over {
+  outline: 2px dashed #724a32;
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+.mist-engine .themebook-container .card-drag-handle {
+  cursor: grab;
+  color: rgba(115, 74, 51, 0.3);
+  margin-right: 4px;
+  font-size: 0.8em;
+  vertical-align: middle;
+  transition: color 0.15s ease;
+}
+.mist-engine .themebook-container .card-drag-handle:active {
+  cursor: grabbing;
+}
+.mist-engine .themebook-container .card-drag-handle:hover {
+  color: #734a33;
+}
+.mist-engine .themebook-container:hover .card-drag-handle {
+  color: rgba(115, 74, 51, 0.7);
+}
 .mist-engine .themebook-container .themebook-icon-line {
   margin: 2px 0;
   color: black;
@@ -2393,6 +2415,12 @@ article.cc-enriched section.journal-entry-content {
   padding: 2px 10px;
   color: rgb(78.5487804878, 50.987804878, 34.4512195122);
   -webkit-font-smoothing: antialiased;
+}
+.mist-engine .sheet-tabs a[data-action=tab].drag-over {
+  background-color: rgba(114, 74, 50, 0.25);
+  outline: 2px dashed #724a32;
+  outline-offset: -2px;
+  border-radius: 4px;
 }
 .mist-engine .themebook-style {
   background-repeat: no-repeat;
@@ -3932,5 +3960,3 @@ article.cc-enriched section.journal-entry-content {
   height: 100%;
   padding-right: 8px;
 }
-
-/*# sourceMappingURL=mist-engine-fvtt.css.map */

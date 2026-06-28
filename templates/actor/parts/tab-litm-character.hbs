@@ -3,16 +3,19 @@
     <div class="character-sheet-divider flexrow">
         <div class="right-side {{#if system.editMode}}edit-mode{{/if}}">
             <div class="litm-character-themebooks-container">
-                {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-themebooks.hbs' themebooks=themebooks tidyTags=tidyTags}}
-                <div class="themebooks-container grid grid-4col grid-themebook-container {{#if system.editMode}}edit-mode{{/if}}">
-                    {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-quintessences-partial.hbs'
-                    editMode=system.editMode}}
-                    {{> 'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-partial.hbs'
-                    editMode=system.editMode}}
-                    {{> 'systems/mist-engine-fvtt/templates/actor/parts/backpack-partial.hbs' backpack=backpack
-                    editMode=system.editMode tidyTags=tidyTags}}
-                    {{> 'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-themebook-partial.hbs'
-                    editMode=system.editMode}}
+                <div class="themebooks-container card-grid {{#unless system.editMode}}themebooks-container-stylized{{/unless}} grid grid-4col grid-themebook-container {{#if system.editMode}}edit-mode{{/if}}"
+                     data-tab-category="main">
+                    {{#if themebooksEmpty}}
+                    <div class="themebook-container">
+                        <div class="themebook-style flexcol">
+                            <div class="empty-message">{{localize "MIST_ENGINE.HELP.NoThemebooksInCharacter"}}</div>
+                            <div><button class="themekit-button" data-action="openThemekitSelection">{{localize "MIST_ENGINE.THEMEKITS.OpenThemekitSelection"}}</button></div>
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{#each mainCards as |card|}}
+                    {{> 'systems/mist-engine-fvtt/templates/actor/parts/card-dispatch.hbs' card=card}}
+                    {{/each}}
                 </div>
             </div>
         </div>

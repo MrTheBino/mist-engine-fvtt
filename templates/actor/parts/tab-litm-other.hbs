@@ -3,7 +3,12 @@
     <div class="character-sheet-divider flexrow">
         <div class="right-side {{#if system.editMode}}edit-mode{{/if}}">
             <div class="litm-character-themebooks-container">
-                {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-themebooks.hbs' themebooks=themebooksOther}}
+                <div class="themebooks-container card-grid {{#unless system.editMode}}themebooks-container-stylized{{/unless}} grid grid-4col grid-themebook-container {{#if system.editMode}}edit-mode{{/if}}"
+                     data-tab-category="other">
+                    {{#each otherCards as |card|}}
+                    {{> 'systems/mist-engine-fvtt/templates/actor/parts/card-dispatch.hbs' card=card}}
+                    {{/each}}
+                </div>
             </div>
         </div>
     </div>

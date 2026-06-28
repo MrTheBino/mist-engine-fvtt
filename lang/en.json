@@ -97,6 +97,7 @@
     },
     "LABELS": {
       "Options": "Options",
+      "DragCardHint": "Drag to reorder or move between tabs",
       "AddPowertag": "Powertags",
       "AddWeaknesstag": "Weaknesses",
       "Other": "Other",

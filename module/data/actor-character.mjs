@@ -22,6 +22,21 @@ export default class MistEngineCharacter extends MistEngineActorBase {
       }),
       { min: 0, required: false }
     )
+
+    // Ordered layout of the cards shown in the Main/Other tab grid.
+    // Each entry references a card by a stable key and the tab it lives in.
+    // Array order (within a tab) is the display order. Self-healed on render,
+    // so an empty/partial layout still renders correctly.
+    //   key: "themebook:<itemId>" | "backpack" | "quintessences" | "fellowships" | "fellowship-themecard"
+    //   tab: "main" | "other"
+    schema.cardLayout = new fields.ArrayField(
+      new fields.SchemaField({
+        key: new fields.StringField({ required: true, blank: false }),
+        tab: new fields.StringField({ required: true, blank: false, initial: "main" }),
+      }),
+      { required: false, initial: [] }
+    )
+
     return schema;
   }
 }

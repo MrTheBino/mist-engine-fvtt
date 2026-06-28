@@ -93,6 +93,10 @@ export function registerHandlebarHelpers() {
     return str.toLowerCase();
   });
 
+  Handlebars.registerHelper("eq", function (a, b) {
+    return a === b;
+  });
+
   Handlebars.registerHelper("tagFilled", function (str) {
     if (str && str.trim().length > 0) {
       return true;

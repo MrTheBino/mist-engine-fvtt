@@ -1,7 +1,7 @@
-<div class="themebook-container container-themebook-with-border" data-id="{{id}}" data-tab-category="{{themebook.system.tabCategory}}">
+<div class="themebook-container container-themebook-with-border" data-id="{{id}}" data-tab-category="{{themebook.system.tabCategory}}" data-card-key="{{cardKey}}">
     <div class="themebook-style {{themebook.system.color}} flexcol">
         <div class="themebook-item" data-id="{{id}}" data-tab-category="{{themebook.system.tabCategory}}">
-        <h2 class="theme-name">{{themebook.name}}
+        <h2 class="theme-name"><i class="card-drag-handle fa-solid fa-grip-vertical" draggable="true" data-drag-type="card" data-card-key="{{cardKey}}" title="{{localize 'MIST_ENGINE.LABELS.DragCardHint'}}"></i>{{themebook.name}}
             {{#if editMode}}
             <a data-action="editItem" data-item-id='{{themebook._id}}'>
                 <i class='fas fa-edit'></i>

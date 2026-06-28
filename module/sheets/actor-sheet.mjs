@@ -751,22 +751,13 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         return super._onDrop?.(event);
     }
 
-    async sendFloatableTagOrStatusUpdate() {
-        game.socket.emit("system.mist-engine-fvtt", {
-            type: "hook",
-            hook: "floatableTagOrStatusUpdate",
-            data: {
-                actorId: this.actor.id,
-                actorType: this.actor.type
-            }
-        });
-
-        // socket events are not getting send to the sender itself, so we need to update our own scene app too
-        const instance = MistSceneApp.getInstance();
-        if (instance.rendered) { // only if shown
-            instance.render(true, { focus: true });
-        }
-    }
+    /**
+     * Retained no-op: the actor.update performed before this call fires the
+     * central `updateActor` hook (lib/hooks.mjs) on every client, refreshing
+     * the scene tracker / dice roll app, while this sheet auto-re-renders on
+     * its own document update. No manual socket message is needed.
+     */
+    async sendFloatableTagOrStatusUpdate() {}
 
     handleInputShortCutsForGM(event) {
         const input = event.currentTarget;

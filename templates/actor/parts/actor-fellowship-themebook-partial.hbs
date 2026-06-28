@@ -1,8 +1,8 @@
 <div class="themebook-container container-themebook-with-border {{#unless editMode}}fellowship-themebook-stylized{{/unless}}"
-    data-id="{{id}}">
+    data-id="{{id}}" data-card-key="{{cardKey}}">
     {{#if fellowshipThemecard}}
     <div class="themebook-style litm-fellowship-themecard flexcol">
-        <h2 class="theme-name">
+        <h2 class="theme-name"><i class="card-drag-handle fa-solid fa-grip-vertical" draggable="true" data-drag-type="card" data-card-key="{{cardKey}}" title="{{localize 'MIST_ENGINE.LABELS.DragCardHint'}}"></i>
             {{#if (notEmpty fellowshipThemecardName)}}
             {{fellowshipThemecardName}}
             {{#if editMode}}
@@ -75,7 +75,7 @@
     </div>
     {{else}}
     <div class="themebook-style litm-fellowship-themecard flexcol">
-        <h2 class="theme-name">{{localize 'MIST_ENGINE.THEMEBOOKS.Fellowship'}}
+        <h2 class="theme-name"><i class="card-drag-handle fa-solid fa-grip-vertical" draggable="true" data-drag-type="card" data-card-key="{{cardKey}}" title="{{localize 'MIST_ENGINE.LABELS.DragCardHint'}}"></i>{{localize 'MIST_ENGINE.THEMEBOOKS.Fellowship'}}
         </h2>
         <div class="powertags-container">
             <div class="empty-message">

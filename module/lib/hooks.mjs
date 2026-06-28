@@ -1,4 +1,5 @@
 import { MistSceneApp } from "../apps/scene-app.mjs";
+import { DiceRollApp } from "../apps/dice-roll-app.mjs";
 import { HowToPlayApp } from "../apps/how-to-play-app.mjs";
 import { showCharacterTokenHover, initCharacterTokenHoverKeyListeners } from "./character-token-hover.mjs";
 
@@ -347,12 +348,30 @@ export function setupHooks() {
     html.querySelector('select[name="type"] option[value="scene-data"]')?.remove();
   });
 
-  Hooks.on("mistengine:sceneAppUpdated", (_data) => {
-    const instance = MistSceneApp.getInstance();
-    console.log("Received sceneAppUpdated , app rendered: ", instance.rendered);
-    if (instance.rendered && !instance.minimized) {
-      instance.render(true);
-    }
+  // Central live-refresh for the aggregator apps (scene tracker + dice roll).
+  // Foundry already broadcasts document updates to every client (including the
+  // initiator) and fires these hooks everywhere, so this replaces the old
+  // manual `game.socket` refresh messages. Each document's own sheet
+  // auto-re-renders on update; only these cross-document aggregators need a
+  // nudge. Uses the cached singletons so it never spawns a closed app.
+  const refreshSceneTrackers = () => {
+    const sceneApp = MistSceneApp.instance;
+    if (sceneApp?.rendered && !sceneApp.minimized) sceneApp.render(true);
+    if (DiceRollApp.instance) DiceRollApp.instance.updateTagsAndStatuses(true);
+  };
+
+  Hooks.on("updateActor", (actor) => {
+    // Only actors shown in the active scene affect the trackers.
+    const inScene = game.scenes?.active?.tokens?.contents?.some(t => t.actor?.id === actor.id);
+    if (inScene) refreshSceneTrackers();
+  });
+
+  // Item types whose data feeds the scene tracker / dice roll app:
+  // scene-data (scene tags + roll mods), themebook/backpack (power/story tags),
+  // shortchallenge (challenge tags).
+  const TRACKED_ITEM_TYPES = new Set(["scene-data", "themebook", "backpack", "shortchallenge"]);
+  Hooks.on("updateItem", (item) => {
+    if (TRACKED_ITEM_TYPES.has(item.type)) refreshSceneTrackers();
   });
 
   Hooks.on("canvasReady", (canvas) => {

@@ -1,0 +1,29 @@
+{{!--
+    Renders a single card in the Main/Other tab grid based on its descriptor.
+    `card` = { key, type, themebook? }. Singleton cards pull their data from
+    @root so they render identically to the pre-unified-grid templates.
+--}}
+{{#if (eq card.type "themebook")}}
+    {{> 'systems/mist-engine-fvtt/templates/actor/parts/themebook-partial.hbs'
+        themebook=card.themebook id=card.themebook._id
+        editMode=@root.system.editMode tidyTags=@root.tidyTags cardKey=card.key}}
+{{/if}}
+{{#if (eq card.type "quintessences")}}
+    {{> 'systems/mist-engine-fvtt/templates/actor/parts/character-quintessences-partial.hbs'
+        system=@root.system quintessences=@root.quintessences
+        editMode=@root.system.editMode cardKey=card.key}}
+{{/if}}
+{{#if (eq card.type "fellowships")}}
+    {{> 'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-partial.hbs'
+        system=@root.system editMode=@root.system.editMode cardKey=card.key}}
+{{/if}}
+{{#if (eq card.type "backpack")}}
+    {{> 'systems/mist-engine-fvtt/templates/actor/parts/backpack-partial.hbs'
+        backpack=@root.backpack system=@root.system
+        editMode=@root.system.editMode tidyTags=@root.tidyTags cardKey=card.key}}
+{{/if}}
+{{#if (eq card.type "fellowship-themecard")}}
+    {{> 'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-themebook-partial.hbs'
+        fellowshipThemecard=@root.fellowshipThemecard fellowshipThemecardName=@root.fellowshipThemecardName
+        system=@root.system editMode=@root.system.editMode tidyTags=@root.tidyTags cardKey=card.key}}
+{{/if}}

@@ -11,8 +11,6 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.currentSceneName = game.scenes.active ? game.scenes.active.name : null;
         this.findOrCreateSceneDataItem();
 
-        this.activateSocketListeners();
-
         MistSceneApp.instance = this;
     }
 
@@ -117,7 +115,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
                         this.sendUpdateHookEvent();
                         return;
                     }else{
-                        const actor = this.getCorrectActor(li.dataset.actorId);
+                        const actor = this.resolveTargetActor(li);
                         await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(actor, index, "adventure");
                         await actor.sheet.sendFloatableTagOrStatusUpdate();
                     }
@@ -140,7 +138,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
                         this.sendUpdateHookEvent();
                         return;
                     }else{
-                        const actor = this.getCorrectActor(li.dataset.actorId);
+                        const actor = this.resolveTargetActor(li);
                         await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(actor, index, "greatness");
                         await actor.sheet.sendFloatableTagOrStatusUpdate();
                     }
@@ -163,7 +161,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
                         this.sendUpdateHookEvent();
                         return;
                     }else{
-                        const actor = this.getCorrectActor(li.dataset.actorId);
+                        const actor = this.resolveTargetActor(li);
                         await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(actor, index, "origin");
                         await actor.sheet.sendFloatableTagOrStatusUpdate();
                     }
@@ -188,7 +186,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
                         this.sendUpdateHookEvent();
                         return;
                     }else{
-                        const actor = this.getCorrectActor(li.dataset.actorId);
+                        const actor = this.resolveTargetActor(li);
                         await FloatingTagAndStatusAdapter.handleTagStatusMightToggle(actor, index);
                         await actor.sheet.sendFloatableTagOrStatusUpdate();
                     }
@@ -236,54 +234,18 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return super._onDrop?.(event);
     }
 
-    activateSocketListeners() {
-        game.socket.on("system.mist-engine-fvtt", (msg) => {
-            const instance = MistSceneApp.getInstance();
-            if (msg?.type === "hook" && msg.hook == "sceneAppUpdated") {
-                if (instance.rendered && !instance.minimized) {
-                    instance.render(true);
-                }
-                DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
-            }
-            else if (msg?.type === "hook" && msg.hook == "floatableTagOrStatusUpdate") {
-                if (instance.rendered && !instance.minimized) {
-                    instance.render(true);
-                }
-                DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
-            }
-        });
-
-        // ToDo: remove all the emit events and refactor all code to use hook.on
-        Hooks.on("updateActor", (actor, changes, options, userId) => {
-            const scene = game.scenes.active;
-            if (!scene) return;
-            const isInScene = scene.tokens.contents.some(t => t.actor?.id === actor.id);
-            if (!isInScene) return;
-            const instance = MistSceneApp.getInstance();
-            if (instance.rendered && !instance.minimized) {
-                instance.render(true);
-            }
-            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
-        });
-    }
-
     /**
-     * Deprecated function to send an update event for the scene app, which can be used to trigger updates in other apps like the dice roll app. Consider using a more specific hook for better performance and to avoid unnecessary renders in other apps.
-     * @param {boolean} forceRender - Whether to force a render of the scene app.
+     * Re-render THIS client's scene tracker. The cross-client socket broadcast
+     * was removed — other clients now refresh via the central `updateActor` /
+     * `updateItem` / token hooks in lib/hooks.mjs. This local render is still
+     * needed for changes that are NOT a document update those hooks catch
+     * (e.g. adding/removing a token, switching scenes via sceneUpdatedHook /
+     * sceneChangedHook).
      */
     sendUpdateHookEvent(forceRender = true) {
-        console.log("Deprecated: sendUpdateHookEvent - consider using a more specific hook for better performance and to avoid unnecessary renders in other apps");
         if (this.rendered && !this.minimized) {
             this.render(true);
         }
-
-        //if (game.user.isGM) {
-        game.socket.emit("system.mist-engine-fvtt", {
-            type: "hook",
-            hook: "sceneAppUpdated",
-            data: {}
-        });
-        //}
     }
 
     async _prepareContext(options) {
@@ -306,43 +268,55 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         let context = {}
         const scene = game.scenes.active;
         const tokens = scene.tokens.contents;
-        const actors = tokens.map(t => t.actor).filter(a => a);
-        const uniqueActors = [...new Set(actors)];
-
         context.userIsGM = game.user.isGM;
-        uniqueActors.forEach(actor => {
+
+        // Characters: one entry per unique character actor (player characters
+        // are linked, so duplicate tokens share the same actor).
+        const characterActors = [...new Set(tokens.map(t => t.actor).filter(a => a && a.type === "litm-character"))];
+        characterActors.forEach(actor => {
             let selectedTags = DiceRollApp.getPreparedTagsAndStatusesForRoll(actor);
             let floatingTagAndStatuses = actor.system.floatingTagsAndStatuses || [];
-            if (actor.type == "litm-character") {
-                if (!context.characters) context.characters = [];
-                context.characters.push({
-                    id: actor.id,
-                    name: actor.name,
-                    img: actor.img,
-                    floatingTagsAndStatuses: floatingTagAndStatuses,
-                    hasFloatingTagsAndStatuses: floatingTagAndStatuses.length > 0,
-                    selectedTagsForRoll: selectedTags,
-                    hasSelectedTagsForRoll: selectedTags.length > 0
-                });
-            }
-            if (actor.type == "litm-npc") {
-                if (!context.challenges) context.challenges = [];
-                context.challenges.push({
-                    id: actor.id,
-                    name: actor.name,
-                    img: actor.img,
-                    floatingTagsAndStatuses: floatingTagAndStatuses,
-                    hasFloatingTagsAndStatuses: floatingTagAndStatuses.length > 0
-                });
-            }
+            if (!context.characters) context.characters = [];
+            context.characters.push({
+                id: actor.id,
+                name: actor.name,
+                img: actor.img,
+                floatingTagsAndStatuses: floatingTagAndStatuses,
+                hasFloatingTagsAndStatuses: floatingTagAndStatuses.length > 0,
+                selectedTagsForRoll: selectedTags,
+                hasSelectedTagsForRoll: selectedTags.length > 0
+            });
         });
+
+        // Challenges (NPCs): one entry PER TOKEN, so multiple instances of the
+        // same challenge stay independent. Each unlinked token has its own actor
+        // delta, and its per-scene-unique token id is the real identity (the
+        // base actor id is shared across duplicates — see issue #88). Linked
+        // duplicates share a single actor object, so those collapse to one entry.
+        const seenNpcActors = new Set();
+        tokens.forEach(token => {
+            const actor = token.actor;
+            if (!actor || actor.type !== "litm-npc") return;
+            if (seenNpcActors.has(actor)) return; // linked duplicate → already added
+            seenNpcActors.add(actor);
+            let floatingTagAndStatuses = actor.system.floatingTagsAndStatuses || [];
+            if (!context.challenges) context.challenges = [];
+            context.challenges.push({
+                id: actor.id,
+                tokenId: token.id,
+                name: token.name || actor.name,
+                img: actor.img,
+                floatingTagsAndStatuses: floatingTagAndStatuses,
+                hasFloatingTagsAndStatuses: floatingTagAndStatuses.length > 0
+            });
+        });
+
         return context;
     }
 
     static async #handleClickOpenCharacterSheet(event, target) {
         event.preventDefault();
-        const actorId = target.dataset.id;
-        const actor = this.getCorrectActor(actorId);
+        const actor = this.resolveTargetActor(target);
         if (actor) {
             actor.sheet.render(true);
         }
@@ -357,7 +331,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": data });
 
         this.sendUpdateHookEvent();
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
     }
 
     static async #handleRemoveSceneAppRollMod(event, target) {
@@ -369,21 +343,38 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": data });
 
         this.sendUpdateHookEvent();
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
     }
 
     async handleActorFtTagStatusToggle(event) {
         event.preventDefault();
         const index = event.currentTarget.dataset.index;
-        const actor = this.getCorrectActor(event.currentTarget.dataset.actorId);
+        const actor = this.resolveTargetActor(event.currentTarget);
 
         await FloatingTagAndStatusAdapter.handleTagStatusToggle(actor, index);
         this.sendFloatableTagOrStatusUpdateForActor(actor);
 
     }
 
+    /**
+     * Resolve the actor a clicked scene-app control refers to. Challenge
+     * controls carry `data-token-id` (per-scene-unique) — the correct identity
+     * for duplicate NPC tokens; everything else falls back to `data-actor-id` /
+     * `data-id`. See issue #88.
+     * @param {HTMLElement} el  The element with the data-* identity attributes.
+     * @returns {Actor|null}
+     */
+    resolveTargetActor(el) {
+        const tokenId = el.dataset.tokenId;
+        if (tokenId) {
+            return game.scenes.active?.tokens.get(tokenId)?.actor ?? null;
+        }
+        return this.getCorrectActor(el.dataset.actorId ?? el.dataset.id);
+    }
+
     getCorrectActor(actorId) {
         const actor = game.actors.get(actorId);
+        if (!actor) return null;
         if (actor.type == "litm-npc") {
             // challenges are not linked, so we need to update the scene's actor
             const scene = game.scenes.active;
@@ -399,7 +390,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     static async #handleActorToggleFloatingTagOrStatusMarking(event, target) {
         event.preventDefault();
         const index = parseInt(target.dataset.index);
-        const actor = this.getCorrectActor(target.dataset.actorId);
+        const actor = this.resolveTargetActor(target);
         const markingIndex = parseInt(target.dataset.markingIndex);
 
         await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(actor, index, markingIndex);
@@ -420,12 +411,12 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         event.preventDefault();
         if (game.user.isGM === false) return;
         if (target.dataset.source == "litm-npc" || target.dataset.source == "litm-character"){
-            const actor = this.getCorrectActor(target.dataset.actorId);
+            const actor = this.resolveTargetActor(target);
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(actor, index, target.dataset.markingIndex);
 
             this.sendUpdateHookEvent();
-            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+            DiceRollApp.instance?.updateTagsAndStatuses(true);
         }else{
             if (!this.currentSceneDataItem) return;
 
@@ -433,7 +424,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(this.currentSceneDataItem, index, target.dataset.markingIndex);
 
             this.sendUpdateHookEvent();
-            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+            DiceRollApp.instance?.updateTagsAndStatuses(true);
         }
         
     }
@@ -458,19 +449,19 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (game.user.isGM === false) return;
         // check if the target has data-source and data-source is litm-npc
         if (target.dataset.source == "litm-npc" || target.dataset.source == "litm-character"){
-            const actor = this.getCorrectActor(target.dataset.actorId);
+            const actor = this.resolveTargetActor(target);
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleTagStatusSelectedToggle(actor, index);
             this.sendFloatableTagOrStatusUpdateForActor(actor);
             this.sendUpdateHookEvent();
-            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+            DiceRollApp.instance?.updateTagsAndStatuses(true);
         }else{
             if (!this.currentSceneDataItem) return;
 
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleTagStatusSelectedToggle(this.currentSceneDataItem, index);
             this.sendUpdateHookEvent();
-            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+            DiceRollApp.instance?.updateTagsAndStatuses(true);
         }
     }
 
@@ -478,18 +469,18 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         event.preventDefault();
         if (game.user.isGM === false) return;
         if (target.dataset.source == "litm-npc" ||target.dataset.source == "litm-character"){
-            const actor = this.getCorrectActor(target.dataset.actorId);
+            const actor = this.resolveTargetActor(target);
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleTagStatusToggle(actor, index);
             this.sendUpdateHookEvent();
-            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+            DiceRollApp.instance?.updateTagsAndStatuses(true);
         }else{
             if (!this.currentSceneDataItem) return;
 
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleTagStatusToggle(this.currentSceneDataItem, index);
             this.sendUpdateHookEvent();
-            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+            DiceRollApp.instance?.updateTagsAndStatuses(true);
         }
     }
 
@@ -498,18 +489,18 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
         if (game.user.isGM === false) return;
         if (target.dataset.source == "litm-npc" ||target.dataset.source == "litm-character"){
-            const actor = this.getCorrectActor(target.dataset.actorId);
+            const actor = this.resolveTargetActor(target);
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleTagStatusModifierToggle(actor, index);
             this.sendUpdateHookEvent();
-            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+            DiceRollApp.instance?.updateTagsAndStatuses(true);
         }else{
             if (!this.currentSceneDataItem) return;
 
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleTagStatusModifierToggle(this.currentSceneDataItem, index);
             this.sendUpdateHookEvent();
-            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+            DiceRollApp.instance?.updateTagsAndStatuses(true);
         }
     }
 
@@ -539,17 +530,17 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
 
         if (target.dataset.source == "litm-npc" || target.dataset.source == "litm-character"){
-            const actor = this.getCorrectActor(target.dataset.actorId);
+            const actor = this.resolveTargetActor(target);
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(actor, index);
             this.sendUpdateHookEvent();
-            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+            DiceRollApp.instance?.updateTagsAndStatuses(true);
         }else{
             if (!this.currentSceneDataItem) return;
             const index = target.dataset.index;
             await FloatingTagAndStatusAdapter.handleDeleteFloatingTagOrStatus(this.currentSceneDataItem, index);
             this.sendUpdateHookEvent();
-            DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+            DiceRollApp.instance?.updateTagsAndStatuses(true);
         }
         
     }
@@ -649,16 +640,12 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.sendUpdateHookEvent();
     }
 
-    sendFloatableTagOrStatusUpdateForActor(actor) {
-        if (game.user.isGM) {
-            game.socket.emit("system.mist-engine-fvtt", {
-                type: "hook",
-                hook: "floatableTagOrStatusUpdateViaSceneApp",
-                data: { actorId: actor.id }
-            });
-        }
-        this.sendUpdateHookEvent();
-    }
+    /**
+     * Retained no-op: the actor.update performed before this call fires the
+     * central `updateActor` hook (lib/hooks.mjs) on every client, which
+     * refreshes the scene tracker and dice roll app.
+     */
+    sendFloatableTagOrStatusUpdateForActor(actor) {}
 
     async addRollModification(name, value) {
         if (game.user.isGM === false) return;
@@ -669,7 +656,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         await this.currentSceneDataItem.update({ "system.diceRollTagsStatus": tags });
 
         this.sendUpdateHookEvent();
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
     }
 
     getRollModifications() {
