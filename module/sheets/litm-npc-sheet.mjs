@@ -3,6 +3,7 @@ import { MistSceneApp } from '../apps/scene-app.mjs'
 import { parseChallengeJSON } from '../lib/json-importer.mjs';
 import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
 import { ChallengeAddonAdapter } from "../lib/challenge-addon-adapter.mjs";
+import { confirmDeletion } from "../lib/confirm-deletion.mjs";
 
 export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
   #dragDrop; // Private field to hold dragDrop handlers
@@ -190,6 +191,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   static async #handleDeleteThreadAndConsequenceEntry(event, target) {
     event.preventDefault();
+    if (!(await confirmDeletion())) return;
     const index = target.dataset.index;
     const listIndex = target.dataset.listindex;
     const threatsAndConsequences = this.actor.system.threatsAndConsequences;
@@ -201,7 +203,8 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   static async #handleDeleteThreadAndConsequence(event, target) {
     event.preventDefault();
-    await ArrayFieldAdapter.remove(this.actor, "system.threatsAndConsequences", parseInt(target.dataset.index));
+    if (!(await confirmDeletion())) return;
+    await ArrayFieldAdapter.remove(this.actor,"system.threatsAndConsequences", parseInt(target.dataset.index));
   }
 
   async handleNpcItemNpcArrayUpdate(event) {
@@ -233,17 +236,20 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   static async #handleDeleteSecret(event, target) {
     event.preventDefault();
-    await ArrayFieldAdapter.remove(this.actor, "system.secrets", parseInt(target.dataset.index));
+    if (!(await confirmDeletion())) return;
+    await ArrayFieldAdapter.remove(this.actor,"system.secrets", parseInt(target.dataset.index));
   }
 
   static async #handleDeleteLimit(event, target) {
     event.preventDefault();
-    await ArrayFieldAdapter.remove(this.actor, "system.limits", parseInt(target.dataset.index));
+    if (!(await confirmDeletion())) return;
+    await ArrayFieldAdapter.remove(this.actor,"system.limits", parseInt(target.dataset.index));
   }
 
   static async #handleDeleteSpecialFeature(event, target) {
     event.preventDefault();
-    await ArrayFieldAdapter.remove(this.actor, "system.specialFeatures", parseInt(target.dataset.index));
+    if (!(await confirmDeletion())) return;
+    await ArrayFieldAdapter.remove(this.actor,"system.specialFeatures", parseInt(target.dataset.index));
   }
 
   static async #handleCreateThreatAndConsequenceEntry(event, target) {
@@ -308,6 +314,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   static async #handleDeleteChallengeListItem(event, target) {
     event.preventDefault();
+    if (!(await confirmDeletion())) return;
     const item = this.actor.items.get(target.dataset.itemId);
     await ArrayFieldAdapter.remove(item, "system.list", parseInt(target.dataset.index));
   }

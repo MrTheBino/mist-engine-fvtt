@@ -1,9 +1,13 @@
 const { ItemSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
+import { confirmDeletion } from "../lib/confirm-deletion.mjs";
 
 
 export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
+
+    #scrollPositions; // preserves scroll across submitOnChange re-renders
+    #scrollListenerAttached = false;
 
     static DEFAULT_OPTIONS = {
         classes: ['mist-engine', 'sheet', 'item', 'npc'],
@@ -56,18 +60,69 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
 
     _onRender(context, options) {
         super._onRender(context, options)
+        this._restoreScrollPositions();
+
+        if (!this.#scrollListenerAttached) {
+            this.#scrollListenerAttached = true;
+            this.element.addEventListener("change", () => this._saveScrollPositions(), true);
+            this.element.addEventListener("pointerdown", (event) => {
+                if (event.target.closest("[data-action]")) this._saveScrollPositions();
+            }, true);
+        }
 
         for (const input of this.element.querySelectorAll('.npc-updatable-npc-array-stat')) {
             input.addEventListener("change", event => this.handleArrayUpdate(event));
+            input.addEventListener("keydown", event => this.handleInputShortCutsForGM(event));
         }
         for (const input of this.element.querySelectorAll('.npc-updatable-threat-entry-stat')) {
             input.addEventListener("change", event => this.handleThreatEntryUpdate(event));
+            input.addEventListener("keydown", event => this.handleInputShortCutsForGM(event));
         }
         const rolesInput = this.element.querySelector('.addon-roles-input');
         rolesInput?.addEventListener("change", event => this.handleRolesInput(event));
         for (const input of this.element.querySelectorAll('.addon-tagstatus-input')) {
             input.addEventListener("change", event => this.handleTagStatusUpdate(event));
         }
+    }
+
+    _saveScrollPositions() {
+        this.#scrollPositions = {};
+        this.element?.querySelectorAll('.scrollable').forEach((el, index) => {
+            this.#scrollPositions[index] = el.scrollTop;
+        });
+    }
+
+    _restoreScrollPositions() {
+        if (!this.#scrollPositions) return;
+        requestAnimationFrame(() => {
+            this.element?.querySelectorAll('.scrollable').forEach((el, index) => {
+                if (this.#scrollPositions[index] === undefined) return;
+                const original = el.style.scrollBehavior;
+                el.style.scrollBehavior = 'auto';
+                el.scrollTop = this.#scrollPositions[index];
+                if (original) el.style.scrollBehavior = original;
+                else el.style.removeProperty('scroll-behavior');
+            });
+        });
+    }
+
+    handleInputShortCutsForGM(event) {
+        const input = event.currentTarget;
+        if (!(event.ctrlKey && event.shiftKey)) return;
+        const key = event.key.toLowerCase();
+        if (key !== "s" && key !== "y" && key !== "a" && key !== "x") return;
+
+        event.preventDefault();
+        const start = input.selectionStart ?? 0;
+        const end = input.selectionEnd ?? 0;
+        const value = input.value ?? "";
+        if (start === end) return; // nothing selected
+
+        const selectedText = value.slice(start, end);
+        const wrap = { s: `[/s ${selectedText}]`, y: `[/b ${selectedText}]`, a: `[${selectedText}]`, x: `[/m ${selectedText}]` };
+        input.value = value.slice(0, start) + wrap[key] + value.slice(end);
+        input.setSelectionRange(start + 1, end + 1);
+        input.dispatchEvent(new Event("change", { bubbles: true }));
     }
 
     // ---- field/array change handlers (operate on this.document) ----
@@ -105,7 +160,8 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
     }
     static async #handleDeleteRole(event, target) {
         event.preventDefault();
-        await ArrayFieldAdapter.remove(this.document, "system.roles", parseInt(target.dataset.index));
+        if (!(await confirmDeletion())) return;
+        await ArrayFieldAdapter.remove(this.document,"system.roles", parseInt(target.dataset.index));
     }
 
     static async #handleCreateTagStatus(event, target) {
@@ -114,7 +170,8 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
     }
     static async #handleDeleteTagStatus(event, target) {
         event.preventDefault();
-        await ArrayFieldAdapter.remove(this.document, "system.floatingTagsAndStatuses", parseInt(target.dataset.index));
+        if (!(await confirmDeletion())) return;
+        await ArrayFieldAdapter.remove(this.document,"system.floatingTagsAndStatuses", parseInt(target.dataset.index));
     }
 
     static async #handleCreateLimit(event, target) {
@@ -123,7 +180,8 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
     }
     static async #handleDeleteLimit(event, target) {
         event.preventDefault();
-        await ArrayFieldAdapter.remove(this.document, "system.limits", parseInt(target.dataset.index));
+        if (!(await confirmDeletion())) return;
+        await ArrayFieldAdapter.remove(this.document,"system.limits", parseInt(target.dataset.index));
     }
 
     static async #handleCreateSecret(event, target) {
@@ -132,7 +190,8 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
     }
     static async #handleDeleteSecret(event, target) {
         event.preventDefault();
-        await ArrayFieldAdapter.remove(this.document, "system.secrets", parseInt(target.dataset.index));
+        if (!(await confirmDeletion())) return;
+        await ArrayFieldAdapter.remove(this.document,"system.secrets", parseInt(target.dataset.index));
     }
 
     static async #handleCreateSpecialFeature(event, target) {
@@ -141,7 +200,8 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
     }
     static async #handleDeleteSpecialFeature(event, target) {
         event.preventDefault();
-        await ArrayFieldAdapter.remove(this.document, "system.specialFeatures", parseInt(target.dataset.index));
+        if (!(await confirmDeletion())) return;
+        await ArrayFieldAdapter.remove(this.document,"system.specialFeatures", parseInt(target.dataset.index));
     }
 
     static async #handleCreateThreatAndConsequence(event, target) {
@@ -150,7 +210,8 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
     }
     static async #handleDeleteThreatAndConsequence(event, target) {
         event.preventDefault();
-        await ArrayFieldAdapter.remove(this.document, "system.threatsAndConsequences", parseInt(target.dataset.index));
+        if (!(await confirmDeletion())) return;
+        await ArrayFieldAdapter.remove(this.document,"system.threatsAndConsequences", parseInt(target.dataset.index));
     }
 
     static async #handleCreateThreatAndConsequenceEntry(event, target) {
@@ -163,6 +224,7 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
     }
     static async #handleDeleteThreatAndConsequenceEntry(event, target) {
         event.preventDefault();
+        if (!(await confirmDeletion())) return;
         const index = parseInt(target.dataset.index);
         const listIndex = parseInt(target.dataset.listindex);
         const list = this.document.system.threatsAndConsequences;

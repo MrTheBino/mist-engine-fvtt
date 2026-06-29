@@ -2,6 +2,7 @@ const { ItemSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
 import { importShortChallengeForJSON } from '../lib/json-importer.mjs';
+import { confirmDeletion } from "../lib/confirm-deletion.mjs";
 
 export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
@@ -171,6 +172,7 @@ export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixi
 
     static async #handleDeleteEntry(event, target) {
         event.preventDefault();
+        if (!(await confirmDeletion())) return;
         const item = this.document;
         const index = parseInt(target.dataset.index);
         const data = foundry.utils.duplicate(item.system);

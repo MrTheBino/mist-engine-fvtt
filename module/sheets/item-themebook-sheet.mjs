@@ -2,6 +2,7 @@ const { ItemSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
 import { MistEngineItemSheet } from "./item-sheet.mjs"
+import { confirmDeletion } from "../lib/confirm-deletion.mjs";
 export class MistEngineThemebookItemSheet extends MistEngineItemSheet {
     #dragDrop // Private field to hold dragDrop handlers
 
@@ -240,10 +241,11 @@ export class MistEngineThemebookItemSheet extends MistEngineItemSheet {
 
     static async #handleDeletePowertag(event, target) {
         event.preventDefault();
+        if (!(await confirmDeletion())) return;
         const itemId = target.dataset.itemId;
         const index = target.dataset.index;
-        
-        
+
+
         this._saveScrollPositions();
         let powertags = this.document.system.powertags || [];
         if (index < 0 || index >= powertags.length) {
@@ -256,6 +258,7 @@ export class MistEngineThemebookItemSheet extends MistEngineItemSheet {
 
     static async #handleDeleteWeaknessTag(event, target) {
         event.preventDefault();
+        if (!(await confirmDeletion())) return;
         const itemId = target.dataset.itemId;
         const index = target.dataset.index;
 
@@ -271,6 +274,7 @@ export class MistEngineThemebookItemSheet extends MistEngineItemSheet {
 
     static async #handleDeleteSpecialImprovement(event, target) {
         event.preventDefault();
+        if (!(await confirmDeletion())) return;
         const item = this.document;
         const specialImprovements = item.system.specialImprovements || [];
         const index = target.dataset.index;

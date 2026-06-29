@@ -1,4 +1,5 @@
 import { MistEngineActorSheet } from './actor-sheet.mjs';
+import { confirmDeletion } from '../lib/confirm-deletion.mjs';
 
 export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -111,8 +112,9 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
 
     static async #handleDeletePowertag(event, target) {
         event.preventDefault();
+        if (!(await confirmDeletion())) return;
         const index = target.dataset.index;
-        
+
         this._saveScrollPositions();
         let powertags = this.actor.system.powertags || [];
         if (index < 0 || index >= powertags.length) {
@@ -125,6 +127,7 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
 
     static async #handleDeleteWeaknessTag(event, target) {
         event.preventDefault();
+        if (!(await confirmDeletion())) return;
         const index = target.dataset.index;
 
         this._saveScrollPositions();

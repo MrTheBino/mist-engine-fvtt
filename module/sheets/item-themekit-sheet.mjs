@@ -1,6 +1,7 @@
 const { ItemSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
+import { confirmDeletion } from "../lib/confirm-deletion.mjs";
 
 export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
@@ -236,6 +237,7 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
 
     static async #handleDeletePowertag(event, target) {
         event.preventDefault();
+        if (!(await confirmDeletion())) return;
         const item = this.document;
         const powertags = item.system.powertags || [];
         const index = target.dataset.index;
@@ -247,6 +249,7 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
 
     static async #handleDeleteWeaknesstag(event, target) {
         event.preventDefault();
+        if (!(await confirmDeletion())) return;
         const item = this.document;
         const weaknesstags = item.system.weaknesstags || [];
         const index = target.dataset.index;
@@ -267,6 +270,7 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
 
     static async #handleDeleteSpecialImprovement(event, target) {
         event.preventDefault();
+        if (!(await confirmDeletion())) return;
         const item = this.document;
         const specialImprovements = item.system.specialImprovements || [];
         const index = target.dataset.index;

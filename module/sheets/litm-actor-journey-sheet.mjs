@@ -3,6 +3,7 @@ import { DiceRollApp } from '../apps/dice-roll-app.mjs';
 import { PowerTagAdapter } from '../lib/power-tag-adapter.mjs';
 import { MistSceneApp } from '../apps/scene-app.mjs';
 import { importVignetteForActorJSON } from '../lib/json-importer.mjs';
+import { confirmDeletion } from '../lib/confirm-deletion.mjs';
 
 export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -186,6 +187,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
 
     static async #handleDeleteGeneralConsequence(event, target) {
         event.preventDefault();
+        if (!(await confirmDeletion())) return;
         this._saveScrollPositions();
         this.actor.system.generalConsequences.splice(target.dataset.index, 1);
         this.actor.update({ system: { generalConsequences: this.actor.system.generalConsequences } });
@@ -193,6 +195,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
 
     static async #handleDeleteChallengeListItem(event, target) {
         event.preventDefault();
+        if (!(await confirmDeletion())) return;
         this._saveScrollPositions();
         const itemId = target.dataset.itemId;
         const item = this.actor.items.get(itemId);
