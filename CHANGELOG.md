@@ -2,6 +2,16 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.4.0
+- FEAT: confirmation dialogs when deleting entries from different item sheets
+- FEAT:  Expose character weakness tags on Scene app #85 
+- Challenge Add ons, drag'n'drop them on a challenge to apply them
+- FIX: [Bug] Multiple instances of the same Challenge in the same scene have odd behaviors in Scene app #88
+ - FEAT: re-order the different cards via drag'n'drop in the character sheet in the main and other tab the way you want to
+ - FIX: [Bug] Multiple instances of the same Challenge in the same scene have odd behaviors in Scene app #88
+ - internal code clean up
+ - FIX: [Bug] Manually entered roll mods values do not change the total power. #95
+ 
 # 14.3.7
 - FEAT: [Feature Request] CTRL+Hover to show token tags #94
 - FEAT: final styling for premium modules

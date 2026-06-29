@@ -115,8 +115,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (context.mightUsageEnabled == false) { // just to be sure
             context.mightScale = 0;
         }
-        let countTags = DiceRollApp.calculatePowerTags(DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags, this.challengeTags));
-        context.powerAmount = (countTags.positive - countTags.negative) + context.mightScale + this.numModPositive - this.numModNegative;
+        context.powerAmount = this.computePowerAmount();
         /*if(context.powerAmount < 0){
             context.powerAmount = 0;
         }*/
@@ -155,9 +154,45 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return context;
     }
 
+    /** Total power shown in the dialog: tags +/- , might scale and the manul +/- mods. */
+    computePowerAmount() {
+        const countTags = DiceRollApp.calculatePowerTags(
+            DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags, this.challengeTags)
+        );
+        const mightEnabled = game.settings.get("mist-engine-fvtt", "mightUsageEnabled") === true;
+        const mightScale = mightEnabled ? (this.mightScale || 0) : 0;
+        return (countTags.positive - countTags.negative) + mightScale + (this.numModPositive || 0) - (this.numModNegative || 0);
+    }
+
     /** @inheritDoc */
     _onRender(context, options) {
         super._onRender(context, options);
+
+        const updatePowerLabel = () => {
+            const label = this.element.querySelector('.power-label');
+            if (label) label.textContent = `Power: ${this.computePowerAmount()}`;
+        };
+
+        const posInput = this.element.querySelector('#positiveInput');
+        posInput?.addEventListener('input', () => {
+            this.numModPositive = Math.max(0, parseInt(posInput.value) || 0);
+            updatePowerLabel();
+        });
+
+        const negInput = this.element.querySelector('#negativeInput');
+        negInput?.addEventListener('input', () => {
+            this.numModNegative = Math.max(0, parseInt(negInput.value) || 0);
+            updatePowerLabel();
+        });
+
+        for (const radio of this.element.querySelectorAll('.might-scale-radio')) {
+            radio.addEventListener('change', () => {
+                if (radio.checked) {
+                    this.mightScale = parseInt(radio.value) || 0;
+                    updatePowerLabel();
+                }
+            });
+        }
     }
 
     prepareGMTags() {
@@ -651,6 +686,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             content: html,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         });
+
+        this.numModPositive = 0;
+        this.numModNegative = 0;
+        this.mightScale = 0;
 
         this.resetTags();
         this.close();
