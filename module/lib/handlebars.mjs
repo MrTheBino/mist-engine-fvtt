@@ -104,6 +104,13 @@ export function registerHandlebarHelpers() {
     return arr.join(typeof sep === "string" ? sep : ", ");
   });
 
+  // Localized label for a Might level: {{mightLevelLabel "origin"}}. Custom
+  // levels (for non-standard games) are shown exactly as entered.
+  Handlebars.registerHelper("mightLevelLabel", function (level) {
+    const key = { origin: "Origin", adventure: "Adventure", greatness: "Greatness" }[level];
+    return key ? game.i18n.localize(`MIST_ENGINE.MIGHT.${key}`) : (level ?? "");
+  });
+
   Handlebars.registerHelper("tagFilled", function (str) {
     if (str && str.trim().length > 0) {
       return true;

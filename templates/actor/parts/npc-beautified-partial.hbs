@@ -17,6 +17,25 @@
                 {{/each}}
             </div>
         </div>
+        {{!-- Mighty Aspects --}}
+        {{#if system.mightyAspects.length}}
+        <div class="npc-mighty-aspects-container">
+            <div class="npc-subtitle-container-c">
+                <div class="npc-subtitle-text">{{localize "MIST_ENGINE.NPC.MightyAspects"}}</div>
+            </div>
+            <div class="npc-mighty-aspects-list flexcol">
+                {{#each system.mightyAspects as |aspect|}}
+                {{#if (notEmpty aspect.aspect)}}
+                <div class="npc-mighty-aspect-item">
+                    {{#if aspect.mightIcon}}<i class="might-icon {{aspect.mightIcon}}"></i>{{/if}}
+                    <span class="might-level {{aspect.level}}">{{mightLevelLabel aspect.level}}</span>
+                    <span class="might-aspect-name">{{aspect.aspect}}</span>
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
         {{!-- Secrets --}}
         {{#if hasSecrets}}
         <div class="npc-secret-container">

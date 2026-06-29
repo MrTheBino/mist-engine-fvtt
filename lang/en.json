@@ -49,6 +49,7 @@
       "FelllowshipThemeCardExplanation": "A Fellowship Themecard is a shared resource for all members of a fellowship. It contains power tags, weakness tags and special improvements. The actual tags are getting entered in the characters. Not here, here are only the questions of the tags.",
       "GMTagShortCuts": "Select text, then CTL+SHIFT+S = Status, CTL+SHIFT+X = Might, CTL+SHIFT+A = Tag, CTL+SHIFT+Y = Bold",
       "ChallengeAddon": "Define a reusable set of roles, tags/statuses, limits, threats, secrets and special features. Drag this add-on onto a Challenge to merge it in and raise the Challenge's rating.",
+      "MightyAspects": "Aspects in which this Challenge is Adventure or Greatness level (everything else is Origin). These are NOT tags — they tell the GM whether a Might differential (Favored/Imperiled) applies; they do not add to a roll.",
       "Titles":{
         "RightClickToToggleBurnState": "Right click to toggle burn state",
         "Powertag": "Powertag",
@@ -60,6 +61,11 @@
       "TagsAndStatuses": "Tags & Statuses",
       "SpecialFeatures": "Special Features",
       "Secrets": "Secrets",
+      "MightyAspects": "Mighty Aspects",
+      "MightLevel": "Level",
+      "MightIcon": "Icon",
+      "MightAspect": "Aspect",
+      "MightAspectPlaceholder": "e.g. size, magic, influence, numbers",
       "TagsStatus":{
         "Symbols":{
           "Adventure": "Adventure",
@@ -72,6 +78,12 @@
     "SCENE_APP": {
       "Weaknesses": "Weaknesses (GM)",
       "WeaknessToggleHint": "Click to toggle this weakness as active in the scene"
+    },
+    "MIGHT": {
+      "None": "— None —",
+      "Origin": "Origin",
+      "Adventure": "Adventure",
+      "Greatness": "Greatness"
     },
     "CHALLENGE_ADDON": {
       "RatingIncrease": "Rating Increase",

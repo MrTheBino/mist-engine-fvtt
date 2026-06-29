@@ -16,6 +16,8 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
         actions: {
             createRole: this.#handleCreateRole,
             deleteRole: this.#handleDeleteRole,
+            createMightyAspect: this.#handleCreateMightyAspect,
+            deleteMightyAspect: this.#handleDeleteMightyAspect,
             createTagStatus: this.#handleCreateTagStatus,
             deleteTagStatus: this.#handleDeleteTagStatus,
             createLimit: this.#handleCreateLimit,
@@ -41,6 +43,7 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
             template: 'systems/mist-engine-fvtt/templates/item/item-challenge-addon-sheet.hbs',
             scrollable: ['.scrollable'],
             templates: [
+                'systems/mist-engine-fvtt/templates/actor/parts/mighty-aspects-edit-partial.hbs',
                 'systems/mist-engine-fvtt/templates/actor/parts/npc-limits-edit-partial.hbs',
                 'systems/mist-engine-fvtt/templates/actor/parts/npc-secrets.hbs',
                 'systems/mist-engine-fvtt/templates/actor/parts/npc-special-features-edit-partial.hbs',
@@ -162,6 +165,16 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
         event.preventDefault();
         if (!(await confirmDeletion())) return;
         await ArrayFieldAdapter.remove(this.document,"system.roles", parseInt(target.dataset.index));
+    }
+
+    static async #handleCreateMightyAspect(event, target) {
+        event.preventDefault();
+        await ArrayFieldAdapter.add(this.document, "system.mightyAspects", { level: "origin", aspect: "", mightIcon: "" });
+    }
+    static async #handleDeleteMightyAspect(event, target) {
+        event.preventDefault();
+        if (!(await confirmDeletion())) return;
+        await ArrayFieldAdapter.remove(this.document, "system.mightyAspects", parseInt(target.dataset.index));
     }
 
     static async #handleCreateTagStatus(event, target) {

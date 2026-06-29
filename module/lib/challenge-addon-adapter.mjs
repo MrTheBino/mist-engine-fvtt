@@ -60,6 +60,9 @@ export class ChallengeAddonAdapter {
         if ((a.specialFeatures ?? []).length) {
             update["system.specialFeatures"] = [...(n.specialFeatures ?? []), ...a.specialFeatures];
         }
+        if ((a.mightyAspects ?? []).length) {
+            update["system.mightyAspects"] = [...(n.mightyAspects ?? []), ...a.mightyAspects];
+        }
 
         await npc.update(update);
         ui.notifications?.info(game.i18n.format("MIST_ENGINE.CHALLENGE_ADDON.Applied", { addon: addonName, challenge: npc.name }));

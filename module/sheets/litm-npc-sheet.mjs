@@ -17,6 +17,8 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     },
     actions: {
       createLimit: this.#handleCreateLimit,
+      createMightyAspect: this.#handleCreateMightyAspect,
+      deleteMightyAspect: this.#handleDeleteMightyAspect,
       createSecret: this.#handleCreateSecret,
       createSpecialFeature: this.#handleCreateSpecialFeature,
       createThreatAndConsequence: this.#handleCreateThreatAndConsequence,
@@ -64,6 +66,7 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
       template: "systems/mist-engine-fvtt/templates/actor/parts/tab-litm-npc.hbs",
       templates: [
         "systems/mist-engine-fvtt/templates/actor/parts/npc-limits-edit-partial.hbs",
+        "systems/mist-engine-fvtt/templates/actor/parts/mighty-aspects-edit-partial.hbs",
         "systems/mist-engine-fvtt/templates/actor/parts/npc-secrets.hbs",
         "systems/mist-engine-fvtt/templates/actor/parts/npc-special-features-edit-partial.hbs",
         "systems/mist-engine-fvtt/templates/actor/parts/npc-threats-edit-partial.hbs",
@@ -159,6 +162,9 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     this.enableFloatingTagStatusContextMenus();
   }
 
+  
+  enableFloatingTagStatusContextMenus() {}
+
   /** Parse the comma-separated roles input into the `system.roles` list. easies way*/
   handleRolesInput(event) {
     event.preventDefault();
@@ -250,6 +256,17 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     event.preventDefault();
     if (!(await confirmDeletion())) return;
     await ArrayFieldAdapter.remove(this.actor,"system.specialFeatures", parseInt(target.dataset.index));
+  }
+
+  static async #handleCreateMightyAspect(event, target) {
+    event.preventDefault();
+    await ArrayFieldAdapter.add(this.actor, "system.mightyAspects", { level: "origin", aspect: "", mightIcon: "" });
+  }
+
+  static async #handleDeleteMightyAspect(event, target) {
+    event.preventDefault();
+    if (!(await confirmDeletion())) return;
+    await ArrayFieldAdapter.remove(this.actor, "system.mightyAspects", parseInt(target.dataset.index));
   }
 
   static async #handleCreateThreatAndConsequenceEntry(event, target) {

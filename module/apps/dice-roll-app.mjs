@@ -233,25 +233,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         tagsForRoll.forEach(element => {
 
             if (element.value === undefined || element.value == 0) {
-                // normal power tags, story tags etc
                 if (element.positive) {
-                    if (element.toBurn) {
-                        numPositiveTags += 3;
-                    } else {
-                        if (element.might > 0) {
-                            numPositiveTags += element.might;
-                        } else {
-                            numPositiveTags++;
-                        }
-                    }
+                    numPositiveTags += element.toBurn ? 3 : 1;
                 }
                 else {
-                    if (element.might > 0) {
-                        numNegativeTags += element.might;
-                    } else {
-                        numNegativeTags++;
-                    }
-
+                    numNegativeTags++;
                 }
             } else {
                 // statuses

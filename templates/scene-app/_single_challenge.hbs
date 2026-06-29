@@ -38,5 +38,18 @@
         {{/each}}
     </div>
     {{/if}}
+
+    {{#if challenge.hasMightyAspects}}
+    <div class="mighty-aspects-entries">
+        <div class="mighty-aspects-label">{{localize "MIST_ENGINE.NPC.MightyAspects"}}</div>
+        {{#each challenge.mightyAspects}}
+        <div class="mighty-aspect-entry">
+            {{#if this.mightIcon}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
+            <span class="might-level {{this.level}}">{{mightLevelLabel this.level}}</span>
+            <span class="might-aspect-name">{{this.aspect}}</span>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
 </div>
 <div class="seperator"></div>

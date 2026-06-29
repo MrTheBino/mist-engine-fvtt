@@ -15,6 +15,15 @@ export default class MistEngineNPC extends MistEngineActorBase {
     // warn before re-applying the same add-on.
     schema.appliedAddons = new fields.ArrayField(new fields.StringField(), { required: false, initial: [] });
 
+    schema.mightyAspects = new fields.ArrayField(
+      new fields.SchemaField({
+        level: new fields.StringField({ initial: "origin" }), // origin/adventure/greatness, or a custom level
+        aspect: new fields.StringField(),
+        mightIcon: new fields.StringField({ blank: true, initial: "" }) // "" | adventure | greatness | origin
+      }),
+      { min: 0, required: false }
+    )
+
     schema.limits = new fields.ArrayField(
       new fields.SchemaField({
         name: new fields.StringField(),

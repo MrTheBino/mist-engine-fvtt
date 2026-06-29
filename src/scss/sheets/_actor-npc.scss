@@ -181,6 +181,45 @@
   margin-right: 2px;
 }
 
+// Mighty aspects (issue #90) — non-edit display on the Challenge sheet.
+.npc-mighty-aspects-container {
+  font-family: $font-primary;
+  color: $c-dark-styled-text;
+
+  .npc-mighty-aspects-list {
+    align-items: center;
+  }
+
+  .npc-mighty-aspect-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+    margin: 0.1em 0;
+    font-size: 0.85rem;
+
+    .might-icon {
+      @include might-icon-def;
+    }
+
+    .might-level {
+      font-weight: bold;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      border-radius: 2px;
+      padding: 0 0.3em;
+      color: $c-off-white; // light text on the dark (brown / red) chips
+      background-color: $c-brown; // adventure / custom
+
+      &.origin { background-color: $c-tag-green; color: $c-styled-text; } // dark text on light green
+      &.greatness { background-color: $c-text-redish; }
+    }
+
+    .might-aspect-name {
+      font-style: italic;
+    }
+  }
+}
+
 .npc-threats-and-consequences-container {
   font-family: Labrada, serif;
   color: $c-dark-styled-text;

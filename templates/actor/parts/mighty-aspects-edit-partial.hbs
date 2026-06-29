@@ -1,0 +1,45 @@
+<fieldset>
+    <legend>{{localize "MIST_ENGINE.NPC.MightyAspects"}}
+        <button type="button" data-action="createMightyAspect"><i class='fas fa-plus'></i></button>
+    </legend>
+    <p class="help-text">{{localize "MIST_ENGINE.HELP.MightyAspects"}}</p>
+    <datalist id="might-levels">
+        <option value="origin">{{localize "MIST_ENGINE.MIGHT.Origin"}}</option>
+        <option value="adventure">{{localize "MIST_ENGINE.MIGHT.Adventure"}}</option>
+        <option value="greatness">{{localize "MIST_ENGINE.MIGHT.Greatness"}}</option>
+    </datalist>
+    <div class="table-group">
+        <div class="table-row">
+            <div class="table-cell header">{{localize "MIST_ENGINE.NPC.MightIcon"}}</div>
+            <div class="table-cell header">{{localize "MIST_ENGINE.NPC.MightLevel"}}</div>
+            <div class="table-cell header">{{localize "MIST_ENGINE.NPC.MightAspect"}}</div>
+            <div class="table-cell header"></div>
+        </div>
+        {{#each system.mightyAspects as |entry index|}}
+        <div class="table-row">
+            <div class="table-cell">
+                <select class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="mightyAspects" data-key="mightIcon">
+                    <option value="" {{#unless entry.mightIcon}}selected{{/unless}}>{{localize "MIST_ENGINE.MIGHT.None"}}</option>
+                    <option value="adventure" {{#if (eq entry.mightIcon "adventure")}}selected{{/if}}>{{localize "MIST_ENGINE.MIGHT.Adventure"}}</option>
+                    <option value="greatness" {{#if (eq entry.mightIcon "greatness")}}selected{{/if}}>{{localize "MIST_ENGINE.MIGHT.Greatness"}}</option>
+                    <option value="origin" {{#if (eq entry.mightIcon "origin")}}selected{{/if}}>{{localize "MIST_ENGINE.MIGHT.Origin"}}</option>
+                </select>
+            </div>
+            <div class="table-cell">
+                <input type="text" class="npc-updatable-npc-array-stat" list="might-levels" data-index="{{index}}"
+                    data-array="mightyAspects" data-key="level" value="{{entry.level}}"
+                    placeholder="{{localize 'MIST_ENGINE.NPC.MightLevel'}}" />
+            </div>
+            <div class="table-cell">
+                <input type="text" class="npc-updatable-npc-array-stat" data-index="{{index}}" data-array="mightyAspects"
+                    data-key="aspect" value="{{entry.aspect}}" placeholder="{{localize 'MIST_ENGINE.NPC.MightAspectPlaceholder'}}" />
+            </div>
+            <div class="table-cell">
+                <div class="trash-icon-container">
+                    <a data-action="deleteMightyAspect" data-index="{{index}}"><i class='fas fa-trash'></i></a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</fieldset>

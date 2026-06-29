@@ -86,10 +86,6 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
         this.element.addEventListener("drop", this._onDrop.bind(this));
 
-        // only enable the context menu for GMS
-        if (game.user.isGM) {
-            this.enableFloatingTagStatusContextMenus();
-        }
 
         // setr the title of the dialog
         let titleElement = this.element.querySelector(".window-title");
@@ -306,6 +302,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             if (seenNpcActors.has(actor)) return; // linked duplicate → already added
             seenNpcActors.add(actor);
             let floatingTagAndStatuses = actor.system.floatingTagsAndStatuses || [];
+            let mightyAspects = this.getChallengeMightyAspects(actor);
             if (!context.challenges) context.challenges = [];
             context.challenges.push({
                 id: actor.id,
@@ -313,7 +310,9 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 name: token.name || actor.name,
                 img: actor.img,
                 floatingTagsAndStatuses: floatingTagAndStatuses,
-                hasFloatingTagsAndStatuses: floatingTagAndStatuses.length > 0
+                hasFloatingTagsAndStatuses: floatingTagAndStatuses.length > 0,
+                mightyAspects: mightyAspects,
+                hasMightyAspects: mightyAspects.length > 0
             });
         });
 
@@ -339,6 +338,21 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
         const themecard = game.actors.get(actor.system.actorSharedSingleThemecardId);
         if (themecard) collect(themecard.system.weaknesstags, "fellowship-themecard", null);
+        return result;
+    }
+
+    /**
+     * A Challenge's Mighty aspects for the scene app (issue #90). Display-only —
+     * never roll tags. The scene app's challenge list is GM-only, so there is no
+     * player-facing reveal.
+     * @param {Actor} actor  a litm-npc challenge actor
+     */
+    getChallengeMightyAspects(actor) {
+        const result = [];
+        (actor.system.mightyAspects ?? []).forEach(a => {
+            if (!a?.aspect || !a.aspect.trim()) return;
+            result.push({ level: a.level, aspect: a.aspect, mightIcon: a.mightIcon });
+        });
         return result;
     }
 
@@ -373,6 +387,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.sendUpdateHookEvent();
         DiceRollApp.instance?.updateTagsAndStatuses(true);
     }
+
 
     static async #handleToggleDiceRollModifier(event, target) {
         event.preventDefault();

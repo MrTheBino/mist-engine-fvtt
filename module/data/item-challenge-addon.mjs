@@ -14,6 +14,15 @@ export default class MistEngineChallengeAddon extends MistEngineItemBase {
     // Roles this add-on contributes (e.g. "Mystery", "Sapper").
     schema.roles = new fields.ArrayField(new fields.StringField(), { required: false, initial: [] });
 
+    schema.mightyAspects = new fields.ArrayField(
+      new fields.SchemaField({
+        level: new fields.StringField({ initial: "origin" }),
+        aspect: new fields.StringField(),
+        mightIcon: new fields.StringField({ blank: true, initial: "" })
+      }),
+      { min: 0, required: false }
+    )
+
     // Tags & statuses 
     Object.assign(schema, buildFloatingTagsAndStatuses());
 

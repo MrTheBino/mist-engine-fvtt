@@ -3014,6 +3014,61 @@ article.cc-enriched section.journal-entry-content {
   height: 18px;
   margin-right: 2px;
 }
+.mist-engine .npc-mighty-aspects-container {
+  font-family: Labrada, serif;
+  color: #191813;
+}
+.mist-engine .npc-mighty-aspects-container .npc-mighty-aspects-list {
+  align-items: center;
+}
+.mist-engine .npc-mighty-aspects-container .npc-mighty-aspect-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  margin: 0.1em 0;
+  font-size: 0.85rem;
+}
+.mist-engine .npc-mighty-aspects-container .npc-mighty-aspect-item .might-icon {
+  height: 1em;
+  width: 1em;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 0.2em;
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+  margin-right: 0.2em;
+}
+.mist-engine .npc-mighty-aspects-container .npc-mighty-aspect-item .might-icon.adventure {
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+}
+.mist-engine .npc-mighty-aspects-container .npc-mighty-aspect-item .might-icon.greatness {
+  background-image: url("../assets/icons/might-icon-greatness.webp");
+}
+.mist-engine .npc-mighty-aspects-container .npc-mighty-aspect-item .might-icon.origin {
+  background-image: url("../assets/icons/might-icon-origin.webp");
+  margin-right: 0;
+}
+.mist-engine .npc-mighty-aspects-container .npc-mighty-aspect-item .might-level {
+  font-weight: bold;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  border-radius: 2px;
+  padding: 0 0.3em;
+  color: #f6eeea;
+  background-color: #724a32;
+}
+.mist-engine .npc-mighty-aspects-container .npc-mighty-aspect-item .might-level.origin {
+  background-color: rgb(188, 205, 175);
+  color: #724a32;
+}
+.mist-engine .npc-mighty-aspects-container .npc-mighty-aspect-item .might-level.greatness {
+  background-color: #742a2b;
+}
+.mist-engine .npc-mighty-aspects-container .npc-mighty-aspect-item .might-aspect-name {
+  font-style: italic;
+}
 .mist-engine .npc-threats-and-consequences-container {
   font-family: Labrada, serif;
   color: #191813;
@@ -3503,6 +3558,64 @@ article.cc-enriched section.journal-entry-content {
 .character-container .weakness-tags-container .scene-weakness-tag.burned {
   opacity: 0.4;
   text-decoration: line-through;
+}
+.character-container .mighty-aspects-entries {
+  margin: 8px 0;
+  font-family: Labrada, serif;
+}
+.character-container .mighty-aspects-entries .mighty-aspects-label {
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: #724a32;
+}
+.character-container .mighty-aspects-entries .mighty-aspect-entry {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  padding: 1px 0;
+}
+.character-container .mighty-aspects-entries .mighty-aspect-entry .might-icon {
+  height: 1em;
+  width: 1em;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 0.2em;
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+  margin-right: 0.2em;
+}
+.character-container .mighty-aspects-entries .mighty-aspect-entry .might-icon.adventure {
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+}
+.character-container .mighty-aspects-entries .mighty-aspect-entry .might-icon.greatness {
+  background-image: url("../assets/icons/might-icon-greatness.webp");
+}
+.character-container .mighty-aspects-entries .mighty-aspect-entry .might-icon.origin {
+  background-image: url("../assets/icons/might-icon-origin.webp");
+  margin-right: 0;
+}
+.character-container .mighty-aspects-entries .mighty-aspect-entry .might-level {
+  font-weight: bold;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  border-radius: 2px;
+  padding: 0 4px;
+  color: #f6eeea;
+  background-color: #724a32;
+}
+.character-container .mighty-aspects-entries .mighty-aspect-entry .might-level.origin {
+  background-color: rgb(188, 205, 175);
+  color: #724a32;
+}
+.character-container .mighty-aspects-entries .mighty-aspect-entry .might-level.greatness {
+  background-color: #742a2b;
+}
+.character-container .mighty-aspects-entries .mighty-aspect-entry .might-aspect-name {
+  font-style: italic;
 }
 
 .custom-background-editor .toolbar {
@@ -3996,5 +4109,3 @@ article.cc-enriched section.journal-entry-content {
   height: 100%;
   padding-right: 8px;
 }
-
-/*# sourceMappingURL=mist-engine-fvtt.css.map */
