@@ -5,6 +5,7 @@ import { ThemekitSelectionApp } from '../apps/themekit-selection-app.mjs';
 import { MistEngineActorSheet } from './actor-sheet.mjs';
 import { ThemeKitAdapter } from '../lib/themekit-adapter.mjs';
 import { ArrayFieldAdapter } from '../lib/array-field-adapter.mjs';
+import { clearOtherBurns } from '../lib/burn-helper.mjs';
 
 export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -767,9 +768,11 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const powertags = foundry.utils.getProperty(object, "system.powertags");
         if (!powertags[powertagIndex]) return;
         if (powertags[powertagIndex].burned) return;
+        const willBurn = !powertags[powertagIndex].toBurn;
         powertags[powertagIndex].toBurn = !powertags[powertagIndex].toBurn;
         powertags[powertagIndex].selected = powertags[powertagIndex].toBurn;
         await object.update({ "system.powertags": powertags });
+        if (willBurn) await clearOtherBurns(this.actor, object, "system.powertags", powertagIndex);
         this.reloadFellowshipThemecard();
         this.render();
         DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);

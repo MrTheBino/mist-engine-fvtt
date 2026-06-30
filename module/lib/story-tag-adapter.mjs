@@ -1,4 +1,5 @@
 import { ArrayFieldAdapter } from "./array-field-adapter.mjs";
+import { clearOtherBurns } from "./burn-helper.mjs";
 
 // Adapter for story tags stored as an ArrayField on an item within an actor.
 // `key` is the dot-path of the array on the item (e.g. "system.items").
@@ -31,7 +32,11 @@ export class StoryTagAdapter {
         const data = foundry.utils.getProperty(item, key);
         if(!data || index < 0 || index >= data.length) return false;
         if(data[index].burned) return false; // cannot toggle burned tags
-        return ArrayFieldAdapter.toggle(item, key, index, "toBurn");
+        const willBurn = !data[index].toBurn;
+        const ok = await ArrayFieldAdapter.toggle(item, key, index, "toBurn");
+        // Only one tag may be queued to burn (#92) — clear it on all other tags.
+        if(ok && willBurn) await clearOtherBurns(actor, item, key, index);
+        return ok;
     }
 
     static async toggleBurnedState(actor, itemId, key, index){

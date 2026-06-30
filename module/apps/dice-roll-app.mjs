@@ -229,12 +229,18 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     static calculatePowerTags(tagsForRoll) {
         let numPositiveTags = 0;
         let numNegativeTags = 0;
+        let burnUsed = false; // only one tag may burn for +3 (#92)
 
         tagsForRoll.forEach(element => {
 
             if (element.value === undefined || element.value == 0) {
                 if (element.positive) {
-                    numPositiveTags += element.toBurn ? 3 : 1;
+                    if (element.toBurn && !burnUsed) {
+                        numPositiveTags += 3;
+                        burnUsed = true;
+                    } else {
+                        numPositiveTags += 1;
+                    }
                 }
                 else {
                     numNegativeTags++;
@@ -489,6 +495,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     async resetTags() {
         let alreadyImprovedThemebooks = [];
+        let burnedOne = false; // at most one tag may actually burn per roll (#92)
 
         for (let item of this.actor.items) {
             if (item.type === "backpack") {
@@ -497,7 +504,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                     for (let [bi, backpackItem] of backpackItems.entries()) {
                         backpackItem.selected = false;
                         if (backpackItem.toBurn) {
-                            backpackItem.burned = true;
+                            if (!burnedOne) {
+                                backpackItem.burned = true;
+                                burnedOne = true;
+                            }
                             backpackItem.toBurn = false;
                         }
                     }
@@ -508,7 +518,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             if (item.type === "themebook") {
                 if (item.system.powertags && item.system.powertags.length > 0) {
                     const powertags = item.system.powertags.map((tag, i) => {
-                        const burned = tag.burned || this.isTagToBurn(i, item._id);
+                        let burned = tag.burned;
+                        if (!burned && !burnedOne && this.isTagToBurn(i, item._id)) {
+                            burned = true;
+                            burnedOne = true;
+                        }
                         return { ...tag, selected: false, toBurn: false, burned };
                     });
                     await item.update({ 'system.powertags': powertags });
@@ -554,7 +568,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
                 if (actorFellowshipThemecard.system.powertags) {
                     const powertags = actorFellowshipThemecard.system.powertags.map((tag, i) => {
-                        const burned = tag.burned || this.wasTagSelected(i, null, "fellowship-themecard");
+                        let burned = tag.burned;
+                        if (!burned && !burnedOne && tag.toBurn) {
+                            burned = true;
+                            burnedOne = true;
+                        }
                         return { ...tag, selected: false, toBurn: false, burned };
                     });
                     await actorFellowshipThemecard.update({ 'system.powertags': powertags });
