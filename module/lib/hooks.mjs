@@ -361,9 +361,12 @@ export function setupHooks() {
   };
 
   Hooks.on("updateActor", (actor) => {
-    // Only actors shown in the active scene affect the trackers.
+    // Only actors shown in the active scene affect the trackers...
     const inScene = game.scenes?.active?.tokens?.contents?.some(t => t.actor?.id === actor.id);
-    if (inScene) refreshSceneTrackers();
+    // ...plus the journey assigned to the scene (Journeys tab) — it is not a
+    // scene token, so it would otherwise never trigger a refresh.
+    const isAssignedJourney = MistSceneApp.instance?.getAssignedJourney?.()?.id === actor.id;
+    if (inScene || isAssignedJourney) refreshSceneTrackers();
   });
 
   // Item types whose data feeds the scene tracker / dice roll app:

@@ -77,7 +77,12 @@
     },
     "SCENE_APP": {
       "Weaknesses": "Weaknesses (GM)",
-      "WeaknessToggleHint": "Click to toggle this weakness as active in the scene"
+      "WeaknessToggleHint": "Click to toggle this weakness as active in the scene",
+      "TabActors": "Actors",
+      "TabJourneys": "Journeys",
+      "OpenJourney": "Open journey sheet",
+      "UnassignJourney": "Unassign journey",
+      "NoJourneyAssigned": "No journey assigned. Drag a journey from the sidebar onto this app to assign it to the scene."
     },
     "MIGHT": {
       "None": "— None —",

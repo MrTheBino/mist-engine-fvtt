@@ -25,7 +25,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             title: 'Scene Tags & Characters',
             icon: 'fa-solid fa-book-atlas',
             positioned: true,
-            resizable: true
+            resizable: true,
+            contentClasses: ['scene-app-body']
         },
         position: {
             left: 100,
@@ -33,6 +34,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             height: 800
         },
         actions: {
+            openAssignedJourney: this.#handleOpenAssignedJourney,
+            unassignJourney: this.#handleUnassignJourney,
             createFloatingTagOrStatus: this.#handleCreateFloatingTagOrStatus,
             deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus,
             actorToggleFloatingTagOrStatusMarking: this.#handleActorToggleFloatingTagOrStatusMarking,
@@ -63,11 +66,52 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             template: 'systems/mist-engine-fvtt/templates/scene-app/dice-roll-mods.hbs',
             scrollable: ['']
         },
+        // GM-only right-side icon tab rail + tab content (see _configureRenderParts).
+        tabs: {
+            template: 'templates/generic/tab-navigation.hbs'
+        },
         actors: {
             template: 'systems/mist-engine-fvtt/templates/scene-app/actors.hbs',
-            scrollable: ['']
+            scrollable: ['.tab-content-inner']
+        },
+        journeys: {
+            template: 'systems/mist-engine-fvtt/templates/scene-app/journeys.hbs',
+            scrollable: ['.tab-content-inner']
         }
     };
+
+    static TABS = {
+        "scene-app": {
+            tabs: [
+                { id: "actors", group: "scene-app", icon: "fa-solid fa-users", label: "MIST_ENGINE.SCENE_APP.TabActors" },
+                { id: "journeys", group: "scene-app", icon: "fa-solid fa-route", label: "MIST_ENGINE.SCENE_APP.TabJourneys" }
+            ],
+            initial: "actors"
+        }
+    };
+
+    async _preparePartContext(partId, context) {
+        context = await super._preparePartContext(partId, context);
+        if (partId === "tabs") {
+            context.verticalTabs = true;
+            context.tabClasses = "scene-app-side-tabs";
+            for (const t of Object.values(context.tabs ?? {})) {
+                t.tooltip ??= game.i18n.localize(t.label);
+            }
+        }
+        return context;
+    }
+
+
+    _configureRenderParts(options) {
+        const parts = super._configureRenderParts(options);
+        if (!game.user.isGM) {
+            delete parts.tabs;
+            delete parts.actors;
+            delete parts.journeys;
+        }
+        return parts;
+    }
 
     static getInstance(options = {}) {
         if (!MistSceneApp.instance) {
@@ -85,7 +129,6 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
 
         this.element.addEventListener("drop", this._onDrop.bind(this));
-
 
         // setr the title of the dialog
         let titleElement = this.element.querySelector(".window-title");
@@ -201,7 +244,18 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
      * @protected
      */
     async _onDrop(event) {
-        const { type, name, value } = TextEditor.getDragEventData(event);
+        const data = TextEditor.getDragEventData(event);
+        const { type, name, value } = data;
+
+        if (type === "Actor" && game.user.isGM) {
+            const actor = await fromUuid(data.uuid);
+            if (actor?.type === "litm-journey") {
+                await this.currentSceneDataItem.update({ "system.assignedJourneyId": actor.id });
+                this.sendUpdateHookEvent();
+                return;
+            }
+        }
+
         const isStatus = type === "status";
         const floatingTagsAndStatuses = this.currentSceneDataItem.system.floatingTagsAndStatuses ?? [];
 
@@ -257,9 +311,36 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
         if (game.user.isGM) {
             foundry.utils.mergeObject(context, await this._prepareContextForCharacters());
+
+            const journey = this.getAssignedJourney();
+            context.assignedJourney = journey;
+            context.assignedJourneyName = journey?.name ?? "";
+            context.assignedJourneySystem = journey?.system ?? null;
+            context.assignedJourneyChallenges = journey
+                ? journey.items.filter(i => i.type === "shortchallenge")
+                : [];
         }
 
         return context;
+    }
+
+    /** The journey actor assigned to this scene, or null. */
+    getAssignedJourney() {
+        const id = this.currentSceneDataItem?.system?.assignedJourneyId;
+        if (!id) return null;
+        const journey = game.actors.get(id);
+        return journey?.type === "litm-journey" ? journey : null;
+    }
+
+    static async #handleOpenAssignedJourney(event, target) {
+        event.preventDefault();
+        this.getAssignedJourney()?.sheet.render(true);
+    }
+
+    static async #handleUnassignJourney(event, target) {
+        event.preventDefault();
+        await this.currentSceneDataItem.update({ "system.assignedJourneyId": "" });
+        this.sendUpdateHookEvent();
     }
 
     async _prepareContextForCharacters() {

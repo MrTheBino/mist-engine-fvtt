@@ -3618,6 +3618,118 @@ article.cc-enriched section.journal-entry-content {
   font-style: italic;
 }
 
+.scene-app.application:not(.minimized) {
+  overflow: visible;
+}
+.scene-app .window-content.scene-app-body {
+  overflow: visible;
+  min-height: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.scene-app .window-content.scene-app-body > #tags,
+.scene-app .window-content.scene-app-body > .scene-app-dice-roll-modifiers {
+  flex: 0 0 auto;
+}
+.scene-app .window-content.scene-app-body > section.tab {
+  display: none;
+  min-height: 0;
+}
+.scene-app .window-content.scene-app-body > section.tab.active {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  overflow: hidden;
+}
+.scene-app .window-content.scene-app-body > section.tab .tab-content-inner {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+.scene-app nav.sheet-tabs.scene-app-side-tabs.vertical {
+  position: absolute;
+  top: 70px;
+  left: 100%;
+  margin-left: 10px;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 4px;
+  background: #000;
+  border-radius: 0 6px 6px 0;
+}
+.scene-app nav.sheet-tabs.scene-app-side-tabs.vertical a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  color: #f6eeea;
+  background: none;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.scene-app nav.sheet-tabs.scene-app-side-tabs.vertical a i {
+  margin: 0;
+  font-size: 1.05rem;
+  color: inherit;
+}
+.scene-app nav.sheet-tabs.scene-app-side-tabs.vertical a span {
+  display: none;
+}
+.scene-app nav.sheet-tabs.scene-app-side-tabs.vertical a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+.scene-app nav.sheet-tabs.scene-app-side-tabs.vertical a.active {
+  color: rgb(239, 214, 147);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 3px 0 0 rgb(239, 214, 147);
+}
+.scene-app .scene-app-journey .scene-app-journey-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.scene-app .scene-app-journey .scene-app-journey-actions {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+.scene-app .scene-app-journey .scene-app-journey-actions a {
+  cursor: pointer;
+  color: #734a33;
+}
+.scene-app .scene-app-journey .npc-roles {
+  font-family: var(--litm-font-accent);
+  font-size: large;
+  text-align: center;
+  color: #724a32;
+}
+.scene-app .scene-app-journey .short-description {
+  margin: 0.4rem 0;
+  font-family: Labrada, serif;
+  color: #724a32;
+  text-align: start;
+}
+.scene-app .scene-app-journey .tags {
+  text-align: center;
+  font-family: Labrada, serif;
+}
+.scene-app .scene-app-journey .scene-app-journey-empty p {
+  font-family: Labrada, serif;
+  text-align: center;
+  padding: 1rem;
+}
+
 .custom-background-editor .toolbar {
   display: flex;
   gap: 8px;
@@ -4109,3 +4221,5 @@ article.cc-enriched section.journal-entry-content {
   height: 100%;
   padding-right: 8px;
 }
+
+/*# sourceMappingURL=mist-engine-fvtt.css.map */

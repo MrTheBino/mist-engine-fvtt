@@ -1,0 +1,55 @@
+<section class="tab {{tabs.journeys.cssClass}}" data-group="scene-app" data-tab="journeys">
+    <div class="tab-content-inner scene-app-journey">
+        {{#if assignedJourney}}
+        <div class="scene-app-journey-header">
+            <div class="scene-app-actor-header">{{assignedJourneyName}}</div>
+            <div class="scene-app-journey-actions">
+                <a data-action="openAssignedJourney" data-tooltip="{{localize 'MIST_ENGINE.SCENE_APP.OpenJourney'}}">
+                    <i class="fa-solid fa-up-right-from-square"></i>
+                </a>
+                <a data-action="unassignJourney" data-tooltip="{{localize 'MIST_ENGINE.SCENE_APP.UnassignJourney'}}">
+                    <i class="fa-solid fa-xmark"></i>
+                </a>
+            </div>
+        </div>
+
+        {{#if (notEmpty assignedJourneySystem.role)}}
+        <div class="npc-roles">{{assignedJourneySystem.role}}</div>
+        {{/if}}
+
+        {{#if (notEmpty assignedJourneySystem.shortDescription)}}
+        <div class="short-description">{{{simpleFormatText assignedJourneySystem.shortDescription}}}</div>
+        {{/if}}
+
+        {{#if (notEmpty assignedJourneySystem.tags)}}
+        <p class="tags">{{{textWithTags assignedJourneySystem.tags}}}</p>
+        {{/if}}
+
+        {{!-- Vignettes & Consequences (read-only, like the journey sheet) --}}
+        <div class="grid grid-2col">
+            {{#if assignedJourneySystem.generalConsequences.length}}
+            <div class="challenge-entry-container text-container-large-paper-background">
+                <h2>{{localize "MIST_ENGINE.LABELS.GeneralConsequences"}}</h2>
+                <div class="list-entries">
+                    {{#each assignedJourneySystem.generalConsequences as | consequence | }}
+                    <div class="list-entry">
+                        <div class="entry-content-no-edit flexrow">
+                            <div class="icon-col"><i class="skull-icon"></i></div>
+                            <div class="text-col">{{{textWithTags consequence}}}</div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+            {{#each assignedJourneyChallenges}}
+            {{> systems/mist-engine-fvtt/templates/actor/parts/challenge-partial.hbs challenge=this editMode=false}}
+            {{/each}}
+        </div>
+        {{else}}
+        <div class="empty-message scene-app-journey-empty">
+            <p>{{localize 'MIST_ENGINE.SCENE_APP.NoJourneyAssigned'}}</p>
+        </div>
+        {{/if}}
+    </div>
+</section>

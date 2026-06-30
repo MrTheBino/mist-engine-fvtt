@@ -8,6 +8,9 @@ export default class MistEngineSceneData extends MistEngineItemBase {
     const schema = super.defineSchema();
 
     schema.sceneKey = new fields.StringField({ required: true, blank: true });
+
+    schema.assignedJourneyId = new fields.StringField({ required: false, blank: true, initial: "" });
+
     foundry.utils.mergeObject(schema, buildFloatingTagsAndStatuses());
 
     schema.might = new fields.SchemaField({

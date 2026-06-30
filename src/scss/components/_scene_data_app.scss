@@ -195,3 +195,145 @@
         }
     }
 }
+
+
+.scene-app {
+
+    &.application:not(.minimized) { overflow: visible; }
+
+
+    .window-content.scene-app-body {
+        overflow: visible;
+        min-height: 0;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+
+        > #tags,
+        > .scene-app-dice-roll-modifiers {
+            flex: 0 0 auto;
+        }
+
+
+        > section.tab {
+            display: none;
+            min-height: 0;
+
+            &.active {
+                display: flex;
+                flex: 1 1 auto;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            .tab-content-inner {
+                flex: 1 1 auto;
+                min-height: 0;
+                overflow-y: auto;
+            }
+        }
+    }
+
+
+    nav.sheet-tabs.scene-app-side-tabs.vertical {
+        position: absolute;
+        top: 70px;
+        left: 100%;
+        margin-left: 10px;
+        width: auto;
+        height: auto;
+        z-index: -1;
+
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 3px;
+        padding: 6px 4px;
+
+        background: $c-black;
+        border-radius: 0 6px 6px 0;
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            margin: 0;
+            padding: 0;
+            border: none;
+            border-radius: 4px;
+            color: $c-off-white;
+            background: none;
+            transition: color 0.15s ease, background 0.15s ease;
+
+            i {
+                margin: 0;
+                font-size: 1.05rem;
+                color: inherit;
+            }
+
+            // Icons only — the localized label is kept for the tooltip but hidden.
+            span { display: none; }
+
+            &:hover {
+                color: $c-white;
+                background: rgba(255, 255, 255, 0.15);
+            }
+
+            &.active {
+                color: $c-tag-yellow;
+                background: rgba(255, 255, 255, 0.12);
+                // Ink accent on the window-facing edge marks the active tab.
+                box-shadow: inset 3px 0 0 $c-tag-yellow;
+            }
+        }
+    }
+
+    // Journeys tab content.
+    .scene-app-journey {
+        .scene-app-journey-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .scene-app-journey-actions {
+            display: inline-flex;
+            gap: 0.5rem;
+
+            a {
+                cursor: pointer;
+                color: $c-icon-brown;
+            }
+        }
+
+        // Journey identity, mirrored from the journey sheet (read-only).
+        .npc-roles {
+            font-family: var(--litm-font-accent);
+            font-size: large;
+            text-align: center;
+            color: $c-styled-text;
+        }
+
+        .short-description {
+            margin: 0.4rem 0;
+            font-family: $font-primary;
+            color: $c-styled-text;
+            text-align: start;
+        }
+
+        .tags {
+            text-align: center;
+            font-family: $font-primary;
+        }
+
+        .scene-app-journey-empty p {
+            font-family: $font-primary;
+            text-align: center;
+            padding: 1rem;
+        }
+    }
+}
