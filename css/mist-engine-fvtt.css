@@ -1217,12 +1217,15 @@ body {
 }
 .journal-entry-content .icon-origin {
   mask-image: url("../assets/icons/icon-origin-litm.svg");
+  background-color: #4d8061;
 }
 .journal-entry-content .icon-adventure {
   mask-image: url("../assets/icons/icon-adventure-litm.svg");
+  background-color: #8f4024;
 }
 .journal-entry-content .icon-greatness {
   mask-image: url("../assets/icons/icon-greatness-litm.svg");
+  background-color: #5c5c92;
 }
 .journal-entry-content .icon-hint {
   color: #734a33;
@@ -1337,9 +1340,12 @@ body {
   font-size: 0.95em;
   line-height: 1.3;
   border: 1px solid rgba(114, 74, 50, 0.35);
+  background-color: #f1e6cc;
+  color: #191813;
 }
 .journal-entry-content table p {
   margin: 0;
+  color: #191813;
 }
 .journal-entry-content table th {
   background-color: rgba(114, 74, 50, 0.22);
@@ -1355,6 +1361,7 @@ body {
 .journal-entry-content table td {
   padding: 0.4em 0.8em;
   vertical-align: top;
+  color: #191813;
   border-bottom: 1px solid rgba(114, 74, 50, 0.15);
 }
 .journal-entry-content table tr:nth-of-type(even) td {
@@ -3695,18 +3702,29 @@ article.cc-enriched section.journal-entry-content {
   box-shadow: inset 3px 0 0 rgb(239, 214, 147);
 }
 .scene-app .scene-app-journey .scene-app-journey-header {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 0.5rem;
 }
 .scene-app .scene-app-journey .scene-app-journey-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
   display: inline-flex;
   gap: 0.5rem;
 }
 .scene-app .scene-app-journey .scene-app-journey-actions a {
   cursor: pointer;
   color: #734a33;
+}
+.scene-app .scene-app-journey .journey-name {
+  font-family: Labrada, serif;
+  font-size: 36px;
+  text-align: center;
+  color: #724a32;
+  margin: 0;
 }
 .scene-app .scene-app-journey .npc-roles {
   font-family: var(--litm-font-accent);
@@ -3725,6 +3743,114 @@ article.cc-enriched section.journal-entry-content {
   font-family: Labrada, serif;
 }
 .scene-app .scene-app-journey .scene-app-journey-empty p {
+  font-family: Labrada, serif;
+  text-align: center;
+  padding: 1rem;
+}
+.scene-app .scene-story-themes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  gap: 0.5rem;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-actions a {
+  cursor: pointer;
+  color: #734a33;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark {
+  padding-left: 2px;
+  padding-right: 3px;
+  border-radius: 2px;
+  font-style: italic;
+  white-space: nowrap;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.tag, .scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.tag.yellow {
+  background: linear-gradient(to bottom, transparent 20%, rgb(239, 214, 147) 21%, rgb(239, 214, 147) 90%, transparent 91%);
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.status, .scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.tag.green {
+  background: linear-gradient(to bottom, transparent 20%, rgb(188, 205, 175) 21%, rgb(188, 205, 175) 90%, transparent 91%);
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.weakness, .scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.tag.orange {
+  background: linear-gradient(to bottom, transparent 20%, rgb(236, 186, 133) 21%, rgb(236, 186, 133) 90%, transparent 91%);
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.limit, .scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.tag.red {
+  background: linear-gradient(to bottom, transparent 20%, rgb(208, 160, 141) 21%, rgb(208, 160, 141) 90%, transparent 91%);
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.might {
+  background: transparent;
+  font-weight: bold;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark .might-icon {
+  height: 1em;
+  width: 1em;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  top: 0.2em;
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+  margin-right: 0.2em;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark .might-icon.adventure {
+  background-image: url("../assets/icons/might-icon-adventure.webp");
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark .might-icon.greatness {
+  background-image: url("../assets/icons/might-icon-greatness.webp");
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark .might-icon.origin {
+  background-image: url("../assets/icons/might-icon-origin.webp");
+  margin-right: 0;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags .limit-inline,
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags .npc-limit-item {
+  display: inline-block;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags .limit-inline mark.limit,
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags .npc-limit-item mark.limit {
+  padding-right: 0.8em;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags .limit-inline .limit-value,
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags .npc-limit-item .limit-value {
+  background-image: url("../assets/icons/icon-litm-limit-shield.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  display: inline-block;
+  margin: 0 0 0 -0.5em;
+  padding: 0 0 0.1em 0;
+  width: 1.1em;
+  height: auto;
+  text-align: center;
+  color: white;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.draggable {
+  cursor: grab;
+}
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.draggable i {
+  margin-right: 3px;
+}
+.scene-app .scene-story-themes .scene-story-themes-empty p {
   font-family: Labrada, serif;
   text-align: center;
   padding: 1rem;
@@ -4221,5 +4347,3 @@ article.cc-enriched section.journal-entry-content {
   height: 100%;
   padding-right: 8px;
 }
-
-/*# sourceMappingURL=mist-engine-fvtt.css.map */

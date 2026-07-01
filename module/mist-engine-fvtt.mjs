@@ -179,13 +179,9 @@ Hooks.once("ready", async function () {
 
   $(document).on(
     "dragstart",
-    [
-      "mark.mist-engine.tag",
-      "mark.mist-engine.status",
-      "mark.mist-engine.limit",
-    ],
+    "mark.draggable",
     (event) => {
-      event.originalEvent.dataTransfer.setData("text/plain", JSON.stringify(event.target.dataset));
+      event.originalEvent.dataTransfer.setData("text/plain", JSON.stringify(event.currentTarget.dataset));
     }
   );
 

@@ -1,0 +1,36 @@
+<section class="tab {{tabs.storyThemes.cssClass}}" data-group="scene-app" data-tab="storyThemes">
+    <div class="tab-content-inner scene-story-themes">
+        {{#if storyThemes.length}}
+        {{#each storyThemes}}
+        <div class="scene-story-theme">
+            <div class="scene-story-theme-header">
+                <div class="scene-app-actor-header">{{name}}</div>
+                <div class="scene-story-theme-actions">
+                    <a data-action="openStoryTheme" data-uuid="{{uuid}}"
+                        data-tooltip="{{localize 'MIST_ENGINE.SCENE_APP.OpenStoryTheme'}}">
+                        <i class="fa-solid fa-up-right-from-square"></i>
+                    </a>
+                    <a data-action="removeStoryTheme" data-uuid="{{uuid}}"
+                        data-tooltip="{{localize 'MIST_ENGINE.SCENE_APP.RemoveStoryTheme'}}">
+                        <i class="fa-solid fa-xmark"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="scene-story-theme-tags">
+                {{#each powertags}}
+                <mark class="draggable tag" draggable="true" data-type="tag" data-name="{{name}}">{{name}}</mark>
+                {{/each}}
+                {{#each weaknesstags}}
+                <mark class="draggable weakness" draggable="true" data-type="weakness" data-name="{{name}}"><i
+                        class="fa-light fa-angles-down"></i>{{name}}</mark>
+                {{/each}}
+            </div>
+        </div>
+        {{/each}}
+        {{else}}
+        <div class="empty-message scene-story-themes-empty">
+            <p>{{localize 'MIST_ENGINE.SCENE_APP.NoStoryThemes'}}</p>
+        </div>
+        {{/if}}
+    </div>
+</section>

@@ -3,8 +3,9 @@
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
 # 14.4.1
-- improved might aspect handling, they are a seperate field in the challenges now, GMs have to tell a player if they have to use the modifier in the roll dialog or not
-- SceneApp supports journeys (one journey at a time)
+- FEAT: improved might aspect handling, they are a seperate field in the challenges now, GMs have to tell a player if they have to use the modifier in the roll dialog or not
+- FEAT: SceneApp supports journeys (one journey at a time) and story themes
+- FIX: premium package styling
   
 # 14.4.0
 - FEAT: confirmation dialogs when deleting entries from different item sheets

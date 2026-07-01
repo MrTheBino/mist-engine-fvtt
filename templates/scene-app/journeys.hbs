@@ -2,7 +2,7 @@
     <div class="tab-content-inner scene-app-journey">
         {{#if assignedJourney}}
         <div class="scene-app-journey-header">
-            <div class="scene-app-actor-header">{{assignedJourneyName}}</div>
+            <h1 class="journey-name custom-font-color">{{assignedJourneyName}}</h1>
             <div class="scene-app-journey-actions">
                 <a data-action="openAssignedJourney" data-tooltip="{{localize 'MIST_ENGINE.SCENE_APP.OpenJourney'}}">
                     <i class="fa-solid fa-up-right-from-square"></i>
@@ -14,15 +14,15 @@
         </div>
 
         {{#if (notEmpty assignedJourneySystem.role)}}
-        <div class="npc-roles">{{assignedJourneySystem.role}}</div>
+        <div class="npc-roles custom-font-color">{{assignedJourneySystem.role}}</div>
         {{/if}}
 
         {{#if (notEmpty assignedJourneySystem.shortDescription)}}
-        <div class="short-description">{{{simpleFormatText assignedJourneySystem.shortDescription}}}</div>
+        <div class="short-description custom-font-color">{{{simpleFormatText assignedJourneySystem.shortDescription}}}</div>
         {{/if}}
 
         {{#if (notEmpty assignedJourneySystem.tags)}}
-        <p class="tags">{{{textWithTags assignedJourneySystem.tags}}}</p>
+        <p class="tags custom-font-color">{{{textWithTags assignedJourneySystem.tags}}}</p>
         {{/if}}
 
         {{!-- Vignettes & Consequences (read-only, like the journey sheet) --}}

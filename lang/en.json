@@ -80,9 +80,14 @@
       "WeaknessToggleHint": "Click to toggle this weakness as active in the scene",
       "TabActors": "Actors",
       "TabJourneys": "Journeys",
+      "TabStoryThemes": "Story Themes",
       "OpenJourney": "Open journey sheet",
       "UnassignJourney": "Unassign journey",
-      "NoJourneyAssigned": "No journey assigned. Drag a journey from the sidebar onto this app to assign it to the scene."
+      "NoJourneyAssigned": "No journey assigned. Drag a journey from the sidebar onto this app to assign it to the scene.",
+      "OpenStoryTheme": "Open story theme",
+      "RemoveStoryTheme": "Remove story theme",
+      "OnlyStoryThemes": "Only themebooks flagged as a Story Theme can be added here.",
+      "NoStoryThemes": "No story themes yet. Drag a Story Theme from the sidebar or a compendium onto this app to add it to the scene."
     },
     "MIGHT": {
       "None": "— None —",

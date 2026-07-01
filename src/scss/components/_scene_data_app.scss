@@ -294,13 +294,17 @@
     // Journeys tab content.
     .scene-app-journey {
         .scene-app-journey-header {
+            position: relative;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             gap: 0.5rem;
         }
 
         .scene-app-journey-actions {
+            position: absolute;
+            top: 0;
+            right: 0;
             display: inline-flex;
             gap: 0.5rem;
 
@@ -311,6 +315,14 @@
         }
 
         // Journey identity, mirrored from the journey sheet (read-only).
+        .journey-name {
+            font-family: $font-primary;
+            font-size: 36px;
+            text-align: center;
+            color: $c-styled-text;
+            margin: 0;
+        }
+
         .npc-roles {
             font-family: var(--litm-font-accent);
             font-size: large;
@@ -331,6 +343,60 @@
         }
 
         .scene-app-journey-empty p {
+            font-family: $font-primary;
+            text-align: center;
+            padding: 1rem;
+        }
+    }
+
+    // Story Themes tab content.
+    .scene-story-themes {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        .scene-story-theme {
+            // Center the theme name; keep the open/remove actions top-right.
+            .scene-story-theme-header {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            .scene-story-theme-actions {
+                position: absolute;
+                top: 0;
+                right: 0;
+                display: inline-flex;
+                gap: 0.5rem;
+
+                a {
+                    cursor: pointer;
+                    color: $c-icon-brown;
+                }
+            }
+
+            .scene-story-theme-tags {
+                @include tag-mark-def;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+                justify-content: center;
+                margin-top: 0.25rem;
+
+                mark.draggable {
+                    cursor: grab;
+
+                    i {
+                        margin-right: 3px;
+                    }
+                }
+            }
+        }
+
+        .scene-story-themes-empty p {
             font-family: $font-primary;
             text-align: center;
             padding: 1rem;

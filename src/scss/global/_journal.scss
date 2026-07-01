@@ -448,14 +448,17 @@
 
     .icon-origin {
         mask-image: url("../assets/icons/icon-origin-litm.svg");
+        background-color: $c-icon-green;
     }
 
     .icon-adventure {
         mask-image: url("../assets/icons/icon-adventure-litm.svg");
+        background-color: $c-icon-red;
     }
 
     .icon-greatness {
         mask-image: url("../assets/icons/icon-greatness-litm.svg");
+        background-color: $c-icon-blue;
     }
 
     .icon-hint {
@@ -590,9 +593,12 @@
         font-size: 0.95em;
         line-height: 1.3;
         border: 1px solid rgba($c-brown, 0.35);
+        background-color: #f1e6cc;
+        color: $c-dark;
 
         p {
             margin: 0;
+            color: $c-dark;
         }
 
         // header cells (rendered as <th> in the table's first row)
@@ -611,6 +617,7 @@
         td {
             padding: 0.4em 0.8em;
             vertical-align: top;
+            color: $c-dark;
             border-bottom: 1px solid rgba($c-brown, 0.15);
         }
 

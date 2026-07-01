@@ -36,6 +36,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         actions: {
             openAssignedJourney: this.#handleOpenAssignedJourney,
             unassignJourney: this.#handleUnassignJourney,
+            openStoryTheme: this.#handleOpenStoryTheme,
+            removeStoryTheme: this.#handleRemoveStoryTheme,
             createFloatingTagOrStatus: this.#handleCreateFloatingTagOrStatus,
             deleteFloatingTagOrStatus: this.#handleDeleteFloatingTagOrStatus,
             actorToggleFloatingTagOrStatusMarking: this.#handleActorToggleFloatingTagOrStatusMarking,
@@ -77,6 +79,10 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         journeys: {
             template: 'systems/mist-engine-fvtt/templates/scene-app/journeys.hbs',
             scrollable: ['.tab-content-inner']
+        },
+        storyThemes: {
+            template: 'systems/mist-engine-fvtt/templates/scene-app/story-themes.hbs',
+            scrollable: ['.tab-content-inner']
         }
     };
 
@@ -84,7 +90,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         "scene-app": {
             tabs: [
                 { id: "actors", group: "scene-app", icon: "fa-solid fa-users", label: "MIST_ENGINE.SCENE_APP.TabActors" },
-                { id: "journeys", group: "scene-app", icon: "fa-solid fa-route", label: "MIST_ENGINE.SCENE_APP.TabJourneys" }
+                { id: "journeys", group: "scene-app", icon: "fa-solid fa-route", label: "MIST_ENGINE.SCENE_APP.TabJourneys" },
+                { id: "storyThemes", group: "scene-app", icon: "fa-solid fa-scroll", label: "MIST_ENGINE.SCENE_APP.TabStoryThemes" }
             ],
             initial: "actors"
         }
@@ -109,6 +116,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             delete parts.tabs;
             delete parts.actors;
             delete parts.journeys;
+            delete parts.storyThemes;
         }
         return parts;
     }
@@ -129,6 +137,24 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
 
         this.element.addEventListener("drop", this._onDrop.bind(this));
+
+        // Journeys tab: reuse the assigned journey's custom background 
+        const journey = this.getAssignedJourney();
+        const journeyEl = journey ? this.element.querySelector(".scene-app-journey") : null;
+        const bg = journey?.system.customBackground;
+        if (journeyEl && bg && bg.trim() !== "") {
+            journeyEl.style.setProperty("background-image",
+                `url("${bg}"), url("systems/mist-engine-fvtt/assets/paper_background_1.webp")`);
+            journeyEl.style.setProperty("background-size", "contain, cover");
+            journeyEl.style.setProperty("background-repeat", "no-repeat");
+
+            // Only honor the journey's custom font color when its background is present 
+            const fontColor = journey.system.customFontColor;
+            if (fontColor && fontColor.trim() !== "") {
+                journeyEl.querySelectorAll(".custom-font-color")
+                    .forEach(el => { el.style.color = fontColor; });
+            }
+        }
 
         // setr the title of the dialog
         let titleElement = this.element.querySelector(".window-title");
@@ -256,6 +282,23 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             }
         }
 
+        // A dropped themebook flagged as a story theme is added to the scene.
+        if (type === "Item" && game.user.isGM) {
+            const item = await fromUuid(data.uuid);
+            if (item?.type === "themebook") {
+                if (!this.isStoryThemeItem(item)) {
+                    ui.notifications.warn(game.i18n.localize("MIST_ENGINE.SCENE_APP.OnlyStoryThemes"));
+                    return;
+                }
+                const ids = this.currentSceneDataItem.system.storyThemeIds ?? [];
+                if (!ids.includes(item.uuid)) {
+                    await this.currentSceneDataItem.update({ "system.storyThemeIds": [...ids, item.uuid] });
+                    this.sendUpdateHookEvent();
+                }
+                return;
+            }
+        }
+
         const isStatus = type === "status";
         const floatingTagsAndStatuses = this.currentSceneDataItem.system.floatingTagsAndStatuses ?? [];
 
@@ -264,6 +307,13 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             case "tag":
                 await this.currentSceneDataItem.update({
                     "system.floatingTagsAndStatuses": [...floatingTagsAndStatuses, { name }],
+                });
+                this.sendUpdateHookEvent();
+                break;
+            case "weakness":
+                // A dropped weakness / negative tag becomes a negative floating tag.
+                await this.currentSceneDataItem.update({
+                    "system.floatingTagsAndStatuses": [...floatingTagsAndStatuses, { name, positive: false }],
                 });
                 this.sendUpdateHookEvent();
                 break;
@@ -319,6 +369,15 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             context.assignedJourneyChallenges = journey
                 ? journey.items.filter(i => i.type === "shortchallenge")
                 : [];
+
+            // Story Themes tab: themebooks dragged onto the scene, read-only,
+            // with their (filled) power and weakness tags exposed for dragging.
+            context.storyThemes = (await this.getStoryThemes()).map(item => ({
+                uuid: item.uuid,
+                name: item.name,
+                powertags: (item.system.powertags ?? []).filter(t => t.name?.trim() && !t.planned),
+                weaknesstags: (item.system.weaknesstags ?? []).filter(t => t.name?.trim() && !t.planned)
+            }));
         }
 
         return context;
@@ -340,6 +399,32 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     static async #handleUnassignJourney(event, target) {
         event.preventDefault();
         await this.currentSceneDataItem.update({ "system.assignedJourneyId": "" });
+        this.sendUpdateHookEvent();
+    }
+
+    /** Is this item a story theme? A themebook flagged isStoryTheme. */
+    isStoryThemeItem(item) {
+        return item?.type === "themebook" && item.system.options?.isStoryTheme === true;
+    }
+
+    /** Resolve the assigned story themes (valid + still story themes). */
+    async getStoryThemes() {
+        const ids = this.currentSceneDataItem?.system?.storyThemeIds ?? [];
+        const resolved = await Promise.all(ids.map(uuid => fromUuid(uuid).catch(() => null)));
+        return resolved.filter(it => this.isStoryThemeItem(it));
+    }
+
+    static async #handleOpenStoryTheme(event, target) {
+        event.preventDefault();
+        const item = await fromUuid(target.dataset.uuid);
+        item?.sheet.render(true);
+    }
+
+    static async #handleRemoveStoryTheme(event, target) {
+        event.preventDefault();
+        const uuid = target.dataset.uuid;
+        const ids = (this.currentSceneDataItem.system.storyThemeIds ?? []).filter(u => u !== uuid);
+        await this.currentSceneDataItem.update({ "system.storyThemeIds": ids });
         this.sendUpdateHookEvent();
     }
 
