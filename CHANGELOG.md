@@ -5,7 +5,9 @@ If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/m
 # 14.4.1
 - FEAT: improved might aspect handling, they are a seperate field in the challenges now, GMs have to tell a player if they have to use the modifier in the roll dialog or not
 - FEAT: SceneApp supports journeys (one journey at a time) and story themes
+- FEAT: [Feature Request] Tie Story Themes to a Scene #75
 - FIX: premium package styling
+- FIX: [Bug/rules] Only one TAG per throw should be burned/scratched #92
   
 # 14.4.0
 - FEAT: confirmation dialogs when deleting entries from different item sheets
