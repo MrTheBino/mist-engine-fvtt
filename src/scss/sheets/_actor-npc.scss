@@ -181,6 +181,12 @@
   margin-right: 2px;
 }
 
+.might-level-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
 // Mighty aspects (issue #90) — non-edit display on the Challenge sheet.
 .npc-mighty-aspects-container {
   font-family: $font-primary;

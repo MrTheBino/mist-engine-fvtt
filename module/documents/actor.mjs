@@ -31,8 +31,8 @@ export class MistEngineActor extends Actor {
         image = "systems/mist-engine-fvtt/assets/icons/icon-challenge.svg";
         break;
     }
-
-    if (image != null) {
+    const DEFAULT_ACTOR_IMG = "icons/svg/mystery-man.svg";
+    if (image != null && (!data.img || data.img === DEFAULT_ACTOR_IMG)) {
       data.img = image
     }
 

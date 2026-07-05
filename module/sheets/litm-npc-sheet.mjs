@@ -138,6 +138,11 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
       input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
     }
 
+    const mightLevelSelects = this.element.querySelectorAll(".npc-might-level-select");
+    for (const select of mightLevelSelects) {
+      select.addEventListener("change", (event) => this.handleMightLevelSelect(event));
+    }
+
     const rolesInput = this.element.querySelector(".npc-roles-input");
     rolesInput?.addEventListener("change", (event) => this.handleRolesInput(event));
 
@@ -215,16 +220,35 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
 
   async handleNpcItemNpcArrayUpdate(event) {
     event.preventDefault();
-    
+
     // Save scroll position before update
     this._saveScrollPositions();
-    
+
     const target = event.currentTarget;
     const arrayIndex = parseInt(target.dataset.index);
     const arrayName = target.dataset.array;
     const key = target.dataset.key;
 
     await ArrayFieldAdapter.set(this.actor, `system.${arrayName}`, arrayIndex, key, target.value);
+  }
+
+  async handleMightLevelSelect(event) {
+    event.preventDefault();
+    const select = event.currentTarget;
+    const index = parseInt(select.dataset.index);
+    const customInput = select.parentElement?.querySelector(".npc-might-level-custom");
+
+    if (select.value === "__custom__") {
+      if (customInput) {
+        customInput.hidden = false;
+        customInput.focus();
+      }
+      return;
+    }
+
+    if (customInput) customInput.hidden = true;
+    this._saveScrollPositions();
+    await ArrayFieldAdapter.set(this.actor, "system.mightyAspects", index, "level", select.value);
   }
 
   async handleNpcItemThreatEntryUpdate(event) {

@@ -77,6 +77,9 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
             input.addEventListener("change", event => this.handleArrayUpdate(event));
             input.addEventListener("keydown", event => this.handleInputShortCutsForGM(event));
         }
+        for (const select of this.element.querySelectorAll('.npc-might-level-select')) {
+            select.addEventListener("change", event => this.handleMightLevelSelect(event));
+        }
         for (const input of this.element.querySelectorAll('.npc-updatable-threat-entry-stat')) {
             input.addEventListener("change", event => this.handleThreatEntryUpdate(event));
             input.addEventListener("keydown", event => this.handleInputShortCutsForGM(event));
@@ -134,6 +137,24 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
         event.preventDefault();
         const t = event.currentTarget;
         await ArrayFieldAdapter.set(this.document, `system.${t.dataset.array}`, parseInt(t.dataset.index), t.dataset.key, t.value);
+    }
+
+    async handleMightLevelSelect(event) {
+        event.preventDefault();
+        const select = event.currentTarget;
+        const index = parseInt(select.dataset.index);
+        const customInput = select.parentElement?.querySelector(".npc-might-level-custom");
+
+        if (select.value === "__custom__") {
+            if (customInput) {
+                customInput.hidden = false;
+                customInput.focus();
+            }
+            return;
+        }
+
+        if (customInput) customInput.hidden = true;
+        await ArrayFieldAdapter.set(this.document, "system.mightyAspects", index, "level", select.value);
     }
 
     async handleThreatEntryUpdate(event) {

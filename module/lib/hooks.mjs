@@ -25,8 +25,8 @@ export function setupHooks() {
     };
 
     config.push({
-      action: "toggle-status",
-      title: "Als Status markieren",
+      action: "toggle-tag",
+      title: game.i18n.localize("MIST_ENGINE.PROSEMIRROR.MarkAsTag"),
       icon: '<i class="fa-solid fa-tag fa-fw"></i>',
       scope: "text",
       cmd: toggleMark("tag"),
@@ -34,8 +34,8 @@ export function setupHooks() {
     });
 
     config.push({
-      action: "toggle-tag",
-      title: "Als Tag markieren",
+      action: "toggle-status",
+      title: game.i18n.localize("MIST_ENGINE.PROSEMIRROR.MarkAsStatus"),
       icon: '<i class="fa-solid fa-hashtag fa-fw"></i>',
       scope: "text",
       cmd: toggleMark("status"),

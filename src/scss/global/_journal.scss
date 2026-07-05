@@ -37,6 +37,32 @@
             border-bottom: 0;
         }
     }
+
+    .scene-art{
+        display: block;
+        margin: 1.6em auto;
+        max-width: 600px;
+        padding: 10px;
+        background-color: #efe4cc;
+        background-image: url(../assets/bg-pargement-texture.webp);
+        background-size: cover;
+        border: 2px solid $c-brown;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+
+        img{
+            display: block;
+            width: 100%;
+            height: auto;
+            margin: 0;
+            border: 1px solid rgba($c-dark, 0.55);
+            cursor: pointer;
+        }
+
+        // portrait pieces shouldn't dominate the text column
+        &.portrait{
+            max-width: 420px;
+        }
+    }
     
     .text-container-300{
         padding: 30px;
@@ -494,6 +520,26 @@
         grid-template-columns: 1fr 1fr;
         gap: 20px;
         align-items: start;
+    }
+
+    .tag-category-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 28px;
+        row-gap: 12px;
+        align-items: start;
+
+        .tag-cell { min-width: 0; }
+
+        h3 {
+            text-align: center;
+            margin: 0.3em 0 0.4em;
+        }
+
+        p {
+            text-align: center;
+            margin: 0.15em 0;
+        }
     }
 
     .loot-grid {

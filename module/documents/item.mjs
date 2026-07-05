@@ -45,7 +45,8 @@ export class MistEngineItem extends Item {
         break;
     }
 
-    if (image != null) {
+    const DEFAULT_ITEM_IMG = "icons/svg/item-bag.svg";
+    if (image != null && (!data.img || data.img === DEFAULT_ITEM_IMG)) {
       data.img = image
     }
 

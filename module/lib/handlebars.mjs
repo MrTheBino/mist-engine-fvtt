@@ -111,6 +111,10 @@ export function registerHandlebarHelpers() {
     return key ? game.i18n.localize(`MIST_ENGINE.MIGHT.${key}`) : (level ?? "");
   });
 
+  Handlebars.registerHelper("isCustomMightLevel", function (level) {
+    return !!level && !["origin", "adventure", "greatness"].includes(level);
+  });
+
   Handlebars.registerHelper("tagFilled", function (str) {
     if (str && str.trim().length > 0) {
       return true;

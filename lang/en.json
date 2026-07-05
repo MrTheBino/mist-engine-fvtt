@@ -4,6 +4,10 @@
       "UpdatedTo": "Updated to version",
       "DontShowAgain": "Don't show again for this version"
     },
+    "PROSEMIRROR": {
+      "MarkAsTag": "Mark as Tag",
+      "MarkAsStatus": "Mark as Status"
+    },
     "ACTIONS":{
       "ImportChallengeJSON": "Import Challenge from JSON",
       "ImportShortChallengeVignetteJSON": "Import Short Challenge / Vignette from JSON",
@@ -66,6 +70,7 @@
       "MightIcon": "Icon",
       "MightAspect": "Aspect",
       "MightAspectPlaceholder": "e.g. size, magic, influence, numbers",
+      "CustomMightLevel": "Custom level",
       "TagsStatus":{
         "Symbols":{
           "Adventure": "Adventure",
@@ -93,7 +98,8 @@
       "None": "— None —",
       "Origin": "Origin",
       "Adventure": "Adventure",
-      "Greatness": "Greatness"
+      "Greatness": "Greatness",
+      "Custom": "Custom…"
     },
     "CHALLENGE_ADDON": {
       "RatingIncrease": "Rating Increase",

@@ -388,6 +388,7 @@ body {
 .tab-notes mark .might-icon {
   height: 1em;
   width: 1em;
+  flex-shrink: 0;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -677,6 +678,7 @@ body {
 .journal-entry-content mark .might-icon {
   height: 1em;
   width: 1em;
+  flex-shrink: 0;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -745,6 +747,28 @@ body {
 .journal-entry-content .written-block h2 {
   font-family: CaveatBrush-Regular, cursive;
   border-bottom: 0;
+}
+.journal-entry-content .scene-art {
+  display: block;
+  margin: 1.6em auto;
+  max-width: 600px;
+  padding: 10px;
+  background-color: #efe4cc;
+  background-image: url(../assets/bg-pargement-texture.webp);
+  background-size: cover;
+  border: 2px solid #724a32;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+.journal-entry-content .scene-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border: 1px solid rgba(25, 24, 19, 0.55);
+  cursor: pointer;
+}
+.journal-entry-content .scene-art.portrait {
+  max-width: 420px;
 }
 .journal-entry-content .text-container-300 {
   padding: 30px;
@@ -1257,6 +1281,24 @@ body {
   gap: 20px;
   align-items: start;
 }
+.journal-entry-content .tag-category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 28px;
+  row-gap: 12px;
+  align-items: start;
+}
+.journal-entry-content .tag-category-grid .tag-cell {
+  min-width: 0;
+}
+.journal-entry-content .tag-category-grid h3 {
+  text-align: center;
+  margin: 0.3em 0 0.4em;
+}
+.journal-entry-content .tag-category-grid p {
+  text-align: center;
+  margin: 0.15em 0;
+}
 .journal-entry-content .loot-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1599,6 +1641,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine #tooltip mark .might-icon {
   height: 1em;
   width: 1em;
+  flex-shrink: 0;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -1643,6 +1686,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine #tooltip {
   height: 1em;
   width: 1em;
+  flex-shrink: 0;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -2175,6 +2219,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .fts-input-name .might-icon {
   height: 1em;
   width: 1em;
+  flex-shrink: 0;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -2648,6 +2693,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine mark .might-icon {
   height: 1em;
   width: 1em;
+  flex-shrink: 0;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -3021,6 +3067,11 @@ article.cc-enriched section.journal-entry-content {
   height: 18px;
   margin-right: 2px;
 }
+.mist-engine .might-level-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
 .mist-engine .npc-mighty-aspects-container {
   font-family: Labrada, serif;
   color: #191813;
@@ -3038,6 +3089,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .npc-mighty-aspects-container .npc-mighty-aspect-item .might-icon {
   height: 1em;
   width: 1em;
+  flex-shrink: 0;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -3421,6 +3473,7 @@ article.cc-enriched section.journal-entry-content {
 .roll-dialog-container .might-icon {
   height: 1em;
   width: 1em;
+  flex-shrink: 0;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -3586,6 +3639,7 @@ article.cc-enriched section.journal-entry-content {
 .character-container .mighty-aspects-entries .mighty-aspect-entry .might-icon {
   height: 1em;
   width: 1em;
+  flex-shrink: 0;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -3796,6 +3850,7 @@ article.cc-enriched section.journal-entry-content {
 .scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark .might-icon {
   height: 1em;
   width: 1em;
+  flex-shrink: 0;
   background-color: transparent;
   background-size: contain;
   background-repeat: no-repeat;
@@ -4347,3 +4402,5 @@ article.cc-enriched section.journal-entry-content {
   height: 100%;
   padding-right: 8px;
 }
+
+/*# sourceMappingURL=mist-engine-fvtt.css.map */
