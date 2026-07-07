@@ -113,7 +113,8 @@
       "Applied": "Applied add-on \"{addon}\" to {challenge}."
     },
     "SheetLabels": {
-      "ChallengeAddon": "Challenge Add-on"
+      "ChallengeAddon": "Challenge Add-on",
+      "JournalEntry": "Legend In The Mist Journal"
     },
     "PLACEHOLDERS": {
       "QuestGoal": "Quest/Goal",

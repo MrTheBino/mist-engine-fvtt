@@ -33,7 +33,7 @@
       "flags": {}
     }
   ],
-  "version": "14.4.2",
+  "version": "14.4.3",
   "compatibility": {
     "minimum": "13",
     "verified": "14"
@@ -124,7 +124,7 @@
   ],
   "socket": true,
   "manifest": "https://github.com/MrTheBino/mist-engine-fvtt/releases/latest/download/system.json",
-  "download": "https://github.com/MrTheBino/mist-engine-fvtt/releases/download/13.5.4/system.zip",
+  "download": "https://github.com/MrTheBino/mist-engine-fvtt/releases/download/14.4.2/system.zip",
   "background": "systems/mist-engine-fvtt/assets/landingpage.webp",
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "power",

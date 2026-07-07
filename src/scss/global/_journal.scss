@@ -63,7 +63,18 @@
             max-width: 420px;
         }
     }
-    
+
+    .style-artset{
+        img{
+            display: block;
+            margin: 0.3em auto;
+            max-width: 50%;
+            height: auto;
+            border: 0;
+            cursor: pointer;
+        }
+    }
+
     .text-container-300{
         padding: 30px;
     }

@@ -15,6 +15,14 @@
     width: 102px;
   }
 
+  .header-fields.journey {
+    h1,
+    .short-description,
+    .npc-roles {
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.85), 0 1px 1px rgba(0, 0, 0, 0.7);
+    }
+  }
+
   h1.journey-name {
     font-family: $font-primary;
     font-size: 36px;

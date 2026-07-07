@@ -417,4 +417,30 @@ export function setupHooks() {
       showCharacterTokenHover(token, false);
     }
   });
+
+  Hooks.on("tokenizer-2.registerFrames", (registry) => {
+    registry.registerSection({
+      id: "mist-engine-fvtt",
+      label: "Legend In The Mist",
+      subsections: [
+        {
+          label: null,
+          frames: [
+            {
+              src: "systems/mist-engine-fvtt/assets/token_frames/litm-token-frame-1.png",
+              label: "LitM Frame 1",
+            },
+            {
+              src: "systems/mist-engine-fvtt/assets/token_frames/litm-token-frame-2.png",
+              label: "LitM Frame 2",
+            },
+            {
+              src: "systems/mist-engine-fvtt/assets/token_frames/litm-token-frame-3.png",
+              label: "LitM Frame 3",
+            },
+          ],
+        },
+      ],
+    });
+  });
 }

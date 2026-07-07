@@ -770,6 +770,14 @@ body {
 .journal-entry-content .scene-art.portrait {
   max-width: 420px;
 }
+.journal-entry-content .style-artset img {
+  display: block;
+  margin: 0.3em auto;
+  max-width: 50%;
+  height: auto;
+  border: 0;
+  cursor: pointer;
+}
 .journal-entry-content .text-container-300 {
   padding: 30px;
 }
@@ -3246,6 +3254,11 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine.sheet.actor.litm-journey .portrait-img {
   height: 102px;
   width: 102px;
+}
+.mist-engine.sheet.actor.litm-journey .header-fields.journey h1,
+.mist-engine.sheet.actor.litm-journey .header-fields.journey .short-description,
+.mist-engine.sheet.actor.litm-journey .header-fields.journey .npc-roles {
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.85), 0 1px 1px rgba(0, 0, 0, 0.7);
 }
 .mist-engine.sheet.actor.litm-journey h1.journey-name {
   font-family: Labrada, serif;

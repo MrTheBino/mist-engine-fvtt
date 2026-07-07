@@ -13,6 +13,7 @@ import { MistEngineItemThemekitSheet } from "./sheets/item-themekit-sheet.mjs";
 import { MistEngineLegendInTheMistJourneySheet } from "./sheets/litm-actor-journey-sheet.mjs";
 import { MistEngineThemebookItemSheet } from "./sheets/item-themebook-sheet.mjs";
 import { MistEngineChallengeAddonItemSheet } from "./sheets/item-challenge-addon-sheet.mjs";
+import { MistEngineJournalEntrySheet } from "./sheets/journal-entry-sheet.mjs";
 import { MistSceneApp } from "./apps/scene-app.mjs";
 import { HowToPlayApp } from "./apps/how-to-play-app.mjs";
 import { ChangelogApp } from "./apps/changelog-app.mjs";
@@ -151,7 +152,14 @@ Hooks.once("init", function () {
     types: ["challenge-addon"],
     label: "MIST_ENGINE.SheetLabels.ChallengeAddon",
   });
-  
+
+  // Use our own journal sheet so journals open at a wider default width. The
+  // core JournalEntrySheet stays registered as a selectable fallback.
+  foundry.documents.collections.Journal.registerSheet("mist-engine-fvtt", MistEngineJournalEntrySheet, {
+    makeDefault: true,
+    label: "MIST_ENGINE.SheetLabels.JournalEntry",
+  });
+
 
   setupMistEngineKeyBindings();
   setupConfiguration();

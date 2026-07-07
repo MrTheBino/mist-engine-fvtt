@@ -2,6 +2,10 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.4.3
+- FEAT: added native support for Tokenizer 2, added 3 official token frames
+- FEAT: improved styling for premium journal entries
+
 # 14.4.2
 - FIX: importing actors / items from compendium to the world doesn't overwrite it's images
 - FIX: premium package journal styling for scene art
