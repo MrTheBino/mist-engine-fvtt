@@ -770,6 +770,24 @@ body {
 .journal-entry-content .scene-art.portrait {
   max-width: 420px;
 }
+.journal-entry-content .scene-art-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1em;
+  align-items: start;
+  margin: 1.6em 0;
+}
+.journal-entry-content .scene-art-grid + .scene-art-grid {
+  margin-top: 1em;
+}
+.journal-entry-content .scene-art-grid .scene-art {
+  margin: 0;
+  max-width: none;
+  padding: 6px;
+}
+.journal-entry-content .scene-art-grid .scene-art.portrait {
+  max-width: none;
+}
 .journal-entry-content .style-artset img {
   display: block;
   margin: 0.3em auto;

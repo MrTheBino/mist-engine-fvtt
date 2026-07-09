@@ -64,6 +64,29 @@
         }
     }
 
+
+    .scene-art-grid{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1em;
+        align-items: start;
+        margin: 1.6em 0;
+
+        & + .scene-art-grid{
+            margin-top: 1em;
+        }
+
+        .scene-art{
+            margin: 0;
+            max-width: none;
+            padding: 6px;
+
+            &.portrait{
+                max-width: none;
+            }
+        }
+    }
+
     .style-artset{
         img{
             display: block;

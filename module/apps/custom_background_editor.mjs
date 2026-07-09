@@ -357,7 +357,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
 
     async uploadToWorldAssets(blobOrFile, {
         subdir = "custom_backgrounds/generated",
-        filename = `export-${randomID()}.png`,
+        filename = `export-${foundry.utils.randomID()}.png`,
         notify = true
     } = {}) {
         // Permission gate
