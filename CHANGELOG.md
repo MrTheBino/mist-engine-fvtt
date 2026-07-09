@@ -3,7 +3,7 @@
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
 # 14.4.4
-# FIX: duplicate() bug fixed during quintessence creation on the character sheet
+- FIX: duplicate() bug fixed during quintessence creation on the character sheet
 
 # 14.4.3
 - FEAT: added native support for Tokenizer 2, added 3 official token frames
