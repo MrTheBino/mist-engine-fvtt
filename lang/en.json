@@ -145,6 +145,22 @@
       "detailed": "Detailed Roll",
       "reaction": "Reaction Roll"
     },
+    "GM_CONFIRM": {
+      "Title": "Roll Confirmation",
+      "RequestFrom": "{player} wants to roll for {actor}:",
+      "WaitingForGm": "Waiting for GM confirmation…",
+      "Cancel": "Cancel request",
+      "Rejected": "The GM rejected your roll. Adjust your selection and try again.",
+      "CanceledByPlayer": "The player withdrew the roll request.",
+      "Approve": "Approve",
+      "Reject": "Reject",
+      "PlayerTags": "Selected Tags:",
+      "StoryTags": "Story Tags / Status:",
+      "ChallengeTags": "Challenge Tags / Status:",
+      "GmTags": "GM Modifiers:",
+      "Mods": "Mods",
+      "Might": "Might"
+    },
     "LABELS": {
       "Options": "Options",
       "DragCardHint": "Drag to reorder or move between tabs",

@@ -45,6 +45,16 @@ export function setupConfiguration() {
         default: false
     });
 
+    // game.settings.get("mist-engine-fvtt", "gmRollConfirmation");
+    game.settings.register("mist-engine-fvtt", "gmRollConfirmation", {
+        name: "GM Roll Confirmation",
+        hint: "Player rolls from the roll dialog must be confirmed by the GM before the dice are rolled. The GM sees the player's selection and can approve or reject it.",
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false
+    });
+
     game.settings.register("mist-engine-fvtt", "tidyTagsOnCharacterSheet", {
         name: "Tidy Tags on Character Sheet",
         hint: "Hide planned tags and eliminate blank lines in a character's themes",

@@ -63,6 +63,22 @@
       "detailed": "Tirada Detallada",
       "reaction": "Tirada de Reacción"
     },
+    "GM_CONFIRM": {
+      "Title": "Confirmación de Tirada",
+      "RequestFrom": "{player} quiere tirar por {actor}:",
+      "WaitingForGm": "Esperando la confirmación del DJ…",
+      "Cancel": "Cancelar solicitud",
+      "Rejected": "El DJ rechazó tu tirada. Ajusta tu selección e inténtalo de nuevo.",
+      "CanceledByPlayer": "El jugador retiró la solicitud de tirada.",
+      "Approve": "Aprobar",
+      "Reject": "Rechazar",
+      "PlayerTags": "Etiquetas seleccionadas:",
+      "StoryTags": "Etiquetas de historia / Estado:",
+      "ChallengeTags": "Etiquetas de desafío / Estado:",
+      "GmTags": "Modificadores del DJ:",
+      "Mods": "Modificadores",
+      "Might": "Poder"
+    },
     "LABELS": {
       "JourneyConsequences": "Viñetas y Consecuencias",
       "ThreatsAndConsequences": "Amenazas y Consecuencias",

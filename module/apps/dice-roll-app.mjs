@@ -3,6 +3,8 @@ import { MistSceneApp } from "./scene-app.mjs";
 import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adapter.mjs";
 import { PowerTagAdapter } from "../lib/power-tag-adapter.mjs";
 import { StoryTagAdapter } from "../lib/story-tag-adapter.mjs";
+import { RollConfirmation } from "../lib/roll-confirmation.mjs";
+import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
 
 export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     constructor(options = {}) {
@@ -18,6 +20,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.numModPositive = 0;
         this.numModNegative = 0;
         this.mightScale = 0;
+
+        // pending GM confirmation: { requestId, formValues, snapshot } or null
+        this.pendingRequest = null;
 
         DiceRollApp.instance = this;
     }
@@ -45,7 +50,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             clickModNegativeMinus: this.#handleClickModNegativeMinus,
             clickModNegativePlus: this.#handleClickModNegativePlus,
             clickDeselectTag: this.#handleClickDeselectTag,
-            clickTagStatusModifierToggle: this.#handleTagStatusModifierToggle
+            clickTagStatusModifierToggle: this.#handleTagStatusModifierToggle,
+            clickCancelConfirmation: this.#handleClickCancelConfirmation
         },
     };
 
@@ -116,6 +122,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             context.mightScale = 0;
         }
         context.powerAmount = this.computePowerAmount();
+        context.waitingForGm = !!this.pendingRequest;
         /*if(context.powerAmount < 0){
             context.powerAmount = 0;
         }*/
@@ -161,7 +168,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         );
         const mightEnabled = game.settings.get("mist-engine-fvtt", "mightUsageEnabled") === true;
         const mightScale = mightEnabled ? (this.mightScale || 0) : 0;
-        return (countTags.positive - countTags.negative) + mightScale + (this.numModPositive || 0) - (this.numModNegative || 0);
+        const power = (countTags.positive - countTags.negative) + mightScale + (this.numModPositive || 0) - (this.numModNegative || 0);
+        return Math.max(1, power); // preview matches the roll: never below Power 1 (see executeRoll)
     }
 
     /** @inheritDoc */
@@ -614,14 +622,84 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     static async #rollCallback(event, target) {
-        let numPositiveTags = parseInt(target.form.positiveValue.value);
-        let numNegativeTags = parseInt(target.form.negativeValue.value);
+        if (this.pendingRequest) return; // already waiting for the GM
+
+        const formValues = {
+            numModPositive: parseInt(target.form.positiveValue.value) || 0,
+            numModNegative: parseInt(target.form.negativeValue.value) || 0,
+            mightScale: 0
+        };
 
         // first check if might usage is enabled
-        let mightScale = 0;
         if (game.settings.get("mist-engine-fvtt", "mightUsageEnabled") == true) {
-            mightScale = parseInt(target.form.might_scale.value);
+            formValues.mightScale = parseInt(target.form.might_scale.value) || 0;
         }
+
+        if (RollConfirmation.needsConfirmation()) {
+            this.requestGmConfirmation(formValues);
+            return;
+        }
+
+        await this.executeRoll(formValues);
+    }
+
+    /** Send the roll to the GM for confirmation and lock the dialog until the answer arrives. */
+    requestGmConfirmation(formValues) {
+        const requestId = RollConfirmation.sendRequest(this, formValues);
+        this.pendingRequest = {
+            requestId,
+            formValues,
+            // roll exactly what the GM gets to see, even if the sheet changes meanwhile
+            snapshot: {
+                selectedTags: foundry.utils.deepClone(this.selectedTags),
+                selectedGmTags: foundry.utils.deepClone(this.selectedGmTags),
+                selectedStoryTags: foundry.utils.deepClone(this.selectedStoryTags),
+                challengeTags: foundry.utils.deepClone(this.challengeTags)
+            }
+        };
+        ui.notifications.info(game.i18n.localize("MIST_ENGINE.GM_CONFIRM.WaitingForGm"));
+        this.render();
+    }
+
+    /** Player side: the GM answered our pending confirmation request. */
+    handleConfirmationResponse(msg) {
+        if (!this.pendingRequest || msg.requestId !== this.pendingRequest.requestId) return;
+        const pending = this.pendingRequest;
+        this.pendingRequest = null;
+
+        if (msg.approved) {
+            this.selectedTags = pending.snapshot.selectedTags;
+            this.selectedGmTags = pending.snapshot.selectedGmTags;
+            this.selectedStoryTags = pending.snapshot.selectedStoryTags;
+            this.challengeTags = pending.snapshot.challengeTags;
+            this.executeRoll(pending.formValues);
+        } else {
+            ui.notifications.warn(game.i18n.localize("MIST_ENGINE.GM_CONFIRM.Rejected"));
+            if (this.rendered) this.render();
+        }
+    }
+
+    /** Withdraw a pending confirmation request (cancel button or dialog close). */
+    cancelPendingRequest() {
+        if (!this.pendingRequest) return;
+        RollConfirmation.sendCancel(this.pendingRequest.requestId);
+        this.pendingRequest = null;
+    }
+
+    static async #handleClickCancelConfirmation(event, target) {
+        this.cancelPendingRequest();
+        this.render();
+    }
+
+    /** @inheritDoc */
+    _onClose(options) {
+        super._onClose(options);
+        this.cancelPendingRequest();
+    }
+
+    async executeRoll({ numModPositive, numModNegative, mightScale }) {
+        let numPositiveTags = numModPositive;
+        let numNegativeTags = numModNegative;
 
         let tagsAndStatusForRoll = DiceRollApp.applyRulesToSelectedTags(this.selectedTags, this.selectedGmTags, this.selectedStoryTags, this.challengeTags);
         let countTags = DiceRollApp.calculatePowerTags(tagsAndStatusForRoll);
@@ -636,15 +714,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (numNegativeTags > 0) rollFormula += ` - ${numNegativeTags}`;
 
         let numPowerTags = parseInt(numPositiveTags) - parseInt(numNegativeTags);
-        if (numPowerTags <= 0) numPowerTags = 1; // at least 1 power tag
 
         if (mightScale != 0) {
             rollFormula += ` + ${mightScale}`;
             numPowerTags += mightScale;
-            if (numPowerTags <= 0) {
-                numPowerTags = 1; // is this correct?
-            }
         }
+
+        // clamp only AFTER might is applied, otherwise a negative tag total
+        // gets lifted to 1 first and might is added on top (issue #97)
+        if (numPowerTags <= 0) numPowerTags = 1; // at least 1 power tag
 
         const diceRoll = new Roll(rollFormula, this.actor.getRollData());
         await diceRoll.evaluate();
@@ -784,11 +862,13 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             else if (tagToDeselect.source === "fellowship-themecard") {
                 let fellowshipThemecard = this.actor.sheet.getActorFellowshipThemecard();
                 if (fellowshipThemecard) {
+                    // a raw dotted update like "system.powertags.N.selected" would
+                    // replace the whole ArrayField and wipe all tags (#deselect bug)
                     if (tagToDeselect.weakness) {
-                        await fellowshipThemecard.update({ [`system.weaknesstags.${tagToDeselect.index}.selected`]: false });
+                        await ArrayFieldAdapter.set(fellowshipThemecard, "system.weaknesstags", tagToDeselect.index, "selected", false);
                     }
                     else {
-                        await fellowshipThemecard.update({ [`system.powertags.${tagToDeselect.index}.selected`]: false });
+                        await ArrayFieldAdapter.set(fellowshipThemecard, "system.powertags", tagToDeselect.index, "selected", false);
                     }
                     this.updateTagsAndStatuses(true);
                     this.actor.render({ force: false })

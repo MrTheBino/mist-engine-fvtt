@@ -1,4 +1,11 @@
 <form class="roll-dialog-container scrollable">
+    {{#if waitingForGm}}
+    <div class="gm-confirm-waiting" style="display:flex; flex-direction:column; gap:8px; align-items:center; padding:8px; border:1px dashed var(--color-border-dark, #666); border-radius:4px; margin-bottom:8px;">
+        <span><i class="fa-solid fa-hourglass-half"></i> {{localize "MIST_ENGINE.GM_CONFIRM.WaitingForGm"}}</span>
+        <button type="button" data-action="clickCancelConfirmation">{{localize "MIST_ENGINE.GM_CONFIRM.Cancel"}}</button>
+    </div>
+    {{/if}}
+    <div {{#if waitingForGm}}style="pointer-events:none; opacity:0.5;"{{/if}}>
     {{!-- Selected Tags --}}
     <div class="selected-tags-container flexcol">
         <label class="resource-label">You selected:</label>
@@ -96,6 +103,7 @@
         </div>
     </div>
     <footer class="dialog-footer">
-        <button type="button" class="roll-button" data-action="clickedRoll">Roll</button>
+        <button type="button" class="roll-button" data-action="clickedRoll" {{#if waitingForGm}}disabled{{/if}}>Roll</button>
     </footer>
+    </div>
 </form>

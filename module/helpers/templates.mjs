@@ -36,6 +36,7 @@ export const preloadHandlebarsTemplates = async function () {
     "systems/mist-engine-fvtt/templates/scene-app/_single_challenge.hbs",
     "systems/mist-engine-fvtt/templates/actor/parts/npc-challenges-edit-partial.hbs",
     "systems/mist-engine-fvtt/templates/dice-roll-app/might.hbs",
+    "systems/mist-engine-fvtt/templates/dice-roll-app/gm-roll-confirm.hbs",
     "systems/mist-engine-fvtt/templates/overlay/tag-entry.hbs"
   ]);
 };

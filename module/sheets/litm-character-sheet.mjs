@@ -875,6 +875,26 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
                 await adapter.importThemekitToCharacter(this.actor, item);
                 return;
             }
+            // A dropped backpack item must never become a second embedded
+            // backpack (the sheet renders exactly one) — see issue #99.
+            if (item?.type === "backpack") {
+                const backpack = this.getBackpack();
+                if (backpack) {
+                    const entries = backpack.system.items ?? [];
+                    const dropped = (item.system.items ?? [])
+                        .filter(e => e.name && String(e.name).trim().length > 0)
+                        .map(e => ({ ...e, selected: false, toBurn: false }));
+                    if (dropped.length > 0) {
+                        // merge the dropped backpack's gear into the existing one
+                        await backpack.update({ "system.items": [...entries, ...dropped] });
+                    } else {
+                        // empty backpack item -> its name becomes a gear entry
+                        await backpack.update({ "system.items": [...entries, { name: item.name, selected: false, burned: false }] });
+                    }
+                    return;
+                }
+                // no backpack yet -> fall through, the drop becomes THE backpack
+            }
         }
 
         return super._onDrop(event);

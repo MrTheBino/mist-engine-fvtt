@@ -28,6 +28,7 @@ import * as models from "./data/_module.mjs";
 import { setupMistEngineKeyBindings } from "./lib/key-binding.mjs";
 import { setupConfiguration } from "./lib/configuration.mjs";
 import { setupHooks } from "./lib/hooks.mjs";
+import { RollConfirmation } from "./lib/roll-confirmation.mjs";
 import { registerMigrationSettings, needsMigration, migrateWorld } from "./migration.mjs";
 
 /* -------------------------------------------- */
@@ -181,6 +182,8 @@ registerHandlebarHelpers();
 
 Hooks.once("ready", async function () {
   if (needsMigration()) await migrateWorld();
+
+  RollConfirmation.setup();
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));

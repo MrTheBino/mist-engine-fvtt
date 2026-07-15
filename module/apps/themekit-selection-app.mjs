@@ -72,18 +72,19 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
     }
 
     async getAllThemekits(){
-       // Welt
-        const worldThemeKits = game.items.filter(i => i.type === "themekit");
+       // Welt: only themekits the current user is allowed to see
+        const worldThemeKits = game.items.filter(i => i.type === "themekit" && i.visible);
 
-        // Kompendien
+        // Kompendien: skip packs hidden from the current user
         const compendiumThemeKits = [];
 
         for (const pack of game.packs) {
             if (pack.documentName !== "Item") continue;
+            if (!pack.visible) continue;
 
             const docs = await pack.getDocuments();
             compendiumThemeKits.push(
-                ...docs.filter(i => i.type === "themekit")
+                ...docs.filter(i => i.type === "themekit" && i.visible)
             );
         }
 

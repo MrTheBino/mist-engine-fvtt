@@ -431,7 +431,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     async _prepareContextForCharacters() {
         let context = {}
         const scene = game.scenes.active;
-        const tokens = scene.tokens.contents;
+        const tokens = scene ? scene.tokens.contents : [];
         context.userIsGM = game.user.isGM;
 
         // Characters: one entry per unique character actor (player characters
@@ -611,6 +611,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (actor.type == "litm-npc") {
             // challenges are not linked, so we need to update the scene's actor
             const scene = game.scenes.active;
+            if (!scene) return null;
             const tokens = scene.tokens.contents;
             // match the id of the actor with the id of the token's actor, because the same npc can be used multiple times in the scene
             return tokens.map(t => t.actor).find(a => a && a.id === actor.id);
@@ -905,6 +906,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     getCombinedSelectedNPCTags(){
         // retrieve all npc from the current scene
         const scene = game.scenes.active;
+        if (!scene) return []; // no active scene -> no npc tags
         const tokens = scene.tokens.contents;
         const actors = tokens.map(t => t.actor).filter(a => a && a.type == "litm-npc");
         const uniqueActors = [...new Set(actors)];

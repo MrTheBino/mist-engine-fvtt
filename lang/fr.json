@@ -56,6 +56,22 @@
       "detailed": "Jet Détaillé",
       "reaction": "Jet de Réaction"
     },
+    "GM_CONFIRM": {
+      "Title": "Confirmation de Jet",
+      "RequestFrom": "{player} veut faire un jet pour {actor} :",
+      "WaitingForGm": "En attente de la confirmation du MJ…",
+      "Cancel": "Annuler la demande",
+      "Rejected": "Le MJ a rejeté votre jet. Ajustez votre sélection et réessayez.",
+      "CanceledByPlayer": "Le joueur a retiré la demande de jet.",
+      "Approve": "Approuver",
+      "Reject": "Rejeter",
+      "PlayerTags": "Étiquettes sélectionnées :",
+      "StoryTags": "Étiquettes d'histoire / Statut :",
+      "ChallengeTags": "Étiquettes de défi / Statut :",
+      "GmTags": "Modificateurs du MJ :",
+      "Mods": "Modificateurs",
+      "Might": "Puissance"
+    },
     "LABELS": {
       "JourneyConsequences": "Vignettes & Conséquences",
       "ThreatsAndConsequences": "Menaces & Conséquences",

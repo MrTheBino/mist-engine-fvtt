@@ -23,6 +23,22 @@
             "detailed": "Detaillierter Wurf",
             "reaction": "Reaktionswurf"
         },
+        "GM_CONFIRM": {
+            "Title": "Wurf-Bestätigung",
+            "RequestFrom": "{player} möchte für {actor} würfeln:",
+            "WaitingForGm": "Warte auf Bestätigung durch den Spielleiter…",
+            "Cancel": "Anfrage abbrechen",
+            "Rejected": "Der Spielleiter hat deinen Wurf abgelehnt. Passe deine Auswahl an und versuche es erneut.",
+            "CanceledByPlayer": "Der Spieler hat die Wurf-Anfrage zurückgezogen.",
+            "Approve": "Bestätigen",
+            "Reject": "Ablehnen",
+            "PlayerTags": "Gewählte Tags:",
+            "StoryTags": "Story-Tags / Status:",
+            "ChallengeTags": "Challenge-Tags / Status:",
+            "GmTags": "Spielleiter-Modifikatoren:",
+            "Mods": "Modifikatoren",
+            "Might": "Macht"
+        },
         "LABELS": {
             "JourneyConsequences": "Vignetten & Konsequenzen",
             "Milestone": "Meilenstein",

@@ -1,0 +1,81 @@
+<div class="gm-roll-confirm roll-dialog-container">
+    <p style="margin-top:0;">
+        {{localize "MIST_ENGINE.GM_CONFIRM.RequestFrom" player=playerName actor=actorName}}<br>
+        <strong>{{rollTypeLabel}}</strong>
+    </p>
+
+    {{#if selectedTags.length}}
+    <div class="selected-tags-container flexcol">
+        <label class="resource-label">{{localize "MIST_ENGINE.GM_CONFIRM.PlayerTags"}}</label>
+        {{#each selectedTags}}
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#if this.isStatus}}status{{/if}}">
+            <span class="tag-icon">
+                {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
+                    class="fa-solid fa-thumbs-down"></i>{{/if}}
+            </span>
+            {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
+            {{#if this.toBurn}}🔥
+            {{/if}}{{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if selectedStoryTags.length}}
+    <div class="selected-tags-container flexcol">
+        <label class="resource-label">{{localize "MIST_ENGINE.GM_CONFIRM.StoryTags"}}</label>
+        {{#each selectedStoryTags}}
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">
+            <span class="tag-icon">
+                {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
+                    class="fa-solid fa-thumbs-down"></i>{{/if}}
+            </span>
+            {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
+            {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if challengeTags.length}}
+    <div class="selected-tags-container flexcol">
+        <label class="resource-label">{{localize "MIST_ENGINE.GM_CONFIRM.ChallengeTags"}}</label>
+        {{#each challengeTags}}
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">
+            <span class="tag-icon">
+                {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
+                    class="fa-solid fa-thumbs-down"></i>{{/if}}
+            </span>
+            {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if selectedGmTags.length}}
+    <div class="selected-tags-container flexcol">
+        <label class="resource-label">{{localize "MIST_ENGINE.GM_CONFIRM.GmTags"}}</label>
+        {{#each selectedGmTags}}
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">
+            <span class="tag-icon">
+                {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
+                    class="fa-solid fa-thumbs-down"></i>{{/if}}
+            </span>
+            {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    <div class="form-group">
+        <label class="resource-label">{{localize "MIST_ENGINE.GM_CONFIRM.Mods"}}: +{{numModPositive}} / -{{numModNegative}}</label>
+    </div>
+    {{#if mightUsageEnabled}}
+    <div class="form-group">
+        <label class="resource-label">{{localize "MIST_ENGINE.GM_CONFIRM.Might"}}: {{mightScale}}</label>
+    </div>
+    {{/if}}
+    <div class="form-group">
+        <label class="resource-label">Power: {{power}}</label>
+    </div>
+</div>
