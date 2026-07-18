@@ -1,0 +1,78 @@
+// Shared edit-mode look for all item and actor sheets EXCEPT the player
+// character sheet: one section-header language, system font on buttons and
+// textareas, consistent header banner and image frame.
+
+&.sheet:not(.litm-character) {
+    .window-content {
+
+        // buttons use the system font like .roll-button everywhere else
+        button {
+            font-family: $font-primary;
+        }
+
+        // textareas match the inputs instead of the monospace default
+        textarea {
+            font-family: $font-primary;
+            font-size: var(--font-size-14, 14px);
+        }
+
+        // one legend style for all fieldset sections (NPC, addon, shortchallenge …)
+        fieldset>legend {
+            font-family: var(--litm-font-heading);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            font-size: 0.85em;
+            color: $c-styled-text;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            button {
+                background-color: rgb(120 70 37);
+                color: white;
+                border: none;
+                border-radius: 3px;
+                line-height: 1.4;
+                padding: 1px 6px;
+
+                &:hover {
+                    box-shadow: 0 0 4px rgb(120 70 37);
+                }
+            }
+        }
+
+        // item sheet header: framed, clickable image + banner that fits its text
+        .item-header {
+            .item-img {
+                border: 1px solid $c-brown;
+                border-radius: 6px;
+                background: rgba(255, 255, 255, 0.35);
+                padding: 2px;
+                cursor: pointer;
+                object-fit: contain;
+
+                &:hover {
+                    box-shadow: 0 0 6px $c-brown;
+                }
+            }
+
+            .item-name {
+                margin: 0 0 4px 0;
+                width: 100%;
+
+                input {
+                    height: 2.4rem;
+                    line-height: 2.4rem;
+                    font-size: 1.3rem;
+                    padding: 0 0.5rem;
+                }
+            }
+        }
+    }
+}
+
+// Journey header: the custom-background controls step back visually
+.change-custom-background-btn {
+    font-size: 0.85em;
+    line-height: 1.6;
+}

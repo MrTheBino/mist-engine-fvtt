@@ -2,3 +2,38 @@
   @include tag-mark-def;
   @include might-icon-def;
 }
+
+// The core #tooltip element lives at the document root, OUTSIDE any
+// .mist-engine sheet — escape the .mist-engine scope this file is imported in.
+@at-root {
+  // rich rote tooltip (description / success / consequences)
+  #tooltip.rote-tooltip {
+    max-width: 420px;
+    text-align: left;
+
+    .rote-tooltip-title {
+      display: block;
+      text-align: center;
+      text-transform: uppercase;
+      font-family: var(--litm-font-heading);
+      margin-bottom: 0.25em;
+    }
+
+    h4 {
+      margin: 0.6em 0 0.2em 0;
+      font-family: var(--litm-font-heading);
+      text-transform: uppercase;
+      font-size: 0.85em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    p {
+      margin: 0.2em 0;
+    }
+
+    ul {
+      margin: 0.2em 0 0.2em 1.2em;
+      padding: 0;
+    }
+  }
+}

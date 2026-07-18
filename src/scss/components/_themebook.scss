@@ -93,11 +93,21 @@
     flex-grow: 0.25;
     padding-bottom: 8px;
 
-    // Drag-and-drop reordering / tab-move of cards in the Main/Other grid.
+    // Drag-and-drop reordering / tab-move of cards in the Main/Other grid:
+    // the dragged card is inserted BEFORE this card -> insertion bar on its
+    // left edge (the box-shadow strip sits in the 10px grid gap) plus a subtle
+    // highlight. NOTE: no position/::before here — the stylized grid already
+    // uses ::before for decorations and top/left offsets on positioned cards.
     &.drag-over {
-        outline: 2px dashed $c-brown;
+        outline: 2px dashed rgba($c-brown, 0.4);
         outline-offset: -2px;
         border-radius: 4px;
+        box-shadow: -8px 0 0 0 $c-brown;
+    }
+
+    // The card currently being dragged.
+    &.card-dragging {
+        opacity: 0.35;
     }
 
     .card-drag-handle {
@@ -145,6 +155,13 @@
             -webkit-font-smoothing: antialiased;
         }
     }
+}
+
+// Dragging over empty grid space: the card would be appended at the end.
+.card-grid.drag-over-append {
+    outline: 2px dashed $c-brown;
+    outline-offset: 4px;
+    border-radius: 4px;
 }
 
 // A Main/Other tab button acting as a drop target while dragging a card.
@@ -232,6 +249,14 @@
     }
 
     &.litm-fellowship-themecard {
+        h2 {
+            background-image: url("../assets/headers/header-backpack.webp");
+            background-repeat: no-repeat;
+            background-size: 100% 20px;
+        }
+    }
+
+    &.litm-rote {
         h2 {
             background-image: url("../assets/headers/header-backpack.webp");
             background-repeat: no-repeat;

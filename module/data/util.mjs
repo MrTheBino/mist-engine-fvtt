@@ -31,7 +31,10 @@ export function buildPowerTag(){
                 burned: new fields.BooleanField({ initial: false }),
                 toBurn: new fields.BooleanField({ initial: false }),
                 planned: new fields.BooleanField({ initial: false }),
-                selected: new fields.BooleanField({ initial: false })
+                selected: new fields.BooleanField({ initial: false }),
+                // Camping & Sojourns (p. 179): story tag expiration review
+                expiring: new fields.BooleanField({ initial: false }), // marked to expire
+                expired: new fields.BooleanField({ initial: false })   // no longer grants Power
             });
 }
 

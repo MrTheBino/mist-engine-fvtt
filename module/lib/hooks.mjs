@@ -1,6 +1,7 @@
 import { MistSceneApp } from "../apps/scene-app.mjs";
 import { DiceRollApp } from "../apps/dice-roll-app.mjs";
 import { HowToPlayApp } from "../apps/how-to-play-app.mjs";
+import { CampingApp } from "../apps/camping-app.mjs";
 import { showCharacterTokenHover, initCharacterTokenHoverKeyListeners } from "./character-token-hover.mjs";
 
 export function setupHooks() {
@@ -314,7 +315,15 @@ export function setupHooks() {
         title: "Scene Tags",
         icon: "fas fa-scroll",
         visible: true,
-        onChange: () => MistSceneApp.getInstance().render(true, { focus: true }),
+        onChange: () => MistSceneApp.open(),
+        button: true,
+      },
+      camping_app: {
+        name: "camping_app",
+        title: game.i18n.localize("MIST_ENGINE.CAMPING.Title"),
+        icon: "fas fa-campground",
+        visible: game.user.isGM,
+        onChange: () => CampingApp.openForGM(),
         button: true,
       },
       how_to_play_app: {
@@ -358,6 +367,8 @@ export function setupHooks() {
     const sceneApp = MistSceneApp.instance;
     if (sceneApp?.rendered && !sceneApp.minimized) sceneApp.render(true);
     if (DiceRollApp.instance) DiceRollApp.instance.updateTagsAndStatuses(true);
+    const campingApp = CampingApp.instance;
+    if (campingApp?.rendered && !campingApp.minimized) campingApp.render(true);
   };
 
   Hooks.on("updateActor", (actor) => {
@@ -372,9 +383,25 @@ export function setupHooks() {
   // Item types whose data feeds the scene tracker / dice roll app:
   // scene-data (scene tags + roll mods), themebook/backpack (power/story tags),
   // shortchallenge (challenge tags).
-  const TRACKED_ITEM_TYPES = new Set(["scene-data", "themebook", "backpack", "shortchallenge"]);
-  Hooks.on("updateItem", (item) => {
+  const TRACKED_ITEM_TYPES = new Set(["scene-data", "themebook", "backpack", "shortchallenge", "rote"]);
+  Hooks.on("updateItem", (item, changes) => {
     if (TRACKED_ITEM_TYPES.has(item.type)) refreshSceneTrackers();
+
+    // Camping & Sojourns: open the dialog on every client when the GM
+    // activates the mode on the scene-data item, close it when it ends.
+    if (item.type === "scene-data" && changes.system?.camping !== undefined) {
+      const active = changes.system.camping.active;
+      if (active === true) CampingApp.getInstance().render(true, { focus: true });
+      else if (active === false && game.user.isGM === false) CampingApp.instance?.close();
+    }
+  });
+
+  // Reconnecting players: reopen the camping dialog if the mode is running.
+  Hooks.once("ready", () => {
+    setTimeout(() => {
+      const sd = MistSceneApp.instance?.currentSceneDataItem;
+      if (sd?.system.camping?.active) CampingApp.getInstance().render(true);
+    }, 3000);
   });
 
   Hooks.on("canvasReady", (canvas) => {

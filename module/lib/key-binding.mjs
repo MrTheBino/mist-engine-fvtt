@@ -50,7 +50,7 @@ function setupKBSzeneTagsApp(){
       }
     ],
     onDown: () => {
-        MistSceneApp.getInstance().render(true, { focus: true })
+        MistSceneApp.open();
       return true;
     },
     onUp: () => {},

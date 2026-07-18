@@ -1,0 +1,173 @@
+<div class="camping-container scrollable">
+{{#unless hasSceneData}}
+    <p class="camping-hint">{{localize 'MIST_ENGINE.CAMPING.Inactive'}}</p>
+{{else}}
+
+    {{!-- header: mode / duration / period --}}
+    <div class="camping-header">
+        <div class="camping-mode-line">
+            <i class="fa-solid fa-campground"></i>
+            <strong>{{modeLabel}}</strong>
+            {{#if isSojourn}}<span> — {{durationLabel}} (+{{bonusPower}} Power)</span>{{/if}}
+        </div>
+        <div class="camping-period-line">
+            {{localize 'MIST_ENGINE.CAMPING.Period'}}: <strong>{{camping.period}} / {{maxPeriod}}</strong>
+            {{#if isThirdPeriod}}<span class="camping-third-warning"><i class="fa-solid fa-triangle-exclamation"></i> {{localize 'MIST_ENGINE.CAMPING.ThirdPeriodWarning'}}</span>{{/if}}
+        </div>
+    </div>
+
+    {{!-- campsite tags --}}
+    <div class="camping-section">
+        <h3 class="camping-section-header">{{localize 'MIST_ENGINE.CAMPING.CampsiteTags'}}
+            {{#if isGM}}
+            <a data-action="campingAddCampsiteTag" title="{{localize 'MIST_ENGINE.CAMPING.AddCampsiteTag'}}"><i class="fas fa-plus"></i></a>
+            {{/if}}
+        </h3>
+        <div class="camping-tags flexrow">
+            {{#each campsiteTags}}
+            <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#if this.isStatus}}status{{/if}}">
+                {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
+                {{#if @root.isGM}}
+                <i class="fa-solid fa-circle-trash clickable" data-action="campingDeleteCampsiteTag" data-index="{{this.index}}"></i>
+                {{/if}}
+            </div>
+            {{else}}
+            <span class="camping-empty">{{localize 'MIST_ENGINE.CAMPING.NoCampsiteTags'}}</span>
+            {{/each}}
+        </div>
+    </div>
+
+    {{#if isGM}}
+    {{!-- ===================== GM ===================== --}}
+    <div class="camping-section">
+        <h3 class="camping-section-header">{{localize 'MIST_ENGINE.CAMPING.GmControls'}}</h3>
+        <div class="camping-gm-controls flexrow">
+            {{#if canAdvancePeriod}}
+            <button type="button" data-action="campingNextPeriod"><i class="fa-solid fa-forward"></i> {{localize 'MIST_ENGINE.CAMPING.NextPeriod'}}</button>
+            {{/if}}
+            {{#unless camping.thirdPeriodOpen}}
+            <button type="button" data-action="campingOpenThirdPeriod" title="{{localize 'MIST_ENGINE.CAMPING.ThirdPeriodWarning'}}"><i class="fa-solid fa-moon"></i> {{localize 'MIST_ENGINE.CAMPING.OpenThirdPeriod'}}</button>
+            {{/unless}}
+            <button type="button" data-action="campingEnd"><i class="fa-solid fa-person-hiking"></i> {{localize 'MIST_ENGINE.CAMPING.End'}}</button>
+        </div>
+    </div>
+
+    <div class="camping-section">
+        <h3 class="camping-section-header">{{localize 'MIST_ENGINE.CAMPING.BackpackReview'}}
+            <a data-action="campingApplyExpiration" class="camping-apply-expiration" title="{{localize 'MIST_ENGINE.CAMPING.ApplyExpirationHint'}}"><i class="fa-solid fa-hourglass-end"></i> {{localize 'MIST_ENGINE.CAMPING.ApplyExpiration'}}</a>
+        </h3>
+        <p class="camping-hint">{{localize 'MIST_ENGINE.CAMPING.BackpackReviewHintGm'}}</p>
+        {{#each characters}}
+        <div class="camping-character">
+            <div class="camping-character-head">
+                <img src="{{this.img}}" alt="{{this.name}}">
+                <strong>{{this.name}}</strong>
+                <span class="camping-character-state">
+                    {{#if this.restUsed}}<i class="fa-solid fa-bed" title="{{localize 'MIST_ENGINE.CAMPING.Rest'}}"></i>{{/if}}
+                    {{#if this.reflectUsed}}<i class="fa-solid fa-brain" title="{{localize 'MIST_ENGINE.CAMPING.Reflect'}}"></i>{{/if}}
+                    {{#if this.fellowshipUsed}}<i class="fa-solid fa-people-group" title="{{localize 'MIST_ENGINE.CAMPING.FellowshipTime'}}"></i>{{/if}}
+                </span>
+            </div>
+            <div class="camping-tags flexrow">
+                {{#each this.backpack}}
+                <div class="tag positive camping-backpack-entry {{#if this.expiring}}expiring{{/if}} {{#if this.expired}}expired{{/if}} clickable"
+                    data-action="campingToggleExpiring" data-actor-id="{{../this.id}}" data-index="{{this.index}}"
+                    title="{{localize 'MIST_ENGINE.CAMPING.ToggleExpiringHint'}}">
+                    {{#if this.expiring}}<i class="fa-solid fa-hourglass-half"></i> {{/if}}{{#if this.expired}}<i class="fa-solid fa-hourglass-end"></i> {{/if}}{{this.name}}
+                </div>
+                {{else}}
+                <span class="camping-empty">{{localize 'MIST_ENGINE.CAMPING.EmptyBackpack'}}</span>
+                {{/each}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if own}}
+    {{!-- ===================== Player ===================== --}}
+    <div class="camping-section">
+        <h3 class="camping-section-header"><i class="fa-solid fa-bed"></i> {{localize 'MIST_ENGINE.CAMPING.Rest'}}
+            {{#if own.restUsed}}<span class="camping-used">{{localize 'MIST_ENGINE.CAMPING.Used'}}</span>{{/if}}
+        </h3>
+        <p class="camping-hint">{{localize 'MIST_ENGINE.CAMPING.RestHint'}}</p>
+        {{#unless own.restUsed}}
+        <button type="button" data-action="campingChooseRest"><i class="fa-solid fa-bed"></i> {{localize 'MIST_ENGINE.CAMPING.ChooseRest'}}</button>
+        {{/unless}}
+        {{#if own.restUsed}}
+        <div class="camping-tags flexrow">
+            {{#each own.statuses}}
+            <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#if this.isStatus}}status{{/if}} clickable"
+                data-action="campingExpireStatus" data-index="{{this.index}}" title="{{localize 'MIST_ENGINE.CAMPING.ExpireStatusHint'}}">
+                {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}} <i class="fa-solid fa-circle-trash"></i>
+            </div>
+            {{else}}
+            <span class="camping-empty">{{localize 'MIST_ENGINE.CAMPING.NoStatuses'}}</span>
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+
+    <div class="camping-section">
+        <h3 class="camping-section-header"><i class="fa-solid fa-brain"></i> {{localize 'MIST_ENGINE.CAMPING.Reflect'}}
+            {{#if own.reflectUsed}}<span class="camping-used">{{localize 'MIST_ENGINE.CAMPING.Used'}}</span>{{/if}}
+        </h3>
+        <p class="camping-hint">{{localize 'MIST_ENGINE.CAMPING.ReflectHint'}}</p>
+        {{#unless own.reflectUsed}}
+        <div class="camping-theme-buttons flexrow">
+            {{#each own.themebooks}}
+            <button type="button" data-action="campingChooseReflect" data-theme-id="{{this.id}}">{{this.name}} ({{this.improve}}/3)</button>
+            {{/each}}
+            {{#if own.hasThemecard}}
+            <button type="button" data-action="campingChooseReflect" data-theme-id="fellowship-themecard">{{own.themecardName}}</button>
+            {{/if}}
+        </div>
+        {{/unless}}
+    </div>
+
+    <div class="camping-section">
+        <h3 class="camping-section-header"><i class="fa-solid fa-hammer"></i> {{localize 'MIST_ENGINE.CAMPING.CampAction'}}</h3>
+        <p class="camping-hint">{{localize 'MIST_ENGINE.CAMPING.CampActionHint'}}{{#if isSojourn}} {{localize 'MIST_ENGINE.CAMPING.CampActionSojournHint'}} (+{{bonusPower}}){{/if}}</p>
+        <div class="flexrow camping-gm-controls">
+            <button type="button" data-action="campingActionRoll"><i class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.CAMPING.ActionRoll'}}</button>
+            <button type="button" data-action="campingActionSpendPower" title="{{localize 'MIST_ENGINE.CAMPING.ActionSpendHint'}}"><i class="fa-solid fa-bolt"></i> {{localize 'MIST_ENGINE.CAMPING.ActionSpend'}}</button>
+        </div>
+    </div>
+
+    <div class="camping-section">
+        <h3 class="camping-section-header"><i class="fa-solid fa-suitcase"></i> {{localize 'MIST_ENGINE.CAMPING.BackpackReview'}}</h3>
+        <p class="camping-hint">{{localize 'MIST_ENGINE.CAMPING.BackpackReviewHintPlayer'}}</p>
+        <div class="camping-tags flexrow">
+            {{#each own.backpack}}
+            <div class="tag positive camping-backpack-entry {{#if this.expiring}}expiring{{/if}} {{#if this.expired}}expired{{/if}} clickable"
+                data-action="campingToggleExpiring" data-actor-id="{{../own.id}}" data-index="{{this.index}}"
+                title="{{localize 'MIST_ENGINE.CAMPING.ToggleExpiringHint'}}">
+                {{#if this.expiring}}<i class="fa-solid fa-hourglass-half"></i> {{/if}}{{#if this.expired}}<i class="fa-solid fa-hourglass-end"></i> {{/if}}{{this.name}}
+            </div>
+            {{else}}
+            <span class="camping-empty">{{localize 'MIST_ENGINE.CAMPING.EmptyBackpack'}}</span>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="camping-section">
+        <h3 class="camping-section-header"><i class="fa-solid fa-people-group"></i> {{localize 'MIST_ENGINE.CAMPING.FellowshipTime'}}
+            {{#if own.fellowshipUsed}}<span class="camping-used">{{localize 'MIST_ENGINE.CAMPING.Used'}}</span>{{/if}}
+        </h3>
+        <p class="camping-hint">{{localize 'MIST_ENGINE.CAMPING.FellowshipHint'}}</p>
+        {{#unless own.fellowshipUsed}}
+        <div class="camping-tags flexrow">
+            {{#each own.scratchedFellowships}}
+            <div class="tag positive clickable" data-action="campingRecoverFellowship" data-index="{{this.index}}"
+                title="{{localize 'MIST_ENGINE.CAMPING.RecoverFellowshipHint'}}">
+                <i class="fa-solid fa-rotate-left"></i> {{this.name}}{{#if this.companion}} ({{this.companion}}){{/if}}
+            </div>
+            {{/each}}
+            <button type="button" data-action="campingNewRelationshipTag"><i class="fa-solid fa-user-plus"></i> {{localize 'MIST_ENGINE.CAMPING.NewRelationshipTag'}}</button>
+        </div>
+        {{/unless}}
+    </div>
+    {{/if}}
+
+{{/unless}}
+</div>

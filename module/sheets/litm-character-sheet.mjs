@@ -31,7 +31,9 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             createFellowshipThemecard: this.#handleCreateFellowshipThemecard,
             openThemekitSelection: this.#handleOpenThemekitSelection,
             openThemekitCharacterApp: this.#handleOpenThemekitCharacterApp,
-            removeThemekit: this.#handleRemoveThemekit
+            removeThemekit: this.#handleRemoveThemekit,
+            toggleRoteSelection: this.#handleToggleRoteSelection,
+            clickSacrificeRoll: this.#handleClickSacrificeRoll
         },
         form: {
             submitOnChange: true
@@ -172,7 +174,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
         // Build the ordered card lists for the Main/Other tab grids.
         const cards = this._orderedCardEntries();
-        const toDescriptor = (c) => ({ key: c.key, type: c.type, themebook: c.themebook });
+        const toDescriptor = (c) => ({ key: c.key, type: c.type, themebook: c.themebook, rote: c.rote });
         context.mainCards = cards.filter(c => c.tab === "main").map(toDescriptor);
         context.otherCards = cards.filter(c => c.tab === "other").map(toDescriptor);
 
@@ -200,6 +202,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
      */
     _orderedCardEntries() {
         const themebookItems = this.actor.items.filter(i => i.type === "themebook");
+        const roteItems = this.actor.items.filter(i => i.type === "rote");
 
         // Expected cards keyed by their stable key.
         const expected = new Map();
@@ -209,6 +212,15 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
                 type: "themebook",
                 defaultTab: t.system.tabCategory === "other" ? "other" : "main",
                 themebook: t,
+            });
+        }
+        // one card per rote, like themebooks
+        for (const r of roteItems) {
+            expected.set(`rote:${r.id}`, {
+                key: `rote:${r.id}`,
+                type: "rote",
+                defaultTab: "main",
+                rote: r,
             });
         }
         for (const key of MistEngineLegendInTheMistCharacterSheet.SINGLETON_CARD_KEYS) {
@@ -227,9 +239,10 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         }
 
         // 2) Append any not-yet-placed cards in a stable default order:
-        //    themebooks first (item order), then the singletons.
+        //    themebooks first (item order), then rotes, then the singletons.
         const defaultOrder = [
             ...themebookItems.map(t => `themebook:${t.id}`),
+            ...roteItems.map(r => `rote:${r.id}`),
             ...MistEngineLegendInTheMistCharacterSheet.SINGLETON_CARD_KEYS,
         ];
         for (const key of defaultOrder) {
@@ -377,6 +390,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const themebooks = [];
         const themebooksOther = [];
         const quintessences = [];
+        const rotes = [];
         let backpack = null;
 
         let inventory = this.options.document.items;
@@ -387,11 +401,13 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
                 }else{
                     themebooks.push(i);
                 }
-                
+
             } else if (i.type === 'backpack') {
                 backpack = i;
             } else if (i.type === 'quintessence') {
                 quintessences.push(i);
+            } else if (i.type === 'rote') {
+                rotes.push(i);
             }
         }
 
@@ -399,7 +415,8 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         // character having NO themebooks at all (placement is driven by
         // cardLayout now, not the per-themebook tabCategory).
         const totalThemebooks = themebooks.length + themebooksOther.length;
-        return { themebooks: themebooks, backpack: backpack, quintessences: quintessences, themebooksEmpty: totalThemebooks === 0, themebooksOther: themebooksOther, themebooksOtherEmpty: themebooksOther.length === 0 };
+        rotes.sort((a, b) => a.name.localeCompare(b.name));
+        return { themebooks: themebooks, backpack: backpack, quintessences: quintessences, rotes: rotes, themebooksEmpty: totalThemebooks === 0, themebooksOther: themebooksOther, themebooksOtherEmpty: themebooksOther.length === 0 };
     }
 
     getBackpack() {
@@ -409,6 +426,13 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     /** @inheritDoc */
     _onRender(context, options) {
         super._onRender(context, options);
+
+        // A canceled drag (ESC / drop outside) fires no drop event — clean the
+        // indicators on dragend. Bound once; this.element survives re-renders.
+        if (!this._cardDragendBound) {
+            this._cardDragendBound = true;
+            this.element.addEventListener("dragend", () => this._clearCardDragIndicators());
+        }
         // Restore scroll positions after render to prevent jumping
         this._restoreScrollPositions();
 
@@ -786,6 +810,85 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         DiceRollApp.getInstance({ actor: actor, type: target.dataset.rollType }).render(true, { focus: true });
     }
 
+    /**
+     * Making a Sacrifice (Core Book p. 134): a Quick outcome without any
+     * Power. The player picks the level of Sacrifice, the Narrator may grant
+     * a modifier. 10+ Miracle (sacrifice lessened one level), 7-9 Fate
+     * (success, pay in full), 6- In Vain (pay in full, no success).
+     */
+    static async #handleClickSacrificeRoll(event, target) {
+        event.preventDefault();
+        const levels = ["painful", "scarring", "grave"];
+        const content = `
+            <p class="hint">${game.i18n.localize("MIST_ENGINE.SACRIFICE.Hint")}</p>
+            <div class="form-group">
+                <label>${game.i18n.localize("MIST_ENGINE.SACRIFICE.Level")}</label>
+                <select name="level">
+                    ${levels.map(l => `<option value="${l}">${game.i18n.localize("MIST_ENGINE.SACRIFICE.Levels." + l)}</option>`).join("")}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>${game.i18n.localize("MIST_ENGINE.SACRIFICE.Modifier")}</label>
+                <input type="number" name="modifier" value="0">
+            </div>`;
+        const result = await foundry.applications.api.DialogV2.prompt({
+            window: { title: game.i18n.localize("MIST_ENGINE.SACRIFICE.Title"), icon: "fa-solid fa-heart-crack" },
+            classes: ["mist-engine", "dialog"],
+            content,
+            ok: {
+                label: game.i18n.localize("MIST_ENGINE.SACRIFICE.Roll"),
+                icon: "fa-solid fa-dice",
+                callback: (event, button) => ({
+                    level: button.form.elements.level.value,
+                    modifier: parseInt(button.form.elements.modifier.value) || 0
+                })
+            },
+            rejectClose: false
+        });
+        if (!result) return;
+
+        let formula = "2d6";
+        if (result.modifier > 0) formula += ` + ${result.modifier}`;
+        else if (result.modifier < 0) formula += ` - ${Math.abs(result.modifier)}`;
+
+        const roll = new Roll(formula, this.actor.getRollData());
+        await roll.evaluate();
+        if (game.dice3d) await game.dice3d.showForRoll(roll, game.user, true, null, false);
+
+        let outcome = "invain";
+        if (roll.total >= 10) outcome = "miracle";
+        else if (roll.total >= 7) outcome = "fate";
+
+        const lessened = { grave: "scarring", scarring: "painful", painful: "none" }[result.level];
+        const html = await foundry.applications.handlebars.renderTemplate(
+            "systems/mist-engine-fvtt/templates/chat/sacrifice-result.hbs",
+            {
+                diceRollHTML: await roll.render(),
+                levelLabel: game.i18n.localize(`MIST_ENGINE.SACRIFICE.Levels.${result.level}`),
+                lessenedLabel: game.i18n.localize(`MIST_ENGINE.SACRIFICE.Levels.${lessened}`),
+                isMiracle: outcome === "miracle",
+                isFate: outcome === "fate",
+                isInVain: outcome === "invain"
+            }
+        );
+        await ChatMessage.create({
+            content: html,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor })
+        });
+    }
+
+    /** Select/deselect a rote for the next roll — its title joins the roll as a tag. */
+    static async #handleToggleRoteSelection(event, target) {
+        event.preventDefault();
+        const rote = this.actor.items.get(target.dataset.itemId);
+        if (!rote) return;
+        this._saveScrollPositions();
+        await rote.update({ "system.selected": !rote.system.selected });
+        this.render();
+        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        MistSceneApp.getInstance().sendUpdateHookEvent(false);
+    }
+
     menuOpenThemekitSelection(){
         const app = new ThemekitSelectionApp();
         app.setActor(this.actor);
@@ -842,14 +945,38 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     }
 
     /** @override */
-    _onDragOver(event) {
-        // Highlight the card the dragged card would be inserted before, or the
-        // Main/Other tab button it would be moved to.
-        for (const el of this.element.querySelectorAll(".drag-over")) {
-            el.classList.remove("drag-over");
+    _onDragStart(event) {
+        // Fade the dragged card so the origin stays visible during the drag.
+        const el = event.currentTarget;
+        if (el.dataset?.dragType === "card") {
+            el.closest(".themebook-container")?.classList.add("card-dragging");
         }
-        if (event.target.closest(".card-grid")) {
-            event.target.closest(".themebook-container")?.classList.add("drag-over");
+        return super._onDragStart(event);
+    }
+
+    /** Remove all card drag & drop indicator classes. */
+    _clearCardDragIndicators() {
+        for (const el of this.element.querySelectorAll(".drag-over, .drag-over-append, .card-dragging")) {
+            el.classList.remove("drag-over", "drag-over-append", "card-dragging");
+        }
+    }
+
+    /** @override */
+    _onDragOver(event) {
+        // Visual drop indicators: an insertion bar on the card the dragged card
+        // would be inserted BEFORE, a dashed grid outline when it would be
+        // appended at the end, or the Main/Other tab button it would move to.
+        for (const el of this.element.querySelectorAll(".drag-over, .drag-over-append")) {
+            el.classList.remove("drag-over", "drag-over-append");
+        }
+        const grid = event.target.closest(".card-grid");
+        if (grid) {
+            const card = event.target.closest(".themebook-container");
+            if (card && !card.classList.contains("card-dragging")) {
+                card.classList.add("drag-over");
+            } else if (!card) {
+                grid.classList.add("drag-over-append");
+            }
         } else {
             const tabBtn = event.target.closest('a[data-action="tab"]');
             if (tabBtn?.dataset.tab === "character" || tabBtn?.dataset.tab === "other") {
@@ -861,6 +988,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
 
     /** @override */
     async _onDrop(event) {
+        this._clearCardDragIndicators();
         const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
 
         // Reorder / move a card within the Main/Other tab grid.
@@ -974,18 +1102,21 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     }
 
     enableMoveThemebookContextMenu() {
+        // rote cards carry data-card-key on their .themebook-item; themebook
+        // cards keep the legacy "themebook:<id>" key derived from data-id
+        const cardKeyOf = (li) => li.dataset.cardKey ?? ("themebook:" + li.dataset.id);
         this._createContextMenu(() => [
             {
                 name: "Move to Other Tab",
                 icon: '<i class="fa-solid fa-right-left"></i>',
-                condition: li => this._getCardTab("themebook:" + li.dataset.id) === "main",
-                callback: li => this._setCardTab("themebook:" + li.dataset.id, "other")
+                condition: li => this._getCardTab(cardKeyOf(li)) === "main",
+                callback: li => this._setCardTab(cardKeyOf(li), "other")
             },
             {
                 name: "Move to Main Tab",
                 icon: '<i class="fa-solid fa-right-left"></i>',
-                condition: li => this._getCardTab("themebook:" + li.dataset.id) === "other",
-                callback: li => this._setCardTab("themebook:" + li.dataset.id, "main")
+                condition: li => this._getCardTab(cardKeyOf(li)) === "other",
+                callback: li => this._setCardTab(cardKeyOf(li), "main")
             }
         ], ".themebook-item", {
             fixed: true

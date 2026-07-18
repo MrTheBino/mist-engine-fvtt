@@ -120,6 +120,18 @@
       },
       "system": "mist-engine-fvtt",
       "flags": {}
+    },
+    {
+      "name": "litm-rotes",
+      "label": "LiTM Rotes",
+      "path": "packs/litm-rotes",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "mist-engine-fvtt",
+      "flags": {}
     }
   ],
   "socket": true,

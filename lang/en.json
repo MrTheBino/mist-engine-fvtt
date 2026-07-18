@@ -47,6 +47,8 @@
       "NoFellowshipThemecardFound": "No Fellowship Themecard actors found. Use \"Create New\" to make one first."
     },
     "HELP": {
+      "BackpackSheet": "Backpack entries are edited directly on the character sheet (edit mode of the Backpack card). Use the Description tab for tooltip text.",
+      "QuintessenceSheet": "Edit this quintessence's text in the Description tab — it is shown as a tooltip on the character sheet.",
       "FellowshipCreation": "No Fellowship Themecard is assigned. Create a new one, or assign an existing Fellowship Themecard Actor.",
       "NoThemebooksInCharacter": "No Themebooks found. Create Themebook Items and drop them here.",
       "ChallengeTemplateDragNDrop": "Drag and drop challenge / vignette items on this NPC to use them. They serve as templates and will not modify the original item.",
@@ -81,6 +83,7 @@
       }
     },
     "SCENE_APP": {
+      "NoActiveScene": "The scene tracker needs an active scene. Activate a scene first.",
       "Weaknesses": "Weaknesses (GM)",
       "WeaknessToggleHint": "Click to toggle this weakness as active in the scene",
       "TabActors": "Actors",
@@ -114,7 +117,8 @@
     },
     "SheetLabels": {
       "ChallengeAddon": "Challenge Add-on",
-      "JournalEntry": "Legend In The Mist Journal"
+      "JournalEntry": "Legend In The Mist Journal",
+      "Rote": "Rote"
     },
     "PLACEHOLDERS": {
       "QuestGoal": "Quest/Goal",
@@ -136,14 +140,139 @@
       "Fellowship": "Fellowship",
       "Backpack": "Backpack",
       "Quintessences": "Quintessences",
+      "Rotes": "Rotes",
       "Options":{
         "IsStoryTheme": "Is Story Theme"
       }
+    },
+    "ROTE": {
+      "Practitioners": "Practitioners",
+      "PractitionersPlaceholder": "Who may have access to this rote?",
+      "ActionType": "Resolved as",
+      "ActionTypes": {
+        "simple": "Simple Action",
+        "quick": "Quick Action",
+        "detailed": "Detailed Action"
+      },
+      "Power": "Power",
+      "PowerHelping": "Helping tags",
+      "PowerHindering": "Hindering tags",
+      "Success": "Success",
+      "Consequences": "Consequences",
+      "SelectHint": "Click to select this rote as a tag for the next roll",
+      "OpenHint": "Open rote",
+      "EmptyHint": "Drop a rote item here"
     },
     "ROLL_TYPES": {
       "quick": "Quick Roll",
       "detailed": "Detailed Roll",
       "reaction": "Reaction Roll"
+    },
+    "OVERCOME": {
+      "Overcome": "Overcome",
+      "LimitReachedHint": "A status has reached this Limit — the Challenge is overcome.",
+      "HeroHint": "A tier-5 status has overcome this Hero — they cannot act and lose control of the scene."
+    },
+    "SACRIFICE": {
+      "Title": "Sacrifice",
+      "Hint": "Making a Sacrifice is a Quick outcome without any Power: you accept severe Consequences to achieve something extraordinary. The Narrator may grant a modifier before you roll.",
+      "Level": "Level of Sacrifice",
+      "Levels": {
+        "painful": "Painful",
+        "scarring": "Scarring",
+        "grave": "Grave",
+        "none": "Negligible"
+      },
+      "Modifier": "Narrator modifier",
+      "Roll": "Roll",
+      "Miracle": "Miracle",
+      "MiracleText": "You succeed and your Sacrifice is lessened by one level.",
+      "Fate": "Fate",
+      "FateText": "You succeed but pay in full the Consequences of your Sacrifice.",
+      "InVain": "In Vain",
+      "InVainText": "You pay in full the Consequences of your Sacrifice, but nothing comes out of it — or things go terribly wrong."
+    },
+    "CAMPING": {
+      "Title": "Camping & Sojourns",
+      "NoActiveScene": "Camping needs an active scene. Activate a scene first.",
+      "SetupTitle": "Set Up Camp / Sojourn",
+      "Mode": "Mode",
+      "Camp": "Camping",
+      "Sojourn": "Sojourn",
+      "Duration": "Length of stay (sojourn only)",
+      "Durations": { "days": "Days", "weeks": "Weeks", "months": "Months" },
+      "DurationHint": "A sojourn grants bonus Power on camp actions: days +1, weeks +2, months +3.",
+      "Start": "Start",
+      "Inactive": "No camping or sojourn is currently in progress.",
+      "Period": "Period",
+      "ThirdPeriodWarning": "The third period comes at the cost of Consequences!",
+      "CampsiteTags": "Campsite Tags & Statuses",
+      "AddCampsiteTag": "Add campsite tag or status",
+      "Add": "Add",
+      "NoCampsiteTags": "No campsite tags yet.",
+      "GmControls": "Narrator Controls",
+      "NextPeriod": "Next Period",
+      "OpenThirdPeriod": "Allow Third Period",
+      "End": "Pack Up & End",
+      "BackpackReview": "Backpack Review",
+      "ApplyExpiration": "Apply Expiration",
+      "ApplyExpirationHint": "All marked story tags expire and no longer grant Power.",
+      "BackpackReviewHintGm": "Click entries to mark them for expiration. Click an expired entry to recreate it.",
+      "BackpackReviewHintPlayer": "Propose story tags of your backpack for expiration — the Narrator has the final say.",
+      "ToggleExpiringHint": "Mark / unmark for expiration",
+      "EmptyBackpack": "Empty backpack.",
+      "Rest": "Rest",
+      "ChooseRest": "Take a rest",
+      "RestHint": "Recover and expire statuses (once per camping scene). During a sojourn even graver injuries can be expired.",
+      "RestAlreadyUsed": "You have already rested during this camping scene.",
+      "ExpireStatusHint": "Click to expire this status after your rest",
+      "NoStatuses": "No statuses to expire.",
+      "Used": "already used",
+      "Reflect": "Reflect",
+      "ReflectHint": "Internalize what you have been through: mark Improve on one of your themes (once per camping scene).",
+      "ReflectAlreadyUsed": "You have already reflected during this camping scene.",
+      "CampAction": "Camp Action",
+      "CampActionHint": "Take up a camp duty: select your tags as usual, then roll — or spend half your Power (rounded up) without rolling.",
+      "CampActionSojournHint": "Sojourn bonus Power is added automatically.",
+      "ActionRoll": "Roll",
+      "ActionSpend": "Spend half Power",
+      "ActionSpendHint": "Requires at least 1 Power from selected tags.",
+      "NoPowerSelected": "Select at least one tag (1 Power or more) for your camp action first.",
+      "FellowshipTime": "Fellowship Quality Time",
+      "FellowshipHint": "Recover a scratched relationship tag or create a new one with another Hero (once per camping scene).",
+      "FellowshipAlreadyUsed": "You have already used your Fellowship quality time.",
+      "ConfirmTitle": "Confirm Activity",
+      "ConfirmRest": "Take a rest now? This can only be chosen once per camping scene and cannot be undone.",
+      "ConfirmReflect": "Reflect and mark Improve on \"{theme}\"? This can only be chosen once per camping scene and cannot be undone.",
+      "ConfirmExpireStatus": "Expire the status \"{name}\"? It will be removed and cannot be restored.",
+      "ConfirmSpendPower": "Spend {spend} Power (of {power}) without rolling? Your selected tags will be consumed.",
+      "ConfirmRecoverFellowship": "Recover the relationship tag \"{name}\"? This uses your Fellowship quality time for this camping scene.",
+      "RecoverFellowshipHint": "Click to recover this scratched relationship tag",
+      "NewRelationshipTag": "New relationship tag",
+      "ChatStartedTitle": "The Fellowship makes camp",
+      "ChatStartedLine": "{mode} begins ({duration}). Review your backpacks and choose your activities.",
+      "ChatPeriodTitle": "A new watch begins",
+      "ChatPeriodLine": "Period {period} has started.",
+      "ChatThirdTitle": "A third period is allowed",
+      "ChatThirdLine": "Whoever participates risks Consequences.",
+      "ChatEndedTitle": "Packing up to go",
+      "ChatEndedLine": "The camping time is over — the journey continues.",
+      "ChatRestTitle": "Rest",
+      "ChatRestLine": "takes time to recover — the Narrator expires appropriate statuses.",
+      "ChatRestLineSojourn": "takes a long rest — even graver injuries may be expired.",
+      "ChatStatusExpiredTitle": "Status expired",
+      "ChatStatusExpiredLine": "The status \"{name}\" has been expired.",
+      "ChatReflectTitle": "Reflect",
+      "ChatReflectLine": "reflects and marks Improve on \"{theme}\".",
+      "ChatActionTitle": "Camp Action",
+      "ChatActionSpendLine": "spends {spend} Power (of {power}) without rolling.",
+      "ChatExpiredTitle": "Story tags expired",
+      "ChatExpiredLine": "\"{name}\" has expired and no longer grants Power.",
+      "ChatRecreatedTitle": "Story tag recreated",
+      "ChatRecreatedLine": "\"{name}\" is back in working order.",
+      "ChatFellowshipTitle": "Fellowship Quality Time",
+      "ChatFellowshipRecoverLine": "recovers the relationship tag \"{name}\".",
+      "ChatFellowshipNewLine": "creates the new relationship tag \"{name}\" with {companion}."
     },
     "GM_CONFIRM": {
       "Title": "Roll Confirmation",
@@ -272,7 +401,8 @@
       "shortchallenge": "Short Challenge / Vignette",
       "backpack": "Backpack",
       "themekit": "Themekit",
-      "challenge-addon": "Challenge Add-on"
+      "challenge-addon": "Challenge Add-on",
+      "rote": "Rote"
     }
   }
 }

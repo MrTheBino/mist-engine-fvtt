@@ -70,5 +70,18 @@ export default class MistEngineNPC extends MistEngineActorBase {
 
   prepareDerivedData() {
     super.prepareDerivedData();
+
+    // Overcoming a Challenge (Core Book p. 29): a Challenge is overcome when
+    // it carries a status of a Limit's tier or higher. Limit and status names
+    // rarely match exactly ("wound" vs "wounded"), so we compare word stems.
+    const stem = (s) => String(s ?? "").trim().toLowerCase().slice(0, 4);
+    const statuses = this.floatingTagsAndStatuses ?? [];
+    (this.limits ?? []).forEach(limit => {
+      const tier = parseInt(limit.value);
+      const limitStem = stem(limit.name);
+      limit.reached = Number.isFinite(tier) && tier > 0 && limitStem.length > 0 &&
+        statuses.some(t => (t.value ?? 0) >= tier && stem(t.name) === limitStem);
+    });
+    this.isOvercome = (this.limits ?? []).some(l => l.reached);
   }
 }

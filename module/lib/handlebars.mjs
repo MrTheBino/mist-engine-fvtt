@@ -81,6 +81,21 @@ export function registerHandlebarHelpers() {
     return `<strong>${item.name}</strong><br/>${t}`;
   });
 
+  // Rich tooltip for a rote's tags on the character sheet: description,
+  // success and consequences of the rote, formatted for the core tooltip.
+  Handlebars.registerHelper('roteTooltipHTML', function (rote) {
+    const section = (labelKey, html) => {
+      if (!html || html.trim() === "") return "";
+      return `<h4>${game.i18n.localize(labelKey)}</h4><div>${html}</div>`;
+    };
+    let t = `<strong class="rote-tooltip-title">${rote.name}</strong>`;
+    t += section("MIST_ENGINE.LABELS.Description", rote.system.description);
+    t += section("MIST_ENGINE.ROTE.Success", rote.system.success);
+    t += section("MIST_ENGINE.ROTE.Consequences", rote.system.consequences);
+    // replace " with ' to avoid issues with HTML attributes
+    return t.replace(/"/g, "'");
+  });
+
   Handlebars.registerHelper('tooltipHTML', function (name, desc) {
     let t = textWithTags(desc);
     // replace " with ' to avoid issues with HTML attributes

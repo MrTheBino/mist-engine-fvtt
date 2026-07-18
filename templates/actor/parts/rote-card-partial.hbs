@@ -1,0 +1,59 @@
+{{!--
+    One card per rote item, styled like a themebook card. The banner shows the
+    localized type name; the rote's own name is the first power tag line and
+    clicking it selects/deselects the rote for the next roll (circle marker).
+--}}
+<div class="themebook-container container-themebook-with-border" data-id="{{rote._id}}" data-card-key="{{cardKey}}">
+    <div class="themebook-style litm-rote flexcol">
+        <div class="themebook-item" data-id="{{rote._id}}" data-card-key="{{cardKey}}">
+        <h2 class="theme-name"><i class="card-drag-handle fa-solid fa-grip-vertical" draggable="true" data-drag-type="card" data-card-key="{{cardKey}}" title="{{localize 'MIST_ENGINE.LABELS.DragCardHint'}}"></i>{{localize 'TYPES.Item.rote'}}
+            {{#if editMode}}
+            <a data-action="editItem" data-item-id='{{rote._id}}'>
+                <i class='fas fa-edit'></i>
+            </a>
+            <a data-action="deleteItem" data-item-id='{{rote._id}}'>
+                <i class='fas fa-trash'></i>
+            </a>
+            {{else}}
+            <a data-action="editItem" data-item-id='{{rote._id}}' title="{{localize 'MIST_ENGINE.ROTE.OpenHint'}}">
+                <i class="themebook-icon fa-solid fa-book-open"></i>
+            </a>
+            {{/if}}
+        </h2>
+        </div>
+        <div class="powertags-container">
+            {{!-- the rote's title tag: first power tag line, selectable --}}
+            <div class="item-powertag-line flexrow">
+                <span class="burn-indicator"></span>
+                <span class="litm-pc-powertag powertag-name first rote-title-selectable {{#if rote.system.selected}}selected{{/if}}"
+                    data-action="toggleRoteSelection" data-item-id="{{rote._id}}"
+                    data-tooltip-html="{{{roteTooltipHTML rote}}}" data-tooltip-class="rote-tooltip">{{rote.name}}</span>
+            </div>
+            {{#each rote.system.powertags as |powertag index|}}
+            {{#if (notEmpty powertag.name)}}
+            <div class="item-powertag-line flexrow">
+                <span class="burn-indicator"></span>
+                <span class="litm-pc-powertag powertag-name"
+                    data-tooltip-html="{{{roteTooltipHTML ../rote}}}" data-tooltip-class="rote-tooltip">{{powertag.name}}</span>
+            </div>
+            {{/if}}
+            {{/each}}
+
+            {{#each rote.system.weaknesstags as |weaknesstag index|}}
+            {{#if (notEmpty weaknesstag.name)}}
+            <div class="item-weakness-line flexrow">
+                <span class="weakness-indicator"><i class="fa-light fa-angles-down"></i></span>
+                <span class="litm-pc-weakness"
+                    data-tooltip-html="{{{roteTooltipHTML ../rote}}}" data-tooltip-class="rote-tooltip">{{weaknesstag.name}}</span>
+            </div>
+            {{/if}}
+            {{/each}}
+        </div>
+        {{#if rote.system.practitioners}}
+        <div class="quest-container">
+            <h3>{{localize 'MIST_ENGINE.ROTE.Practitioners'}}</h3>
+            <p class="quest-text">{{rote.system.practitioners}}</p>
+        </div>
+        {{/if}}
+    </div>
+</div>

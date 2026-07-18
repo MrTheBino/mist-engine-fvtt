@@ -10,6 +10,40 @@ export class FloatingTagAndStatusAdapter {
     /** Dot-path of the floating tags/statuses array within a document's system data. */
     static PATH = "system.floatingTagsAndStatuses";
 
+    /**
+     * Add a floating tag/status to a list, stacking statuses per the
+     * tracking-card rule (Core Book p. 29): a same-named status marks the box
+     * of its tier; if that box is already marked, the next empty box to the
+     * right is marked instead. The status tier is the highest marked box.
+     * Non-statuses and new names are simply appended.
+     * @param {Array} list        current floatingTagsAndStatuses array
+     * @param {object} ftsObject  entry to add (from parseFloatingTagAndStatusString or a drop)
+     * @returns {Array} a new array with the entry appended or stacked
+     */
+    static withStatusStacked(list, ftsObject){
+        const current = list ?? [];
+        const norm = s => String(s ?? "").trim().toLowerCase();
+        if (ftsObject.isStatus && norm(ftsObject.name) !== "") {
+            const idx = current.findIndex(e => e.isStatus && norm(e.name) === norm(ftsObject.name));
+            if (idx !== -1) {
+                const existing = foundry.utils.deepClone(current[idx]);
+                const markings = [...(existing.markings ?? Array(6).fill(false))];
+                while (markings.length < 6) markings.push(false);
+                let tier = Math.max(1, Math.min(ftsObject.value || 1, 6)) - 1;
+                if (markings[tier]) {
+                    tier = markings.findIndex((m, i) => i > tier && !m); // next empty box to the right
+                }
+                if (tier !== -1) markings[tier] = true;
+                existing.markings = markings;
+                existing.value = markings.lastIndexOf(true) + 1;
+                const result = [...current];
+                result[idx] = existing;
+                return result;
+            }
+        }
+        return [...current, ftsObject];
+    }
+
     static parseFloatingTagAndStatusString(srcString){
         let ftsObject = { name: srcString, description: "", isStatus: false, positive:true, value: 0, markings: Array(6).fill(false) };
         if (srcString.includes("-")) {

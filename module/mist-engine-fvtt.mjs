@@ -8,6 +8,7 @@ import { MistEngineLegendInTheMistCharacterSheet } from "./sheets/litm-character
 import { MistEngineLegendInTheMistNpcSheet } from "./sheets/litm-npc-sheet.mjs";
 import { MistEngineLegendInTheMistFellowshipThemecard } from "./sheets/litm-fellowship-themecard.mjs"
 import { MistEngineItemSheet } from "./sheets/item-sheet.mjs";
+import { MistEngineRoteItemSheet } from "./sheets/item-rote-sheet.mjs";
 import { MistEngineShortChallengeItemSheet } from "./sheets/item-shortchallenge-sheet.mjs";
 import { MistEngineItemThemekitSheet } from "./sheets/item-themekit-sheet.mjs";
 import { MistEngineLegendInTheMistJourneySheet } from "./sheets/litm-actor-journey-sheet.mjs";
@@ -81,7 +82,8 @@ Hooks.once("init", function () {
     quintessence: models.MistEngineQuintessence,
     shortchallenge: models.MistEngineShortChallenge,
     themekit: models.MistEngineThemekit,
-    "challenge-addon": models.MistEngineChallengeAddon
+    "challenge-addon": models.MistEngineChallengeAddon,
+    rote: models.MistEngineItemRote
   };
 
   // Active Effects are never copied to the Actor,
@@ -152,6 +154,12 @@ Hooks.once("init", function () {
     makeDefault: true,
     types: ["challenge-addon"],
     label: "MIST_ENGINE.SheetLabels.ChallengeAddon",
+  });
+
+  foundry.documents.collections.Items.registerSheet("mist-engine-fvtt", MistEngineRoteItemSheet, {
+    makeDefault: true,
+    types: ["rote"],
+    label: "MIST_ENGINE.SheetLabels.Rote",
   });
 
   // Use our own journal sheet so journals open at a wider default width. The

@@ -84,12 +84,49 @@
         color: gray;
     }
 
+    // Camping & Sojourns story tag expiration (p. 179)
+    &.expiring {
+        color: #a3641e;
+    }
+
+    &.expired {
+        text-decoration: line-through;
+        color: gray;
+
+        &:hover {
+            cursor: default;
+        }
+    }
+
     &.empty {
         color: rgba(0, 0, 0, 0.5);
 
         &:hover {
             cursor: default;
         }
+    }
+}
+
+// Overcome (Core Book p. 29): a Hero at tier 5 / a Challenge at a Limit
+.overcome-badge {
+    display: inline-block;
+    background: #8c1f14;
+    color: white;
+    font-family: var(--litm-font-heading);
+    font-size: 0.55em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 1px 6px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-left: 6px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.npc-limit-item.limit-reached {
+    mark.limit {
+        outline: 2px solid #8c1f14;
+        font-weight: bold;
     }
 }
 

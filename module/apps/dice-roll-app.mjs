@@ -384,11 +384,16 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 const backpackItems = item.system.items;
                 if (backpackItems) {
                     for (const [i, backpackItem] of backpackItems.entries()) {
-                        if (backpackItem.selected) {
+                        if (backpackItem.selected && !backpackItem.expired) {
                             selectedTags.push({ name: backpackItem.name, positive: true, toBurn: backpackItem.toBurn, index: i + 1, themebookId: backpackItem.id, source: 'backpack' });
                         }
                     }
                 }
+            }
+
+            if (item.type === "rote" && item.system.selected) {
+                // a rote's title works as a tag (Core Book p. 98)
+                selectedTags.push({ name: item.name, positive: true, source: "rote", roteId: item.id });
             }
 
             if (item.type === "themebook") {
@@ -506,6 +511,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         let burnedOne = false; // at most one tag may actually burn per roll (#92)
 
         for (let item of this.actor.items) {
+            if (item.type === "rote" && item.system.selected) {
+                await item.update({ "system.selected": false });
+            }
             if (item.type === "backpack") {
                 const backpackItems = item.system.items;
                 if (backpackItems) {
@@ -745,6 +753,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             consequenceResult = 0;
         }
 
+        // double sixes always mean Success without Consequences, double ones
+        // always Consequences without Success — regardless of Power!!!!
+        if (isCritical) consequenceResult = 1;
+        if (isFumble) consequenceResult = -1;
+
         let positiveTags = tagsAndStatusForRoll.filter(t => t.positive);
         let negativeTags = tagsAndStatusForRoll.filter(t => !t.positive);
 
@@ -851,6 +864,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 if (backpackItem) {
                     await StoryTagAdapter.toggleStoryTagSelection(this.actor, backpackItem.id, 'system.items', tagToDeselect.index - 1);
                     this.updateTagsAndStatuses(true);
+                }
+            }
+            // now rotes
+            else if (tagToDeselect.source === "rote") {
+                const rote = this.actor.items.get(tagToDeselect.roteId);
+                if (rote) {
+                    await rote.update({ "system.selected": false });
+                    this.updateTagsAndStatuses(true);
+                    this.actor.sheet.render();
                 }
             }
             // now floating tag or status

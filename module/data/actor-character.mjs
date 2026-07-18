@@ -39,4 +39,11 @@ export default class MistEngineCharacter extends MistEngineActorBase {
 
     return schema;
   }
+
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    // Heroes are overcome at tier 5 (Core Book p. 29): a negative status of
+    // tier 5+ takes them out of the scene.
+    this.isOvercome = (this.floatingTagsAndStatuses ?? []).some(t => t.isStatus && !t.positive && (t.value ?? 0) >= 5);
+  }
 }

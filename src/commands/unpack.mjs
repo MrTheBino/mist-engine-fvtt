@@ -7,3 +7,4 @@ await extractPack("./packs/pregen-characters", "./src/packs/pregen-characters", 
 await extractPack("./packs/example-actors", "./src/packs/example-actors", { nedb: false,log: true,documentType: "Actor" });
 //await extractPack("./packs/pregen-heroes", "./src/packs/pregen-heroes", { nedb: false,log: true,documentType: "Actor" });
 await extractPack("./packs/system-documentation", "./src/packs/system-documentation", { nedb: false,log: true,documentType: "Journal" });
+await extractPack("./packs/litm-rotes", "./src/packs/litm-rotes", { nedb: false,log: true,documentType: "Item" });

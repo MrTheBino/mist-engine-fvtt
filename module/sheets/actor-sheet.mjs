@@ -497,20 +497,9 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         }
 
         let ftsObject = FloatingTagAndStatusAdapter.parseFloatingTagAndStatusString(srcStatusTagStr);
-        if (floatingTagsAndStatuses) {
-            await this.actor.update({
-                "system.floatingTagsAndStatuses": [
-                    ...floatingTagsAndStatuses,
-                    ftsObject
-                ]
-            });
-        } else {
-            await this.actor.update({
-                "system.floatingTagsAndStatuses": [
-                    ftsObject
-                ]
-            });
-        }
+        await this.actor.update({
+            "system.floatingTagsAndStatuses": FloatingTagAndStatusAdapter.withStatusStacked(floatingTagsAndStatuses, ftsObject)
+        });
 
         /*if (this.actor.type == "litm-character") {
             this.actor.update({ "system.floatingTagsAndStatusesEditable": true });
@@ -717,9 +706,12 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 break;
             case 'status':
                 const value = parseInt(data.value) || 0;
-                floatingTagsAndStatuses.push({ name: data.name, isStatus: true, value, description: "", markings: Array(6).fill(false).fill(true, Math.max(value - 1, 0), value) });
+                // stacks with an existing same-named status per the tracking-card rule (p. 29)
                 this.actor.update({
-                    "system.floatingTagsAndStatuses": floatingTagsAndStatuses,
+                    "system.floatingTagsAndStatuses": FloatingTagAndStatusAdapter.withStatusStacked(
+                        floatingTagsAndStatuses,
+                        { name: data.name, isStatus: true, value, description: "", markings: Array(6).fill(false).fill(true, Math.max(value - 1, 0), value) }
+                    ),
                 });
                 break;
             case 'limit':

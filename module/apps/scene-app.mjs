@@ -128,6 +128,14 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return MistSceneApp.instance;
     }
 
+    static open() {
+        if (!game.scenes.active) {
+            ui.notifications.warn(game.i18n.localize("MIST_ENGINE.SCENE_APP.NoActiveScene"));
+            return;
+        }
+        MistSceneApp.getInstance().render(true, { focus: true });
+    }
+
     /** @inheritDoc */
     _onRender(context, options) {
         // Story floating tags and statuses
@@ -321,10 +329,10 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 const markings = new Array(6).fill(false);
                 markings[Math.max(0, Math.min(parseInt(value) - 1, 5))] = true;
                 await this.currentSceneDataItem.update({
-                    "system.floatingTagsAndStatuses": [
-                        ...floatingTagsAndStatuses,
+                    "system.floatingTagsAndStatuses": FloatingTagAndStatusAdapter.withStatusStacked(
+                        floatingTagsAndStatuses,
                         { name, value, isStatus, markings }
-                    ],
+                    ),
                 });
                 this.sendUpdateHookEvent();
                 break;
@@ -475,6 +483,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 tokenId: token.id,
                 name: token.name || actor.name,
                 img: actor.img,
+                isOvercome: actor.system.isOvercome === true,
                 floatingTagsAndStatuses: floatingTagAndStatuses,
                 hasFloatingTagsAndStatuses: floatingTagAndStatuses.length > 0,
                 mightyAspects: mightyAspects,
@@ -806,20 +815,9 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
         let ftsObject = FloatingTagAndStatusAdapter.parseFloatingTagAndStatusString(srcStatusTagStr);
 
-        if (floatingTagsAndStatuses) {
-            await this.currentSceneDataItem.update({
-                "system.floatingTagsAndStatuses": [
-                    ...floatingTagsAndStatuses,
-                    ftsObject
-                ]
-            });
-        } else {
-            await this.currentSceneDataItem.update({
-                "system.floatingTagsAndStatuses": [
-                    ftsObject
-                ]
-            });
-        }
+        await this.currentSceneDataItem.update({
+            "system.floatingTagsAndStatuses": FloatingTagAndStatusAdapter.withStatusStacked(floatingTagsAndStatuses, ftsObject)
+        });
 
         this.sendUpdateHookEvent();
     }

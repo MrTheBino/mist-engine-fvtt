@@ -23,6 +23,7 @@ export class StoryTagAdapter {
         const data = foundry.utils.getProperty(item, key);
         if(!data || index < 0 || index >= data.length) return false;
         if(data[index].burned) return false; // cannot select burned tags
+        if(data[index].expired) return false; // expired story tags grant no Power (p. 179)
         return ArrayFieldAdapter.toggle(item, key, index, "selected");
     }
 

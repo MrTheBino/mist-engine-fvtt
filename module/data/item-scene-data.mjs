@@ -20,6 +20,15 @@ export default class MistEngineSceneData extends MistEngineItemBase {
     });
 
 
+    // Camping & Sojourns mode (Core Book p. 179-181)
+    schema.camping = new fields.SchemaField({
+      active: new fields.BooleanField({ initial: false }),
+      mode: new fields.StringField({ initial: "camp", choices: ["camp", "sojourn"] }),
+      duration: new fields.StringField({ initial: "days", choices: ["days", "weeks", "months"] }),
+      period: new fields.NumberField({ ...requiredInteger, initial: 1, min: 1, max: 3 }),
+      thirdPeriodOpen: new fields.BooleanField({ initial: false })
+    });
+
     schema.diceRollTagsStatus = new fields.ArrayField(new fields.SchemaField({
       name: new fields.StringField({ required: true, blank: false }),
       value: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),

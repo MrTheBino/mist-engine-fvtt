@@ -7,9 +7,10 @@
             </div>
             <div class="npc-limits-list flexcol">
                 {{#each system.limits as |limit|}}
-                <div class="npc-limit-item">
+                <div class="npc-limit-item {{#if limit.reached}}limit-reached{{/if}}">
                     <mark class="limit">{{limit.name}}</mark>
                     <span class="limit-value">{{npcLimitValue limit.value}}</span>
+                    {{#if limit.reached}}<span class="overcome-badge" title="{{localize 'MIST_ENGINE.OVERCOME.LimitReachedHint'}}">{{localize 'MIST_ENGINE.OVERCOME.Overcome'}}</span>{{/if}}
                 </div>
                 {{#if (notEmpty limit.consequence)}}
                         <div class="npc-limit-consequence"><i class="icon-round-arrow-up"></i>{{{textWithTags limit.consequence}}}</div>

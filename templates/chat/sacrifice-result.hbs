@@ -1,0 +1,29 @@
+<form class="roll-card">
+    <div class="card-title">
+        {{localize 'MIST_ENGINE.SACRIFICE.Title'}} — {{levelLabel}}
+    </div>
+    <div class="roll-result">
+        {{{diceRollHTML}}}
+    </div>
+    <div class="consequence-container">
+        {{#if isMiracle}}
+        <div class="consequence-result-positive">
+            <span class="heading"><i class="consequence-result-icon positive"></i>10+ {{localize 'MIST_ENGINE.SACRIFICE.Miracle'}}</span>
+            <p>{{localize 'MIST_ENGINE.SACRIFICE.MiracleText'}}</p>
+            <p><em>{{levelLabel}} &rarr; {{lessenedLabel}}</em></p>
+        </div>
+        {{/if}}
+        {{#if isFate}}
+        <div class="consequence-result-neutral">
+            <span class="heading"><i class="consequence-result-icon neutral"></i>7-9 {{localize 'MIST_ENGINE.SACRIFICE.Fate'}}</span>
+            <p>{{localize 'MIST_ENGINE.SACRIFICE.FateText'}}</p>
+        </div>
+        {{/if}}
+        {{#if isInVain}}
+        <div class="consequence-result-negative">
+            <span class="heading"><i class="consequence-result-icon negative"></i>6- {{localize 'MIST_ENGINE.SACRIFICE.InVain'}}</span>
+            <p>{{localize 'MIST_ENGINE.SACRIFICE.InVainText'}}</p>
+        </div>
+        {{/if}}
+    </div>
+</form>

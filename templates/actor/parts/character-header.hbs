@@ -33,7 +33,9 @@
             <div class="col-character-name">
                 <div class="character-name-container">
                     <div class="title">
-                        <h1 class="charname custom-font-color">{{actor.name}}</h1>
+                        <h1 class="charname custom-font-color">{{actor.name}}
+                            {{#if system.isOvercome}}<span class="overcome-badge" title="{{localize 'MIST_ENGINE.OVERCOME.HeroHint'}}">{{localize 'MIST_ENGINE.OVERCOME.Overcome'}}</span>{{/if}}
+                        </h1>
                     </div>
                     <div class="short-description">{{system.shortDescription}}</div>
                 </div>
@@ -46,6 +48,8 @@
                             class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.detailed'}}</button>
                     <button data-action="clickRoll" class="roll-button" data-roll-type="reaction"><i
                             class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.reaction'}}</button>
+                    <button data-action="clickSacrificeRoll" class="roll-button"><i
+                            class="fa-solid fa-heart-crack"></i> {{localize 'MIST_ENGINE.SACRIFICE.Title'}}</button>
                 </div>
             </div>
             <div class="col-status">

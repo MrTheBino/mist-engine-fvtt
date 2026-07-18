@@ -1732,6 +1732,32 @@ article.cc-enriched section.journal-entry-content {
   background-image: url("../assets/icons/might-icon-origin.webp");
   margin-right: 0;
 }
+#tooltip.rote-tooltip {
+  max-width: 420px;
+  text-align: left;
+}
+#tooltip.rote-tooltip .rote-tooltip-title {
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: var(--litm-font-heading);
+  margin-bottom: 0.25em;
+}
+#tooltip.rote-tooltip h4 {
+  margin: 0.6em 0 0.2em 0;
+  font-family: var(--litm-font-heading);
+  text-transform: uppercase;
+  font-size: 0.85em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+#tooltip.rote-tooltip p {
+  margin: 0.2em 0;
+}
+#tooltip.rote-tooltip ul {
+  margin: 0.2em 0 0.2em 1.2em;
+  padding: 0;
+}
+
 .mist-engine .item-form {
   font-family: Labrada, serif;
 }
@@ -2060,11 +2086,39 @@ article.cc-enriched section.journal-entry-content {
   text-decoration: line-through;
   color: gray;
 }
+.mist-engine .litm-pc-storytag.expiring {
+  color: #a3641e;
+}
+.mist-engine .litm-pc-storytag.expired {
+  text-decoration: line-through;
+  color: gray;
+}
+.mist-engine .litm-pc-storytag.expired:hover {
+  cursor: default;
+}
 .mist-engine .litm-pc-storytag.empty {
   color: rgba(0, 0, 0, 0.5);
 }
 .mist-engine .litm-pc-storytag.empty:hover {
   cursor: default;
+}
+.mist-engine .overcome-badge {
+  display: inline-block;
+  background: #8c1f14;
+  color: white;
+  font-family: var(--litm-font-heading);
+  font-size: 0.55em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1px 6px;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-left: 6px;
+  -webkit-font-smoothing: antialiased;
+}
+.mist-engine .npc-limit-item.limit-reached mark.limit {
+  outline: 2px solid #8c1f14;
+  font-weight: bold;
 }
 .mist-engine .special-improvement-label {
   font-family: var(--litm-font-text);
@@ -2446,9 +2500,13 @@ article.cc-enriched section.journal-entry-content {
   padding-bottom: 8px;
 }
 .mist-engine .themebook-container.drag-over {
-  outline: 2px dashed #724a32;
+  outline: 2px dashed rgba(114, 74, 50, 0.4);
   outline-offset: -2px;
   border-radius: 4px;
+  box-shadow: -8px 0 0 0 #724a32;
+}
+.mist-engine .themebook-container.card-dragging {
+  opacity: 0.35;
 }
 .mist-engine .themebook-container .card-drag-handle {
   cursor: grab;
@@ -2493,6 +2551,11 @@ article.cc-enriched section.journal-entry-content {
   padding: 2px 10px;
   color: rgb(78.5487804878, 50.987804878, 34.4512195122);
   -webkit-font-smoothing: antialiased;
+}
+.mist-engine .card-grid.drag-over-append {
+  outline: 2px dashed #724a32;
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 .mist-engine .sheet-tabs a[data-action=tab].drag-over {
   background-color: rgba(114, 74, 50, 0.25);
@@ -2553,6 +2616,11 @@ article.cc-enriched section.journal-entry-content {
   background-size: 100% 20px;
 }
 .mist-engine .themebook-style.litm-fellowship-themecard h2 {
+  background-image: url("../assets/headers/header-backpack.webp");
+  background-repeat: no-repeat;
+  background-size: 100% 20px;
+}
+.mist-engine .themebook-style.litm-rote h2 {
   background-image: url("../assets/headers/header-backpack.webp");
   background-repeat: no-repeat;
   background-size: 100% 20px;
@@ -2803,6 +2871,39 @@ article.cc-enriched section.journal-entry-content {
   margin: 5px;
   font-family: Labrada, serif;
   width: 100%;
+  background: #724a32;
+  color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  text-shadow: none;
+}
+.mist-engine .roll-button:hover:not(:disabled) {
+  background: color-mix(in srgb, #724a32 82%, white);
+  box-shadow: 0 0 6px #724a32;
+  color: #fff;
+}
+.mist-engine .roll-button:disabled {
+  opacity: 0.6;
+}
+.mist-engine .roll-button i {
+  color: #fff;
+}
+.mist-engine .themekit-button,
+.mist-engine .empty-message button {
+  background: #724a32;
+  color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  font-family: Labrada, serif;
+  text-shadow: none;
+}
+.mist-engine .themekit-button:hover:not(:disabled),
+.mist-engine .empty-message button:hover:not(:disabled) {
+  background: color-mix(in srgb, #724a32 82%, white);
+  box-shadow: 0 0 6px #724a32;
+  color: #fff;
+}
+.mist-engine .themekit-button i,
+.mist-engine .empty-message button i {
+  color: #fff;
 }
 .mist-engine .lock-toggle-container {
   cursor: pointer;
@@ -2931,6 +3032,59 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .tab.journey-consequences a {
   font-family: Labrada, serif;
   color: #724a32;
+}
+.mist-engine.sheet:not(.litm-character) .window-content button {
+  font-family: Labrada, serif;
+}
+.mist-engine.sheet:not(.litm-character) .window-content textarea {
+  font-family: Labrada, serif;
+  font-size: var(--font-size-14, 14px);
+}
+.mist-engine.sheet:not(.litm-character) .window-content fieldset > legend {
+  font-family: var(--litm-font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.85em;
+  color: #724a32;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mist-engine.sheet:not(.litm-character) .window-content fieldset > legend button {
+  background-color: rgb(120, 70, 37);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  line-height: 1.4;
+  padding: 1px 6px;
+}
+.mist-engine.sheet:not(.litm-character) .window-content fieldset > legend button:hover {
+  box-shadow: 0 0 4px rgb(120, 70, 37);
+}
+.mist-engine.sheet:not(.litm-character) .window-content .item-header .item-img {
+  border: 1px solid #724a32;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.35);
+  padding: 2px;
+  cursor: pointer;
+  object-fit: contain;
+}
+.mist-engine.sheet:not(.litm-character) .window-content .item-header .item-img:hover {
+  box-shadow: 0 0 6px #724a32;
+}
+.mist-engine.sheet:not(.litm-character) .window-content .item-header .item-name {
+  margin: 0 0 4px 0;
+  width: 100%;
+}
+.mist-engine.sheet:not(.litm-character) .window-content .item-header .item-name input {
+  height: 2.4rem;
+  line-height: 2.4rem;
+  font-size: 1.3rem;
+  padding: 0 0.5rem;
+}
+.mist-engine .change-custom-background-btn {
+  font-size: 0.85em;
+  line-height: 1.6;
 }
 .mist-engine.sheet.actor.npc .window-content {
   background-image: url("../assets/paper_background_1.webp");
@@ -4040,6 +4194,146 @@ article.cc-enriched section.journal-entry-content {
   cursor: pointer;
 }
 
+#camping-app > section.window-content {
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  color: #724a32;
+  font-family: Labrada, serif;
+}
+
+.camping-app button {
+  font-family: Labrada, serif;
+}
+.camping-app .camping-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px;
+  height: 100%;
+  overflow-y: auto;
+}
+.camping-app .camping-header {
+  text-align: center;
+}
+.camping-app .camping-header .camping-mode-line {
+  font-family: var(--litm-font-heading);
+  text-transform: uppercase;
+  font-size: 1.1em;
+}
+.camping-app .camping-header .camping-period-line {
+  font-size: 0.95em;
+}
+.camping-app .camping-header .camping-third-warning {
+  color: #a33c1e;
+  margin-left: 6px;
+}
+.camping-app .camping-section {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  padding: 6px 8px;
+}
+.camping-app .camping-section .camping-section-header {
+  font-family: var(--litm-font-heading);
+  text-transform: uppercase;
+  font-size: 0.85em;
+  color: #724a32;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.camping-app .camping-section .camping-section-header a {
+  margin-left: auto;
+  color: #724a32;
+}
+.camping-app .camping-hint {
+  font-size: 0.85em;
+  font-style: italic;
+  margin: 2px 0 6px 0;
+  opacity: 0.85;
+}
+.camping-app .camping-empty {
+  font-style: italic;
+  opacity: 0.6;
+}
+.camping-app .camping-used {
+  margin-left: auto;
+  font-size: 0.8em;
+  opacity: 0.7;
+  text-transform: none;
+}
+.camping-app .camping-tags {
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: flex-start;
+}
+.camping-app .camping-tags .tag {
+  flex: 0 0 auto;
+}
+.camping-app .camping-gm-controls {
+  gap: 6px;
+}
+.camping-app .camping-gm-controls button {
+  flex: 1;
+}
+.camping-app .camping-theme-buttons {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.camping-app .camping-theme-buttons button {
+  flex: 0 0 auto;
+}
+.camping-app .camping-character {
+  margin-bottom: 6px;
+}
+.camping-app .camping-character .camping-character-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+.camping-app .camping-character .camping-character-head img {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border: none;
+  border-radius: 4px;
+}
+.camping-app .camping-character .camping-character-head .camping-character-state {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+  opacity: 0.75;
+}
+.camping-app .camping-apply-expiration {
+  font-size: 0.9em;
+  text-transform: none;
+}
+.camping-app .camping-backpack-entry.expiring {
+  background-color: rgba(214, 130, 40, 0.35);
+  border-color: #a3641e;
+}
+.camping-app .camping-backpack-entry.expired {
+  opacity: 0.55;
+  text-decoration: line-through;
+}
+
+.camping-chat-entry .camping-chat-title {
+  font-family: var(--litm-font-heading);
+  text-transform: uppercase;
+  font-size: 1em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  margin-bottom: 2px;
+}
+.camping-chat-entry .camping-chat-actor {
+  margin: 2px 0;
+}
+.camping-chat-entry .camping-chat-line {
+  margin: 2px 0;
+}
+
 .character-token-overlay {
   font-size: 0.95em;
   text-align: center;
@@ -4433,5 +4727,3 @@ article.cc-enriched section.journal-entry-content {
   height: 100%;
   padding-right: 8px;
 }
-
-/*# sourceMappingURL=mist-engine-fvtt.css.map */
