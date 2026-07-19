@@ -1,0 +1,38 @@
+<form class="roll-card">
+    <div class="card-title">
+        {{localize "MIST_ENGINE.COLLAB.GroupTitle"}}
+    </div>
+    <div class="selected-tags group-result-tags">
+        {{#each contributions}}
+        <div class="tag positive"><span class="tag-icon"><i class="fa-solid fa-user"></i></span>{{this.actorName}}: {{this.tagName}}{{#if this.burn}} 🔥{{/if}}</div>
+        {{/each}}
+    </div>
+    <div class="roll-result">
+        {{{diceRollHTML}}}
+    </div>
+    {{> 'systems/mist-engine-fvtt/templates/chat/critical-fumble-partial.hbs' isCritical=isCritical isFumble=isFumble}}
+    <div class="consequence-container">
+        {{#if (eq consequenceResult -1)}}
+        <div class="consequence-result-negative">
+            <span class="heading"><i class="consequence-result-icon negative"></i>6-</span>
+            <p>{{{localize "MIST_ENGINE.MOVES.LEGEND.detailed.fail"}}}</p>
+            <div class="power-counter">{{localize "MIST_ENGINE.COLLAB.GroupPower"}}: {{power}}</div>
+        </div>
+        {{/if}}
+        {{#if (eq consequenceResult 0)}}
+        <div class="consequence-result-neutral">
+            <span class="heading"><i class="consequence-result-icon neutral"></i>7-9</span>
+            <p>{{{localize "MIST_ENGINE.MOVES.LEGEND.detailed.neutral"}}}</p>
+            <div class="power-counter">{{localize "MIST_ENGINE.COLLAB.GroupPower"}}: {{power}}</div>
+        </div>
+        {{/if}}
+        {{#if (eq consequenceResult 1)}}
+        <div class="consequence-result-positive">
+            <span class="heading"><i class="consequence-result-icon positive"></i>10+</span>
+            <p>{{{localize "MIST_ENGINE.MOVES.LEGEND.detailed.success"}}}</p>
+            <div class="power-counter">{{localize "MIST_ENGINE.COLLAB.GroupPower"}}: {{power}}</div>
+        </div>
+        {{/if}}
+    </div>
+    <p class="group-affects-all"><em>{{localize "MIST_ENGINE.COLLAB.AffectsGroup"}}</em></p>
+</form>

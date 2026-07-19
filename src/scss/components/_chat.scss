@@ -88,3 +88,89 @@
 .power-counter{
     font-weight: 800;
 }
+// Detailed action interactive Power spending (Core Book p. 154)
+.detailed-spend {
+    margin-top: 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.25);
+    padding-top: 6px;
+    font-family: $font-primary;
+
+    &.readonly {
+        opacity: 0.85;
+
+        .detailed-spend-options,
+        .detailed-spend-undo {
+            display: none;
+        }
+    }
+
+    .detailed-spend-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 800;
+        color: $c-styled-text;
+        text-transform: uppercase;
+        font-size: 0.85em;
+
+        .detailed-spend-remaining {
+            font-size: 1.1em;
+        }
+    }
+
+    .detailed-spend-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin: 6px 0;
+
+        .detailed-spend-btn {
+            flex: 1 1 auto;
+            width: auto;
+            font-family: $font-primary;
+            background: $c-brown;
+            color: $c-white;
+            border: 1px solid rgba(0, 0, 0, 0.35);
+            border-radius: 3px;
+            padding: 2px 6px;
+            font-size: 0.85em;
+            line-height: 1.3;
+
+            &:hover:not(:disabled) {
+                background: color-mix(in srgb, $c-brown 82%, white);
+                box-shadow: 0 0 4px $c-brown;
+            }
+
+            &:disabled {
+                opacity: 0.45;
+            }
+
+            .detailed-spend-cost {
+                font-weight: 800;
+            }
+        }
+    }
+
+    .detailed-spend-list {
+        list-style: none;
+        margin: 4px 0 0 0;
+        padding: 0;
+        font-size: 0.9em;
+
+        li {
+            margin: 2px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .detailed-spend-undo {
+            cursor: pointer;
+            color: $c-text-redish;
+        }
+
+        .detailed-spend-cost {
+            opacity: 0.7;
+        }
+    }
+}

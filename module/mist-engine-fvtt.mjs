@@ -30,7 +30,10 @@ import { setupMistEngineKeyBindings } from "./lib/key-binding.mjs";
 import { setupConfiguration } from "./lib/configuration.mjs";
 import { setupHooks } from "./lib/hooks.mjs";
 import { RollConfirmation } from "./lib/roll-confirmation.mjs";
+import * as DetailedSpend from "./lib/detailed-spend.mjs";
+import { Collaboration } from "./lib/collaboration.mjs";
 import { registerMigrationSettings, needsMigration, migrateWorld } from "./migration.mjs";
+import { registerGmTour, registerGmTourSettings, maybeAutoStartGmTour } from "./lib/gm-tour.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -173,6 +176,7 @@ Hooks.once("init", function () {
   setupMistEngineKeyBindings();
   setupConfiguration();
   registerMigrationSettings();
+  registerGmTourSettings();
 
   if(game.settings.get("mist-engine-fvtt", "disableCustomDice") !== true) {
     CONFIG.Dice.terms["6"] = D6ToD12;
@@ -192,6 +196,8 @@ Hooks.once("ready", async function () {
   if (needsMigration()) await migrateWorld();
 
   RollConfirmation.setup();
+  DetailedSpend.setup();
+  Collaboration.setup();
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
@@ -207,6 +213,11 @@ Hooks.once("ready", async function () {
   globalThis.MistSceneApp = MistSceneApp;
   globalThis.HowToPlayApp = HowToPlayApp;
   globalThis.ChangelogApp = ChangelogApp;
+
+  // GM-only guided tour: register it (shows in Tour Management) and auto-start
+  // once per GM who has not seen it yet.
+  registerGmTour();
+  await maybeAutoStartGmTour();
 
   ChangelogApp.checkAndShow();
 });

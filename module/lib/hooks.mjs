@@ -2,6 +2,7 @@ import { MistSceneApp } from "../apps/scene-app.mjs";
 import { DiceRollApp } from "../apps/dice-roll-app.mjs";
 import { HowToPlayApp } from "../apps/how-to-play-app.mjs";
 import { CampingApp } from "../apps/camping-app.mjs";
+import { Collaboration } from "../lib/collaboration.mjs";
 import { showCharacterTokenHover, initCharacterTokenHoverKeyListeners } from "./character-token-hover.mjs";
 
 export function setupHooks() {
@@ -324,6 +325,14 @@ export function setupHooks() {
         icon: "fas fa-campground",
         visible: game.user.isGM,
         onChange: () => CampingApp.openForGM(),
+        button: true,
+      },
+      group_action_app: {
+        name: "group_action_app",
+        title: game.i18n.localize("MIST_ENGINE.COLLAB.GroupTitle"),
+        icon: "fas fa-people-group",
+        visible: game.user.isGM,
+        onChange: () => Collaboration.openGroupAction(),
         button: true,
       },
       how_to_play_app: {

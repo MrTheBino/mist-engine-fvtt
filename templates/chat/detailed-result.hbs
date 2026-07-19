@@ -31,4 +31,27 @@
         </div>
         {{/if}}
     </div>
+
+    {{#if canSpend}}
+    <div class="detailed-spend">
+        <div class="detailed-spend-header">
+            <span>{{localize "MIST_ENGINE.DETAILED_SPEND.Title"}}</span>
+            <span class="detailed-spend-remaining">{{remaining}} / {{total}}</span>
+        </div>
+        <div class="detailed-spend-options">
+            {{#each options}}
+            <button type="button" class="detailed-spend-btn" data-spend-option="{{this.id}}" {{#if this.disabled}}disabled{{/if}}>
+                {{this.label}} <span class="detailed-spend-cost">{{#if (eq this.kind "status")}}+{{this.cost}}{{else}}{{this.cost}}{{/if}}</span>
+            </button>
+            {{/each}}
+        </div>
+        {{#if entries.length}}
+        <ul class="detailed-spend-list">
+            {{#each entries}}
+            <li><i class="fa-solid fa-circle-xmark detailed-spend-undo" data-spend-undo="{{@index}}" title="{{localize 'MIST_ENGINE.DETAILED_SPEND.Undo'}}"></i> {{this.label}} <span class="detailed-spend-cost">({{this.cost}})</span></li>
+            {{/each}}
+        </ul>
+        {{/if}}
+    </div>
+    {{/if}}
 </form>
