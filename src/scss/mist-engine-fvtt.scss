@@ -33,6 +33,7 @@
 
   // Per-sheet styles
   @import "sheets/shared";
+  @import "sheets/edit-shared";
   @import "sheets/actor-npc";
   @import "sheets/actor-character";
   @import "sheets/actor-journey";
@@ -46,6 +47,8 @@
 @import "components/scene_data_app";
 @import "components/custom_background_editor";
 @import "components/dice_roller_app";
+@import "components/camping_app";
+@import "components/group_action_app";
 @import "components/character_overlay";
 @import "components/themekit_selection_app";
 @import "components/themekit_character_app";

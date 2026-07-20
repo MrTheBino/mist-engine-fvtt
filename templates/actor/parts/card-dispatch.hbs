@@ -1,6 +1,7 @@
 {{!--
     Renders a single card in the Main/Other tab grid based on its descriptor.
-    `card` = { key, type, themebook? }. Singleton cards pull their data from
+    `card` = { key, type, themebook? }. Singleton cards (quintessences,
+    fellowships, backpack, rotes, fellowship-themecard) pull their data from
     @root so they render identically to the pre-unified-grid templates.
 --}}
 {{#if (eq card.type "themebook")}}
@@ -21,6 +22,10 @@
     {{> 'systems/mist-engine-fvtt/templates/actor/parts/backpack-partial.hbs'
         backpack=@root.backpack system=@root.system
         editMode=@root.system.editMode tidyTags=@root.tidyTags cardKey=card.key}}
+{{/if}}
+{{#if (eq card.type "rote")}}
+    {{> 'systems/mist-engine-fvtt/templates/actor/parts/rote-card-partial.hbs'
+        rote=card.rote editMode=@root.system.editMode cardKey=card.key}}
 {{/if}}
 {{#if (eq card.type "fellowship-themecard")}}
     {{> 'systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-themebook-partial.hbs'

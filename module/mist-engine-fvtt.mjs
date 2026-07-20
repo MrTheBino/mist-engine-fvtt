@@ -8,6 +8,7 @@ import { MistEngineLegendInTheMistCharacterSheet } from "./sheets/litm-character
 import { MistEngineLegendInTheMistNpcSheet } from "./sheets/litm-npc-sheet.mjs";
 import { MistEngineLegendInTheMistFellowshipThemecard } from "./sheets/litm-fellowship-themecard.mjs"
 import { MistEngineItemSheet } from "./sheets/item-sheet.mjs";
+import { MistEngineRoteItemSheet } from "./sheets/item-rote-sheet.mjs";
 import { MistEngineShortChallengeItemSheet } from "./sheets/item-shortchallenge-sheet.mjs";
 import { MistEngineItemThemekitSheet } from "./sheets/item-themekit-sheet.mjs";
 import { MistEngineLegendInTheMistJourneySheet } from "./sheets/litm-actor-journey-sheet.mjs";
@@ -29,7 +30,11 @@ import { setupMistEngineKeyBindings } from "./lib/key-binding.mjs";
 import { setupConfiguration } from "./lib/configuration.mjs";
 import { setupHooks } from "./lib/hooks.mjs";
 import { RollConfirmation } from "./lib/roll-confirmation.mjs";
+import * as DetailedSpend from "./lib/detailed-spend.mjs";
+import { Collaboration } from "./lib/collaboration.mjs";
 import { registerMigrationSettings, needsMigration, migrateWorld } from "./migration.mjs";
+import { registerGmTour, registerGmTourSettings, maybeAutoStartGmTour } from "./lib/gm-tour.mjs";
+import { registerPlayerTour, registerPlayerTourSettings, maybeAutoStartPlayerTour } from "./lib/player-tour.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -81,7 +86,8 @@ Hooks.once("init", function () {
     quintessence: models.MistEngineQuintessence,
     shortchallenge: models.MistEngineShortChallenge,
     themekit: models.MistEngineThemekit,
-    "challenge-addon": models.MistEngineChallengeAddon
+    "challenge-addon": models.MistEngineChallengeAddon,
+    rote: models.MistEngineItemRote
   };
 
   // Active Effects are never copied to the Actor,
@@ -154,6 +160,12 @@ Hooks.once("init", function () {
     label: "MIST_ENGINE.SheetLabels.ChallengeAddon",
   });
 
+  foundry.documents.collections.Items.registerSheet("mist-engine-fvtt", MistEngineRoteItemSheet, {
+    makeDefault: true,
+    types: ["rote"],
+    label: "MIST_ENGINE.SheetLabels.Rote",
+  });
+
   // Use our own journal sheet so journals open at a wider default width. The
   // core JournalEntrySheet stays registered as a selectable fallback.
   foundry.documents.collections.Journal.registerSheet("mist-engine-fvtt", MistEngineJournalEntrySheet, {
@@ -165,6 +177,8 @@ Hooks.once("init", function () {
   setupMistEngineKeyBindings();
   setupConfiguration();
   registerMigrationSettings();
+  registerGmTourSettings();
+  registerPlayerTourSettings();
 
   if(game.settings.get("mist-engine-fvtt", "disableCustomDice") !== true) {
     CONFIG.Dice.terms["6"] = D6ToD12;
@@ -184,6 +198,8 @@ Hooks.once("ready", async function () {
   if (needsMigration()) await migrateWorld();
 
   RollConfirmation.setup();
+  DetailedSpend.setup();
+  Collaboration.setup();
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
@@ -199,6 +215,14 @@ Hooks.once("ready", async function () {
   globalThis.MistSceneApp = MistSceneApp;
   globalThis.HowToPlayApp = HowToPlayApp;
   globalThis.ChangelogApp = ChangelogApp;
+
+  // Guided tours: register them (they show in Tour Management) and auto-start
+  // once per user who has not seen the relevant one yet. The GM tour is gated
+  // to GMs, the player tour to players who own a character.
+  registerGmTour();
+  registerPlayerTour();
+  await maybeAutoStartGmTour();
+  await maybeAutoStartPlayerTour();
 
   ChangelogApp.checkAndShow();
 });

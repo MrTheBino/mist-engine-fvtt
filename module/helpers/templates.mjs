@@ -19,6 +19,7 @@ export const preloadHandlebarsTemplates = async function () {
     "systems/mist-engine-fvtt/templates/actor/parts/development-partial.hbs",
     "systems/mist-engine-fvtt/templates/actor/parts/backpack-partial.hbs",
     "systems/mist-engine-fvtt/templates/actor/parts/character-quintessences-partial.hbs",
+    "systems/mist-engine-fvtt/templates/actor/parts/rote-card-partial.hbs",
     "systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-partial.hbs",
     "systems/mist-engine-fvtt/templates/actor/parts/actor-fellowship-themebook-partial.hbs",
     "systems/mist-engine-fvtt/templates/actor/parts/challenge-partial.hbs",

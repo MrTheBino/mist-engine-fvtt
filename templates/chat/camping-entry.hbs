@@ -1,0 +1,7 @@
+<div class="camping-chat-entry">
+    <h3 class="camping-chat-title"><i class="fa-solid fa-campground"></i> {{title}}</h3>
+    {{#if actorName}}<p class="camping-chat-actor"><em>{{actorName}}</em></p>{{/if}}
+    {{#each lines}}
+    <p class="camping-chat-line">{{this}}</p>
+    {{/each}}
+</div>

@@ -5,6 +5,8 @@ import { PowerTagAdapter } from "../lib/power-tag-adapter.mjs";
 import { StoryTagAdapter } from "../lib/story-tag-adapter.mjs";
 import { RollConfirmation } from "../lib/roll-confirmation.mjs";
 import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
+import * as DetailedSpend from "../lib/detailed-spend.mjs";
+import { Collaboration } from "../lib/collaboration.mjs";
 
 export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     constructor(options = {}) {
@@ -23,6 +25,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
         // pending GM confirmation: { requestId, formValues, snapshot } or null
         this.pendingRequest = null;
+
+        // Helping Each Other (p. 131): tags other heroes contribute to this roll.
+        // Each { name, helperName } adds +1 Power and cannot be burned.
+        this.helpingTags = [];
+        this.pendingHelpReqId = null;
 
         DiceRollApp.instance = this;
     }
@@ -51,7 +58,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             clickModNegativePlus: this.#handleClickModNegativePlus,
             clickDeselectTag: this.#handleClickDeselectTag,
             clickTagStatusModifierToggle: this.#handleTagStatusModifierToggle,
-            clickCancelConfirmation: this.#handleClickCancelConfirmation
+            clickCancelConfirmation: this.#handleClickCancelConfirmation,
+            clickRequestHelp: this.#handleRequestHelp,
+            clickRemoveHelpingTag: this.#handleRemoveHelpingTag
         },
     };
 
@@ -123,6 +132,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
         context.powerAmount = this.computePowerAmount();
         context.waitingForGm = !!this.pendingRequest;
+        // Helping Each Other: contributed tags + whether a Request Help button applies
+        context.helpingTags = this.helpingTags;
+        context.canRequestHelp = !this.pendingRequest && Collaboration.hasOtherPlayers();
         /*if(context.powerAmount < 0){
             context.powerAmount = 0;
         }*/
@@ -168,7 +180,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         );
         const mightEnabled = game.settings.get("mist-engine-fvtt", "mightUsageEnabled") === true;
         const mightScale = mightEnabled ? (this.mightScale || 0) : 0;
-        const power = (countTags.positive - countTags.negative) + mightScale + (this.numModPositive || 0) - (this.numModNegative || 0);
+        const helping = (this.helpingTags?.length || 0); // +1 per helping tag (p. 131)
+        const power = (countTags.positive - countTags.negative) + mightScale + helping + (this.numModPositive || 0) - (this.numModNegative || 0);
         return Math.max(1, power); // preview matches the roll: never below Power 1 (see executeRoll)
     }
 
@@ -384,11 +397,16 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 const backpackItems = item.system.items;
                 if (backpackItems) {
                     for (const [i, backpackItem] of backpackItems.entries()) {
-                        if (backpackItem.selected) {
+                        if (backpackItem.selected && !backpackItem.expired) {
                             selectedTags.push({ name: backpackItem.name, positive: true, toBurn: backpackItem.toBurn, index: i + 1, themebookId: backpackItem.id, source: 'backpack' });
                         }
                     }
                 }
+            }
+
+            if (item.type === "rote" && item.system.selected) {
+                // a rote's title works as a tag (Core Book p. 98)
+                selectedTags.push({ name: item.name, positive: true, source: "rote", roteId: item.id });
             }
 
             if (item.type === "themebook") {
@@ -506,6 +524,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         let burnedOne = false; // at most one tag may actually burn per roll (#92)
 
         for (let item of this.actor.items) {
+            if (item.type === "rote" && item.system.selected) {
+                await item.update({ "system.selected": false });
+            }
             if (item.type === "backpack") {
                 const backpackItems = item.system.items;
                 if (backpackItems) {
@@ -695,6 +716,27 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     _onClose(options) {
         super._onClose(options);
         this.cancelPendingRequest();
+        if (this.pendingHelpReqId) { Collaboration.cancelHelp(this.pendingHelpReqId); this.pendingHelpReqId = null; }
+        this.helpingTags = [];
+    }
+
+    /** Socket callback: a fellow hero contributed a helping tag to this roll. */
+    addHelpingTag({ helperName, tagName }) {
+        this.helpingTags.push({ name: tagName, helperName });
+        ui.notifications.info(game.i18n.format("MIST_ENGINE.COLLAB.HelpReceived", { helper: helperName, tag: tagName }));
+        if (this.rendered) this.render();
+    }
+
+    static async #handleRequestHelp(event, target) {
+        Collaboration.requestHelp(this);
+    }
+
+    static async #handleRemoveHelpingTag(event, target) {
+        const idx = parseInt(target.dataset.index);
+        if (idx >= 0 && idx < this.helpingTags.length) {
+            this.helpingTags.splice(idx, 1);
+            this.render();
+        }
     }
 
     async executeRoll({ numModPositive, numModNegative, mightScale }) {
@@ -705,6 +747,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         let countTags = DiceRollApp.calculatePowerTags(tagsAndStatusForRoll);
         numPositiveTags += countTags.positive;
         numNegativeTags += countTags.negative;
+
+        // Helping Each Other (p. 131): +1 Power per contributed tag (never burned).
+        const helpingContribs = (this.helpingTags ?? []).map(h => ({ name: `${h.name} (${h.helperName})`, positive: true, source: "help" }));
+        numPositiveTags += helpingContribs.length;
 
 
         const dicePromises = [];
@@ -745,7 +791,12 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             consequenceResult = 0;
         }
 
-        let positiveTags = tagsAndStatusForRoll.filter(t => t.positive);
+        // double sixes always mean Success without Consequences, double ones
+        // always Consequences without Success — regardless of Power!!!!
+        if (isCritical) consequenceResult = 1;
+        if (isFumble) consequenceResult = -1;
+
+        let positiveTags = [...tagsAndStatusForRoll.filter(t => t.positive), ...helpingContribs];
         let negativeTags = tagsAndStatusForRoll.filter(t => !t.positive);
 
         const chatVars = {
@@ -760,18 +811,23 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             numPowerTags: numPowerTags,
         };
 
-        const html = await foundry.applications.handlebars.renderTemplate(
-            `systems/mist-engine-fvtt/templates/chat/${this.rollType}-result.hbs`,
-            chatVars
-        );
-        ChatMessage.create({
-            content: html,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        });
+        const speaker = ChatMessage.getSpeaker({ actor: this.actor });
+        if (this.rollType === "detailed") {
+            // detailed action gets an interactive Power-spending tracker (p. 154)
+            await DetailedSpend.createDetailedMessage(chatVars, speaker);
+        } else {
+            const html = await foundry.applications.handlebars.renderTemplate(
+                `systems/mist-engine-fvtt/templates/chat/${this.rollType}-result.hbs`,
+                chatVars
+            );
+            ChatMessage.create({ content: html, speaker });
+        }
 
         this.numModPositive = 0;
         this.numModNegative = 0;
         this.mightScale = 0;
+        this.helpingTags = [];
+        this.pendingHelpReqId = null;
 
         this.resetTags();
         this.close();
@@ -851,6 +907,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 if (backpackItem) {
                     await StoryTagAdapter.toggleStoryTagSelection(this.actor, backpackItem.id, 'system.items', tagToDeselect.index - 1);
                     this.updateTagsAndStatuses(true);
+                }
+            }
+            // now rotes
+            else if (tagToDeselect.source === "rote") {
+                const rote = this.actor.items.get(tagToDeselect.roteId);
+                if (rote) {
+                    await rote.update({ "system.selected": false });
+                    this.updateTagsAndStatuses(true);
+                    this.actor.sheet.render();
                 }
             }
             // now floating tag or status

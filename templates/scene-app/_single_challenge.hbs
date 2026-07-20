@@ -1,6 +1,6 @@
 <div class="character-container" data-actor-id="{{challenge.id}}" data-token-id="{{challenge.tokenId}}">
     <div class="npc-subtitle-container-c">
-        <div class="npc-subtitle-text pointer" data-action="clickOpenCharacterSheet" data-id="{{challenge.id}}" data-token-id="{{challenge.tokenId}}"><img src="{{challenge.img}}" class="actor-img">{{challenge.name}}</div>
+        <div class="npc-subtitle-text pointer" data-action="clickOpenCharacterSheet" data-id="{{challenge.id}}" data-token-id="{{challenge.tokenId}}"><img src="{{challenge.img}}" class="actor-img">{{challenge.name}}{{#if challenge.isOvercome}} <span class="overcome-badge" title="{{localize 'MIST_ENGINE.OVERCOME.LimitReachedHint'}}">{{localize 'MIST_ENGINE.OVERCOME.Overcome'}}</span>{{/if}}</div>
     </div>
     {{#if challenge.hasFloatingTagsAndStatuses}}
     <div class="floating-tags-and-status-entries">

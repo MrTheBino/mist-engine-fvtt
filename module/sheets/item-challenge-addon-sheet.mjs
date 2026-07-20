@@ -2,6 +2,7 @@ const { ItemSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
 import { confirmDeletion } from "../lib/confirm-deletion.mjs";
+import { wireEditUx } from "../lib/sheet-edit-ux.mjs";
 
 
 export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
@@ -89,6 +90,7 @@ export class MistEngineChallengeAddonItemSheet extends HandlebarsApplicationMixi
         for (const input of this.element.querySelectorAll('.addon-tagstatus-input')) {
             input.addEventListener("change", event => this.handleTagStatusUpdate(event));
         }
+        wireEditUx(this, this.element);
     }
 
     _saveScrollPositions() {

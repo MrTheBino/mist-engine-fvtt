@@ -10,7 +10,7 @@
             Import
         </button>
     </div>
-    <div class="flexcol powertags-container">
+    <div class="flexcol powertags-container" data-array-list="system.powertags">
         {{#each system.powertags}}
         <div class="item-storytag-line flexrow">
             <input type="text" name="system.powertags.{{@index}}.name" value="{{this.name}}" />

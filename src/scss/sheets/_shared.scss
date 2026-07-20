@@ -53,6 +53,50 @@
   margin: 5px;
   font-family: $font-primary;
   width: 100%;
+  // Explicit colors so the button stays readable regardless of Foundry's
+  // light/dark application theme — the default button flips to a light
+  // background with dark text in light mode and washes out over the sheet
+  // (issue #100). Match the system's brown button aesthetic.
+  background: $c-brown;
+  color: $c-white;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  text-shadow: none;
+
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, $c-brown 82%, white);
+    box-shadow: 0 0 6px $c-brown;
+    color: $c-white;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+  }
+
+  i {
+    color: $c-white;
+  }
+}
+
+// Other character-sheet action buttons that otherwise inherit Foundry's
+// theme-dependent default look (issue #100): themekit selection and the
+// fellowship create/assign buttons. Same brown, theme-independent treatment.
+.themekit-button,
+.empty-message button {
+  background: $c-brown;
+  color: $c-white;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  font-family: $font-primary;
+  text-shadow: none;
+
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, $c-brown 82%, white);
+    box-shadow: 0 0 6px $c-brown;
+    color: $c-white;
+  }
+
+  i {
+    color: $c-white;
+  }
 }
 
 .lock-toggle-container {

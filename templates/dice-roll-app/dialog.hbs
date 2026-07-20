@@ -70,6 +70,21 @@
         </div>
         {{/each}}
     </div>
+    {{!-- Helping Each Other (p. 131): tags contributed by fellow heroes (+1 each, never burned) --}}
+    <div class="selected-tags-container flexcol helping-tags-container">
+        {{#if helpingTags.length}}
+        <label class="resource-label">{{localize "MIST_ENGINE.COLLAB.HelpingTags"}}</label>
+        {{#each helpingTags}}
+        <div class="tag positive helping-tag">
+            <span class="tag-icon"><i class="fa-solid fa-hands-helping"></i></span>
+            {{this.name}} <em>({{this.helperName}})</em>
+            <span class="deselect-icon">
+                <i class="fa-solid fa-circle-trash" data-action="clickRemoveHelpingTag" data-index="{{@index}}"></i>
+            </span>
+        </div>
+        {{/each}}
+        {{/if}}
+    </div>
     {{!-- Positive & Negative Mods --}}
     <div class="form-group">
         <label class="resource-label">Positive Mods:</label>
@@ -103,6 +118,9 @@
         </div>
     </div>
     <footer class="dialog-footer">
+        {{#if canRequestHelp}}
+        <button type="button" class="roll-button request-help-button" data-action="clickRequestHelp"><i class="fa-solid fa-hands-helping"></i> {{localize "MIST_ENGINE.COLLAB.RequestHelp"}}</button>
+        {{/if}}
         <button type="button" class="roll-button" data-action="clickedRoll" {{#if waitingForGm}}disabled{{/if}}>Roll</button>
     </footer>
     </div>

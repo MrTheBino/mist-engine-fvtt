@@ -2,6 +2,22 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.5.0 - The mundane and the magic (D.T.)
+- FEAT: roll dialog works now without an active scene
+- FIX: (UI) Light mode makes buttons on character sheet hard to read #100
+- FIX: Backpack items dropped on actors do appear in backpack on actor #99
+- FIX: Rolling with Might +3 or +6 always results in 4 or 7 as the Power shown in the card, regardless of other modifiers #97
+- FEAT: proposal implementation of rotes, need feedback
+- FEAT: visual indicator while dragging containers in the player character sheet
+- FEAT: Camping & Sojourns application, gets triggered by GMs only
+- FIX: various small fixes regarding dice rolls in reference to the rules
+- FEAT: request help option for players (there must be more than one player online, GM's excluded)
+- FEAT: group actions, triggered by GMs only
+- FEAT: Detailed actions in chat messages for detailed rolls (incl. undo functions)
+- FEAT: Feature Request: After player finishes roll dialog, send an overview dialog of tags/statuses/bonuses/penalties to Narrator for approval. (enabled via Game Options in Foundry) #36
+- FIX: styling for chat messages improved
+- FEAT: improvements on faster data entering for GMs
+
 # 14.4.4
 - FIX: duplicate() bug fixed during quintessence creation on the character sheet
 

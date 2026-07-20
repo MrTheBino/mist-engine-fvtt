@@ -1,4 +1,8 @@
-#dice-roll-app>section.window-content {
+// The dice roll dialog, the GM roll-confirmation dialog and the Sacrifice
+// roll dialog share the same parchment look (background, colours, font).
+#dice-roll-app>section.window-content,
+.gm-roll-confirm-dialog>section.window-content,
+.sacrifice-roll-dialog>section.window-content {
     border-style: solid;
     border-width: 10px 10px 10px 10px;
     -moz-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;

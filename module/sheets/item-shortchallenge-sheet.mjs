@@ -3,6 +3,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
 import { importShortChallengeForJSON } from '../lib/json-importer.mjs';
 import { confirmDeletion } from "../lib/confirm-deletion.mjs";
+import { wireEditUx } from "../lib/sheet-edit-ux.mjs";
 
 export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
@@ -111,6 +112,7 @@ export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixi
             input.addEventListener("change", event => this.handleInputUpdate(event))
             input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
         }
+        wireEditUx(this, this.element);
     }
 
     handleInputShortCutsForGM(event) {

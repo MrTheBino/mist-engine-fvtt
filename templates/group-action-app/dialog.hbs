@@ -1,0 +1,38 @@
+<div class="group-action-container">
+    <p class="group-action-hint">{{localize "MIST_ENGINE.COLLAB.GroupHint"}}</p>
+
+    {{#unless started}}
+    <button type="button" class="roll-button" data-action="groupStart"><i class="fa-solid fa-people-group"></i> {{localize "MIST_ENGINE.COLLAB.StartGroupAction"}}</button>
+    {{else}}
+    <div class="group-contributions">
+        <label class="resource-label">{{localize "MIST_ENGINE.COLLAB.Contributions"}}</label>
+        {{#each contributions}}
+        <div class="tag positive group-contribution">
+            <span class="tag-icon"><i class="fa-solid fa-user"></i></span>
+            <strong>{{this.actorName}}:</strong> {{this.tagName}}{{#if this.burn}} 🔥{{/if}}
+            <span class="deselect-icon"><i class="fa-solid fa-circle-trash" data-action="groupRemove" data-index="{{@index}}"></i></span>
+        </div>
+        {{/each}}
+        {{#unless contributions.length}}
+        <p class="group-empty">{{localize "MIST_ENGINE.COLLAB.WaitingContributions"}}</p>
+        {{/unless}}
+    </div>
+
+    <div class="form-group">
+        <label class="resource-label">{{localize "MIST_ENGINE.COLLAB.GmMod"}}</label>
+        <div class="flexrow">
+            <i class="fa-solid fa-minus icon-hover" data-action="groupModMinus"></i>
+            <span class="group-mod-value">{{gmMod}}</span>
+            <i class="fa-solid fa-plus icon-hover" data-action="groupModPlus"></i>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="resource-label power-label">{{localize "MIST_ENGINE.COLLAB.GroupPower"}}: {{power}}</label>
+    </div>
+
+    <footer class="dialog-footer">
+        <button type="button" class="roll-button" data-action="groupRoll">{{localize "MIST_ENGINE.COLLAB.RollForGroup"}}</button>
+    </footer>
+    {{/unless}}
+</div>

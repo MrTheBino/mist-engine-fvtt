@@ -1,0 +1,45 @@
+// Acting Together — group action app (Core Book p. 131)
+#group-action-app>section.window-content {
+    border-style: solid;
+    border-width: 10px;
+    border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+    color: $c-styled-text;
+    font-family: $font-primary;
+}
+
+.group-action-app {
+    // scope to content only — see camping-app note: header control buttons
+    // carry Font Awesome classes on the <button> and must keep their font.
+    .window-content button { font-family: $font-primary; }
+
+    .group-action-hint {
+        font-style: italic;
+        font-size: 0.9em;
+        margin-bottom: 8px;
+    }
+
+    .group-contributions {
+        margin-bottom: 8px;
+
+        .group-contribution {
+            margin: 3px 0;
+        }
+    }
+
+    .group-empty {
+        font-style: italic;
+        opacity: 0.6;
+    }
+
+    .group-mod-value {
+        min-width: 30px;
+        text-align: center;
+        font-weight: 800;
+    }
+}
+
+// helping tags in the roll dialog + group result chat card
+.helping-tags-container .helping-tag em { opacity: 0.75; }
+.request-help-button { background: color-mix(in srgb, #{$c-brown} 70%, #4d8061) !important; }
+.group-result-tags { margin: 4px 0; display: flex; flex-wrap: wrap; gap: 3px; }
+.group-affects-all { text-align: center; margin-top: 4px; font-size: 0.9em; }

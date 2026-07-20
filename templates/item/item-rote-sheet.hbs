@@ -1,0 +1,70 @@
+<section class="tab {{tabs.form.id}} {{tabs.form.cssClass}} scrollable" id="form"
+    data-tab="{{tabs.form.id}}" data-group="{{tabs.form.group}}">
+
+    <div class="form-group">
+        <label class="resource-label">{{localize 'MIST_ENGINE.ROTE.Practitioners'}}</label>
+        <input type="text" name="system.practitioners" value="{{system.practitioners}}"
+            placeholder="{{localize 'MIST_ENGINE.ROTE.PractitionersPlaceholder'}}" />
+    </div>
+
+    <div class="form-group">
+        <label class="resource-label">{{localize 'MIST_ENGINE.ROTE.ActionType'}}</label>
+        <select name="system.actionType">
+            <option value="simple" {{#if (eq system.actionType "simple")}}selected{{/if}}>{{localize 'MIST_ENGINE.ROTE.ActionTypes.simple'}}</option>
+            <option value="quick" {{#if (eq system.actionType "quick")}}selected{{/if}}>{{localize 'MIST_ENGINE.ROTE.ActionTypes.quick'}}</option>
+            <option value="detailed" {{#if (eq system.actionType "detailed")}}selected{{/if}}>{{localize 'MIST_ENGINE.ROTE.ActionTypes.detailed'}}</option>
+        </select>
+    </div>
+
+    <h3 class="resource-label">{{localize 'MIST_ENGINE.ROTE.Power'}}</h3>
+    <div class="form-group flexcol" data-array-list="system.powertags">
+        <div class="themebook-section-header clickable" data-action="addRotePowertag">
+            <i class="fas fa-plus add-line-icon" title="{{localize 'MIST_ENGINE.ROTE.PowerHelping'}}"></i> {{localize 'MIST_ENGINE.ROTE.PowerHelping'}}
+        </div>
+        {{#each system.powertags as |tag index|}}
+        <div class="item-powertag-line flexrow">
+            <input type="text" name="system.powertags.{{index}}.name" value="{{tag.name}}"
+                placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Tag'}}" style="flex-grow:8;" />
+            <i class="fa-solid fa-trash clickable" data-action="deleteRotePowertag" data-index="{{index}}"
+                style="flex-grow:0.3; margin-left: 0.5em;"></i>
+        </div>
+        {{/each}}
+    </div>
+    <div class="form-group flexcol" data-array-list="system.weaknesstags">
+        <div class="themebook-section-header clickable" data-action="addRoteWeaknesstag">
+            <i class="fas fa-plus add-line-icon" title="{{localize 'MIST_ENGINE.ROTE.PowerHindering'}}"></i> {{localize 'MIST_ENGINE.ROTE.PowerHindering'}}
+        </div>
+        {{#each system.weaknesstags as |tag index|}}
+        <div class="item-weakness-line flexrow">
+            <input type="text" name="system.weaknesstags.{{index}}.name" value="{{tag.name}}"
+                placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Tag'}}" style="flex-grow:8;" />
+            <i class="fa-solid fa-trash clickable" data-action="deleteRoteWeaknesstag" data-index="{{index}}"
+                style="flex-grow:0.3; margin-left: 0.5em;"></i>
+        </div>
+        {{/each}}
+    </div>
+
+    <h3 class="resource-label">{{localize 'MIST_ENGINE.ROTE.Success'}}</h3>
+    <div class="form-group flexcol">
+        {{#if editable}}
+        <prose-mirror name="system.success" button="true" editable="{{editable}}" toggled="false"
+            value="{{system.success}}">
+            {{{successHTML}}}
+        </prose-mirror>
+        {{else}}
+        {{{successHTML}}}
+        {{/if}}
+    </div>
+
+    <h3 class="resource-label">{{localize 'MIST_ENGINE.ROTE.Consequences'}}</h3>
+    <div class="form-group flexcol">
+        {{#if editable}}
+        <prose-mirror name="system.consequences" button="true" editable="{{editable}}" toggled="false"
+            value="{{system.consequences}}">
+            {{{consequencesHTML}}}
+        </prose-mirror>
+        {{else}}
+        {{{consequencesHTML}}}
+        {{/if}}
+    </div>
+</section>
