@@ -8,6 +8,7 @@ import { MistEngineItem } from '../documents/item.mjs'
 import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adapter.mjs";
 import { StoryTagAdapter } from "../lib/story-tag-adapter.mjs";
 import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
+import { wireEditUx } from "../lib/sheet-edit-ux.mjs";
 
 export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
@@ -222,6 +223,9 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
             input.addEventListener("change", event => this.handleThemebookEntryInputChanged(event))
         }
 
+        // Shared edit-mode data-entry UX (autofocus on new rows, Enter-to-add,
+        // no scroll jump). The player charcter sheet is excluded on purpose.
+        if (this.actor?.type !== "litm-character") wireEditUx(this, this.element);
     }
 
     async handleStoryTagBurnState(event) {

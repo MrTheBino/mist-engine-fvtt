@@ -37,18 +37,22 @@
             <i class="fas fa-plus add-line-icon " title="{{localize " MIST_ENGINE.LABELS.AddPowertag"}}"></i> {{localize
             "MIST_ENGINE.LABELS.AddPowertag"}}
         </div>
+        <div data-array-list="system.powertags">
         {{#each system.powertags as |powertag index|}}
         {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-powertag-line.hbs" index=index powertag=powertag}}
         {{/each}}
+        </div>
 
         <div class="themebook-section-header clickable" data-action="addEmptyWeaknessTag"
             data-item-id="{{themebook._id}}">
             <i class="fas fa-plus add-line-icon " title="{{localize " MIST_ENGINE.LABELS.AddWeaknesstag"}}"></i>
             {{localize "MIST_ENGINE.LABELS.AddWeaknesstag"}}
         </div>
+        <div data-array-list="system.weaknesstags">
         {{#each system.weaknesstags as |weakness index|}}
         {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-weakness-line.hbs" index=index weakness=weakness}}
         {{/each}}
+        </div>
     </div>
     {{#unless system.options.isStoryTheme}}
     <div class="box-shadowed-container">

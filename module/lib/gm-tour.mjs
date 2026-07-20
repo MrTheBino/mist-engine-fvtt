@@ -27,6 +27,7 @@ const STEPS = [
     { id: "tools", selector: "#scene-controls-tools", title: t("ToolsTitle"), content: t("ToolsContent"), activateNotes: true },
     { id: "sceneTracker", selector: toolSelector("scene_data_app"), title: t("SceneTrackerTitle"), content: t("SceneTrackerContent"), activateNotes: true },
     { id: "camping", selector: toolSelector("camping_app"), title: t("CampingTitle"), content: t("CampingContent"), activateNotes: true },
+    { id: "groupAction", selector: toolSelector("group_action_app"), title: t("GroupActionTitle"), content: t("GroupActionContent"), activateNotes: true },
 
     // --- player character walkthrough (demo actor: Finn) ---
     { id: "charSheet", within: ".sheet-header", title: t("CharSheetTitle"), content: t("CharSheetContent"), charMode: "game" },

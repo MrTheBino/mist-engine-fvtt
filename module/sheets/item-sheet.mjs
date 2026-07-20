@@ -1,6 +1,7 @@
 const { ItemSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
+import { wireEditUx } from "../lib/sheet-edit-ux.mjs";
 
 export class MistEngineItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
@@ -212,6 +213,14 @@ export class MistEngineItemSheet extends HandlebarsApplicationMixin(ItemSheetV2)
         }
 
         return super._onDrop?.(event);
+    }
+
+    /** @inheritDoc */
+    _onRender(context, options) {
+        super._onRender?.(context, options);
+        // Shared edit-mode data-entry UX (autofocus new rows, Enter-to-add,
+        // no scroll jump). Inherited by the themebook and rote item sheets.
+        wireEditUx(this, this.element);
     }
 
     /**

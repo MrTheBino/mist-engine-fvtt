@@ -8,7 +8,9 @@
 }
 
 .group-action-app {
-    button { font-family: $font-primary; }
+    // scope to content only — see camping-app note: header control buttons
+    // carry Font Awesome classes on the <button> and must keep their font.
+    .window-content button { font-family: $font-primary; }
 
     .group-action-hint {
         font-style: italic;

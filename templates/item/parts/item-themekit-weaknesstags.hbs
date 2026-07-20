@@ -10,7 +10,7 @@
             Import
         </button>
     </div>
-    <div class="flexcol weaknesstags-container">
+    <div class="flexcol weaknesstags-container" data-array-list="system.weaknesstags">
         {{#each system.weaknesstags}}
         <div class="item-storytag-line flexrow">
             <input type="text" name="system.weaknesstags.{{@index}}.name" value="{{this.name}}" />

@@ -1,4 +1,8 @@
 .message-content {
+    // Style inline tag/status/weakness/limit marks (and their colour variants
+    // yellow/green/orange/red) the same way the journal and sheets do.
+    @include tag-mark-def;
+
     .selected-tags {
         margin-top: 5px;
         margin-bottom: 5px;
@@ -29,13 +33,43 @@
 }
 
 .consequence-container {
-    text-align: center;
     padding-top: 5px;
     font-family: Labrada, serif;
 
+    // The outcome-tier banner (6- / 7-9 / 10+ with its icon) stays centred…
     .heading {
+        display: block;
+        text-align: center;
         font-size: 2em;
         font-weight: bold;
+        margin-bottom: 4px;
+    }
+
+    // …but the outcome description and its options read left-aligned so longer,
+    // multi-sentence text and bullet lists (Detailed action) stay legible.
+    p {
+        text-align: left;
+        margin: 4px 0;
+        line-height: 1.4;
+    }
+
+    ul {
+        text-align: left;
+        margin: 4px 0;
+        padding-left: 1.4em;
+        list-style: disc;
+
+        li {
+            margin: 2px 0;
+            line-height: 1.35;
+        }
+    }
+
+    .power-counter {
+        text-align: center;
+        margin-top: 6px;
+        padding-top: 4px;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
     }
 }
 
@@ -43,21 +77,21 @@
     background-image: url("../assets/outcome-bg-litm-negative.webp");
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 5px;
+    padding: 6px 10px;
 }
 
 .consequence-result-neutral {
     background-image: url("../assets/outcome-bg-litm-neutral.webp");
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 5px;
+    padding: 6px 10px;
 }
 
 .consequence-result-positive {
     background-image: url("../assets/outcome-bg-litm-positive.webp");
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 5px;
+    padding: 6px 10px;
 }
 
 .consequence-result-icon {

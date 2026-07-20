@@ -34,6 +34,7 @@ import * as DetailedSpend from "./lib/detailed-spend.mjs";
 import { Collaboration } from "./lib/collaboration.mjs";
 import { registerMigrationSettings, needsMigration, migrateWorld } from "./migration.mjs";
 import { registerGmTour, registerGmTourSettings, maybeAutoStartGmTour } from "./lib/gm-tour.mjs";
+import { registerPlayerTour, registerPlayerTourSettings, maybeAutoStartPlayerTour } from "./lib/player-tour.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -177,6 +178,7 @@ Hooks.once("init", function () {
   setupConfiguration();
   registerMigrationSettings();
   registerGmTourSettings();
+  registerPlayerTourSettings();
 
   if(game.settings.get("mist-engine-fvtt", "disableCustomDice") !== true) {
     CONFIG.Dice.terms["6"] = D6ToD12;
@@ -214,10 +216,13 @@ Hooks.once("ready", async function () {
   globalThis.HowToPlayApp = HowToPlayApp;
   globalThis.ChangelogApp = ChangelogApp;
 
-  // GM-only guided tour: register it (shows in Tour Management) and auto-start
-  // once per GM who has not seen it yet.
+  // Guided tours: register them (they show in Tour Management) and auto-start
+  // once per user who has not seen the relevant one yet. The GM tour is gated
+  // to GMs, the player tour to players who own a character.
   registerGmTour();
+  registerPlayerTour();
   await maybeAutoStartGmTour();
+  await maybeAutoStartPlayerTour();
 
   ChangelogApp.checkAndShow();
 });

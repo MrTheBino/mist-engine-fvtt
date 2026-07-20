@@ -33,7 +33,7 @@
       "flags": {}
     }
   ],
-  "version": "14.4.4",
+  "version": "14.5.0",
   "compatibility": {
     "minimum": "13",
     "verified": "14"
@@ -113,18 +113,6 @@
       "name": "litm-themebooks",
       "label": "LiTM Themebooks",
       "path": "packs/litm-themebooks",
-      "type": "Item",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      },
-      "system": "mist-engine-fvtt",
-      "flags": {}
-    },
-    {
-      "name": "litm-rotes",
-      "label": "LiTM Rotes",
-      "path": "packs/litm-rotes",
       "type": "Item",
       "ownership": {
         "PLAYER": "OBSERVER",

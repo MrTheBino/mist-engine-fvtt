@@ -10,8 +10,11 @@
 
 .camping-app {
 
-    // buttons use the system font like .roll-button everywhere else
-    button {
+    // buttons use the system font like .roll-button everywhere else.
+    // Scope to the content only — the window-header control buttons carry
+    // their Font Awesome classes on the <button> itself, so overriding their
+    // font-family would break the close/collapse icon glyphs.
+    .window-content button {
         font-family: $font-primary;
     }
 
@@ -90,8 +93,33 @@
         gap: 6px;
         align-items: flex-start;
 
+        // match the scene app's floating tags (.fts-input-name in _tags.scss):
+        // yellow tag / green status / orange negative, with the same border and
+        // inset shadow treatment.
         .tag {
             flex: 0 0 auto;
+            padding: 1px 6px;
+            font-family: var(--litm-font-text);
+            font-style: normal;
+            text-align: center;
+            background-color: $c-tag-yellow;
+            border-radius: 3px 2px 3px 2px;
+            border: 1px solid rgba(100, 55, 8, 0.65);
+            box-shadow:
+                inset 0 1px 2px rgba(255, 205, 90, 0.12),
+                0 1px 3px rgba(0, 0, 0, 0.2);
+
+            &.status {
+                background-color: $c-tag-green;
+                border: 1px solid rgba(20, 60, 18, 0.55);
+                box-shadow:
+                    inset 0 1px 2px rgba(100, 200, 80, 0.12),
+                    inset 0 -1px 2px rgba(10, 40, 8, 0.15);
+            }
+
+            &.negative {
+                background-color: $c-tag-orange;
+            }
         }
     }
 

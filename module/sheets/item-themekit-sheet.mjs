@@ -2,6 +2,7 @@ const { ItemSheetV2 } = foundry.applications.sheets
 const { HandlebarsApplicationMixin } = foundry.applications.api
 const { TextEditor, DragDrop } = foundry.applications.ux
 import { confirmDeletion } from "../lib/confirm-deletion.mjs";
+import { wireEditUx } from "../lib/sheet-edit-ux.mjs";
 
 export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
     #dragDrop // Private field to hold dragDrop handlers
@@ -127,6 +128,12 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
         // Process the actor data normally
         const result = await super._processSubmitData(event, form, formData)
         return result
+    }
+
+    /** @inheritDoc */
+    _onRender(context, options) {
+        super._onRender?.(context, options);
+        wireEditUx(this, this.element);
     }
 
     /**

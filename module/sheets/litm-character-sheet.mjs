@@ -833,7 +833,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             </div>`;
         const result = await foundry.applications.api.DialogV2.prompt({
             window: { title: game.i18n.localize("MIST_ENGINE.SACRIFICE.Title"), icon: "fa-solid fa-heart-crack" },
-            classes: ["mist-engine", "dialog"],
+            classes: ["mist-engine", "dialog", "sacrifice-roll-dialog"],
             content,
             ok: {
                 label: game.i18n.localize("MIST_ENGINE.SACRIFICE.Roll"),
