@@ -261,7 +261,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const itemId = target.dataset.itemId;
         const key = target.dataset.key;
         await StoryTagAdapter.toggleBurnedState(this.actor, itemId, key, index);
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
@@ -273,7 +273,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const itemId = target.dataset.itemId;
         const key = target.dataset.key;
         await StoryTagAdapter.toggleBurnSelection(this.actor, itemId, key, index);
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
@@ -285,7 +285,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
         this._saveScrollPositions();
         await StoryTagAdapter.toggleStoryTagSelection(this.actor, itemId, key, index);
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
@@ -304,7 +304,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         } else {
             await StoryTagAdapter.updateStoryTag(this.actor, itemId, key, index, event.currentTarget.value,null);
         }
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
         MistSceneApp.getInstance().sendUpdateHookEvent(false);
     }
 
@@ -313,7 +313,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const index = target.dataset.index;
         this._saveScrollPositions();
         await FloatingTagAndStatusAdapter.handleTagStatusSelectedToggle(this.actor, index);
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
         this.sendFloatableTagOrStatusUpdate();
     }
 
@@ -322,7 +322,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const index = target.dataset.index;
         this._saveScrollPositions();
         await FloatingTagAndStatusAdapter.handleTagStatusModifierToggle(this.actor, index);
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
         this.sendFloatableTagOrStatusUpdate();
     }
 
@@ -331,7 +331,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const index = target.dataset.index;
         this._saveScrollPositions();
         await FloatingTagAndStatusAdapter.handleTagStatusToggle(this.actor, index);
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
         this.sendFloatableTagOrStatusUpdate();
     }
 
@@ -378,7 +378,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
         await FloatingTagAndStatusAdapter.handleFtStatChanged(this.actor, index, key, value);
         this.sendFloatableTagOrStatusUpdate();
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
     }
 
     static async #handleToggleFloatingTagOrStatusMarking(event, target) {
@@ -388,7 +388,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         await FloatingTagAndStatusAdapter.handleToggleFloatingTagOrStatusMarking(this.actor, index, target.dataset.markingIndex);
 
         this.sendFloatableTagOrStatusUpdate();
-        DiceRollApp.getInstance({ actor: this.actor }).updateTagsAndStatuses(true);
+        DiceRollApp.instance?.updateTagsAndStatuses(true);
     }
 
     async handleItemStatChanged(event) {
