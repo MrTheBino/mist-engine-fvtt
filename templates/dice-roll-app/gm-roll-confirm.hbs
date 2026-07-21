@@ -25,13 +25,13 @@
     <div class="selected-tags-container flexcol">
         <label class="resource-label">{{localize "MIST_ENGINE.GM_CONFIRM.StoryTags"}}</label>
         {{#each selectedStoryTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#if this.challengeInverted}}inverted-challenge{{/if}}">
             <span class="tag-icon">
                 {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
                     class="fa-solid fa-thumbs-down"></i>{{/if}}
             </span>
             {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
-            {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
+            {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}{{#if this.challengeInverted}} <em>({{localize 'MIST_ENGINE.ROLL.InvertedChallengeSuffix'}})</em>{{/if}}
         </div>
         {{/each}}
     </div>
@@ -41,12 +41,12 @@
     <div class="selected-tags-container flexcol">
         <label class="resource-label">{{localize "MIST_ENGINE.GM_CONFIRM.ChallengeTags"}}</label>
         {{#each challengeTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}}">
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#if this.challengeInverted}}inverted-challenge{{/if}}">
             <span class="tag-icon">
                 {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
                     class="fa-solid fa-thumbs-down"></i>{{/if}}
             </span>
-            {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
+            {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}{{#if this.challengeInverted}} <em>({{localize 'MIST_ENGINE.ROLL.InvertedChallengeSuffix'}})</em>{{/if}}
         </div>
         {{/each}}
     </div>

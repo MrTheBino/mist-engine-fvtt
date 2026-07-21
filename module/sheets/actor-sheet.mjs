@@ -482,25 +482,36 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;
         this._saveScrollPositions();
 
-        let srcStatusTagStr = "New Status";
+        // #104 part 1: an explicit positive/negative choice at creation time —
+        // a plain tag (no "-N" suffix) has nothing for the parser to flip, and the
+        // schema still defaults new entries to positive.
+        let promptResult;
         try {
-            srcStatusTagStr = await foundry.applications.api.DialogV2.prompt({
+            promptResult = await foundry.applications.api.DialogV2.prompt({
                 window: { title: "Enter the status or tag" },
-                content: '<input name="srcStatusTagStr" type="text" autofocus placeholder="tag or status-2">',
+                content: `<input name="srcStatusTagStr" type="text" autofocus placeholder="tag or status-2">
+                <div class="form-group"><label><input name="negative" type="checkbox"> ${game.i18n.localize("MIST_ENGINE.LABELS.CreateAsNegative")}</label></div>`,
                 ok: {
                     label: "Submit",
-                    callback: (event, button, dialog) => button.form.elements.srcStatusTagStr.value
+                    callback: (event, button, dialog) => ({
+                        srcStatusTagStr: button.form.elements.srcStatusTagStr.value,
+                        negative: button.form.elements.negative.checked
+                    })
                 }
             });
         } catch (error) {
             return;
         }
 
+        const srcStatusTagStr = promptResult?.srcStatusTagStr;
         if (srcStatusTagStr === undefined || srcStatusTagStr.trim().length === 0) {
             return;
         }
 
         let ftsObject = FloatingTagAndStatusAdapter.parseFloatingTagAndStatusString(srcStatusTagStr);
+        if (promptResult.negative) {
+            ftsObject.positive = false;
+        }
         await this.actor.update({
             "system.floatingTagsAndStatuses": FloatingTagAndStatusAdapter.withStatusStacked(floatingTagsAndStatuses, ftsObject)
         });

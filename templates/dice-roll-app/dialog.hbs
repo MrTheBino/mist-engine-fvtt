@@ -30,14 +30,15 @@
     <div class="selected-tags-container flexcol">
         <label class="resource-label">Story Tags / Status selected:</label>
         {{#each selectedStoryTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}}">
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}} {{#if (gt this.value 0)}}clickable{{/if}} {{#if this.challengeInverted}}inverted-challenge{{/if}}"
+            {{#if (gt this.value 0)}}data-action="clickToggleChallengeInversion" data-challenge-key="{{this.challengeEntryKey}}" title="{{localize 'MIST_ENGINE.ROLL.ToggleChallengeInversion'}}"{{/if}}>
             <span class="tag-icon">
                 {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
                     class="fa-solid fa-thumbs-down"></i>{{/if}}
             </span>
             {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
             {{#if this.toBurn}}🔥{{/if}}{{this.name}}{{#if (gt
-            this.value 0)}}-{{this.value}}{{/if}}
+            this.value 0)}}-{{this.value}}{{/if}}{{#if this.challengeInverted}} <em>({{localize 'MIST_ENGINE.ROLL.InvertedChallengeSuffix'}})</em>{{/if}}
         </div>
         {{/each}}
     </div>
@@ -45,7 +46,8 @@
      <div class="selected-tags-container flexcol">
         <label class="resource-label">Challenge Tags / Status selected:</label>
         {{#each challengeTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}}">
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}} clickable {{#if this.challengeInverted}}inverted-challenge{{/if}}"
+            data-action="clickToggleChallengeInversion" data-challenge-key="{{this.challengeEntryKey}}" title="{{localize 'MIST_ENGINE.ROLL.ToggleChallengeInversion'}}">
             <span class="tag-icon">
                 {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
                     class="fa-solid fa-thumbs-down"></i>{{/if}}
@@ -54,7 +56,7 @@
                 <img src="systems/mist-engine-fvtt/assets/icons/icon-sword.svg" alt="Might Icon" class="might-icon">
             {{/if}}
             {{#if this.toBurn}}🔥{{/if}}{{this.name}}{{#if (gt
-            this.value 0)}}-{{this.value}}{{/if}}
+            this.value 0)}}-{{this.value}}{{/if}}{{#if this.challengeInverted}} <em>({{localize 'MIST_ENGINE.ROLL.InvertedChallengeSuffix'}})</em>{{/if}}
         </div>
         {{/each}}
     </div>

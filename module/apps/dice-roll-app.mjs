@@ -38,6 +38,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         // prepareTags() and cleared on roll execution, actor change and close.
         this.invertedTags = new Set();
 
+        // Per-roll Challenge/Scene-Story polarity inversion (#104): lets a positive
+        // challenge status (e.g. swift-4) be applied AGAINST the roll as -4 without
+        // editing the challenge (or scene) document. In-memory only: a Set of
+        // challengeEntryKey strings (see getChallengeEntryKey), re-applied to
+        // freshly derived entries in prepareChallengeTags()/prepareSceneAndStoryTags()
+        // and cleared on roll execution, actor change and close (same lifecycle as
+        // invertedTags above).
+        this.invertedChallengeEntries = new Set();
+
         DiceRollApp.instance = this;
     }
 
@@ -68,7 +77,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             clickCancelConfirmation: this.#handleClickCancelConfirmation,
             clickRequestHelp: this.#handleRequestHelp,
             clickRemoveHelpingTag: this.#handleRemoveHelpingTag,
-            clickToggleTagInversion: this.#handleToggleTagInversion
+            clickToggleTagInversion: this.#handleToggleTagInversion,
+            clickToggleChallengeInversion: this.#handleToggleChallengeInversion
         },
     };
 
@@ -82,10 +92,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     setOptions(options) {
         if (options.actor) {
-            // a per-roll tag inversion is scoped to the actor it was granted
-            // for; switching actors on this (singleton) dialog must not carry it over
+            // a per-roll tag/Challenge inversion is scoped to the actor it was
+            // granted for; switching actors on this (singleton) dialog must not carry it over
             if (this.actor?.id !== options.actor.id) {
                 this.invertedTags.clear();
+                this.invertedChallengeEntries.clear();
             }
             this.actor = options.actor;
         }
@@ -114,8 +125,43 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.prepareGMTags();
         this.prepareSceneAndStoryTags();
         this.prepareChallengeTags();
+        this.pruneInvertedChallengeEntries(); // #104: drop keys this pass didn't re-derive
         if (renderFlag == true && this.rendered) {
             this.render(true, { focus: true })
+        }
+    }
+
+    /**
+     * #104: after every re-derivation, drop any invertedChallengeEntries key
+     * that wasn't matched by a currently-derived challenge/scene-story entry
+     * THIS pass. An entry that's still present keeps its inversion (an
+     * unrelated toggle elsewhere must not reset a live inversion — same
+     * guarantee #35 gives Weakness inversion); an entry that's vanished loses
+     * its key so it can never resurrect on a later derivation. This is what
+     * actually fixes:
+     *  - a GM deleting/editing the underlying tag/status while the dialog is
+     *    open (an index shift must not silently invert whatever slides into
+     *    that now-stale slot — the strengthened key in getChallengeEntryKey is
+     *    a second line of defense for the same problem, this is the primary
+     *    fix);
+     *  - deselect-then-reselect resurrection (deselecting drops the entry from
+     *    this pass entirely, since prepareChallengeTags/prepareSceneAndStoryTags
+     *    only include `selected` entries — its key gets pruned here, so
+     *    reselecting later derives it fresh, not inverted);
+     *  - a scene switch leaving a stale key that could otherwise collide with
+     *    the new scene's array at the same index.
+     * Deliberately scoped to challenge/scene-story entries only — NOT applied
+     * to invertedTags (#35), which is a separate, already-shipped branch;
+     * see the PR draft/report for why the same latent issue there is left as a
+     * follow-up rather than fixed on this branch.
+     */
+    pruneInvertedChallengeEntries() {
+        const liveKeys = new Set([
+            ...this.challengeTags.map(t => t.challengeEntryKey).filter(Boolean),
+            ...this.selectedStoryTags.map(t => t.challengeEntryKey).filter(Boolean)
+        ]);
+        for (const key of Array.from(this.invertedChallengeEntries)) {
+            if (!liveKeys.has(key)) this.invertedChallengeEntries.delete(key);
         }
     }
 
@@ -242,9 +288,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     prepareSceneAndStoryTags() {
         const sceneApp = MistSceneApp.instance;
         if (!sceneApp) return;
-        sceneApp.getSceneAndStoryTags().forEach(element => {
+        sceneApp.getSceneAndStoryTags().forEach((element, index) => {
             if (element.selected) {
-                this.selectedStoryTags.push({ name: element.name, positive: element.positive, source: "scene-and-story", value: element.value, might: element.might, mightIcon: element.mightIcon });
+                let t = { name: element.name, positive: element.positive, source: "scene-and-story", value: element.value, index, sceneDataItemId: sceneApp.currentSceneDataItem?.id, might: element.might, mightIcon: element.mightIcon };
+                // #104: only scene/story STATUSES (value > 0) can be inverted for this
+                // roll — a plain scene/story tag has no "count against instead" reading.
+                if (element.value > 0) {
+                    DiceRollApp.applyChallengeInversion(t, this.invertedChallengeEntries);
+                }
+                this.selectedStoryTags.push(t);
             }
         });
     }
@@ -254,7 +306,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (!sceneApp) return;
         sceneApp.getCombinedSelectedNPCTags().forEach(element => {
             if (element.selected) {
-                let t = { name: element.name, positive: element.positive, source: "npc", value: element.value, actorId: element.actorId, might: element.might, mightIcon: element.mightIcon };
+                let t = { name: element.name, positive: element.positive, source: "npc", value: element.value, actorId: element.actorId, index: element.index, might: element.might, mightIcon: element.mightIcon };
+                // #104: a challenge's status/tag can be applied against the roll for
+                // this roll only, without editing the challenge document.
+                DiceRollApp.applyChallengeInversion(t, this.invertedChallengeEntries);
                 this.challengeTags.push(t);
             }
         });
@@ -406,6 +461,49 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
      */
     static getTagKey(tag) {
         return `${tag.themebookId ?? tag.source ?? "na"}:${tag.weakness ? "w" : "p"}:${tag.index}`;
+    }
+
+    /**
+     * Stable-ish identity for a Challenge/Scene-Story entry, used as the key for
+     * the per-roll `invertedChallengeEntries` Set (#104). NPC challenge entries
+     * are keyed by actor id + their index within that actor's
+     * floatingTagsAndStatuses (see MistSceneApp.getCombinedSelectedNPCTags);
+     * scene/story entries are keyed by the scene data item's own id (via
+     * `sceneDataItemId`, so a scene switch never collides with a different
+     * scene's array at the same index) + their index within it (see
+     * prepareSceneAndStoryTags).
+     *
+     * The NAME is included as a defense-in-depth measure, not the primary
+     * identity: index alone is only stable while the underlying array doesn't
+     * shift. If the GM deletes an earlier entry while the dialog is open, a
+     * later entry can slide into a stale index — including the name means that
+     * shift changes the key too, so the stale key matches nothing (the
+     * inversion is silently lost) rather than silently reattaching to the
+     * wrong entry (wrong roll math). Same-named entries on the same owner stay
+     * distinct via index. This is belt-and-suspenders: prepareChallengeTags()/
+     * prepareSceneAndStoryTags() also prune any key that goes unmatched after
+     * every derivation (see pruneInvertedChallengeEntries), which is the actual
+     * fix for the deletion-shift and deselect/reselect-resurrection cases.
+     */
+    static getChallengeEntryKey(entry) {
+        const ownerId = entry.actorId ?? entry.sceneDataItemId ?? "na";
+        return `${entry.source ?? "na"}:${ownerId}:${entry.index}:${entry.name ?? ""}`;
+    }
+
+    /**
+     * #104: apply a pending per-roll inversion to a freshly built Challenge/Scene-
+     * Story entry — flips its polarity so it competes in the opposite bucket in
+     * applyRulesToSelectedTags (e.g. a positive swift-4 status becomes a -4
+     * negative status), without touching the persisted document. Mutates `entry`
+     * in place and stamps `challengeEntryKey` on it either way, so the dialog
+     * template always has a key to toggle against.
+     */
+    static applyChallengeInversion(entry, invertedChallengeEntries) {
+        entry.challengeEntryKey = DiceRollApp.getChallengeEntryKey(entry);
+        if (invertedChallengeEntries.has(entry.challengeEntryKey)) {
+            entry.positive = !entry.positive;
+            entry.challengeInverted = true;
+        }
     }
 
     static getPreparedTagsAndStatusesForRoll(actor) {
@@ -781,6 +879,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (this.pendingHelpReqId) { Collaboration.cancelHelp(this.pendingHelpReqId); this.pendingHelpReqId = null; }
         this.helpingTags = [];
         this.invertedTags.clear(); // #35: per-roll only, never carries into the next opening
+        this.invertedChallengeEntries.clear(); // #104: per-roll only, never carries into the next opening
     }
 
     /** Socket callback: a fellow hero contributed a helping tag to this roll. */
@@ -892,6 +991,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.helpingTags = [];
         this.pendingHelpReqId = null;
         this.invertedTags.clear(); // #35: the inversion only applied to this roll
+        this.invertedChallengeEntries.clear(); // #104: the inversion only applied to this roll
 
         this.resetTags();
         this.close();
@@ -966,6 +1066,26 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             this.invertedTags.delete(key);
         } else {
             this.invertedTags.add(key);
+        }
+        this.updateTagsAndStatuses(true);
+    }
+
+    /**
+     * #104: toggle a Challenge/Scene-Story entry's polarity for this roll only
+     * (Narrator discretion) — e.g. a challenge's positive swift-4 status is applied
+     * as -4 against the roll — without editing the challenge or scene document.
+     * Purely in-memory on this dialog instance. updateTagsAndStatuses() re-derives
+     * challengeTags/selectedStoryTags from the persisted documents, and
+     * prepareChallengeTags()/prepareSceneAndStoryTags() re-apply this Set to the
+     * freshly derived entries, so the toggle survives that re-derivation.
+     */
+    static async #handleToggleChallengeInversion(event, target) {
+        const key = target.dataset.challengeKey;
+        if (!key) return;
+        if (this.invertedChallengeEntries.has(key)) {
+            this.invertedChallengeEntries.delete(key);
+        } else {
+            this.invertedChallengeEntries.add(key);
         }
         this.updateTagsAndStatuses(true);
     }

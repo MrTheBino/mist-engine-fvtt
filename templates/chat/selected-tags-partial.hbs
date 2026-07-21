@@ -7,9 +7,10 @@
                 {{#if this.weakness}}weakness{{/if}}
                 {{#if this.fellowship}}fellowship{{/if}}
                 {{#if this.inverted}}inverted-tag{{/if}}
+                {{#if this.challengeInverted}}inverted-challenge{{/if}}
                 " {{#if this.inverted}}title="{{localize 'MIST_ENGINE.ROLL.InvertedTagHint'}}"{{/if}}>
         {{#if this.toBurn}}🔥 {{/if}}
-        {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
+        {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}{{#if this.challengeInverted}} <em>({{localize 'MIST_ENGINE.ROLL.InvertedChallengeSuffix'}})</em>{{/if}}
     </span>
     {{/each}}
 </div>
@@ -23,9 +24,10 @@
                 {{#if this.weakness}}weakness{{/if}}
                 {{#if this.fellowship}}fellowship{{/if}}
                 {{#if this.inverted}}inverted-tag{{/if}}
+                {{#if this.challengeInverted}}inverted-challenge{{/if}}
                 " {{#if this.inverted}}title="{{localize 'MIST_ENGINE.ROLL.InvertedTagHint'}}"{{/if}}>
         {{#if this.toBurn}}🔥 {{/if}}
-        {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
+        {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}{{#if this.challengeInverted}} <em>({{localize 'MIST_ENGINE.ROLL.InvertedChallengeSuffix'}})</em>{{/if}}
     </span>
     {{/each}}
 </div>
