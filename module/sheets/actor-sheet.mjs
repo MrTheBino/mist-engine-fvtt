@@ -129,6 +129,10 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         const actorData = this.document.toPlainObject();
 
         context.system = actorData.system;
+        // Display-only sort (issue #28): tags before statuses, persisted array/index untouched.
+        context.system.floatingTagsAndStatuses = FloatingTagAndStatusAdapter.sortedFloatingView(
+            actorData.system.floatingTagsAndStatuses
+        );
         context.flags = actorData.flags;
         context.actor = this.document;
         context.editMode = actorData.system.editMode;

@@ -23,30 +23,35 @@
 </div>
 
 <div class="floating-tags-and-status-entries {{#if useGrid}}grid grid-3col{{/if}}">
+    {{!-- floatingTagsAndStatuses is a sorted VIEW (tags before statuses; see
+    FloatingTagAndStatusAdapter.sortedFloatingView, issue #28) - each entry
+    carries its ORIGINAL position in the persisted array as `originalIndex`,
+    which is what data-index must use so handlers keep mutating the right
+    element. Do not switch this back to @index. --}}
     {{#each floatingTagsAndStatuses}}
-    <div class="floating-tag-and-status-entry flexcol" data-might="{{this.might}}" data-index="{{@index}}" data-is-status="{{this.isStatus}}">
+    <div class="floating-tag-and-status-entry flexcol" data-might="{{this.might}}" data-index="{{this.originalIndex}}" data-is-status="{{this.isStatus}}">
         {{!-- Tag/Status --}}
-        <div class="fts-tag-container" data-might="{{this.might}}" data-index="{{@index}}" data-is-status="{{this.isStatus}}">
+        <div class="fts-tag-container" data-might="{{this.might}}" data-index="{{this.originalIndex}}" data-is-status="{{this.isStatus}}">
             {{#if ../floatingTagsAndStatusesEditable}}
             {{! -- this input field must not have a name attribute! otterwise foundry itself will update the array and fills it fill false data! --}}
-            <input type="text" class="fts-input-name updateable-fts-stat" data-index="{{@index}}" data-key="name"
+            <input type="text" class="fts-input-name updateable-fts-stat" data-index="{{this.originalIndex}}" data-key="name"
                 value="{{this.name}}" placeholder="{{localize 'MIST_ENGINE.LABELS.Item.TagStatusName'}}">
             {{#if this.isStatus}}
             <input type="text" class="fts-input-value" value="{{this.value}}" disabled>
             {{/if}}
-            <a data-action="deleteFloatingTagOrStatus" data-index="{{@index}}"><i class='fas fa-trash'></i></a>
+            <a data-action="deleteFloatingTagOrStatus" data-index="{{this.originalIndex}}"><i class='fas fa-trash'></i></a>
             {{else}}
             <div class="fts-input-name  {{#if this.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}">
                 {{#if (isRenderBlockAllowed ../gmCheck)}}
-                    <i class="fa-solid {{#if this.positive}}fa-thumbs-up{{else}}fa-thumbs-down{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-index="{{@index}}" title="toggle between positive and negative"></i>
+                    <i class="fa-solid {{#if this.positive}}fa-thumbs-up{{else}}fa-thumbs-down{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-index="{{this.originalIndex}}" title="toggle between positive and negative"></i>
                 {{/if}}
-                <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-index="{{@index}}" title="{{floatingTagStatusTitleHelper this}}">
+                <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-index="{{this.originalIndex}}" title="{{floatingTagStatusTitleHelper this}}">
                     {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
                     {{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}
                 </span>
                 {{#if (isRenderBlockAllowed ../gmCheck)}}
-                    <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{@index}}" data-confirm="1" title="delete this tag/status"></i>
-                    <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{@index}}" title="toggle between tag and status"></i>
+                    <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{this.originalIndex}}" data-confirm="1" title="delete this tag/status"></i>
+                    <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{this.originalIndex}}" title="toggle between tag and status"></i>
                 {{/if}}
             </div>
             {{/if}}
@@ -57,7 +62,7 @@
         <div class="fts-markings-container">
             {{#each this.markings as |marking index|}}
             <span class="fts-input-marking" data-marking-index="{{index}}"
-                data-action="toggleFloatingTagOrStatusMarking" data-index="{{@../index}}">
+                data-action="toggleFloatingTagOrStatusMarking" data-index="{{../originalIndex}}">
                 <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne index}}</i>
             </span>
             {{/each}}
