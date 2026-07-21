@@ -13,16 +13,33 @@ export function setupHooks() {
     const markType = schema?.marks?.mark;
     if (!markType) return;
 
-    const toggleMark = (cssClass) => (state, dispatch) => {
+    // Tag/status marks mirror the applyLimit/applyWeakness pattern below so button-applied
+    // marks carry the same draggable + data-* attributes as text produced by the
+    // [tag]/[/s status] parser (see makeStyledTagOrStatusText in tag-status-text-helper.mjs).
+    // A bare class (the old behavior) doesn't match the global `mark.draggable` dragstart
+    // handler (mist-engine-fvtt.mjs), so marks applied via these buttons weren't draggable.
+    const applyTag = (state, dispatch) => {
       const { from, to } = state.selection;
-      const mark = markType.create({ _preserve: { class: cssClass } });
+      if (from === to) return false;
+
       const hasMark = state.doc.rangeHasMark(from, to, markType);
-      if (dispatch) {
-        const tr = hasMark
-          ? state.tr.removeMark(from, to, markType)
-          : state.tr.addMark(from, to, mark);
-        dispatch(tr);
+      if (hasMark) {
+        if (dispatch) dispatch(state.tr.removeMark(from, to, markType));
+        return true;
       }
+
+      const name = state.doc.textBetween(from, to).trim();
+      if (!name) return false; // schema.text("") throws on empty/whitespace selections
+
+      const tagMark = markType.create({ _preserve: {
+        class: "draggable tag",
+        draggable: "true",
+        "data-type": "tag",
+        "data-name": name,
+      }});
+
+      const newText = state.schema.text(name, [tagMark]);
+      if (dispatch) dispatch(state.tr.replaceWith(from, to, newText));
       return true;
     };
 
@@ -31,16 +48,51 @@ export function setupHooks() {
       title: game.i18n.localize("MIST_ENGINE.PROSEMIRROR.MarkAsTag"),
       icon: '<i class="fa-solid fa-tag fa-fw"></i>',
       scope: "text",
-      cmd: toggleMark("tag"),
+      cmd: applyTag,
       priority: 8,
     });
+
+    const applyStatus = (state, dispatch) => {
+      const { from, to } = state.selection;
+      if (from === to) return false;
+
+      const hasMark = state.doc.rangeHasMark(from, to, markType);
+      if (hasMark) {
+        if (dispatch) dispatch(state.tr.removeMark(from, to, markType));
+        return true;
+      }
+
+      const selectedText = state.doc.textBetween(from, to);
+      const parts = selectedText.split("-");
+      const lastSegment = parts[parts.length - 1].trim();
+      const hasValue = parts.length > 1 && /^\d+$/.test(lastSegment);
+
+      const value = hasValue ? parseInt(lastSegment) : 0;
+      const name = hasValue
+        ? selectedText.substring(0, selectedText.lastIndexOf("-")).trim()
+        : selectedText.trim();
+      const displayText = hasValue ? `${name}-${value}` : name;
+      if (!displayText) return false; // schema.text("") throws on empty/whitespace selections
+
+      const statusMark = markType.create({ _preserve: {
+        class: "draggable status",
+        draggable: "true",
+        "data-type": "status",
+        "data-name": name,
+        "data-value": String(value),
+      }});
+
+      const newText = state.schema.text(displayText, [statusMark]);
+      if (dispatch) dispatch(state.tr.replaceWith(from, to, newText));
+      return true;
+    };
 
     config.push({
       action: "toggle-status",
       title: game.i18n.localize("MIST_ENGINE.PROSEMIRROR.MarkAsStatus"),
       icon: '<i class="fa-solid fa-hashtag fa-fw"></i>',
       scope: "text",
-      cmd: toggleMark("status"),
+      cmd: applyStatus,
       priority: 7,
     });
 
