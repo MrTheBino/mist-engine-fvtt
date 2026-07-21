@@ -67,6 +67,43 @@ function buildThemebookUpdate(item) {
     };
 }
 
+/**
+ * Build the default backpack item data for a litm-character actor.
+ * Must stay in sync with the `createActor` hook in `lib/hooks.mjs`, which
+ * creates this same item for actors created after the backpack feature
+ * shipped — this migration step backfills it for actors created before.
+ *
+ * @returns {{ name: string, type: string, system: object, flags: object }}
+ */
+function buildBackpackItemData() {
+    return {
+        name: "Backpack",
+        type: "backpack",
+        system: {
+            /* ... */
+        },
+        flags: { mist: { autoAdded: true } },
+    };
+}
+
+/**
+ * Create a missing backpack item on a litm-character actor, world or
+ * compendium. No-op for other actor types, or for actors that already have
+ * a backpack item — safe to call repeatedly (idempotent).
+ *
+ * @param {Actor} actor
+ * @returns {Promise<boolean>} true when a backpack item was created
+ */
+async function _ensureBackpack(actor) {
+    if (actor.type !== "litm-character") return false;
+
+    const hasBackpack = actor.items.find(i => i.type === "backpack");
+    if (hasBackpack) return false;
+
+    await Item.implementation.create([buildBackpackItemData()], { parent: actor });
+    return true;
+}
+
 // ---------------------------------------------------------------------------
 // Public API
 // ---------------------------------------------------------------------------
@@ -107,6 +144,7 @@ export async function migrateWorld() {
     await _migrateActorItems();
     await _migrateFellowshipActors();
     await _migrateWorldItems();
+    await _migrateCharacterBackpacks();
     await _migrateCompendiums();
 
     await game.settings.set(SYSTEM_ID, MIGRATION_VERSION_KEY, version);
@@ -184,6 +222,33 @@ async function _migrateFellowshipActors() {
     }
 }
 
+/**
+ * Create missing backpack items on litm-character world actors.
+ *
+ * Backpacks are normally auto-created by the `createActor` hook, but actors
+ * created before that feature shipped never received one (issue #105), and
+ * nothing else retrofits it. Exported (in addition to being wired into
+ * `migrateWorld()`) so it can be unit-tested standalone.
+ *
+ * Uses a single summary notification rather than one per actor (unlike
+ * `_migrateActorItems`) since a world can have many long-lived characters
+ * missing a backpack, and a notification per actor would be spammy.
+ */
+export async function _migrateCharacterBackpacks() {
+    let created = 0;
+
+    for (const actor of game.actors) {
+        if (!(await _ensureBackpack(actor))) continue;
+
+        console.log(`Mist Engine | Created missing backpack for actor "${actor.name}"`);
+        created++;
+    }
+
+    if (created > 0) {
+        ui.notifications.info(`Mist Engine | Created ${created} missing backpack(s) on character actor(s).`);
+    }
+}
+
 /** Migrate themebook items sitting in the world item directory. */
 async function _migrateWorldItems() {
     for (const item of game.items) {
@@ -218,6 +283,13 @@ async function _migrateCompendiums() {
                 if (updates.length) {
                     console.log(`Mist Engine | Migrating ${updates.length} themebook(s) on compendium actor "${doc.name}" (${pack.collection})`);
                     await doc.updateEmbeddedDocuments("Item", updates);
+                }
+
+                // Backfill missing backpacks (issue #105) alongside the themebook
+                // migration above, reusing this same pack scan rather than
+                // running a second full getDocuments() pass over every pack.
+                if (await _ensureBackpack(doc)) {
+                    console.log(`Mist Engine | Created missing backpack for compendium actor "${doc.name}" (${pack.collection})`);
                 }
                 continue;
             }
