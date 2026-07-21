@@ -73,7 +73,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     };
 
     setOptions(options) {
-        if (options.actor) {
+        if (options.actor && (options.actor.type === "character" || options.actor.type === "litm-character")) {
             this.actor = options.actor;
         }
         if (options.type) {
