@@ -25,14 +25,14 @@
         </fieldset>
     {{else}}
         <h2>{{challenge.name}}</h2>
-        <div class="short-description">{{{textWithTags challenge.system.shortDescription}}}</div>
+        <div class="short-description">{{{challenge.shortDescriptionHTML}}}</div>
         <div class="list-entries">
-            {{#each challenge.system.list as |entry index|}}
+            {{#each challenge.listHTML as |entryHTML index|}}
                 <div class="list-entry">
-                    
+
                     <div class="entry-content-no-edit flexrow">
                         <div class="icon-col"><i class="skull-icon"></i></div>
-                        <div class="text-col">{{{textWithTags entry}}}</div>
+                        <div class="text-col">{{{entryHTML}}}</div>
                     </div>
                 </div>
             {{/each}}

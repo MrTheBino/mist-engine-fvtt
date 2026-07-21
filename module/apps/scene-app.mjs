@@ -1,5 +1,6 @@
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adapter.mjs";
+import { enrichShortChallenges, enrichTextWithTags } from "../lib/tag-status-text-helper.mjs";
 import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
 import { DiceRollApp } from "./dice-roll-app.mjs";
 
@@ -374,8 +375,12 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             context.assignedJourney = journey;
             context.assignedJourneyName = journey?.name ?? "";
             context.assignedJourneySystem = journey?.system ?? null;
+            // Enriched so @UUID[...]{Label} links render here too (issue #73).
+            context.assignedJourneyGeneralConsequencesHTML = journey
+                ? await Promise.all((journey.system.generalConsequences ?? []).map((entry) => enrichTextWithTags(entry, journey)))
+                : [];
             context.assignedJourneyChallenges = journey
-                ? journey.items.filter(i => i.type === "shortchallenge")
+                ? await enrichShortChallenges(journey.items.filter(i => i.type === "shortchallenge"), journey)
                 : [];
 
             // Story Themes tab: themebooks dragged onto the scene, read-only,

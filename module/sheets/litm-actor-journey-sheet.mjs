@@ -4,6 +4,8 @@ import { PowerTagAdapter } from '../lib/power-tag-adapter.mjs';
 import { MistSceneApp } from '../apps/scene-app.mjs';
 import { importVignetteForActorJSON } from '../lib/json-importer.mjs';
 import { confirmDeletion } from '../lib/confirm-deletion.mjs';
+import { enrichShortChallenges, enrichTextWithTags } from '../lib/tag-status-text-helper.mjs';
+import { ArrayFieldAdapter } from '../lib/array-field-adapter.mjs';
 
 export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet {
     #dragDrop // Private field to hold dragDrop handlers
@@ -32,7 +34,10 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
         },
         dragDrop: [{
             dragSelector: '[draggable="true"]',
-            dropSelector: '.mist-engine.journey'
+            // Must match the sheet's root classes (mist-engine sheet actor
+            // litm-journey) — the previous '.mist-engine.journey' matched
+            // nothing, so the sheet never received drops at all.
+            dropSelector: '.mist-engine.actor'
         }],
         window: {
             resizable: true,
@@ -100,6 +105,13 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
 
         foundry.utils.mergeObject(context, items);
 
+        // Enrich view-mode text so @UUID[...]{Label} links render as real
+        // content links (issue #73, same treatment as the Challenge sheet).
+        context.generalConsequencesHTML = await Promise.all(
+            (this.document.system.generalConsequences ?? []).map((entry) => enrichTextWithTags(entry, this.document))
+        );
+        context.challenges = await enrichShortChallenges(context.challenges ?? [], this.document);
+
         return context;
     }
 
@@ -152,6 +164,30 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
         for (const input of taggableText) {
             input.addEventListener("keydown", (event) => this.handleInputShortCutsForGM(event));
         }
+    }
+
+    /**
+     * @override The journey's general-consequence inputs (list entries
+     * without a data-item-id), then the shared challenge fields.
+     */
+    _getUuidDroppableField(target) {
+        if (target instanceof HTMLInputElement
+            && target.classList.contains("editable-challenge-item-list-entry")
+            && !target.dataset.itemId) {
+            return target;
+        }
+        return super._getUuidDroppableField(target);
+    }
+
+    /** @override Persist general consequences; shared challenge fields defer to the base. */
+    async _persistUuidDroppedText(field, value) {
+        if (field.classList.contains("editable-challenge-item-list-entry") && !field.dataset.itemId) {
+            const index = Number.parseInt(field.dataset.index, 10);
+            if (Number.isNaN(index)) return;
+            await ArrayFieldAdapter.setIndex(this.actor, "system.generalConsequences", index, value);
+            return;
+        }
+        return super._persistUuidDroppedText(field, value);
     }
 
     async handleChallengeItemUpdate(event) {

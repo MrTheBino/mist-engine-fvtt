@@ -39,6 +39,59 @@ export function textWithTags(str) {
 }
 
 /**
+ * Convert a raw tag/status string into final display HTML with document links
+ * (issue #73).
+ *
+ * Order matters: `textWithTags` runs FIRST, while the string is still plain
+ * text. Its regex explicitly skips `@UUID[...]{...}` (and other
+ * `@word[...]{...}`) spans - it matches them only so its `[...]` tag-token
+ * branch cannot misfire on their brackets - so it hands back a string with
+ * `[tag]`/`[/s status]` tokens converted to `<mark>` HTML and any
+ * `@UUID[...]{...}` spans still untouched as plain text. `enrichHTML` then
+ * runs SECOND on that (now partially-HTML) string, converting the remaining
+ * `@UUID[...]{...}` spans into real content-link anchors while leaving the
+ * `<mark>` elements alone. Running the plain (non-DOM-aware) textWithTags
+ * regex over enrichHTML's output instead would be the riskier direction.
+ *
+ * @param {string} raw
+ * @param {foundry.abstract.Document} doc owns permissions (secrets), roll data
+ *   and relative UUID resolution for the enrichment
+ * @returns {Promise<string>}
+ */
+export async function enrichTextWithTags(raw, doc) {
+  if (!raw) return "";
+  return foundry.applications.ux.TextEditor.implementation.enrichHTML(textWithTags(raw), {
+    // Whether to show secret blocks in the finished html
+    secrets: doc.isOwner,
+    // Necessary in v11, can be removed in v12
+    async: true,
+    // Data to fill in for inline rolls
+    rollData: doc.getRollData(),
+    // Relative UUID resolution
+    relativeTo: doc,
+  });
+}
+
+/**
+ * Map shortchallenge Items to plain render objects for challenge-partial.hbs:
+ * `id`/`name`/`system` for the edit branch, plus enriched
+ * `shortDescriptionHTML`/`listHTML` for the view branch.
+ *
+ * @param {Item[]} challenges shortchallenge items
+ * @param {foundry.abstract.Document} doc the actor the enrichment is relative to
+ * @returns {Promise<object[]>}
+ */
+export async function enrichShortChallenges(challenges, doc) {
+  return Promise.all(challenges.map(async (challenge) => ({
+    id: challenge.id,
+    name: challenge.name,
+    system: challenge.system,
+    shortDescriptionHTML: await enrichTextWithTags(challenge.system.shortDescription, doc),
+    listHTML: await Promise.all((challenge.system.list ?? []).map((entry) => enrichTextWithTags(entry, doc))),
+  })));
+}
+
+/**
  * Parse and convert token markup into a styled HTML mark element
  *
  * @param {String} token the token to convert
