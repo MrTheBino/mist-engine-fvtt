@@ -231,7 +231,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     async handleStoryTagBurnState(event) {
         event.preventDefault();
         const target = event.currentTarget;
-        const index = target.dataset.index;
+        const index = Number.parseInt(target.dataset.index, 10);
         const itemId = target.dataset.itemId;
         const key = target.dataset.key;
         await StoryTagAdapter.toggleBurnedState(this.actor, itemId, key, index);
@@ -241,7 +241,9 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     static async #handleToggleStoryTagBurn(event, target) {
         event.preventDefault();
-        const index = target.dataset.index;
+        // Must be a number: clearOtherBurns (burn-helper.mjs) keeps the just-toggled
+        // tag via a strict `i === keepIndex` check against a numeric array index (#98).
+        const index = Number.parseInt(target.dataset.index, 10);
         const itemId = target.dataset.itemId;
         const key = target.dataset.key;
         await StoryTagAdapter.toggleBurnSelection(this.actor, itemId, key, index);
@@ -251,7 +253,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     static async #handleToggleStoryTagSelection(event, target) {
         event.preventDefault();
-        const index = target.dataset.index;
+        const index = Number.parseInt(target.dataset.index, 10);
         const itemId = target.dataset.itemId;
         const key = target.dataset.key;
 
@@ -263,7 +265,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     async handleStoryTagItemChanged(event) {
         event.preventDefault();
-        const index = event.currentTarget.dataset.index;
+        const index = Number.parseInt(event.currentTarget.dataset.index, 10);
         const key = event.currentTarget.dataset.key;
         const subKey = event.currentTarget.dataset.subKey;
         const itemId = event.currentTarget.dataset.itemId;
@@ -577,7 +579,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     static async #handleDeleteStoryTag(event, target) {
         event.preventDefault();
         const itemId = target.dataset.itemId;
-        const index = target.dataset.index;
+        const index = Number.parseInt(target.dataset.index, 10);
         const key = target.dataset.key;
 
         this._saveScrollPositions();

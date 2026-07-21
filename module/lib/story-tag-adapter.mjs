@@ -24,7 +24,11 @@ export class StoryTagAdapter {
         if(!data || index < 0 || index >= data.length) return false;
         if(data[index].burned) return false; // cannot select burned tags
         if(data[index].expired) return false; // expired story tags grant no Power (p. 179)
-        return ArrayFieldAdapter.toggle(item, key, index, "selected");
+        const willSelect = !data[index].selected;
+        // Deselecting also un-queues the burn, same as power tags — a tag
+        // cannot burn on a roll it no longer contributes to.
+        const patch = willSelect ? { selected: true } : { selected: false, toBurn: false };
+        return ArrayFieldAdapter.patch(item, key, index, patch);
     }
 
     static async toggleBurnSelection(actor, itemId, key, index){
@@ -34,7 +38,9 @@ export class StoryTagAdapter {
         if(!data || index < 0 || index >= data.length) return false;
         if(data[index].burned) return false; // cannot toggle burned tags
         const willBurn = !data[index].toBurn;
-        const ok = await ArrayFieldAdapter.toggle(item, key, index, "toBurn");
+        // Queueing a burn also selects the tag (and un-queueing deselects),
+        // mirroring power tags — the roll only counts selected tags.
+        const ok = await ArrayFieldAdapter.patch(item, key, index, { toBurn: willBurn, selected: willBurn });
         // Only one tag may be queued to burn (#92) — clear it on all other tags.
         if(ok && willBurn) await clearOtherBurns(actor, item, key, index);
         return ok;
