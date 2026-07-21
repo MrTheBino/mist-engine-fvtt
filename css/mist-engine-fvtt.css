@@ -2422,11 +2422,11 @@ article.cc-enriched section.journal-entry-content {
   margin-top: 0px;
   margin-bottom: 5px;
   min-width: 233px;
-  grid-template-columns: repeat(4, 186px);
-  justify-content: space-between;
+  grid-template-columns: repeat(auto-fit, 186px);
+  justify-content: center;
 }
 .mist-engine .themebooks-container.edit-mode {
-  grid-template-columns: repeat(4, 260px);
+  grid-template-columns: repeat(auto-fit, 260px);
 }
 .mist-engine .themebooks-container-stylized > :nth-child(2) {
   top: 3.75rem;
