@@ -1,4 +1,15 @@
 <div class="left-panel scrollable">
+    {{#if hasThemebookFilter}}
+    <div class="themekit-filter-banner">
+        {{#if isFilteredByThemebook}}
+        <span>{{localize "MIST_ENGINE.THEMEKITS.FilteredForThemebook" themebook=themebookFilterLabel}}</span>
+        <a class="themekit-filter-toggle" data-action="toggleShowAllThemekits">{{localize "MIST_ENGINE.THEMEKITS.ShowAllThemekits"}}</a>
+        {{else}}
+        <span>{{localize "MIST_ENGINE.THEMEKITS.ShowingAllThemekits"}}</span>
+        <a class="themekit-filter-toggle" data-action="toggleShowAllThemekits">{{localize "MIST_ENGINE.THEMEKITS.ShowFilteredThemekits" themebook=themebookFilterLabel}}</a>
+        {{/if}}
+    </div>
+    {{/if}}
     <input type="text" class="themekit-search" placeholder="Search themekits...">
     <div class="search-filters">
         <label class="search-filter-toggle"><input type="checkbox" data-filter="powertags"> Power Tags</label>
