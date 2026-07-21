@@ -3,10 +3,11 @@
  *
  * Registered under `game.tours` so it appears in Tour Management, and
  * auto-started once for a GM who has not seen it yet. `canStart` gates it to
- * GMs; `_preStep` activates the scene-controls Notes tools and opens a demo
- * character sheet so the highlighted selectors resolve. Intentionally has NO
- * imports on other app modules so it always loads regardless of which optional
- * features a build ships — the demo actor is fetched via core APIs only.
+ * GMs; `_preStep` activates the scene-controls "Mist Engine" tool group and
+ * opens a demo character sheet so the highlighted selectors resolve.
+ * Intentionally has NO imports on other app modules so it always loads
+ * regardless of which optional features a build ships — the demo actor is
+ * fetched via core APIs only.
  */
 const SEEN_SETTING = "gmTutorialSeen";
 const t = (k) => `MIST_ENGINE.TUTORIAL.${k}`;
@@ -23,11 +24,11 @@ const DEMO_ACTOR_NAME = "Finn The Red Marshal";
  * edit/game mode before the step.
  */
 const STEPS = [
-    { id: "welcome", selector: "#scene-controls", title: t("WelcomeTitle"), content: t("WelcomeContent"), activateNotes: true },
-    { id: "tools", selector: "#scene-controls-tools", title: t("ToolsTitle"), content: t("ToolsContent"), activateNotes: true },
-    { id: "sceneTracker", selector: toolSelector("scene_data_app"), title: t("SceneTrackerTitle"), content: t("SceneTrackerContent"), activateNotes: true },
-    { id: "camping", selector: toolSelector("camping_app"), title: t("CampingTitle"), content: t("CampingContent"), activateNotes: true },
-    { id: "groupAction", selector: toolSelector("group_action_app"), title: t("GroupActionTitle"), content: t("GroupActionContent"), activateNotes: true },
+    { id: "welcome", selector: "#scene-controls", title: t("WelcomeTitle"), content: t("WelcomeContent"), activateControl: "mist-engine" },
+    { id: "tools", selector: "#scene-controls-tools", title: t("ToolsTitle"), content: t("ToolsContent"), activateControl: "mist-engine" },
+    { id: "sceneTracker", selector: toolSelector("scene_data_app"), title: t("SceneTrackerTitle"), content: t("SceneTrackerContent"), activateControl: "mist-engine" },
+    { id: "camping", selector: toolSelector("camping_app"), title: t("CampingTitle"), content: t("CampingContent"), activateControl: "mist-engine" },
+    { id: "groupAction", selector: toolSelector("group_action_app"), title: t("GroupActionTitle"), content: t("GroupActionContent"), activateControl: "mist-engine" },
 
     // --- player character walkthrough (demo actor: Finn) ---
     { id: "charSheet", within: ".sheet-header", title: t("CharSheetTitle"), content: t("CharSheetContent"), charMode: "game" },
@@ -37,7 +38,7 @@ const STEPS = [
 
     { id: "challenges", selector: "#sidebar", title: t("ChallengesTitle"), content: t("ChallengesContent") },
     { id: "rollConfirm", selector: "#sidebar", title: t("RollConfirmTitle"), content: t("RollConfirmContent") },
-    { id: "howToPlay", selector: toolSelector("how_to_play_app"), title: t("HowToPlayTitle"), content: t("HowToPlayContent"), activateNotes: true },
+    { id: "howToPlay", selector: toolSelector("how_to_play_app"), title: t("HowToPlayTitle"), content: t("HowToPlayContent"), activateControl: "mist-engine" },
 ];
 
 export function registerGmTour() {
@@ -84,8 +85,8 @@ export function registerGmTour() {
             const step = this.currentStep;
             if (!step) return;
 
-            if (step.activateNotes) {
-                try { ui.controls?.activate({ control: "notes" }); } catch (e) { /* no canvas */ }
+            if (step.activateControl) {
+                try { ui.controls?.activate({ control: step.activateControl }); } catch (e) { /* no canvas */ }
                 await new Promise(r => setTimeout(r, 250));
             }
 

@@ -96,7 +96,7 @@
       "WelcomeTitle": "Bienvenue, Narrateur",
       "WelcomeContent": "Cette visite présente les outils que le système Mist Engine ajoute pour vous. La plupart se trouvent ici, dans les contrôles de scène à gauche. Utilisez les flèches ou les boutons pour parcourir la visite.",
       "ToolsTitle": "Votre barre de MJ",
-      "ToolsContent": "Sous les contrôles Notes se trouvent les applis MJ du système : le Suivi de Scène, Campement et Séjours, Agir Ensemble et How To Play. Nous allons voir chacune.",
+      "ToolsContent": "Sous les contrôles Mist Engine se trouvent les applis MJ du système : le Suivi de Scène, Campement et Séjours, Agir Ensemble et How To Play. Nous allons voir chacune.",
       "SceneTrackerTitle": "Suivi de Scène",
       "SceneTrackerContent": "Ouvre les étiquettes d'histoire, statuts et modificateurs de jet partagés de la scène, ainsi que les personnages et défis présents. Les étiquettes que vous ajoutez ici entrent automatiquement dans les jets des joueurs. Nécessite une scène active.",
       "CampingTitle": "Campement et Séjours",

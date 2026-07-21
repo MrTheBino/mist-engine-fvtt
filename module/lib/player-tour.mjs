@@ -40,7 +40,7 @@ const STEPS = [
     { id: "fellowship", within: ".litm-fellowship-relationship", title: t("FellowshipTitle"), content: t("FellowshipContent"), charMode: "game" },
     { id: "otherTab", within: '.litm-character-sheet-tabs [data-tab="other"]', title: t("OtherTabTitle"), content: t("OtherTabContent"), charMode: "game" },
     { id: "bioNotes", within: '.litm-character-sheet-tabs [data-tab="biography"]', title: t("BioNotesTitle"), content: t("BioNotesContent"), charMode: "game" },
-    { id: "howToPlay", selector: toolSelector("how_to_play_app"), title: t("HowToPlayTitle"), content: t("HowToPlayContent"), activateNotes: true },
+    { id: "howToPlay", selector: toolSelector("how_to_play_app"), title: t("HowToPlayTitle"), content: t("HowToPlayContent"), activateControl: "mist-engine" },
 ];
 
 export function registerPlayerTour() {
@@ -95,8 +95,8 @@ export function registerPlayerTour() {
             // as soon as the tour moves on so it never covers a sheet step.
             if (!step.openRollDialog) this.#closeRollDialog();
 
-            if (step.activateNotes) {
-                try { ui.controls?.activate({ control: "notes" }); } catch (e) { /* no canvas */ }
+            if (step.activateControl) {
+                try { ui.controls?.activate({ control: step.activateControl }); } catch (e) { /* no canvas */ }
                 await new Promise(r => setTimeout(r, 250));
             }
 
