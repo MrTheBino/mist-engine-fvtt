@@ -72,15 +72,30 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
     }
 
     async getAllThemekits(){
-       // Welt: only themekits the current user is allowed to see
-        const worldThemeKits = game.items.filter(i => i.type === "themekit" && i.visible);
+        // Welt: only themekits the current user is allowed to see, and only
+        // if the GM hasn't disabled world items as a themekit source. The
+        // `!== false` guard keeps world items included if the stored value
+        // is ever malformed (preserves pre-toggle behavior).
+        const includeWorldItems = game.settings.get("mist-engine-fvtt", "themekitIncludeWorldItems") !== false;
+        const worldThemeKits = includeWorldItems
+            ? game.items.filter(i => i.type === "themekit" && i.visible)
+            : [];
 
         // Kompendien: skip packs hidden from the current user
         const compendiumThemeKits = [];
 
+        // Issue #101: GM-configured allowlist of pack collection ids. An
+        // empty/unset array means no restriction (preserves prior behavior,
+        // scanning every visible Item pack); a non-empty array restricts
+        // scanning to just those packs. World items are governed by the
+        // separate themekitIncludeWorldItems toggle above, not this list.
+        const allowedSourcePacks = game.settings.get("mist-engine-fvtt", "themekitSourcePacks");
+        const hasSourceAllowlist = Array.isArray(allowedSourcePacks) && allowedSourcePacks.length > 0;
+
         for (const pack of game.packs) {
             if (pack.documentName !== "Item") continue;
             if (!pack.visible) continue;
+            if (hasSourceAllowlist && !allowedSourcePacks.includes(pack.collection)) continue;
 
             const docs = await pack.getDocuments();
             compendiumThemeKits.push(

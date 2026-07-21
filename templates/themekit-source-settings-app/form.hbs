@@ -1,0 +1,35 @@
+<div class="themekit-source-settings">
+    <p class="hint">{{localize "MIST_ENGINE.SETTINGS.ThemekitSourcePacks.Explanation"}}</p>
+
+    <div class="themekit-source-list">
+        <div class="themekit-source-group">
+            <h3 class="group-header">{{localize "MIST_ENGINE.SETTINGS.ThemekitSourcePacks.WorldItemsGroup"}}</h3>
+            <label class="themekit-source-entry">
+                <input type="checkbox" data-world-items {{#if includeWorldItems}}checked{{/if}}>
+                <span class="themekit-source-title">{{localize "MIST_ENGINE.SETTINGS.ThemekitSourcePacks.WorldItemsEntry"}}</span>
+            </label>
+        </div>
+
+        {{#each groups}}
+        <div class="themekit-source-group">
+            <h3 class="group-header">{{this.source}}</h3>
+            {{#each this.packs}}
+            <label class="themekit-source-entry">
+                <input type="checkbox" value="{{this.collection}}" {{#if this.allowed}}checked{{/if}}>
+                <span class="themekit-source-title">{{this.title}}</span>
+            </label>
+            {{/each}}
+        </div>
+        {{/each}}
+
+        {{#unless hasPacks}}
+        <p class="empty-message">{{localize "MIST_ENGINE.SETTINGS.ThemekitSourcePacks.NoPacksAvailable"}}</p>
+        {{/unless}}
+    </div>
+
+    <footer class="dialog-footer">
+        <button type="button" class="roll-button" data-action="saveThemekitSources">
+            <i class="fa-solid fa-floppy-disk"></i> {{localize "MIST_ENGINE.SETTINGS.ThemekitSourcePacks.Save"}}
+        </button>
+    </footer>
+</div>

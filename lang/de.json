@@ -297,6 +297,20 @@
                 "SpecialFeatures": "Spezialmerkmale",
                 "ThreatsAndConsequences": "Bedrohungen & Konsequenzen"
             }
+        },
+        "SETTINGS": {
+            "ThemekitSourcePacks": {
+                "MenuName": "Theme-Kit-Quellkompendien",
+                "MenuLabel": "Quellen konfigurieren",
+                "MenuHint": "Wähle, welche Kompendien — und ob Gegenstände in der Welt — Themekits für die Themekit-Auswahl liefern dürfen.",
+                "WindowTitle": "Theme-Kit-Quellen",
+                "Explanation": "Kreuze die Kompendien an, die Themekits liefern sollen. Wenn du keins ankreuzt — oder alle ankreuzt — sind alle Kompendien erlaubt, auch später installierte (Standardverhalten). Die Weltgegenstände-Checkbox darüber ist unabhängig: Sie schaltet nur um, ob Gegenstände dieser Welt angeboten werden.",
+                "WorldSource": "Welt-Kompendium",
+                "WorldItemsGroup": "Diese Welt",
+                "WorldItemsEntry": "Gegenstände in der Welt (Items-Verzeichnis)",
+                "NoPacksAvailable": "Keine Item-Kompendien gefunden.",
+                "Save": "Speichern"
+            }
         }
     },
      "TYPES": {
