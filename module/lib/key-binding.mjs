@@ -1,5 +1,6 @@
 import { MistSceneApp } from "../apps/scene-app.mjs";
 import { HowToPlayApp } from "../apps/how-to-play-app.mjs";
+import { ThemekitSelectionApp } from "../apps/themekit-selection-app.mjs";
 
 function getActiveTextControl() {
   const el = document.activeElement;
@@ -79,6 +80,37 @@ function setupKBHowToPlayApp(){
   });
 }
 
+function setupKBThemekitSelectionApp(){
+    game.keybindings.register("mist-engine-fvtt", "showThemekitSelectionApp", {
+    name: "Show Themekit Selection App",
+    hint: "opens the theme kit selection window for your assigned character",
+    editable: [
+      {
+        // Not Ctrl/Cmd+T: browsers reserve that combo to open a new tab and
+        // never deliver it to the page, so it would silently fail to fire.
+        // Alt+T isn't claimed by browsers or Foundry core, and is still
+        // rebindable in Configure Controls.
+        key: "KeyT",
+        modifiers: ["Alt"]
+      }
+    ],
+    onDown: () => {
+        const actor = game.user.character;
+        if (!actor || actor.type !== "litm-character") {
+          ui.notifications.warn(game.i18n.localize("MIST_ENGINE.NOTIFICATIONS.NoCharacterAssignedForThemekitSelection"));
+          return true;
+        }
+        const app = new ThemekitSelectionApp();
+        app.setActor(actor);
+        app.render(true);
+      return true;
+    },
+    onUp: () => {},
+    restricted: false, // true = nur SL darf Shortcut nutzen
+    precedence: CONST.KEYBINDING_PRECEDENCE.NORMAL
+  });
+}
+
 function setupKBTaggingBindings(){
     game.keybindings.register("mist-engine-fvtt", "enrichTextWithTags", {
     name: "Make Tags",
@@ -93,5 +125,6 @@ function setupKBTaggingBindings(){
 export function setupMistEngineKeyBindings(){
     setupKBSzeneTagsApp();
     setupKBHowToPlayApp();
+    setupKBThemekitSelectionApp();
     //setupKBTaggingBindings(); not working yet
 }

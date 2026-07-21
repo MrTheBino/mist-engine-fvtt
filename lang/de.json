@@ -118,6 +118,9 @@
         "THEMEBOOKS": {
             "Rotes": "Rotes"
         },
+        "NOTIFICATIONS": {
+            "NoCharacterAssignedForThemekitSelection": "Kein Charakter zugewiesen. Weise deinem Benutzer einen Charakter zu, um die Theme-Kit-Auswahl zu öffnen."
+        },
         "SCENE_APP": {
             "NoActiveScene": "Der Szenen-Tracker benötigt eine aktive Szene. Aktiviere zuerst eine Szene."
         },
