@@ -486,7 +486,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         try {
             srcStatusTagStr = await foundry.applications.api.DialogV2.prompt({
                 window: { title: "Enter the status or tag" },
-                content: '<input name="srcStatusTagStr" type="text" autofocus placeholder="tag or status-2">',
+                content: '<input name="srcStatusTagStr" type="text" autofocus placeholder="tag or status-2 (or /sn status-2 for negative)">',
                 ok: {
                     label: "Submit",
                     callback: (event, button, dialog) => button.form.elements.srcStatusTagStr.value
@@ -710,11 +710,14 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 break;
             case 'status':
                 const value = parseInt(data.value) || 0;
+                // data-positive is absent for existing (positive) statuses; only an
+                // explicit "false" (from the [/sn] negative-status token) flips it
+                const positive = data.positive !== "false";
                 // stacks with an existing same-named status per the tracking-card rule (p. 29)
                 this.actor.update({
                     "system.floatingTagsAndStatuses": FloatingTagAndStatusAdapter.withStatusStacked(
                         floatingTagsAndStatuses,
-                        { name: data.name, isStatus: true, value, description: "", markings: Array(6).fill(false).fill(true, Math.max(value - 1, 0), value) }
+                        { name: data.name, isStatus: true, value, positive, description: "", markings: Array(6).fill(false).fill(true, Math.max(value - 1, 0), value) }
                     ),
                 });
                 break;

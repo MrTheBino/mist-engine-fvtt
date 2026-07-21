@@ -279,7 +279,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
      */
     async _onDrop(event) {
         const data = TextEditor.getDragEventData(event);
-        const { type, name, value } = data;
+        const { type, name, value, positive } = data;
 
         if (type === "Actor" && game.user.isGM) {
             const actor = await fromUuid(data.uuid);
@@ -328,10 +328,13 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             case "status":
                 const markings = new Array(6).fill(false);
                 markings[Math.max(0, Math.min(parseInt(value) - 1, 5))] = true;
+                // data-positive is absent for existing (positive) statuses; only an
+                // explicit "false" (from the [/sn] negative-status token) flips it
+                const statusPositive = positive !== "false";
                 await this.currentSceneDataItem.update({
                     "system.floatingTagsAndStatuses": FloatingTagAndStatusAdapter.withStatusStacked(
                         floatingTagsAndStatuses,
-                        { name, value, isStatus, markings }
+                        { name, value, isStatus, markings, positive: statusPositive }
                     ),
                 });
                 this.sendUpdateHookEvent();
@@ -799,7 +802,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         try {
             srcStatusTagStr = await foundry.applications.api.DialogV2.prompt({
                 window: { title: "Enter the status or tag" },
-                content: '<input name="srcStatusTagStr" type="text" autofocus placeholder="tag or status-2">',
+                content: '<input name="srcStatusTagStr" type="text" autofocus placeholder="tag or status-2 (or /sn status-2 for negative)">',
                 ok: {
                     label: "Submit",
                     callback: (event, button, dialog) => button.form.elements.srcStatusTagStr.value
