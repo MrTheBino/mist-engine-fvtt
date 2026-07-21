@@ -1,12 +1,13 @@
 <div class="selected-tags flexcol">
     <label class="resource-label">{{localize 'MIST_ENGINE.LABELS.Positive'}}:</label>
     {{#each positiveTags}}
-    <span class="tag 
+    <span class="tag
                 {{#if this.positive}}positive{{else}}negative{{/if}}
                 {{#if this.toBurn}}burned{{/if}}
                 {{#if this.weakness}}weakness{{/if}}
                 {{#if this.fellowship}}fellowship{{/if}}
-                ">
+                {{#if this.inverted}}inverted-tag{{/if}}
+                " {{#if this.inverted}}title="{{localize 'MIST_ENGINE.ROLL.InvertedTagHint'}}"{{/if}}>
         {{#if this.toBurn}}🔥 {{/if}}
         {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
     </span>
@@ -16,12 +17,13 @@
 <div class="selected-tags flexcol">
     <label class="resource-label">{{localize 'MIST_ENGINE.LABELS.Negative'}}:</label>
     {{#each negativeTags}}
-    <span class="tag 
+    <span class="tag
                 {{#if this.positive}}positive{{else}}negative{{/if}}
                 {{#if this.toBurn}}burned{{/if}}
                 {{#if this.weakness}}weakness{{/if}}
                 {{#if this.fellowship}}fellowship{{/if}}
-                ">
+                {{#if this.inverted}}inverted-tag{{/if}}
+                " {{#if this.inverted}}title="{{localize 'MIST_ENGINE.ROLL.InvertedTagHint'}}"{{/if}}>
         {{#if this.toBurn}}🔥 {{/if}}
         {{this.name}}{{#if (gt this.value 0)}}-{{this.value}}{{/if}}
     </span>

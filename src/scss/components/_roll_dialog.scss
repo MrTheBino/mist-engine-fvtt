@@ -31,6 +31,14 @@
             &.clickable {
                 cursor: pointer;
             }
+
+            // #35: a tag flipped for this roll only (Weakness as Power or Power
+            // as Weakness) — it renders with the flipped colour, so a dashed
+            // ring is the only clue it isn't a native tag of that kind
+            &.inverted-tag {
+                outline: 2px dashed $c-brown;
+                outline-offset: -2px;
+            }
         }
 
         .status {

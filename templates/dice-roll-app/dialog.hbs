@@ -10,7 +10,9 @@
     <div class="selected-tags-container flexcol">
         <label class="resource-label">You selected:</label>
         {{#each selectedTags}}
-        <div class="selected-tag tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}} {{#if this.isStatus}}status{{/if}} {{#if this.isClickable}}clickable{{/if}}" {{#if this.isClickable}}data-action="clickTagStatusModifierToggle" data-index="{{this.index}}"{{/if}}>
+        <div class="selected-tag tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}} {{#if this.isStatus}}status{{/if}} {{#if this.isClickable}}clickable{{/if}} {{#if this.tagKey}}clickable{{/if}} {{#if this.inverted}}inverted-tag{{/if}}"
+            {{#if this.isClickable}}data-action="clickTagStatusModifierToggle" data-index="{{this.index}}"{{/if}}
+            {{#if this.tagKey}}data-action="clickToggleTagInversion" data-tag-key="{{this.tagKey}}" title="{{#if this.weakness}}{{localize 'MIST_ENGINE.ROLL.ToggleWeaknessAsPower'}}{{else}}{{localize 'MIST_ENGINE.ROLL.TogglePowerAsWeakness'}}{{/if}}"{{/if}}>
             <span class="tag-icon">
                 {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
                     class="fa-solid fa-thumbs-down"></i>{{/if}}

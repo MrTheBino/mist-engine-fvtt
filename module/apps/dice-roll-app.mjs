@@ -31,6 +31,13 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.helpingTags = [];
         this.pendingHelpReqId = null;
 
+        // Per-roll tag inversion (#35, Narrator discretion, Core Book): a Weakness
+        // may count as Power and a Power tag as Weakness, for this roll only.
+        // In-memory only, never persisted to the actor: a Set of tagKey
+        // strings (see getTagKey), re-applied to freshly derived tags in
+        // prepareTags() and cleared on roll execution, actor change and close.
+        this.invertedTags = new Set();
+
         DiceRollApp.instance = this;
     }
 
@@ -60,7 +67,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             clickTagStatusModifierToggle: this.#handleTagStatusModifierToggle,
             clickCancelConfirmation: this.#handleClickCancelConfirmation,
             clickRequestHelp: this.#handleRequestHelp,
-            clickRemoveHelpingTag: this.#handleRemoveHelpingTag
+            clickRemoveHelpingTag: this.#handleRemoveHelpingTag,
+            clickToggleTagInversion: this.#handleToggleTagInversion
         },
     };
 
@@ -74,6 +82,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     setOptions(options) {
         if (options.actor) {
+            // a per-roll tag inversion is scoped to the actor it was granted
+            // for; switching actors on this (singleton) dialog must not carry it over
+            if (this.actor?.id !== options.actor.id) {
+                this.invertedTags.clear();
+            }
             this.actor = options.actor;
         }
         if (options.type) {
@@ -253,6 +266,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         let burnUsed = false; // only one tag may burn for +3 (#92)
 
         tagsForRoll.forEach(element => {
+            // #35: per-roll inversions are already baked into `positive` by
+            // prepareTags(), so no special-casing is needed here.
 
             if (element.value === undefined || element.value == 0) {
                 if (element.positive) {
@@ -381,6 +396,18 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return tagsForRole;
     }
 
+    /**
+     * Stable identity for an invertible tag entry (Power or Weakness), used as
+     * the key for the per-roll `invertedTags` Set (#35). Themebook tags are keyed
+     * by their themebook item id + tag index; the fellowship themecard has no
+     * themebookId, so its `source` stands in for it. Power and weakness indices
+     * overlap, so the tag kind is part of the key. Both index schemes are
+     * 0-based per-item indices assigned in getPreparedTagsAndStatusesForRoll.
+     */
+    static getTagKey(tag) {
+        return `${tag.themebookId ?? tag.source ?? "na"}:${tag.weakness ? "w" : "p"}:${tag.index}`;
+    }
+
     static getPreparedTagsAndStatusesForRoll(actor) {
         let selectedTags = [];
         if (!actor || (actor.type !== "character" && actor.type !== "litm-character")) {
@@ -413,7 +440,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 if(item.system.powertags){
                     item.system.powertags.forEach((tag, i) => {
                         if (tag.selected) {
-                            selectedTags.push({ name: tag.name, positive: true, toBurn: tag.toBurn, index: i, themebookId: item.id, source: null });
+                            selectedTags.push({ name: tag.name, positive: true, powerTag: true, toBurn: tag.toBurn, index: i, themebookId: item.id, source: null });
                         }
                     });
                 }
@@ -443,7 +470,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 if (actorFellowshipThemecard.system.powertags) {
                     actorFellowshipThemecard.system.powertags.forEach((tag, i) => {
                         if (tag.selected) {
-                            selectedTags.push({ name: tag.name, positive: true, toBurn: tag.toBurn, index: i, source: "fellowship-themecard" });
+                            selectedTags.push({ name: tag.name, positive: true, powerTag: true, toBurn: tag.toBurn, index: i, source: "fellowship-themecard" });
                         }
                     });
                 }
@@ -487,6 +514,34 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     prepareTags() {
 
         this.selectedTags = DiceRollApp.getPreparedTagsAndStatusesForRoll(this.actor);
+
+        // re-apply any per-roll tag inversion (#35): this array is rebuilt from
+        // the persisted documents on every call, so the in-memory invertedTags
+        // Set is the only thing that survives a re-derivation. An inverted tag
+        // simply flips `positive` — the roll math, chat grouping and the
+        // colour/thumb rendering all follow from that one flag; `inverted`
+        // only drives the visual "this was flipped" marker.
+        this.selectedTags.forEach(tag => {
+            if (tag.weakness || tag.powerTag) {
+                tag.tagKey = DiceRollApp.getTagKey(tag);
+                // burn wins over a stale inversion: the toggle refuses burning
+                // tags, but the tag can be marked to burn on the sheet while
+                // the dialog is open — it would then be spent for a penalty
+                tag.inverted = this.invertedTags.has(tag.tagKey) && !tag.toBurn;
+                if (tag.inverted) {
+                    tag.positive = !tag.positive;
+                }
+            }
+        });
+
+        // an inversion changes polarity after the initial sort — restore the
+        // positive-first, alphabetical order the dialog relies on
+        this.selectedTags.sort((a, b) => {
+            if (a.positive === b.positive) {
+                return a.name.localeCompare(b.name);
+            }
+            return a.positive ? -1 : 1;
+        });
 
     }
 
@@ -557,14 +612,19 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                     await item.update({ 'system.powertags': powertags });
                 }
 
-                if (item.system.weaknesstags && item.system.weaknesstags.length > 0) {
-                    for (const tag of item.system.weaknesstags) {
-                        if (tag.selected && item.system.improve < 3 && !alreadyImprovedThemebooks.includes(item.id)) {
-                            alreadyImprovedThemebooks.push(item.id);
-                            await item.update({ 'system.improve': item.system.improve + 1 });
-                        }
-                    }
+                // improvement is earned by invoking a tag from this themebook as
+                // hindering (#35): a Weakness used straight, or a Power tag
+                // inverted to count as Weakness for this roll. A Weakness
+                // inverted to help earns nothing. selectedTags carries the
+                // effective (post-inversion) polarity in `positive`.
+                const invokedAsHindering = this.selectedTags.some(t =>
+                    t.themebookId === item.id && (t.weakness || t.powerTag) && !t.positive);
+                if (invokedAsHindering && item.system.improve < 3 && !alreadyImprovedThemebooks.includes(item.id)) {
+                    alreadyImprovedThemebooks.push(item.id);
+                    await item.update({ 'system.improve': item.system.improve + 1 });
+                }
 
+                if (item.system.weaknesstags && item.system.weaknesstags.length > 0) {
                     const weaknesstags = item.system.weaknesstags.map(tag => ({ ...tag, selected: false }));
                     await item.update({ 'system.weaknesstags': weaknesstags });
                 }
@@ -607,13 +667,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                     await actorFellowshipThemecard.update({ 'system.powertags': powertags });
                 }
 
+                // same hindering-earns-improvement rule as themebooks (#35)
+                const themecardInvokedAsHindering = this.selectedTags.some(t =>
+                    t.source === "fellowship-themecard" && (t.weakness || t.powerTag) && !t.positive);
+                if (themecardInvokedAsHindering && actorFellowshipThemecard.system.improve < 3 && !alreadyImprovedThemebooks.includes(actorFellowshipThemecard.id)) {
+                    alreadyImprovedThemebooks.push(actorFellowshipThemecard.id);
+                    await actorFellowshipThemecard.update({ 'system.improve': actorFellowshipThemecard.system.improve + 1 });
+                }
+
                 if (actorFellowshipThemecard.system.weaknesstags) {
-                    for (const tag of actorFellowshipThemecard.system.weaknesstags) {
-                        if (tag.selected && actorFellowshipThemecard.system.improve < 3 && !alreadyImprovedThemebooks.includes(actorFellowshipThemecard.id)) {
-                            alreadyImprovedThemebooks.push(actorFellowshipThemecard.id);
-                            await actorFellowshipThemecard.update({ 'system.improve': actorFellowshipThemecard.system.improve + 1 });
-                        }
-                    }
                     const weaknesstags = actorFellowshipThemecard.system.weaknesstags.map(tag => ({ ...tag, selected: false }));
                     await actorFellowshipThemecard.update({ 'system.weaknesstags': weaknesstags });
                 }
@@ -718,6 +780,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.cancelPendingRequest();
         if (this.pendingHelpReqId) { Collaboration.cancelHelp(this.pendingHelpReqId); this.pendingHelpReqId = null; }
         this.helpingTags = [];
+        this.invertedTags.clear(); // #35: per-roll only, never carries into the next opening
     }
 
     /** Socket callback: a fellow hero contributed a helping tag to this roll. */
@@ -828,6 +891,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.mightScale = 0;
         this.helpingTags = [];
         this.pendingHelpReqId = null;
+        this.invertedTags.clear(); // #35: the inversion only applied to this roll
 
         this.resetTags();
         this.close();
@@ -880,6 +944,32 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.updateTagsAndStatuses(true);
     }
 
+    /**
+     * #35: toggle a Weakness tag to count as Power — or a Power tag to count as
+     * Weakness — for this roll only (Narrator discretion). Purely in-memory on
+     * this dialog instance — nothing is written to the actor.
+     * updateTagsAndStatuses() re-derives selectedTags from the persisted
+     * documents, and prepareTags() re-applies this Set to the freshly derived
+     * entries, so the toggle survives that re-derivation.
+     */
+    static async #handleToggleTagInversion(event, target) {
+        const key = target.dataset.tagKey;
+        if (!key) return;
+        const tag = this.selectedTags.find(t => t.tagKey === key);
+        // a tag marked to burn still gets burned after the roll — letting it
+        // also count as a Weakness would spend the resource for a penalty
+        if (tag?.toBurn && !this.invertedTags.has(key)) {
+            ui.notifications.warn(game.i18n.localize("MIST_ENGINE.ROLL.CannotInvertBurningTag"));
+            return;
+        }
+        if (this.invertedTags.has(key)) {
+            this.invertedTags.delete(key);
+        } else {
+            this.invertedTags.add(key);
+        }
+        this.updateTagsAndStatuses(true);
+    }
+
     static async #handleClickDeselectTag(event, target) {
         const index = parseInt(target.dataset.index);
 
@@ -889,6 +979,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             return;
         }
         else {
+            // an explicit deselect withdraws the per-roll inversion too — otherwise a
+            // later reselect would silently come back inverted
+            if (tagToDeselect.tagKey) {
+                this.invertedTags.delete(tagToDeselect.tagKey);
+            }
             // we check if this is a power tag or weakness tag from a themebook and if a themebook id is provided
             if (tagToDeselect.source === null && tagToDeselect.themebookId) {
                 if (tagToDeselect.weakness) {

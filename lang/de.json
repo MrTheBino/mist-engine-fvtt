@@ -265,6 +265,12 @@
             "Mods": "Modifikatoren",
             "Might": "Macht"
         },
+        "ROLL": {
+            "ToggleWeaknessAsPower": "Für diesen Wurf als Power zählen (Entscheidung des Spielleiters)",
+            "TogglePowerAsWeakness": "Für diesen Wurf als Schwäche zählen (Entscheidung des Spielleiters)",
+            "InvertedTagHint": "Für diesen Wurf invertiert (Entscheidung des Spielleiters)",
+            "CannotInvertBurningTag": "Ein zum Verbrennen markiertes Tag kann für diesen Wurf nicht invertiert werden."
+        },
         "LABELS": {
             "JourneyConsequences": "Vignetten & Konsequenzen",
             "Milestone": "Meilenstein",

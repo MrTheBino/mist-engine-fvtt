@@ -382,6 +382,12 @@
       "Mods": "Mods",
       "Might": "Might"
     },
+    "ROLL": {
+      "ToggleWeaknessAsPower": "Count as Power for this roll (Narrator's call)",
+      "TogglePowerAsWeakness": "Count as Weakness for this roll (Narrator's call)",
+      "InvertedTagHint": "Inverted for this roll (Narrator's call)",
+      "CannotInvertBurningTag": "A tag marked to burn cannot be inverted for this roll."
+    },
     "LABELS": {
       "Options": "Options",
       "DragCardHint": "Drag to reorder or move between tabs",
