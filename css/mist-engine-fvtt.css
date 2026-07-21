@@ -369,7 +369,8 @@ body {
 .tab-notes mark.tag.green {
   background: linear-gradient(to bottom, transparent 20%, rgb(188, 205, 175) 21%, rgb(188, 205, 175) 90%, transparent 91%);
 }
-.editor-content mark.weakness, .editor-content mark.tag.orange,
+.editor-content mark.status.negative, .editor-content mark.weakness, .editor-content mark.tag.orange,
+.tab-notes mark.status.negative,
 .tab-notes mark.weakness,
 .tab-notes mark.tag.orange {
   background: linear-gradient(to bottom, transparent 20%, rgb(236, 186, 133) 21%, rgb(236, 186, 133) 90%, transparent 91%);
@@ -665,7 +666,7 @@ body {
 .journal-entry-content mark.status, .journal-entry-content mark.tag.green {
   background: linear-gradient(to bottom, transparent 20%, rgb(188, 205, 175) 21%, rgb(188, 205, 175) 90%, transparent 91%);
 }
-.journal-entry-content mark.weakness, .journal-entry-content mark.tag.orange {
+.journal-entry-content mark.status.negative, .journal-entry-content mark.weakness, .journal-entry-content mark.tag.orange {
   background: linear-gradient(to bottom, transparent 20%, rgb(236, 186, 133) 21%, rgb(236, 186, 133) 90%, transparent 91%);
 }
 .journal-entry-content mark.limit, .journal-entry-content mark.tag.red {
@@ -1654,7 +1655,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine #tooltip mark.status, .mist-engine #tooltip mark.tag.green {
   background: linear-gradient(to bottom, transparent 20%, rgb(188, 205, 175) 21%, rgb(188, 205, 175) 90%, transparent 91%);
 }
-.mist-engine #tooltip mark.weakness, .mist-engine #tooltip mark.tag.orange {
+.mist-engine #tooltip mark.status.negative, .mist-engine #tooltip mark.weakness, .mist-engine #tooltip mark.tag.orange {
   background: linear-gradient(to bottom, transparent 20%, rgb(236, 186, 133) 21%, rgb(236, 186, 133) 90%, transparent 91%);
 }
 .mist-engine #tooltip mark.limit, .mist-engine #tooltip mark.tag.red {
@@ -2340,6 +2341,11 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .fts-input-name.negative {
   background-color: rgb(236, 186, 133);
 }
+.mist-engine .fts-input-name.status.negative {
+  background-color: rgb(236, 186, 133);
+  border: 1px solid rgba(100, 55, 8, 0.55);
+  box-shadow: inset 0 1px 2px rgba(255, 205, 90, 0.12), inset 0 -1px 2px rgba(60, 30, 5, 0.15);
+}
 .mist-engine .fts-input-value {
   flex-shrink: 2;
 }
@@ -2774,7 +2780,7 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine mark.status, .mist-engine mark.tag.green {
   background: linear-gradient(to bottom, transparent 20%, rgb(188, 205, 175) 21%, rgb(188, 205, 175) 90%, transparent 91%);
 }
-.mist-engine mark.weakness, .mist-engine mark.tag.orange {
+.mist-engine mark.status.negative, .mist-engine mark.weakness, .mist-engine mark.tag.orange {
   background: linear-gradient(to bottom, transparent 20%, rgb(236, 186, 133) 21%, rgb(236, 186, 133) 90%, transparent 91%);
 }
 .mist-engine mark.limit, .mist-engine mark.tag.red {
@@ -3529,7 +3535,7 @@ article.cc-enriched section.journal-entry-content {
 .message-content mark.status, .message-content mark.tag.green {
   background: linear-gradient(to bottom, transparent 20%, rgb(188, 205, 175) 21%, rgb(188, 205, 175) 90%, transparent 91%);
 }
-.message-content mark.weakness, .message-content mark.tag.orange {
+.message-content mark.status.negative, .message-content mark.weakness, .message-content mark.tag.orange {
   background: linear-gradient(to bottom, transparent 20%, rgb(236, 186, 133) 21%, rgb(236, 186, 133) 90%, transparent 91%);
 }
 .message-content mark.limit, .message-content mark.tag.red {
@@ -3798,6 +3804,9 @@ article.cc-enriched section.journal-entry-content {
 }
 .roll-dialog-container .selected-tags-container .status.positive {
   background-color: rgb(188, 205, 175);
+}
+.roll-dialog-container .selected-tags-container .status.negative {
+  background-color: rgb(236, 186, 133);
 }
 .roll-dialog-container .selected-tags-container .tag-icon {
   float: left;
@@ -4194,7 +4203,7 @@ article.cc-enriched section.journal-entry-content {
 .scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.status, .scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.tag.green {
   background: linear-gradient(to bottom, transparent 20%, rgb(188, 205, 175) 21%, rgb(188, 205, 175) 90%, transparent 91%);
 }
-.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.weakness, .scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.tag.orange {
+.scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.status.negative, .scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.weakness, .scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.tag.orange {
   background: linear-gradient(to bottom, transparent 20%, rgb(236, 186, 133) 21%, rgb(236, 186, 133) 90%, transparent 91%);
 }
 .scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.limit, .scene-app .scene-story-themes .scene-story-theme .scene-story-theme-tags mark.tag.red {

@@ -19,6 +19,7 @@
       background: linear-gradient(to bottom, transparent 20%, $c-tag-green 21%, $c-tag-green 90%, transparent 91%);
     }
 
+    &.status.negative,
     &.weakness,
     &.tag.orange {
       background: linear-gradient(to bottom, transparent 20%, $c-tag-orange 21%, $c-tag-orange 90%, transparent 91%);
