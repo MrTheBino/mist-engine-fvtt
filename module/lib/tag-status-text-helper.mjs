@@ -4,6 +4,8 @@
 // [/w weakness] - a weakness tag
 // [status-X] - a status with a tier of X (1-6)
 // [/s status] - a status without a tier, used in a journal for example
+// [/sn status] - a negative status without a tier
+// [/sn status-X] - a negative status with a tier of X (1-6), counted as -X in rolls
 // [/l limit] - a limit without a value, used in a journal for example
 // [/l limit-X] - a limit with the value X (1-6)
 
@@ -18,6 +20,7 @@ const MIGHT = 3;
 const BOLD = 4;
 const LIMIT = 5;
 const WEAKNESS = 6;
+const NEGATIVE_STATUS = 7;
 
 /**
  * Convert raw text with above markup tokens to text with HTML mark elements
@@ -101,8 +104,13 @@ export function makeStyledTagOrStatusText(markup) {
   let isOfType = TAG; // type is TAG by default
   let extraIcon = ""; // No extra icon prefix
 
-  // status
-  if (markup.includes("/s")) {
+  // negative status - checked before the plain status token since "/sn" also
+  // contains the substring "/s" and would otherwise be caught by that check
+  if (markup.includes("/sn")) {
+    isOfType = NEGATIVE_STATUS;
+    markup = markup.replace("/sn", "");
+  } else if (markup.includes("/s")) {
+    // status
     isOfType = STATUS;
     markup = markup.replace("/s", "");
   }
@@ -155,6 +163,8 @@ export function makeStyledTagOrStatusText(markup) {
     const name = markup.trim();
     if (isOfType === STATUS) {
       return `<mark class="draggable status" draggable="true" data-type="status" data-name="${name}" data-value="0">${name}</mark>`;
+    } else if (isOfType === NEGATIVE_STATUS) {
+      return `<mark class="draggable status negative" draggable="true" data-type="status" data-positive="false" data-name="${name}" data-value="0">${name}</mark>`;
     } else if (isOfType === WEAKNESS) {
       return `<mark class="draggable weakness" draggable="true" data-type="weakness" data-name="${name}">${extraIcon}${name}</mark>`;
     } else if (isOfType === LIMIT) {
@@ -172,6 +182,8 @@ export function makeStyledTagOrStatusText(markup) {
     const name = markup.substring(0, markup.lastIndexOf("-")).trim();
     if (isOfType === LIMIT) {
       return `<div class="limit-inline"><mark class="draggable limit" draggable="true" data-type="limit" data-name="${name}" data-value="${value}">${name}</mark><span class="limit-value">${value}</span></div>`;
+    } else if (isOfType === NEGATIVE_STATUS) {
+      return `<mark class="draggable status negative" draggable="true" data-type="status" data-positive="false" data-name="${name}" data-value="${value}">${name}-${value}</mark>`;
     } else {
       return `<mark class="draggable status" draggable="true" data-type="status" data-name="${name}" data-value="${value}">${name}-${value}</mark>`;
     }
