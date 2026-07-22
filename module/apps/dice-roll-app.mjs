@@ -31,6 +31,22 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.helpingTags = [];
         this.pendingHelpReqId = null;
 
+        // Per-roll tag inversion (#35, Narrator discretion, Core Book): a Weakness
+        // may count as Power and a Power tag as Weakness, for this roll only.
+        // In-memory only, never persisted to the actor: a Set of tagKey
+        // strings (see getTagKey), re-applied to freshly derived tags in
+        // prepareTags() and cleared on roll execution, actor change and close.
+        this.invertedTags = new Set();
+
+        // Per-roll Challenge/Scene-Story polarity inversion (#104): lets a positive
+        // challenge status (e.g. swift-4) be applied AGAINST the roll as -4 without
+        // editing the challenge (or scene) document. In-memory only: a Set of
+        // challengeEntryKey strings (see getChallengeEntryKey), re-applied to
+        // freshly derived entries in prepareChallengeTags()/prepareSceneAndStoryTags()
+        // and cleared on roll execution, actor change and close (same lifecycle as
+        // invertedTags above).
+        this.invertedChallengeEntries = new Set();
+
         DiceRollApp.instance = this;
     }
 
@@ -60,7 +76,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             clickTagStatusModifierToggle: this.#handleTagStatusModifierToggle,
             clickCancelConfirmation: this.#handleClickCancelConfirmation,
             clickRequestHelp: this.#handleRequestHelp,
-            clickRemoveHelpingTag: this.#handleRemoveHelpingTag
+            clickRemoveHelpingTag: this.#handleRemoveHelpingTag,
+            clickToggleTagInversion: this.#handleToggleTagInversion,
+            clickToggleChallengeInversion: this.#handleToggleChallengeInversion
         },
     };
 
@@ -74,6 +92,12 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     setOptions(options) {
         if (options.actor) {
+            // a per-roll tag/Challenge inversion is scoped to the actor it was
+            // granted for; switching actors on this (singleton) dialog must not carry it over
+            if (this.actor?.id !== options.actor.id) {
+                this.invertedTags.clear();
+                this.invertedChallengeEntries.clear();
+            }
             this.actor = options.actor;
         }
         if (options.type) {
@@ -101,8 +125,43 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.prepareGMTags();
         this.prepareSceneAndStoryTags();
         this.prepareChallengeTags();
+        this.pruneInvertedChallengeEntries(); // #104: drop keys this pass didn't re-derive
         if (renderFlag == true && this.rendered) {
             this.render(true, { focus: true })
+        }
+    }
+
+    /**
+     * #104: after every re-derivation, drop any invertedChallengeEntries key
+     * that wasn't matched by a currently-derived challenge/scene-story entry
+     * THIS pass. An entry that's still present keeps its inversion (an
+     * unrelated toggle elsewhere must not reset a live inversion — same
+     * guarantee #35 gives Weakness inversion); an entry that's vanished loses
+     * its key so it can never resurrect on a later derivation. This is what
+     * actually fixes:
+     *  - a GM deleting/editing the underlying tag/status while the dialog is
+     *    open (an index shift must not silently invert whatever slides into
+     *    that now-stale slot — the strengthened key in getChallengeEntryKey is
+     *    a second line of defense for the same problem, this is the primary
+     *    fix);
+     *  - deselect-then-reselect resurrection (deselecting drops the entry from
+     *    this pass entirely, since prepareChallengeTags/prepareSceneAndStoryTags
+     *    only include `selected` entries — its key gets pruned here, so
+     *    reselecting later derives it fresh, not inverted);
+     *  - a scene switch leaving a stale key that could otherwise collide with
+     *    the new scene's array at the same index.
+     * Deliberately scoped to challenge/scene-story entries only — NOT applied
+     * to invertedTags (#35), which is a separate, already-shipped branch;
+     * see the PR draft/report for why the same latent issue there is left as a
+     * follow-up rather than fixed on this branch.
+     */
+    pruneInvertedChallengeEntries() {
+        const liveKeys = new Set([
+            ...this.challengeTags.map(t => t.challengeEntryKey).filter(Boolean),
+            ...this.selectedStoryTags.map(t => t.challengeEntryKey).filter(Boolean)
+        ]);
+        for (const key of Array.from(this.invertedChallengeEntries)) {
+            if (!liveKeys.has(key)) this.invertedChallengeEntries.delete(key);
         }
     }
 
@@ -229,9 +288,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     prepareSceneAndStoryTags() {
         const sceneApp = MistSceneApp.instance;
         if (!sceneApp) return;
-        sceneApp.getSceneAndStoryTags().forEach(element => {
+        sceneApp.getSceneAndStoryTags().forEach((element, index) => {
             if (element.selected) {
-                this.selectedStoryTags.push({ name: element.name, positive: element.positive, source: "scene-and-story", value: element.value, might: element.might, mightIcon: element.mightIcon });
+                let t = { name: element.name, positive: element.positive, source: "scene-and-story", value: element.value, index, sceneDataItemId: sceneApp.currentSceneDataItem?.id, might: element.might, mightIcon: element.mightIcon };
+                // #104: only scene/story STATUSES (value > 0) can be inverted for this
+                // roll — a plain scene/story tag has no "count against instead" reading.
+                if (element.value > 0) {
+                    DiceRollApp.applyChallengeInversion(t, this.invertedChallengeEntries);
+                }
+                this.selectedStoryTags.push(t);
             }
         });
     }
@@ -241,7 +306,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (!sceneApp) return;
         sceneApp.getCombinedSelectedNPCTags().forEach(element => {
             if (element.selected) {
-                let t = { name: element.name, positive: element.positive, source: "npc", value: element.value, actorId: element.actorId, might: element.might, mightIcon: element.mightIcon };
+                let t = { name: element.name, positive: element.positive, source: "npc", value: element.value, actorId: element.actorId, index: element.index, might: element.might, mightIcon: element.mightIcon };
+                // #104: a challenge's status/tag can be applied against the roll for
+                // this roll only, without editing the challenge document.
+                DiceRollApp.applyChallengeInversion(t, this.invertedChallengeEntries);
                 this.challengeTags.push(t);
             }
         });
@@ -253,6 +321,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         let burnUsed = false; // only one tag may burn for +3 (#92)
 
         tagsForRoll.forEach(element => {
+            // #35: per-roll inversions are already baked into `positive` by
+            // prepareTags(), so no special-casing is needed here.
 
             if (element.value === undefined || element.value == 0) {
                 if (element.positive) {
@@ -381,6 +451,61 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return tagsForRole;
     }
 
+    /**
+     * Stable identity for an invertible tag entry (Power or Weakness), used as
+     * the key for the per-roll `invertedTags` Set (#35). Themebook tags are keyed
+     * by their themebook item id + tag index; the fellowship themecard has no
+     * themebookId, so its `source` stands in for it. Power and weakness indices
+     * overlap, so the tag kind is part of the key. Both index schemes are
+     * 0-based per-item indices assigned in getPreparedTagsAndStatusesForRoll.
+     */
+    static getTagKey(tag) {
+        return `${tag.themebookId ?? tag.source ?? "na"}:${tag.weakness ? "w" : "p"}:${tag.index}`;
+    }
+
+    /**
+     * Stable-ish identity for a Challenge/Scene-Story entry, used as the key for
+     * the per-roll `invertedChallengeEntries` Set (#104). NPC challenge entries
+     * are keyed by actor id + their index within that actor's
+     * floatingTagsAndStatuses (see MistSceneApp.getCombinedSelectedNPCTags);
+     * scene/story entries are keyed by the scene data item's own id (via
+     * `sceneDataItemId`, so a scene switch never collides with a different
+     * scene's array at the same index) + their index within it (see
+     * prepareSceneAndStoryTags).
+     *
+     * The NAME is included as a defense-in-depth measure, not the primary
+     * identity: index alone is only stable while the underlying array doesn't
+     * shift. If the GM deletes an earlier entry while the dialog is open, a
+     * later entry can slide into a stale index — including the name means that
+     * shift changes the key too, so the stale key matches nothing (the
+     * inversion is silently lost) rather than silently reattaching to the
+     * wrong entry (wrong roll math). Same-named entries on the same owner stay
+     * distinct via index. This is belt-and-suspenders: prepareChallengeTags()/
+     * prepareSceneAndStoryTags() also prune any key that goes unmatched after
+     * every derivation (see pruneInvertedChallengeEntries), which is the actual
+     * fix for the deletion-shift and deselect/reselect-resurrection cases.
+     */
+    static getChallengeEntryKey(entry) {
+        const ownerId = entry.actorId ?? entry.sceneDataItemId ?? "na";
+        return `${entry.source ?? "na"}:${ownerId}:${entry.index}:${entry.name ?? ""}`;
+    }
+
+    /**
+     * #104: apply a pending per-roll inversion to a freshly built Challenge/Scene-
+     * Story entry — flips its polarity so it competes in the opposite bucket in
+     * applyRulesToSelectedTags (e.g. a positive swift-4 status becomes a -4
+     * negative status), without touching the persisted document. Mutates `entry`
+     * in place and stamps `challengeEntryKey` on it either way, so the dialog
+     * template always has a key to toggle against.
+     */
+    static applyChallengeInversion(entry, invertedChallengeEntries) {
+        entry.challengeEntryKey = DiceRollApp.getChallengeEntryKey(entry);
+        if (invertedChallengeEntries.has(entry.challengeEntryKey)) {
+            entry.positive = !entry.positive;
+            entry.challengeInverted = true;
+        }
+    }
+
     static getPreparedTagsAndStatusesForRoll(actor) {
         let selectedTags = [];
         if (!actor || (actor.type !== "character" && actor.type !== "litm-character")) {
@@ -413,7 +538,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 if(item.system.powertags){
                     item.system.powertags.forEach((tag, i) => {
                         if (tag.selected) {
-                            selectedTags.push({ name: tag.name, positive: true, toBurn: tag.toBurn, index: i, themebookId: item.id, source: null });
+                            selectedTags.push({ name: tag.name, positive: true, powerTag: true, toBurn: tag.toBurn, index: i, themebookId: item.id, source: null });
                         }
                     });
                 }
@@ -443,7 +568,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 if (actorFellowshipThemecard.system.powertags) {
                     actorFellowshipThemecard.system.powertags.forEach((tag, i) => {
                         if (tag.selected) {
-                            selectedTags.push({ name: tag.name, positive: true, toBurn: tag.toBurn, index: i, source: "fellowship-themecard" });
+                            selectedTags.push({ name: tag.name, positive: true, powerTag: true, toBurn: tag.toBurn, index: i, source: "fellowship-themecard" });
                         }
                     });
                 }
@@ -487,6 +612,34 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     prepareTags() {
 
         this.selectedTags = DiceRollApp.getPreparedTagsAndStatusesForRoll(this.actor);
+
+        // re-apply any per-roll tag inversion (#35): this array is rebuilt from
+        // the persisted documents on every call, so the in-memory invertedTags
+        // Set is the only thing that survives a re-derivation. An inverted tag
+        // simply flips `positive` — the roll math, chat grouping and the
+        // colour/thumb rendering all follow from that one flag; `inverted`
+        // only drives the visual "this was flipped" marker.
+        this.selectedTags.forEach(tag => {
+            if (tag.weakness || tag.powerTag) {
+                tag.tagKey = DiceRollApp.getTagKey(tag);
+                // burn wins over a stale inversion: the toggle refuses burning
+                // tags, but the tag can be marked to burn on the sheet while
+                // the dialog is open — it would then be spent for a penalty
+                tag.inverted = this.invertedTags.has(tag.tagKey) && !tag.toBurn;
+                if (tag.inverted) {
+                    tag.positive = !tag.positive;
+                }
+            }
+        });
+
+        // an inversion changes polarity after the initial sort — restore the
+        // positive-first, alphabetical order the dialog relies on
+        this.selectedTags.sort((a, b) => {
+            if (a.positive === b.positive) {
+                return a.name.localeCompare(b.name);
+            }
+            return a.positive ? -1 : 1;
+        });
 
     }
 
@@ -557,14 +710,19 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                     await item.update({ 'system.powertags': powertags });
                 }
 
-                if (item.system.weaknesstags && item.system.weaknesstags.length > 0) {
-                    for (const tag of item.system.weaknesstags) {
-                        if (tag.selected && item.system.improve < 3 && !alreadyImprovedThemebooks.includes(item.id)) {
-                            alreadyImprovedThemebooks.push(item.id);
-                            await item.update({ 'system.improve': item.system.improve + 1 });
-                        }
-                    }
+                // improvement is earned by invoking a tag from this themebook as
+                // hindering (#35): a Weakness used straight, or a Power tag
+                // inverted to count as Weakness for this roll. A Weakness
+                // inverted to help earns nothing. selectedTags carries the
+                // effective (post-inversion) polarity in `positive`.
+                const invokedAsHindering = this.selectedTags.some(t =>
+                    t.themebookId === item.id && (t.weakness || t.powerTag) && !t.positive);
+                if (invokedAsHindering && item.system.improve < 3 && !alreadyImprovedThemebooks.includes(item.id)) {
+                    alreadyImprovedThemebooks.push(item.id);
+                    await item.update({ 'system.improve': item.system.improve + 1 });
+                }
 
+                if (item.system.weaknesstags && item.system.weaknesstags.length > 0) {
                     const weaknesstags = item.system.weaknesstags.map(tag => ({ ...tag, selected: false }));
                     await item.update({ 'system.weaknesstags': weaknesstags });
                 }
@@ -607,13 +765,15 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                     await actorFellowshipThemecard.update({ 'system.powertags': powertags });
                 }
 
+                // same hindering-earns-improvement rule as themebooks (#35)
+                const themecardInvokedAsHindering = this.selectedTags.some(t =>
+                    t.source === "fellowship-themecard" && (t.weakness || t.powerTag) && !t.positive);
+                if (themecardInvokedAsHindering && actorFellowshipThemecard.system.improve < 3 && !alreadyImprovedThemebooks.includes(actorFellowshipThemecard.id)) {
+                    alreadyImprovedThemebooks.push(actorFellowshipThemecard.id);
+                    await actorFellowshipThemecard.update({ 'system.improve': actorFellowshipThemecard.system.improve + 1 });
+                }
+
                 if (actorFellowshipThemecard.system.weaknesstags) {
-                    for (const tag of actorFellowshipThemecard.system.weaknesstags) {
-                        if (tag.selected && actorFellowshipThemecard.system.improve < 3 && !alreadyImprovedThemebooks.includes(actorFellowshipThemecard.id)) {
-                            alreadyImprovedThemebooks.push(actorFellowshipThemecard.id);
-                            await actorFellowshipThemecard.update({ 'system.improve': actorFellowshipThemecard.system.improve + 1 });
-                        }
-                    }
                     const weaknesstags = actorFellowshipThemecard.system.weaknesstags.map(tag => ({ ...tag, selected: false }));
                     await actorFellowshipThemecard.update({ 'system.weaknesstags': weaknesstags });
                 }
@@ -718,6 +878,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.cancelPendingRequest();
         if (this.pendingHelpReqId) { Collaboration.cancelHelp(this.pendingHelpReqId); this.pendingHelpReqId = null; }
         this.helpingTags = [];
+        this.invertedTags.clear(); // #35: per-roll only, never carries into the next opening
+        this.invertedChallengeEntries.clear(); // #104: per-roll only, never carries into the next opening
     }
 
     /** Socket callback: a fellow hero contributed a helping tag to this roll. */
@@ -828,6 +990,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.mightScale = 0;
         this.helpingTags = [];
         this.pendingHelpReqId = null;
+        this.invertedTags.clear(); // #35: the inversion only applied to this roll
+        this.invertedChallengeEntries.clear(); // #104: the inversion only applied to this roll
 
         this.resetTags();
         this.close();
@@ -880,6 +1044,52 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.updateTagsAndStatuses(true);
     }
 
+    /**
+     * #35: toggle a Weakness tag to count as Power — or a Power tag to count as
+     * Weakness — for this roll only (Narrator discretion). Purely in-memory on
+     * this dialog instance — nothing is written to the actor.
+     * updateTagsAndStatuses() re-derives selectedTags from the persisted
+     * documents, and prepareTags() re-applies this Set to the freshly derived
+     * entries, so the toggle survives that re-derivation.
+     */
+    static async #handleToggleTagInversion(event, target) {
+        const key = target.dataset.tagKey;
+        if (!key) return;
+        const tag = this.selectedTags.find(t => t.tagKey === key);
+        // a tag marked to burn still gets burned after the roll — letting it
+        // also count as a Weakness would spend the resource for a penalty
+        if (tag?.toBurn && !this.invertedTags.has(key)) {
+            ui.notifications.warn(game.i18n.localize("MIST_ENGINE.ROLL.CannotInvertBurningTag"));
+            return;
+        }
+        if (this.invertedTags.has(key)) {
+            this.invertedTags.delete(key);
+        } else {
+            this.invertedTags.add(key);
+        }
+        this.updateTagsAndStatuses(true);
+    }
+
+    /**
+     * #104: toggle a Challenge/Scene-Story entry's polarity for this roll only
+     * (Narrator discretion) — e.g. a challenge's positive swift-4 status is applied
+     * as -4 against the roll — without editing the challenge or scene document.
+     * Purely in-memory on this dialog instance. updateTagsAndStatuses() re-derives
+     * challengeTags/selectedStoryTags from the persisted documents, and
+     * prepareChallengeTags()/prepareSceneAndStoryTags() re-apply this Set to the
+     * freshly derived entries, so the toggle survives that re-derivation.
+     */
+    static async #handleToggleChallengeInversion(event, target) {
+        const key = target.dataset.challengeKey;
+        if (!key) return;
+        if (this.invertedChallengeEntries.has(key)) {
+            this.invertedChallengeEntries.delete(key);
+        } else {
+            this.invertedChallengeEntries.add(key);
+        }
+        this.updateTagsAndStatuses(true);
+    }
+
     static async #handleClickDeselectTag(event, target) {
         const index = parseInt(target.dataset.index);
 
@@ -889,6 +1099,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             return;
         }
         else {
+            // an explicit deselect withdraws the per-roll inversion too — otherwise a
+            // later reselect would silently come back inverted
+            if (tagToDeselect.tagKey) {
+                this.invertedTags.delete(tagToDeselect.tagKey);
+            }
             // we check if this is a power tag or weakness tag from a themebook and if a themebook id is provided
             if (tagToDeselect.source === null && tagToDeselect.themebookId) {
                 if (tagToDeselect.weakness) {

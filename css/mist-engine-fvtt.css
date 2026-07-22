@@ -3607,6 +3607,10 @@ article.cc-enriched section.journal-entry-content {
   background-color: rgb(236, 186, 133);
   color: black;
 }
+.message-content .selected-tags .tag.inverted-tag, .message-content .selected-tags .tag.inverted-challenge {
+  outline: 2px dashed #724a32;
+  outline-offset: -2px;
+}
 
 .consequence-container {
   padding-top: 5px;
@@ -3787,6 +3791,10 @@ article.cc-enriched section.journal-entry-content {
 }
 .roll-dialog-container .selected-tags-container .tag.clickable {
   cursor: pointer;
+}
+.roll-dialog-container .selected-tags-container .tag.inverted-tag, .roll-dialog-container .selected-tags-container .tag.inverted-challenge {
+  outline: 2px dashed #724a32;
+  outline-offset: -2px;
 }
 .roll-dialog-container .selected-tags-container .status.positive {
   background-color: rgb(188, 205, 175);

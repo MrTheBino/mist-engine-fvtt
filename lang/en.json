@@ -382,6 +382,14 @@
       "Mods": "Mods",
       "Might": "Might"
     },
+    "ROLL": {
+      "ToggleWeaknessAsPower": "Count as Power for this roll (Narrator's call)",
+      "TogglePowerAsWeakness": "Count as Weakness for this roll (Narrator's call)",
+      "InvertedTagHint": "Inverted for this roll (Narrator's call)",
+      "CannotInvertBurningTag": "A tag marked to burn cannot be inverted for this roll.",
+      "ToggleChallengeInversion": "Invert for this roll only (Narrator's call)",
+      "InvertedChallengeSuffix": "inverted"
+    },
     "LABELS": {
       "Options": "Options",
       "DragCardHint": "Drag to reorder or move between tabs",
@@ -413,6 +421,7 @@
       "Name": "Name",
       "Value": "Value",
       "Symbol": "Symbol",
+      "CreateAsNegative": "Create as negative",
       "Challenges": "Challenges",
       "Characters": "Characters",
       "NoCharactersInScene": "No characters found. Place character actors on the current scene to see them here.",

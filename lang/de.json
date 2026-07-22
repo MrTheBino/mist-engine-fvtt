@@ -265,6 +265,14 @@
             "Mods": "Modifikatoren",
             "Might": "Macht"
         },
+        "ROLL": {
+            "ToggleWeaknessAsPower": "Für diesen Wurf als Power zählen (Entscheidung des Spielleiters)",
+            "TogglePowerAsWeakness": "Für diesen Wurf als Schwäche zählen (Entscheidung des Spielleiters)",
+            "InvertedTagHint": "Für diesen Wurf invertiert (Entscheidung des Spielleiters)",
+            "CannotInvertBurningTag": "Ein zum Verbrennen markiertes Tag kann für diesen Wurf nicht invertiert werden.",
+            "ToggleChallengeInversion": "Nur für diesen Wurf umkehren (Entscheidung des Spielleiters)",
+            "InvertedChallengeSuffix": "umgekehrt"
+        },
         "LABELS": {
             "JourneyConsequences": "Vignetten & Konsequenzen",
             "Milestone": "Meilenstein",
@@ -280,6 +288,7 @@
             "Name": "Name",
             "Value": "Wert",
             "Symbol": "Symbol",
+            "CreateAsNegative": "Als negativ erstellen",
             "NoCharactersInScene": "Keine Charaktere gefunden. Platziere Charakter-Akteure auf der aktuellen Szene, um sie hier zu sehen.",
             "NoChallengesInScene": "Keine Herausforderungen gefunden. Platziere Herausforderungs-Akteure auf der aktuellen Szene, um sie hier zu sehen.",
             "Actor": {

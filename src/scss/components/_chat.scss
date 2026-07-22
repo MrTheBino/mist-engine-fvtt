@@ -28,6 +28,17 @@
                 background-color: $c-tag-orange;
                 color: black;
             }
+
+            // #35: a tag the roller flipped for this roll (Weakness as Power or
+            // Power as Weakness) — it renders with the flipped colour, so a
+            // dashed ring is the only clue it isn't a native tag of that kind
+            // #104: same treatment for a Challenge/Scene-Story entry flipped
+            // against the roll for this roll only
+            &.inverted-tag,
+            &.inverted-challenge {
+                outline: 2px dashed $c-brown;
+                outline-offset: -2px;
+            }
         }
     }
 }
