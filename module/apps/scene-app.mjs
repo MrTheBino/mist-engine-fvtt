@@ -366,10 +366,16 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.currentSceneName = this.currentSceneName;
         context.isGM = game.user.isGM;
         context.isNotGM = !game.user.isGM;
-        context.hasDiceRollModifiers = this.currentSceneDataItem.system.diceRollTagsStatus.length > 0;
+        // Defensive: on a scene the GM has never opened this app on before, the
+        // scene-data item is created asynchronously (findOrCreateSceneDataItem)
+        // and may not have resolved yet on this very first render. Guard so a
+        // stray null here can't throw mid-_prepareContext and blank the whole
+        // app (not the reporter's bug in #93, but the same failure class).
+        context.hasDiceRollModifiers = (this.currentSceneDataItem?.system.diceRollTagsStatus.length ?? 0) > 0;
         // Display-only sort (issue #28): tags before statuses, persisted array/index untouched.
+        // Same null-guard as above (#93): sortedFloatingView(undefined) yields [].
         context.sortedFloatingTagsAndStatuses = FloatingTagAndStatusAdapter.sortedFloatingView(
-            this.currentSceneDataItem.system.floatingTagsAndStatuses
+            this.currentSceneDataItem?.system.floatingTagsAndStatuses
         );
 
         if (game.user.isGM) {
@@ -447,7 +453,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     async _prepareContextForCharacters() {
         let context = {}
-        const scene = game.scenes.active;
+        const scene = this.getCurrentScene();
         const tokens = scene ? scene.tokens.contents : [];
         context.userIsGM = game.user.isGM;
 
@@ -620,7 +626,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     resolveTargetActor(el) {
         const tokenId = el.dataset.tokenId;
         if (tokenId) {
-            return game.scenes.active?.tokens.get(tokenId)?.actor ?? null;
+            return this.getCurrentScene()?.tokens.get(tokenId)?.actor ?? null;
         }
         return this.getCorrectActor(el.dataset.actorId ?? el.dataset.id);
     }
@@ -630,7 +636,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         if (!actor) return null;
         if (actor.type == "litm-npc") {
             // challenges are not linked, so we need to update the scene's actor
-            const scene = game.scenes.active;
+            const scene = this.getCurrentScene();
             if (!scene) return null;
             const tokens = scene.tokens.contents;
             // match the id of the actor with the id of the token's actor, because the same npc can be used multiple times in the scene
@@ -844,6 +850,22 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         this.sendUpdateHookEvent();
     }
 
+    /**
+     * The Scene document this app instance is currently tracking — kept in
+     * sync with the scene the GM is VIEWING (see sceneChangedHook, driven by
+     * the canvasReady hook), which is not necessarily `game.scenes.active`.
+     * A GM routinely views a scene (e.g. to prep it, or check on it) without
+     * making it the world's "active" scene, so any token-driven read here
+     * (characters, challenges, NPC tag resolution) must go through this
+     * accessor instead of `game.scenes.active` — otherwise it silently scans
+     * whichever scene happens to be active while showing/editing data for a
+     * different one (issue #93).
+     * @returns {Scene|null}
+     */
+    getCurrentScene() {
+        return this.currentSceneId ? (game.scenes.get(this.currentSceneId) ?? null) : null;
+    }
+
     findOrCreateSceneDataItem() {
         this.currentSceneDataItem = null;
 
@@ -924,9 +946,9 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     getCombinedSelectedNPCTags(){
-        // retrieve all npc from the current scene
-        const scene = game.scenes.active;
-        if (!scene) return []; // no active scene -> no npc tags
+        // retrieve all npc from the currently tracked (viewed) scene
+        const scene = this.getCurrentScene();
+        if (!scene) return []; // no tracked scene -> no npc tags
         const tokens = scene.tokens.contents;
         const actors = tokens.map(t => t.actor).filter(a => a && a.type == "litm-npc");
         const uniqueActors = [...new Set(actors)];
@@ -954,7 +976,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         floatingTagsAndStatuses.forEach(t => t.selected = false);
         this.currentSceneDataItem.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
 
-        const scene = game.scenes.active;
+        const scene = this.getCurrentScene();
         if (scene) {
             const actors = scene.tokens.contents.map(t => t.actor).filter(a => a && a.type == "litm-npc");
             const uniqueActors = [...new Set(actors)];
