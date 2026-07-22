@@ -1,3 +1,5 @@
+import { ThemekitSourceSettingsApp } from "../apps/themekit-source-settings-app.mjs";
+
 export function setupConfiguration() {
 
     game.settings.register("mist-engine-fvtt", "systemVersion", {
@@ -62,6 +64,38 @@ export function setupConfiguration() {
         config: true,
         type: Boolean,
         default: false
-    });    
+    });
+
+    // Issue #101: allowlist of compendium pack collection ids that may
+    // supply themekits in ThemekitSelectionApp#getAllThemekits(). Hidden
+    // (config: false) since it's edited through the registerMenu below;
+    // an empty array means "no restriction" (every visible Item pack is
+    // allowed), which is also the default and preserves prior behavior.
+    game.settings.register("mist-engine-fvtt", "themekitSourcePacks", {
+        scope: "world",
+        config: false,
+        type: Array,
+        default: []
+    });
+
+    // Companion toggle to themekitSourcePacks: whether themekits from
+    // in-world items (game.items) are offered in ThemekitSelectionApp.
+    // Hidden (config: false) — edited through the same menu below.
+    // Default true preserves prior behavior (world items always included).
+    game.settings.register("mist-engine-fvtt", "themekitIncludeWorldItems", {
+        scope: "world",
+        config: false,
+        type: Boolean,
+        default: true
+    });
+
+    game.settings.registerMenu("mist-engine-fvtt", "themekitSourcePacksMenu", {
+        name: "MIST_ENGINE.SETTINGS.ThemekitSourcePacks.MenuName",
+        label: "MIST_ENGINE.SETTINGS.ThemekitSourcePacks.MenuLabel",
+        hint: "MIST_ENGINE.SETTINGS.ThemekitSourcePacks.MenuHint",
+        icon: "fa-solid fa-book-atlas",
+        type: ThemekitSourceSettingsApp,
+        restricted: true
+    });
 
 }

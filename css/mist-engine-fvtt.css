@@ -4699,6 +4699,80 @@ article.cc-enriched section.journal-entry-content {
   line-height: 1.5em;
 }
 
+#themekit-source-settings-app > section.window-content {
+  background-image: url("../assets/bg-dark-old-paper-textures.webp");
+  background-repeat: no-repeat;
+  font-family: Labrada, serif;
+  color: var(--litm-color-accent);
+}
+#themekit-source-settings-app > section.window-content .themekit-source-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#themekit-source-settings-app > section.window-content .themekit-source-settings .hint {
+  font-size: 0.9em;
+  font-style: italic;
+  opacity: 0.8;
+  margin: 0;
+}
+#themekit-source-settings-app > section.window-content .themekit-source-settings .themekit-source-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 50vh;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 8px;
+}
+#themekit-source-settings-app > section.window-content .themekit-source-settings .themekit-source-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+#themekit-source-settings-app > section.window-content .themekit-source-settings .themekit-source-group .group-header {
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 0 0 4px;
+  padding-bottom: 2px;
+}
+#themekit-source-settings-app > section.window-content .themekit-source-settings .themekit-source-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#themekit-source-settings-app > section.window-content .themekit-source-settings .themekit-source-entry:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+#themekit-source-settings-app > section.window-content .themekit-source-settings .themekit-source-entry input[type=checkbox] {
+  accent-color: var(--litm-color-accent);
+  cursor: pointer;
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  margin: 0;
+}
+#themekit-source-settings-app > section.window-content .themekit-source-settings .empty-message {
+  font-style: italic;
+  opacity: 0.7;
+  text-align: center;
+  margin: 0;
+}
+#themekit-source-settings-app > section.window-content .themekit-source-settings .dialog-footer {
+  display: flex;
+}
+#themekit-source-settings-app > section.window-content .themekit-source-settings .dialog-footer .roll-button {
+  flex: 1;
+}
+
 #themekit-character-app > section.window-content {
   background-image: url("../assets/bg-dark-old-paper-textures.webp");
   background-repeat: no-repeat;

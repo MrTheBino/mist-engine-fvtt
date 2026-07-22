@@ -27,6 +27,20 @@
       "AssignThemekit": "Assign Themekit",
       "NoThemekitsAvailable": "No themekits available. Create themekit items first."
     },
+    "SETTINGS": {
+      "ThemekitSourcePacks": {
+        "MenuName": "Theme-Kit Source Compendiums",
+        "MenuLabel": "Configure Sources",
+        "MenuHint": "Choose which compendiums — and whether items in the world — may supply themekits in the Themekit selector.",
+        "WindowTitle": "Theme-Kit Sources",
+        "Explanation": "Check the compendiums that should provide themekits in the selector. Leaving none checked — or checking all of them — allows every compendium, including any installed later (default behavior). The world-items checkbox above is independent: it simply toggles whether items in this world are offered.",
+        "WorldSource": "World Compendium",
+        "WorldItemsGroup": "This World",
+        "WorldItemsEntry": "Items in the world (Items directory)",
+        "NoPacksAvailable": "No Item compendiums were found.",
+        "Save": "Save"
+      }
+    },
     "QUESTIONS": {
       "ConfirmDeletionTitle": "Confirm Deletion",
       "ConfirmDeletion": "Are you sure you want to delete this?",
