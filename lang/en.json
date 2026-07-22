@@ -4,6 +4,9 @@
       "UpdatedTo": "Updated to version",
       "DontShowAgain": "Don't show again for this version"
     },
+    "CONTROLS": {
+      "GroupTitle": "Mist Engine Tools"
+    },
     "PROSEMIRROR": {
       "MarkAsTag": "Mark as Tag",
       "MarkAsStatus": "Mark as Status"
@@ -97,6 +100,7 @@
       }
     },
     "SCENE_APP": {
+      "Title": "Scene Tags",
       "NoActiveScene": "The scene tracker needs an active scene. Activate a scene first.",
       "Weaknesses": "Weaknesses (GM)",
       "WeaknessToggleHint": "Click to toggle this weakness as active in the scene",
@@ -110,6 +114,9 @@
       "RemoveStoryTheme": "Remove story theme",
       "OnlyStoryThemes": "Only themebooks flagged as a Story Theme can be added here.",
       "NoStoryThemes": "No story themes yet. Drag a Story Theme from the sidebar or a compendium onto this app to add it to the scene."
+    },
+    "HOW_TO_PLAY": {
+      "Title": "How To Play"
     },
     "MIGHT": {
       "None": "— None —",
@@ -220,7 +227,7 @@
       "WelcomeTitle": "Welcome, Narrator",
       "WelcomeContent": "This tour shows the tools the Mist Engine system adds for you. Most of them live here in the scene controls on the left. Use the arrow keys or the buttons to move through the tour.",
       "ToolsTitle": "Your GM Toolbar",
-      "ToolsContent": "Under the Notes controls you'll find the system's GM apps: the Scene Tracker, Camping & Sojourns, Acting Together and How To Play. We'll look at each one.",
+      "ToolsContent": "Under the Mist Engine controls you'll find the system's GM apps: the Scene Tracker, Camping & Sojourns, Acting Together and How To Play. We'll look at each one.",
       "SceneTrackerTitle": "Scene Tracker",
       "SceneTrackerContent": "Opens the scene's shared story tags, statuses and dice-roll modifiers, plus the characters and challenges present. Tags you add here flow automatically into the players' rolls. It needs an active scene.",
       "CampingTitle": "Camping & Sojourns",

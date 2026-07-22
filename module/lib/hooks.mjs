@@ -309,46 +309,61 @@ export function setupHooks() {
     img.classList.remove("fa-spin");
   });
 
+  // Dedicated top-level toolbar group for the system's own apps (issue #91):
+  // previously these were merged into the core Notes toolbox, which buried
+  // the Scene App (and the other Mist apps) behind an unrelated tool group.
+  // This control has no `layer` and no `onChange`, and every tool is a
+  // `button: true` "fire and forget" opener rather than a selectable tool —
+  // per core's SceneControls#activate (client/applications/ui/scene-
+  // controls.mjs), a control only touches the canvas via its own onChange
+  // calling `canvas.<layer>.activate()`; without one, clicking this group
+  // only changes which tool tray is displayed and leaves whichever canvas
+  // layer (e.g. Token Controls) was active untouched and still interactive.
   Hooks.on("getSceneControlButtons", (controls) => {
-    let sidebarControls = {
-      scene_data_app: {
-        name: "scene_data_app",
-        title: "Scene Tags",
-        icon: "fas fa-scroll",
-        visible: true,
-        onChange: () => MistSceneApp.open(),
-        button: true,
-      },
-      camping_app: {
-        name: "camping_app",
-        title: game.i18n.localize("MIST_ENGINE.CAMPING.Title"),
-        icon: "fas fa-campground",
-        visible: game.user.isGM,
-        onChange: () => CampingApp.openForGM(),
-        button: true,
-      },
-      group_action_app: {
-        name: "group_action_app",
-        title: game.i18n.localize("MIST_ENGINE.COLLAB.GroupTitle"),
-        icon: "fas fa-people-group",
-        visible: game.user.isGM,
-        onChange: () => Collaboration.openGroupAction(),
-        button: true,
-      },
-      how_to_play_app: {
-        name: "how_to_play_app",
-        title: "How To Play",
-        icon: "fas fa-circle-question",
-        visible: true,
-        onChange: () => HowToPlayApp.getInstance().render(true, { focus: true }),
-        button: true,
+    controls["mist-engine"] = {
+      name: "mist-engine",
+      title: game.i18n.localize("MIST_ENGINE.CONTROLS.GroupTitle"),
+      icon: "fas fa-smog",
+      order: 11, // after all core control groups (Notes is order 8 on v14 but 10 on v13, with Regions at 9)
+      tools: {
+        scene_data_app: {
+          name: "scene_data_app",
+          order: 1,
+          title: game.i18n.localize("MIST_ENGINE.SCENE_APP.Title"),
+          icon: "fas fa-scroll",
+          visible: true,
+          onChange: () => MistSceneApp.open(),
+          button: true,
+        },
+        camping_app: {
+          name: "camping_app",
+          order: 2,
+          title: game.i18n.localize("MIST_ENGINE.CAMPING.Title"),
+          icon: "fas fa-campground",
+          visible: game.user.isGM,
+          onChange: () => CampingApp.openForGM(),
+          button: true,
+        },
+        group_action_app: {
+          name: "group_action_app",
+          order: 3,
+          title: game.i18n.localize("MIST_ENGINE.COLLAB.GroupTitle"),
+          icon: "fas fa-people-group",
+          visible: game.user.isGM,
+          onChange: () => Collaboration.openGroupAction(),
+          button: true,
+        },
+        how_to_play_app: {
+          name: "how_to_play_app",
+          order: 4,
+          title: game.i18n.localize("MIST_ENGINE.HOW_TO_PLAY.Title"),
+          icon: "fas fa-circle-question",
+          visible: true,
+          onChange: () => HowToPlayApp.getInstance().render(true, { focus: true }),
+          button: true,
+        },
       },
     };
-
-    controls.notes.tools = foundry.utils.mergeObject(
-      controls.notes.tools,
-      sidebarControls
-    );
   });
 
   Hooks.on("renderItemDirectory", (_app, html) => {

@@ -1,5 +1,8 @@
 {
     "MIST_ENGINE": {
+        "CONTROLS": {
+            "GroupTitle": "Mist-Engine-Werkzeuge"
+        },
         "ACTIONS":{
         "ImportChallengeJSON": "Import-Herausforderung von JSON",
         "ImportShortChallengeVignetteJSON": "Import-Kurz-Herausforderung / Vignette von JSON",
@@ -61,7 +64,7 @@
             "WelcomeTitle": "Willkommen, Spielleiter",
             "WelcomeContent": "Diese Tour zeigt dir die Werkzeuge, die das Mist-Engine-System für dich mitbringt. Die meisten findest du hier in den Szenen-Steuerungen auf der linken Seite. Nutze die Pfeiltasten oder die Buttons, um durch die Tour zu blättern.",
             "ToolsTitle": "Deine Spielleiter-Leiste",
-            "ToolsContent": "Unter den Notizen-Steuerungen liegen die Spielleiter-Apps des Systems: Szenen-Tracker, Lager & Aufenthalte, Gemeinsam handeln und How To Play. Wir schauen uns jede an.",
+            "ToolsContent": "Unter den Mist-Engine-Steuerungen liegen die Spielleiter-Apps des Systems: Szenen-Tracker, Lager & Aufenthalte, Gemeinsam handeln und How To Play. Wir schauen uns jede an.",
             "SceneTrackerTitle": "Szenen-Tracker",
             "SceneTrackerContent": "Öffnet die gemeinsamen Story-Tags, Status und Würfel-Modifikatoren der Szene, dazu die anwesenden Charaktere und Herausforderungen. Tags, die du hier setzt, fließen automatisch in die Würfe der Spieler ein. Benötigt eine aktive Szene.",
             "CampingTitle": "Lager & Aufenthalte",
@@ -119,7 +122,11 @@
             "Rotes": "Rotes"
         },
         "SCENE_APP": {
+            "Title": "Szenen-Tags",
             "NoActiveScene": "Der Szenen-Tracker benötigt eine aktive Szene. Aktiviere zuerst eine Szene."
+        },
+        "HOW_TO_PLAY": {
+            "Title": "How To Play"
         },
         "HELP": {
             "BackpackSheet": "Rucksack-Einträge werden direkt auf dem Charakterbogen bearbeitet (Edit-Modus der Rucksack-Karte). Der Description-Tab liefert den Tooltip-Text.",

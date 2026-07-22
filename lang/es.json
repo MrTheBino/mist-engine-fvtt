@@ -103,7 +103,7 @@
       "WelcomeTitle": "Bienvenido, Narrador",
       "WelcomeContent": "Esta visita muestra las herramientas que el sistema Mist Engine añade para ti. La mayoría están aquí, en los controles de escena a la izquierda. Usa las flechas o los botones para avanzar por la visita.",
       "ToolsTitle": "Tu barra de DJ",
-      "ToolsContent": "Bajo los controles de Notas encontrarás las apps de DJ del sistema: el Rastreador de Escena, Acampada y Estancias, Actuar en Grupo y How To Play. Veremos cada una.",
+      "ToolsContent": "Bajo los controles de Mist Engine encontrarás las apps de DJ del sistema: el Rastreador de Escena, Acampada y Estancias, Actuar en Grupo y How To Play. Veremos cada una.",
       "SceneTrackerTitle": "Rastreador de Escena",
       "SceneTrackerContent": "Abre las etiquetas de historia, estados y modificadores de tirada compartidos de la escena, además de los personajes y desafíos presentes. Las etiquetas que añadas aquí entran automáticamente en las tiradas de los jugadores. Necesita una escena activa.",
       "CampingTitle": "Acampada y Estancias",
