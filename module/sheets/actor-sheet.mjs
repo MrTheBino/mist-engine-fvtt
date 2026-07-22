@@ -14,6 +14,17 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     #dragDrop // Private field to hold dragDrop handlers
     #scrollPositions; // Store scroll positions to prevent jumping
 
+    /**
+     * Last known text selection in a UUID-droppable field, as
+     * `{ field, start, end }`. Kept because the field blurs (and its selection
+     * collapses) the moment a drag starts in the sidebar, so at drop time the
+     * live selection is already gone. Updated on every selection change while
+     * the field is focused; consumed by #dropUuidLinkOnField. A re-render
+     * replaces the field elements, which invalidates the cache via its
+     * `field` identity check.
+     */
+    #lastFieldSelection = null;
+
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
         classes: ['sheet', 'actor'],
@@ -156,6 +167,17 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     /** @inheritDoc */
     _onRender(context, options) {
         this.#dragDrop.forEach((d) => d.bind(this.element))
+
+        // Track selections in UUID-droppable fields so an actor dragged from
+        // the sidebar (which blurs the field) can still use the selection as
+        // the link label (see #lastFieldSelection).
+        for (const field of this.element.querySelectorAll("input, textarea")) {
+            if (!this._getUuidDroppableField(field)) continue;
+            // `selectionchange` (Chromium 111+) also fires when the selection
+            // collapses; `select` is kept as a fallback for older embedders.
+            field.addEventListener("selectionchange", () => this.#cacheFieldSelection(field));
+            field.addEventListener("select", () => this.#cacheFieldSelection(field));
+        }
 
         if (this.actor.type === "litm-character" || this.actor.type === "litm-npc" || this.actor.type === "litm-journey") {
             this._renderModeToggle();
@@ -696,11 +718,118 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
 
     /**
      * Callback actions which occur when a dragged element is over a drop target.
+     * Marks the UUID-droppable text fields as generic drop targets: this
+     * suppresses the browser's native text-drop handling during the drag (the
+     * moving insertion caret), which would otherwise disturb the field's text
+     * selection before #dropUuidLinkOnField can read it as the link label.
      * @param {DragEvent} event       The originating DragEvent
      * @protected
      */
-    _onDragOver(event) { }
+    _onDragOver(event) {
+        if (this._getUuidDroppableField(event.target)) {
+            event.preventDefault();
+            event.dataTransfer.dropEffect = "copy";
+        }
+    }
 
+    /**
+     * Resolve the text field a drag event points at, if that field accepts a
+     * dropped Actor as a `@UUID[...]{Label}` link — i.e. its content is
+     * enriched in view mode via enrichTextWithTags (issue #73). The base
+     * implementation covers the fields of the shared challenge-partial.hbs;
+     * subclasses extend it with their own enriched fields.
+     * @param {EventTarget} target
+     * @returns {HTMLInputElement|HTMLTextAreaElement|null}
+     * @protected
+     */
+    _getUuidDroppableField(target) {
+        if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement)) return null;
+        if (target.classList.contains("editable-challenge-item") && target.dataset.itemId && target.dataset.key === "system.shortDescription") return target;
+        if (target.classList.contains("editable-challenge-item-list-entry") && target.dataset.itemId) return target;
+        return null;
+    }
+
+    /**
+     * Persist `value` as the new raw text of a UUID-droppable field, mirroring
+     * the field's change handler. The base implementation covers the embedded
+     * shortchallenge item fields of challenge-partial.hbs; subclasses handle
+     * their own fields and defer here for the shared ones.
+     * @param {HTMLInputElement|HTMLTextAreaElement} field
+     * @param {string} value
+     * @protected
+     */
+    async _persistUuidDroppedText(field, value) {
+        const item = this.actor.items.get(field.dataset.itemId);
+        if (!item) return;
+        if (field.classList.contains("editable-challenge-item")) {
+            await item.update({ [field.dataset.key]: value });
+        } else if (field.classList.contains("editable-challenge-item-list-entry")) {
+            const index = Number.parseInt(field.dataset.index, 10);
+            const list = item.system.list;
+            if (Number.isNaN(index) || !Array.isArray(list) || index < 0 || index >= list.length) return;
+            list[index] = value;
+            await item.update({ "system.list": list });
+        }
+    }
+
+    /**
+     * Remember `field`'s current selection (collapsed selection clears the
+     * cache). Only honored while the field is focused: the selection collapse
+     * caused by blurring into a sidebar drag also fires `selectionchange`, and
+     * must not clear the cache we need at drop time.
+     */
+    #cacheFieldSelection(field) {
+        if (document.activeElement !== field) return;
+        const start = field.selectionStart ?? 0;
+        const end = field.selectionEnd ?? 0;
+        this.#lastFieldSelection = start !== end ? { field, start, end } : null;
+    }
+
+    /**
+     * Insert a `@UUID[...]{...}` link into the text field the drop landed on
+     * and persist it via _persistUuidDroppedText. If the field has (or had,
+     * before the drag blurred it) a text selection, the selection is replaced
+     * by the link and becomes its label; otherwise the link is appended with
+     * the document's name as label.
+     * @param {DragEvent} event
+     * @param {string} uuid
+     * @returns {Promise<boolean>} true if the drop was consumed by a field.
+     */
+    async #dropUuidLinkOnField(event, uuid) {
+        const field = this._getUuidDroppableField(event.target);
+        if (!field) return false;
+
+        // Without this the browser's default drop pastes the raw drag JSON into the field.
+        event.preventDefault();
+
+        // The drag from the sidebar blurs the field, which collapses its live
+        // selection — fall back to the selection cached while it was focused.
+        let start = field.selectionStart ?? 0;
+        let end = field.selectionEnd ?? 0;
+        if (start === end && this.#lastFieldSelection?.field === field) {
+            end = Math.min(this.#lastFieldSelection.end, field.value.length);
+            start = Math.min(this.#lastFieldSelection.start, end);
+        }
+        this.#lastFieldSelection = null;
+
+        const doc = await fromUuid(uuid);
+        if (!doc) return true;
+
+        let value;
+        if (start !== end) {
+            // `}` would terminate the enricher's label match early; `{` is stripped for symmetry.
+            const label = field.value.slice(start, end).trim().replace(/[{}]/g, "");
+            const link = `@UUID[${uuid}]{${label || doc.name}}`;
+            value = field.value.slice(0, start) + link + field.value.slice(end);
+        } else {
+            const link = `@UUID[${uuid}]{${doc.name}}`;
+            value = field.value.trim() ? `${field.value.trimEnd()} ${link}` : link;
+        }
+
+        this._saveScrollPositions();
+        await this._persistUuidDroppedText(field, value);
+        return true;
+    }
 
     /**
      * Callback actions which occur when a dragged element is dropped on a target.
@@ -709,6 +838,11 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
      */
     async _onDrop(event) {
         const data = TextEditor.getDragEventData(event);
+
+        // An actor dropped onto an enriched text field becomes a @UUID link (issue #73).
+        if (data.type === "Actor" && data.uuid && (await this.#dropUuidLinkOnField(event, data.uuid))) {
+            return;
+        }
 
         // Handle different data types
         const floatingTagsAndStatuses = this.actor.system.floatingTagsAndStatuses;

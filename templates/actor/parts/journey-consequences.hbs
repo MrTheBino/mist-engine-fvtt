@@ -33,15 +33,15 @@
     {{else}}
     {{!-- Normal Layout --}}
     <div class="grid grid-2col">
-        {{#if system.generalConsequences}}
+        {{#if generalConsequencesHTML}}
         <div class="challenge-entry-container text-container-large-paper-background">
             <h2>{{localize "MIST_ENGINE.LABELS.GeneralConsequences"}}</h2>
             <div class="list-entries">
-                {{#each system.generalConsequences as | consequence | }}
+                {{#each generalConsequencesHTML as | consequenceHTML | }}
                 <div class="list-entry">
                     <div class="entry-content-no-edit flexrow">
                         <div class="icon-col"><i class="skull-icon"></i></div>
-                        <div class="text-col">{{{textWithTags consequence}}}</div>
+                        <div class="text-col">{{{consequenceHTML}}}</div>
                     </div>
                 </div>
                 {{/each}}

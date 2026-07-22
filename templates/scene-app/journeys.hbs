@@ -27,15 +27,15 @@
 
         {{!-- Vignettes & Consequences (read-only, like the journey sheet) --}}
         <div class="grid grid-2col">
-            {{#if assignedJourneySystem.generalConsequences.length}}
+            {{#if assignedJourneyGeneralConsequencesHTML.length}}
             <div class="challenge-entry-container text-container-large-paper-background">
                 <h2>{{localize "MIST_ENGINE.LABELS.GeneralConsequences"}}</h2>
                 <div class="list-entries">
-                    {{#each assignedJourneySystem.generalConsequences as | consequence | }}
+                    {{#each assignedJourneyGeneralConsequencesHTML as | consequenceHTML | }}
                     <div class="list-entry">
                         <div class="entry-content-no-edit flexrow">
                             <div class="icon-col"><i class="skull-icon"></i></div>
-                            <div class="text-col">{{{textWithTags consequence}}}</div>
+                            <div class="text-col">{{{consequenceHTML}}}</div>
                         </div>
                     </div>
                     {{/each}}

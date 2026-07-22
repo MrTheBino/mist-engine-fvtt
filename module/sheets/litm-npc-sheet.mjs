@@ -4,6 +4,7 @@ import { parseChallengeJSON } from '../lib/json-importer.mjs';
 import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
 import { ChallengeAddonAdapter } from "../lib/challenge-addon-adapter.mjs";
 import { confirmDeletion } from "../lib/confirm-deletion.mjs";
+import { enrichShortChallenges, enrichTextWithTags } from "../lib/tag-status-text-helper.mjs";
 
 export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
   #dragDrop; // Private field to hold dragDrop handlers
@@ -109,7 +110,51 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     context.hasSpecialFeatures = this.options.document.system.specialFeatures && this.options.document.system.specialFeatures.length > 0;
     context.hasSecrets = this.options.document.system.secrets && this.options.document.system.secrets.length > 0;
 
+    // Issue #73: enrich consequence/threat text so @UUID[...]{Label} document
+    // links render as real, clickable content links in the view-mode
+    // ("beautified") partial. `context.system` is a plain clone from
+    // toPlainObject() (see actor-sheet.mjs), so extending these arrays with
+    // sibling *HTML fields is safe - it never touches the live document, and
+    // the edit-mode partials (which read the same array by index) keep
+    // reading the untouched raw string fields.
+    context.system.limits = await Promise.all((context.system.limits ?? []).map(async (limit) => ({
+      ...limit,
+      consequenceHTML: await this.#enrichTaggedText(limit.consequence),
+    })));
+
+    context.system.secrets = await Promise.all((context.system.secrets ?? []).map(async (secret) => ({
+      ...secret,
+      descriptionHTML: await this.#enrichTaggedText(secret.description),
+    })));
+
+    context.system.specialFeatures = await Promise.all((context.system.specialFeatures ?? []).map(async (feature) => ({
+      ...feature,
+      nameHTML: await this.#enrichTaggedText(feature.name),
+      descriptionHTML: await this.#enrichTaggedText(feature.description),
+    })));
+
+    context.system.threatsAndConsequences = await Promise.all((context.system.threatsAndConsequences ?? []).map(async (threat) => ({
+      ...threat,
+      descriptionHTML: await this.#enrichTaggedText(threat.description),
+      listHTML: await Promise.all((threat.list ?? []).map((entry) => this.#enrichTaggedText(entry))),
+    })));
+
+    // The challenge templates render through the shared challenge-partial.hbs,
+    // whose view branch expects enriched plain objects.
+    context.challenges = await enrichShortChallenges(context.challenges ?? [], this.document);
+
     return context;
+  }
+
+  /**
+   * Convert a raw consequence/threat string into final display HTML (see
+   * enrichTextWithTags in tag-status-text-helper.mjs for why the tag pass
+   * must run before enrichHTML).
+   * @param {string} raw
+   * @returns {Promise<string>}
+   */
+  async #enrichTaggedText(raw) {
+    return enrichTextWithTags(raw, this.document);
   }
 
   _prepareItems() {
@@ -177,6 +222,19 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
     this.actor.update({ "system.roles": roles });
   }
 
+  /**
+   * The edit-mode text fields whose content is enriched in view mode (see
+   * #enrichTaggedText, issue #73), keyed by data-array with the accepted
+   * data-key values. Only these fields accept a dropped Actor as a
+   * `@UUID[...]{Name}` link — anywhere else a link would never render.
+   */
+  static #UUID_DROPPABLE_FIELDS = {
+    limits: ["consequence"],
+    secrets: ["description"],
+    specialFeatures: ["name", "description"],
+    threatsAndConsequences: ["description"],
+  };
+
   /** @override Apply a dropped Challenge Add-on, otherwise fall back to the base drop handling. */
   async _onDrop(event) {
     const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
@@ -188,6 +246,35 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
       }
     }
     return super._onDrop(event);
+  }
+
+  /** @override The NPC's enriched consequence/threat fields, then the shared challenge fields. */
+  _getUuidDroppableField(target) {
+    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement) {
+      if (target.classList.contains("npc-updatable-threat-entry-stat")) return target;
+      const acceptedKeys = MistEngineLegendInTheMistNpcSheet.#UUID_DROPPABLE_FIELDS[target.dataset.array] ?? [];
+      if (target.classList.contains("npc-updatable-npc-array-stat") && acceptedKeys.includes(target.dataset.key)) {
+        return target;
+      }
+    }
+    return super._getUuidDroppableField(target);
+  }
+
+  /** @override Persist the NPC's array-backed fields; shared challenge fields defer to the base. */
+  async _persistUuidDroppedText(field, value) {
+    const index = Number.parseInt(field.dataset.index, 10);
+    if (field.classList.contains("npc-updatable-threat-entry-stat")) {
+      const listIndex = Number.parseInt(field.dataset.listindex, 10);
+      if (Number.isNaN(index) || Number.isNaN(listIndex)) return;
+      await ArrayFieldAdapter.set(this.actor, "system.threatsAndConsequences", index, `list.${listIndex}`, value);
+      return;
+    }
+    if (field.classList.contains("npc-updatable-npc-array-stat")) {
+      if (Number.isNaN(index)) return;
+      await ArrayFieldAdapter.set(this.actor, `system.${field.dataset.array}`, index, field.dataset.key, value);
+      return;
+    }
+    return super._persistUuidDroppedText(field, value);
   }
 
   static async #handleAddSceneAppRollMod(event, target) {

@@ -13,7 +13,7 @@
                     {{#if limit.reached}}<span class="overcome-badge" title="{{localize 'MIST_ENGINE.OVERCOME.LimitReachedHint'}}">{{localize 'MIST_ENGINE.OVERCOME.Overcome'}}</span>{{/if}}
                 </div>
                 {{#if (notEmpty limit.consequence)}}
-                        <div class="npc-limit-consequence"><i class="icon-round-arrow-up"></i>{{{textWithTags limit.consequence}}}</div>
+                        <div class="npc-limit-consequence"><i class="icon-round-arrow-up"></i>{{{limit.consequenceHTML}}}</div>
                 {{/if}}
                 {{/each}}
             </div>
@@ -50,7 +50,7 @@
                         <img src="systems/mist-engine-fvtt/assets/icons/torch.webp" class="npc-secret-icon">{{secret.name}}
                     </div>
                     <div class="npc-secret-description">
-                        {{{textWithTags secret.description}}}
+                        {{{secret.descriptionHTML}}}
                     </div>
                 </div>
                 {{/each}}
@@ -66,8 +66,8 @@
                 <div class="npc-special-features-list flexcol">
                     {{#each system.specialFeatures as |feature|}}
                     <div class="npc-special-feature-item">
-                        <div class="npc-special-feature-name">{{{textWithTags feature.name}}}</div>
-                        <div class="npc-special-feature-description">{{{textWithTags feature.description}}}</div>
+                        <div class="npc-special-feature-name">{{{feature.nameHTML}}}</div>
+                        <div class="npc-special-feature-description">{{{feature.descriptionHTML}}}</div>
                     </div>
                     {{/each}}
                 </div>
@@ -88,12 +88,12 @@
                         <span class="entry-name">{{threat.name}}</span>
                     {{/if}}
                     {{#if (notEmpty threat.description)}}
-                        <strong>{{{textWithTags threat.description}}}</strong>
+                        <strong>{{{threat.descriptionHTML}}}</strong>
                     {{/if}}
                 </div>
                 <ul class="entry-list">
-                    {{#each threat.list as |entry|}}
-                    <li class="entry-item">{{{textWithTags entry}}}</li>
+                    {{#each threat.listHTML as |html|}}
+                    <li class="entry-item">{{{html}}}</li>
                     {{/each}}
                 </ul>
             </div>
