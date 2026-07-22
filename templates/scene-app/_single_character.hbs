@@ -2,22 +2,27 @@
     <div class="npc-subtitle-container-c">
         <div class="npc-subtitle-text pointer" data-action="clickOpenCharacterSheet" data-id="{{character.id}}"><img src="{{character.img}}" alt="{{character.name}}" class="actor-img"> {{character.name}}</div>
     </div>
+    {{!-- character.floatingTagsAndStatuses is a sorted VIEW (tags before
+    statuses; see FloatingTagAndStatusAdapter.sortedFloatingView, issue #28) -
+    each entry carries its ORIGINAL position in the persisted array as
+    `originalIndex`, which is what data-index must use so handlers keep
+    mutating the right element. Do not switch this back to @index. --}}
     {{#if character.hasFloatingTagsAndStatuses}}
     <div class="floating-tags-and-status-entries">
-        {{#each character.floatingTagsAndStatuses as |fts ftsIndex|}}
-        <div class="floating-tag-and-status-entry flexcol" data-might="{{this.might}}" data-index="{{@index}}" data-actor-id="{{../character.id}}" data-is-status="{{fts.isStatus}}">
+        {{#each character.floatingTagsAndStatuses as |fts|}}
+        <div class="floating-tag-and-status-entry flexcol" data-might="{{this.might}}" data-index="{{fts.originalIndex}}" data-actor-id="{{../character.id}}" data-is-status="{{fts.isStatus}}">
             <div class="flexrow">
 
                 <div class="fts-input-name fts-tag-status-toggle-actor {{#if fts.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}"
-                    data-index="{{ftsIndex}}" data-actor-id="{{../character.id}}"
+                    data-index="{{fts.originalIndex}}" data-actor-id="{{../character.id}}"
                     title="right click to toggle between tag or state">
-                    <i class="fa-solid {{#if this.positive}}fa-thumbs-up{{else}}fa-thumbs-down{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-source="litm-character" data-index="{{@index}}" data-actor-id="{{../character.id}}" title="toggle between positive and negative"></i>
-                    <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-source="litm-character" data-index="{{@index}}" data-actor-id="{{../character.id}}" title="{{floatingTagStatusTitleHelper this}}">
+                    <i class="fa-solid {{#if this.positive}}fa-thumbs-up{{else}}fa-thumbs-down{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-source="litm-character" data-index="{{fts.originalIndex}}" data-actor-id="{{../character.id}}" title="toggle between positive and negative"></i>
+                    <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-source="litm-character" data-index="{{fts.originalIndex}}" data-actor-id="{{../character.id}}" title="{{floatingTagStatusTitleHelper this}}">
                     {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
                     {{fts.name}}{{#if fts.isStatus}}-{{fts.value}}{{/if}}
                     </span>
-                    <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{@index}}" data-confirm="1" title="delete this tag/status" data-source="litm-character" data-index="{{@index}}" data-actor-id="{{../character.id}}"></i>
-                    <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{@index}}" title="toggle between tag and status" data-source="litm-character" data-index="{{@index}}"  data-actor-id="{{../character.id}}"></i>
+                    <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{fts.originalIndex}}" data-confirm="1" title="delete this tag/status" data-source="litm-character" data-actor-id="{{../character.id}}"></i>
+                    <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{fts.originalIndex}}" title="toggle between tag and status" data-source="litm-character" data-actor-id="{{../character.id}}"></i>
                 </div>
             </div>
             {{#if fts.isStatus}}
@@ -26,7 +31,7 @@
                 {{#each fts.markings as |marking index|}}
                 <span class="fts-input-marking" data-marking-index="{{index}}"
                     data-action="actorToggleFloatingTagOrStatusMarking" data-actor-id="{{../../character.id}}"
-                    data-index="{{ftsIndex}}">
+                    data-index="{{fts.originalIndex}}">
                     <i class="marking-circle {{#if marking}}active{{else}}inactive{{/if}}">{{indexPlusOne
                         index}}</i>
                 </span>

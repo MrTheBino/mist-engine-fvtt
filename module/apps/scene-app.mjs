@@ -367,6 +367,10 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         context.isGM = game.user.isGM;
         context.isNotGM = !game.user.isGM;
         context.hasDiceRollModifiers = this.currentSceneDataItem.system.diceRollTagsStatus.length > 0;
+        // Display-only sort (issue #28): tags before statuses, persisted array/index untouched.
+        context.sortedFloatingTagsAndStatuses = FloatingTagAndStatusAdapter.sortedFloatingView(
+            this.currentSceneDataItem.system.floatingTagsAndStatuses
+        );
 
         if (game.user.isGM) {
             foundry.utils.mergeObject(context, await this._prepareContextForCharacters());
@@ -452,7 +456,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const characterActors = [...new Set(tokens.map(t => t.actor).filter(a => a && a.type === "litm-character"))];
         characterActors.forEach(actor => {
             let selectedTags = DiceRollApp.getPreparedTagsAndStatusesForRoll(actor);
-            let floatingTagAndStatuses = actor.system.floatingTagsAndStatuses || [];
+            // Display-only sort (issue #28): tags before statuses, persisted array/index untouched.
+            let floatingTagAndStatuses = FloatingTagAndStatusAdapter.sortedFloatingView(actor.system.floatingTagsAndStatuses);
             // All weakness tags are exposed to the GM only (issue #85).
             let weaknessTags = game.user.isGM ? this.getCharacterWeaknessTags(actor) : [];
             if (!context.characters) context.characters = [];
@@ -480,7 +485,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             if (!actor || actor.type !== "litm-npc") return;
             if (seenNpcActors.has(actor)) return; // linked duplicate → already added
             seenNpcActors.add(actor);
-            let floatingTagAndStatuses = actor.system.floatingTagsAndStatuses || [];
+            // Display-only sort (issue #28): tags before statuses, persisted array/index untouched.
+            let floatingTagAndStatuses = FloatingTagAndStatusAdapter.sortedFloatingView(actor.system.floatingTagsAndStatuses);
             let mightyAspects = this.getChallengeMightyAspects(actor);
             if (!context.challenges) context.challenges = [];
             context.challenges.push({

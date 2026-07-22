@@ -98,4 +98,37 @@ export class FloatingTagAndStatusAdapter {
     static async handleToggleFloatingTagOrStatusMarking(objectToUpdate, arrayIndex, markingIndex){
         return ArrayFieldAdapter.toggle(objectToUpdate, this.PATH, arrayIndex, `markings.${markingIndex}`);
     }
+
+    /**
+     * Is this floating tag/status entry a status? Mirrors the fixup test in
+     * DiceRollApp.getPreparedTagsAndStatusesForRoll (dice-roll-app.mjs): the
+     * `isStatus` flag, OR (for entries where it wasn't set) a positive value.
+     * @param {object} entry
+     * @returns {boolean}
+     */
+    static isStatusEntry(entry){
+        return entry?.isStatus === true || (entry?.value ?? 0) > 0;
+    }
+
+    /**
+     * Build a display-only, sorted VIEW of a floating tags/statuses array:
+     * tags first, then statuses, stable within each group (insertion order
+     * preserved - see issue #28). Never mutates `list` or reorders the
+     * persisted array; every entry in the returned copy carries its
+     * ORIGINAL index from `list` as `originalIndex`, so templates can keep
+     * using that for `data-index` on elements whose handlers mutate the
+     * persisted array by index.
+     *
+     * Every context-prep site that feeds the floating-tags-and-status
+     * partial (or the scene app's own markup for it) must build the view
+     * through this single helper so the sort logic only exists once.
+     * @param {Array} list  current floatingTagsAndStatuses array (or null/undefined)
+     * @returns {Array} new array of `{...entry, originalIndex}`, sorted
+     */
+    static sortedFloatingView(list){
+        const arr = list ?? [];
+        return arr
+            .map((entry, originalIndex) => ({ ...entry, originalIndex }))
+            .sort((a, b) => Number(this.isStatusEntry(a)) - Number(this.isStatusEntry(b)));
+    }
 }
