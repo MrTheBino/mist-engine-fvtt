@@ -61,7 +61,8 @@
       "AddedSpecialImprovement": "Added special improvement {siName}",
       "SetQuest": "Set quest to {quest}",
       "AssignedThemekit": "Assigned themekit {themekitName} to character {characterName}",
-      "NoFellowshipThemecardFound": "No Fellowship Themecard actors found. Use \"Create New\" to make one first."
+      "NoFellowshipThemecardFound": "No Fellowship Themecard actors found. Use \"Create New\" to make one first.",
+      "NoCharacterAssignedForThemekitSelection": "No character assigned to your user. Assign a character to open the Themekit selection."
     },
     "HELP": {
       "BackpackSheet": "Backpack entries are edited directly on the character sheet (edit mode of the Backpack card). Use the Description tab for tooltip text.",
