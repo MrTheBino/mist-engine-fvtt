@@ -30,12 +30,18 @@ const STEPS = [
     { id: "camping", selector: toolSelector("camping_app"), title: t("CampingTitle"), content: t("CampingContent"), activateControl: "mist-engine" },
     { id: "groupAction", selector: toolSelector("group_action_app"), title: t("GroupActionTitle"), content: t("GroupActionContent"), activateControl: "mist-engine" },
 
+    // centre step (no selector): explains the [tag]/[/s]/[/w]/[/l] shorthand
+    { id: "journalMarkup", title: t("JournalMarkupTitle"), content: t("JournalMarkupContent") },
+    { id: "compendiums", selector: '#sidebar nav.tabs [data-tab="compendium"]', title: t("CompendiumsTitle"), content: t("CompendiumsContent") },
+
     // --- player character walkthrough (demo actor: Finn) ---
     { id: "charSheet", within: ".sheet-header", title: t("CharSheetTitle"), content: t("CharSheetContent"), charMode: "game" },
     { id: "editToggle", within: ".mode-toggle-button", title: t("EditToggleTitle"), content: t("EditToggleContent"), charMode: "game" },
     { id: "editMode", within: ".card-grid", title: t("EditModeTitle"), content: t("EditModeContent"), charMode: "edit" },
     { id: "gameMode", within: ".roll-button", title: t("GameModeTitle"), content: t("GameModeContent"), charMode: "game" },
 
+    // centre step: shared fellowship themecard (created/assigned by the GM)
+    { id: "fellowshipCard", title: t("FellowshipCardTitle"), content: t("FellowshipCardContent") },
     { id: "challenges", selector: "#sidebar", title: t("ChallengesTitle"), content: t("ChallengesContent") },
     { id: "rollConfirm", selector: "#sidebar", title: t("RollConfirmTitle"), content: t("RollConfirmContent") },
     { id: "howToPlay", selector: toolSelector("how_to_play_app"), title: t("HowToPlayTitle"), content: t("HowToPlayContent"), activateControl: "mist-engine" },
@@ -74,8 +80,14 @@ export function registerGmTour() {
             if (this.#demoActor.system.editMode !== wantEdit) {
                 await this.#demoActor.update({ "system.editMode": wantEdit });
             }
-            if (!this.#demoActor.sheet.rendered) this.#demoActor.sheet.render(true);
-            await new Promise(r => setTimeout(r, 600)); // allow (re)render
+            const sheet = this.#demoActor.sheet;
+            if (!sheet.rendered) sheet.render(true);
+            // poll until the sheet content actually exists in the DOM — a fixed
+            // wait is flaky on slow machines / many connected clients
+            for (let i = 0; i < 20 && !sheet.element?.querySelector(".sheet-header"); i++) {
+                await new Promise(r => setTimeout(r, 150));
+            }
+            await new Promise(r => setTimeout(r, 250)); // settle re-render
             return this.#demoActor;
         }
 

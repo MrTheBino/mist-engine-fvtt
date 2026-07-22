@@ -26,6 +26,7 @@ const STEPS = [
     { id: "editToggle", within: ".mode-toggle-button", title: t("EditToggleTitle"), content: t("EditToggleContent"), charMode: "game" },
     { id: "editMode", within: ".themebooks-container", title: t("EditModeTitle"), content: t("EditModeContent"), charMode: "edit" },
     { id: "themes", within: ".themebooks-container", title: t("ThemesTitle"), content: t("ThemesContent"), charMode: "game" },
+    { id: "burnWeakness", within: ".themebooks-container", title: t("BurnWeaknessTitle"), content: t("BurnWeaknessContent"), charMode: "game" },
     { id: "rolling", within: ".roll-button", title: t("RollingTitle"), content: t("RollingContent"), charMode: "game" },
     // NOTE: no `selector` on purpose — this renders as a centre-screen step.
     // Anchoring the tour tooltip to the floating #dice-roll-app window makes
@@ -33,6 +34,8 @@ const STEPS = [
     // the tour guard), so the explanation vanished after ~1s. The dialog is
     // still opened via `openRollDialog` so the player sees it on screen.
     { id: "diceDialog", title: t("DiceDialogTitle"), content: t("DiceDialogContent"), openRollDialog: true },
+    // centre step: helping from the HELPER's point of view (the request dialog)
+    { id: "helping", title: t("HelpingTitle"), content: t("HelpingContent") },
     { id: "sacrifice", within: '[data-action="clickSacrificeRoll"]', title: t("SacrificeTitle"), content: t("SacrificeContent"), charMode: "game" },
     { id: "statuses", within: ".col-status", title: t("StatusesTitle"), content: t("StatusesContent"), charMode: "game" },
     { id: "backpack", within: ".litm-backpack", title: t("BackpackTitle"), content: t("BackpackContent"), charMode: "game" },
@@ -75,8 +78,14 @@ export function registerPlayerTour() {
             if (this.#demoActor.system.editMode !== wantEdit) {
                 await this.#demoActor.update({ "system.editMode": wantEdit });
             }
-            if (!this.#demoActor.sheet.rendered) this.#demoActor.sheet.render(true);
-            await new Promise(r => setTimeout(r, 600)); // allow (re)render
+            const sheet = this.#demoActor.sheet;
+            if (!sheet.rendered) sheet.render(true);
+            // poll until the sheet content actually exists in the DOM — a fixed
+            // wait is flaky on slow machines / many connected clients
+            for (let i = 0; i < 20 && !sheet.element?.querySelector(".sheet-header"); i++) {
+                await new Promise(r => setTimeout(r, 150));
+            }
+            await new Promise(r => setTimeout(r, 250)); // settle re-render
             return this.#demoActor;
         }
 
