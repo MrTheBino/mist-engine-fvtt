@@ -1,7 +1,11 @@
 <div class="right-panel scrollable">
             <div class="">
                 {{#if (eq hasAvailableThemekits false)}}
+                {{#if isFilteredByThemebook}}
+                <p>{{localize "MIST_ENGINE.THEMEKITS.NoThemekitsForThemebook" themebook=themebookFilterLabel}}</p>
+                {{else}}
                 <p>{{localize "MIST_ENGINE.THEMEKITS.NoThemekitsAvailable"}}</p>
+                {{/if}}
                 {{/if}}
                 {{#if currentSelectedThemekitAvailable}}
                 <h2>{{currentSelectedThemekit.name}}</h2>

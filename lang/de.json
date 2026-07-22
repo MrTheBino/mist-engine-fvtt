@@ -134,6 +134,13 @@
         "NOTIFICATIONS": {
             "NoCharacterAssignedForThemekitSelection": "Kein Charakter zugewiesen. Weise deinem Benutzer einen Charakter zu, um die Theme-Kit-Auswahl zu öffnen."
         },
+        "THEMEKITS": {
+            "NoThemekitsForThemebook": "Keine Themekits gehören zum Themebook „{themebook}“. Nutze „Alle anzeigen“, um alle verfügbaren Kits zu sehen.",
+            "FilteredForThemebook": "Zeigt Kits für „{themebook}“",
+            "ShowAllThemekits": "Alle anzeigen",
+            "ShowingAllThemekits": "Alle Themekits werden angezeigt",
+            "ShowFilteredThemekits": "Nur „{themebook}“ anzeigen"
+        },
         "SCENE_APP": {
             "Title": "Szenen-Tags",
             "NoActiveScene": "Der Szenen-Tracker benötigt eine aktive Szene. Aktiviere zuerst eine Szene."

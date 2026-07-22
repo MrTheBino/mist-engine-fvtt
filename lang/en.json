@@ -28,7 +28,12 @@
       "SelectThemekit": "Select Themekit",
       "RemoveThemekit": "Remove Themekit from Character",
       "AssignThemekit": "Assign Themekit",
-      "NoThemekitsAvailable": "No themekits available. Create themekit items first."
+      "NoThemekitsAvailable": "No themekits available. Create themekit items first.",
+      "NoThemekitsForThemebook": "No themekits belong to the \"{themebook}\" Themebook. Use \"Show all\" to see every available kit.",
+      "FilteredForThemebook": "Showing kits for \"{themebook}\"",
+      "ShowAllThemekits": "Show all",
+      "ShowingAllThemekits": "Showing all themekits",
+      "ShowFilteredThemekits": "Show only \"{themebook}\""
     },
     "SETTINGS": {
       "ThemekitSourcePacks": {

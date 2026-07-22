@@ -14,6 +14,28 @@
         align-self:flex-start;
         height: 100%;
 
+        .themekit-filter-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            margin-bottom: 6px;
+            padding: 4px 6px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--litm-color-accent);
+            border-radius: 3px;
+            color: var(--litm-color-accent);
+            font-family: $font-primary;
+            font-size: 0.8em;
+
+            .themekit-filter-toggle {
+                color: var(--litm-color-accent);
+                text-decoration: underline;
+                cursor: pointer;
+                white-space: nowrap;
+            }
+        }
+
         .themekit-search {
             width: 100%;
             margin-bottom: 6px;
