@@ -448,8 +448,14 @@ export function setupHooks() {
   };
 
   Hooks.on("updateActor", (actor) => {
-    // Only actors shown in the active scene affect the trackers...
-    const inScene = game.scenes?.active?.tokens?.contents?.some(t => t.actor?.id === actor.id);
+    // Only actors shown in the scene app's currently TRACKED scene affect the
+    // trackers — that is the scene the GM is viewing (see
+    // MistSceneApp#getCurrentScene / #sceneChangedHook), not necessarily
+    // game.scenes.active. Filtering on the active scene here let an actor
+    // update on a viewed-but-not-active scene silently skip the refresh even
+    // after the scene app itself was fixed to read the right scene (#93).
+    const trackedScene = MistSceneApp.instance?.getCurrentScene?.();
+    const inScene = trackedScene?.tokens?.contents?.some(t => t.actor?.id === actor.id);
     // ...plus the journey assigned to the scene (Journeys tab) — it is not a
     // scene token, so it would otherwise never trigger a refresh.
     const isAssignedJourney = MistSceneApp.instance?.getAssignedJourney?.()?.id === actor.id;
