@@ -2,6 +2,30 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.5.1 - Nymphetamine
+- FEAT: dedicated "Mist Engine" toolbar group for the system apps (Scene Tracker, Camping & Sojourns, Acting Together, How To Play) #91 (by aMediocreDad)
+- FEAT: per-roll weakness-to-power inversion in the roll dialog (Narrator's discretion) #35 (by aMediocreDad)
+- FEAT: apply challenge statuses against the roll without editing the challenge #104 (by aMediocreDad)
+- FEAT: [/sn] syntax for negative statuses in text fields and journals #81 (by aMediocreDad)
+- FEAT: tags are grouped before statuses in Tags & Statuses lists #28 (by aMediocreDad)
+- FEAT: challenge consequence fields are enriched, @UUID links work there #73 (by aMediocreDad)
+- FEAT: hotkey ALT+T opens the ThemeKit selection #70 (by aMediocreDad)
+- FEAT: setting to choose the theme-kit source compendiums #101 (by aMediocreDad)
+- FEAT: theme kit list is filtered by the launching theme book #102 (by aMediocreDad)
+- FEAT: guided tours for the Narrator and for players (Settings -> Tour Management)
+- FEAT: overhauled custom background editor: multiple artwork layers, zoom at cursor, layout guide with name preview, background gallery, re-editable compositions
+- FEAT: reworked System Documentation journal with all current features and screenshots
+- FIX: fixed-width theme cards that wrap instead of stretching #37 (by aMediocreDad)
+- FIX: editor tag/status buttons produce enricher-consistent markup #58 (by aMediocreDad)
+- FIX: backpack tags cannot be queued to burn #98 (by aMediocreDad)
+- FIX: create missing backpacks for pre-14.5 characters during migration #105 (by aMediocreDad)
+- FIX: selecting challenge tags no longer clears hero selection in roll dialog #83 (by aMediocreDad)
+- FIX: scene app registers characters/challenges on viewed (non-active) scenes #93 (by aMediocreDad)
+- FIX: inline tag/status marks are styled in chat messages
+- FIX: tags with hyphenated names (e.g. "quick-witted") are no longer turned into broken value-0 statuses by the create-tag dialogs
+- internal clean up: removed unused font files
+- FIX: parsing statuses "example-status" translates now correctly to a tag because of the missing number at the end
+
 # 14.5.0 - The mundane and the magic (D.T.)
 - FEAT: roll dialog works now without an active scene
 - FIX: (UI) Light mode makes buttons on character sheet hard to read #100

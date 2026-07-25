@@ -68,13 +68,18 @@ export class FloatingTagAndStatusAdapter {
         let ftsObject = { name: str, description: "", isStatus: false, positive, value: 0, markings: Array(6).fill(false) };
         if (str.includes("-")) {
             const parts = str.split("-");
-            ftsObject.isStatus = true;
-            ftsObject.value = parseInt(parts[parts.length - 1]) || 0;
-            ftsObject.name = parts.slice(0, parts.length - 1).join("-").trim();
-            if(ftsObject.value > 0 && ftsObject.value <= 6){
-                ftsObject.markings[ftsObject.value-1] = true;
+            const last = parts[parts.length - 1].trim();
+            // Only a purely numeric suffix marks a status ("dazed-2"). A
+            // hyphenated word like "quick-witted" is a plain tag and must keep
+            // its full name instead of becoming a broken value-0 status.
+            if (/^\d+$/.test(last)) {
+                ftsObject.isStatus = true;
+                ftsObject.value = parseInt(last) || 0;
+                ftsObject.name = parts.slice(0, parts.length - 1).join("-").trim();
+                if(ftsObject.value > 0 && ftsObject.value <= 6){
+                    ftsObject.markings[ftsObject.value-1] = true;
+                }
             }
-
         }
 
         return ftsObject;
