@@ -301,6 +301,27 @@
             "InvertedChallengeSuffix": "umgekehrt"
         },
         "LABELS": {
+            "CustomBackgroundEditor": {
+                "Button": "Editor für eigene Hintergründe",
+                "PickBackground": "Hintergrund wählen",
+                "Reset": "Zurücksetzen",
+                "ExportPng": "Als PNG exportieren",
+                "UploadOverlayArtwork": "Artwork hochladen",
+                "SetAsCustomBackground": "Als Hintergrund übernehmen",
+                "HelpText": "Füge Artwork per Upload, Einfügen (Strg+V) oder Drag & Drop auf die Leinwand hinzu. Klick wählt eine Ebene, Ziehen verschiebt sie, das Mausrad zoomt am Cursor, Pfeiltasten verschieben fein (Umschalt = 10 px), Entf entfernt. Das schattierte Band und die Namensvorschau sind nur Hilfslinien — sie werden nie exportiert. Zum Speichern brauchst du Datei-Upload-Rechte.",
+                "GuideLabel": "Namens- & Porträtspalte",
+                "ToggleGuide": "Hilfslinien",
+                "Flip": "Spiegeln",
+                "FlipHint": "Ausgewähltes Artwork horizontal spiegeln",
+                "Center": "Zentrieren",
+                "DeleteOverlay": "Artwork entfernen",
+                "Scale": "Größe",
+                "FontColor": "Namensfarbe",
+                "SavedSuccess": "Eigener Hintergrund gespeichert.",
+                "SaveFailed": "Der Hintergrund konnte nicht gespeichert werden. Details in der Konsole.",
+                "NoWorldId": "Die Welt-ID konnte nicht ermittelt werden.",
+                "LoadImageFailed": "Dieses Bild konnte nicht geladen werden."
+            },
             "JourneyConsequences": "Vignetten & Konsequenzen",
             "Milestone": "Meilenstein",
             "Abandon": "Aufgeben",

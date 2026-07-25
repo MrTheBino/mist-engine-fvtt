@@ -1,17 +1,30 @@
 <div class="custom-background-editor">
     <div class="toolbar flexrow">
         <button type="button" class="btn" data-action="clickedSelectBackground"><i class="fa-solid fa-object-ungroup"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.PickBackground"}}</button>
-        <button class="btn" data-action="clickedUploadOverlay">
-            <i class="fa-solid fa-upload"></i>{{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.UploadOverlayArtwork"}} <input type="file" id="pick_overlay_file" accept="image/png,image/webp,image/jpeg" data-action="clickedPickOverlay" hidden>
+        <button type="button" class="btn" data-action="clickedUploadOverlay">
+            <i class="fa-solid fa-upload"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.UploadOverlayArtwork"}}
+            <input type="file" id="pick_overlay_file" accept="image/png,image/webp,image/jpeg" data-action="clickedPickOverlay" hidden>
         </button>
-
-        <button type="button" class="btn" data-action="export-png"><i class="fa-solid fa-download"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.ExportPng"}}</button>
-        <button type="button" class="btn" data-action="clickedSetAsCustomBackground"><i class="fa-solid fa-image-portrait"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.SetAsCustomBackground"}}</button>
+        <button type="button" class="btn" data-action="clickedFlipOverlay" title="{{localize 'MIST_ENGINE.LABELS.CustomBackgroundEditor.FlipHint'}}"><i class="fa-solid fa-left-right"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.Flip"}}</button>
+        <button type="button" class="btn" data-action="clickedCenterOverlay"><i class="fa-solid fa-arrows-to-dot"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.Center"}}</button>
+        <button type="button" class="btn" data-action="clickedDeleteOverlay"><i class="fa-solid fa-trash"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.DeleteOverlay"}}</button>
         <button type="button" class="btn" data-action="clickedReset"><i class="fa-solid fa-arrows-rotate"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.Reset"}}</button>
     </div>
-    <div>
-        <p class="help-text">{{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.HelpText"}}</p>
+    <div class="toolbar flexrow toolbar-second">
+        <label class="inline-control">{{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.Scale"}}
+            <input type="range" data-ref="scale-slider" min="5" max="400" value="100">
+        </label>
+        {{#if isCharacter}}
+        <label class="inline-control">{{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.FontColor"}}
+            <input type="color" data-ref="font-color" value="{{fontColor}}">
+        </label>
+        <button type="button" class="btn active" data-action="clickedToggleGuide"><i class="fa-solid fa-table-columns"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.ToggleGuide"}}</button>
+        {{/if}}
+        <button type="button" class="btn" data-action="clickedExportPng"><i class="fa-solid fa-download"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.ExportPng"}}</button>
+        <button type="button" class="btn btn-primary" data-action="clickedSetAsCustomBackground"><i class="fa-solid fa-image-portrait"></i> {{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.SetAsCustomBackground"}}</button>
     </div>
+    <p class="help-text">{{localize "MIST_ENGINE.LABELS.CustomBackgroundEditor.HelpText"}}</p>
+    <div class="bg-gallery flexrow" data-ref="gallery"></div>
     <div class="stage">
         <canvas data-ref="canvas" width="1100" height="800"></canvas>
     </div>

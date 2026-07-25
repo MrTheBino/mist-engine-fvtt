@@ -357,10 +357,22 @@
         "Button": "Editor de Fondos Personalizados",
         "PickBackground": "Escoge un fondo",
         "Reset": "Resetear",
-        "ExportPng": "Exportar comoPNG",
-        "UploadOverlayArtwork": "Subir ilustracion superpuesta",
+        "ExportPng": "Exportar como PNG",
+        "UploadOverlayArtwork": "Subir ilustración",
         "SetAsCustomBackground": "Fijar como Fondo Personalizado",
-        "HelpText": "El Editor de Fondos Personalizados te permite crear un fondo personalizado para tu personaje subiendo (o copiando y pegando) una imagen y ajustando su posición y escala. También puedes exportar el fondo personalizado como archivo PNG o configurarlo directamente como fondo de tu personaje. Ten en cuenta que necesitas permiso para subir archivos y usar esta función. Habla con tu GM si no tienes los permisos necesarios. La línea a continuación es solo una guía para ayudarte a colocar tu ilustración; no será visible en la imagen exportada ni en el fondo del personaje."
+        "HelpText": "Añade ilustraciones subiéndolas, pegándolas (Ctrl+V) o arrastrándolas al lienzo. Un clic selecciona una capa, arrastrar la mueve, la rueda del ratón hace zoom en el cursor, las flechas la desplazan (Mayús = 10 px) y Supr la elimina. La franja sombreada y la vista previa del nombre son solo guías: nunca se exportan. Guardar requiere permiso de subida de archivos.",
+        "GuideLabel": "Columna de nombre y retrato",
+        "ToggleGuide": "Guía",
+        "Flip": "Voltear",
+        "FlipHint": "Refleja horizontalmente la ilustración seleccionada",
+        "Center": "Centrar",
+        "DeleteOverlay": "Quitar ilustración",
+        "Scale": "Escala",
+        "FontColor": "Color del nombre",
+        "SavedSuccess": "Fondo personalizado guardado.",
+        "SaveFailed": "No se pudo guardar el fondo personalizado. Consulta la consola.",
+        "NoWorldId": "No se pudo determinar el ID del mundo.",
+        "LoadImageFailed": "No se pudo cargar esa imagen."
       }
     },
     "MOVES": {
