@@ -91,7 +91,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     };
 
     setOptions(options) {
-        if (options.actor) {
+        // only hero actors may own this (singleton) dialog — a challenge actor
+        // passed while toggling challenge tags must not displace the hero (#83)
+        if (options.actor && (options.actor.type === "character" || options.actor.type === "litm-character")) {
             // a per-roll tag/Challenge inversion is scoped to the actor it was
             // granted for; switching actors on this (singleton) dialog must not carry it over
             if (this.actor?.id !== options.actor.id) {
