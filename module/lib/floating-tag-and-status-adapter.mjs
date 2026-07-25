@@ -15,7 +15,11 @@ export class FloatingTagAndStatusAdapter {
      * tracking-card rule (Core Book p. 29): a same-named status marks the box
      * of its tier; if that box is already marked, the next empty box to the
      * right is marked instead. The status tier is the highest marked box.
-     * Non-statuses and new names are simply appended.
+     * Non-statuses and new names are simply appended. A same-named status of
+     * the *opposite* polarity (e.g. a negative "dazed" dropped onto an
+     * existing positive "dazed") is never stacked onto the existing entry —
+     * that would silently flip its polarity and corrupt roll math — it is
+     * instead appended as its own separate entry.
      * @param {Array} list        current floatingTagsAndStatuses array
      * @param {object} ftsObject  entry to add (from parseFloatingTagAndStatusString or a drop)
      * @returns {Array} a new array with the entry appended or stacked
@@ -23,8 +27,15 @@ export class FloatingTagAndStatusAdapter {
     static withStatusStacked(list, ftsObject){
         const current = list ?? [];
         const norm = s => String(s ?? "").trim().toLowerCase();
+        // missing/undefined `positive` defaults to true, matching the schema
+        // default (module/data/util.mjs) - compare both sides on that basis
+        const isPositive = v => v !== false;
         if (ftsObject.isStatus && norm(ftsObject.name) !== "") {
-            const idx = current.findIndex(e => e.isStatus && norm(e.name) === norm(ftsObject.name));
+            const idx = current.findIndex(e =>
+                e.isStatus &&
+                norm(e.name) === norm(ftsObject.name) &&
+                isPositive(e.positive) === isPositive(ftsObject.positive)
+            );
             if (idx !== -1) {
                 const existing = foundry.utils.deepClone(current[idx]);
                 const markings = [...(existing.markings ?? Array(6).fill(false))];
@@ -45,9 +56,18 @@ export class FloatingTagAndStatusAdapter {
     }
 
     static parseFloatingTagAndStatusString(srcString){
-        let ftsObject = { name: srcString, description: "", isStatus: false, positive:true, value: 0, markings: Array(6).fill(false) };
-        if (srcString.includes("-")) {
-            const parts = srcString.split("-");
+        // A leading "/sn" marks the entry as a negative status/tag, mirroring
+        // the [/sn name-X] enricher token used in journal/description text.
+        let str = srcString.trim();
+        let positive = true;
+        if (str.startsWith("/sn")) {
+            positive = false;
+            str = str.slice(3).trim();
+        }
+
+        let ftsObject = { name: str, description: "", isStatus: false, positive, value: 0, markings: Array(6).fill(false) };
+        if (str.includes("-")) {
+            const parts = str.split("-");
             ftsObject.isStatus = true;
             ftsObject.value = parseInt(parts[parts.length - 1]) || 0;
             ftsObject.name = parts.slice(0, parts.length - 1).join("-").trim();

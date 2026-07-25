@@ -48,6 +48,10 @@
             &.positive {
                 background-color: $c-tag-green;
             }
+
+            &.negative {
+                background-color: $c-tag-orange;
+            }
         }
 
         .tag-icon {
