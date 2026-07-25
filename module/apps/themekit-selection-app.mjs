@@ -9,10 +9,47 @@ const FILTER_DATASET_KEYS = {
     story:                'searchStory',
 };
 
+/**
+ * Filters a flat list of themekit documents down to those belonging to the
+ * launching themebook (issue #102).
+ *
+ * A kit "belongs to" a themebook by name: `system.themekit_type` holds the
+ * name of the themebook the kit fills in (e.g. "Skill or Trade" — the
+ * adapter uses it as the created themebook's name). Matching is trimmed and
+ * case-insensitive. Note `system.themebook_type` is NOT the themebook — it
+ * is the might level (litm-origin/adventure/greatness) and plays no part
+ * here: two books of the same might are still different books.
+ *
+ * Kits with a blank/empty `system.themekit_type` are always kept — they
+ * predate this field and are treated as legacy content that should stay
+ * visible regardless of which themebook opened the app.
+ *
+ * When `themebookName` is blank/falsy (no launching themebook — nothing to
+ * filter against) or `showAll` is true (user hit the "show all" escape
+ * hatch), the list passes through unfiltered.
+ *
+ * Pure function, no Foundry API dependency, so it can be exercised by a
+ * standalone Node script without stubbing the Foundry runtime.
+ *
+ * @param {Array<object>} themekits                Themekit documents (or plain objects with a `system.themekit_type`).
+ * @param {string|null|undefined} themebookName    The launching themebook's name (e.g. "Skill or Trade"), or blank/falsy to disable filtering.
+ * @param {boolean} [showAll=false]                Escape hatch — when true, disables filtering regardless of `themebookName`.
+ * @returns {Array<object>}
+ */
+export function filterThemekitsForThemebook(themekits, themebookName, showAll = false) {
+    const bookName = themebookName?.trim().toLowerCase();
+    if (!bookName || showAll) return themekits;
+    return themekits.filter(themekit => {
+        const kitBookName = themekit?.system?.themekit_type?.trim().toLowerCase();
+        return !kitBookName || kitBookName === bookName;
+    });
+}
+
 export class ThemekitSelectionApp extends HandlebarsApplicationMixin(ApplicationV2) {
     currentSelectedThemekit = null;
     actor = null;
     actorThemebook = null;
+    showAllThemekits = false;
     _searchQuery = '';
     _activeFilters = new Set();
 
@@ -34,7 +71,8 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
         },
         actions: {
             selectThemekit: this.#handleSelectThemekit,
-            addThemekit: this.#handleAddThemekit
+            addThemekit: this.#handleAddThemekit,
+            toggleShowAllThemekits: this.#handleToggleShowAllThemekits
         },
     };
 
@@ -64,10 +102,19 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
         }else{
             context.addThemekitButtonStr = game.i18n.localize("MIST_ENGINE.THEMEKITS.AddThemekit");
         }
-        
+
+        // Issue #102: when opened from a themebook card, offer to filter the
+        // list down to kits belonging to that themebook (matched by name),
+        // with a toggle to escape it.
+        const themebookName = this.actorThemebook?.name?.trim() || null;
+        context.hasThemebookFilter = Boolean(themebookName);
+        context.isFilteredByThemebook = context.hasThemebookFilter && !this.showAllThemekits;
+        context.showAllThemekits = this.showAllThemekits;
+        context.themebookFilterLabel = themebookName;
+
         // we set this flag if the currentSelectedThemekit has any special improvements without an empty name
         context.hasSpecialImprovements = context.currentSelectedThemekitAvailable && context.currentSelectedThemekit.system.specialImprovements && context.currentSelectedThemekit.system.specialImprovements.some(si => si.name && si.name.trim() !== "");
-        
+
         return context;
     }
 
@@ -109,10 +156,14 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
         ...compendiumThemeKits
         ];
 
+        // Issue #102: filter to kits belonging to the launching themebook
+        // (blank themekit_type kits and the "show all" toggle both bypass this).
+        const filteredThemeKits = filterThemekitsForThemebook(allThemeKits, this.actorThemebook?.name, this.showAllThemekits);
+
         // now we group them by property 'themekit_type', if themekit_type in uppercase is not set, we put it in a group called 'OTHER'
         // each group hash is {groupName: string, themekits: array of themekits}
         const themekitsByType = {};
-        for(let themekit of allThemeKits){
+        for(let themekit of filteredThemeKits){
             const type = (themekit.system.themekit_type || "OTHER").toUpperCase(); 
             if(!themekitsByType[type]){
                 themekitsByType[type] = { groupName: type, themekits: [] };
@@ -188,6 +239,12 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
 
     setThemebook(themebook){
         this.actorThemebook = themebook;
+    }
+
+    static async #handleToggleShowAllThemekits(event, target){
+        event.preventDefault();
+        this.showAllThemekits = !this.showAllThemekits;
+        this.render();
     }
 
     static async #handleAddThemekit(event, target){
