@@ -25,6 +25,7 @@ If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/m
 - FIX: tags with hyphenated names (e.g. "quick-witted") are no longer turned into broken value-0 statuses by the create-tag dialogs
 - internal clean up: removed unused font files
 - FIX: parsing statuses "example-status" translates now correctly to a tag because of the missing number at the end
+- FIX: [Bug Report] Deleting a relationship tag always deletes the first entry in the relationship list #125
 - FEAT: compact character sheets option in the "toggle controls" dropdopwn of a character sheet
 
 # 14.5.0 - The mundane and the magic (D.T.)
