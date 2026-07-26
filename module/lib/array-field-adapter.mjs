@@ -22,7 +22,9 @@ export class ArrayFieldAdapter {
     static _resolve(doc, path, index) {
         if (!doc) return null;
         const arr = foundry.utils.getProperty(doc, path);
-        if (!Array.isArray(arr) || index < 0 || index >= arr.length) return null;
+        // `Number.isInteger` also rejects NaN, which every comparison below would
+        // let through — `splice(NaN, 1)` silently removes the *first* element.
+        if (!Array.isArray(arr) || !Number.isInteger(index) || index < 0 || index >= arr.length) return null;
         return arr;
     }
 
