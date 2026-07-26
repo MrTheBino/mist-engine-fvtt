@@ -171,7 +171,7 @@
       "image": {},
       "text": {
         "format": 1,
-        "content": "\n<p>The compendium <strong>LiTM Themebooks</strong> contains every themebook from the Core Book (without the optional power-tag questions, see p. 92). Drag a themebook onto a character sheet in Edit Mode to add it. It also contains a ready-to-use <strong>Backpack</strong> &mdash; drag it onto a character.</p>\n<h2>ThemeKits</h2>\n<p>ThemeKits are prebuilt tag packages. Open the ThemeKit selection via the character sheet header button or <strong>Alt+T</strong>, pick a kit and it is imported into the character. Two settings control where kits are pulled from: <em>ThemeKit source compendiums</em> and <em>include world items</em>.</p>"
+        "content": "\n<p>The compendium <strong>LiTM Themebooks</strong> contains every themebook from the Core Book (without the optional power-tag questions, see p. 92). Drag a themebook onto a character sheet in Edit Mode to add it. It also contains a ready-to-use <strong>Backpack</strong> &mdash; drag it onto a character.</p>\n<h2>ThemeKits</h2>\n<p>ThemeKits are prebuilt tag packages. Open the ThemeKit selection via the character sheet header button or <strong>Alt+T</strong>, pick a kit and it is imported into the character. The list is filtered to the theme book you launched it from, so you only see kits that fit. Two settings control where kits are pulled from: <em>ThemeKit source compendiums</em> and <em>include world items</em>.</p>"
       },
       "video": {
         "controls": true,
@@ -508,6 +508,86 @@
         "lastModifiedBy": "wgZHyBDokH67OG0A"
       },
       "_key": "!journal.pages!TrgMWh3RyxxBkZoB.SettingsDocPage1"
+    },
+    {
+      "sort": 40000,
+      "name": "Character Sheet",
+      "type": "text",
+      "_id": "CharSheetDocPg01",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<p>Every hero sheet has two modes, switched with the <strong>lock icon</strong> in the window header: <em>Game Mode</em> for play &mdash; click a power tag to select it, then roll from the buttons at the top &mdash; and <em>Edit Mode</em> for building the character.</p>\n<h2>Arranging the cards</h2>\n<p>Themebooks, rotes, quintessences, the fellowship, the backpack and the fellowship themecard are all <strong>cards</strong> in one grid. Drag a card by its title to reorder it, or drop it onto the <strong>Main</strong> / <strong>Other</strong> tab button to move it to the other tab; right-clicking a card title offers the same move. An insertion marker shows where the card will land. The arrangement is stored per character.</p>\n<h2>Sheet layouts</h2>\n<p>The hero sheet ships in two layouts. Switch between them at any time from the <strong>controls menu</strong> in the window header (the &hellip; button), or via <em>Configure Sheet</em>:</p>\n<ul>\n<li><p><strong>Full layout with artwork</strong> &mdash; the default. Reserves a column down the left edge for the character's artwork, with the name and short description set on top of it. See <em>Custom Background Editor</em>.</p></li>\n<li><p><strong>Compact layout</strong> &mdash; drops the artwork column and puts the character portrait next to the roll buttons instead, on a dark backdrop. The window is markedly narrower, which suits heroes without artwork and smaller screens. Everything else is identical: tags, cards, rolling, drag &amp; drop, Edit Mode. Only the custom-background buttons and the name-colour picker are gone, because that layout paints no artwork.</p></li>\n</ul>\n<p>Switching throws nothing away &mdash; a custom background stays stored on the character and reappears the moment you switch back to the full layout. The choice is per character, so artwork-heavy heroes and plain ones can sit side by side. Narrators who want one layout everywhere can set it as the default under <em>Configure Sheet</em>.</p>\n<h2>Rotes</h2>\n<p>A rote (Core Book p. 98) is the outline of one specific magic ability &mdash; a technique, spell, maneuver or recipe. Drop a rote item onto the sheet and it becomes a card of its own; click it to select its title as a positive tag for the next roll.</p>",
+        "format": 1,
+        "markdown": null
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "14.365",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "14.5.1",
+        "createdTime": 1784880000000,
+        "modifiedTime": 1784880000000,
+        "lastModifiedBy": "wgZHyBDokH67OG0A"
+      },
+      "_key": "!journal.pages!TrgMWh3RyxxBkZoB.CharSheetDocPg01"
+    },
+    {
+      "sort": 45000,
+      "name": "Custom Background Editor",
+      "type": "text",
+      "_id": "CustomBgEdDocP01",
+      "system": {},
+      "title": {
+        "show": true,
+        "level": 1
+      },
+      "image": {},
+      "text": {
+        "content": "<p>Heroes can carry their own artwork, drawn down the left side of the full sheet layout. Open the editor from the character sheet in <strong>Edit Mode</strong> &rarr; <em>Custom Background Editor</em>. It also works for Journey actors.</p>\n<h2>Building a composition</h2>\n<ul>\n<li><p><strong>Pick Background</strong> chooses the base plate; the thumbnail strip under the toolbar offers the backgrounds shipped with the system.</p></li>\n<li><p>Artwork is added in <strong>layers</strong>, as many as you like: <em>Upload Artwork</em>, paste with <strong>Ctrl+V</strong>, or drag &amp; drop an image file onto the canvas.</p></li>\n<li><p>Click selects a layer, dragging moves it, the <strong>mouse wheel zooms at the cursor</strong>, the arrow keys nudge it (<strong>Shift</strong> for 10&nbsp;px steps) and <strong>Del</strong> removes it. <em>Flip</em>, <em>Center</em>, <em>Scale</em> and <em>Reset</em> sit in the toolbar.</p></li>\n<li><p><strong>Guide</strong> shades the 300&nbsp;px name &amp; portrait column of the sheet and previews the character name in place, so no important part of the artwork ends up hidden behind it. The guide is a drawing aid only &mdash; it is never part of the saved image.</p></li>\n<li><p><strong>Name Color</strong> picks the colour the character name is drawn in on the sheet.</p></li>\n</ul>\n<h2>Saving</h2>\n<p><strong>Set as Custom Background</strong> writes the composition to the character, <strong>Export as PNG</strong> downloads it instead. Saving needs <em>file upload</em> permission for your user. Compositions stay <strong>re-editable</strong>: reopening the editor restores the background and every layer exactly as you left them, so you can adjust a hero's artwork later instead of rebuilding it.</p>\n<p>The compact sheet layout shows no artwork, so its header has no background buttons. The artwork is only hidden, never deleted.</p>",
+        "format": 1,
+        "markdown": null
+      },
+      "video": {
+        "controls": true,
+        "volume": 0.5
+      },
+      "src": null,
+      "category": null,
+      "ownership": {
+        "default": -1,
+        "wgZHyBDokH67OG0A": 3
+      },
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "14.365",
+        "systemId": "mist-engine-fvtt",
+        "systemVersion": "14.5.1",
+        "createdTime": 1784880000000,
+        "modifiedTime": 1784880000000,
+        "lastModifiedBy": "wgZHyBDokH67OG0A"
+      },
+      "_key": "!journal.pages!TrgMWh3RyxxBkZoB.CustomBgEdDocP01"
     }
   ],
   "folder": null,

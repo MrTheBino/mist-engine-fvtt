@@ -88,9 +88,26 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         this.loadFellowshipThemecard();
     }
 
+    static ALTERNATE_LAYOUT = {
+        id: "mist-engine-fvtt.MistEngineCompactCharacterSheet",
+        icon: "fa-solid fa-compress",
+        label: "MIST_ENGINE.LABELS.SwitchToCompactSheet"
+    };
+
     /** @override */
   _getHeaderControls() {
     const controls = super._getHeaderControls();
+
+    const alternate = this.constructor.ALTERNATE_LAYOUT;
+    if (alternate) {
+      controls.unshift({
+        action: "switchSheetLayout",
+        icon: alternate.icon,
+        label: alternate.label,
+        visible: () => this.isEditable,
+        onClick: () => this.actor.setFlag("core", "sheetClass", alternate.id)
+      });
+    }
 
     controls.unshift({
       action: "openThemekit",
@@ -436,13 +453,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         // Restore scroll positions after render to prevent jumping
         this._restoreScrollPositions();
 
-        // If the actor has a custom background, set it as the background image of the sheet.
-        const el = this.element.querySelector?.(".window-content") ?? this.element;
-        if(this.actor.system.customBackground){
-            el.style.setProperty("background-image", `url("${this.actor.system.customBackground}")`);
-        } else {
-            el.style.removeProperty("background-image");
-        }
+        this._applyCustomBackground();
 
         const selectablePowertags = this.element.querySelectorAll('.pt-selectable');
         for (const tag of selectablePowertags) {
@@ -487,6 +498,20 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         this.enableMoveThemebookContextMenu();
     }
 
+
+    /**
+     * Paint the actor's custom background artwork onto the sheet body. The full
+     * sheet reserves `--litm-premium-left-margin` of empty space on the left for
+     * it; the compact sheet has no such column and overrides this with a no-op.
+     */
+    _applyCustomBackground() {
+        const el = this.element.querySelector?.(".window-content") ?? this.element;
+        if (this.actor.system.customBackground) {
+            el.style.setProperty("background-image", `url("${this.actor.system.customBackground}")`);
+        } else {
+            el.style.removeProperty("background-image");
+        }
+    }
 
     async handleFellowshipRelationshipSelectableClick(event) {
         event.preventDefault();

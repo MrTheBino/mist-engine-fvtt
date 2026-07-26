@@ -300,7 +300,12 @@
             "ToggleChallengeInversion": "Nur für diesen Wurf umkehren (Entscheidung des Spielleiters)",
             "InvertedChallengeSuffix": "umgekehrt"
         },
+        "SheetLabels": {
+            "CompactCharacter": "Charakter (kompakt)"
+        },
         "LABELS": {
+            "SwitchToCompactSheet": "Kompaktes Layout",
+            "SwitchToFullSheet": "Volles Layout mit Artwork",
             "CustomBackgroundEditor": {
                 "Button": "Editor für eigene Hintergründe",
                 "PickBackground": "Hintergrund wählen",

@@ -15,6 +15,68 @@
   }
 }
 
+&.sheet.actor.litm-character.litm-compact {
+  --litm-premium-left-margin: 0px;
+
+
+  .window-content {
+    background-image: url("../assets/backgrounds/default_sheet_background.webp");
+    padding: 4px 4px 0 4px;
+    row-gap: 0.25em;
+  }
+
+  h1.charname {
+    font-size: 24px;
+    text-align: left;
+  }
+
+  .litm-character-themebooks-container {
+    margin: 0;
+  }
+
+  .sheet-header.compact {
+    margin-bottom: 0;
+
+    .header-fields {
+      align-items: flex-start;
+    }
+
+    .portrait-img {
+      flex: 0 0 auto;
+      height: 110px;
+      width: 110px;
+      object-fit: cover;
+    }
+
+    .col-compact-identity {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1 1 160px;
+      min-width: 0;
+
+      &.edit-mode {
+        flex: 1 1 auto;
+      }
+
+      .short-description {
+        text-align: left;
+        flex-grow: 0;
+      }
+    }
+
+    .col-main {
+      flex: 0 0 150px;
+      min-width: 150px;
+    }
+
+    .col-status {
+      flex: 2 1 260px;
+      min-width: 0;
+    }
+  }
+}
+
 .litm-character-themebooks-container {
   margin: 5px;
   overflow-y: clip;

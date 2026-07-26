@@ -143,6 +143,7 @@
       "Applied": "Applied add-on \"{addon}\" to {challenge}."
     },
     "SheetLabels": {
+      "CompactCharacter": "Character (compact)",
       "ChallengeAddon": "Challenge Add-on",
       "JournalEntry": "Legend In The Mist Journal",
       "Rote": "Rote"
@@ -428,6 +429,8 @@
       "InvertedChallengeSuffix": "inverted"
     },
     "LABELS": {
+      "SwitchToCompactSheet": "Compact layout",
+      "SwitchToFullSheet": "Full layout with artwork",
       "Options": "Options",
       "DragCardHint": "Drag to reorder or move between tabs",
       "AddPowertag": "Powertags",

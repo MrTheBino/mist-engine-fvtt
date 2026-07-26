@@ -5,6 +5,7 @@ import { MistEngineItem } from "./documents/item.mjs";
 // Import sheet classes.
 import { MistEngineActorSheet } from "./sheets/actor-sheet.mjs";
 import { MistEngineLegendInTheMistCharacterSheet } from "./sheets/litm-character-sheet.mjs";
+import { MistEngineCompactCharacterSheet } from "./sheets/litm-character-compact-sheet.mjs";
 import { MistEngineLegendInTheMistNpcSheet } from "./sheets/litm-npc-sheet.mjs";
 import { MistEngineLegendInTheMistFellowshipThemecard } from "./sheets/litm-fellowship-themecard.mjs"
 import { MistEngineItemSheet } from "./sheets/item-sheet.mjs";
@@ -105,6 +106,16 @@ Hooks.once("init", function () {
       makeDefault: true,
       types: ["litm-character"],
       label: "MIST_ENGINE.SheetLabels.Actor",
+    }
+  );
+
+  foundry.documents.collections.Actors.registerSheet(
+    "mist-engine-fvtt",
+    MistEngineCompactCharacterSheet,
+    {
+      makeDefault: false,
+      types: ["litm-character"],
+      label: "MIST_ENGINE.SheetLabels.CompactCharacter",
     }
   );
 

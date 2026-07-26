@@ -7,6 +7,7 @@ export const preloadHandlebarsTemplates = async function () {
   return foundry.applications.handlebars.loadTemplates([
     // Actor partials.
     "systems/mist-engine-fvtt/templates/actor/parts/character-header.hbs",
+    "systems/mist-engine-fvtt/templates/actor/parts/compact-character-header.hbs",
     "systems/mist-engine-fvtt/templates/actor/parts/tab-litm-character.hbs",
     "systems/mist-engine-fvtt/templates/item/parts/themebook-powertag-line.hbs",
     "systems/mist-engine-fvtt/templates/item/parts/themebook-weakness-line.hbs",

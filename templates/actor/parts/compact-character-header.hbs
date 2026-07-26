@@ -1,0 +1,48 @@
+<div>
+    <header class="sheet-header compact {{#if system.editMode}}edit-mode{{else}}stylized-background{{/if}}">
+
+        {{#if system.editMode}}
+        <div class="header-fields">
+            <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"
+                height="120" />
+            <div class="col-compact-identity edit-mode">
+                <h1 class="charname">
+                    <input name="name" type="text" value="{{actor.name}}"
+                        placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}" />
+                </h1>
+                <div class="short-description"><input name="system.shortDescription" type="text"
+                        value="{{system.shortDescription}}"
+                        placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.ShortDescription'}}" /></div>
+            </div>
+        </div>
+        {{else}}
+        <div class="header-fields">
+            <img class="portrait-img" data-action="editImage" src="{{actor.img}}" data-edit="img"
+                title="{{actor.name}}" />
+            <div class="col-compact-identity">
+                <h1 class="charname">{{actor.name}}
+                    {{#if system.isOvercome}}<span class="overcome-badge" title="{{localize 'MIST_ENGINE.OVERCOME.HeroHint'}}">{{localize 'MIST_ENGINE.OVERCOME.Overcome'}}</span>{{/if}}
+                </h1>
+                <div class="short-description">{{system.shortDescription}}</div>
+            </div>
+            <div class="col-main">
+                <div class="flexcol">
+                    <button data-action="clickRoll" class="roll-button" data-roll-type="quick"><i
+                            class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.quick'}}</button>
+                    <button data-action="clickRoll" class="roll-button" data-roll-type="detailed"><i
+                            class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.detailed'}}</button>
+                    <button data-action="clickRoll" class="roll-button" data-roll-type="reaction"><i
+                            class="fa-solid fa-dice"></i> {{localize 'MIST_ENGINE.ROLL_TYPES.reaction'}}</button>
+                    <button data-action="clickSacrificeRoll" class="roll-button"><i
+                            class="fa-solid fa-heart-crack"></i> {{localize 'MIST_ENGINE.SACRIFICE.Title'}}</button>
+                </div>
+            </div>
+            <div class="col-status">
+                {{> 'systems/mist-engine-fvtt/templates/actor/parts/floating-tags-and-status-partial.hbs' useGrid=true
+                classCustomContainer="floating-status-container-character"}}
+            </div>
+        </div>
+        {{/if}}
+
+    </header>
+</div>
