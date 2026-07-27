@@ -16,15 +16,31 @@
  */
 export class ArrayFieldAdapter {
     /**
+     * Normalize an index argument to an integer.
+     *
+     * Callers pass either a number or the raw `dataset.index` string straight
+     * from the DOM, so both must be accepted. Everything that is not a whole
+     * number — `undefined` (missing data attribute), `""` (empty attribute),
+     * `"abc"`, `1.5` — becomes NaN and is rejected by `_resolve`. That matters:
+     * every bounds comparison below is false for NaN, and `splice(NaN, 1)`
+     * silently removes the *first* element (issue #125).
+     * @returns {number} the integer index, or NaN if the input is unusable.
+     */
+    static _toIndex(index) {
+        if (typeof index === "string" && index.trim() === "") return NaN;
+        const i = Number(index);
+        return Number.isInteger(i) ? i : NaN;
+    }
+
+    /**
      * Resolve and bounds-check the array element targeted by (doc, path, index).
      * @returns {Array|null} the live array, or null if the target is invalid.
      */
     static _resolve(doc, path, index) {
         if (!doc) return null;
         const arr = foundry.utils.getProperty(doc, path);
-        // `Number.isInteger` also rejects NaN, which every comparison below would
-        // let through — `splice(NaN, 1)` silently removes the *first* element.
-        if (!Array.isArray(arr) || !Number.isInteger(index) || index < 0 || index >= arr.length) return null;
+        const i = this._toIndex(index);
+        if (!Array.isArray(arr) || Number.isNaN(i) || i < 0 || i >= arr.length) return null;
         return arr;
     }
 
@@ -34,9 +50,10 @@ export class ArrayFieldAdapter {
      * @returns {Promise<boolean>} true if the update was applied.
      */
     static async set(doc, path, index, key, value) {
-        const arr = this._resolve(doc, path, index);
+        const i = this._toIndex(index);
+        const arr = this._resolve(doc, path, i);
         if (!arr) return false;
-        foundry.utils.setProperty(arr[index], key, value);
+        foundry.utils.setProperty(arr[i], key, value);
         await doc.update({ [path]: arr });
         return true;
     }
@@ -47,10 +64,11 @@ export class ArrayFieldAdapter {
      * @returns {Promise<boolean>} true if the update was applied.
      */
     static async toggle(doc, path, index, key) {
-        const arr = this._resolve(doc, path, index);
+        const i = this._toIndex(index);
+        const arr = this._resolve(doc, path, i);
         if (!arr) return false;
-        const current = foundry.utils.getProperty(arr[index], key) || false;
-        foundry.utils.setProperty(arr[index], key, !current);
+        const current = foundry.utils.getProperty(arr[i], key) || false;
+        foundry.utils.setProperty(arr[i], key, !current);
         await doc.update({ [path]: arr });
         return true;
     }
@@ -61,9 +79,10 @@ export class ArrayFieldAdapter {
      * @returns {Promise<boolean>} true if the update was applied.
      */
     static async setIndex(doc, path, index, value) {
-        const arr = this._resolve(doc, path, index);
+        const i = this._toIndex(index);
+        const arr = this._resolve(doc, path, i);
         if (!arr) return false;
-        arr[index] = value;
+        arr[i] = value;
         await doc.update({ [path]: arr });
         return true;
     }
@@ -74,9 +93,10 @@ export class ArrayFieldAdapter {
      * @returns {Promise<boolean>} true if the update was applied.
      */
     static async patch(doc, path, index, patch) {
-        const arr = this._resolve(doc, path, index);
+        const i = this._toIndex(index);
+        const arr = this._resolve(doc, path, i);
         if (!arr) return false;
-        foundry.utils.mergeObject(arr[index], patch, { inplace: true });
+        foundry.utils.mergeObject(arr[i], patch, { inplace: true });
         await doc.update({ [path]: arr });
         return true;
     }
@@ -98,9 +118,10 @@ export class ArrayFieldAdapter {
      * @returns {Promise<boolean>} true if an element was removed.
      */
     static async remove(doc, path, index) {
-        const arr = this._resolve(doc, path, index);
+        const i = this._toIndex(index);
+        const arr = this._resolve(doc, path, i);
         if (!arr) return false;
-        arr.splice(index, 1);
+        arr.splice(i, 1);
         await doc.update({ [path]: arr });
         return true;
     }

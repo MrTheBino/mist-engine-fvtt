@@ -2,6 +2,10 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.5.2
+- FIX: [Bug Report] On both versions of the character sheet, tags and statuses can not be deleted #126
+- FIX: [Bug Report] On either version of the character sheet, the tier of a status cannot be set anymore #127
+
 # 14.5.1 - Nymphetamine
 - FEAT: dedicated "Mist Engine" toolbar group for the system apps (Scene Tracker, Camping & Sojourns, Acting Together, How To Play) #91 (by aMediocreDad)
 - FEAT: per-roll weakness-to-power inversion in the roll dialog (Narrator's discretion) #35 (by aMediocreDad)
