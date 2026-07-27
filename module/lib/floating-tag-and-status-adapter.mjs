@@ -94,22 +94,25 @@ export class FloatingTagAndStatusAdapter {
     }
 
     static async handleTagStatusMightToggle(objectToUpdate, arrayIndex, mightIcon){
+        // callers pass raw `dataset.index` strings, so normalize before indexing
+        const i = ArrayFieldAdapter._toIndex(arrayIndex);
         const fts = objectToUpdate?.system?.floatingTagsAndStatuses;
-        if (!fts || arrayIndex < 0 || arrayIndex >= fts.length) return false;
+        if (!fts || Number.isNaN(i) || i < 0 || i >= fts.length) return false;
         // might toggles between 0 and 3
-        const newMight = (fts[arrayIndex].might || 0) === 0 ? 3 : 0;
-        return ArrayFieldAdapter.patch(objectToUpdate, this.PATH, arrayIndex, { might: newMight, mightIcon });
+        const newMight = (fts[i].might || 0) === 0 ? 3 : 0;
+        return ArrayFieldAdapter.patch(objectToUpdate, this.PATH, i, { might: newMight, mightIcon });
     }
 
     static async handleTagStatusToggle(objectToUpdate, arrayIndex){
+        const i = ArrayFieldAdapter._toIndex(arrayIndex);
         const fts = objectToUpdate?.system?.floatingTagsAndStatuses;
-        if (!fts || arrayIndex < 0 || arrayIndex >= fts.length) return false;
-        const newStatus = !(fts[arrayIndex].isStatus || false);
+        if (!fts || Number.isNaN(i) || i < 0 || i >= fts.length) return false;
+        const newStatus = !(fts[i].isStatus || false);
         // resetting value/might/markings to keep tag <-> status transitions consistent
         const patch = newStatus
             ? { isStatus: true, might: 0, markings: [true, false, false, false, false, false] }
             : { isStatus: false, value: 0, might: 0, markings: [false, false, false, false, false, false] };
-        return ArrayFieldAdapter.patch(objectToUpdate, this.PATH, arrayIndex, patch);
+        return ArrayFieldAdapter.patch(objectToUpdate, this.PATH, i, patch);
     }
 
     static async handleDeleteFloatingTagOrStatus(objectToUpdate, arrayIndex){
