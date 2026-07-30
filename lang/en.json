@@ -143,10 +143,18 @@
       "Applied": "Applied add-on \"{addon}\" to {challenge}."
     },
     "SheetLabels": {
+      "Character": "Character",
       "CompactCharacter": "Character (compact)",
       "ChallengeAddon": "Challenge Add-on",
+      "FellowshipThemecard": "Fellowship Theme Card",
+      "Item": "Item",
       "JournalEntry": "Legend In The Mist Journal",
-      "Rote": "Rote"
+      "Journey": "Journey",
+      "NPC": "NPC",
+      "Rote": "Rote",
+      "ShortChallengeItem": "Short Challenge / Vignette",
+      "Themebook": "Themebook",
+      "ThemekitItem": "Theme Kit"
     },
     "PLACEHOLDERS": {
       "QuestGoal": "Quest/Goal",
