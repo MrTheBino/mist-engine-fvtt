@@ -105,7 +105,7 @@ Hooks.once("init", function () {
     {
       makeDefault: true,
       types: ["litm-character"],
-      label: "MIST_ENGINE.SheetLabels.Actor",
+      label: "MIST_ENGINE.SheetLabels.Character",
     }
   );
 
@@ -122,7 +122,7 @@ Hooks.once("init", function () {
   foundry.documents.collections.Actors.registerSheet("mist-engine-fvtt", MistEngineLegendInTheMistNpcSheet, {
     makeDefault: true,
     types: ["litm-npc"],
-    label: "MIST_ENGINE.SheetLabels.Actor",
+    label: "MIST_ENGINE.SheetLabels.Challenge",
   });
 
   foundry.documents.collections.Actors.registerSheet("mist-engine-fvtt", MistEngineLegendInTheMistJourneySheet, {
