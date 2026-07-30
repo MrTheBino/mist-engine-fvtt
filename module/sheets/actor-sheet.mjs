@@ -118,11 +118,11 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         if (this.actor.system.editMode) {
             button.classList.add("fa-lock-open");
             button.classList.remove("fa-lock");
-            button.title = "Switch to Edit Mode";
+            button.title = "Switch to Game Mode";
         } else {
             button.classList.add("fa-lock");
             button.classList.remove("fa-lock-open");
-            button.title = "Switch to Game Mode";
+            button.title = "Switch to Edit Mode";
 
         }
         button.onclick = ev => this._onToggleEditMode(ev);
