@@ -331,6 +331,12 @@
       "LimitReachedHint": "A status has reached this Limit — the Challenge is overcome.",
       "Overcome": "Overcome"
     },
+    "OVERLAY": {
+      "SceneCaption": "Scene",
+      "SceneTagsLabel": "Scene Tags & Statuses",
+      "SelectedHint": "Selected by the Narrator",
+      "StoryCaption": "Story"
+    },
     "PLACEHOLDERS": {
       "ColorPicker": "Select a color",
       "Companion": "Companion",
@@ -461,6 +467,18 @@
       "Weaknesses": "Weaknesses (GM)"
     },
     "SETTINGS": {
+      "SceneTagsOverlayPosAbove": "Above the scene navigation",
+      "SceneTagsOverlayPosBelow": "Below the scene navigation",
+      "SceneTagsOverlayPosHotbar": "Above the macro hotbar",
+      "SceneTagsOverlayPosition": "Scene Tags Overlay Position",
+      "SceneTagsOverlayPositionHint": "Where the overlay is docked: at the top edge relative to the scene navigation, or at the bottom above the macro hotbar.",
+      "SceneTagsOverlayStoryAll": "Show to everyone",
+      "SceneTagsOverlayStoryGM": "Narrator only",
+      "SceneTagsOverlayStoryOff": "Do not show",
+      "SceneTagsOverlayStoryTags": "Story Tags in the Overlay",
+      "SceneTagsOverlayStoryTagsHint": "Whether the power and weakness tags of the scene's story themes appear in the overlay. Story themes are otherwise visible to the Narrator only.",
+      "ShowSceneTagsOverlay": "Show Scene Tags Overlay",
+      "ShowSceneTagsOverlayHint": "Show a read-only bar with the scene's tags and statuses at the top of the screen. Editing stays in the Scene Tracker.",
       "ThemekitSourcePacks": {
         "Explanation": "Check the compendiums that should provide theme kits in the selector. Leaving none checked — or checking all of them — allows every compendium, including any installed later (default behavior). The world-items checkbox above is independent: it simply toggles whether items in this world are offered.",
         "MenuHint": "Choose which compendiums — and whether items in the world — may supply theme kits in the theme kit selector.",

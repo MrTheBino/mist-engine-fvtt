@@ -94,19 +94,19 @@
       "Used": "bereits genutzt"
     },
     "CHALLENGE_ADDON": {
-      "Applied": "",
-      "ConfirmApply": "",
-      "ConfirmReapply": "",
-      "ConfirmTitle": "",
-      "IsStatus": "",
-      "OnlyOnChallenges": "",
-      "RatingIncrease": "",
-      "RolesPlaceholder": "",
-      "TagsAndStatuses": ""
+      "Applied": "Erweiterung „{addon}“ auf {challenge} angewendet.",
+      "ConfirmApply": "Die Erweiterung „{name}“ auf {challenge} anwenden? Dabei werden ihre Rollen, Tags, Status, Limits, Bedrohungen, Geheimnisse und Spezialmerkmale eingefügt und die Stufe der Herausforderung erhöht.",
+      "ConfirmReapply": "„{name}“ wurde bereits auf {challenge} angewendet. Trotzdem erneut anwenden? Die Erweiterung wird dann ein zweites Mal eingefügt.",
+      "ConfirmTitle": "Herausforderungs-Erweiterung anwenden",
+      "IsStatus": "Status?",
+      "OnlyOnChallenges": "Herausforderungs-Erweiterungen können nur auf eine Herausforderung (NSC) gezogen werden.",
+      "RatingIncrease": "Stufenerhöhung",
+      "RolesPlaceholder": "z. B. Rätsel, Pionier",
+      "TagsAndStatuses": "Tags & Status"
     },
     "CHANGELOG": {
-      "DontShowAgain": "",
-      "UpdatedTo": ""
+      "DontShowAgain": "Für diese Version nicht mehr anzeigen",
+      "UpdatedTo": "Aktualisiert auf Version"
     },
     "COLLAB": {
       "AffectsGroup": "Das Ergebnis betrifft die gesamte Gruppe.",
@@ -161,19 +161,19 @@
     },
     "HELP": {
       "BackpackSheet": "Rucksack-Einträge werden direkt auf dem Charakterbogen bearbeitet (Edit-Modus der Rucksack-Karte). Der Description-Tab liefert den Tooltip-Text.",
-      "ChallengeAddon": "",
-      "ChallengeTemplateDragNDrop": "",
-      "FelllowshipThemeCardExplanation": "",
-      "FellowshipCreation": "",
-      "GMTagShortCuts": "",
-      "MightyAspects": "",
-      "NoThemebooksInCharacter": "",
+      "ChallengeAddon": "Lege einen wiederverwendbaren Satz aus Rollen, Tags/Status, Limits, Bedrohungen, Geheimnissen und Spezialmerkmalen an. Ziehe diese Erweiterung auf eine Herausforderung, um sie einzufügen und deren Stufe zu erhöhen.",
+      "ChallengeTemplateDragNDrop": "Ziehe Herausforderungs- oder Vignetten-Items auf diesen NSC, um sie zu verwenden. Sie dienen als Vorlagen; das ursprüngliche Item wird nicht verändert.",
+      "FelllowshipThemeCardExplanation": "Eine Gemeinschafts-Themenkarte ist eine gemeinsame Ressource aller Mitglieder einer Gemeinschaft. Sie enthält Power-Tags, Weakness-Tags und Spezialverbesserungen. Die eigentlichen Tags werden in den Charakteren eingetragen, nicht hier — hier stehen nur die Fragen zu den Tags.",
+      "FellowshipCreation": "Es ist keine Gemeinschafts-Themenkarte zugewiesen. Erstelle eine neue oder weise einen vorhandenen Gemeinschafts-Themenkarten-Akteur zu.",
+      "GMTagShortCuts": "Text markieren, dann STRG+UMSCHALT+S = Status, STRG+UMSCHALT+X = Macht, STRG+UMSCHALT+A = Tag, STRG+UMSCHALT+Y = Fett",
+      "MightyAspects": "Aspekte, in denen diese Herausforderung auf Abenteuer- oder Größe-Stufe steht (alles andere ist Ursprung). Das sind KEINE Tags — sie sagen der Spielleitung, ob ein Macht-Unterschied (begünstigt/gefährdet) gilt; sie zählen nicht zum Wurf.",
+      "NoThemebooksInCharacter": "Keine Themebooks gefunden. Erstelle Themebook-Items und ziehe sie hierher.",
       "QuintessenceSheet": "Der Text dieser Quintessenz wird im Description-Tab bearbeitet — er erscheint als Tooltip auf dem Charakterbogen.",
       "Titles": {
-        "PlannedPowertag": "",
-        "PlannedStorytag": "",
-        "Powertag": "",
-        "RightClickToToggleBurnState": ""
+        "PlannedPowertag": "Geplanter Power- oder Weakness-Tag. Wähle ihn aus, um ihn aus der Liste der aktiven Tags auszublenden, bis du ihn einsetzen willst.",
+        "PlannedStorytag": "Geplanter Story-Tag. Wähle ihn aus, um ihn aus der Liste der aktiven Story-Tags auszublenden, bis du ihn einsetzen willst.",
+        "Powertag": "Power-Tag",
+        "RightClickToToggleBurnState": "Rechtsklick schaltet den Brennzustand um"
       }
     },
     "HOW_TO_PLAY": {
@@ -184,18 +184,18 @@
       "Actor": {
         "FloatingTagOrStatus": "Tags & Statuses"
       },
-      "AddPowertag": "",
-      "AddWeaknesstag": "",
-      "AssignExisting": "",
+      "AddPowertag": "Power-Tags",
+      "AddWeaknesstag": "Weakness-Tags",
+      "AssignExisting": "Vorhandene zuweisen",
       "Biography": "Biografie",
-      "Challenges": "",
-      "Characters": "",
-      "Consequence": "",
-      "Consequences": "",
-      "Create": "",
+      "Challenges": "Herausforderungen",
+      "Characters": "Charaktere",
+      "Consequence": "Konsequenz",
+      "Consequences": "Konsequenzen",
+      "Create": "Erstellen",
       "CreateAsNegative": "Als negativ erstellen",
-      "CreateFellowshipThemecard": "",
-      "CreateNew": "",
+      "CreateFellowshipThemecard": "Gemeinschafts-Themenkarte erstellen",
+      "CreateNew": "Neu erstellen",
       "CustomBackgroundEditor": {
         "Button": "Editor für eigene Hintergründe",
         "Center": "Zentrieren",
@@ -218,23 +218,23 @@
         "UploadOverlayArtwork": "Artwork hochladen"
       },
       "Description": "Beschreibung",
-      "DragCardHint": "",
+      "DragCardHint": "Ziehen, um umzusortieren oder zwischen Reitern zu verschieben",
       "Form": "Daten",
-      "GeneralConsequences": "",
+      "GeneralConsequences": "Allgemeine Konsequenzen",
       "Improve": "Verbessern",
       "Item": {
-        "TagStatusName": ""
+        "TagStatusName": "Name des Tags/Status"
       },
       "JourneyConsequences": "Vignetten & Konsequenzen",
       "MainThemebooks": "Themenbücher",
       "Milestone": "Meilenstein",
       "Name": "Name",
-      "Negative": "",
+      "Negative": "Negativ",
       "NoChallengesInScene": "Keine Herausforderungen gefunden. Platziere Herausforderungs-Akteure auf der aktuellen Szene, um sie hier zu sehen.",
       "NoCharactersInScene": "Keine Charaktere gefunden. Platziere Charakter-Akteure auf der aktuellen Szene, um sie hier zu sehen.",
       "Notes": "Notizen",
       "Npc": {
-        "Secrets": "",
+        "Secrets": "Geheimnisse",
         "SpecialFeatures": "Spezialmerkmale",
         "TagsAndStatuses": "Tags & Statuses",
         "ThreatsAndConsequences": "Bedrohungen & Konsequenzen",
@@ -244,85 +244,85 @@
         "limits": "Limits",
         "roles": "Rollen"
       },
-      "Options": "",
-      "Other": "",
-      "OtherThemebooks": "",
-      "Positive": "",
+      "Options": "Optionen",
+      "Other": "Sonstiges",
+      "OtherThemebooks": "Sonstiges",
+      "Positive": "Positiv",
       "Quantity": "Menge",
       "Quest": "Quest",
-      "RemoveCustomBackground": "",
+      "RemoveCustomBackground": "Eigenen Hintergrund entfernen",
       "SceneApp": {
-        "CharactersHeader": "",
-        "DiceRollModifiers": "",
-        "Header": "",
-        "MightModifiers": ""
+        "CharactersHeader": "Charaktere",
+        "DiceRollModifiers": "Wurf-Modifikatoren",
+        "Header": "Story-Tags & Status",
+        "MightModifiers": "Macht"
       },
-      "Select": "",
-      "SelectCustomBackground": "",
-      "SelectFellowshipThemecard": "",
-      "SelectedTagsAndStatuses": "",
+      "Select": "Auswählen",
+      "SelectCustomBackground": "Eigenen Hintergrund auswählen",
+      "SelectFellowshipThemecard": "Gemeinschafts-Themenkarte auswählen",
+      "SelectedTagsAndStatuses": "Ausgewählte Tags & Status",
       "SpecialImprovements": "Spezialverbesserungen",
       "SwitchToCompactSheet": "Kompaktes Layout",
       "SwitchToFullSheet": "Volles Layout mit Artwork",
       "Symbol": "Symbol",
-      "Themekit": "",
-      "ThreatsAndConsequences": "",
+      "Themekit": "Theme Kit",
+      "ThreatsAndConsequences": "Bedrohungen & Konsequenzen",
       "ToggleEditMode": "Bearbeitungsmodus umschalten",
       "Value": "Wert"
     },
     "MIGHT": {
-      "Adventure": "",
-      "Custom": "",
-      "Greatness": "",
-      "None": "",
-      "Origin": ""
+      "Adventure": "Abenteuer",
+      "Custom": "Eigene…",
+      "Greatness": "Größe",
+      "None": "— Keine —",
+      "Origin": "Ursprung"
     },
     "MOVES": {
       "LEGEND": {
         "detailed": {
-          "fail": "",
-          "neutral": "",
-          "success": ""
+          "fail": "Die Spielleitung entscheidet über eine für den Helden nachteilige Entwicklung der Erzählung und kann einen Tag oder Status so vergeben oder entfernen, dass es den Helden behindert.",
+          "neutral": "Erfolg (wie bei 10+) &amp; Konsequenzen wie bei der einfachen Aktion.<p> Die Aktion verläuft wie erwartet oder besser und erreicht ihr Ziel oder überwindet ein Hindernis. Die Spielleitung kann dir außerdem einen nützlichen Tag oder Status geben. </p> <p> Die Spielleitung entscheidet über eine für den Helden nachteilige Entwicklung der Erzählung und kann einen Tag oder Status so vergeben oder entfernen, dass es den Helden behindert. </p><p>Gib deine Power aus: <ul> <li>Einen Tag hinzufügen oder streichen (2 Power)</li> <li>Einen Status geben oder verringern (1 Power pro Stufe)</li> <li>Ein wertvolles Detail entdecken (1 Power)</li> </ul><p>Weitere Möglichkeiten auf Seite 154.</p></p>",
+          "success": "Gib deine Power aus: <ul> <li>Einen Tag hinzufügen oder streichen (2 Power)</li> <li>Einen Status geben oder verringern (1 Power pro Stufe)</li> <li>Ein wertvolles Detail entdecken (1 Power)</li> </ul><p>Weitere Möglichkeiten auf Seite 154.</p><p>Keine Konsequenzen.</p>"
         },
         "quick": {
-          "fail": "",
-          "neutral": "",
-          "success": ""
+          "fail": "Die Spielleitung entscheidet über eine für den Helden nachteilige Entwicklung der Erzählung und kann einen Tag oder Status so vergeben oder entfernen, dass es den Helden behindert.",
+          "neutral": "<p> Die Aktion verläuft wie erwartet oder besser und erreicht ihr Ziel oder überwindet ein Hindernis. Die Spielleitung kann dir außerdem einen nützlichen Tag oder Status geben. </p> <p> Die Spielleitung entscheidet über eine für den Helden nachteilige Entwicklung der Erzählung und kann einen Tag oder Status so vergeben oder entfernen, dass es den Helden behindert. </p>",
+          "success": "Die Aktion verläuft wie erwartet oder besser und erreicht ihr Ziel oder überwindet ein Hindernis. Die Spielleitung kann dir außerdem einen nützlichen Tag oder Status geben."
         },
         "reaction": {
-          "fail": "",
-          "neutral": "",
-          "success": ""
+          "fail": "Erleide die Konsequenzen unverändert",
+          "neutral": "Du hast Erfolg und darfst PWR Power ausgeben, allerdings nur, um die Konsequenzen abzumildern.",
+          "success": "Du hast Erfolg und darfst PWR+1 Power für einen beliebigen Effekt ausgeben."
         }
       }
     },
     "NOTIFICATIONS": {
-      "AddedPowertag": "",
-      "AddedSpecialImprovement": "",
-      "AddedThemekit": "",
-      "AddedWeaknessTag": "",
-      "AssignedThemekit": "",
+      "AddedPowertag": "Power-Tag {tagName} hinzugefügt",
+      "AddedSpecialImprovement": "Spezialverbesserung {siName} hinzugefügt",
+      "AddedThemekit": "Theme Kit {themekitName} zu Akteur {actorName} hinzugefügt",
+      "AddedWeaknessTag": "Weakness-Tag {tagName} hinzugefügt",
+      "AssignedThemekit": "Theme Kit {themekitName} dem Charakter {characterName} zugewiesen",
       "NoCharacterAssignedForThemekitSelection": "Kein Charakter zugewiesen. Weise deinem Benutzer einen Charakter zu, um die Theme-Kit-Auswahl zu öffnen.",
-      "NoFellowshipThemecardFound": "",
-      "NotAllowedToUploadFilesForCustomBackground": "",
-      "SetQuest": ""
+      "NoFellowshipThemecardFound": "Keine Gemeinschafts-Themenkarten-Akteure gefunden. Erstelle zuerst eine über „Neu erstellen“.",
+      "NotAllowedToUploadFilesForCustomBackground": "Du hast keine Berechtigung, Dateien hochzuladen. Bitte wende dich an deine Spielleitung.",
+      "SetQuest": "Quest auf {quest} gesetzt"
     },
     "NPC": {
-      "CustomMightLevel": "",
-      "MightAspect": "",
-      "MightAspectPlaceholder": "",
-      "MightIcon": "",
-      "MightLevel": "",
-      "MightyAspects": "",
-      "Secrets": "",
-      "SpecialFeatures": "",
-      "TagsAndStatuses": "",
+      "CustomMightLevel": "Eigene Stufe",
+      "MightAspect": "Aspekt",
+      "MightAspectPlaceholder": "z. B. Größe, Magie, Einfluss, Anzahl",
+      "MightIcon": "Symbol",
+      "MightLevel": "Stufe",
+      "MightyAspects": "Macht-Aspekte",
+      "Secrets": "Geheimnisse",
+      "SpecialFeatures": "Spezialmerkmale",
+      "TagsAndStatuses": "Tags & Status",
       "TagsStatus": {
         "Symbols": {
-          "Adventure": "",
-          "Greatness": "",
-          "Origin": "",
-          "Variable": ""
+          "Adventure": "Abenteuer",
+          "Greatness": "Größe",
+          "Origin": "Ursprung",
+          "Variable": "Veränderlich"
         }
       }
     },
@@ -331,19 +331,25 @@
       "LimitReachedHint": "Ein Status hat dieses Limit erreicht — die Herausforderung ist überwunden.",
       "Overcome": "Überwunden"
     },
+    "OVERLAY": {
+      "SceneCaption": "Szene",
+      "SceneTagsLabel": "Szenen-Tags & Statuses",
+      "SelectedHint": "Von der Erzählerin ausgewählt",
+      "StoryCaption": "Story"
+    },
     "PLACEHOLDERS": {
       "ColorPicker": "Wählen Sie eine Farbe aus",
       "Companion": "Kompanion",
       "Description": "Beschreibung",
       "Name": "Name",
       "QuestGoal": "Quest/Ziel",
-      "Role": "",
+      "Role": "Rolle",
       "ShortDescription": "Kurze Beschreibung",
       "SpecialImprovementDescription": "Spezialverbesserung Beschreibung",
       "SpecialImprovementName": "Spezialverbesserung Name",
       "Tag": "Tag",
-      "Tags": "",
-      "ThemebookStory": ""
+      "Tags": "Tags",
+      "ThemebookStory": "Story"
     },
     "PLAYER_TUTORIAL": {
       "BackpackContent": "Dein Rucksack enthält Story-Tags für Ausrüstung und nützliche Gegenstände. Füge einen Gegenstand hinzu und wähle ihn bei einem Wurf aus, um ihn einzusetzen. Manche Gegenstände laufen beim Lagern ab — der Erzähler sagt dir Bescheid.",
@@ -382,17 +388,17 @@
       "WelcomeTitle": "Willkommen, Held"
     },
     "PROSEMIRROR": {
-      "MarkAsStatus": "",
-      "MarkAsTag": ""
+      "MarkAsStatus": "Als Status markieren",
+      "MarkAsTag": "Als Tag markieren"
     },
     "QUESTIONS": {
-      "ConfirmDeletion": "",
-      "ConfirmDeletionTitle": "",
-      "DeleteChallenge": "",
-      "DeleteItem": "",
-      "RemoveCustomBackgroundConfirmation": "",
-      "RemoveFellowshipThemecardConfirmation": "",
-      "RemoveThemekitConfirmation": ""
+      "ConfirmDeletion": "Soll das wirklich gelöscht werden?",
+      "ConfirmDeletionTitle": "Löschen bestätigen",
+      "DeleteChallenge": "Soll diese Herausforderung wirklich gelöscht werden?",
+      "DeleteItem": "Soll dieses Item wirklich gelöscht werden?",
+      "RemoveCustomBackgroundConfirmation": "Soll der eigene Hintergrund wirklich entfernt werden? Das Bild wird nicht gelöscht, sondern nur von diesem Charakter entfernt.",
+      "RemoveFellowshipThemecardConfirmation": "Soll die Zuweisung der Gemeinschafts-Themenkarte wirklich aufgehoben werden? Der Themenkarten-Akteur wird nicht gelöscht, sondern nur von diesem Charakter getrennt.",
+      "RemoveThemekitConfirmation": "Soll dieses Theme Kit wirklich entfernt werden? Das Theme-Kit-Item wird nicht gelöscht, sondern nur vom Themebook dieses Charakters getrennt."
     },
     "ROLL": {
       "CannotInvertBurningTag": "Ein zum Verbrennen markiertes Tag kann für diesen Wurf nicht invertiert werden.",
@@ -446,21 +452,33 @@
     },
     "SCENE_APP": {
       "NoActiveScene": "Der Szenen-Tracker benötigt eine aktive Szene. Aktiviere zuerst eine Szene.",
-      "NoJourneyAssigned": "",
-      "NoStoryThemes": "",
-      "OnlyStoryThemes": "",
-      "OpenJourney": "",
-      "OpenStoryTheme": "",
-      "RemoveStoryTheme": "",
-      "TabActors": "",
-      "TabJourneys": "",
-      "TabStoryThemes": "",
+      "NoJourneyAssigned": "Keine Reise zugewiesen. Ziehe eine Reise aus der Seitenleiste auf dieses Fenster, um sie der Szene zuzuweisen.",
+      "NoStoryThemes": "Noch keine Story-Themen. Ziehe ein Story-Thema aus der Seitenleiste oder einem Kompendium auf dieses Fenster, um es der Szene hinzuzufügen.",
+      "OnlyStoryThemes": "Nur Themebooks, die als Story-Thema gekennzeichnet sind, können hier hinzugefügt werden.",
+      "OpenJourney": "Reise-Bogen öffnen",
+      "OpenStoryTheme": "Story-Thema öffnen",
+      "RemoveStoryTheme": "Story-Thema entfernen",
+      "TabActors": "Akteure",
+      "TabJourneys": "Reisen",
+      "TabStoryThemes": "Story-Themen",
       "Title": "Szenen-Tags",
-      "UnassignJourney": "",
-      "WeaknessToggleHint": "",
-      "Weaknesses": ""
+      "UnassignJourney": "Reise-Zuweisung aufheben",
+      "WeaknessToggleHint": "Klicken, um diese Weakness in der Szene aktiv zu schalten",
+      "Weaknesses": "Weaknesses (SL)"
     },
     "SETTINGS": {
+      "SceneTagsOverlayPosAbove": "Über der Szenennavigation",
+      "SceneTagsOverlayPosBelow": "Unter der Szenennavigation",
+      "SceneTagsOverlayPosHotbar": "Über der Makro-Leiste",
+      "SceneTagsOverlayPosition": "Position der Szenen-Tag-Leiste",
+      "SceneTagsOverlayPositionHint": "Wo die Leiste angedockt wird: oben relativ zur Szenennavigation oder unten über der Makro-Leiste.",
+      "SceneTagsOverlayStoryAll": "Allen anzeigen",
+      "SceneTagsOverlayStoryGM": "Nur Erzählerin",
+      "SceneTagsOverlayStoryOff": "Nicht anzeigen",
+      "SceneTagsOverlayStoryTags": "Story-Tags in der Leiste",
+      "SceneTagsOverlayStoryTagsHint": "Ob die Power- und Weakness-Tags der Story-Themes der Szene in der Leiste erscheinen. Story-Themes sind sonst nur für die Erzählerin sichtbar.",
+      "ShowSceneTagsOverlay": "Szenen-Tag-Leiste anzeigen",
+      "ShowSceneTagsOverlayHint": "Zeigt am oberen Bildschirmrand eine reine Anzeigeleiste mit den Tags und Statuses der Szene. Bearbeitet wird weiterhin im Szenen-Tracker.",
       "ThemekitSourcePacks": {
         "Explanation": "Kreuze die Kompendien an, die Themekits liefern sollen. Wenn du keins ankreuzt — oder alle ankreuzt — sind alle Kompendien erlaubt, auch später installierte (Standardverhalten). Die Weltgegenstände-Checkbox darüber ist unabhängig: Sie schaltet nur um, ob Gegenstände dieser Welt angeboten werden.",
         "MenuHint": "Wähle, welche Kompendien — und ob Gegenstände in der Welt — Themekits für die Themekit-Auswahl liefern dürfen.",
@@ -475,46 +493,46 @@
       }
     },
     "SheetLabels": {
-      "Challenge": "",
-      "ChallengeAddon": "",
-      "Character": "",
+      "Challenge": "Herausforderung",
+      "ChallengeAddon": "Herausforderungs-Erweiterung",
+      "Character": "Charakter",
       "CompactCharacter": "Charakter (kompakt)",
-      "FellowshipThemecard": "",
-      "Item": "",
-      "JournalEntry": "",
-      "Journey": "",
-      "Rote": "",
-      "ShortChallengeItem": "",
-      "Themebook": "",
-      "ThemekitItem": ""
+      "FellowshipThemecard": "Gemeinschafts-Themenkarte",
+      "Item": "Item",
+      "JournalEntry": "Legend-In-The-Mist-Journal",
+      "Journey": "Reise",
+      "Rote": "Rote",
+      "ShortChallengeItem": "Kurz-Herausforderung / Vignette",
+      "Themebook": "Themebook",
+      "ThemekitItem": "Theme Kit"
     },
     "THEMEBOOKS": {
-      "Backpack": "",
-      "Fellowship": "",
-      "FellowshipRelationship": "",
+      "Backpack": "Rucksack",
+      "Fellowship": "Gemeinschaft",
+      "FellowshipRelationship": "Gemeinschafts-Beziehung",
       "Options": {
-        "IsStoryTheme": ""
+        "IsStoryTheme": "Ist Story-Thema"
       },
-      "Quintessences": "",
+      "Quintessences": "Quintessenzen",
       "Rotes": "Rotes",
-      "SpecialImprovements": ""
+      "SpecialImprovements": "Spezialverbesserungen"
     },
     "THEMEKITS": {
-      "AddThemekit": "",
-      "AssignThemekit": "",
+      "AddThemekit": "Theme Kit hinzufügen",
+      "AssignThemekit": "Theme Kit zuweisen",
       "FilteredForThemebook": "Zeigt Kits für „{themebook}“",
-      "NoThemekitsAvailable": "",
+      "NoThemekitsAvailable": "Keine Theme Kits verfügbar. Erstelle zuerst Theme-Kit-Items.",
       "NoThemekitsForThemebook": "Keine Themekits gehören zum Themebook „{themebook}“. Nutze „Alle anzeigen“, um alle verfügbaren Kits zu sehen.",
-      "OpenThemekitSelection": "",
-      "Powertags": "",
-      "Quest": "",
-      "RemoveThemekit": "",
-      "SelectThemekit": "",
+      "OpenThemekitSelection": "Theme-Kit-Auswahl öffnen",
+      "Powertags": "Power-Tags",
+      "Quest": "Quest",
+      "RemoveThemekit": "Theme Kit vom Charakter entfernen",
+      "SelectThemekit": "Theme Kit auswählen",
       "ShowAllThemekits": "Alle anzeigen",
       "ShowFilteredThemekits": "Nur „{themebook}“ anzeigen",
       "ShowingAllThemekits": "Alle Themekits werden angezeigt",
-      "SpecialImprovements": "",
-      "WeaknessTags": ""
+      "SpecialImprovements": "Spezialverbesserungen",
+      "WeaknessTags": "Weakness-Tags"
     },
     "TUTORIAL": {
       "CampingContent": "Führt eine Lager- oder Aufenthaltsszene aus (Core Book S. 179): Lagerplatz-Tags, Ausruhen / Nachdenken / Lager-Aktion je Held und die Rucksack-Durchsicht zum Ablaufen von Story-Tags. Benötigt ebenfalls eine aktive Szene.",
@@ -560,14 +578,14 @@
     },
     "Item": {
       "backpack": "Rucksack",
-      "challenge-addon": "",
+      "challenge-addon": "Herausforderungs-Erweiterung",
       "item": "Gegenstand",
       "quintessence": "Quintessenz",
       "rote": "Rote",
       "scene-data": "Szenendaten",
-      "shortchallenge": "",
+      "shortchallenge": "Kurz-Herausforderung / Vignette",
       "themebook": "Themenbuch",
-      "themekit": ""
+      "themekit": "Theme Kit"
     }
   }
 }

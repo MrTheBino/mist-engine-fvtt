@@ -1,0 +1,155 @@
+// Read-only Tags & Statuses bar docked into #ui-top (module/apps/scene-tags-overlay.mjs).
+//
+// #ui-top lives inside #ui-middle, which is 60% wide, centred and carries
+// `pointer-events: none`. That inherited value is load-bearing here: it is what
+// makes the bar click-through, so the canvas stays usable underneath. Do NOT
+// set `pointer-events: auto` on the container — the bar is display-only.
+#litm-scene-tags-overlay {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 4px 0;
+
+    // Nothing to show: keep the element (so a later render can fill it) but
+    // take it out of the layout entirely.
+    &.litm-sto-empty {
+        display: none;
+    }
+
+    // Docked in #ui-bottom right above the macro hotbar: the breathing room
+    // belongs between bar and hotbar, and the bar must not eat the width the
+    // hotbar needs.
+    &.litm-sto-at-hotbar {
+        width: auto;
+        max-width: 100%;
+        margin: 0 0 6px;
+    }
+}
+
+.litm-sto {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    max-width: 100%;
+    padding: 5px 12px;
+    border-radius: 6px;
+
+    // Parchment-ish plate, dark enough to stay readable over bright scene art
+    // and light enough not to fight the tag colours.
+    background: linear-gradient(
+        to bottom,
+        rgba(28, 22, 16, 0.82),
+        rgba(18, 14, 10, 0.88)
+    );
+    border: 1px solid rgba(115, 74, 51, 0.85);
+    box-shadow:
+        inset 0 1px 0 rgba(239, 214, 147, 0.14),
+        0 3px 10px rgba(0, 0, 0, 0.45);
+}
+
+.litm-sto-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.litm-sto-caption {
+    flex-shrink: 0;
+    font-family: var(--litm-font-heading);
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: rgba(239, 214, 147, 0.72);
+    // Optical alignment with the pill text, which sits a touch lower.
+    padding-top: 1px;
+}
+
+.litm-sto-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    // Roomier than it looks necessary: the selection ellipse is drawn OUTSIDE
+    // the pill, and this gap is what keeps neighbouring rings from colliding.
+    gap: 7px 10px;
+    min-width: 0;
+}
+
+// Pill styling mirrors .fts-input-name in _tags.scss so the bar reads as the
+// same component family as the Scene App and the character sheets.
+.litm-sto-tag {
+    padding: 1px 8px;
+    border-radius: 3px 2px 3px 2px;
+    font-family: var(--litm-font-text);
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: $c-dark;
+    white-space: nowrap;
+
+    .might-icon {
+        @include might-icon-def;
+        margin-right: 3px;
+    }
+
+    &.tag {
+        background-color: $c-tag-yellow;
+        border: 1px solid rgba(100, 55, 8, 0.65);
+        box-shadow:
+            inset 0 1px 2px rgba(255, 205, 90, 0.12),
+            0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    &.status {
+        background-color: $c-tag-green;
+        border: 1px solid rgba(20, 60, 18, 0.55);
+        box-shadow:
+            inset 0 1px 2px rgba(100, 200, 80, 0.12),
+            inset 0 -1px 2px rgba(10, 40, 8, 0.15);
+    }
+
+    &.negative,
+    &.status.negative {
+        background-color: $c-tag-orange;
+        border: 1px solid rgba(100, 55, 8, 0.55);
+        box-shadow:
+            inset 0 1px 2px rgba(255, 205, 90, 0.12),
+            inset 0 -1px 2px rgba(60, 30, 5, 0.15);
+    }
+
+    // Story-theme weakness tags: same convention as the character overlay —
+    // orange and italic.
+    &.weakness {
+        background-color: $c-tag-orange;
+        border: 1px solid rgba(100, 55, 8, 0.55);
+        font-style: italic;
+    }
+
+    // Selected by the Narrator in the Scene App. Same hand-drawn ellipse the
+    // sheets and the Scene App use (.fts-selectable.selected), but recoloured:
+    // the source SVG is dark ink, which would vanish where the ring extends
+    // past the pill onto the dark plate. A mask keeps the drawn shape and lets
+    // the parchment gold show through instead.
+    &.selected {
+        position: relative;
+        z-index: 1;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: -5px -8px;
+            background-color: $c-tag-yellow;
+            mask: url("../assets/circle-selection.svg") no-repeat center / 100% 100%;
+            -webkit-mask: url("../assets/circle-selection.svg") no-repeat center / 100% 100%;
+            pointer-events: none;
+        }
+    }
+}
+
+// Second row sits visually subordinate to the scene tags.
+.litm-sto-story {
+    .litm-sto-tag {
+        font-size: 0.8rem;
+        opacity: 0.92;
+    }
+}

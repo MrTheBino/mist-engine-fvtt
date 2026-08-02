@@ -94,19 +94,19 @@
       "Used": "déjà utilisé"
     },
     "CHALLENGE_ADDON": {
-      "Applied": "",
-      "ConfirmApply": "",
-      "ConfirmReapply": "",
-      "ConfirmTitle": "",
-      "IsStatus": "",
-      "OnlyOnChallenges": "",
-      "RatingIncrease": "",
-      "RolesPlaceholder": "",
-      "TagsAndStatuses": ""
+      "Applied": "Extension « {addon} » appliquée à {challenge}.",
+      "ConfirmApply": "Appliquer l'extension « {name} » à {challenge} ? Ses rôles, étiquettes, statuts, limites, menaces, secrets et caractéristiques spéciales seront fusionnés et le niveau du défi augmentera.",
+      "ConfirmReapply": "« {name} » a déjà été appliquée à {challenge}. L'appliquer quand même ? Elle sera fusionnée une seconde fois.",
+      "ConfirmTitle": "Appliquer une extension de défi",
+      "IsStatus": "Statut ?",
+      "OnlyOnChallenges": "Les extensions de défi ne peuvent être déposées que sur un défi (PNJ).",
+      "RatingIncrease": "Augmentation de niveau",
+      "RolesPlaceholder": "p. ex. mystère, sapeur",
+      "TagsAndStatuses": "Étiquettes et statuts"
     },
     "CHANGELOG": {
-      "DontShowAgain": "",
-      "UpdatedTo": ""
+      "DontShowAgain": "Ne plus afficher pour cette version",
+      "UpdatedTo": "Mis à jour vers la version"
     },
     "COLLAB": {
       "AffectsGroup": "Le résultat affecte tout le groupe.",
@@ -131,7 +131,7 @@
       "YourTag": "Votre étiquette"
     },
     "CONTROLS": {
-      "GroupTitle": ""
+      "GroupTitle": "Outils Mist Engine"
     },
     "DETAILED_SPEND": {
       "AddTag": "Ajouter / barrer / récupérer une étiquette",
@@ -161,66 +161,66 @@
     },
     "HELP": {
       "BackpackSheet": "Les entrées du sac à dos se modifient directement sur la fiche de personnage (mode édition de la carte Sac à Dos). Utilisez l'onglet Description pour le texte d'infobulle.",
-      "ChallengeAddon": "",
+      "ChallengeAddon": "Définissez un ensemble réutilisable de rôles, étiquettes/statuts, limites, menaces, secrets et caractéristiques spéciales. Déposez cette extension sur un défi pour la fusionner et augmenter son niveau.",
       "ChallengeTemplateDragNDrop": "Faites glisser et déposez des items de défi / vignette sur ce PNJ pour les utiliser. Ils servent de modèles et ne modifieront pas l'item original.",
-      "FelllowshipThemeCardExplanation": "",
+      "FelllowshipThemeCardExplanation": "Une carte de thème de communauté est une ressource partagée par tous les membres d'une communauté. Elle contient des étiquettes de pouvoir, des étiquettes de faiblesse et des améliorations spéciales. Les étiquettes elles-mêmes se saisissent dans les personnages, pas ici — ici ne figurent que les questions des étiquettes.",
       "FellowshipCreation": "Créez un Acteur Carte de Communauté et assignez-en la propriété à tous les membres du groupe pour le voir ici.",
-      "GMTagShortCuts": "",
-      "MightyAspects": "",
+      "GMTagShortCuts": "Sélectionnez le texte, puis CTRL+MAJ+S = Statut, CTRL+MAJ+X = Puissance, CTRL+MAJ+A = Étiquette, CTRL+MAJ+Y = Gras",
+      "MightyAspects": "Aspects dans lesquels ce défi est de niveau Aventure ou Grandeur (tout le reste est Origine). Ce ne sont PAS des étiquettes : elles indiquent au Narrateur si un écart de Puissance (favorisé/en péril) s'applique ; elles ne s'ajoutent pas au jet.",
       "NoThemebooksInCharacter": "Aucun Livret de Thème trouvé. Créez des Items Livret de Thème et déposez-les ici.",
       "QuintessenceSheet": "Modifiez le texte de cette quintessence dans l'onglet Description — il s'affiche en infobulle sur la fiche de personnage.",
       "Titles": {
-        "PlannedPowertag": "",
-        "PlannedStorytag": "",
+        "PlannedPowertag": "Étiquette de pouvoir ou de faiblesse planifiée. Sélectionnez-la pour la masquer de la liste des étiquettes actives jusqu'à ce que vous vouliez l'utiliser.",
+        "PlannedStorytag": "Étiquette d'histoire planifiée. Sélectionnez-la pour la masquer de la liste des étiquettes d'histoire actives jusqu'à ce que vous vouliez l'utiliser.",
         "Powertag": "Trait de Pouvoir",
         "RightClickToToggleBurnState": "Clic droit pour basculer l'état Brûlé"
       }
     },
     "HOW_TO_PLAY": {
-      "Title": ""
+      "Title": "Comment jouer"
     },
     "LABELS": {
       "Abandon": "Abandon",
       "Actor": {
         "FloatingTagOrStatus": "Traits & Conditions"
       },
-      "AddPowertag": "",
-      "AddWeaknesstag": "",
-      "AssignExisting": "",
+      "AddPowertag": "Étiquettes de Pouvoir",
+      "AddWeaknesstag": "Étiquettes de Faiblesse",
+      "AssignExisting": "Assigner un existant",
       "Biography": "Biographie",
-      "Challenges": "",
-      "Characters": "",
-      "Consequence": "",
+      "Challenges": "Défis",
+      "Characters": "Personnages",
+      "Consequence": "Conséquence",
       "Consequences": "Conséquences",
-      "Create": "",
-      "CreateAsNegative": "",
-      "CreateFellowshipThemecard": "",
-      "CreateNew": "",
+      "Create": "Créer",
+      "CreateAsNegative": "Créer comme négatif",
+      "CreateFellowshipThemecard": "Créer une carte de thème de communauté",
+      "CreateNew": "Créer un nouveau",
       "CustomBackgroundEditor": {
-        "Button": "",
-        "Center": "",
-        "DeleteOverlay": "",
-        "ExportPng": "",
-        "Flip": "",
-        "FlipHint": "",
-        "FontColor": "",
-        "GuideLabel": "",
-        "HelpText": "",
-        "LoadImageFailed": "",
-        "NoWorldId": "",
-        "PickBackground": "",
-        "Reset": "",
-        "SaveFailed": "",
-        "SavedSuccess": "",
-        "Scale": "",
-        "SetAsCustomBackground": "",
-        "ToggleGuide": "",
-        "UploadOverlayArtwork": ""
+        "Button": "Éditeur d'arrière-plan personnalisé",
+        "Center": "Centrer",
+        "DeleteOverlay": "Retirer l'illustration",
+        "ExportPng": "Exporter en PNG",
+        "Flip": "Retourner",
+        "FlipHint": "Miroir horizontal de l'illustration sélectionnée",
+        "FontColor": "Couleur du nom",
+        "GuideLabel": "Colonne nom et portrait",
+        "HelpText": "Ajoutez des illustrations par téléversement, collage (Ctrl+V) ou glisser-déposer sur le canevas. Un clic sélectionne un calque, le glisser le déplace, la molette zoome au curseur, les flèches ajustent (Maj = 10 px), Suppr retire. La bande ombrée et l'aperçu du nom ne sont que des repères — ils ne sont jamais exportés. L'enregistrement requiert la permission de téléverser des fichiers.",
+        "LoadImageFailed": "Impossible de charger cette image.",
+        "NoWorldId": "Impossible de déterminer l'identifiant du monde.",
+        "PickBackground": "Choisir un arrière-plan",
+        "Reset": "Réinitialiser",
+        "SaveFailed": "Échec de l'enregistrement de l'arrière-plan personnalisé. Voir la console pour les détails.",
+        "SavedSuccess": "Arrière-plan personnalisé enregistré.",
+        "Scale": "Échelle",
+        "SetAsCustomBackground": "Définir comme arrière-plan personnalisé",
+        "ToggleGuide": "Repères",
+        "UploadOverlayArtwork": "Téléverser une illustration"
       },
       "Description": "Description",
-      "DragCardHint": "",
+      "DragCardHint": "Glissez pour réordonner ou déplacer entre les onglets",
       "Form": "Données",
-      "GeneralConsequences": "",
+      "GeneralConsequences": "Conséquences générales",
       "Improve": "Améliorer",
       "Item": {
         "TagStatusName": "Nom du Trait/de la Condition"
@@ -234,7 +234,7 @@
       "NoCharactersInScene": "Aucun personnage trouvé. Placez des acteurs de type personnage sur la scène actuelle pour les voir ici.",
       "Notes": "Notes",
       "Npc": {
-        "Secrets": "",
+        "Secrets": "Secrets",
         "SpecialFeatures": "Caractéristiques Spéciales",
         "TagsAndStatuses": "Traits & Conditions",
         "ThreatsAndConsequences": "Menaces & Conséquences",
@@ -244,38 +244,38 @@
         "limits": "Limites",
         "roles": "Rôles"
       },
-      "Options": "",
-      "Other": "",
-      "OtherThemebooks": "",
+      "Options": "Options",
+      "Other": "Autres",
+      "OtherThemebooks": "Autres",
       "Positive": "Positif",
       "Quantity": "Quantité",
       "Quest": "Quête",
-      "RemoveCustomBackground": "",
+      "RemoveCustomBackground": "Retirer l'arrière-plan personnalisé",
       "SceneApp": {
         "CharactersHeader": "Personnages",
         "DiceRollModifiers": "Modificateurs de Jet de Dés",
         "Header": "Traits & Conditions de Scène",
         "MightModifiers": "Écart de Puissance"
       },
-      "Select": "",
-      "SelectCustomBackground": "",
-      "SelectFellowshipThemecard": "",
+      "Select": "Sélectionner",
+      "SelectCustomBackground": "Sélectionner un arrière-plan personnalisé",
+      "SelectFellowshipThemecard": "Sélectionner une carte de thème de communauté",
       "SelectedTagsAndStatuses": "Traits & Conditions Sélectionnés",
       "SpecialImprovements": "Améliorations Spéciales",
-      "SwitchToCompactSheet": "",
-      "SwitchToFullSheet": "",
+      "SwitchToCompactSheet": "Mise en page compacte",
+      "SwitchToFullSheet": "Mise en page complète avec illustration",
       "Symbol": "Symbole",
-      "Themekit": "",
+      "Themekit": "Kit de thème",
       "ThreatsAndConsequences": "Menaces & Conséquences",
       "ToggleEditMode": "Basculer en Mode Édition",
       "Value": "Valeur"
     },
     "MIGHT": {
-      "Adventure": "",
-      "Custom": "",
-      "Greatness": "",
-      "None": "",
-      "Origin": ""
+      "Adventure": "Aventure",
+      "Custom": "Personnalisé…",
+      "Greatness": "Grandeur",
+      "None": "— Aucun —",
+      "Origin": "Origine"
     },
     "MOVES": {
       "LEGEND": {
@@ -297,24 +297,24 @@
       }
     },
     "NOTIFICATIONS": {
-      "AddedPowertag": "",
-      "AddedSpecialImprovement": "",
-      "AddedThemekit": "",
-      "AddedWeaknessTag": "",
-      "AssignedThemekit": "",
-      "NoCharacterAssignedForThemekitSelection": "",
-      "NoFellowshipThemecardFound": "",
-      "NotAllowedToUploadFilesForCustomBackground": "",
-      "SetQuest": ""
+      "AddedPowertag": "Étiquette de pouvoir {tagName} ajoutée",
+      "AddedSpecialImprovement": "Amélioration spéciale {siName} ajoutée",
+      "AddedThemekit": "Kit de thème {themekitName} ajouté à l'acteur {actorName}",
+      "AddedWeaknessTag": "Étiquette de faiblesse {tagName} ajoutée",
+      "AssignedThemekit": "Kit de thème {themekitName} assigné au personnage {characterName}",
+      "NoCharacterAssignedForThemekitSelection": "Aucun personnage n'est assigné à votre utilisateur. Assignez un personnage pour ouvrir la sélection de kits de thème.",
+      "NoFellowshipThemecardFound": "Aucun acteur de carte de thème de communauté trouvé. Utilisez « Créer un nouveau » pour en créer un d'abord.",
+      "NotAllowedToUploadFilesForCustomBackground": "Vous n'avez pas la permission de téléverser des fichiers. Contactez votre Narrateur.",
+      "SetQuest": "Quête définie sur {quest}"
     },
     "NPC": {
-      "CustomMightLevel": "",
-      "MightAspect": "",
-      "MightAspectPlaceholder": "",
-      "MightIcon": "",
-      "MightLevel": "",
-      "MightyAspects": "",
-      "Secrets": "",
+      "CustomMightLevel": "Niveau personnalisé",
+      "MightAspect": "Aspect",
+      "MightAspectPlaceholder": "p. ex. taille, magie, influence, nombre",
+      "MightIcon": "Icône",
+      "MightLevel": "Niveau",
+      "MightyAspects": "Aspects de Puissance",
+      "Secrets": "Secrets",
       "SpecialFeatures": "Caractéristiques Spéciales",
       "TagsAndStatuses": "Traits & Conditions",
       "TagsStatus": {
@@ -331,19 +331,25 @@
       "LimitReachedHint": "Un statut a atteint cette Limite — le Défi est vaincu.",
       "Overcome": "Vaincu"
     },
+    "OVERLAY": {
+      "SceneCaption": "Scène",
+      "SceneTagsLabel": "Tags et statuts de la scène",
+      "SelectedHint": "Sélectionné par le Narrateur",
+      "StoryCaption": "Histoire"
+    },
     "PLACEHOLDERS": {
       "ColorPicker": "Sélectionnez une couleur",
       "Companion": "Compagnon",
       "Description": "Description",
       "Name": "Nom",
       "QuestGoal": "Quête/Objectif",
-      "Role": "",
+      "Role": "Rôle",
       "ShortDescription": "Description Courte",
       "SpecialImprovementDescription": "Description de l'Amélioration Spéciale",
       "SpecialImprovementName": "Nom de l'Amélioration Spéciale",
       "Tag": "Trait",
-      "Tags": "",
-      "ThemebookStory": ""
+      "Tags": "Étiquettes",
+      "ThemebookStory": "Histoire"
     },
     "PLAYER_TUTORIAL": {
       "BackpackContent": "Votre sac à dos contient des étiquettes d'histoire pour l'équipement et les objets utiles. Ajoutez un objet, puis sélectionnez-le lors d'un jet pour l'employer. Certains objets expirent pendant le Campement — le Meneur vous préviendra.",
@@ -382,25 +388,25 @@
       "WelcomeTitle": "Bienvenue, Héros"
     },
     "PROSEMIRROR": {
-      "MarkAsStatus": "",
-      "MarkAsTag": ""
+      "MarkAsStatus": "Marquer comme statut",
+      "MarkAsTag": "Marquer comme étiquette"
     },
     "QUESTIONS": {
-      "ConfirmDeletion": "",
-      "ConfirmDeletionTitle": "",
+      "ConfirmDeletion": "Voulez-vous vraiment supprimer ceci ?",
+      "ConfirmDeletionTitle": "Confirmer la suppression",
       "DeleteChallenge": "Êtes-vous sûr de vouloir supprimer ce Défi ?",
       "DeleteItem": "Êtes-vous sûr de vouloir supprimer cet élément ?",
-      "RemoveCustomBackgroundConfirmation": "",
+      "RemoveCustomBackgroundConfirmation": "Voulez-vous vraiment retirer l'arrière-plan personnalisé ? L'image ne sera pas supprimée, seulement retirée de ce personnage.",
       "RemoveFellowshipThemecardConfirmation": "Êtes-vous sûr de vouloir retirer l'assignation de la Carte de Communauté ? Ceci ne supprimera pas l'Acteur Carte de Communauté, juste le désassignera de ce personnage.",
-      "RemoveThemekitConfirmation": ""
+      "RemoveThemekitConfirmation": "Voulez-vous vraiment retirer ce kit de thème ? L'objet du kit ne sera pas supprimé, seulement dissocié du livret de thème de ce personnage."
     },
     "ROLL": {
-      "CannotInvertBurningTag": "",
-      "InvertedChallengeSuffix": "",
-      "InvertedTagHint": "",
-      "ToggleChallengeInversion": "",
-      "TogglePowerAsWeakness": "",
-      "ToggleWeaknessAsPower": ""
+      "CannotInvertBurningTag": "Une étiquette marquée pour être brûlée ne peut pas être inversée pour ce jet.",
+      "InvertedChallengeSuffix": "inversé",
+      "InvertedTagHint": "Inversé pour ce jet (décision du Narrateur)",
+      "ToggleChallengeInversion": "Inverser pour ce jet uniquement (décision du Narrateur)",
+      "TogglePowerAsWeakness": "Compter comme Faiblesse pour ce jet (décision du Narrateur)",
+      "ToggleWeaknessAsPower": "Compter comme Pouvoir pour ce jet (décision du Narrateur)"
     },
     "ROLL_TYPES": {
       "detailed": "Jet Détaillé",
@@ -446,75 +452,87 @@
     },
     "SCENE_APP": {
       "NoActiveScene": "Le suivi de scène nécessite une scène active. Activez d'abord une scène.",
-      "NoJourneyAssigned": "",
-      "NoStoryThemes": "",
-      "OnlyStoryThemes": "",
-      "OpenJourney": "",
-      "OpenStoryTheme": "",
-      "RemoveStoryTheme": "",
-      "TabActors": "",
-      "TabJourneys": "",
-      "TabStoryThemes": "",
-      "Title": "",
-      "UnassignJourney": "",
-      "WeaknessToggleHint": "",
-      "Weaknesses": ""
+      "NoJourneyAssigned": "Aucun voyage assigné. Faites glisser un voyage depuis la barre latérale sur cette fenêtre pour l'assigner à la scène.",
+      "NoStoryThemes": "Pas encore de thèmes d'histoire. Faites glisser un thème d'histoire depuis la barre latérale ou un compendium sur cette fenêtre pour l'ajouter à la scène.",
+      "OnlyStoryThemes": "Seuls les livrets de thème marqués comme thème d'histoire peuvent être ajoutés ici.",
+      "OpenJourney": "Ouvrir la fiche de voyage",
+      "OpenStoryTheme": "Ouvrir le thème d'histoire",
+      "RemoveStoryTheme": "Retirer le thème d'histoire",
+      "TabActors": "Acteurs",
+      "TabJourneys": "Voyages",
+      "TabStoryThemes": "Thèmes d'histoire",
+      "Title": "Étiquettes de scène",
+      "UnassignJourney": "Retirer l'assignation du voyage",
+      "WeaknessToggleHint": "Cliquez pour activer ou désactiver cette faiblesse dans la scène",
+      "Weaknesses": "Faiblesses (Narrateur)"
     },
     "SETTINGS": {
+      "SceneTagsOverlayPosAbove": "Au-dessus de la navigation des scènes",
+      "SceneTagsOverlayPosBelow": "Sous la navigation des scènes",
+      "SceneTagsOverlayPosHotbar": "Au-dessus de la barre de macros",
+      "SceneTagsOverlayPosition": "Position de la barre de tags",
+      "SceneTagsOverlayPositionHint": "Où la barre est ancrée : en haut par rapport à la navigation des scènes, ou en bas au-dessus de la barre de macros.",
+      "SceneTagsOverlayStoryAll": "Afficher à tous",
+      "SceneTagsOverlayStoryGM": "Narrateur uniquement",
+      "SceneTagsOverlayStoryOff": "Ne pas afficher",
+      "SceneTagsOverlayStoryTags": "Tags d'histoire dans la barre",
+      "SceneTagsOverlayStoryTagsHint": "Si les tags de pouvoir et de faiblesse des thèmes d'histoire de la scène apparaissent dans la barre. Les thèmes d'histoire ne sont visibles que par le Narrateur.",
+      "ShowSceneTagsOverlay": "Afficher la barre de tags de scène",
+      "ShowSceneTagsOverlayHint": "Affiche en haut de l'écran une barre en lecture seule avec les tags et statuts de la scène. La modification reste dans le Suivi de Scène.",
       "ThemekitSourcePacks": {
-        "Explanation": "",
-        "MenuHint": "",
-        "MenuLabel": "",
-        "MenuName": "",
-        "NoPacksAvailable": "",
-        "Save": "",
-        "WindowTitle": "",
-        "WorldItemsEntry": "",
-        "WorldItemsGroup": "",
-        "WorldSource": ""
+        "Explanation": "Cochez les compendiums qui doivent fournir des kits de thème dans le sélecteur. Si aucun n'est coché — ou si tous le sont — tous les compendiums sont autorisés, y compris ceux installés plus tard (comportement par défaut). La case des objets du monde ci-dessus est indépendante : elle détermine simplement si les objets de ce monde sont proposés.",
+        "MenuHint": "Choisissez quels compendiums — et si les objets du monde — peuvent fournir des kits de thème dans le sélecteur.",
+        "MenuLabel": "Configurer les sources",
+        "MenuName": "Compendiums sources des kits de thème",
+        "NoPacksAvailable": "Aucun compendium d'objets n'a été trouvé.",
+        "Save": "Enregistrer",
+        "WindowTitle": "Sources des kits de thème",
+        "WorldItemsEntry": "Objets du monde (répertoire des objets)",
+        "WorldItemsGroup": "Ce monde",
+        "WorldSource": "Compendium du monde"
       }
     },
     "SheetLabels": {
-      "Challenge": "",
-      "ChallengeAddon": "",
-      "Character": "",
-      "CompactCharacter": "",
-      "FellowshipThemecard": "",
-      "Item": "",
-      "JournalEntry": "",
-      "Journey": "",
-      "Rote": "",
-      "ShortChallengeItem": "",
-      "Themebook": "",
-      "ThemekitItem": ""
+      "Challenge": "Défi",
+      "ChallengeAddon": "Extension de défi",
+      "Character": "Personnage",
+      "CompactCharacter": "Personnage (compact)",
+      "FellowshipThemecard": "Carte de thème de communauté",
+      "Item": "Objet",
+      "JournalEntry": "Journal Legend In The Mist",
+      "Journey": "Voyage",
+      "Rote": "Routine",
+      "ShortChallengeItem": "Défi court / Vignette",
+      "Themebook": "Livret de thème",
+      "ThemekitItem": "Kit de thème"
     },
     "THEMEBOOKS": {
       "Backpack": "Sac à Dos",
       "Fellowship": "Communauté",
       "FellowshipRelationship": "Relation de Communauté",
       "Options": {
-        "IsStoryTheme": ""
+        "IsStoryTheme": "Est un thème d'histoire"
       },
       "Quintessences": "Quintessences",
-      "Rotes": "",
+      "Rotes": "Routines",
       "SpecialImprovements": "Améliorations Spéciales"
     },
     "THEMEKITS": {
-      "AddThemekit": "",
-      "AssignThemekit": "",
-      "FilteredForThemebook": "",
-      "NoThemekitsAvailable": "",
-      "NoThemekitsForThemebook": "",
-      "OpenThemekitSelection": "",
-      "Powertags": "",
-      "Quest": "",
-      "RemoveThemekit": "",
-      "SelectThemekit": "",
-      "ShowAllThemekits": "",
-      "ShowFilteredThemekits": "",
-      "ShowingAllThemekits": "",
-      "SpecialImprovements": "",
-      "WeaknessTags": ""
+      "AddThemekit": "Ajouter un kit de thème",
+      "AssignThemekit": "Assigner un kit de thème",
+      "FilteredForThemebook": "Affichage des kits pour « {themebook} »",
+      "NoThemekitsAvailable": "Aucun kit de thème disponible. Créez d'abord des objets de kit de thème.",
+      "NoThemekitsForThemebook": "Aucun kit de thème n'appartient au livret « {themebook} ». Utilisez « Tout afficher » pour voir tous les kits disponibles.",
+      "OpenThemekitSelection": "Ouvrir la sélection de kits de thème",
+      "Powertags": "Étiquettes de Pouvoir",
+      "Quest": "Quête",
+      "RemoveThemekit": "Retirer le kit de thème du personnage",
+      "SelectThemekit": "Sélectionner un kit de thème",
+      "ShowAllThemekits": "Tout afficher",
+      "ShowFilteredThemekits": "Afficher uniquement « {themebook} »",
+      "ShowingAllThemekits": "Affichage de tous les kits de thème",
+      "SpecialImprovements": "Améliorations spéciales",
+      "WeaknessTags": "Étiquettes de Faiblesse"
     },
     "TUTORIAL": {
       "CampingContent": "Lance une scène de campement ou de séjour (Livre de base p. 179) : étiquettes de campement, Repos / Réflexion / Action de camp par héros, et la revue d'expiration des étiquettes du sac à dos. Nécessite aussi une scène active.",
@@ -560,14 +578,14 @@
     },
     "Item": {
       "backpack": "Sac à Dos",
-      "challenge-addon": "",
+      "challenge-addon": "Extension de défi",
       "item": "Objet",
       "quintessence": "Quintessence",
       "rote": "Routine",
       "scene-data": "Données de Scène",
       "shortchallenge": "Défi Court / Vignette",
       "themebook": "Livret de Thème",
-      "themekit": ""
+      "themekit": "Kit de thème"
     }
   }
 }

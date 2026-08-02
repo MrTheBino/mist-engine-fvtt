@@ -445,6 +445,10 @@ export function setupHooks() {
     if (DiceRollApp.instance) DiceRollApp.instance.updateTagsAndStatuses(true);
     const campingApp = CampingApp.instance;
     if (campingApp?.rendered && !campingApp.minimized) campingApp.render(true);
+    // The read-only tags bar feeds off the same documents (scene-data for the
+    // scene tags, themebook for the story themes) — both are already in the
+    // hooks below, so it needs no signal of its own.
+    if (ui.litmSceneTags?.rendered) ui.litmSceneTags.render();
   };
 
   Hooks.on("updateActor", (actor) => {
@@ -488,6 +492,8 @@ export function setupHooks() {
 
   Hooks.on("canvasReady", (canvas) => {
     MistSceneApp.getInstance().sceneChangedHook(canvas.scene);
+    // Switching scenes swaps the scene-data item the bar reads from.
+    if (ui.litmSceneTags?.rendered) ui.litmSceneTags.render();
   });
 
   Hooks.on("createToken", (_tokenDocument, _options, _userId) => {

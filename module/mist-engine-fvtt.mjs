@@ -17,6 +17,7 @@ import { MistEngineThemebookItemSheet } from "./sheets/item-themebook-sheet.mjs"
 import { MistEngineChallengeAddonItemSheet } from "./sheets/item-challenge-addon-sheet.mjs";
 import { MistEngineJournalEntrySheet } from "./sheets/journal-entry-sheet.mjs";
 import { MistSceneApp } from "./apps/scene-app.mjs";
+import { MistSceneTagsOverlay } from "./apps/scene-tags-overlay.mjs";
 import { HowToPlayApp } from "./apps/how-to-play-app.mjs";
 import { ChangelogApp } from "./apps/changelog-app.mjs";
 
@@ -61,6 +62,11 @@ Hooks.once("init", function () {
     formula: "1d20 + @abilities.dex.mod",
     decimals: 2,
   };
+
+  // Read-only Tags & Statuses bar docked in #ui-top. Registering it here makes
+  // Foundry construct it as the singleton `ui.litmSceneTags` during
+  // Game#initializeUI; the ready hook below renders it if the user wants it.
+  CONFIG.ui.litmSceneTags = MistSceneTagsOverlay;
 
   // Define custom Document and DataModel classes
   CONFIG.Actor.documentClass = MistEngineActor;
@@ -211,6 +217,10 @@ Hooks.once("ready", async function () {
   RollConfirmation.setup();
   DetailedSpend.setup();
   Collaboration.setup();
+
+  // Show the scene tags bar for users who have it switched on. Without this it
+  // would only appear once the first tag update triggers a refresh.
+  MistSceneTagsOverlay.refresh();
 
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));

@@ -1,0 +1,33 @@
+{{!-- Read-only Tags & Statuses bar docked in #ui-top. Carries no data-action
+      on purpose: the bar is display-only, editing lives in the Scene App.
+      The root part consumes this outer element's children, hence the wrapper. --}}
+<div>
+    <div class="litm-sto" aria-label="{{localize 'MIST_ENGINE.OVERLAY.SceneTagsLabel'}}">
+        {{#if hasSceneTags}}
+        <div class="litm-sto-row">
+            <span class="litm-sto-caption">{{localize 'MIST_ENGINE.OVERLAY.SceneCaption'}}</span>
+            <div class="litm-sto-tags">
+                {{#each sceneTags}}
+                <span class="litm-sto-tag {{#if this.isStatus}}status{{else}}tag{{/if}} {{#unless this.positive}}negative{{/unless}} {{#if this.selected}}selected{{/if}}"
+                    {{#if this.selected}}title="{{localize 'MIST_ENGINE.OVERLAY.SelectedHint'}}"{{/if}}>
+                    {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
+                    {{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}
+                </span>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if hasStoryTags}}
+        <div class="litm-sto-row litm-sto-story">
+            <span class="litm-sto-caption">{{localize 'MIST_ENGINE.OVERLAY.StoryCaption'}}</span>
+            <div class="litm-sto-tags">
+                {{#each storyTags}}
+                <span class="litm-sto-tag {{#if this.weakness}}weakness{{else}}tag{{/if}}"
+                    title="{{this.theme}}">{{this.name}}</span>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>

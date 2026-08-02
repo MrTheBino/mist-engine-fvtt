@@ -4,6 +4,24 @@ import { enrichShortChallenges, enrichTextWithTags } from "../lib/tag-status-tex
 import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
 import { DiceRollApp } from "./dice-roll-app.mjs";
 
+/**
+ * Localize a key, but never return an empty string.
+ *
+ * `Localization#localize` only falls back to English when a key is *missing* —
+ * a key that exists with an empty value is returned as "". That is a trap for
+ * tooltips: Handlebars treats "" as falsy, so `{{#if tab.tooltip}}` drops the
+ * whole `data-tooltip` attribute and the tooltip silently disappears in that
+ * language while working fine in English.
+ * @param {string} key
+ * @returns {string} the translation, the English fallback, or the key itself
+ */
+function localizeNonEmpty(key) {
+    const translated = game.i18n.localize(key);
+    if (translated?.trim()) return translated;
+    const fallback = foundry.utils.getProperty(game.i18n._fallback ?? {}, key);
+    return (typeof fallback === "string" && fallback.trim()) ? fallback : key;
+}
+
 export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
     constructor(options = {}) {
         super(options);
@@ -104,7 +122,7 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             context.verticalTabs = true;
             context.tabClasses = "scene-app-side-tabs";
             for (const t of Object.values(context.tabs ?? {})) {
-                t.tooltip ??= game.i18n.localize(t.label);
+                t.tooltip ??= localizeNonEmpty(t.label);
             }
         }
         return context;
