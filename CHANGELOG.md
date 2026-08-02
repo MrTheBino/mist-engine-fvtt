@@ -3,8 +3,8 @@
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
 # 14.5.3
-- FEAT: new scene tag overlay, configurable via the game settings. They
-display the scene tag & stasuses of the current scene.
+- FEAT: new scene tag overlay, configurable via the game settings. It 
+displays  the scene tag & stasuses of the current scene.
 
 # 14.5.2
 - FIX: [Bug Report] On both versions of the character sheet, tags and statuses can not be deleted #126
