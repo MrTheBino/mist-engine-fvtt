@@ -251,6 +251,7 @@
       "Quantity": "Quantité",
       "Quest": "Quête",
       "RemoveCustomBackground": "Retirer l'arrière-plan personnalisé",
+      "RemoveFellowshipThemecard": "Retirer l'assignation de la carte de thème de communauté",
       "SceneApp": {
         "CharactersHeader": "Personnages",
         "DiceRollModifiers": "Modificateurs de Jet de Dés",
@@ -302,6 +303,7 @@
       "AddedThemekit": "Kit de thème {themekitName} ajouté à l'acteur {actorName}",
       "AddedWeaknessTag": "Étiquette de faiblesse {tagName} ajoutée",
       "AssignedThemekit": "Kit de thème {themekitName} assigné au personnage {characterName}",
+      "FellowshipThemecardUnavailable": "La carte de thème de communauté assignée n'est plus disponible. Assignez-en une autre ou retirez l'assignation.",
       "NoCharacterAssignedForThemekitSelection": "Aucun personnage n'est assigné à votre utilisateur. Assignez un personnage pour ouvrir la sélection de kits de thème.",
       "NoFellowshipThemecardFound": "Aucun acteur de carte de thème de communauté trouvé. Utilisez « Créer un nouveau » pour en créer un d'abord.",
       "NotAllowedToUploadFilesForCustomBackground": "Vous n'avez pas la permission de téléverser des fichiers. Contactez votre Narrateur.",

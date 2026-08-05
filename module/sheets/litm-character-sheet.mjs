@@ -180,11 +180,12 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
             }
         );
 
-        if (this.actorFellowshipThemecard != null && this.actorFellowshipThemecard !== false) {
+        // Re-resolve on every render: the link may have been dropped or the
+        // themecard actor deleted since this sheet instance was constructed.
+        this.loadFellowshipThemecard();
+        if (this.actorFellowshipThemecard) {
             context.fellowshipThemecard = this.actorFellowshipThemecard.system;
             context.fellowshipThemecardName = this.actorFellowshipThemecard.name;
-        } else {
-            console.log("no fellowship themecard assigned, so no context");
         }
 
         foundry.utils.mergeObject(context, items);
@@ -273,6 +274,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     }
 
     getActorFellowshipThemecard() {
+        this.loadFellowshipThemecard();
         return this.actorFellowshipThemecard;
     }
 
@@ -285,7 +287,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         });
         if (proceed) {
             await this.actor.update({ "system.actorSharedSingleThemecardId": "" });
-            this.actorFellowshipThemecard = false;
+            this.actorFellowshipThemecard = null;
             this.render(false);
         }
     }
@@ -393,10 +395,15 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         }
     }
 
-    async loadFellowshipThemecard() {
-        if (this.actor.system.actorSharedSingleThemecardId && this.actor.system.actorSharedSingleThemecardId !== "") {
-            this.actorFellowshipThemecard = game.actors.get(this.actor.system.actorSharedSingleThemecardId);
-        }
+    /**
+     * Resolve the linked fellowship themecard actor from the id persisted on the
+     * character. Always derived fresh from actor data — never left holding a
+     * previously resolved actor — so unassigning (possibly done on another
+     * client) or deleting the themecard actor is reflected immediately.
+     */
+    loadFellowshipThemecard() {
+        const id = this.actor.system.actorSharedSingleThemecardId;
+        this.actorFellowshipThemecard = id ? (game.actors.get(id) ?? null) : null;
     }
 
     reloadFellowshipThemecard() {

@@ -251,6 +251,7 @@
       "Quantity": "Cantidad",
       "Quest": "Gesta",
       "RemoveCustomBackground": "Elimina un fondo personalizado",
+      "RemoveFellowshipThemecard": "Quitar la asignación de la carta de tema de compañía",
       "SceneApp": {
         "CharactersHeader": "Personajes",
         "DiceRollModifiers": "Modificadores de la tirada",
@@ -302,6 +303,7 @@
       "AddedThemekit": "Kit de tema {themekitName} añadido al actor {actorName}",
       "AddedWeaknessTag": "Etiqueta de debilidad {tagName} añadida",
       "AssignedThemekit": "Kit de tema {themekitName} asignado al personaje {characterName}",
+      "FellowshipThemecardUnavailable": "La carta de tema de compañía asignada ya no está disponible. Asigna otra o quita la asignación.",
       "NoCharacterAssignedForThemekitSelection": "No hay ningún personaje asignado a tu usuario. Asigna un personaje para abrir la selección de kits de tema.",
       "NoFellowshipThemecardFound": "No se encontraron actores de carta de tema de compañía. Usa «Crear nueva» para hacer una primero.",
       "NotAllowedToUploadFilesForCustomBackground": "No tienes permiso para subir ficheros. Habla con tu GM.",

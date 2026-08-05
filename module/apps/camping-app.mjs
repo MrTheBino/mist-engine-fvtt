@@ -78,11 +78,22 @@ export class CampingApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return sceneApp.currentSceneDataItem;
     }
 
-    /** All player-owned characters taking part in the camping scene. */
+    /** Every character actor in the world, regardless of ownership. */
+    static allCharacters() {
+        return game.actors.filter(a => a.type === "litm-character");
+    }
+
+    /**
+     * The characters taking part in the camping scene: the heroes with a token
+     * on the current scene. Built exactly like the scene tracker's character
+     * list (MistSceneApp#_prepareContextForCharacters) — same scene accessor,
+     * same dedupe — so both windows always show the same party.
+     */
     static campingCharacters() {
-        let chars = game.actors.filter(a => a.type === "litm-character" && a.hasPlayerOwner);
-        if (chars.length === 0) chars = game.actors.filter(a => a.type === "litm-character");
-        return chars;
+        const scene = MistSceneApp.getInstance().getCurrentScene() ?? game.scenes.active ?? null;
+        const tokens = scene ? scene.tokens.contents : [];
+        // Player characters are linked, so duplicate tokens share one actor.
+        return [...new Set(tokens.map(t => t.actor).filter(a => a && a.type === "litm-character"))];
     }
 
     /** The current user's own character (players only). */
@@ -302,8 +313,10 @@ export class CampingApp extends HandlebarsApplicationMixin(ApplicationV2) {
         const sd = CampingApp.sceneData();
         if (!sd) return;
 
-        // clear per-hero camping state and pending (unapplied) expiration marks
-        for (const actor of CampingApp.campingCharacters()) {
+        // Clear per-hero camping state and pending (unapplied) expiration marks.
+        // Sweeps every character, not just the ones on the scene, so a hero
+        // whose token was removed mid-camp keeps no stale flags.
+        for (const actor of CampingApp.allCharacters()) {
             await actor.unsetFlag(CampingApp.FLAG_SCOPE, CampingApp.FLAG_KEY);
             const backpack = actor.items.find(i => i.type === "backpack");
             if (backpack && (backpack.system.items ?? []).some(e => e.expiring)) {

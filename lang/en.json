@@ -251,6 +251,7 @@
       "Quantity": "Quantity",
       "Quest": "Quest",
       "RemoveCustomBackground": "Remove Custom Background",
+      "RemoveFellowshipThemecard": "Remove Fellowship Theme Card Assignment",
       "SceneApp": {
         "CharactersHeader": "Characters",
         "DiceRollModifiers": "Dice Roll Modifiers",
@@ -302,6 +303,7 @@
       "AddedThemekit": "Added theme kit {themekitName} to actor {actorName}",
       "AddedWeaknessTag": "Added weakness tag {tagName}",
       "AssignedThemekit": "Assigned theme kit {themekitName} to character {characterName}",
+      "FellowshipThemecardUnavailable": "The assigned Fellowship Theme Card is no longer available. Assign another one or remove the assignment.",
       "NoCharacterAssignedForThemekitSelection": "No character assigned to your user. Assign a character to open the theme kit selection.",
       "NoFellowshipThemecardFound": "No Fellowship Theme Card actors found. Use \"Create New\" to make one first.",
       "NotAllowedToUploadFilesForCustomBackground": "You do not have permission to upload files. Please contact your GM.",

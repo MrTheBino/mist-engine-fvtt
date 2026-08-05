@@ -251,6 +251,7 @@
       "Quantity": "Menge",
       "Quest": "Quest",
       "RemoveCustomBackground": "Eigenen Hintergrund entfernen",
+      "RemoveFellowshipThemecard": "Zuweisung der Gemeinschafts-Themenkarte aufheben",
       "SceneApp": {
         "CharactersHeader": "Charaktere",
         "DiceRollModifiers": "Wurf-Modifikatoren",
@@ -302,6 +303,7 @@
       "AddedThemekit": "Theme Kit {themekitName} zu Akteur {actorName} hinzugefügt",
       "AddedWeaknessTag": "Weakness-Tag {tagName} hinzugefügt",
       "AssignedThemekit": "Theme Kit {themekitName} dem Charakter {characterName} zugewiesen",
+      "FellowshipThemecardUnavailable": "Die zugewiesene Gemeinschafts-Themenkarte ist nicht mehr verfügbar. Weise eine andere zu oder hebe die Zuweisung auf.",
       "NoCharacterAssignedForThemekitSelection": "Kein Charakter zugewiesen. Weise deinem Benutzer einen Charakter zu, um die Theme-Kit-Auswahl zu öffnen.",
       "NoFellowshipThemecardFound": "Keine Gemeinschafts-Themenkarten-Akteure gefunden. Erstelle zuerst eine über „Neu erstellen“.",
       "NotAllowedToUploadFilesForCustomBackground": "Du hast keine Berechtigung, Dateien hochzuladen. Bitte wende dich an deine Spielleitung.",

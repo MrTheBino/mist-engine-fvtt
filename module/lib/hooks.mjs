@@ -451,6 +451,13 @@ export function setupHooks() {
     if (ui.litmSceneTags?.rendered) ui.litmSceneTags.render();
   };
 
+  // The camping participant list is built from the hero tokens on the current
+  // scene, so it has to follow the same signals the scene tracker does.
+  const refreshCampingApp = () => {
+    const campingApp = CampingApp.instance;
+    if (campingApp?.rendered && !campingApp.minimized) campingApp.render(true);
+  };
+
   Hooks.on("updateActor", (actor) => {
     // Only actors shown in the scene app's currently TRACKED scene affect the
     // trackers — that is the scene the GM is viewing (see
@@ -494,6 +501,7 @@ export function setupHooks() {
     MistSceneApp.getInstance().sceneChangedHook(canvas.scene);
     // Switching scenes swaps the scene-data item the bar reads from.
     if (ui.litmSceneTags?.rendered) ui.litmSceneTags.render();
+    refreshCampingApp();
   });
 
   Hooks.on("createToken", (_tokenDocument, _options, _userId) => {
@@ -501,6 +509,7 @@ export function setupHooks() {
     if (instance.rendered) { // only if shown
       instance.sceneUpdatedHook();
     }
+    refreshCampingApp();
   });
 
   const TOKEN_POSITIONAL_KEYS = new Set(["x", "y", "rotation", "elevation", "_id"]);
@@ -518,6 +527,7 @@ export function setupHooks() {
     if (instance.rendered) { // only if shown
       instance.sceneUpdatedHook();
     }
+    refreshCampingApp();
   });
 
   Hooks.on("hoverToken", (token, hovered) => {
