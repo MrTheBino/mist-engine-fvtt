@@ -75,6 +75,18 @@
       "name": "Español",
       "path": "lang/es.json",
       "flags": {}
+    },
+    {
+      "lang": "ru",
+      "name": "Русский",
+      "path": "lang/ru.json",
+      "flags": {}
+    },
+    {
+      "lang": "uk",
+      "name": "Українська",
+      "path": "lang/uk.json",
+      "flags": {}
     }
   ],
   "packs": [
