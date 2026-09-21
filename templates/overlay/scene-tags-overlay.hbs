@@ -21,10 +21,17 @@
         {{#if hasStoryTags}}
         <div class="litm-sto-row litm-sto-story">
             <span class="litm-sto-caption">{{localize 'MIST_ENGINE.OVERLAY.StoryCaption'}}</span>
-            <div class="litm-sto-tags">
-                {{#each storyTags}}
-                <span class="litm-sto-tag {{#if this.weakness}}weakness{{else}}tag{{/if}}"
-                    title="{{this.theme}}">{{this.name}}</span>
+            <div class="litm-sto-theme-groups">
+                {{#each storyTagGroups}}
+                <div class="litm-sto-theme-group" data-theme-uuid="{{this.uuid}}">
+                    <span class="litm-sto-theme-name">{{this.name}}</span>
+                    <div class="litm-sto-tags">
+                        {{#each this.tags}}
+                        <span class="litm-sto-tag {{#if this.weakness}}weakness{{else}}tag{{/if}}"
+                            title="{{this.theme}}">{{this.name}}</span>
+                        {{/each}}
+                    </div>
+                </div>
                 {{/each}}
             </div>
         </div>

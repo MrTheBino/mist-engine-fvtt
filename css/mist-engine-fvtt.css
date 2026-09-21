@@ -4753,6 +4753,33 @@ article.cc-enriched section.journal-entry-content {
   min-width: 0;
 }
 
+.litm-sto-theme-groups {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.litm-sto-theme-group {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px 7px;
+  min-width: 0;
+}
+
+.litm-sto-theme-name {
+  color: rgba(239, 214, 147, 0.88);
+  font-family: var(--litm-font-heading);
+  font-size: 0.72rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
 .litm-sto-tag {
   padding: 1px 8px;
   border-radius: 3px 2px 3px 2px;

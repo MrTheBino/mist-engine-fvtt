@@ -337,7 +337,8 @@
       "SceneCaption": "Scene",
       "SceneTagsLabel": "Scene Tags & Statuses",
       "SelectedHint": "Selected by the Narrator",
-      "StoryCaption": "Story"
+      "StoryCaption": "Story",
+      "Unthemed": "Unthemed"
     },
     "PLACEHOLDERS": {
       "ColorPicker": "Select a color",

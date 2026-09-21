@@ -337,7 +337,8 @@
       "SceneCaption": "Scène",
       "SceneTagsLabel": "Tags et statuts de la scène",
       "SelectedHint": "Sélectionné par le Narrateur",
-      "StoryCaption": "Histoire"
+      "StoryCaption": "Histoire",
+      "Unthemed": "Sans thème"
     },
     "PLACEHOLDERS": {
       "ColorPicker": "Sélectionnez une couleur",

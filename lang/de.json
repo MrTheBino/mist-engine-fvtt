@@ -337,7 +337,8 @@
       "SceneCaption": "Szene",
       "SceneTagsLabel": "Szenen-Tags & Statuses",
       "SelectedHint": "Von der Erzählerin ausgewählt",
-      "StoryCaption": "Story"
+      "StoryCaption": "Story",
+      "Unthemed": "Ohne Thema"
     },
     "PLACEHOLDERS": {
       "ColorPicker": "Wählen Sie eine Farbe aus",

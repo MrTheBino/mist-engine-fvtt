@@ -97,37 +97,40 @@ export class MistSceneTagsOverlay extends HandlebarsApplicationMixin(Application
             selected: entry.selected === true
         })).filter(t => t.name?.trim());
 
-        const storyTags = MistSceneTagsOverlay.showStoryTags ? await this.#storyTags(sd) : [];
+        const storyTagGroups = MistSceneTagsOverlay.showStoryTags ? await this.#storyTagGroups(sd) : [];
 
         return {
             sceneTags,
-            storyTags,
+            storyTagGroups,
             hasSceneTags: sceneTags.length > 0,
-            hasStoryTags: storyTags.length > 0,
-            isEmpty: sceneTags.length === 0 && storyTags.length === 0
+            hasStoryTags: storyTagGroups.length > 0,
+            isEmpty: sceneTags.length === 0 && storyTagGroups.length === 0
         };
     }
 
     /**
-     * Power and weakness tags of the scene's story themes, flattened into one
-     * list. Uses the same filter as the Scene App's Story Themes tab: named,
-     * non-planned tags only.
+     * Power and weakness tags of the scene's story themes, grouped by their
+     * owning theme. Uses the same filter as the Scene App's Story Themes tab:
+     * named, non-planned tags only.
      * @param {Item|null} sd  the scene-data item
-     * @returns {Promise<Array<{name: string, weakness: boolean, theme: string}>>}
+     * @returns {Promise<Array<{uuid: string, name: string, tags: Array<{name: string, weakness: boolean, theme: string}>}>>}
      */
-    async #storyTags(sd) {
+    async #storyTagGroups(sd) {
         const uuids = sd?.system?.storyThemeIds ?? [];
-        const out = [];
+        const groups = [];
         for (const uuid of uuids) {
             const theme = await fromUuid(uuid).catch(() => null);
             if (theme?.type !== "themebook") continue;
+            const name = theme.name?.trim() || game.i18n.localize("MIST_ENGINE.OVERLAY.Unthemed");
+            const tags = [];
             const pick = (list, weakness) => (list ?? [])
                 .filter(t => t.name?.trim() && !t.planned)
-                .forEach(t => out.push({ name: t.name, weakness, theme: theme.name }));
+                .forEach(t => tags.push({ name: t.name, weakness, theme: name }));
             pick(theme.system.powertags, false);
             pick(theme.system.weaknesstags, true);
+            if (tags.length) groups.push({ uuid, name, tags });
         }
-        return out;
+        return groups;
     }
 
     /**

@@ -76,6 +76,33 @@
     min-width: 0;
 }
 
+.litm-sto-theme-groups {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.litm-sto-theme-group {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px 7px;
+    min-width: 0;
+}
+
+.litm-sto-theme-name {
+    color: rgba(239, 214, 147, 0.88);
+    font-family: var(--litm-font-heading);
+    font-size: 0.72rem;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
 // Pill styling mirrors .fts-input-name in _tags.scss so the bar reads as the
 // same component family as the Scene App and the character sheets.
 .litm-sto-tag {
