@@ -111,8 +111,10 @@
     "COLLAB": {
       "AffectsGroup": "The outcome affects the entire group.",
       "BurnForPower": "Burn this tag for +3 Power (only one hero may burn)",
+      "BurnRejected": "Another hero is already burning a tag — \"{tag}\" was added without burning.",
       "Contribute": "Contribute",
       "Contributions": "Contributions",
+      "FellowshipTags": "Fellowship theme tags (+1 Power each)",
       "GmMod": "Narrator modifier",
       "GroupHint": "A single roll for the group. Each hero contributes one tag (+1 Power); one hero may burn a tag (+3). The outcome affects everyone.",
       "GroupPower": "Group Power",
@@ -126,6 +128,11 @@
       "HelpingTags": "Helping (from fellow heroes):",
       "RequestHelp": "Request Help",
       "RollForGroup": "Roll for the Group",
+      "SourceBackpack": "Backpack",
+      "SourcePowerTag": "Power tag",
+      "SourceRelationship": "Relationship",
+      "SourceRote": "Rote",
+      "SourceStoryTag": "Story tag",
       "StartGroupAction": "Start Group Action",
       "WaitingContributions": "Waiting for heroes to contribute…",
       "YourTag": "Your tag"
@@ -163,10 +170,13 @@
       "BackpackSheet": "Backpack entries are edited directly on the character sheet (edit mode of the Backpack card). Use the Description tab for tooltip text.",
       "ChallengeAddon": "Define a reusable set of roles, tags/statuses, limits, threats, secrets and special features. Drag this add-on onto a Challenge to merge it in and raise the Challenge's rating.",
       "ChallengeTemplateDragNDrop": "Drag and drop challenge / vignette items on this NPC to use them. They serve as templates and will not modify the original item.",
+      "DeletePowertag": "Delete power tag",
+      "DeleteWeaknessTag": "Delete weakness tag",
       "FelllowshipThemeCardExplanation": "A Fellowship Theme Card is a shared resource for all members of a fellowship. It contains power tags, weakness tags and special improvements. The actual tags are getting entered in the characters. Not here, here are only the questions of the tags.",
       "FellowshipCreation": "No Fellowship Theme Card is assigned. Create a new one, or assign an existing Fellowship Theme Card Actor.",
       "GMTagShortCuts": "Select text, then CTL+SHIFT+S = Status, CTL+SHIFT+X = Might, CTL+SHIFT+A = Tag, CTL+SHIFT+Y = Bold",
       "MightyAspects": "Aspects in which this Challenge is Adventure or Greatness level (everything else is Origin). These are NOT tags — they tell the GM whether a Might differential (Favored/Imperiled) applies; they do not add to a roll.",
+      "NoBackpackEquipped": "No backpack equipped.",
       "NoThemebooksInCharacter": "No Themebooks found. Create Themebook Items and drop them here.",
       "QuintessenceSheet": "Edit this quintessence's text in the Description tab — it is shown as a tooltip on the character sheet.",
       "Titles": {
@@ -256,7 +266,8 @@
         "CharactersHeader": "Characters",
         "DiceRollModifiers": "Dice Roll Modifiers",
         "Header": "Story Tags & Statuses",
-        "MightModifiers": "Might"
+        "MightModifiers": "Might",
+        "RemoveRollMod": "Remove dice roll modifier"
       },
       "Select": "Select",
       "SelectCustomBackground": "Select Custom Background",
@@ -304,6 +315,8 @@
       "AddedWeaknessTag": "Added weakness tag {tagName}",
       "AssignedThemekit": "Assigned theme kit {themekitName} to character {characterName}",
       "FellowshipThemecardUnavailable": "The assigned Fellowship Theme Card is no longer available. Assign another one or remove the assignment.",
+      "ImportChallengeJSONError": "The challenge could not be imported. Check the JSON data (details in the console).",
+      "ImportChallengeJSONSuccess": "Challenge imported from JSON.",
       "NoCharacterAssignedForThemekitSelection": "No character assigned to your user. Assign a character to open the theme kit selection.",
       "NoFellowshipThemecardFound": "No Fellowship Theme Card actors found. Use \"Create New\" to make one first.",
       "NotAllowedToUploadFilesForCustomBackground": "You do not have permission to upload files. Please contact your GM.",
@@ -404,6 +417,7 @@
       "RemoveThemekitConfirmation": "Are you sure you want to remove this theme kit? This will not delete the theme kit item, just unassign it from this character's themebook."
     },
     "ROLL": {
+      "CannotBurnFellowshipTag": "Fellowship theme tags are single-use: they are scratched when invoked and cannot be burnt for Power.",
       "CannotInvertBurningTag": "A tag marked to burn cannot be inverted for this roll.",
       "InvertedChallengeSuffix": "inverted",
       "InvertedTagHint": "Inverted for this roll (Narrator's call)",
@@ -555,7 +569,7 @@
       "FellowshipCardTitle": "Fellowship Theme Card",
       "GameModeContent": "Back in Game Mode the roll buttons drive play: Quick, Detailed, Reaction and Sacrifice. The player selects the relevant tags and statuses, then rolls — the dialog totals the Power for them. After a successful Detailed action, the roller spends their Power directly on the resulting chat card.",
       "GameModeTitle": "Game Mode & Rolling",
-      "GroupActionContent": "Opens a shared group action (Core Book p. 131): one roll for the whole group. Each hero contributes one tag (+1 Power) and a single hero may burn a tag (+3); you can add a Narrator modifier. The outcome affects everyone.",
+      "GroupActionContent": "Opens a shared group action (Core Book p. 158): one roll for the whole group. Each hero contributes one tag (+1 Power) and a single hero may burn a tag (+3); you can add a Narrator modifier. The outcome affects everyone.",
       "GroupActionTitle": "Acting Together",
       "HowToPlayContent": "The How To Play window is your in-app rules reference — Ctrl+H opens it at any time. That's the tour — you can replay it anytime from Settings → Tour Management.",
       "HowToPlayTitle": "How To Play",

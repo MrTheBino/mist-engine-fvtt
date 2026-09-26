@@ -6,6 +6,9 @@
         {{#each contributions}}
         <div class="tag positive"><span class="tag-icon"><i class="fa-solid fa-user"></i></span>{{this.actorName}}: {{this.tagName}}{{#if this.burn}} 🔥{{/if}}</div>
         {{/each}}
+        {{#each fellowshipTags}}
+        <div class="tag positive"><span class="tag-icon"><i class="fa-solid fa-people-group"></i></span>{{this.themecardName}}: {{this.name}}</div>
+        {{/each}}
     </div>
     <div class="roll-result">
         {{{diceRollHTML}}}

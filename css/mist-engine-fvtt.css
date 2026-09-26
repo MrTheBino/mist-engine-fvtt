@@ -4649,6 +4649,12 @@ article.cc-enriched section.journal-entry-content {
 .group-action-app .group-contributions .group-contribution {
   margin: 3px 0;
 }
+.group-action-app .group-contributions .group-fellowship-tag {
+  cursor: pointer;
+}
+.group-action-app .group-contributions .group-fellowship-tag:not(.selected) {
+  opacity: 0.7;
+}
 .group-action-app .group-empty {
   font-style: italic;
   opacity: 0.6;

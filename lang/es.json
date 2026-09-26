@@ -111,8 +111,10 @@
     "COLLAB": {
       "AffectsGroup": "El resultado afecta a todo el grupo.",
       "BurnForPower": "Quemar esta etiqueta por +3 Poder (solo un héroe puede quemar)",
+      "BurnRejected": "Otro héroe ya está quemando una etiqueta — \"{tag}\" se ha aportado sin quemar.",
       "Contribute": "Aportar",
       "Contributions": "Aportaciones",
+      "FellowshipTags": "Etiquetas del tema de Compañía (+1 Poder cada una)",
       "GmMod": "Modificador del Narrador",
       "GroupHint": "Una sola tirada para el grupo. Cada héroe aporta una etiqueta (+1 Poder); un héroe puede quemar una etiqueta (+3). El resultado afecta a todos.",
       "GroupPower": "Poder del Grupo",
@@ -126,6 +128,11 @@
       "HelpingTags": "Ayuda (de compañeros):",
       "RequestHelp": "Pedir ayuda",
       "RollForGroup": "Tirar por el Grupo",
+      "SourceBackpack": "Mochila",
+      "SourcePowerTag": "Etiqueta de poder",
+      "SourceRelationship": "Relación",
+      "SourceRote": "Rutina",
+      "SourceStoryTag": "Etiqueta de historia",
       "StartGroupAction": "Iniciar acción de grupo",
       "WaitingContributions": "Esperando aportaciones de los héroes…",
       "YourTag": "Tu etiqueta"
@@ -163,10 +170,13 @@
       "BackpackSheet": "Las entradas de la mochila se editan directamente en la hoja de personaje (modo edición de la tarjeta Mochila). Usa la pestaña Descripción para el texto de la información emergente.",
       "ChallengeAddon": "Define un conjunto reutilizable de roles, etiquetas/estados, límites, amenazas, secretos y características especiales. Arrastra este complemento sobre un desafío para fusionarlo y aumentar su nivel.",
       "ChallengeTemplateDragNDrop": "Arrastra un desafío/viñeta a este NPC para usarlo. Es una plantilla y no modifica el objeto original.",
+      "DeletePowertag": "Borrar etiqueta de poder",
+      "DeleteWeaknessTag": "Borrar etiqueta de debilidad",
       "FelllowshipThemeCardExplanation": "Un Tema de Compañía es un recurso compartido para toda la Compañía. Contiene etiquetas de poder, debilidad y mejoras especiales. Las etiquetas se personalizan en los personajes. Aquí solo se muestran las preguntas sobre las etiquetas.",
       "FellowshipCreation": "Crea un tema de Compañía y asigna la propiedad a todos los miembtros del grupo para verlo.",
       "GMTagShortCuts": "Selecciona el texto y luego CTRL+MAYÚS+S = Estado, CTRL+MAYÚS+X = Poder, CTRL+MAYÚS+A = Etiqueta, CTRL+MAYÚS+Y = Negrita",
       "MightyAspects": "Aspectos en los que este desafío es de nivel Aventura o Grandeza (todo lo demás es Origen). NO son etiquetas: indican al Narrador si se aplica una diferencia de Poder (favorecido/en peligro); no suman al tiro.",
+      "NoBackpackEquipped": "No hay mochila equipada.",
       "NoThemebooksInCharacter": "No hay Temas. Crea un objeto Tema y suéltalo aquí.",
       "QuintessenceSheet": "Edita el texto de esta quintaesencia en la pestaña Descripción — se muestra como información emergente en la hoja de personaje.",
       "Titles": {
@@ -256,7 +266,8 @@
         "CharactersHeader": "Personajes",
         "DiceRollModifiers": "Modificadores de la tirada",
         "Header": "Etiquetas de Historia y Estados",
-        "MightModifiers": "Poderío"
+        "MightModifiers": "Poderío",
+        "RemoveRollMod": "Quitar modificador de la tirada"
       },
       "Select": "Seleccionar",
       "SelectCustomBackground": "Selecciona un fondo personalizado",
@@ -304,6 +315,8 @@
       "AddedWeaknessTag": "Etiqueta de debilidad {tagName} añadida",
       "AssignedThemekit": "Kit de tema {themekitName} asignado al personaje {characterName}",
       "FellowshipThemecardUnavailable": "La carta de tema de compañía asignada ya no está disponible. Asigna otra o quita la asignación.",
+      "ImportChallengeJSONError": "No se pudo importar el desafío. Revisa los datos JSON (detalles en la consola).",
+      "ImportChallengeJSONSuccess": "Desafío importado desde JSON.",
       "NoCharacterAssignedForThemekitSelection": "No hay ningún personaje asignado a tu usuario. Asigna un personaje para abrir la selección de kits de tema.",
       "NoFellowshipThemecardFound": "No se encontraron actores de carta de tema de compañía. Usa «Crear nueva» para hacer una primero.",
       "NotAllowedToUploadFilesForCustomBackground": "No tienes permiso para subir ficheros. Habla con tu GM.",
@@ -404,6 +417,7 @@
       "RemoveThemekitConfirmation": "¿Seguro que quieres quitar este kit de tema? No se eliminará el objeto del kit, solo se desvinculará del tema de este personaje."
     },
     "ROLL": {
+      "CannotBurnFellowshipTag": "Las etiquetas de tema de compañía son de un solo uso: se tachan al invocarlas y no pueden quemarse para obtener Poder.",
       "CannotInvertBurningTag": "Una etiqueta marcada para quemar no puede invertirse en esta tirada.",
       "InvertedChallengeSuffix": "invertido",
       "InvertedTagHint": "Invertido para esta tirada (decisión del Narrador)",
@@ -555,7 +569,7 @@
       "FellowshipCardTitle": "Tarjeta de Tema de la Camaradería",
       "GameModeContent": "De vuelta en Modo de Juego, los botones de tirada dirigen el juego: Rápida, Detallada, Reacción y Sacrificio. El jugador selecciona las etiquetas y estados relevantes y tira — el diálogo suma el Poder automáticamente. Tras una acción Detallada exitosa, quien tira gasta su Poder directamente en la tarjeta de chat.",
       "GameModeTitle": "Modo de Juego y Tiradas",
-      "GroupActionContent": "Abre una acción de grupo compartida (Libro básico p. 131): una única tirada para todo el grupo. Cada héroe aporta una etiqueta (+1 Poder) y un solo héroe puede quemar una etiqueta (+3); puedes añadir un modificador del Narrador. El resultado afecta a todos.",
+      "GroupActionContent": "Abre una acción de grupo compartida (Libro básico p. 158): una única tirada para todo el grupo. Cada héroe aporta una etiqueta (+1 Poder) y un solo héroe puede quemar una etiqueta (+3); puedes añadir un modificador del Narrador. El resultado afecta a todos.",
       "GroupActionTitle": "Actuar en Grupo",
       "HowToPlayContent": "La ventana How To Play es tu referencia de reglas en la app — Ctrl+H la abre en cualquier momento. Eso es todo — puedes repetir la visita cuando quieras desde Ajustes → Gestión de Tours.",
       "HowToPlayTitle": "How To Play",

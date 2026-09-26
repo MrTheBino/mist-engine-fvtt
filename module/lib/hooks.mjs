@@ -3,6 +3,7 @@ import { DiceRollApp } from "../apps/dice-roll-app.mjs";
 import { HowToPlayApp } from "../apps/how-to-play-app.mjs";
 import { CampingApp } from "../apps/camping-app.mjs";
 import { Collaboration } from "../lib/collaboration.mjs";
+import { pruneDeletedStoryTheme } from "../lib/story-theme-helper.mjs";
 import { showCharacterTokenHover, initCharacterTokenHoverKeyListeners } from "./character-token-hover.mjs";
 
 export function setupHooks() {
@@ -487,6 +488,23 @@ export function setupHooks() {
       if (active === true) CampingApp.getInstance().render(true, { focus: true });
       else if (active === false && game.user.isGM === false) CampingApp.instance?.close();
     }
+  });
+
+  // Adding or removing a tracked item (a backpack on a scene hero, a story
+  // theme deleted from the sidebar) changes the same aggregates as an update.
+  // A new scene-data item is skipped: it is created blank and immediately
+  // updated with its sceneKey, and that update already refreshes.
+  Hooks.on("createItem", (item) => {
+    if (item.type !== "scene-data" && TRACKED_ITEM_TYPES.has(item.type)) refreshSceneTrackers();
+  });
+  Hooks.on("deleteItem", (item) => {
+    // a deleted scene-data item has nothing left to show; the scene app picks up a fresh one on the next scene change
+    if (item.type === "scene-data" || !TRACKED_ITEM_TYPES.has(item.type)) return;
+    refreshSceneTrackers();
+    // A deleted story theme would otherwise linger as a dead uuid in
+    // storyThemeIds (rendering skips it, but it never goes away). The active
+    // GM prunes it; the resulting scene-data update refreshes everyone again.
+    pruneDeletedStoryTheme(item).catch(e => console.error("mist-engine-fvtt | pruning deleted story theme failed", e));
   });
 
   // Reconnecting players: reopen the camping dialog if the mode is running.

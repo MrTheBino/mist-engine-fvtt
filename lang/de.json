@@ -111,8 +111,10 @@
     "COLLAB": {
       "AffectsGroup": "Das Ergebnis betrifft die gesamte Gruppe.",
       "BurnForPower": "Diesen Tag für +3 Power brennen (nur ein Held darf brennen)",
+      "BurnRejected": "Ein anderer Held brennt bereits einen Tag — „{tag}“ wurde ohne Brennen beigesteuert.",
       "Contribute": "Beitragen",
       "Contributions": "Beiträge",
+      "FellowshipTags": "Tags des Gemeinschafts-Themas (je +1 Power)",
       "GmMod": "Spielleiter-Modifikator",
       "GroupHint": "Ein einziger Wurf für die Gruppe. Jeder Held steuert einen Tag bei (+1 Power); ein Held darf einen Tag brennen (+3). Das Ergebnis betrifft alle.",
       "GroupPower": "Gruppen-Power",
@@ -126,6 +128,11 @@
       "HelpingTags": "Hilfe (von Mithelden):",
       "RequestHelp": "Hilfe anfordern",
       "RollForGroup": "Für die Gruppe würfeln",
+      "SourceBackpack": "Rucksack",
+      "SourcePowerTag": "Power-Tag",
+      "SourceRelationship": "Beziehung",
+      "SourceRote": "Rote",
+      "SourceStoryTag": "Story-Tag",
       "StartGroupAction": "Gruppenaktion starten",
       "WaitingContributions": "Warte auf Beiträge der Helden…",
       "YourTag": "Dein Tag"
@@ -163,10 +170,13 @@
       "BackpackSheet": "Rucksack-Einträge werden direkt auf dem Charakterbogen bearbeitet (Edit-Modus der Rucksack-Karte). Der Description-Tab liefert den Tooltip-Text.",
       "ChallengeAddon": "Lege einen wiederverwendbaren Satz aus Rollen, Tags/Status, Limits, Bedrohungen, Geheimnissen und Spezialmerkmalen an. Ziehe diese Erweiterung auf eine Herausforderung, um sie einzufügen und deren Stufe zu erhöhen.",
       "ChallengeTemplateDragNDrop": "Ziehe Herausforderungs- oder Vignetten-Items auf diesen NSC, um sie zu verwenden. Sie dienen als Vorlagen; das ursprüngliche Item wird nicht verändert.",
+      "DeletePowertag": "Power-Tag löschen",
+      "DeleteWeaknessTag": "Weakness-Tag löschen",
       "FelllowshipThemeCardExplanation": "Eine Gemeinschafts-Themenkarte ist eine gemeinsame Ressource aller Mitglieder einer Gemeinschaft. Sie enthält Power-Tags, Weakness-Tags und Spezialverbesserungen. Die eigentlichen Tags werden in den Charakteren eingetragen, nicht hier — hier stehen nur die Fragen zu den Tags.",
       "FellowshipCreation": "Es ist keine Gemeinschafts-Themenkarte zugewiesen. Erstelle eine neue oder weise einen vorhandenen Gemeinschafts-Themenkarten-Akteur zu.",
       "GMTagShortCuts": "Text markieren, dann STRG+UMSCHALT+S = Status, STRG+UMSCHALT+X = Macht, STRG+UMSCHALT+A = Tag, STRG+UMSCHALT+Y = Fett",
       "MightyAspects": "Aspekte, in denen diese Herausforderung auf Abenteuer- oder Größe-Stufe steht (alles andere ist Ursprung). Das sind KEINE Tags — sie sagen der Spielleitung, ob ein Macht-Unterschied (begünstigt/gefährdet) gilt; sie zählen nicht zum Wurf.",
+      "NoBackpackEquipped": "Kein Rucksack ausgerüstet.",
       "NoThemebooksInCharacter": "Keine Themebooks gefunden. Erstelle Themebook-Items und ziehe sie hierher.",
       "QuintessenceSheet": "Der Text dieser Quintessenz wird im Description-Tab bearbeitet — er erscheint als Tooltip auf dem Charakterbogen.",
       "Titles": {
@@ -256,7 +266,8 @@
         "CharactersHeader": "Charaktere",
         "DiceRollModifiers": "Wurf-Modifikatoren",
         "Header": "Story-Tags & Status",
-        "MightModifiers": "Macht"
+        "MightModifiers": "Macht",
+        "RemoveRollMod": "Wurf-Modifikator entfernen"
       },
       "Select": "Auswählen",
       "SelectCustomBackground": "Eigenen Hintergrund auswählen",
@@ -304,6 +315,8 @@
       "AddedWeaknessTag": "Weakness-Tag {tagName} hinzugefügt",
       "AssignedThemekit": "Theme Kit {themekitName} dem Charakter {characterName} zugewiesen",
       "FellowshipThemecardUnavailable": "Die zugewiesene Gemeinschafts-Themenkarte ist nicht mehr verfügbar. Weise eine andere zu oder hebe die Zuweisung auf.",
+      "ImportChallengeJSONError": "Die Herausforderung konnte nicht importiert werden. Prüfe die JSON-Daten (Details in der Konsole).",
+      "ImportChallengeJSONSuccess": "Herausforderung aus JSON importiert.",
       "NoCharacterAssignedForThemekitSelection": "Kein Charakter zugewiesen. Weise deinem Benutzer einen Charakter zu, um die Theme-Kit-Auswahl zu öffnen.",
       "NoFellowshipThemecardFound": "Keine Gemeinschafts-Themenkarten-Akteure gefunden. Erstelle zuerst eine über „Neu erstellen“.",
       "NotAllowedToUploadFilesForCustomBackground": "Du hast keine Berechtigung, Dateien hochzuladen. Bitte wende dich an deine Spielleitung.",
@@ -404,6 +417,7 @@
       "RemoveThemekitConfirmation": "Soll dieses Theme Kit wirklich entfernt werden? Das Theme-Kit-Item wird nicht gelöscht, sondern nur vom Themebook dieses Charakters getrennt."
     },
     "ROLL": {
+      "CannotBurnFellowshipTag": "Tags des Gemeinschafts-Themas sind einmalig: Sie werden beim Einsetzen abgestrichen und können nicht für Power gebrannt werden.",
       "CannotInvertBurningTag": "Ein zum Verbrennen markiertes Tag kann für diesen Wurf nicht invertiert werden.",
       "InvertedChallengeSuffix": "umgekehrt",
       "InvertedTagHint": "Für diesen Wurf invertiert (Entscheidung des Spielleiters)",
@@ -555,7 +569,7 @@
       "FellowshipCardTitle": "Gemeinschafts-Themecard",
       "GameModeContent": "Zurück im Spielmodus steuern die Wurf-Buttons das Spiel: Schneller, Detaillierter, Reaktions- und Opfer-Wurf. Der Spieler wählt die relevanten Tags und Status und würfelt — der Dialog summiert die Power automatisch. Nach einer erfolgreichen Detaillierten Aktion verteilt der Würfelnde seine Power direkt auf der Chatkarte.",
       "GameModeTitle": "Spielmodus & Würfeln",
-      "GroupActionContent": "Öffnet eine gemeinsame Gruppenaktion (Core Book S. 131): ein Wurf für die ganze Gruppe. Jeder Held steuert einen Tag bei (+1 Power), ein einzelner Held darf einen Tag verbrennen (+3); du kannst einen Spielleiter-Modifikator hinzufügen. Das Ergebnis betrifft alle.",
+      "GroupActionContent": "Öffnet eine gemeinsame Gruppenaktion (Core Book S. 158): ein Wurf für die ganze Gruppe. Jeder Held steuert einen Tag bei (+1 Power), ein einzelner Held darf einen Tag verbrennen (+3); du kannst einen Spielleiter-Modifikator hinzufügen. Das Ergebnis betrifft alle.",
       "GroupActionTitle": "Gemeinsam handeln",
       "HowToPlayContent": "Das How-To-Play-Fenster ist deine Regel-Referenz in der App — Strg+H öffnet es jederzeit. Das war die Tour — du kannst sie jederzeit unter Einstellungen → Tour-Verwaltung erneut starten.",
       "HowToPlayTitle": "How To Play",

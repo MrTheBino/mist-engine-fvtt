@@ -3,6 +3,7 @@ import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adap
 import { enrichShortChallenges, enrichTextWithTags } from "../lib/tag-status-text-helper.mjs";
 import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
 import { DiceRollApp } from "./dice-roll-app.mjs";
+import { isStoryThemeItem, resolveStoryThemes, visibleStoryThemeTags } from "../lib/story-theme-helper.mjs";
 
 /**
  * Localize a key, but never return an empty string.
@@ -418,8 +419,8 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
             context.storyThemes = (await this.getStoryThemes()).map(item => ({
                 uuid: item.uuid,
                 name: item.name,
-                powertags: (item.system.powertags ?? []).filter(t => t.name?.trim() && !t.planned),
-                weaknesstags: (item.system.weaknesstags ?? []).filter(t => t.name?.trim() && !t.planned)
+                powertags: visibleStoryThemeTags(item.system.powertags),
+                weaknesstags: visibleStoryThemeTags(item.system.weaknesstags)
             }));
         }
 
@@ -447,14 +448,12 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
     /** Is this item a story theme? A themebook flagged isStoryTheme. */
     isStoryThemeItem(item) {
-        return item?.type === "themebook" && item.system.options?.isStoryTheme === true;
+        return isStoryThemeItem(item);
     }
 
     /** Resolve the assigned story themes (valid + still story themes). */
     async getStoryThemes() {
-        const ids = this.currentSceneDataItem?.system?.storyThemeIds ?? [];
-        const resolved = await Promise.all(ids.map(uuid => fromUuid(uuid).catch(() => null)));
-        return resolved.filter(it => this.isStoryThemeItem(it));
+        return resolveStoryThemes(this.currentSceneDataItem?.system?.storyThemeIds);
     }
 
     static async #handleOpenStoryTheme(event, target) {

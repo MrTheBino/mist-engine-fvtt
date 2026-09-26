@@ -808,13 +808,14 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const actor = this.actor;
         const itemId = target.dataset.itemId;
         const source = target.dataset.source;
-        let object = this.actor.items.get(itemId);
-
+        // Fellowship theme power tags are single-use: scratched when invoked,
+        // never burnt for Power (Core Book p. 138). The sheet hides their burn
+        // control (noBurn); this guards stale markup / macros.
         if (source === "fellowship-themecard") {
-            if (this.actorFellowshipThemecard) {
-                object = this.actorFellowshipThemecard;
-            }
+            ui.notifications.warn(game.i18n.localize("MIST_ENGINE.ROLL.CannotBurnFellowshipTag"));
+            return;
         }
+        let object = this.actor.items.get(itemId);
         if (!object) {
             console.log("WARNING: no object found for power tag selectable click");
             return;

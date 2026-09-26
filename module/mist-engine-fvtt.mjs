@@ -148,8 +148,14 @@ Hooks.once("init", function () {
   );
 
   foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
+  // The generic sheet only serves the types without a dedicated sheet below
+  // (it renders templates/item/item-${type}-sheet.hbs). Without a types filter
+  // it was offered for every type — including scene-data, which has no
+  // template. Items still flagged with it keep working: Foundry falls back to
+  // the type's default sheet for an unregistered core.sheetClass.
   foundry.documents.collections.Items.registerSheet("mist-engine-fvtt", MistEngineItemSheet, {
     makeDefault: true,
+    types: ["backpack", "quintessence"],
     label: "MIST_ENGINE.SheetLabels.Item",
   });
 

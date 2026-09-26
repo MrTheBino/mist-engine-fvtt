@@ -1,6 +1,7 @@
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 import { MistSceneApp } from "./scene-app.mjs";
 import { DiceRollApp } from "./dice-roll-app.mjs";
+import { Collaboration } from "../lib/collaboration.mjs";
 import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adapter.mjs";
 import { ArrayFieldAdapter } from "../lib/array-field-adapter.mjs";
 
@@ -479,6 +480,10 @@ export class CampingApp extends HandlebarsApplicationMixin(ApplicationV2) {
         ]);
         app.numModPositive = 0;
         await app.resetTags();
+        // helping tags counted towards the spent Power are used up like in a roll
+        Collaboration.reportHelpUsed(app.helpingTags);
+        app.helpingTags = [];
+        app.pendingHelpReqId = null;
     }
 
     /* ------------------------------------------------------------------ */

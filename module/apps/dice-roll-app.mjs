@@ -26,8 +26,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         // pending GM confirmation: { requestId, formValues, snapshot } or null
         this.pendingRequest = null;
 
-        // Helping Each Other (p. 131): tags other heroes contribute to this roll.
-        // Each { name, helperName } adds +1 Power and cannot be burned.
+        // Helping Each Other (p. 158): tags other heroes contribute to this roll.
+        // Each { name, helperName, helperUserId, helperActorId, source, docId, index }
+        // adds +1 Power and cannot be burned; a contributed Fellowship relationship
+        // tag is scratched once the roll is made (see Collaboration.reportHelpUsed).
         this.helpingTags = [];
         this.pendingHelpReqId = null;
 
@@ -241,7 +243,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         );
         const mightEnabled = game.settings.get("mist-engine-fvtt", "mightUsageEnabled") === true;
         const mightScale = mightEnabled ? (this.mightScale || 0) : 0;
-        const helping = (this.helpingTags?.length || 0); // +1 per helping tag (p. 131)
+        const helping = (this.helpingTags?.length || 0); // +1 per helping tag (p. 158)
         const power = (countTags.positive - countTags.negative) + mightScale + helping + (this.numModPositive || 0) - (this.numModNegative || 0);
         return Math.max(1, power); // preview matches the roll: never below Power 1 (see executeRoll)
     }
@@ -328,7 +330,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
             if (element.value === undefined || element.value == 0) {
                 if (element.positive) {
-                    if (element.toBurn && !burnUsed) {
+                    // Fellowship theme tags never burn (p. 138), whatever the data says
+                    if (element.toBurn && !burnUsed && element.source !== "fellowship-themecard") {
                         numPositiveTags += 3;
                         burnUsed = true;
                     } else {
@@ -570,7 +573,9 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 if (actorFellowshipThemecard.system.powertags) {
                     actorFellowshipThemecard.system.powertags.forEach((tag, i) => {
                         if (tag.selected) {
-                            selectedTags.push({ name: tag.name, positive: true, powerTag: true, toBurn: tag.toBurn, index: i, source: "fellowship-themecard" });
+                            // Fellowship theme power tags cannot be burnt for Power
+                            // (Core Book p. 138) — a stale toBurn from older data is ignored
+                            selectedTags.push({ name: tag.name, positive: true, powerTag: true, toBurn: false, index: i, source: "fellowship-themecard" });
                         }
                     });
                 }
@@ -756,13 +761,18 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             if (actorFellowshipThemecard) {
 
                 if (actorFellowshipThemecard.system.powertags) {
+                    // Fellowship theme power tags are single-use: every one invoked in
+                    // this roll is scratched (burned: true), none is ever burnt for
+                    // Power and none counts against the one-burn limit (Core Book
+                    // p. 138). A power tag the Narrator inverted to hinder (#35) is
+                    // scratched too — it was still invoked, and leaving it would make
+                    // a reusable hindrance that earns Improvement every roll.
+                    // selectedTags is what was actually rolled (GM-confirmed snapshot
+                    // included); the name guard skips a tag edited meanwhile.
+                    const invoked = this.selectedTags.filter(t => t.source === "fellowship-themecard" && t.powerTag);
                     const powertags = actorFellowshipThemecard.system.powertags.map((tag, i) => {
-                        let burned = tag.burned;
-                        if (!burned && !burnedOne && tag.toBurn) {
-                            burned = true;
-                            burnedOne = true;
-                        }
-                        return { ...tag, selected: false, toBurn: false, burned };
+                        const scratch = invoked.some(t => t.index === i && t.name === tag.name);
+                        return { ...tag, selected: false, toBurn: false, burned: tag.burned || scratch };
                     });
                     await actorFellowshipThemecard.update({ 'system.powertags': powertags });
                 }
@@ -837,7 +847,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 selectedTags: foundry.utils.deepClone(this.selectedTags),
                 selectedGmTags: foundry.utils.deepClone(this.selectedGmTags),
                 selectedStoryTags: foundry.utils.deepClone(this.selectedStoryTags),
-                challengeTags: foundry.utils.deepClone(this.challengeTags)
+                challengeTags: foundry.utils.deepClone(this.challengeTags),
+                helpingTags: foundry.utils.deepClone(this.helpingTags)
             }
         };
         ui.notifications.info(game.i18n.localize("MIST_ENGINE.GM_CONFIRM.WaitingForGm"));
@@ -855,6 +866,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             this.selectedGmTags = pending.snapshot.selectedGmTags;
             this.selectedStoryTags = pending.snapshot.selectedStoryTags;
             this.challengeTags = pending.snapshot.challengeTags;
+            this.helpingTags = pending.snapshot.helpingTags;
             this.executeRoll(pending.formValues);
         } else {
             ui.notifications.warn(game.i18n.localize("MIST_ENGINE.GM_CONFIRM.Rejected"));
@@ -885,8 +897,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     /** Socket callback: a fellow hero contributed a helping tag to this roll. */
-    addHelpingTag({ helperName, tagName }) {
-        this.helpingTags.push({ name: tagName, helperName });
+    addHelpingTag({ helperName, tagName, byUserId, helperActorId, source, docId, index }) {
+        this.helpingTags.push({ name: tagName, helperName, helperUserId: byUserId, helperActorId, source, docId, index });
         ui.notifications.info(game.i18n.format("MIST_ENGINE.COLLAB.HelpReceived", { helper: helperName, tag: tagName }));
         if (this.rendered) this.render();
     }
@@ -912,7 +924,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         numPositiveTags += countTags.positive;
         numNegativeTags += countTags.negative;
 
-        // Helping Each Other (p. 131): +1 Power per contributed tag (never burned).
+        // Helping Each Other (p. 158): +1 Power per contributed tag (never burned).
         const helpingContribs = (this.helpingTags ?? []).map(h => ({ name: `${h.name} (${h.helperName})`, positive: true, source: "help" }));
         numPositiveTags += helpingContribs.length;
 
@@ -986,6 +998,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
             );
             ChatMessage.create({ content: html, speaker });
         }
+
+        // the roll is made: spend the helping tags that were actually used —
+        // removed ones never reach this point, a cancelled/rejected roll neither
+        Collaboration.reportHelpUsed(this.helpingTags);
 
         this.numModPositive = 0;
         this.numModNegative = 0;

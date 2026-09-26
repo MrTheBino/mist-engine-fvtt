@@ -18,6 +18,19 @@
         {{/unless}}
     </div>
 
+    {{#if fellowshipTags.length}}
+    {{!-- Fellowship theme power tags: any or all may be invoked on top of the heroes' tags (+1 each, p. 158) --}}
+    <div class="group-contributions group-fellowship-tags">
+        <label class="resource-label">{{localize "MIST_ENGINE.COLLAB.FellowshipTags"}}</label>
+        {{#each fellowshipTags}}
+        <div class="tag group-contribution group-fellowship-tag {{#if this.selected}}positive selected{{/if}}" data-action="groupToggleExtra" data-key="{{this.key}}" data-tooltip="{{this.themecardName}}">
+            <span class="tag-icon"><i class="fa-solid {{#if this.selected}}fa-square-check{{else}}fa-square{{/if}}"></i></span>
+            {{this.name}}
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
     <div class="form-group">
         <label class="resource-label">{{localize "MIST_ENGINE.COLLAB.GmMod"}}</label>
         <div class="flexrow">

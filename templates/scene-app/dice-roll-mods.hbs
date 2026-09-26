@@ -7,7 +7,7 @@
                 {{#each currentSceneDataItem.system.diceRollTagsStatus}}
                     <div class="mod-entry {{#if positive}}positive{{else}}negative{{/if}} toggleSceneAppRollMod" data-index="{{@index}}" title="right click to toggle between positive / negative modifier">
                         <i class="fa-solid fa-arrows-turn-to-dots fts-tag-modifier-toggle" data-action="toggleDiceRollModifier" data-index="{{@index}}" title="toggle between positive and negative"></i>
-                        {{name}}{{#if (gt value 0)}}-{{value}}{{/if}} {{#if ../isGM}}<a class="tag-status-delete" data-action="removeSceneAppRollMod" data-index="{{@index}}" title="{{localize 'MIST_ENGINE.LABELS.SceneApp.RemoveRolMod'}}">
+                        {{name}}{{#if (gt value 0)}}-{{value}}{{/if}} {{#if ../isGM}}<a class="tag-status-delete" data-action="removeSceneAppRollMod" data-index="{{@index}}" title="{{localize 'MIST_ENGINE.LABELS.SceneApp.RemoveRollMod'}}">
                         <i class="fas fa-trash"></i></a>{{/if}}
                     </div>
                 {{/each}}

@@ -1,5 +1,6 @@
 import { MistSceneApp } from "./scene-app.mjs";
 import { FloatingTagAndStatusAdapter } from "../lib/floating-tag-and-status-adapter.mjs";
+import { resolveStoryThemes, visibleStoryThemeTags } from "../lib/story-theme-helper.mjs";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -16,9 +17,9 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
  * singleton `ui.litmSceneTags` during `Game#initializeUI`.
  *
  * Live refresh piggybacks on the central `refreshSceneTrackers()` in
- * lib/hooks.mjs — the same `updateItem` hook that already keeps the Scene App
- * in sync covers both data sources here (`scene-data` for the scene tags,
- * `themebook` for the story themes).
+ * lib/hooks.mjs — the same `updateItem` / `deleteItem` hooks that already keep
+ * the Scene App in sync cover both data sources here (`scene-data` for the
+ * scene tags, `themebook` for the story themes).
  */
 export class MistSceneTagsOverlay extends HandlebarsApplicationMixin(ApplicationV2) {
     static DEFAULT_OPTIONS = {
@@ -110,25 +111,22 @@ export class MistSceneTagsOverlay extends HandlebarsApplicationMixin(Application
 
     /**
      * Power and weakness tags of the scene's story themes, grouped by their
-     * owning theme. Uses the same filter as the Scene App's Story Themes tab:
-     * named, non-planned tags only.
+     * owning theme. Themes and tags go through the same helpers as the Scene
+     * App's Story Themes tab (lib/story-theme-helper.mjs): flagged story
+     * themes only, named, non-planned, non-expired tags.
      * @param {Item|null} sd  the scene-data item
      * @returns {Promise<Array<{uuid: string, name: string, tags: Array<{name: string, weakness: boolean, theme: string}>}>>}
      */
     async #storyTagGroups(sd) {
-        const uuids = sd?.system?.storyThemeIds ?? [];
+        const themes = await resolveStoryThemes(sd?.system?.storyThemeIds);
         const groups = [];
-        for (const uuid of uuids) {
-            const theme = await fromUuid(uuid).catch(() => null);
-            if (theme?.type !== "themebook") continue;
+        for (const theme of themes) {
             const name = theme.name?.trim() || game.i18n.localize("MIST_ENGINE.OVERLAY.Unthemed");
-            const tags = [];
-            const pick = (list, weakness) => (list ?? [])
-                .filter(t => t.name?.trim() && !t.planned)
-                .forEach(t => tags.push({ name: t.name, weakness, theme: name }));
-            pick(theme.system.powertags, false);
-            pick(theme.system.weaknesstags, true);
-            if (tags.length) groups.push({ uuid, name, tags });
+            const tags = [
+                ...visibleStoryThemeTags(theme.system.powertags).map(t => ({ name: t.name, weakness: false, theme: name })),
+                ...visibleStoryThemeTags(theme.system.weaknesstags).map(t => ({ name: t.name, weakness: true, theme: name }))
+            ];
+            if (tags.length) groups.push({ uuid: theme.uuid, name, tags });
         }
         return groups;
     }

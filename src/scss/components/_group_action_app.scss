@@ -1,4 +1,4 @@
-// Acting Together — group action app (Core Book p. 131)
+// Acting Together — group action app (Core Book p. 158)
 #group-action-app>section.window-content {
     border-style: solid;
     border-width: 10px;
@@ -23,6 +23,12 @@
 
         .group-contribution {
             margin: 3px 0;
+        }
+
+        .group-fellowship-tag {
+            cursor: pointer;
+
+            &:not(.selected) { opacity: 0.7; }
         }
     }
 
