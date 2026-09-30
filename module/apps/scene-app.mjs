@@ -986,16 +986,27 @@ export class MistSceneApp extends HandlebarsApplicationMixin(ApplicationV2) {
         return combinedSelectedTags;
     }
 
-    resetSelection() {
-        if (!this.currentSceneDataItem) return;
+    /**
+     * Clear the scene/story tag selection and the NPC challenge tag selection of
+     * a scene after a roll. GM only: players can't select these (and can't write
+     * the scene data item). A player's roll reaches the active GM via
+     * RollConfirmation.requestSceneSelectionReset, which passes the scene the
+     * player rolled against — it may differ from the one this GM is viewing.
+     * @param {string|null} [sceneId]  defaults to the scene tracked here
+     */
+    resetSelection(sceneId = this.currentSceneId) {
         if (game.user.isGM === false) return;
+        const sceneDataItem = sceneId === this.currentSceneId
+            ? this.currentSceneDataItem
+            : game.items.find(i => i.type === "scene-data" && i.system.sceneKey === sceneId);
+        if (!sceneDataItem) return;
 
-        const floatingTagsAndStatuses = this.currentSceneDataItem.system.floatingTagsAndStatuses;
+        const floatingTagsAndStatuses = sceneDataItem.system.floatingTagsAndStatuses;
         if (!floatingTagsAndStatuses) return;
         floatingTagsAndStatuses.forEach(t => t.selected = false);
-        this.currentSceneDataItem.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
+        sceneDataItem.update({ [`system.floatingTagsAndStatuses`]: floatingTagsAndStatuses });
 
-        const scene = this.getCurrentScene();
+        const scene = sceneId ? (game.scenes.get(sceneId) ?? null) : null;
         if (scene) {
             const actors = scene.tokens.contents.map(t => t.actor).filter(a => a && a.type == "litm-npc");
             const uniqueActors = [...new Set(actors)];

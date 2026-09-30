@@ -1,4 +1,5 @@
 import { DiceRollApp } from "../apps/dice-roll-app.mjs";
+import { MistSceneApp } from "../apps/scene-app.mjs";
 
 /**
  * Optional GM confirmation for player rolls (system setting
@@ -11,6 +12,10 @@ import { DiceRollApp } from "../apps/dice-roll-app.mjs";
  *  - rollConfirmRequest  player -> GM   { requestId, userId, actorId, rollType, snapshot }
  *  - rollConfirmResponse GM -> player   { requestId, userId, approved }
  *  - rollConfirmCancel   player -> GM   { requestId }
+ *  - rollSceneSelectionReset player -> GM { userId, sceneId }
+ *      sent after a player's roll was actually made (with or without
+ *      confirmation) that used scene/story or challenge tags: only the GM can
+ *      clear that selection, so the active GM does it once on the player's behalf
  */
 export class RollConfirmation {
 
@@ -63,6 +68,23 @@ export class RollConfirmation {
         game.socket.emit(RollConfirmation.SOCKET, { action: "rollConfirmCancel", requestId });
     }
 
+    /**
+     * Player side, after a roll was made: ask the active GM to clear the
+     * scene/story and challenge tag selection the roll used. A rolling GM
+     * clears it locally instead (DiceRollApp.resetTags), and a socket emit
+     * never reaches its sender, so a selection is never reset twice. Without
+     * an active GM nobody could write it, so nothing is sent.
+     * @param {string|null} sceneId  the scene the roll's tags came from
+     */
+    static requestSceneSelectionReset(sceneId) {
+        if (game.user.isGM || !sceneId || !game.users.activeGM) return;
+        game.socket.emit(RollConfirmation.SOCKET, {
+            action: "rollSceneSelectionReset",
+            userId: game.user.id,
+            sceneId
+        });
+    }
+
     static async #onSocketMessage(msg) {
         switch (msg?.action) {
             case "rollConfirmRequest":
@@ -70,6 +92,9 @@ export class RollConfirmation {
                 break;
             case "rollConfirmCancel":
                 if (game.user === game.users.activeGM) RollConfirmation.#onPlayerCancel(msg);
+                break;
+            case "rollSceneSelectionReset":
+                if (game.user === game.users.activeGM) MistSceneApp.getInstance().resetSelection(msg.sceneId);
                 break;
             case "rollConfirmResponse":
                 if (msg.userId === game.user.id) DiceRollApp.instance?.handleConfirmationResponse(msg);

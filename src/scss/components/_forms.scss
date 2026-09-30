@@ -166,3 +166,64 @@ p.help-text {
   font-family: $font-primary;
   font-weight: bold;
 }
+
+// "Planned" toggle on power/weakness/story tag lines (#66). Still a real
+// checkbox (name + change listeners unchanged), drawn as an eye: open eye =
+// active (unchecked), slashed eye = planned, i.e. hidden (checked). Overrides
+// Foundry's checkbox glyphs, which live on ::before and ::after.
+input[type="checkbox"].planned-toggle {
+  --checkbox-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background: none;
+  // same brown as the trash icons next to it - inheriting would give the
+  // light card text colour on backpack lines, which vanishes on parchment
+  color: $c-icon-brown;
+  cursor: pointer;
+
+  &::before {
+    content: "\f06e"; // eye
+    position: static;
+    font-family: var(--font-awesome);
+    font-weight: 900;
+    color: inherit;
+    outline: none;
+  }
+
+  &::after {
+    content: none;
+  }
+
+  &:checked::before {
+    content: "\f070"; // eye-slash
+    opacity: 0.6;
+  }
+
+  &:hover::before {
+    opacity: 1;
+    text-shadow: 0 0 6px currentColor;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--input-focus-outline-color, #{$c-brown});
+    outline-offset: 1px;
+  }
+
+  &:focus-visible::before,
+  &:checked:focus-visible::before {
+    outline: none;
+  }
+}

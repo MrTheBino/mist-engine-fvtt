@@ -1,7 +1,8 @@
 // Markup tokens supported are as follows...
 
 // [tag] - a simple tag
-// [/w weakness] - a weakness tag
+// [/t tag] - an explicit simple tag (same as [tag])
+// [/w weakness] - a weakness tag ([/wo weakness] is an alias)
 // [status-X] - a status with a tier of X (1-6)
 // [/s status] - a status without a tier, used in a journal for example
 // [/sn status] - a negative status without a tier
@@ -9,9 +10,21 @@
 // [/l limit] - a limit without a value, used in a journal for example
 // [/l limit-X] - a limit with the value X (1-6)
 
+// [/m might] - a might without a type
 // [/ma might] - a might of type adventure
 // [/mg might] - a might of type greatness
 // [/mo might] - a might of type origin
+
+// [/b text] - bold text, no tag (e.g. "[/b New Challenge]")
+
+// Aliases found in the Core Book module content, rendered as a plain status
+// (like [/s status]): /sp, /sg, /sr, /so and /n.
+
+// A token is only recognised at the very start of the markup and must be
+// followed by whitespace ("/sg provoked-2"). Anything else - an unknown token,
+// or a "/" inside the name ("[fire/ice]") - never changes the type and never
+// eats letters of the name: an unknown token renders its remaining text as a
+// plain tag.
 
 // Tag types
 const TAG = 1;
@@ -21,6 +34,27 @@ const BOLD = 4;
 const LIMIT = 5;
 const WEAKNESS = 6;
 const NEGATIVE_STATUS = 7;
+
+// Markup token (without the leading "/") -> tag type and optional icon prefix
+const TOKENS = {
+  t: { type: TAG },
+  w: { type: WEAKNESS, icon: '<i class="fa-light fa-angles-down"></i>' },
+  wo: { type: WEAKNESS, icon: '<i class="fa-light fa-angles-down"></i>' }, // alias of /w (#103)
+  s: { type: STATUS },
+  sn: { type: NEGATIVE_STATUS },
+  l: { type: LIMIT },
+  m: { type: MIGHT, icon: '<i class="might-icon"></i>' },
+  ma: { type: MIGHT, icon: '<i class="might-icon adventure"></i>' },
+  mg: { type: MIGHT, icon: '<i class="might-icon greatness"></i>' },
+  mo: { type: MIGHT, icon: '<i class="might-icon origin"></i>' },
+  b: { type: BOLD },
+  // Core Book module aliases, all used for plain statuses there
+  sp: { type: STATUS },
+  sg: { type: STATUS },
+  sr: { type: STATUS },
+  so: { type: STATUS },
+  n: { type: STATUS },
+};
 
 /**
  * Convert raw text with above markup tokens to text with HTML mark elements
@@ -104,55 +138,18 @@ export function makeStyledTagOrStatusText(markup) {
   let isOfType = TAG; // type is TAG by default
   let extraIcon = ""; // No extra icon prefix
 
-  // negative status - checked before the plain status token since "/sn" also
-  // contains the substring "/s" and would otherwise be caught by that check
-  if (markup.includes("/sn")) {
-    isOfType = NEGATIVE_STATUS;
-    markup = markup.replace("/sn", "");
-  } else if (markup.includes("/s")) {
-    // status
-    isOfType = STATUS;
-    markup = markup.replace("/s", "");
-  }
-
-  // weakness
-  if (markup.includes("/w")) {
-    isOfType = WEAKNESS;
-    extraIcon = '<i class="fa-light fa-angles-down"></i>';
-    markup = markup.replace("/w", "");
-  }
-
-  // limit
-  if (markup.includes("/l")) {
-    isOfType = LIMIT;
-    markup = markup.replace("/l", "");
-  }
-
-  // might
-  if (markup.includes("/mg")) {
-    isOfType = MIGHT;
-    extraIcon = '<i class="might-icon greatness"></i>';
-    markup = markup.replace("/mg", "");
-  } else if (markup.includes("/mo")) {
-    //might origin
-    isOfType = MIGHT;
-    extraIcon = '<i class="might-icon origin"></i>';
-    markup = markup.replace("/mo", "");
-  } else if (markup.includes("/ma")) {
-    isOfType = MIGHT;
-    extraIcon = '<i class="might-icon adventure"></i>';
-    markup = markup.replace("/ma", "");
-  } else if (markup.includes("/m")) {
-    //might standard
-    isOfType = MIGHT;
-    extraIcon = '<i class="might-icon"></i>';
-    markup = markup.replace("/m", "");
-  }
-
-  // bold
-  if (markup.includes("/b")) {
-    markup = markup.replace("/b", "");
-    isOfType = BOLD;
+  // the token is anchored at the start and needs whitespace after it (a
+  // double space typed in the editor arrives as &nbsp;), so a "/l" or "/b"
+  // somewhere inside a name is just part of that name
+  const tokenMatch = /^\/(\w+)(?:\s|&nbsp;)+/.exec(markup);
+  if (tokenMatch) {
+    const token = TOKENS[tokenMatch[1].toLowerCase()];
+    if (token) {
+      isOfType = token.type;
+      extraIcon = token.icon ?? "";
+    }
+    // an unknown token keeps TAG and only drops the token itself
+    markup = markup.substring(tokenMatch[0].length);
   }
 
   const lastSegment = markup.split("-").pop().trim();

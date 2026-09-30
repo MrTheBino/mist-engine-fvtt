@@ -180,8 +180,8 @@
       "NoThemebooksInCharacter": "Keine Themebooks gefunden. Erstelle Themebook-Items und ziehe sie hierher.",
       "QuintessenceSheet": "Der Text dieser Quintessenz wird im Description-Tab bearbeitet — er erscheint als Tooltip auf dem Charakterbogen.",
       "Titles": {
-        "PlannedPowertag": "Geplanter Power- oder Weakness-Tag. Wähle ihn aus, um ihn aus der Liste der aktiven Tags auszublenden, bis du ihn einsetzen willst.",
-        "PlannedStorytag": "Geplanter Story-Tag. Wähle ihn aus, um ihn aus der Liste der aktiven Story-Tags auszublenden, bis du ihn einsetzen willst.",
+        "PlannedPowertag": "Aktiver (offenes Auge) oder geplanter (durchgestrichenes Auge) Power- oder Weakness-Tag. Klicke auf das Auge, um den Tag zu planen: Er wird aus der Liste der aktiven Tags ausgeblendet, bis du ihn mit einem weiteren Klick einsetzt.",
+        "PlannedStorytag": "Aktiver (offenes Auge) oder geplanter (durchgestrichenes Auge) Story-Tag. Klicke auf das Auge, um den Tag zu planen: Er wird aus der Liste der aktiven Story-Tags ausgeblendet, bis du ihn mit einem weiteren Klick einsetzt.",
         "Powertag": "Power-Tag",
         "RightClickToToggleBurnState": "Rechtsklick schaltet den Brennzustand um"
       }

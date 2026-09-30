@@ -295,11 +295,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         sceneApp.getSceneAndStoryTags().forEach((element, index) => {
             if (element.selected) {
                 let t = { name: element.name, positive: element.positive, source: "scene-and-story", value: element.value, index, sceneDataItemId: sceneApp.currentSceneDataItem?.id, might: element.might, mightIcon: element.mightIcon };
-                // #104: only scene/story STATUSES (value > 0) can be inverted for this
-                // roll — a plain scene/story tag has no "count against instead" reading.
-                if (element.value > 0) {
-                    DiceRollApp.applyChallengeInversion(t, this.invertedChallengeEntries);
-                }
+                // #104/#123: scene/story statuses AND plain tags can be inverted for
+                // this roll — a story tag can help or hinder depending on the action
+                // (Core Book p. 233; e.g. [gale winds], Vol. II p. 23).
+                DiceRollApp.applyChallengeInversion(t, this.invertedChallengeEntries);
                 this.selectedStoryTags.push(t);
             }
         });
@@ -463,9 +462,12 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
      * themebookId, so its `source` stands in for it. Power and weakness indices
      * overlap, so the tag kind is part of the key. Both index schemes are
      * 0-based per-item indices assigned in getPreparedTagsAndStatusesForRoll.
+     * Backpack entries (#54) carry their story tag's own id as themebookId and
+     * a 1-based index; the "b" kind keeps them apart from themebook keys.
      */
     static getTagKey(tag) {
-        return `${tag.themebookId ?? tag.source ?? "na"}:${tag.weakness ? "w" : "p"}:${tag.index}`;
+        const kind = tag.source === "backpack" ? "b" : (tag.weakness ? "w" : "p");
+        return `${tag.themebookId ?? tag.source ?? "na"}:${kind}:${tag.index}`;
     }
 
     /**
@@ -626,8 +628,11 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         // simply flips `positive` — the roll math, chat grouping and the
         // colour/thumb rendering all follow from that one flag; `inverted`
         // only drives the visual "this was flipped" marker.
+        // Backpack tags are story tags (Core Book p. 76) and may be inverted
+        // to hinder the same way (#54, p. 164) — they never mark Improve,
+        // as resetTags only awards it for themebook power/weakness tags.
         this.selectedTags.forEach(tag => {
-            if (tag.weakness || tag.powerTag) {
+            if (tag.weakness || tag.powerTag || tag.source === "backpack") {
                 tag.tagKey = DiceRollApp.getTagKey(tag);
                 // burn wins over a stale inversion: the toggle refuses burning
                 // tags, but the tag can be marked to burn on the sheet while
@@ -651,8 +656,8 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     // ToDo, Needs fixing, not working as expected
-    isTagToBurn(index, themebookId, source = null) {
-        for (let tag of this.selectedTags) {
+    isTagToBurn(index, themebookId, source = null, tags = this.selectedTags) {
+        for (let tag of tags) {
             if (tag.toBurn && tag.index === index && themebookId === tag.themebookId && source === null) {
                 return true;
             }
@@ -680,6 +685,16 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     async resetTags() {
+        // what was actually rolled: every document update below fires the
+        // updateItem/updateActor refresh hooks, which re-derive this.selectedTags
+        // & co. from the half-reset documents (and without the per-roll
+        // inversions, already cleared) — so read the rolled arrays up front
+        const rolledTags = this.selectedTags;
+        const usedSceneOrChallengeTags = this.selectedStoryTags.length > 0 || this.challengeTags.length > 0;
+        // the scene the rolled scene tags came from — the tracked scene may change
+        // while a GM confirmation is pending
+        const rolledSceneId = game.items.get(this.selectedStoryTags[0]?.sceneDataItemId)?.system.sceneKey
+            ?? MistSceneApp.instance?.currentSceneId ?? null;
         let alreadyImprovedThemebooks = [];
         let burnedOne = false; // at most one tag may actually burn per roll (#92)
 
@@ -692,8 +707,14 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 if (backpackItems) {
                     for (let [bi, backpackItem] of backpackItems.entries()) {
                         backpackItem.selected = false;
+                        // a tag inverted to hinder in this roll (#54) is never
+                        // burned — mirrors the #35 guard on themebook tags; it
+                        // matters when the rolled snapshot (GM confirmation) is
+                        // older than a burn mark set on the sheet meanwhile
+                        const invertedInRoll = rolledTags.some(t =>
+                            t.source === "backpack" && t.themebookId === backpackItem.id && t.index === bi + 1 && t.inverted);
                         if (backpackItem.toBurn) {
-                            if (!burnedOne) {
+                            if (!burnedOne && !invertedInRoll) {
                                 backpackItem.burned = true;
                                 burnedOne = true;
                             }
@@ -708,7 +729,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 if (item.system.powertags && item.system.powertags.length > 0) {
                     const powertags = item.system.powertags.map((tag, i) => {
                         let burned = tag.burned;
-                        if (!burned && !burnedOne && this.isTagToBurn(i, item._id)) {
+                        if (!burned && !burnedOne && this.isTagToBurn(i, item._id, null, rolledTags)) {
                             burned = true;
                             burnedOne = true;
                         }
@@ -722,7 +743,10 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 // inverted to count as Weakness for this roll. A Weakness
                 // inverted to help earns nothing. selectedTags carries the
                 // effective (post-inversion) polarity in `positive`.
-                const invokedAsHindering = this.selectedTags.some(t =>
+                // A story theme never earns Improvement: its tags are story
+                // tags, and invoking a hindering story tag doesn't mark
+                // Improve (Core Book p. 164-165).
+                const invokedAsHindering = !item.system.options?.isStoryTheme && rolledTags.some(t =>
                     t.themebookId === item.id && (t.weakness || t.powerTag) && !t.positive);
                 if (invokedAsHindering && item.system.improve < 3 && !alreadyImprovedThemebooks.includes(item.id)) {
                     alreadyImprovedThemebooks.push(item.id);
@@ -740,7 +764,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
 
         const fellowships = this.actor.system.fellowships;
-        let fellowshipTagsToCheck = this.selectedTags.filter(t => t.source === "fellowship-relationship").map(t => t.name);
+        let fellowshipTagsToCheck = rolledTags.filter(t => t.source === "fellowship-relationship").map(t => t.name);
         if (fellowships && fellowships.length > 0) {
             fellowships.forEach((entry) => {
                 //check if fellowship tag was selected
@@ -769,7 +793,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                     // a reusable hindrance that earns Improvement every roll.
                     // selectedTags is what was actually rolled (GM-confirmed snapshot
                     // included); the name guard skips a tag edited meanwhile.
-                    const invoked = this.selectedTags.filter(t => t.source === "fellowship-themecard" && t.powerTag);
+                    const invoked = rolledTags.filter(t => t.source === "fellowship-themecard" && t.powerTag);
                     const powertags = actorFellowshipThemecard.system.powertags.map((tag, i) => {
                         const scratch = invoked.some(t => t.index === i && t.name === tag.name);
                         return { ...tag, selected: false, toBurn: false, burned: tag.burned || scratch };
@@ -778,7 +802,7 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
                 }
 
                 // same hindering-earns-improvement rule as themebooks (#35)
-                const themecardInvokedAsHindering = this.selectedTags.some(t =>
+                const themecardInvokedAsHindering = rolledTags.some(t =>
                     t.source === "fellowship-themecard" && (t.weakness || t.powerTag) && !t.positive);
                 if (themecardInvokedAsHindering && actorFellowshipThemecard.system.improve < 3 && !alreadyImprovedThemebooks.includes(actorFellowshipThemecard.id)) {
                     alreadyImprovedThemebooks.push(actorFellowshipThemecard.id);
@@ -811,7 +835,13 @@ export class DiceRollApp extends HandlebarsApplicationMixin(ApplicationV2) {
         }
 
         this.actor.sheet.render();
-        MistSceneApp.instance?.resetSelection();
+        // only the GM can clear scene/story and challenge tag selections — a
+        // player's roll that used some asks the active GM to do it
+        if (game.user.isGM) {
+            MistSceneApp.instance?.resetSelection();
+        } else if (usedSceneOrChallengeTags) {
+            RollConfirmation.requestSceneSelectionReset(rolledSceneId);
+        }
     }
 
     static async #rollCallback(event, target) {

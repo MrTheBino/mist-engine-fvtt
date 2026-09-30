@@ -12,7 +12,7 @@
         {{#each selectedTags}}
         <div class="selected-tag tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}} {{#if this.isStatus}}status{{/if}} {{#if this.isClickable}}clickable{{/if}} {{#if this.tagKey}}clickable{{/if}} {{#if this.inverted}}inverted-tag{{/if}}"
             {{#if this.isClickable}}data-action="clickTagStatusModifierToggle" data-index="{{this.index}}"{{/if}}
-            {{#if this.tagKey}}data-action="clickToggleTagInversion" data-tag-key="{{this.tagKey}}" title="{{#if this.weakness}}{{localize 'MIST_ENGINE.ROLL.ToggleWeaknessAsPower'}}{{else}}{{localize 'MIST_ENGINE.ROLL.TogglePowerAsWeakness'}}{{/if}}"{{/if}}>
+            {{#if this.tagKey}}data-action="clickToggleTagInversion" data-tag-key="{{this.tagKey}}" title="{{#if this.weakness}}{{localize 'MIST_ENGINE.ROLL.ToggleWeaknessAsPower'}}{{else if this.powerTag}}{{localize 'MIST_ENGINE.ROLL.TogglePowerAsWeakness'}}{{else}}{{localize 'MIST_ENGINE.ROLL.ToggleChallengeInversion'}}{{/if}}"{{/if}}>
             <span class="tag-icon">
                 {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
                     class="fa-solid fa-thumbs-down"></i>{{/if}}
@@ -30,8 +30,8 @@
     <div class="selected-tags-container flexcol">
         <label class="resource-label">Story Tags / Status selected:</label>
         {{#each selectedStoryTags}}
-        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}} {{#if (gt this.value 0)}}clickable{{/if}} {{#if this.challengeInverted}}inverted-challenge{{/if}}"
-            {{#if (gt this.value 0)}}data-action="clickToggleChallengeInversion" data-challenge-key="{{this.challengeEntryKey}}" title="{{localize 'MIST_ENGINE.ROLL.ToggleChallengeInversion'}}"{{/if}}>
+        <div class="tag {{#if this.positive}}positive{{else}}negative{{/if}} {{#unless this.isAppliedInPreview}}unapplied-preview{{/unless}} clickable {{#if this.challengeInverted}}inverted-challenge{{/if}}"
+            data-action="clickToggleChallengeInversion" data-challenge-key="{{this.challengeEntryKey}}" title="{{localize 'MIST_ENGINE.ROLL.ToggleChallengeInversion'}}">
             <span class="tag-icon">
                 {{#if this.positive}}<i class="fa-solid fa-thumbs-up"></i>{{else}}<i
                     class="fa-solid fa-thumbs-down"></i>{{/if}}

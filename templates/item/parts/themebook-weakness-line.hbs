@@ -1,6 +1,6 @@
 <div class="item-weakness-line flexrow">
     <strong style="flex-grow:0.3;">{{questionIndexToLetter index}}</strong> 
-    <input type="checkbox" name="system.weaknesstags.{{index}}.planned" style="flex-grow:0.3;" title="{{localize "MIST_ENGINE.HELP.Titles.PlannedPowertag"}}"  {{#if weakness.planned}}checked{{/if}}/>
+    <input type="checkbox" class="planned-toggle" name="system.weaknesstags.{{index}}.planned" style="flex-grow:0.3;" title="{{localize "MIST_ENGINE.HELP.Titles.PlannedPowertag"}}"  {{#if weakness.planned}}checked{{/if}}/>
     <input type="checkbox" name="system.weaknesstags.{{index}}.burned" {{#if weakness.burned}}checked{{/if}} style="display: none;"/>
     <div  style="flex-grow:8;">
         <input type="text" name="system.weaknesstags.{{index}}.question" value="{{weakness.question}}" title="{{questionIndexToLetter index}} - Question" placeholder="{{weaknessTagQuestionPlaceholder index weakness.question}}"/>

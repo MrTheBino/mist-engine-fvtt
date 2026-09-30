@@ -1897,6 +1897,52 @@ article.cc-enriched section.journal-entry-content {
   font-family: Labrada, serif;
   font-weight: bold;
 }
+.mist-engine input[type=checkbox].planned-toggle {
+  --checkbox-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background: none;
+  color: #734a33;
+  cursor: pointer;
+}
+.mist-engine input[type=checkbox].planned-toggle::before {
+  content: "\f06e";
+  position: static;
+  font-family: var(--font-awesome);
+  font-weight: 900;
+  color: inherit;
+  outline: none;
+}
+.mist-engine input[type=checkbox].planned-toggle::after {
+  content: none;
+}
+.mist-engine input[type=checkbox].planned-toggle:checked::before {
+  content: "\f070";
+  opacity: 0.6;
+}
+.mist-engine input[type=checkbox].planned-toggle:hover::before {
+  opacity: 1;
+  text-shadow: 0 0 6px currentColor;
+}
+.mist-engine input[type=checkbox].planned-toggle:focus {
+  outline: none;
+}
+.mist-engine input[type=checkbox].planned-toggle:focus-visible {
+  outline: 2px solid var(--input-focus-outline-color, #724a32);
+  outline-offset: 1px;
+}
+.mist-engine input[type=checkbox].planned-toggle:focus-visible::before, .mist-engine input[type=checkbox].planned-toggle:checked:focus-visible::before {
+  outline: none;
+}
 .mist-engine .resource-label {
   font-weight: bold;
   font-family: Labrada, serif;

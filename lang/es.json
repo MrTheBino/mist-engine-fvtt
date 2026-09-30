@@ -180,8 +180,8 @@
       "NoThemebooksInCharacter": "No hay Temas. Crea un objeto Tema y suéltalo aquí.",
       "QuintessenceSheet": "Edita el texto de esta quintaesencia en la pestaña Descripción — se muestra como información emergente en la hoja de personaje.",
       "Titles": {
-        "PlannedPowertag": "Etiquetas de Poder o Debilidad. Seleccionala para ocultarla de la lista de etiquetas hasta que estés listo para usarlo.",
-        "PlannedStorytag": "Etiqueta de historia planificada. Selecciónala para ocultarla de la lista de etiquetas de historia activas hasta que quieras usarla.",
+        "PlannedPowertag": "Etiqueta de Poder o Debilidad activa (ojo abierto) o planificada (ojo tachado). Haz clic en el ojo para planificarla: se oculta de la lista de etiquetas activas hasta que vuelvas a hacer clic para usarla.",
+        "PlannedStorytag": "Etiqueta de historia activa (ojo abierto) o planificada (ojo tachado). Haz clic en el ojo para planificarla: se oculta de la lista de etiquetas de historia activas hasta que vuelvas a hacer clic para usarla.",
         "Powertag": "Etiqueta de Poder",
         "RightClickToToggleBurnState": "Pulsa botón derecho para cambiar el estado a quemado"
       }

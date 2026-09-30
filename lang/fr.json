@@ -180,8 +180,8 @@
       "NoThemebooksInCharacter": "Aucun Livret de Thème trouvé. Créez des Items Livret de Thème et déposez-les ici.",
       "QuintessenceSheet": "Modifiez le texte de cette quintessence dans l'onglet Description — il s'affiche en infobulle sur la fiche de personnage.",
       "Titles": {
-        "PlannedPowertag": "Étiquette de pouvoir ou de faiblesse planifiée. Sélectionnez-la pour la masquer de la liste des étiquettes actives jusqu'à ce que vous vouliez l'utiliser.",
-        "PlannedStorytag": "Étiquette d'histoire planifiée. Sélectionnez-la pour la masquer de la liste des étiquettes d'histoire actives jusqu'à ce que vous vouliez l'utiliser.",
+        "PlannedPowertag": "Étiquette de pouvoir ou de faiblesse active (œil ouvert) ou planifiée (œil barré). Cliquez sur l'œil pour la planifier : elle est masquée de la liste des étiquettes actives jusqu'à ce que vous cliquiez à nouveau pour l'utiliser.",
+        "PlannedStorytag": "Étiquette d'histoire active (œil ouvert) ou planifiée (œil barré). Cliquez sur l'œil pour la planifier : elle est masquée de la liste des étiquettes d'histoire actives jusqu'à ce que vous cliquiez à nouveau pour l'utiliser.",
         "Powertag": "Trait de Pouvoir",
         "RightClickToToggleBurnState": "Clic droit pour basculer l'état Brûlé"
       }

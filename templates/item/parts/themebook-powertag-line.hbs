@@ -1,6 +1,6 @@
 <div class="item-powertag-line flexrow">
     <strong style="flex-grow:0.3;">{{questionIndexToLetter index}}</strong>
-    <input type="checkbox" name="system.powertags.{{index}}.planned" style="flex-grow:0.3;" title="{{localize "MIST_ENGINE.HELP.Titles.PlannedPowertag"}}"  {{#if powertag.planned}}checked{{/if}}/>
+    <input type="checkbox" class="planned-toggle" name="system.powertags.{{index}}.planned" style="flex-grow:0.3;" title="{{localize "MIST_ENGINE.HELP.Titles.PlannedPowertag"}}"  {{#if powertag.planned}}checked{{/if}}/>
     <input type="checkbox" name="system.powertags.{{index}}.burned" {{#if powertag.burned}}checked{{/if}} style="display: none;"/>
     <div style="flex-grow:8;">
      <input type="text" name="system.powertags.{{index}}.question" value="{{powertag.question}}" title="{{questionIndexToLetter index}} - Question" placeholder="{{powerTagQuestionPlaceholder index powertag.question}}"/>

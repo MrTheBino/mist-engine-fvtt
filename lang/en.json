@@ -180,8 +180,8 @@
       "NoThemebooksInCharacter": "No Themebooks found. Create Themebook Items and drop them here.",
       "QuintessenceSheet": "Edit this quintessence's text in the Description tab — it is shown as a tooltip on the character sheet.",
       "Titles": {
-        "PlannedPowertag": "Planned Power or Weakness Tag. Select it to hide it from the active tags list until you are ready to use it.",
-        "PlannedStorytag": "Planned Story Tag. Select it to hide it from the active story tags list until you are ready to use it.",
+        "PlannedPowertag": "Active (open eye) or planned (slashed eye) Power or Weakness Tag. Click the eye to plan the tag: it is hidden from the active tags list until you click it again to use it.",
+        "PlannedStorytag": "Active (open eye) or planned (slashed eye) Story Tag. Click the eye to plan the tag: it is hidden from the active story tags list until you click it again to use it.",
         "Powertag": "Power Tag",
         "RightClickToToggleBurnState": "Right click to toggle burn state"
       }

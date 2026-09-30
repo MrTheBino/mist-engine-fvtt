@@ -1,6 +1,6 @@
 <div class="item-storytag-line flexrow">
     {{#if editMode}}
-    <input type="checkbox" class="storytag-item-editable" data-item-id="{{id}}" data-index="{{index}}" data-key="{{key}}" data-source="{{source}}" data-sub-key="planned"
+    <input type="checkbox" class="storytag-item-editable planned-toggle" data-item-id="{{id}}" data-index="{{index}}" data-key="{{key}}" data-source="{{source}}" data-sub-key="planned"
         {{#if storytag.planned}}checked{{/if}} title="{{localize "MIST_ENGINE.HELP.Titles.PlannedStorytag"}}" style="flex-grow:0.3; margin-right: 0.5em;"/>
     <input type="text" class="storytag-item-editable" data-item-id='{{id}}' data-index="{{index}}" value="{{this.name}}" data-key="{{key}}" placeholder="{{localize 'MIST_ENGINE.PLACEHOLDERS.Name'}}"/>
     <a class="themebook-icon" data-action="deleteStoryTag" data-item-id='{{id}}' data-index="{{index}}" data-source="{{source}}" data-key="{{key}}">

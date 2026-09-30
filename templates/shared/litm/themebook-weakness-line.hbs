@@ -1,7 +1,7 @@
 <div class="item-weakness-line flexrow">
     {{#if editMode}}
     <strong style="flex-grow:0.3;" class="letter-box">{{questionIndexToLetter index}}</strong>
-    <input type="checkbox" class="themebook-entry-input" data-item-id="{{id}}" data-array="system.weaknesstags" data-index="{{index}}" data-key="planned" data-source="{{source}}"
+    <input type="checkbox" class="themebook-entry-input planned-toggle" data-item-id="{{id}}" data-array="system.weaknesstags" data-index="{{index}}" data-key="planned" data-source="{{source}}"
     {{#if weaknesstag.planned}}checked{{/if}} title="{{localize "MIST_ENGINE.HELP.Titles.PlannedPowertag"}}" style="flex-grow:0.3; margin-right: 0.5em;"/>
     <input class="themebook-entry-input" data-item-id="{{id}}" type="text" data-array="system.weaknesstags" data-index="{{index}}" data-key="name"
         value="{{weaknesstag.name}}" placeholder="{{weaknessTagQuestionPlaceholder index weaknesstag.question}}" title="{{weaknessTagQuestionPlaceholder index weaknesstag.question}}" data-source="{{source}}" style="flex-grow:8;"/>
