@@ -1,10 +1,6 @@
 // Acting Together — group action app (Core Book p. 158)
 #group-action-app>section.window-content {
-    border-style: solid;
-    border-width: 10px;
-    border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
-    color: $c-styled-text;
-    font-family: $font-primary;
+    @include parchment-window-content;
 }
 
 .group-action-app {

@@ -1,11 +1,7 @@
 // Camping & Sojourns dialog (Core Book p. 179) — same paper look as the
 // dice roll dialog / scene tracker.
 #camping-app>section.window-content {
-    border-style: solid;
-    border-width: 10px 10px 10px 10px;
-    border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
-    color: $c-styled-text;
-    font-family: $font-primary;
+    @include parchment-window-content;
 }
 
 .camping-app {

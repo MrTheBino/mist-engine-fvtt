@@ -226,3 +226,88 @@
         }
     }
 }
+/* Parchment window content (bg2-litm.webp) */
+// Shared by the dice roll, GM roll-confirmation, Sacrifice, camping and
+// Acting Together windows. Include it on the `.window-content` element.
+//
+// The paper is always light, but Foundry colours hints, form labels, inputs,
+// select options and buttons through theme custom properties that it sets
+// for the dark interface theme (body.theme-dark / .themed.theme-dark, inside
+// cascade layers) - light text on light paper. Redefining those properties
+// here (unlayered, so it beats every layered core rule) turns everything in
+// the content area dark in both interface themes. The window header is a
+// sibling of .window-content and keeps its normal theme look.
+@mixin parchment-window-content {
+    border-style: solid;
+    border-width: 10px 10px 10px 10px;
+    -moz-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+    -webkit-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+    -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+    border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+    color: $c-styled-text;
+    font-family: $font-primary;
+
+    // light native widgets (select drop-down list, number spinners, scrollbars)
+    color-scheme: light;
+    --color-scheme: light;
+    --color-text-emphatic: #{$c-dark};
+    --color-text-primary: #{$c-styled-text};
+    --color-text-secondary: #{$c-styled-text};
+    --color-text-subtle: #{rgba($c-styled-text, 0.75)};
+    --color-form-label: #{$c-styled-text};
+    --color-form-label-hover: #{$c-dark};
+    --color-form-hint: #{$c-styled-text};
+    --color-form-hint-hover: #{$c-dark};
+    --color-fieldset-border: #{rgba($c-styled-text, 0.5)};
+    --color-select-option-bg: #{$c-off-white};
+
+    // core defines the input/button variables on the elements themselves,
+    // so they have to be overridden there and not on the container
+    input, select, textarea {
+        --input-background-color: rgba(0, 0, 0, 0.08);
+        --input-border-color: #{rgba($c-styled-text, 0.5)};
+        // near-black: brown on the darkened input fill falls just short of WCAG AA
+        --input-text-color: #{$c-dark};
+        --input-placeholder-color: #{rgba($c-styled-text, 0.6)};
+        --input-focus-outline-color: #{$c-styled-text};
+
+        &:focus {
+            --input-text-color: #{$c-dark};
+        }
+
+        &:disabled, &[readonly] {
+            --input-background-color: rgba(0, 0, 0, 0.15);
+            --input-border-color: transparent;
+            --input-text-color: #{rgba($c-styled-text, 0.75)};
+        }
+    }
+
+    option {
+        color: $c-dark;
+    }
+
+    // same hollow look in both interface themes (core fills them dark in theme-dark)
+    input[type=checkbox], input[type=radio] {
+        --checkbox-background-color: transparent;
+        --checkbox-checked-color: #{$c-styled-text};
+    }
+
+    button, a.button {
+        --button-background-color: #{rgba($c-styled-text, 0.1)};
+        --button-border-color: #{$c-styled-text};
+        --button-text-color: #{$c-styled-text};
+        --button-focus-outline-color: #{$c-styled-text};
+        --button-hover-background-color: #{$c-styled-text};
+        --button-hover-border-color: #{$c-dark};
+        --button-hover-text-color: #{$c-white};
+
+        &:disabled, &[disabled] {
+            --button-background-color: rgba(0, 0, 0, 0.1);
+            --button-border-color: transparent;
+            --button-text-color: #{rgba($c-styled-text, 0.5)};
+            --button-hover-background-color: var(--button-background-color);
+            --button-hover-border-color: var(--button-border-color);
+            --button-hover-text-color: var(--button-text-color);
+        }
+    }
+}

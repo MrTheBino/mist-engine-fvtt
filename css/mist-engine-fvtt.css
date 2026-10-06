@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 /* journal styling */
+/* Parchment window content (bg2-litm.webp) */
 body {
   --litm-color-bg: hsl(40, 85%, 87%);
   --litm-color: hsl(40, 27%, 24%);
@@ -4511,6 +4512,99 @@ article.cc-enriched section.journal-entry-content {
   border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
   color: #724a32;
   font-family: Labrada, serif;
+  color-scheme: light;
+  --color-scheme: light;
+  --color-text-emphatic: #191813;
+  --color-text-primary: #724a32;
+  --color-text-secondary: #724a32;
+  --color-text-subtle: rgba(114, 74, 50, 0.75);
+  --color-form-label: #724a32;
+  --color-form-label-hover: #191813;
+  --color-form-hint: #724a32;
+  --color-form-hint-hover: #191813;
+  --color-fieldset-border: rgba(114, 74, 50, 0.5);
+  --color-select-option-bg: #f6eeea;
+}
+#dice-roll-app > section.window-content input, #dice-roll-app > section.window-content select, #dice-roll-app > section.window-content textarea,
+.gm-roll-confirm-dialog > section.window-content input,
+.gm-roll-confirm-dialog > section.window-content select,
+.gm-roll-confirm-dialog > section.window-content textarea,
+.sacrifice-roll-dialog > section.window-content input,
+.sacrifice-roll-dialog > section.window-content select,
+.sacrifice-roll-dialog > section.window-content textarea {
+  --input-background-color: rgba(0, 0, 0, 0.08);
+  --input-border-color: rgba(114, 74, 50, 0.5);
+  --input-text-color: #191813;
+  --input-placeholder-color: rgba(114, 74, 50, 0.6);
+  --input-focus-outline-color: #724a32;
+}
+#dice-roll-app > section.window-content input:focus, #dice-roll-app > section.window-content select:focus, #dice-roll-app > section.window-content textarea:focus,
+.gm-roll-confirm-dialog > section.window-content input:focus,
+.gm-roll-confirm-dialog > section.window-content select:focus,
+.gm-roll-confirm-dialog > section.window-content textarea:focus,
+.sacrifice-roll-dialog > section.window-content input:focus,
+.sacrifice-roll-dialog > section.window-content select:focus,
+.sacrifice-roll-dialog > section.window-content textarea:focus {
+  --input-text-color: #191813;
+}
+#dice-roll-app > section.window-content input:disabled, #dice-roll-app > section.window-content input[readonly], #dice-roll-app > section.window-content select:disabled, #dice-roll-app > section.window-content select[readonly], #dice-roll-app > section.window-content textarea:disabled, #dice-roll-app > section.window-content textarea[readonly],
+.gm-roll-confirm-dialog > section.window-content input:disabled,
+.gm-roll-confirm-dialog > section.window-content input[readonly],
+.gm-roll-confirm-dialog > section.window-content select:disabled,
+.gm-roll-confirm-dialog > section.window-content select[readonly],
+.gm-roll-confirm-dialog > section.window-content textarea:disabled,
+.gm-roll-confirm-dialog > section.window-content textarea[readonly],
+.sacrifice-roll-dialog > section.window-content input:disabled,
+.sacrifice-roll-dialog > section.window-content input[readonly],
+.sacrifice-roll-dialog > section.window-content select:disabled,
+.sacrifice-roll-dialog > section.window-content select[readonly],
+.sacrifice-roll-dialog > section.window-content textarea:disabled,
+.sacrifice-roll-dialog > section.window-content textarea[readonly] {
+  --input-background-color: rgba(0, 0, 0, 0.15);
+  --input-border-color: transparent;
+  --input-text-color: rgba(114, 74, 50, 0.75);
+}
+#dice-roll-app > section.window-content option,
+.gm-roll-confirm-dialog > section.window-content option,
+.sacrifice-roll-dialog > section.window-content option {
+  color: #191813;
+}
+#dice-roll-app > section.window-content input[type=checkbox], #dice-roll-app > section.window-content input[type=radio],
+.gm-roll-confirm-dialog > section.window-content input[type=checkbox],
+.gm-roll-confirm-dialog > section.window-content input[type=radio],
+.sacrifice-roll-dialog > section.window-content input[type=checkbox],
+.sacrifice-roll-dialog > section.window-content input[type=radio] {
+  --checkbox-background-color: transparent;
+  --checkbox-checked-color: #724a32;
+}
+#dice-roll-app > section.window-content button, #dice-roll-app > section.window-content a.button,
+.gm-roll-confirm-dialog > section.window-content button,
+.gm-roll-confirm-dialog > section.window-content a.button,
+.sacrifice-roll-dialog > section.window-content button,
+.sacrifice-roll-dialog > section.window-content a.button {
+  --button-background-color: rgba(114, 74, 50, 0.1);
+  --button-border-color: #724a32;
+  --button-text-color: #724a32;
+  --button-focus-outline-color: #724a32;
+  --button-hover-background-color: #724a32;
+  --button-hover-border-color: #191813;
+  --button-hover-text-color: #fff;
+}
+#dice-roll-app > section.window-content button:disabled, #dice-roll-app > section.window-content button[disabled], #dice-roll-app > section.window-content a.button:disabled, #dice-roll-app > section.window-content a.button[disabled],
+.gm-roll-confirm-dialog > section.window-content button:disabled,
+.gm-roll-confirm-dialog > section.window-content button[disabled],
+.gm-roll-confirm-dialog > section.window-content a.button:disabled,
+.gm-roll-confirm-dialog > section.window-content a.button[disabled],
+.sacrifice-roll-dialog > section.window-content button:disabled,
+.sacrifice-roll-dialog > section.window-content button[disabled],
+.sacrifice-roll-dialog > section.window-content a.button:disabled,
+.sacrifice-roll-dialog > section.window-content a.button[disabled] {
+  --button-background-color: rgba(0, 0, 0, 0.1);
+  --button-border-color: transparent;
+  --button-text-color: rgba(114, 74, 50, 0.5);
+  --button-hover-background-color: var(--button-background-color);
+  --button-hover-border-color: var(--button-border-color);
+  --button-hover-text-color: var(--button-text-color);
 }
 
 .icon-hover:hover {
@@ -4520,9 +4614,63 @@ article.cc-enriched section.journal-entry-content {
 #camping-app > section.window-content {
   border-style: solid;
   border-width: 10px 10px 10px 10px;
+  -moz-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  -webkit-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
   border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
   color: #724a32;
   font-family: Labrada, serif;
+  color-scheme: light;
+  --color-scheme: light;
+  --color-text-emphatic: #191813;
+  --color-text-primary: #724a32;
+  --color-text-secondary: #724a32;
+  --color-text-subtle: rgba(114, 74, 50, 0.75);
+  --color-form-label: #724a32;
+  --color-form-label-hover: #191813;
+  --color-form-hint: #724a32;
+  --color-form-hint-hover: #191813;
+  --color-fieldset-border: rgba(114, 74, 50, 0.5);
+  --color-select-option-bg: #f6eeea;
+}
+#camping-app > section.window-content input, #camping-app > section.window-content select, #camping-app > section.window-content textarea {
+  --input-background-color: rgba(0, 0, 0, 0.08);
+  --input-border-color: rgba(114, 74, 50, 0.5);
+  --input-text-color: #191813;
+  --input-placeholder-color: rgba(114, 74, 50, 0.6);
+  --input-focus-outline-color: #724a32;
+}
+#camping-app > section.window-content input:focus, #camping-app > section.window-content select:focus, #camping-app > section.window-content textarea:focus {
+  --input-text-color: #191813;
+}
+#camping-app > section.window-content input:disabled, #camping-app > section.window-content input[readonly], #camping-app > section.window-content select:disabled, #camping-app > section.window-content select[readonly], #camping-app > section.window-content textarea:disabled, #camping-app > section.window-content textarea[readonly] {
+  --input-background-color: rgba(0, 0, 0, 0.15);
+  --input-border-color: transparent;
+  --input-text-color: rgba(114, 74, 50, 0.75);
+}
+#camping-app > section.window-content option {
+  color: #191813;
+}
+#camping-app > section.window-content input[type=checkbox], #camping-app > section.window-content input[type=radio] {
+  --checkbox-background-color: transparent;
+  --checkbox-checked-color: #724a32;
+}
+#camping-app > section.window-content button, #camping-app > section.window-content a.button {
+  --button-background-color: rgba(114, 74, 50, 0.1);
+  --button-border-color: #724a32;
+  --button-text-color: #724a32;
+  --button-focus-outline-color: #724a32;
+  --button-hover-background-color: #724a32;
+  --button-hover-border-color: #191813;
+  --button-hover-text-color: #fff;
+}
+#camping-app > section.window-content button:disabled, #camping-app > section.window-content button[disabled], #camping-app > section.window-content a.button:disabled, #camping-app > section.window-content a.button[disabled] {
+  --button-background-color: rgba(0, 0, 0, 0.1);
+  --button-border-color: transparent;
+  --button-text-color: rgba(114, 74, 50, 0.5);
+  --button-hover-background-color: var(--button-background-color);
+  --button-hover-border-color: var(--button-border-color);
+  --button-hover-text-color: var(--button-text-color);
 }
 
 .camping-app .window-content button {
@@ -4675,10 +4823,64 @@ article.cc-enriched section.journal-entry-content {
 
 #group-action-app > section.window-content {
   border-style: solid;
-  border-width: 10px;
+  border-width: 10px 10px 10px 10px;
+  -moz-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  -webkit-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
+  -o-border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
   border-image: url("../assets/bg2-litm.webp") 10 10 10 10 fill stretch stretch;
   color: #724a32;
   font-family: Labrada, serif;
+  color-scheme: light;
+  --color-scheme: light;
+  --color-text-emphatic: #191813;
+  --color-text-primary: #724a32;
+  --color-text-secondary: #724a32;
+  --color-text-subtle: rgba(114, 74, 50, 0.75);
+  --color-form-label: #724a32;
+  --color-form-label-hover: #191813;
+  --color-form-hint: #724a32;
+  --color-form-hint-hover: #191813;
+  --color-fieldset-border: rgba(114, 74, 50, 0.5);
+  --color-select-option-bg: #f6eeea;
+}
+#group-action-app > section.window-content input, #group-action-app > section.window-content select, #group-action-app > section.window-content textarea {
+  --input-background-color: rgba(0, 0, 0, 0.08);
+  --input-border-color: rgba(114, 74, 50, 0.5);
+  --input-text-color: #191813;
+  --input-placeholder-color: rgba(114, 74, 50, 0.6);
+  --input-focus-outline-color: #724a32;
+}
+#group-action-app > section.window-content input:focus, #group-action-app > section.window-content select:focus, #group-action-app > section.window-content textarea:focus {
+  --input-text-color: #191813;
+}
+#group-action-app > section.window-content input:disabled, #group-action-app > section.window-content input[readonly], #group-action-app > section.window-content select:disabled, #group-action-app > section.window-content select[readonly], #group-action-app > section.window-content textarea:disabled, #group-action-app > section.window-content textarea[readonly] {
+  --input-background-color: rgba(0, 0, 0, 0.15);
+  --input-border-color: transparent;
+  --input-text-color: rgba(114, 74, 50, 0.75);
+}
+#group-action-app > section.window-content option {
+  color: #191813;
+}
+#group-action-app > section.window-content input[type=checkbox], #group-action-app > section.window-content input[type=radio] {
+  --checkbox-background-color: transparent;
+  --checkbox-checked-color: #724a32;
+}
+#group-action-app > section.window-content button, #group-action-app > section.window-content a.button {
+  --button-background-color: rgba(114, 74, 50, 0.1);
+  --button-border-color: #724a32;
+  --button-text-color: #724a32;
+  --button-focus-outline-color: #724a32;
+  --button-hover-background-color: #724a32;
+  --button-hover-border-color: #191813;
+  --button-hover-text-color: #fff;
+}
+#group-action-app > section.window-content button:disabled, #group-action-app > section.window-content button[disabled], #group-action-app > section.window-content a.button:disabled, #group-action-app > section.window-content a.button[disabled] {
+  --button-background-color: rgba(0, 0, 0, 0.1);
+  --button-border-color: transparent;
+  --button-text-color: rgba(114, 74, 50, 0.5);
+  --button-hover-background-color: var(--button-background-color);
+  --button-hover-border-color: var(--button-border-color);
+  --button-hover-text-color: var(--button-text-color);
 }
 
 .group-action-app .window-content button {
