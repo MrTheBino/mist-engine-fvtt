@@ -14,6 +14,56 @@ export function setupHooks() {
     const markType = schema?.marks?.mark;
     if (!markType) return;
 
+    // The apply commands mark the trimmed text; whitespace at the selection's edges is put
+    // back as plain text so selecting " pl" in "foo plain" doesn't glue "foo" to the new mark.
+    const replaceKeepingEdgeWhitespace = (state, from, to, content) => {
+      const text = state.doc.textBetween(from, to);
+      const lead = text.match(/^\s*/)[0];
+      const trail = text.slice(lead.length).match(/\s*$/)[0];
+      const nodes = [lead && state.schema.text(lead), ...content, trail && state.schema.text(trail)].filter(Boolean);
+      return state.tr.replaceWith(from, to, nodes);
+    };
+
+    // Toggling off removes every mark the selection touches in full, not just the selected
+    // part (which would leave e.g. "lim" unmarked and "it-3" still marked as limit-3), and
+    // drops the icon nodes inside those marks (the weakness arrow) instead of leaving them behind.
+    const removeMarks = (state, dispatch) => {
+      const { from, to } = state.selection;
+      let start = from;
+      let end = to;
+      const icons = [];
+      state.doc.nodesBetween(from, to, (node, pos) => {
+        if (!node.isTextblock) return true;
+        // Group the block's inline children into runs that carry the same mark.
+        let run = null;
+        const closeRun = () => {
+          if (run && run.start < to && run.end > from) {
+            start = Math.min(start, run.start);
+            end = Math.max(end, run.end);
+            icons.push(...run.icons);
+          }
+          run = null;
+        };
+        node.forEach((child, offset) => {
+          const childPos = pos + 1 + offset;
+          const mark = child.marks.find(m => m.type === markType);
+          if (!mark || !run?.mark.eq(mark)) closeRun();
+          if (!mark) return;
+          run ??= { mark, start: childPos, end: childPos, icons: [] };
+          run.end = childPos + child.nodeSize;
+          if (child.type === state.schema.nodes.icon) run.icons.push(childPos);
+        });
+        closeRun();
+        return false;
+      });
+      if (dispatch) {
+        const tr = state.tr.removeMark(start, end, markType);
+        for (const pos of icons.reverse()) tr.delete(pos, pos + 1);
+        dispatch(tr);
+      }
+      return true;
+    };
+
     // Tag/status marks mirror the applyLimit/applyWeakness pattern below so button-applied
     // marks carry the same draggable + data-* attributes as text produced by the
     // [tag]/[/s status] parser (see makeStyledTagOrStatusText in tag-status-text-helper.mjs).
@@ -24,10 +74,7 @@ export function setupHooks() {
       if (from === to) return false;
 
       const hasMark = state.doc.rangeHasMark(from, to, markType);
-      if (hasMark) {
-        if (dispatch) dispatch(state.tr.removeMark(from, to, markType));
-        return true;
-      }
+      if (hasMark) return removeMarks(state, dispatch);
 
       const name = state.doc.textBetween(from, to).trim();
       if (!name) return false; // schema.text("") throws on empty/whitespace selections
@@ -40,7 +87,7 @@ export function setupHooks() {
       }});
 
       const newText = state.schema.text(name, [tagMark]);
-      if (dispatch) dispatch(state.tr.replaceWith(from, to, newText));
+      if (dispatch) dispatch(replaceKeepingEdgeWhitespace(state, from, to, [newText]));
       return true;
     };
 
@@ -58,10 +105,7 @@ export function setupHooks() {
       if (from === to) return false;
 
       const hasMark = state.doc.rangeHasMark(from, to, markType);
-      if (hasMark) {
-        if (dispatch) dispatch(state.tr.removeMark(from, to, markType));
-        return true;
-      }
+      if (hasMark) return removeMarks(state, dispatch);
 
       const selectedText = state.doc.textBetween(from, to);
       const parts = selectedText.split("-");
@@ -84,7 +128,7 @@ export function setupHooks() {
       }});
 
       const newText = state.schema.text(displayText, [statusMark]);
-      if (dispatch) dispatch(state.tr.replaceWith(from, to, newText));
+      if (dispatch) dispatch(replaceKeepingEdgeWhitespace(state, from, to, [newText]));
       return true;
     };
 
@@ -102,10 +146,7 @@ export function setupHooks() {
       if (from === to) return false;
 
       const hasMark = state.doc.rangeHasMark(from, to, markType);
-      if (hasMark) {
-        if (dispatch) dispatch(state.tr.removeMark(from, to, markType));
-        return true;
-      }
+      if (hasMark) return removeMarks(state, dispatch);
 
       const selectedText = state.doc.textBetween(from, to);
       const parts = selectedText.split("-");
@@ -116,6 +157,10 @@ export function setupHooks() {
       const name = hasValue
         ? selectedText.substring(0, selectedText.lastIndexOf("-")).trim()
         : selectedText.trim();
+      // Keep the "-X" visible like applyStatus does; the parser's <div class="limit-inline">
+      // block form can't be produced by an inline mark command.
+      const displayText = hasValue ? `${name}-${value}` : name;
+      if (!displayText) return false; // schema.text("") throws on empty/whitespace selections
 
       const limitMark = markType.create({ _preserve: {
         class: "draggable limit",
@@ -125,14 +170,14 @@ export function setupHooks() {
         "data-value": String(value),
       }});
 
-      const newText = state.schema.text(name, [limitMark]);
-      if (dispatch) dispatch(state.tr.replaceWith(from, to, newText));
+      const newText = state.schema.text(displayText, [limitMark]);
+      if (dispatch) dispatch(replaceKeepingEdgeWhitespace(state, from, to, [newText]));
       return true;
     };
 
     config.push({
       action: "toggle-limit",
-      title: "Mark as Limit",
+      title: game.i18n.localize("MIST_ENGINE.PROSEMIRROR.MarkAsLimit"),
       icon: '<i class="fa-solid fa-shield fa-fw"></i>',
       scope: "text",
       cmd: applyLimit,
@@ -144,12 +189,10 @@ export function setupHooks() {
       if (from === to) return false;
 
       const hasMark = state.doc.rangeHasMark(from, to, markType);
-      if (hasMark) {
-        if (dispatch) dispatch(state.tr.removeMark(from, to, markType));
-        return true;
-      }
+      if (hasMark) return removeMarks(state, dispatch);
 
       const name = state.doc.textBetween(from, to).trim();
+      if (!name) return false; // schema.text("") throws on empty/whitespace selections
 
       const weaknessMark = markType.create({ _preserve: {
         class: "draggable weakness",
@@ -161,17 +204,20 @@ export function setupHooks() {
       // Use the schema's icon node type so the icon renders as <i>, not <mark>.
       // Applying weaknessMark to both the icon node and the name text causes ProseMirror's
       // serializer to merge them under a single <mark class="weakness"> wrapper.
+      // Foundry v13's schema has no icon node; there the weakness is marked without the icon.
       const iconNodeType = state.schema.nodes.icon;
-      const iconNode = iconNodeType.create({ classes: "fa-light fa-angles-down" }, null, [weaknessMark]);
       const nameNode = state.schema.text(name, [weaknessMark]);
+      const content = iconNodeType
+        ? [iconNodeType.create({ classes: "fa-light fa-angles-down" }, null, [weaknessMark]), nameNode]
+        : [nameNode];
 
-      if (dispatch) dispatch(state.tr.replaceWith(from, to, [iconNode, nameNode]));
+      if (dispatch) dispatch(replaceKeepingEdgeWhitespace(state, from, to, content));
       return true;
     };
 
     config.push({
       action: "toggle-weakness",
-      title: "Mark as Weakness",
+      title: game.i18n.localize("MIST_ENGINE.PROSEMIRROR.MarkAsWeakness"),
       icon: '<i class="fa-light fa-angles-down fa-fw"></i>',
       scope: "text",
       cmd: applyWeakness,

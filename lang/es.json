@@ -405,7 +405,9 @@
     },
     "PROSEMIRROR": {
       "MarkAsStatus": "Marcar como estado",
-      "MarkAsTag": "Marcar como etiqueta"
+      "MarkAsTag": "Marcar como etiqueta",
+      "MarkAsLimit": "Marcar como límite",
+      "MarkAsWeakness": "Marcar como debilidad"
     },
     "QUESTIONS": {
       "ConfirmDeletion": "¿Seguro que quieres eliminar esto?",

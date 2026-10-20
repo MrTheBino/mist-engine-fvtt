@@ -405,7 +405,9 @@
     },
     "PROSEMIRROR": {
       "MarkAsStatus": "Als Status markieren",
-      "MarkAsTag": "Als Tag markieren"
+      "MarkAsTag": "Als Tag markieren",
+      "MarkAsLimit": "Als Limit markieren",
+      "MarkAsWeakness": "Als Weakness markieren"
     },
     "QUESTIONS": {
       "ConfirmDeletion": "Soll das wirklich gelöscht werden?",
