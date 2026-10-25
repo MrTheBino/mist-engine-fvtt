@@ -2,6 +2,37 @@
 
 If you encounter bugs, submit a ticket on Github (https://github.com/MrTheBino/mist-engine-fvtt). You can also find us on the offical Sons Of Oak Discord server.
 
+# 14.5.5
+- FEAT: [Feature Suggestion] Journey Limited Sheet - Reveal Challenges #137 (by WBHarry): players with Limited permission only see the challenges revealed to them (name and short description, no consequences); an eye button on each challenge reveals/hides it
+- FEAT: Ukrainian and Russian translations #135 (by qwertyhansindar)
+- FEAT: scene tag overlay is organized by story theme, each story theme gets its own column #133 (by smwestlund42)
+- FEAT: "planned" checkbox on power/weakness/story tag lines is shown as an eye toggle (open eye = active, slashed eye = planned) #66
+- FEAT: plain scene/story tags (not only statuses) can be inverted to hinder in the roll dialog #123
+- FEAT: backpack tags can be inverted to hinder in the roll dialog #54; an inverted backpack tag is never burned
+- FEAT: Helping Each Other / Acting Together: heroes can also contribute backpack items, rotes and their own story tags, each shown with its source
+- FEAT: Fellowship theme power tags can be invoked in group actions (+1 Power each); they are scratched afterwards and listed in the chat card
+- FEAT: new markup tokens [/t tag], [/wo] as alias of [/w] #103 and the status aliases used in the Core Book module (/sp, /sg, /sr, /so, /n)
+- FIX: [Bug] Rich Text Editor limit and weakness don't work as intended #138
+  - "Mark as Limit" keeps the value, "limit-3" stays "limit-3"
+  - "Mark as Weakness" works on Foundry v13 (marked without the arrow icon there)
+  - toggling a mark off removes the whole mark incl. the weakness icon, also on a partial selection
+  - spaces at the edges of a selection are no longer swallowed by the new mark
+- FIX: markup tokens are only recognised at the start of a tag, names containing "/" (e.g. [fire/ice]) are no longer mangled
+- FIX: Fellowship theme tags are single-use: they are scratched when invoked and can no longer be burnt for Power (Core Book p. 138)
+- FIX: Helping Each Other: a contributed Fellowship relationship tag is scratched once the roll is made (also in Camping & Sojourns); helping tags are kept while a GM roll confirmation is pending
+- FIX: group actions: only power tags and backpack items can be burnt, a hero whose burn is rejected is informed, the burned tag is saved after the roll
+- FIX: Acting Together: the contribute dialog closes when the group roll is made, the Narrator gets no contribute prompt
+- FIX: burns, scratches and Improve after a roll use the tags that were actually rolled (also with GM confirmation)
+- FIX: story themes never mark Improve when one of their tags hinders (Core Book p. 164)
+- FIX: scene/story and challenge tag selection is cleared after a player's roll as well (done by the active GM)
+- FIX: deleted story themes are removed from the scene; expired story theme tags and un-flagged themebooks are no longer shown in the Scene App and the scene tag overlay
+- FIX: dice roll, GM confirmation, Sacrifice, Camping and Acting Together dialogs are readable in Foundry's dark interface theme
+- FIX: challenge name row aligned to the top so the buttons stay in place when the name wraps (by WBHarry)
+- FIX: generic item sheet is no longer offered for item types without a template (e.g. scene-data)
+- FIX: missing tooltip texts (delete power/weakness tag, remove dice roll modifier) and wrong "planned" tooltip on weakness tags
+- FIX: success/error notifications of the challenge JSON import are localized
+- FIX: Core Book page reference in the Narrator tour corrected (Acting Together p. 158)
+
 # 14.5.4
 - FIX: [BUG] Cannot delete Fellowship theme from character #132
 - FIX: Camping & Sojour only lists player characters active in the current scene, same behaviour like scene app
