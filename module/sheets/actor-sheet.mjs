@@ -184,7 +184,8 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         }
 
         if (this.actor.type === "litm-character" || this.actor.type === "litm-npc" || this.actor.type === "litm-journey") {
-            this._renderModeToggle();
+            const limitedOwnership = this.document.testUserPermission(game.user, 'LIMITED', { exact: true });
+            if (!limitedOwnership) this._renderModeToggle();
         }
 
         // set custom font color if defined for the actor-name

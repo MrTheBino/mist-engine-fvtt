@@ -225,6 +225,19 @@ section [data-group="litm-character-sheet"] {
   }
 }
 
+.challenge-name-row {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+
+  .challenge-name-row-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+}
+
 .tab.journey-consequences {
   a {
     font-family: $font-primary;

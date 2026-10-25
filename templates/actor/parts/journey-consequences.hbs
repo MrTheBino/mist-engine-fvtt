@@ -33,7 +33,7 @@
     {{else}}
     {{!-- Normal Layout --}}
     <div class="grid grid-2col">
-        {{#if generalConsequencesHTML}}
+        {{#if (and generalConsequencesHTML (not limitedOwnership))}}
         <div class="challenge-entry-container text-container-large-paper-background">
             <h2>{{localize "MIST_ENGINE.LABELS.GeneralConsequences"}}</h2>
             <div class="list-entries">
@@ -49,7 +49,7 @@
         </div>
         {{/if}}
         {{#each challenges}}
-        {{> systems/mist-engine-fvtt/templates/actor/parts/challenge-partial.hbs challenge=this editMode=false}}
+        {{> systems/mist-engine-fvtt/templates/actor/parts/challenge-partial.hbs challenge=this limitedOwnership=@root.limitedOwnership editMode=false}}
         {{/each}}
     </div>
     {{/if}}

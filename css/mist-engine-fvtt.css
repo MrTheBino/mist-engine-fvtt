@@ -3082,6 +3082,17 @@ article.cc-enriched section.journal-entry-content {
 .mist-engine .npc-challenges-container .list-entries .entry-content-no-edit {
   gap: 3px;
 }
+.mist-engine .challenge-name-row {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.mist-engine .challenge-name-row .challenge-name-row-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
 .mist-engine .tab.journey-consequences a {
   font-family: Labrada, serif;
   color: #724a32;
@@ -5575,3 +5586,5 @@ article.cc-enriched section.journal-entry-content {
   height: 100%;
   padding-right: 8px;
 }
+
+/*# sourceMappingURL=mist-engine-fvtt.css.map */

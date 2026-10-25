@@ -24,6 +24,7 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
             createChallengeListEntry: this.#handleCreateChallengeListEntry,
             createChallenge: this.#handleCreateChallenge,
             deleteChallenge: this.#handleDeleteChallenge,
+            toggleChallengeLimitedRevealed: this.#handleToggleChallengeLimitedRevealed,
             importChallengeJSON: this.#handleImportChallengeJSON
         },
         form: {
@@ -86,8 +87,9 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
     async _prepareContext(options) {
         let context = await super._prepareContext(options);
         const actorData = this.document.toPlainObject();
-        let items = this._prepareItems();
         context.editMode = actorData.system.editMode;
+        context.limitedOwnership = this.document.testUserPermission(game.user, 'LIMITED', { exact: true });
+        let items = this._prepareItems(context.limitedOwnership);
 
         context.notesHTML = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
             this.document.system.notes,
@@ -115,12 +117,15 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
         return context;
     }
 
-    _prepareItems() {
+    _prepareItems(limitedOwnership) {
         const challenges = [];
 
         let inventory = this.options.document.items;
         for (let i of inventory) {
-            if (i.type === 'shortchallenge') {
+            if (
+                i.type === 'shortchallenge' &&
+                (!limitedOwnership || i.system.limitedRevealed)
+            ) {
                 challenges.push(i);
             }
         }
@@ -275,6 +280,13 @@ export class MistEngineLegendInTheMistJourneySheet extends MistEngineActorSheet 
             const itemId = target.dataset.itemId;
             await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
         }
+    }
+
+    static async #handleToggleChallengeLimitedRevealed(event, target) {
+        event.preventDefault();
+        const itemId = target.dataset.itemId;
+        const item = this.actor.items.get(itemId);
+        await item.update({ 'system.limitedRevealed': !item.system.limitedRevealed });
     }
 
     static async #handleImportChallengeJSON(event, target) {

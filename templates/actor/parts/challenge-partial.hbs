@@ -24,18 +24,29 @@
             </div>
         </fieldset>
     {{else}}
-        <h2>{{challenge.name}}</h2>
-        <div class="short-description">{{{challenge.shortDescriptionHTML}}}</div>
-        <div class="list-entries">
-            {{#each challenge.listHTML as |entryHTML index|}}
-                <div class="list-entry">
-
-                    <div class="entry-content-no-edit flexrow">
-                        <div class="icon-col"><i class="skull-icon"></i></div>
-                        <div class="text-col">{{{entryHTML}}}</div>
-                    </div>
+        <div class="challenge-name-row">
+            <h2>{{challenge.name}}</h2>
+            {{#unless limitedOwnership}}
+                <div class="challenge-name-row-tools">
+                    <button data-action="toggleChallengeLimitedRevealed" data-item-id="{{challenge.id}}">
+                        <i class="fa-solid {{ifThen challenge.system.limitedRevealed 'fa-eye' 'fa-eye-slash'}}"></i>
+                    </button>
                 </div>
-            {{/each}}
+            {{/unless}}
         </div>
+        <div class="short-description">{{{challenge.shortDescriptionHTML}}}</div>
+        {{#unless limitedOwnership}}
+            <div class="list-entries">
+                {{#each challenge.listHTML as |entryHTML index|}}
+                    <div class="list-entry">
+
+                        <div class="entry-content-no-edit flexrow">
+                            <div class="icon-col"><i class="skull-icon"></i></div>
+                            <div class="text-col">{{{entryHTML}}}</div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        {{/unless}}
     {{/if}}
 </div>
