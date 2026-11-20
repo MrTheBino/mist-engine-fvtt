@@ -33,7 +33,7 @@ function surroundSelection(ctrl, prefix, suffix = prefix) {
 function withFocusedTextControl(action) {
   const ctrl = getActiveTextControl();
   if (!ctrl) {
-    ui.notifications?.warn("Plaziere den Cursor in ein Textfeld/Textbereich.");
+    ui.notifications?.warn(game.i18n.localize("MIST_ENGINE.UI.FocusTextControl"));
     return false;
   }
   action(ctrl);
@@ -42,8 +42,8 @@ function withFocusedTextControl(action) {
 
 function setupKBSzeneTagsApp(){
     game.keybindings.register("mist-engine-fvtt", "showSceneTagsApp", {
-    name: "Show SceneTags App",
-    hint: "opens the scene tags window",
+    name: "MIST_ENGINE.UI.ShowSceneTagsApp",
+    hint: "MIST_ENGINE.UI_HINTS.SceneTagsShortcut",
     editable: [
       {
         key: "KeyJ",       
@@ -62,8 +62,8 @@ function setupKBSzeneTagsApp(){
 
 function setupKBHowToPlayApp(){
     game.keybindings.register("mist-engine-fvtt", "showHowToPlayApp", {
-    name: "Show HowToPlay App",
-    hint: "opens the how to play window",
+    name: "MIST_ENGINE.UI.ShowHowToPlayApp",
+    hint: "MIST_ENGINE.UI_HINTS.HowToPlayShortcut",
     editable: [
       {
         key: "KeyH",       
@@ -82,8 +82,8 @@ function setupKBHowToPlayApp(){
 
 function setupKBThemekitSelectionApp(){
     game.keybindings.register("mist-engine-fvtt", "showThemekitSelectionApp", {
-    name: "Show Themekit Selection App",
-    hint: "opens the theme kit selection window for your assigned character",
+    name: "MIST_ENGINE.UI.ShowThemekitSelectionApp",
+    hint: "MIST_ENGINE.UI_HINTS.ThemekitSelectionShortcut",
     editable: [
       {
         // Not Ctrl/Cmd+T: browsers reserve that combo to open a new tab and
@@ -113,8 +113,8 @@ function setupKBThemekitSelectionApp(){
 
 function setupKBTaggingBindings(){
     game.keybindings.register("mist-engine-fvtt", "enrichTextWithTags", {
-    name: "Make Tags",
-    hint: "Surround selected text with [] to make it a tag",
+    name: "MIST_ENGINE.UI.MakeTags",
+    hint: "MIST_ENGINE.UI_HINTS.MakeTagsShortcut",
     editable: [{ key: "KeyB", modifiers: ["Alt"] }],
     onDown: () => withFocusedTextControl(ctrl => surroundSelection(ctrl, "[", "]")),
     restricted: false,

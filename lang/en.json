@@ -320,7 +320,8 @@
       "NoCharacterAssignedForThemekitSelection": "No character assigned to your user. Assign a character to open the theme kit selection.",
       "NoFellowshipThemecardFound": "No Fellowship Theme Card actors found. Use \"Create New\" to make one first.",
       "NotAllowedToUploadFilesForCustomBackground": "You do not have permission to upload files. Please contact your GM.",
-      "SetQuest": "Set quest to {quest}"
+      "SetQuest": "Set quest to {quest}",
+      "MacroRequiresOwnedItem": "You can only create macro buttons for owned Items"
     },
     "NPC": {
       "CustomMightLevel": "Custom level",
@@ -486,6 +487,9 @@
       "Weaknesses": "Weaknesses (GM)"
     },
     "SETTINGS": {
+      "GmRollConfirmation": "GM Roll Confirmation",
+      "GmRollConfirmationHint": "Player rolls from the roll dialog must be confirmed by the GM before the dice are rolled. The GM sees the player's selection and can approve or reject it.",
+      "TidyTagsHint": "Hide planned tags and eliminate blank lines in a character's themes",
       "SceneTagsOverlayPosAbove": "Above the scene navigation",
       "SceneTagsOverlayPosBelow": "Below the scene navigation",
       "SceneTagsOverlayPosHotbar": "Above the macro hotbar",
@@ -586,6 +590,52 @@
       "ToolsTitle": "Your GM Toolbar",
       "WelcomeContent": "This tour shows the tools the Mist Engine system adds for you. Most of them live here in the scene controls on the left. Use the arrow keys or the buttons to move through the tour.",
       "WelcomeTitle": "Welcome, Narrator"
+    },
+    "UI": {
+      "MissingMacroItem": "Could not find item {item}. You may need to delete and recreate this macro.",
+      "MigrationStarting": "Migrating world data to v{version}…",
+      "MigrationComplete": "Migration to v{version} complete.",
+      "MigratedActor": "Mist Engine | Migrated actor \"{actor}\" ({count} themebook(s) updated).",
+      "MigratedFellowship": "Mist Engine | Migrated fellowship themecard \"{actor}\".",
+      "CreatedBackpacks": "Mist Engine | Created {count} missing backpack(s) on character actor(s).",
+      "FocusTextControl": "Place the cursor in a text field or text area.",
+      "ShowSceneTagsApp": "Show SceneTags App",
+      "ShowHowToPlayApp": "Show HowToPlay App",
+      "ShowThemekitSelectionApp": "Show Themekit Selection App",
+      "MakeTags": "Make Tags",
+      "Icons": "Icons",
+      "OriginIcon": "Origin Icon",
+      "AdventureIcon": "Adventure Icon",
+      "GreatnessIcon": "Greatness Icon",
+      "HintIcon": "Hint Icon",
+      "FakeHeadings": "Fake Headings",
+      "FakeHeading1": "Fake Heading 1",
+      "FakeHeading2": "Fake Heading 2",
+      "FakeHeading3": "Fake Heading 3",
+      "Textframes": "Textframes",
+      "ContentWithSidebar": "Content with Sidebar",
+      "WrittenBlock": "Written Block",
+      "LongPaperBackground": "Long Paper Background",
+      "Container300": "Container 300",
+      "Container500": "Container 500",
+      "LitMFrame1": "LitM Frame 1",
+      "LitMFrame2": "LitM Frame 2",
+      "LitMFrame3": "LitM Frame 3",
+      "MightUsageEnabled": "Might Usage Enabled",
+      "DisableLiTMCustomDice": "Disable LiTM Custom Dice",
+      "DisableCharacterHoverTooltipGMOnly": "Disable Character Hover Tooltip (GM Only)",
+      "ShowCustomJSONImport": "Show Custom JSON Import",
+      "TidyTagsOnCharacterSheet": "Tidy Tags on Character Sheet"
+    },
+    "UI_HINTS": {
+      "SceneTagsShortcut": "opens the scene tags window",
+      "HowToPlayShortcut": "opens the how to play window",
+      "ThemekitSelectionShortcut": "opens the theme kit selection window for your assigned character",
+      "MakeTagsShortcut": "Surround selected text with [] to make it a tag",
+      "MightUsage": "Enable or disable the usage of Might in the game.",
+      "DisableCustomDice": "Disable the use of custom dice in Legend In The Mist. This will revert to using standard dice rolls.",
+      "DisableCharacterHoverTooltip": "Disable the character hover power tag tooltip for GMs",
+      "CustomJSONImport": "Enable the custom JSON import feature for challenges and vignettes. This allows you to import content from external sources using a specific JSON format."
     }
   },
   "TYPES": {

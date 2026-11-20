@@ -77,7 +77,7 @@ function buildThemebookUpdate(item) {
  */
 function buildBackpackItemData() {
     return {
-        name: "Backpack",
+        name: game.i18n.localize("TYPES.Item.backpack"),
         type: "backpack",
         system: {
             /* ... */
@@ -139,7 +139,7 @@ export function needsMigration() {
 export async function migrateWorld() {
     const version = game.system.version;
     console.log(`Starting migration to v${version}`);
-    ui.notifications.info(`Migrating world data to v${version}…`);
+    ui.notifications.info(game.i18n.format("MIST_ENGINE.UI.MigrationStarting", { version }));
 
     await _migrateActorItems();
     await _migrateFellowshipActors();
@@ -149,7 +149,7 @@ export async function migrateWorld() {
 
     await game.settings.set(SYSTEM_ID, MIGRATION_VERSION_KEY, version);
     console.log(`Migration complete (v${version})`);
-    ui.notifications.info(`Migration to v${version} complete.`);
+    ui.notifications.info(game.i18n.format("MIST_ENGINE.UI.MigrationComplete", { version }));
 }
 
 /**
@@ -203,7 +203,7 @@ async function _migrateActorItems() {
 
         console.log(`Mist Engine | Migrating ${updates.length} themebook(s) on actor "${actor.name}"`);
         await actor.updateEmbeddedDocuments("Item", updates);
-        ui.notifications.info(`Mist Engine | Migrated actor "${actor.name}" (${updates.length} themebook(s) updated).`);
+        ui.notifications.info(game.i18n.format("MIST_ENGINE.UI.MigratedActor", { actor: actor.name, count: updates.length }));
     }
 }
 
@@ -218,7 +218,7 @@ async function _migrateFellowshipActors() {
             "system.powertags":    update["system.powertags"],
             "system.weaknesstags": update["system.weaknesstags"],
         });
-        ui.notifications.info(`Mist Engine | Migrated fellowship themecard "${actor.name}".`);
+        ui.notifications.info(game.i18n.format("MIST_ENGINE.UI.MigratedFellowship", { actor: actor.name }));
     }
 }
 
@@ -245,7 +245,7 @@ export async function _migrateCharacterBackpacks() {
     }
 
     if (created > 0) {
-        ui.notifications.info(`Mist Engine | Created ${created} missing backpack(s) on character actor(s).`);
+        ui.notifications.info(game.i18n.format("MIST_ENGINE.UI.CreatedBackpacks", { count: created }));
     }
 }
 

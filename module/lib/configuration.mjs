@@ -13,8 +13,8 @@ export function setupConfiguration() {
 
     // game.settings.get("mist-engine-fvtt", "mightUsageEnabled");
     game.settings.register("mist-engine-fvtt", "mightUsageEnabled", {
-        name: "Might Usage Enabled",
-        hint: "Enable or disable the usage of Might in the game.",
+        name: "MIST_ENGINE.UI.MightUsageEnabled",
+        hint: "MIST_ENGINE.UI_HINTS.MightUsage",
         scope: "world",
         config: true,
         type: Boolean,
@@ -22,8 +22,8 @@ export function setupConfiguration() {
     });
 
     game.settings.register("mist-engine-fvtt", "disableCustomDice", {
-        name: "Disable LiTM Custom Dice",
-        hint: "Disable the use of custom dice in Legend In The Mist. This will revert to using standard dice rolls.",
+        name: "MIST_ENGINE.UI.DisableLiTMCustomDice",
+        hint: "MIST_ENGINE.UI_HINTS.DisableCustomDice",
         scope: "world",
         config: true,
         type: Boolean,
@@ -31,8 +31,8 @@ export function setupConfiguration() {
     });
 
     game.settings.register("mist-engine-fvtt", "disableCharacterHoverTooltip", {
-        name: "Disable Character Hover Tooltip (GM Only)",
-        hint: "Disable the character hover power tag tooltip for GMs",
+        name: "MIST_ENGINE.UI.DisableCharacterHoverTooltipGMOnly",
+        hint: "MIST_ENGINE.UI_HINTS.DisableCharacterHoverTooltip",
         scope: "world",
         config: true,
         type: Boolean,
@@ -40,8 +40,8 @@ export function setupConfiguration() {
     });
 
     game.settings.register("mist-engine-fvtt", "showCustomJSONImport", {
-        name: "Show Custom JSON Import",
-        hint: "Enable the custom JSON import feature for challenges and vignettes. This allows you to import content from external sources using a specific JSON format.",
+        name: "MIST_ENGINE.UI.ShowCustomJSONImport",
+        hint: "MIST_ENGINE.UI_HINTS.CustomJSONImport",
         scope: "world",
         config: true,
         type: Boolean,
@@ -50,8 +50,8 @@ export function setupConfiguration() {
 
     // game.settings.get("mist-engine-fvtt", "gmRollConfirmation");
     game.settings.register("mist-engine-fvtt", "gmRollConfirmation", {
-        name: "GM Roll Confirmation",
-        hint: "Player rolls from the roll dialog must be confirmed by the GM before the dice are rolled. The GM sees the player's selection and can approve or reject it.",
+        name: "MIST_ENGINE.SETTINGS.GmRollConfirmation",
+        hint: "MIST_ENGINE.SETTINGS.GmRollConfirmationHint",
         scope: "world",
         config: true,
         type: Boolean,
@@ -106,8 +106,8 @@ export function setupConfiguration() {
     });
 
     game.settings.register("mist-engine-fvtt", "tidyTagsOnCharacterSheet", {
-        name: "Tidy Tags on Character Sheet",
-        hint: "Hide planned tags and eliminate blank lines in a character's themes",
+        name: "MIST_ENGINE.UI.TidyTagsOnCharacterSheet",
+        hint: "MIST_ENGINE.SETTINGS.TidyTagsHint",
         scope: "user",
         config: true,
         type: Boolean,
