@@ -64,8 +64,8 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
         sheet: { // this is the group name
             tabs:
                 [
-                    { id: 'themebook', group: 'sheet', label: 'Themebook' },
-                    { id: 'special_improvements', group: 'sheet', label: 'Special Improvements' },
+                    { id: 'themebook', group: 'sheet', label: "MIST_ENGINE.SheetLabels.Themebook" },
+                    { id: 'special_improvements', group: 'sheet', label: "MIST_ENGINE.LABELS.SpecialImprovements" },
                 ],
             initial: 'themebook'
         }
@@ -97,7 +97,7 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
 
         this._saveScrollPositions();
         let powertags = this.actor.system.powertags || [];
-        powertags.push({ name: "New Powertag", value: "" });
+        powertags.push({ name: game.i18n.localize("MIST_ENGINE.UI.NewPowertag"), value: "" });
         await this.actor.update({ "system.powertags": powertags });
     }
 
@@ -106,7 +106,7 @@ export class MistEngineLegendInTheMistFellowshipThemecard extends MistEngineActo
         
         this._saveScrollPositions();
         let weaknesses = this.actor.system.weaknesstags || [];
-        weaknesses.push({ name: "New Weakness", value: "" });
+        weaknesses.push({ name: game.i18n.localize("MIST_ENGINE.UI.NewWeakness"), value: "" });
         await this.actor.update({ "system.weaknesstags": weaknesses });
     }
 

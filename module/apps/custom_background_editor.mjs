@@ -21,7 +21,7 @@ export class CustomBackgroundEditorApp extends HandlebarsApplicationMixin(Applic
         tag: 'div',
         window: {
             frame: true,
-            title: 'Custom Background Editor',
+            title: "MIST_ENGINE.LABELS.CustomBackgroundEditor.Button",
             icon: 'fa-solid fa-image',
             positioned: true,
             resizable: true

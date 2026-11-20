@@ -294,10 +294,10 @@ export class MistEngineShortChallengeItemSheet extends HandlebarsApplicationMixi
  event.preventDefault();
         // Open dialog for entering JSON data
         const jsonText = await foundry.applications.api.DialogV2.prompt({
-            window: { title: "Import Vignette from JSON" },
+            window: { title: "MIST_ENGINE.UI.ImportVignetteFromJSON" },
             content: `<textarea name="jsonData" rows="10" autofocus></textarea>`,
             ok: {
-                label: "Import",
+                label: "MIST_ENGINE.UI.Import",
                 callback: (event, button, dialog) => button.form.elements.jsonData.value
             }
         });

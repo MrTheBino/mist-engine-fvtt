@@ -10,7 +10,7 @@ export function registerHandlebarHelpers() {
     let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index];
     let qText = str;
     if (!qText || qText.length <= 0) {
-      qText = "PowerTag Question";
+      qText = game.i18n.localize("MIST_ENGINE.UI.PowerTagQuestion");
     }
     return `${letter} - ${qText}`;
   });
@@ -19,7 +19,7 @@ export function registerHandlebarHelpers() {
     let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index];
     let qText = str;
     if (!qText || qText.length <= 0) {
-      qText = "Weakness Question";
+      qText = game.i18n.localize("MIST_ENGINE.UI.WeaknessQuestion");
     }
     return `${letter} - ${qText}`;
   });

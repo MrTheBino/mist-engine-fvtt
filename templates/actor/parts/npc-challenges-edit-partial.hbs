@@ -1,6 +1,6 @@
 {{!-- Challenges / PreMade templates--}}
 <div class="npc-challenges-container">
-    <h2>Challenge Templates</h2>
+    <h2>{{localize 'MIST_ENGINE.UI.ChallengeTemplates'}}</h2>
     {{#if hasChallenges}}
         {{#each challenges}}
             {{> systems/mist-engine-fvtt/templates/actor/parts/challenge-partial.hbs challenge=this editMode=true}}

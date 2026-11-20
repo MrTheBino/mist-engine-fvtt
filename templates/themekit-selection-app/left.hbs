@@ -10,13 +10,13 @@
         {{/if}}
     </div>
     {{/if}}
-    <input type="text" class="themekit-search" placeholder="Search themekits...">
+    <input type="text" class="themekit-search" placeholder="{{localize 'MIST_ENGINE.UI.SearchThemekits'}}">
     <div class="search-filters">
-        <label class="search-filter-toggle"><input type="checkbox" data-filter="powertags"> Power Tags</label>
-        <label class="search-filter-toggle"><input type="checkbox" data-filter="weaknesstags"> Weakness Tags</label>
-        <label class="search-filter-toggle"><input type="checkbox" data-filter="specialimprovements"> Special Improvements</label>
-        <label class="search-filter-toggle"><input type="checkbox" data-filter="quest"> Quest</label>
-        <label class="search-filter-toggle"><input type="checkbox" data-filter="story"> Story</label>
+        <label class="search-filter-toggle"><input type="checkbox" data-filter="powertags"> {{localize 'MIST_ENGINE.LABELS.AddPowertag'}}</label>
+        <label class="search-filter-toggle"><input type="checkbox" data-filter="weaknesstags"> {{localize 'MIST_ENGINE.LABELS.AddWeaknesstag'}}</label>
+        <label class="search-filter-toggle"><input type="checkbox" data-filter="specialimprovements"> {{localize 'MIST_ENGINE.LABELS.SpecialImprovements'}}</label>
+        <label class="search-filter-toggle"><input type="checkbox" data-filter="quest"> {{localize 'MIST_ENGINE.LABELS.Quest'}}</label>
+        <label class="search-filter-toggle"><input type="checkbox" data-filter="story"> {{localize 'MIST_ENGINE.LABELS.Story'}}</label>
     </div>
 
             <!-- we list all available themekits , group first, then their children -->
@@ -33,9 +33,9 @@
                         data-search-story="{{this.themekit.system.story}}"
                     >
                         {{#if this.isCompendium}}
-                        <i class="fa-solid fa-book source-icon" title="Compendium"></i>
+                        <i class="fa-solid fa-book source-icon" title="{{localize 'MIST_ENGINE.UI.Compendium'}}"></i>
                         {{else}}
-                        <i class="fa-solid fa-globe source-icon" title="World"></i>
+                        <i class="fa-solid fa-globe source-icon" title="{{localize 'MIST_ENGINE.UI.World'}}"></i>
                         {{/if}}
                         <a class="themekit-button" data-themekit-uuid="{{this.themekit.uuid}}" data-action="selectThemekit">
                             {{this.themekit.name}}
