@@ -60,7 +60,7 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
         tag: 'div',
         window: {
             frame: true,
-            title: 'Themekit Selection',
+            title: "MIST_ENGINE.UI.ThemekitSelection",
             icon: 'fa-solid fa-book-atlas',
             positioned: true,
             resizable: true
@@ -164,7 +164,7 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
         // each group hash is {groupName: string, themekits: array of themekits}
         const themekitsByType = {};
         for(let themekit of filteredThemeKits){
-            const type = (themekit.system.themekit_type || "OTHER").toUpperCase(); 
+            const type = (themekit.system.themekit_type || game.i18n.localize("MIST_ENGINE.LABELS.Other")).toLocaleUpperCase(game.i18n.lang);
             if(!themekitsByType[type]){
                 themekitsByType[type] = { groupName: type, themekits: [] };
             }
@@ -250,11 +250,11 @@ export class ThemekitSelectionApp extends HandlebarsApplicationMixin(Application
     static async #handleAddThemekit(event, target){
         event.preventDefault();
         if(!this.currentSelectedThemekit){
-            ui.notifications.warn("No themekit selected!");
+            ui.notifications.warn(game.i18n.localize("MIST_ENGINE.NOTIFICATIONS.NoThemekitSelected"));
             return;
         }
         if(!this.actor){
-            ui.notifications.warn("No actor set for themekit selection app!");
+            ui.notifications.warn(game.i18n.localize("MIST_ENGINE.NOTIFICATIONS.ThemekitActorRequired"));
             return;
         }
 

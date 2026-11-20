@@ -10,7 +10,7 @@ export function registerHandlebarHelpers() {
     let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index];
     let qText = str;
     if (!qText || qText.length <= 0) {
-      qText = "PowerTag Question";
+      qText = game.i18n.localize("MIST_ENGINE.UI.PowerTagQuestion");
     }
     return `${letter} - ${qText}`;
   });
@@ -19,7 +19,7 @@ export function registerHandlebarHelpers() {
     let letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index];
     let qText = str;
     if (!qText || qText.length <= 0) {
-      qText = "Weakness Question";
+      qText = game.i18n.localize("MIST_ENGINE.UI.WeaknessQuestion");
     }
     return `${letter} - ${qText}`;
   });
@@ -153,9 +153,9 @@ export function registerHandlebarHelpers() {
 
   Handlebars.registerHelper("floatingTagStatusTitleHelper", function (entity) {
     if (entity.isStatus) {
-      return `${entity.name}-${entity.value} - ${entity.positive ? "Positive" : "Negative"} Status`;
+      return game.i18n.format("MIST_ENGINE.UI.FloatingStatusTitle", { name: entity.name, tier: entity.value, polarity: game.i18n.localize(entity.positive ? "MIST_ENGINE.LABELS.Positive" : "MIST_ENGINE.LABELS.Negative") });
     } else {
-      return `${entity.name} - ${entity.positive ? "Positive" : "Negative"} Tag`;
+      return game.i18n.format("MIST_ENGINE.UI.FloatingTagTitle", { name: entity.name, polarity: game.i18n.localize(entity.positive ? "MIST_ENGINE.LABELS.Positive" : "MIST_ENGINE.LABELS.Negative") });
     }
   });
 

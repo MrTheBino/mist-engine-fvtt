@@ -2,36 +2,31 @@
     data-group="{{tabs.form.group}}">
     <div class="box-shadowed-container">
         <div class="flexrow">
-            <label><strong>Type</strong></label>
+            <label><strong>{{localize 'MIST_ENGINE.UI.Type'}}</strong></label>
             <select name="system.type">
                 <option value="">-</option>
-                <option value="litm-origin" {{#if (eq system.type "litm-origin" )}}selected{{/if}}>LitM - Origin
-                </option>
-                <option value="litm-adventure" {{#if (eq system.type "litm-adventure" )}}selected{{/if}}>LitM -
-                    Adventure</option>
-                <option value="litm-variable" {{#if (eq system.type "litm-variable" )}}selected{{/if}}>LitM - Variable
-                </option>
-                <option value="litm-greatness" {{#if (eq system.type "litm-greatness" )}}selected{{/if}}>LitM -
-                    Greatness</option>
+                <option value="litm-origin" {{#if (eq system.type "litm-origin" )}}selected{{/if}}>{{localize 'MIST_ENGINE.UI.LitMOrigin'}}</option>
+                <option value="litm-adventure" {{#if (eq system.type "litm-adventure" )}}selected{{/if}}>{{localize 'MIST_ENGINE.UI.LitMAdventure'}}</option>
+                <option value="litm-variable" {{#if (eq system.type "litm-variable" )}}selected{{/if}}>{{localize 'MIST_ENGINE.UI.LitMVariable'}}</option>
+                <option value="litm-greatness" {{#if (eq system.type "litm-greatness" )}}selected{{/if}}>{{localize 'MIST_ENGINE.UI.LitMGreatness'}}</option>
             </select>
         </div>
     </div>
     <div class="box-shadowed-container">
         <div class="flexrow">
-            <label><strong>Color</strong></label>
+            <label><strong>{{localize 'MIST_ENGINE.UI.Color'}}</strong></label>
             <select name="system.color">
                 <option value="">-</option>
-                <option value="litm-origin" {{#if (eq system.color "litm-origin" )}}selected{{/if}}>Green</option>
-                <option value="litm-adventure" {{#if (eq system.color "litm-adventure" )}}selected{{/if}}>Brown</option>
-                <option value="litm-variable" {{#if (eq system.color "litm-variable" )}}selected{{/if}}>Black</option>
-                <option value="litm-greatness" {{#if (eq system.color "litm-greatness" )}}selected{{/if}}>Purple
-                </option>
+                <option value="litm-origin" {{#if (eq system.color "litm-origin" )}}selected{{/if}}>{{localize 'MIST_ENGINE.UI.Green'}}</option>
+                <option value="litm-adventure" {{#if (eq system.color "litm-adventure" )}}selected{{/if}}>{{localize 'MIST_ENGINE.UI.Brown'}}</option>
+                <option value="litm-variable" {{#if (eq system.color "litm-variable" )}}selected{{/if}}>{{localize 'MIST_ENGINE.UI.Black'}}</option>
+                <option value="litm-greatness" {{#if (eq system.color "litm-greatness" )}}selected{{/if}}>{{localize 'MIST_ENGINE.UI.Purple'}}</option>
             </select>
         </div>
     </div>
     <div class="box-shadowed-container">
         <div class="item-powertag-line flexrow">
-            <h4 class="with-line">Questions</h4>
+            <h4 class="with-line">{{localize 'MIST_ENGINE.UI.Questions'}}</h4>
         </div>
         <div class="themebook-section-header clickable" data-action="addEmptyPowertag" data-item-id="{{themebook._id}}">
             <i class="fas fa-plus add-line-icon " title="{{localize " MIST_ENGINE.LABELS.AddPowertag"}}"></i> {{localize
@@ -56,7 +51,7 @@
     </div>
     {{#unless system.options.isStoryTheme}}
     <div class="box-shadowed-container">
-        <h4 class="with-line">Special Improvements</h4>
+        <h4 class="with-line">{{localize 'MIST_ENGINE.LABELS.SpecialImprovements'}}</h4>
         {{#each system.specialImprovements as |imp index|}}
         {{> "systems/mist-engine-fvtt/templates/item/parts/themebook-special-improvement-line.hbs" index=index imp=imp showDelete=true}}
         {{/each}}

@@ -9,7 +9,7 @@ export class ChangelogApp extends HandlebarsApplicationMixin(ApplicationV2) {
         tag: 'div',
         window: {
             frame: true,
-            title: 'Changelog',
+            title: "MIST_ENGINE.UI.Changelog",
             icon: 'fa-solid fa-clock-rotate-left',
             positioned: true,
             resizable: true

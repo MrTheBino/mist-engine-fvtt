@@ -6,14 +6,12 @@
             {{#if userIsGM}}
                 {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs'
                 isLocked=floatingTagsAndStatusesEditable name="system.floatingTagsAndStatusesEditable"
-                title="Toggle
-                Edit Mode"}}
+                title=(localize "MIST_ENGINE.LABELS.ToggleEditMode")}}
             {{/if}}
         {{else}}
             {{> 'systems/mist-engine-fvtt/templates/shared/lock-toggle.hbs'
             isLocked=floatingTagsAndStatusesEditable name="system.floatingTagsAndStatusesEditable"
-            title="Toggle
-            Edit Mode"}}
+            title=(localize "MIST_ENGINE.LABELS.ToggleEditMode")}}
         {{/if}}
         {{localize 'MIST_ENGINE.LABELS.Actor.FloatingTagOrStatus'}}
         {{#if (isRenderBlockAllowed gmCheck)}}
@@ -43,15 +41,15 @@
             {{else}}
             <div class="fts-input-name  {{#if this.isStatus}}status{{else}}tag{{/if}} {{#if this.positive}}positive{{else}}negative{{/if}}">
                 {{#if (isRenderBlockAllowed ../gmCheck)}}
-                    <i class="fa-solid {{#if this.positive}}fa-thumbs-up{{else}}fa-thumbs-down{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-index="{{this.originalIndex}}" title="toggle between positive and negative"></i>
+                    <i class="fa-solid {{#if this.positive}}fa-thumbs-up{{else}}fa-thumbs-down{{/if}} fts-tag-modifier-toggle" data-action="toggleFloatingTagOrStatusModifier" data-index="{{this.originalIndex}}" title="{{localize 'MIST_ENGINE.UI.TogglePolarity'}}"></i>
                 {{/if}}
                 <span class="fts-selectable {{#if this.selected}}selected{{/if}}" data-action="toggleFloatingTagOrStatusSelected" data-index="{{this.originalIndex}}" title="{{floatingTagStatusTitleHelper this}}">
                     {{#if this.might}}<i class="might-icon {{this.mightIcon}}"></i>{{/if}}
                     {{this.name}}{{#if this.isStatus}}-{{this.value}}{{/if}}
                 </span>
                 {{#if (isRenderBlockAllowed ../gmCheck)}}
-                    <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{this.originalIndex}}" data-confirm="1" title="delete this tag/status"></i>
-                    <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{this.originalIndex}}" title="toggle between tag and status"></i>
+                    <i class="fa-solid fa-trash fts-tag-status-toggle" data-action="deleteFloatingTagOrStatus" data-index="{{this.originalIndex}}" data-confirm="1" title="{{localize 'MIST_ENGINE.UI.DeleteTagStatus'}}"></i>
+                    <i class="fa-solid fa-arrows-to-dot fts-tag-status-toggle" data-action="toggleFloatingTagOrStatus" data-index="{{this.originalIndex}}" title="{{localize 'MIST_ENGINE.UI.ToggleTagStatus'}}"></i>
                 {{/if}}
             </div>
             {{/if}}

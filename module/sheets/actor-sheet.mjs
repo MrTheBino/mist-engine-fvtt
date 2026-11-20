@@ -89,7 +89,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         sheet: { // this is the group name
             tabs:
                 [
-                    { id: 'character', group: 'sheet', label: 'DCC.Character' },
+                    { id: 'character', group: 'sheet', label: "MIST_ENGINE.SheetLabels.Character" },
                 ],
             initial: 'character'
         }
@@ -118,11 +118,11 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         if (this.actor.system.editMode) {
             button.classList.add("fa-lock-open");
             button.classList.remove("fa-lock");
-            button.title = "Switch to Game Mode";
+            button.title = game.i18n.localize("MIST_ENGINE.UI.SwitchToGameMode");
         } else {
             button.classList.add("fa-lock");
             button.classList.remove("fa-lock-open");
-            button.title = "Switch to Edit Mode";
+            button.title = game.i18n.localize("MIST_ENGINE.UI.SwitchToEditMode");
 
         }
         button.onclick = ev => this._onToggleEditMode(ev);
@@ -352,14 +352,14 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         let confirmed = true;
         if (target.dataset.confirm && target.dataset.confirm == "1") {
             confirmed = await foundry.applications.api.DialogV2.confirm({
-                title: "Confirm Deletion",
-                content: "Are you sure you want to delete this tag/status?",
+                title: "MIST_ENGINE.QUESTIONS.ConfirmDeletionTitle",
+                content: game.i18n.localize("MIST_ENGINE.UI.ConfirmTagStatusDeletion"),
                 yes: {
-                    label: "Yes",
+                    label: "MIST_ENGINE.UI.Yes",
                     callback: () => true
                 },
                 no: {
-                    label: "No",
+                    label: "MIST_ENGINE.UI.No",
                     callback: () => false
                 }
             });
@@ -517,11 +517,11 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         let promptResult;
         try {
             promptResult = await foundry.applications.api.DialogV2.prompt({
-                window: { title: "Enter the status or tag" },
-                content: `<input name="srcStatusTagStr" type="text" autofocus placeholder="tag or status-2 (or /sn status-2 for negative)">
+                window: { title: "MIST_ENGINE.UI.TagStatusPrompt" },
+                content: `<input name="srcStatusTagStr" type="text" autofocus placeholder="${foundry.utils.escapeHTML(game.i18n.localize("MIST_ENGINE.UI.TagStatusExample"))}">
                 <div class="form-group"><label><input name="negative" type="checkbox"> ${game.i18n.localize("MIST_ENGINE.LABELS.CreateAsNegative")}</label></div>`,
                 ok: {
-                    label: "Submit",
+                    label: "MIST_ENGINE.UI.Submit",
                     callback: (event, button, dialog) => ({
                         srcStatusTagStr: button.form.elements.srcStatusTagStr.value,
                         negative: button.form.elements.negative.checked
@@ -567,7 +567,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         // Grab any data associated with this control.
         const data = foundry.utils.duplicate(target.dataset);
         // Initialize a default name.
-        const name = `New ${type.capitalize()}`;
+        const name = game.i18n.format("MIST_ENGINE.UI.NewDocument", { type: game.i18n.localize(`TYPES.Item.${type}`) });
         // Prepare the item object.
 
         const itemData = {
@@ -957,7 +957,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
     enableFloatingTagStatusContextMenus() {
         this._createContextMenu(() => [
             {
-                name: "Add Adventure Might",
+                name: game.i18n.localize("MIST_ENGINE.UI.AddAdventureMight"),
                 icon: '<i class="fa-solid fa-circle-plus"></i>',
                 condition: li => {
                     if (li.dataset.isStatus === "true") {
@@ -973,7 +973,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 }
             },
             {
-                name: "Add Greatness Might",
+                name: game.i18n.localize("MIST_ENGINE.UI.AddGreatnessMight"),
                 icon: '<i class="fa-solid fa-circle-plus"></i>',
                 condition: li => {
                     if (li.dataset.isStatus === "true") {
@@ -989,7 +989,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 }
             },
             {
-                name: "Add Origin Might",
+                name: game.i18n.localize("MIST_ENGINE.UI.AddOriginMight"),
                 icon: '<i class="fa-solid fa-circle-plus"></i>',
                 condition: li => {
                     if (li.dataset.isStatus === "true") {
@@ -1005,7 +1005,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
                 }
             },
             {
-                name: "Remove Might",
+                name: game.i18n.localize("MIST_ENGINE.UI.RemoveMight"),
                 icon: '<i class="fa-solid fa-circle-minus"></i>',
                 condition: li => {
                     if (li.dataset.isStatus === "true") {
@@ -1080,7 +1080,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         this._saveScrollPositions();
         const doc = this._resolvePowertagTarget(target);
         if (!doc) { console.error("Item not found for adding powertag", { itemId: target.dataset.itemId }); return; }
-        await ArrayFieldAdapter.add(doc, "system.powertags", { name: "New Powertag", question: "" });
+        await ArrayFieldAdapter.add(doc, "system.powertags", { name: game.i18n.localize("MIST_ENGINE.UI.NewPowertag"), question: "" });
     }
 
     static async #handleAddEmptyWeaknessTag(event, target) {
@@ -1088,7 +1088,7 @@ export class MistEngineActorSheet extends HandlebarsApplicationMixin(ActorSheetV
         this._saveScrollPositions();
         const doc = this._resolvePowertagTarget(target);
         if (!doc) { console.error("Item not found for adding weakness", { itemId: target.dataset.itemId }); return; }
-        await ArrayFieldAdapter.add(doc, "system.weaknesstags", { name: "New Weakness", question: "" });
+        await ArrayFieldAdapter.add(doc, "system.weaknesstags", { name: game.i18n.localize("MIST_ENGINE.UI.NewWeakness"), question: "" });
     }
 
     static async #handleDeletePowertag(event, target) {

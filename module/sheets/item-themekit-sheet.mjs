@@ -229,7 +229,7 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
             // adds a new powertag to the themekit
             const item = this.document;
             const powertags = item.system.powertags || [];
-            powertags.push({ name: "New Powertag" });
+            powertags.push({ name: game.i18n.localize("MIST_ENGINE.UI.NewPowertag") });
             await item.update({ "system.powertags": powertags });
     }
 
@@ -238,7 +238,7 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
         // adds a new weaknesstag to the themekit
         const item = this.document;
         const weaknesstags = item.system.weaknesstags || [];
-        weaknesstags.push({ name: "New Weaknesstag" });
+        weaknesstags.push({ name: game.i18n.localize("MIST_ENGINE.UI.NewWeaknesstag") });
         await item.update({ "system.weaknesstags": weaknesstags });
     }
 
@@ -271,7 +271,7 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
         // adds a new special improvement to the themekit
         const item = this.document;
         const specialImprovements = item.system.specialImprovements || [];
-        specialImprovements.push({ name: "New Special Improvement" });
+        specialImprovements.push({ name: game.i18n.localize("MIST_ENGINE.UI.NewSpecialImprovement") });
         await item.update({ "system.specialImprovements": specialImprovements });
     }
 
@@ -324,10 +324,10 @@ export class MistEngineItemThemekitSheet extends HandlebarsApplicationMixin(Item
         
         // use dialogv2 to create a dialog with a textarea input for the CSV data
         const csvData = await foundry.applications.api.DialogV2.prompt({
-            window: {title: "Import Tags from CSV"},
-            content: `<p>Paste your CSV data below. Commas separate tags. Wrap a tag in quotes to include commas within it (e.g. "maps, plans, and schematics").</p><textarea name="csvData" rows="10" style="width: 100%;"></textarea>`,
+            window: {title: "MIST_ENGINE.UI.ImportTagsFromCSV"},
+            content: `<p>${foundry.utils.escapeHTML(game.i18n.localize("MIST_ENGINE.UI.ImportTagsFromCSVInstructions"))}</p><textarea name="csvData" rows="10" style="width: 100%;"></textarea>`,
             ok: {
-                label: "Import",
+                label: "MIST_ENGINE.UI.Import",
                 callback: (event, button, dialog) => {
                     return button.form.elements.csvData.value;
                 }

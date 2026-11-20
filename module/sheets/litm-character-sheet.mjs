@@ -112,7 +112,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     controls.unshift({
       action: "openThemekit",
       icon: "fa-solid fa-layer-group",
-      label: "Themekits",
+      label: "MIST_ENGINE.UI.Themekits",
       visible: () => this.isEditable,
       onClick: () => this.menuOpenThemekitSelection()
     });
@@ -308,7 +308,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         // find the user (not gm) assigned to this actor
         let assignedUserNotGM = game.users.find(u => u.character?._id === this.actor.id && !u.isGM);
         if (!assignedUserNotGM) {
-            ui.notifications.error("This character is not assigned to any non GM user. Please assign the character to a user before assigning a fellowship themecard. Press F5 to reload foundry and its permissions if you encounter problems.");
+            ui.notifications.error(game.i18n.localize("MIST_ENGINE.NOTIFICATIONS.CharacterUserAssignmentRequired"));
             return false;
         }
         return true;
@@ -774,7 +774,7 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
     static async #handleCreateQuintessence(event, target) {
         event.preventDefault();
         this._saveScrollPositions();
-        await ArrayFieldAdapter.add(this.actor, "system.quintessences", "New Quintessence");
+        await ArrayFieldAdapter.add(this.actor, "system.quintessences", game.i18n.localize("MIST_ENGINE.UI.NewQuintessence"));
     }
 
     static async #handleCreateBackpackItem(event, target) {
@@ -782,13 +782,13 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const backpack = this.actor.items.get(target.dataset.itemId);
         this._saveScrollPositions();
 
-        let itemName = "New Item";
+        let itemName = game.i18n.localize("MIST_ENGINE.UI.NewItem");
         try {
             itemName = await foundry.applications.api.DialogV2.prompt({
-                window: { title: "Enter the backpack item name" },
+                window: { title: "MIST_ENGINE.UI.BackpackItemNamePrompt" },
                 content: '<input name="itemName" type="text" autofocus>',
                 ok: {
-                    label: "Submit",
+                    label: "MIST_ENGINE.UI.Submit",
                     callback: (event, button, dialog) => button.form.elements.itemName.value
                 }
             });
@@ -1140,13 +1140,13 @@ export class MistEngineLegendInTheMistCharacterSheet extends MistEngineActorShee
         const cardKeyOf = (li) => li.dataset.cardKey ?? ("themebook:" + li.dataset.id);
         this._createContextMenu(() => [
             {
-                name: "Move to Other Tab",
+                name: game.i18n.localize("MIST_ENGINE.UI.MoveToOtherTab"),
                 icon: '<i class="fa-solid fa-right-left"></i>',
                 condition: li => this._getCardTab(cardKeyOf(li)) === "main",
                 callback: li => this._setCardTab(cardKeyOf(li), "other")
             },
             {
-                name: "Move to Main Tab",
+                name: game.i18n.localize("MIST_ENGINE.UI.MoveToMainTab"),
                 icon: '<i class="fa-solid fa-right-left"></i>',
                 condition: li => this._getCardTab(cardKeyOf(li)) === "other",
                 callback: li => this._setCardTab(cardKeyOf(li), "main")

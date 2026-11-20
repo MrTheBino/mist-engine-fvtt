@@ -346,7 +346,7 @@ export class CampingApp extends HandlebarsApplicationMixin(ApplicationV2) {
         try {
             str = await foundry.applications.api.DialogV2.prompt({
                 window: { title: game.i18n.localize("MIST_ENGINE.CAMPING.AddCampsiteTag") },
-                content: '<input name="srcStatusTagStr" type="text" autofocus placeholder="beautiful vista or rainy-2">',
+                content: `<input name="srcStatusTagStr" type="text" autofocus placeholder="${foundry.utils.escapeHTML(game.i18n.localize("MIST_ENGINE.UI.CampsiteTagExample"))}">`,
                 ok: {
                     label: game.i18n.localize("MIST_ENGINE.CAMPING.Add"),
                     callback: (event, button) => button.form.elements.srcStatusTagStr.value

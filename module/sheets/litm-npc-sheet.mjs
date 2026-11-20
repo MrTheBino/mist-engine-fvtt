@@ -470,10 +470,10 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         event.preventDefault();
 
         const jsonText = await foundry.applications.api.DialogV2.prompt({
-            window: { title: "Import Character from JSON" },
+            window: { title: "MIST_ENGINE.UI.ImportCharacterFromJSON" },
             content: `<textarea name="jsonData" rows="10" autofocus></textarea>`,
             ok: {
-                label: "Import",
+                label: "MIST_ENGINE.UI.Import",
                 callback: (event, button, dialog) => button.form.elements.jsonData.value
             }
         });
@@ -482,9 +482,9 @@ export class MistEngineLegendInTheMistNpcSheet extends MistEngineActorSheet {
         try {
             const data = JSON.parse(jsonText);
             parseChallengeJSON(this.actor, data);
-            ui.notifications.info("Character imported from JSON. Please check the imported data and adjust as necessary.");
+            ui.notifications.info(game.i18n.localize("MIST_ENGINE.NOTIFICATIONS.CharacterImportSuccess"));
         } catch (error) {
-            ui.notifications.error("Failed to import character from JSON: " + error.message);
+            ui.notifications.error(game.i18n.format("MIST_ENGINE.UI.ImportCharacterError", { error: error.message }));
         }
     }
 }

@@ -24,7 +24,7 @@
           />
         </div>
         <div class='resource'>
-          <label class='resource-label'>Weight</label>
+          <label class='resource-label'>{{localize 'MIST_ENGINE.UI.Weight'}}</label>
           <input
             type='text'
             name='system.weight'
@@ -38,8 +38,8 @@
 
   {{! Sheet Tab Navigation }}
   <nav class='sheet-tabs tabs' data-group='primary'>
-    <a class='item' data-tab='description'>Description</a>
-    <a class='item' data-tab='attributes'>Attributes</a>
+    <a class='item' data-tab='description'>{{localize 'MIST_ENGINE.LABELS.Description'}}</a>
+    <a class='item' data-tab='attributes'>{{localize 'MIST_ENGINE.UI.Attributes'}}</a>
   </nav>
 
   {{! Sheet Body }}
@@ -61,11 +61,11 @@
     <div class='tab attributes' data-group='primary' data-tab='attributes'>
       {{! As you add new fields, add them in here! }}
       <div class='resource'>
-        <label class='resource-label'>Roll Formula:</label>
+        <label class='resource-label'>{{localize 'MIST_ENGINE.UI.RollFormula'}}</label>
         <span>{{system.formula}}</span>
         <div class='grid grid-4col'>
           <div class='grid-span-1'>
-            <label class='resource-label'>Number of Dice</label>
+            <label class='resource-label'>{{localize 'MIST_ENGINE.UI.NumberOfDice'}}</label>
             <input
               type='text'
               name='system.roll.diceNum'
@@ -74,7 +74,7 @@
             />
           </div>
           <div class='grid-span-1'>
-            <label class='resource-label'>Die Size</label>
+            <label class='resource-label'>{{localize 'MIST_ENGINE.UI.DieSize'}}</label>
             <input
               type='text'
               name='system.roll.diceSize'
@@ -83,7 +83,7 @@
             />
           </div>
           <div class='grid-span-2'>
-            <label class='resource-label'>Roll Modifier</label>
+            <label class='resource-label'>{{localize 'MIST_ENGINE.UI.RollModifier'}}</label>
             <input
               type='text'
               name='system.roll.diceBonus'
