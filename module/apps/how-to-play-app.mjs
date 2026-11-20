@@ -9,7 +9,7 @@ export class HowToPlayApp extends HandlebarsApplicationMixin(ApplicationV2) {
         tag: 'div',
         window: {
             frame: true,
-            title: 'How to Play',
+            title: "MIST_ENGINE.UI.HowToPlay",
             icon: 'fa-solid fa-book-atlas',
             positioned: true,
             resizable: true
