@@ -190,6 +190,8 @@
       "Title": "How To Play"
     },
     "LABELS": {
+      "Roll": "Roll",
+      "Power": "Power",
       "Story": "Story",
       "Abandon": "Abandon",
       "Actor": {
@@ -668,10 +670,15 @@
       "DisableCharacterHoverTooltipGMOnly": "Disable Character Hover Tooltip (GM Only)",
       "ShowCustomJSONImport": "Show Custom JSON Import",
       "TidyTagsOnCharacterSheet": "Tidy Tags on Character Sheet",
+      "DiceRoll": "Dice Roll",
+      "QuickDiceRoll": "Quick Dice Roll",
+      "DetailedDiceRoll": "Detailed Dice Roll",
       "ThemekitSelection": "Themekit Selection",
       "Themekit": "Themekit",
       "Changelog": "Changelog",
       "SceneTagsCharacters": "Scene Tags & Characters",
+      "CriticalRollDoubleSixes": "Critical Roll Double Sixes",
+      "FumbleRollDoubleOnes": "Fumble Roll Double Ones",
       "ToggleModifierPolarityHint": "right click to toggle between positive / negative modifier",
       "TogglePolarity": "toggle between positive and negative",
       "ToggleTagStatusHint": "right click to toggle between tag or state",
@@ -704,7 +711,12 @@
       "RollModifier": "Roll Modifier",
       "NPCLimits": "NPC Limits",
       "Promise": "Promise",
-      "ChallengeTemplates": "Challenge Templates"
+      "ChallengeTemplates": "Challenge Templates",
+      "YouSelected": "You selected:",
+      "StoryTagsStatusSelected": "Story Tags / Status selected:",
+      "ChallengeTagsStatusSelected": "Challenge Tags / Status selected:",
+      "PositiveMods": "Positive Mods:",
+      "NegativeMods": "Negative Mods:"
     },
     "UI_HINTS": {
       "SceneTagsShortcut": "opens the scene tags window",
