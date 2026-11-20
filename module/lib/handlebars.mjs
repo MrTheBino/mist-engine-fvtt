@@ -153,9 +153,9 @@ export function registerHandlebarHelpers() {
 
   Handlebars.registerHelper("floatingTagStatusTitleHelper", function (entity) {
     if (entity.isStatus) {
-      return `${entity.name}-${entity.value} - ${entity.positive ? "Positive" : "Negative"} Status`;
+      return game.i18n.format("MIST_ENGINE.UI.FloatingStatusTitle", { name: entity.name, tier: entity.value, polarity: game.i18n.localize(entity.positive ? "MIST_ENGINE.LABELS.Positive" : "MIST_ENGINE.LABELS.Negative") });
     } else {
-      return `${entity.name} - ${entity.positive ? "Positive" : "Negative"} Tag`;
+      return game.i18n.format("MIST_ENGINE.UI.FloatingTagTitle", { name: entity.name, polarity: game.i18n.localize(entity.positive ? "MIST_ENGINE.LABELS.Positive" : "MIST_ENGINE.LABELS.Negative") });
     }
   });
 
